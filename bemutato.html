@@ -72,6 +72,10 @@
         }
 
         .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background-color: #6c5ce7;
             color: white;
             font-weight: 600;
@@ -79,6 +83,9 @@
             border-radius: 10px;
             border: none;
             transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
         }
 
         .cta-primary:hover {
@@ -86,6 +93,10 @@
         }
 
         .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background-color: transparent;
             border: 1.5px solid #6c5ce7;
             color: #6c5ce7;
@@ -93,10 +104,24 @@
             border-radius: 10px;
             transition: background 0.2s ease;
             font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
         }
 
         .cta-secondary:hover {
             background-color: rgba(108, 92, 231, 0.08);
+        }
+
+        .cta-primary .material-symbols-outlined,
+        .cta-secondary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
         }
     </style>
     <link
@@ -122,6 +147,7 @@
             background: #9ca3af;
         }
     </style>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -259,7 +285,7 @@
     </style>
 </head>
 
-<body class="bg-card text-dark font-display overflow-x-hidden antialiased">
+<body class="bg-card text-dark font-display antialiased" style="overflow-x: clip;">
     <div class="relative flex min-h-screen w-full flex-col">
 
         <!-- 0. Header (Minimalist) -->
@@ -276,7 +302,7 @@
 
         <!-- 1. Hero + Jelentkezési űrlap -->
         <section id="hero"
-            class="relative flex flex-col justify-center py-10 md:py-24 px-4 md:px-10 lg:px-40 dark: overflow-hidden">
+            class="relative flex flex-col justify-center py-10 md:py-24 px-4 md:px-10 lg:px-40       dark: overflow-hidden">
             <!-- Decorative blobs -->
             <div
                 class="hero-blob absolute top-[-80px] right-[-60px] w-[420px] h-[420px] r rounded-full  pointer-events-none">
@@ -340,19 +366,19 @@
                                 <div
                                     class="flex items-center gap-1.5 bg-light rounded-md px-2.5 py-1 border border-border shrink-0">
                                     <span class="text-xs font-bold text-muted">Foglalt:</span>
-                                    <span id="earlyBirdCount" class="text-sm font-bold text-primary">37</span>
-                                    <span class="text-xs font-bold text-muted">/ 40</span>
+                                    <span id="earlyBirdCount" class="text-sm font-bold text-primary">40</span>
+                                    <span class="text-xs font-bold text-muted">/ 60</span>
                                 </div>
                             </div>
                             <div class="w-full h-2 rounded-full bg-light overflow-hidden border border-border">
                                 <div id="earlyBirdBarNew"
                                     class="h-full rounded-full bg-primary transition-all duration-700 ease-out"
-                                    style="width: 92.5%;"></div>
+                                    style="width: 66.6667%;"></div>
                             </div>
                             <div class="flex flex-wrap justify-between gap-x-2 mt-2">
                                 <p class="text-[11px] text-muted font-medium">Csak a korai regisztrálóknak, fix áron!
                                 </p>
-                                <span id="earlyBirdRemaining" class="text-[11px] font-bold text-primary">Már csak 7
+                                <span id="earlyBirdRemaining" class="text-[11px] font-bold text-primary">Már csak 20
                                     hely!</span>
                             </div>
                         </div>
@@ -1354,7 +1380,7 @@
                         class="bg-card p-8 rounded-[16px] shadow-card hover:shadow-card-hover transition-all border border-border">
                         <h3 class="text-xl font-bold mb-4 text-dark">Standard előfizetés</h3>
                         <div class="flex items-baseline gap-1 mb-6">
-                            <span class="text-4xl font-bold text-dark">19.990</span>
+                            <span class="text-4xl font-bold text-dark">24.990</span>
                             <span class="text-xl font-bold text-dark">Ft</span>
                             <span class="text-muted text-sm">+ÁFA / hó</span>
                         </div>
@@ -1419,11 +1445,11 @@
                         </div>
                         <h3 class="text-xl font-bold mb-4 text-dark">Induló kedvezmény</h3>
                         <div class="flex items-baseline gap-1 mb-6">
-                            <span class="text-4xl font-bold text-primary">9.990</span>
+                            <span class="text-4xl font-bold text-primary">12.495</span>
                             <span class="text-xl font-bold text-dark">Ft</span>
                             <span class="text-muted text-sm">+ÁFA</span>
                         </div>
-                        <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Csak 9.990 Ft / hó – 1
+                        <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Csak 12.495 Ft / hó – 1
                             hónapon át</p>
 
                         <ul class="space-y-4 mb-8">
@@ -1751,9 +1777,9 @@
     <script>
         // Early Bird Dynamic Color Logic
         (function () {
-            const current = 37;
-            const max = 40;
-            const ratio = current / max; // 0.625
+            const current = 40;
+            const max = 60;
+            const ratio = current / max; // 0.6667
 
             // Color interpolation: green(0) -> amber(0.5) -> red(1)
             function getBarColor(r) {

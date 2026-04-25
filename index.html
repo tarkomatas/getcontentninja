@@ -88,6 +88,7 @@
         }
 
         .cta-primary {
+            display: inline-flex;
             background-color: #6c5ce7;
             color: white;
             font-weight: 600;
@@ -99,6 +100,7 @@
             gap: 8px;
             text-decoration: none;
             white-space: nowrap;
+            line-height: 1.2;
         }
 
         .cta-primary:hover {
@@ -107,6 +109,7 @@
         }
 
         .cta-secondary {
+            display: inline-flex;
             background-color: transparent;
             border: 1.5px solid #6c5ce7;
             color: #6c5ce7;
@@ -118,6 +121,7 @@
             gap: 8px;
             text-decoration: none;
             white-space: nowrap;
+            line-height: 1.2;
         }
 
         .cta-secondary:hover {
@@ -137,10 +141,44 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
+            line-height: 1.2;
         }
 
         .cta-outline-white:hover {
             background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-on-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #ffffff;
+            color: #6c5ce7;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s ease, transform 0.15s ease;
+            line-height: 1.2;
+        }
+
+        .cta-on-primary:hover {
+            background-color: rgba(255, 255, 255, 0.92);
+            transform: translateY(-1px);
+        }
+
+        .cta-primary .material-symbols-outlined,
+        .cta-secondary .material-symbols-outlined,
+        .cta-outline-white .material-symbols-outlined,
+        .cta-on-primary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
         }
 
         /* Nav link */
@@ -397,7 +435,7 @@
                                 class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">
                                 ÁK</div>
                         </div>
-                        <p class="text-sm text-muted"><span class="font-semibold text-dark">30+ webshop</span> már
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">40+ webshop</span> már
                             használja</p>
                     </div>
                 </div>
@@ -728,102 +766,106 @@
                 <p class="text-body text-lg">Csatlakozz az elsők között és zsebeld be az induló kedvezményt.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
 
                 <!-- Standard -->
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
-                    <h3 class="text-xl font-bold mb-1 text-dark">Standard előfizetés</h3>
-                    <p class="text-muted text-sm mb-6">A teljes automata marketing csomag</p>
-                    <div class="flex items-baseline gap-1 mb-6 pb-6 border-b border-border">
-                        <span class="text-4xl font-extrabold text-dark">19.990</span>
+                <div
+                    class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                    <h3 class="text-xl font-bold mb-4 text-dark">Standard előfizetés</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-bold text-dark">24.990</span>
                         <span class="text-xl font-bold text-dark">Ft</span>
                         <span class="text-muted text-sm">+ÁFA / hó</span>
                     </div>
-                    <ul class="space-y-3.5 mb-8">
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">A teljes automata
+                        marketing csomag</p>
+                    <ul class="space-y-4 mb-8">
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Automata termékleírás generálás</span>
+                            <span class="text-body font-medium">Automata termékleírás generálás</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Automatikus social media kreatívok</span>
+                            <span class="text-body font-medium">Automatikus social media kreatívok</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Teljesen automatizált publikálás</span>
+                            <span class="text-body font-medium">Teljesen automatizált publikálás</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Márkahű stílus és hangnem</span>
+                            <span class="text-body font-medium">Márkahű stílus és hangnem</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Marketing naptár és időzítés</span>
+                            <span class="text-body font-medium">Marketing naptár és időzítés</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Folyamatos fejlesztés és support</span>
+                            <span class="text-body font-medium">Folyamatos fejlesztés és support</span>
                         </li>
                     </ul>
-                    <a href="bemutato.html" class="cta-secondary w-full py-3 text-sm justify-center">
+                    <a href="bemutato.html"
+                        class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Bemutatót kérek
                     </a>
                 </div>
 
                 <!-- Induló kedvezmény -->
-                <div class="bg-card rounded-[16px] border-2 border-primary p-5 sm:p-8 pricing-featured relative">
+                <div
+                    class="bg-card rounded-[16px] border-2 border-primary p-5 sm:p-8 pricing-featured relative flex flex-col h-full md:-translate-y-4">
                     <div
-                        class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[14px] uppercase tracking-wide">
+                        class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
                         Korai regisztráció
                     </div>
-                    <h3 class="text-xl font-bold mb-1 text-dark">Induló kedvezmény</h3>
-                    <p class="text-muted text-sm mb-6">Csak az első 40 webshopnak</p>
-                    <div class="flex items-baseline gap-1 mb-1">
-                        <span class="text-4xl font-extrabold text-primary">9.990</span>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Induló kedvezmény</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-bold text-primary">12.495</span>
                         <span class="text-xl font-bold text-dark">Ft</span>
                         <span class="text-muted text-sm">+ÁFA</span>
                     </div>
-                    <p class="text-muted text-xs mb-6 pb-6 border-b border-border">az első hónapban, utána standard ár
-                    </p>
-                    <ul class="space-y-3.5 mb-8">
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Csak az első 60 webshopnak
+                        az első hónapban, utána standard ár</p>
+                    <ul class="space-y-4 mb-8">
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Minden funkció, mint a standard csomagban</span>
+                            <span class="text-body font-medium">Minden funkció, mint a standard csomagban</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Extra visszajelzés és szorosabb kapcsolat</span>
+                            <span class="text-body font-medium">Extra visszajelzés és szorosabb kapcsolat</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Előny az új funkcióknál</span>
+                            <span class="text-body font-medium">Előny az új funkcióknál</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <div class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[12px]">check</span>
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
                             </div>
-                            <span class="text-body text-sm">Egyedi igények gyors beépítése</span>
+                            <span class="text-body font-medium">Egyedi igények gyors beépítése</span>
                         </li>
                     </ul>
-                    <a href="bemutato.html" class="cta-primary w-full py-3 text-sm justify-center">
+                    <a href="bemutato.html"
+                        class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Kérem a kedvezményt
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
@@ -912,8 +954,8 @@
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A standard előfizetés havi 19.990 Ft + ÁFA, ami tartalmaz minden funkciót. Az első 40 webshopnak
-                        korai regisztráló kedvezmény érhető el: az első hónapban csak 9.990 Ft + ÁFA. A pontos
+                        A standard előfizetés havi 24.990 Ft + ÁFA, ami tartalmaz minden funkciót. Az első 60 webshopnak
+                        korai regisztráló kedvezmény érhető el: az első hónapban csak 12.495 Ft + ÁFA. A pontos
                         részletekért kérj egy díjmentes bemutatót!
                     </div>
                 </div>
@@ -950,7 +992,7 @@
                 példáin.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="bemutato.html" class="cta-primary bg-white text-primary hover:bg-white/90 px-8 py-4 text-base">
+                <a href="bemutato.html" class="cta-on-primary px-8 py-4 text-base">
                     <span class="material-symbols-outlined text-[18px]">calendar_month</span>
                     Bemutatót kérek – díjmentes
                 </a>
@@ -1057,7 +1099,7 @@
       "name": "Mennyibe kerül a Content Ninja előfizetés?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A standard előfizetés havi 19.990 Ft + ÁFA. Az első 40 webshopnak korai regisztráló kedvezmény: az első hónapban csak 9.990 Ft + ÁFA."
+        "text": "A standard előfizetés havi 24.990 Ft + ÁFA. Az első 60 webshopnak korai regisztráló kedvezmény: az első hónapban csak 12.495 Ft + ÁFA."
       }
     },
     {
