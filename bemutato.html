@@ -239,6 +239,17 @@
             animation: pulse-soft 2s ease-in-out infinite;
         }
 
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+
         /* Early bird progress bar */
         @keyframes urgency-pulse {
 
@@ -387,17 +398,20 @@
                     <!-- Form Container -->
                     <div class="w-full relative">
                         <div
-                            class="relative w-full rounded-[16px] overflow-hidden bg-card  border border-border  shadow-card hover:shadow-card-hover transition-all p-6 md:p-8">
-                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online
-                                bemutatóra
-                            </h3>
-                            <div
-                                class="flex items-center gap-2.5 justify-center dark: dark: border border-border  rounded-lg px-4 py-3 mb-3">
-                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
-                                <p class="text-sm text-body "><strong class="font-bold text-dark ">Közvetlen
-                                        kipróbálásra nincs
-                                        lehetőség</strong> – de egy online megbeszélés keretében bemutatjuk neked a
-                                    rendszert részletesen, akár a te saját példáiddal.</p>
+                            class="hero-form-card relative w-full rounded-[16px] overflow-hidden transition-all p-6 md:p-8">
+                            <div id="formIntro">
+                                <h3 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online
+                                    bemutatóra
+                                </h3>
+                                <div
+                                    class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-lg px-4 py-3 mb-3">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                    <p class="text-sm text-body "><strong class="font-bold text-dark ">Közvetlen
+                                            kipróbálásra nincs
+                                            lehetőség</strong> – de egy online megbeszélés keretében bemutatjuk neked a
+                                        rendszert részletesen, akár a te saját példáiddal.</p>
+                                </div>
                             </div>
 
                             <form id="leadForm"
@@ -609,6 +623,16 @@
                 </div>
 
                 <div class="relative">
+                    <button type="button" id="t-prev"
+                        class="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 xl:-left-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                        aria-label="Előző vélemény">
+                        <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+                    </button>
+                    <button type="button" id="t-next"
+                        class="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 xl:-right-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                        aria-label="Következő vélemény">
+                        <span class="material-symbols-outlined text-[24px]">chevron_right</span>
+                    </button>
                     <div class="overflow-hidden" id="t-viewport">
                         <div class="flex" style="gap:2rem" id="t-track">
 
@@ -782,6 +806,8 @@
                     var track = document.getElementById('t-track');
                     var viewport = document.getElementById('t-viewport');
                     var dotsContainer = document.getElementById('t-dots');
+                    var prevButton = document.getElementById('t-prev');
+                    var nextButton = document.getElementById('t-next');
                     var cards = track.querySelectorAll('.t-card');
                     var GAP = 32;
                     var current = 0;
@@ -836,6 +862,10 @@
                         goTo(current + 1 < getTotal() ? current + 1 : 0);
                     }
 
+                    function prev() {
+                        goTo(current - 1 >= 0 ? current - 1 : getTotal() - 1);
+                    }
+
                     function resetTimer() {
                         clearInterval(autoTimer);
                         autoTimer = setInterval(next, 5000);
@@ -850,6 +880,8 @@
                         resizeTimer = setTimeout(layout, 100);
                     });
 
+                    prevButton.addEventListener('click', function () { prev(); resetTimer(); });
+                    nextButton.addEventListener('click', function () { next(); resetTimer(); });
                     viewport.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
                     viewport.addEventListener('mouseleave', resetTimer);
                 })();
@@ -1564,6 +1596,12 @@
             // Hide all steps
             const steps = document.querySelectorAll('.form-step');
             steps.forEach(s => s.classList.remove('active'));
+
+            const formIntro = document.getElementById('formIntro');
+            const hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
+            if (formIntro) {
+                formIntro.classList.toggle('hidden', hideIntroSteps.includes(String(step)));
+            }
 
             // Show requested step
             const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);

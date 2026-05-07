@@ -519,6 +519,16 @@
             </div>
 
             <div class="relative">
+                <button type="button" id="ti-prev"
+                    class="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 xl:-left-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                    aria-label="Előző vélemény">
+                    <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+                </button>
+                <button type="button" id="ti-next"
+                    class="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 xl:-right-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                    aria-label="Következő vélemény">
+                    <span class="material-symbols-outlined text-[24px]">chevron_right</span>
+                </button>
                 <div class="overflow-hidden" id="ti-viewport">
                     <div class="flex" style="gap:2rem" id="ti-track">
 
@@ -681,6 +691,8 @@
             var track = document.getElementById('ti-track');
             var viewport = document.getElementById('ti-viewport');
             var dotsContainer = document.getElementById('ti-dots');
+            var prevButton = document.getElementById('ti-prev');
+            var nextButton = document.getElementById('ti-next');
             var cards = track.querySelectorAll('.ti-card');
             var GAP = 32;
             var current = 0;
@@ -735,6 +747,10 @@
                 goTo(current + 1 < getTotal() ? current + 1 : 0);
             }
 
+            function prev() {
+                goTo(current - 1 >= 0 ? current - 1 : getTotal() - 1);
+            }
+
             function resetTimer() {
                 clearInterval(autoTimer);
                 autoTimer = setInterval(next, 5000);
@@ -749,6 +765,8 @@
                 resizeTimer = setTimeout(layout, 100);
             });
 
+            prevButton.addEventListener('click', function () { prev(); resetTimer(); });
+            nextButton.addEventListener('click', function () { next(); resetTimer(); });
             viewport.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
             viewport.addEventListener('mouseleave', resetTimer);
         })();
