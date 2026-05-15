@@ -227,6 +227,10 @@
             }
         }
 
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
         .hero-blob {
             animation: float 8s ease-in-out infinite;
         }
@@ -250,49 +254,6 @@
             box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
         }
 
-        /* Early bird progress bar */
-        @keyframes urgency-pulse {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(132, 32, 207, 0.25);
-            }
-
-            50% {
-                box-shadow: 0 0 20px 4px rgba(132, 32, 207, 0.15);
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                background-position: -200% 0;
-            }
-
-            100% {
-                background-position: 200% 0;
-            }
-        }
-
-        .early-bird-card {
-            animation: urgency-pulse 3s ease-in-out infinite;
-        }
-
-        .early-bird-bar {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .early-bird-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
-            background-size: 200% 100%;
-            animation: shimmer 2.5s ease-in-out infinite;
-        }
     </style>
 </head>
 
@@ -312,28 +273,17 @@
         </header>
 
         <!-- 1. Hero + Jelentkezési űrlap -->
-        <section id="hero"
-            class="relative flex flex-col justify-center py-10 md:py-24 px-4 md:px-10 lg:px-40       dark: overflow-hidden">
-            <!-- Decorative blobs -->
-            <div
-                class="hero-blob absolute top-[-80px] right-[-60px] w-[420px] h-[420px] r rounded-full  pointer-events-none">
-            </div>
-            <div
-                class="hero-blob-2 absolute bottom-[-60px] left-[-80px] w-[350px] h-[350px]   rounded-full  pointer-events-none">
-            </div>
-
-            <div class="max-w-[1200px] mx-auto w-full z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
+        <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
+            <div class="max-w-[1200px] mx-auto w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
 
                     <!-- Content -->
-                    <div class="flex flex-col gap-7 text-left">
+                    <div class="flex flex-col gap-4 md:gap-7 text-left">
 
 
                         <h1
-                            class="text-primary text-4xl md:text-[2.85rem] lg:text-5xl font-bold leading-[1.08] tracking-[-0.03em]">
-                            <span class="text-primary  ">Automatizáld
-                                be</span> a webshopod közösségi média
-                            posztolását
+                            class="text-4xl md:text-[2.85rem] lg:text-5xl font-black leading-[1.08] tracking-[-0.03em] text-dark">
+                            Automatizáld be <span class="text-primary">webshopod</span> közösségi média posztolását
                         </h1>
                         <p class="text-body  text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
                             Változtasd webshopod termékeit azonnal megosztható social média tartalommá – az AI szöveget
@@ -344,61 +294,39 @@
 
                         <ul class="space-y-3.5 text-body ">
                             <li class="flex items-start gap-2.5">
-                                <span class="material-symbols-outlined text-primary text-[22px]">check_circle</span>
+                                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                                 <span><strong>Nem kell többé órákat töltened</strong> posztok írásával és képek
                                     szerkesztésével</span>
                             </li>
                             <li class="flex items-start gap-2.5">
-                                <span class="material-symbols-outlined text-primary text-[22px]">check_circle</span>
+                                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                                 <span><strong>Folyamatos</strong>, profi <strong>jelenlét</strong> a social médiában –
                                     akkor is, ha neked <strong>nincs rá
                                         időd</strong></span>
                             </li>
                             <li class="flex items-start gap-2.5">
-                                <span class="material-symbols-outlined text-primary text-[22px]">check_circle</span>
+                                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                                 <span>Több látogató és vásárló a webshopodban, <strong>kevesebb ráfordított
                                         munkaórával</strong></span>
                             </li>
                         </ul>
 
-                        <!-- Early Bird Urgency Slider -->
-                        <div id="earlyBirdCard"
-                            class="mt-2 rounded-[16px] border-2 border-primary/20 bg-card p-5 cursor-pointer shadow-card hover:shadow-card-hover hover:border-primary transition-all"
-                            onclick="document.getElementById('hero').querySelector('form')?.scrollIntoView({behavior:'smooth',block:'center'})">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                                <div class="flex items-center gap-2">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                                        <span class="material-symbols-outlined text-[18px]">bolt</span>
-                                    </div>
-                                    <span class="text-sm font-bold text-dark tracking-wide">Kedvezményes
-                                        előfizetés</span>
-                                </div>
-                                <div
-                                    class="flex items-center gap-1.5 bg-light rounded-md px-2.5 py-1 border border-border shrink-0">
-                                    <span class="text-xs font-bold text-muted">Foglalt:</span>
-                                    <span id="earlyBirdCount" class="text-sm font-bold text-primary">46</span>
-                                    <span class="text-xs font-bold text-muted">/ 60</span>
-                                </div>
+                        <!-- Social proof mini -->
+                        <div class="flex items-center gap-3">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                                <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                                <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
                             </div>
-                            <div class="w-full h-2 rounded-full bg-light overflow-hidden border border-border">
-                                <div id="earlyBirdBarNew"
-                                    class="h-full rounded-full bg-primary transition-all duration-700 ease-out"
-                                    style="width: 76.6667%;"></div>
-                            </div>
-                            <div class="flex flex-wrap justify-between gap-x-2 mt-2">
-                                <p class="text-[11px] text-muted font-medium">Korai regisztrálóknak fix 24.990 Ft-os áron.
-                                </p>
-                                <span id="earlyBirdRemaining" class="text-[11px] font-bold text-primary">Már csak 14
-                                    hely ezen az áron!</span>
-                            </div>
+                            <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshop</span> már használja</p>
                         </div>
+
                     </div>
 
                     <!-- Form Container -->
                     <div class="w-full relative">
                         <div
-                            class="hero-form-card relative w-full rounded-[16px] overflow-hidden transition-all p-6 md:p-8">
+                            class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
                             <div id="formIntro">
                                 <h3 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online
                                     bemutatóra
@@ -494,14 +422,7 @@
                                         <div class="text-center space-y-3">
                                             <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
                                             <p class="text-body leading-relaxed text-sm">
-                                                Mi most olyan ügyfeleket keresünk, akik <strong>azonnal használatba
-                                                    tudják venni</strong> a rendszert – ezért a bemutatót jelenleg csak
-                                                számukra tudjuk vállalni.
-                                            </p>
-                                            <p class="text-body leading-relaxed text-sm">
-                                                De maradjunk kapcsolatban! Add meg az email címed, és küldünk egy
-                                                <strong>bemutató videót</strong> a rendszerről, valamint értesítünk az
-                                                aktuális újdonságokról.
+                                                A bemutatót csak olyanoknak tudjuk vállalni, akik azonnal használni szeretnék a rendszert. Maradjunk kapcsolatban addig is – szívesen elküldenénk egy <strong>videós bemutatót</strong> neked.
                                             </p>
                                         </div>
                                         <div>
@@ -530,7 +451,7 @@
                                         </div>
                                         <button type="button" onclick="submitSoftReject()"
                                             class="w-full flex items-center justify-center rounded-lg h-12 cta-primary transition-all hover:brightness-95">
-                                            Küldj nekem bemutató videót!
+                                            Kérem a videót
                                         </button>
                                     </div>
                                 </div>
@@ -597,7 +518,7 @@
 
                                         <div class="flex gap-3 mt-4">
                                             <button type="button" onclick="nextStep(1)"
-                                                class="flex-shrink-0 flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                                class="flex-shrink-0 hidden md:flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
                                                 <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
                                                 Vissza
                                             </button>
@@ -1416,7 +1337,7 @@
                             <span class="text-xl font-bold text-dark">Ft</span>
                             <span class="text-muted text-sm">+ÁFA / hó</span>
                         </div>
-                        <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Korai regisztrációs ár — a jelenlegi 60 fős sávban</p>
+                        <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fix havidíj, rejtett költségek nélkül</p>
                         <ul class="space-y-4 mb-8">
                             <li class="flex items-center gap-3">
                                 <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
@@ -1544,23 +1465,6 @@
                     </div>
                 </div>
 
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-7 shadow-card mt-8">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-                        <h3 class="text-xl font-bold text-dark">Kedvezményes előfizetés</h3>
-                        <p class="text-dark font-bold">Foglalt: 46 / 60</p>
-                    </div>
-                    <div class="w-full h-3 rounded-full bg-light border border-border overflow-hidden mb-4">
-                        <div class="h-full bg-primary rounded-full" style="width: 76.7%;"></div>
-                    </div>
-                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 text-sm">
-                        <p class="text-body md:max-w-[560px]">A korai regisztrálóknak garantáljuk a 24.990 Ft-os árat. A következő sávtól emelünk.</p>
-                        <p class="text-primary font-bold md:text-right">Már csak 14 hely ezen az áron!</p>
-                    </div>
-                    <div class="mt-5 rounded-[12px] bg-light border border-border px-4 py-3 text-xs sm:text-sm text-body">
-                        <span class="font-bold text-dark">Árlépcső:</span>
-                        40 főig: 19.990 Ft (betelt) → 60 főig: 24.990 Ft → utána magasabb ár
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -1804,53 +1708,6 @@
         });
     </script>
 
-    <script>
-        // Early Bird Dynamic Color Logic
-        (function () {
-            const current = 46;
-            const max = 60;
-            const ratio = current / max; // 0.7667
-
-            // Color interpolation: green(0) -> amber(0.5) -> red(1)
-            function getBarColor(r) {
-                if (r <= 0.5) {
-                    // green to amber
-                    const t = r / 0.5;
-                    const rr = Math.round(34 + t * (245 - 34));
-                    const gg = Math.round(197 + t * (158 - 197));
-                    const bb = Math.round(94 + t * (11 - 94));
-                    return `rgb(${rr},${gg},${bb})`;
-                } else {
-                    // amber to red
-                    const t = (r - 0.5) / 0.5;
-                    const rr = Math.round(245 + t * (239 - 245));
-                    const gg = Math.round(158 + t * (68 - 158));
-                    const bb = Math.round(11 + t * (68 - 11));
-                    return `rgb(${rr},${gg},${bb})`;
-                }
-            }
-
-            const startColor = getBarColor(Math.max(0, ratio - 0.15));
-            const endColor = getBarColor(ratio);
-
-            const bar = document.getElementById('earlyBirdBarNew');
-            if (bar) {
-                bar.style.width = (ratio * 100) + '%';
-                bar.style.background = `linear-gradient(90deg, ${startColor}, ${endColor})`;
-            }
-
-            const countEl = document.getElementById('earlyBirdCount');
-            if (countEl) {
-                countEl.style.color = endColor;
-            }
-
-            const remaining = max - current;
-            const remainingEl = document.getElementById('earlyBirdRemaining');
-            if (remainingEl) {
-                remainingEl.textContent = remaining <= 5 ? `Utolsó ${remaining} hely!` : `Már csak ${remaining} hely!`;
-            }
-        })();
-    </script>
     <script src="assets/cookie.js"></script>
 </body>
 
