@@ -1,0 +1,61 @@
+export const LOCALES = ['hu', 'en'] as const;
+export type Locale = (typeof LOCALES)[number];
+export const DEFAULT_LOCALE: Locale = 'hu';
+
+export type PageKey = 'home' | 'demo' | 'thanks' | 'privacy' | 'terms' | 'imprint' | 'dataDeletion';
+
+/**
+ * Logikai oldal -> nyelvenkénti teljes path (locale prefixszel, fordított sluggal).
+ * `null` = az adott oldalnak nincs verziója az adott nyelven.
+ * Az adatvédelmi tájékoztató teljes szövege KIZÁRÓLAG angolul létezik (Meta App
+ * Review követelmény) — a /hu/adatkezeles csak egy rá hivatkozó rövid oldal.
+ * A terms (ÁSZF) kizárólag angolul létezik (Meta App Review követelmény) —
+ * a régi /hu/aszf URL a /en/terms-re redirectel.
+ * A dataDeletion (Meta által megkövetelt adattörlési tájékoztató) szándékosan
+ * csak angolul létezik — a magyar oldalak erre hivatkoznak.
+ */
+export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
+  home: { hu: '/hu/', en: '/en/' },
+  demo: { hu: '/hu/bemutato', en: '/en/demo' },
+  thanks: { hu: '/hu/koszonjuk', en: '/en/thank-you' },
+  privacy: { hu: '/hu/adatkezeles', en: '/en/privacy-policy' },
+  terms: { hu: null, en: '/en/terms' },
+  imprint: { hu: '/hu/impresszum', en: '/en/imprint' },
+  dataDeletion: { hu: null, en: '/en/data-deletion' },
+};
+
+/** Az adott oldal path-ja egy adott nyelven (üres string, ha nincs). */
+export function pathFor(page: PageKey, locale: Locale): string {
+  return PAGES[page][locale] ?? '';
+}
+
+/** A megadott nyelv főoldalának path-ja (a nav-anchorokhoz: `${home}#funkciok`). */
+export function homeFor(locale: Locale): string {
+  return PAGES.home[locale] as string;
+}
+
+/**
+ * hreflang alternatívák egy adott oldalhoz.
+ * Minden nyelvet felsorol, ahol az oldal létezik, plusz x-default (a HU verzió).
+ */
+export function alternatesFor(page: PageKey): { hreflang: string; path: string }[] {
+  const out: { hreflang: string; path: string }[] = [];
+  for (const loc of LOCALES) {
+    const p = PAGES[page][loc];
+    if (p) out.push({ hreflang: loc, path: p });
+  }
+  const xdefault = PAGES[page][DEFAULT_LOCALE];
+  if (xdefault) out.push({ hreflang: 'x-default', path: xdefault });
+  return out;
+}
+
+/**
+ * A nyelvváltó cél-URL-je: az AKTUÁLIS oldal másik nyelvi verziója.
+ * Ha az adott oldal nem létezik a másik nyelven (pl. jogi oldal), a másik
+ * nyelv főoldalára esik vissza.
+ */
+export function switchTarget(page: PageKey, current: Locale): { locale: Locale; path: string } {
+  const other: Locale = current === 'hu' ? 'en' : 'hu';
+  const p = PAGES[page][other];
+  return { locale: other, path: p ?? homeFor(other) };
+}

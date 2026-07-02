@@ -1,0 +1,104 @@
+---
+import { homeFor, pathFor, type Locale, type PageKey } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+}
+
+const { locale, page } = Astro.props;
+const ui = t(locale);
+const home = homeFor(locale);
+const demo = pathFor('demo', locale);
+const APP_URL = 'https://app.getcontentninja.com';
+
+// Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
+// (#funkciok) nav-elemet elhagytuk – csak létező horgonyokra mutatunk.
+const navItems = [
+  { href: `${home}#hogyan-mukodik`, label: ui.nav.how },
+  { href: `${home}#velemenyek`, label: ui.nav.testimonials },
+  { href: `${home}#arazas`, label: ui.nav.pricing },
+];
+---
+
+<header id="top" class="bg-card border-b border-border sticky top-0 z-50 shadow-card">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-3 flex items-center justify-between gap-6">
+    <!-- Logo -->
+    <a href={home} class="shrink-0">
+      <img src="/assets/logo.webp" alt={ui.logoAlt} class="h-12 md:h-14 w-auto object-contain" />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8" aria-label={ui.nav.aria}>
+      {navItems.map((item) => (
+        <a href={item.href} class="nav-link text-sm">{item.label}</a>
+      ))}
+    </nav>
+
+    <!-- CTAs + language + hamburger -->
+    <div class="flex items-center gap-3 shrink-0">
+      <LanguageSwitcher locale={locale} page={page} class="!hidden md:!inline-flex" />
+      <a href={APP_URL} target="_blank" class="cta-secondary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm">
+        <span class="material-symbols-outlined text-[16px]">login</span>
+        {ui.cta.login}
+      </a>
+      <a href={demo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm">
+        <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+        {ui.cta.demo}
+      </a>
+      <!-- Hamburger (mobile only) -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden flex items-center justify-center w-10 h-10 rounded-[10px] border border-border text-dark hover:bg-light transition-colors"
+        aria-label={ui.nav.menuAria}
+      >
+        <span id="hamburger-icon" class="material-symbols-outlined text-[22px]">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-card px-4 pb-4">
+    <nav class="flex flex-col gap-1 pt-3" aria-label={ui.nav.mobileAria}>
+      {navItems.map((item) => (
+        <a href={item.href} class="mobile-nav-link nav-link text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-border">
+      <LanguageSwitcher locale={locale} page={page} class="justify-center px-4 py-2.5 rounded-[8px] hover:bg-light" />
+      <a href={APP_URL} target="_blank" class="cta-secondary flex items-center justify-center gap-2 px-4 py-2.5 text-sm">
+        <span class="material-symbols-outlined text-[16px]">login</span>
+        {ui.cta.loginApp}
+      </a>
+      <a href={demo} class="cta-primary flex items-center justify-center gap-2 px-4 py-2.5 text-sm">
+        <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+        {ui.cta.demo}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const icon = document.getElementById('hamburger-icon');
+
+  if (btn && menu && icon) {
+    btn.addEventListener('click', function () {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', isOpen);
+      icon.textContent = isOpen ? 'menu' : 'close';
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        menu.classList.add('hidden');
+        icon.textContent = 'menu';
+      });
+    });
+  }
+</script>

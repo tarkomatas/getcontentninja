@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
+
+const locale = 'en';
+const page = 'dataDeletion';
+const title = 'Data Deletion Instructions – Content Ninja';
+const description =
+  'How to delete your personal data from Content Ninja: delete your account in the app, request deletion by email, or revoke the Facebook/Instagram connection.';
+
+const privacyEn = pathFor('privacy', 'en');
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Header locale={locale} page={page} />
+
+  <main class="py-16 md:py-24 px-4 md:px-10">
+    <div class="max-w-[760px] mx-auto">
+
+      <a href="/en/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Back to homepage
+      </a>
+
+      <div class="mb-10">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Data Deletion Instructions</h1>
+        <p class="text-sm text-muted">Last updated: 2 July 2026</p>
+      </div>
+
+      <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+
+        <!-- Data controller -->
+        <div class="p-7">
+          <h2 class="text-base font-bold text-dark mb-4">Data controller</h2>
+          <dl class="space-y-2.5 text-sm">
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Company name</dt>
+              <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Registered office</dt>
+              <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8, Hungary</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Company reg. number</dt>
+              <dd class="text-dark font-medium">01-09-426906</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Tax number</dt>
+              <dd class="text-dark font-medium">32489819-2-43</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Privacy contact</dt>
+              <dd><a href="mailto:support@getcontentninja.com" class="text-primary font-medium hover:underline">support@getcontentninja.com</a></dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Phone</dt>
+              <dd><a href="tel:+36202838831" class="text-primary font-medium hover:underline">+36 20 283 8831</a></dd>
+            </div>
+          </dl>
+          <p class="text-sm text-body mt-5 leading-relaxed">
+            Content Ninja is operated by Digitallwork.hu Kft., a company registered in Hungary (European Union).
+            We process personal data in accordance with Regulation (EU) 2016/679 (GDPR). This page explains how you
+            can have your personal data — including any connected Facebook / Instagram data and stored access
+            tokens — deleted from our systems.
+          </p>
+        </div>
+
+        <!-- Option 1: in-app -->
+        <div class="p-7">
+          <h2 class="text-base font-bold text-dark mb-3">1. Delete your account in the app</h2>
+          <p class="text-sm text-body leading-relaxed mb-3">
+            If you have a Content Ninja account, you can delete it yourself:
+          </p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>Log in to the app at <a href="https://app.getcontentninja.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">app.getcontentninja.com</a>.</li>
+            <li>Open your <strong class="text-dark">Profile / Account settings</strong>.</li>
+            <li>Choose <strong class="text-dark">Delete account</strong> and confirm.</li>
+          </ol>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            Deleting your account removes your personal data from our systems, including your connected
+            Facebook / Instagram integrations and any Meta access tokens we stored on your behalf
+            (see section 4 for details and timelines).
+          </p>
+        </div>
+
+        <!-- Option 2: email -->
+        <div class="p-7">
+          <h2 class="text-base font-bold text-dark mb-3">2. Request deletion by email</h2>
+          <p class="text-sm text-body leading-relaxed">
+            If you no longer have access to your account — or you do not have an account but believe we hold
+            personal data about you (for example, you submitted our demo request form) — send a deletion request to
+            <a href="mailto:support@getcontentninja.com" class="text-primary font-medium hover:underline">support@getcontentninja.com</a>.
+          </p>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            Please send the request from the email address associated with your account (or state that address in
+            your message) so we can verify your identity. Use a subject line such as
+            <span class="text-dark font-medium">“Data deletion request”</span>. No specific form is required.
+          </p>
+        </div>
+
+        <!-- Option 3: revoke on Facebook -->
+        <div class="p-7">
+          <h2 class="text-base font-bold text-dark mb-3">3. Revoke the Facebook / Instagram connection</h2>
+          <p class="text-sm text-body leading-relaxed mb-3">
+            You can also cut off Content Ninja’s access directly on Facebook, without contacting us:
+          </p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>Open <strong class="text-dark">Facebook → Settings &amp; privacy → Settings</strong>.</li>
+            <li>Go to <strong class="text-dark">Business integrations</strong> (or <strong class="text-dark">Apps and websites</strong>).</li>
+            <li>Find <strong class="text-dark">Content Ninja</strong> and click <strong class="text-dark">Remove</strong>.</li>
+          </ol>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            Removing the integration invalidates the access tokens we hold. If you also want the data already
+            stored in our systems to be erased, additionally delete your account (section 1) or email us (section 2).
+          </p>
+        </div>
+
+        <!-- What is deleted -->
+        <div class="p-7">
+          <h2 class="text-base font-bold text-dark mb-3">4. What is deleted, and when</h2>
+          <p class="text-sm text-body leading-relaxed mb-3">
+            Within <strong class="text-dark">30 days</strong> of your account deletion or of receiving your verified
+            deletion request, we permanently erase:
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>your account data (name, email address, company name);</li>
+            <li>product data imported from your webshop (names, descriptions, images, prices, categories);</li>
+            <li>Facebook and Instagram access data, including all stored Meta access tokens;</li>
+            <li>your MailerLite API key and any subscriber data accessed through it;</li>
+            <li>data you provided via our demo request form.</li>
+          </ul>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            <strong class="text-dark">Exception:</strong> data we are legally required to retain is kept for the
+            statutory period only — in particular, invoicing and accounting records must be retained for
+            8 years under the Hungarian Accounting Act (Act C of 2000). Such data is not used for any other
+            purpose and is deleted once the retention period expires.
+          </p>
+        </div>
+
+        <!-- Confirmation -->
+        <div class="p-7">
+          <h2 class="text-base font-bold text-dark mb-3">5. Confirmation and contact</h2>
+          <p class="text-sm text-body leading-relaxed">
+            We confirm the completion of every deletion request by email. If you have any questions about the
+            process, or you have not received a confirmation within 30 days, contact us at
+            <a href="mailto:support@getcontentninja.com" class="text-primary font-medium hover:underline">support@getcontentninja.com</a>.
+          </p>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            Full details of how we process personal data — including your other rights under the GDPR and how to
+            lodge a complaint with the Hungarian supervisory authority (NAIH) — are available in our
+            <a href={privacyEn} class="text-primary font-medium hover:underline">Privacy Policy</a>.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer locale={locale} page={page} />
+</BaseLayout>

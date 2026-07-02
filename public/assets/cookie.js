@@ -2,6 +2,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const COOKIE_NAME = "contentninja_cookie_consent_v1";
     const PIXEL_ID = "3857575907663677";
 
+    // A teljes tájékoztató angolul él (/en/privacy-policy); a /hu/adatkezeles
+    // egy arra hivatkozó rövid magyar oldal.
+    const PRIVACY_URLS = { hu: "/hu/adatkezeles", en: "/en/privacy-policy" };
+
+    const STRINGS = {
+        hu: {
+            title: "Sütiket (cookie-kat) használunk",
+            body: "a legjobb felhasználói élmény és analitikai mérések biztosításához (Meta Pixel).",
+            link: "Adatkezelési tájékoztató",
+            accept: "Elfogadom",
+            reject: "Elutasítom",
+        },
+        en: {
+            title: "We use cookies",
+            body: "to ensure the best user experience and analytics measurement (Meta Pixel).",
+            link: "Privacy policy",
+            accept: "Accept",
+            reject: "Decline",
+        },
+    };
+
+    const lang = (document.documentElement.lang || "hu").toLowerCase().startsWith("en") ? "en" : "hu";
+    const T = STRINGS[lang];
+
     function loadMetaPixel() {
         if (window.fbq) return;
 
@@ -103,13 +127,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div id="cookie-icon">🍪</div>
                 <div id="cookie-text">
                     <p>
-                        <strong>Sütiket (cookie-kat) használunk</strong> a legjobb felhasználói élmény és analitikai mérések biztosításához (Meta Pixel).
-                        <a href="adatkezeles.html">Adatkezelési tájékoztató</a>
+                        <strong>${T.title}</strong> ${T.body}
+                        <a href="${PRIVACY_URLS[lang]}">${T.link}</a>
                     </p>
                 </div>
                 <div id="cookie-buttons">
-                    <button id="cookie-reject">Elutasítom</button>
-                    <button id="cookie-accept">Elfogadom</button>
+                    <button id="cookie-reject">${T.reject}</button>
+                    <button id="cookie-accept">${T.accept}</button>
                 </div>
             </div>
         `;

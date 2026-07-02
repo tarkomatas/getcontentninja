@@ -1,0 +1,420 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'en';
+const page = 'privacy';
+const title = 'Privacy Policy – Content Ninja';
+const description =
+  'Privacy Policy of Content Ninja: what personal data we collect, how we use it to publish content to your Facebook and Instagram accounts, and your rights under the GDPR.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Header locale={locale} page={page} />
+
+  <main class="py-16 md:py-24 px-4 md:px-10">
+    <div class="max-w-[760px] mx-auto">
+
+      <a href="/en/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Back to homepage
+      </a>
+
+      <div class="mb-10">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
+        <p class="text-sm text-muted">Last updated: 2 July 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted mt-2">
+          This Privacy Policy is provided in English only. A tájékoztató kizárólag angol nyelven érhető el –
+          kérdés esetén írj a <a href="mailto:support@getcontentninja.com" class="text-primary underline">support@getcontentninja.com</a> címre.
+        </p>
+      </div>
+
+      <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+
+        <!-- 1. -->
+        <div class="p-7 doc-section">
+          <h2>1. Data Controller</h2>
+          <p>
+            Content Ninja (the "Service") is an AI-powered content marketing tool for e-commerce businesses that
+            creates social media content (text, images, video) and publishes it on the user's behalf to the user's
+            own Facebook Pages and Instagram business accounts. The Service is operated by:
+          </p>
+          <dl class="space-y-2 text-sm mt-4">
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Company name</dt>
+              <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Registered seat</dt>
+              <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8, Hungary</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Company reg. number</dt>
+              <dd class="text-dark font-medium">01-09-426906</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">VAT number</dt>
+              <dd class="text-dark font-medium">32489819-2-43</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Privacy contact</dt>
+              <dd><a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a></dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Phone</dt>
+              <dd><a href="tel:+36202838831">+36 20 283 8831</a></dd>
+            </div>
+          </dl>
+          <p class="mt-4">
+            This policy covers both this marketing website (getcontentninja.com) and the Content Ninja application
+            (app.getcontentninja.com). It is drawn up in accordance with Regulation (EU) 2016/679 (General Data
+            Protection Regulation, "GDPR"), the Hungarian Act CXII of 2011 on informational self-determination, and
+            Act C of 2000 on accounting.
+          </p>
+          <p class="mt-2">
+            The contractual conditions of using the Service are set out in the
+            <a href="/en/terms">Terms of Service</a>; this Privacy Policy forms an integral part of them.
+          </p>
+        </div>
+
+        <!-- 2. -->
+        <div class="p-7 doc-section">
+          <h2>2. What data we process</h2>
+
+          <div class="space-y-5">
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.1. Account and registration data</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">name, e-mail address, password (stored in hashed/encrypted form), billing company name, VAT number</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">creating and managing your user account, providing the Service, invoicing</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR); invoicing: legal obligation (Art. 6(1)(c) GDPR)</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.2. Payment data</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">subscription plan and status, payment transaction references</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">collecting subscription fees</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR)</span></div>
+                <div class="meta-row"><span class="meta-label">Note</span><span class="meta-value">card details are processed exclusively by Stripe, our payment provider. We never see or store your card number; we only store the state of your subscription.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.3. Content data</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">brands and brand-identity settings you create, prompts, generated content (text, images, video), uploaded media files, knowledge-base entries, and product data imported from your webshop (product names, descriptions, images, prices, categories)</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">AI-based content generation and scheduled publishing in your brand's style</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR)</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.4. Facebook / Instagram (Meta) data</p>
+              <p>
+                When you connect your Facebook account via <strong class="text-dark">Facebook Login</strong>, we
+                access and store the following data through the Meta Graph API:
+              </p>
+              <ul>
+                <li>your long-lived user access token (stored encrypted);</li>
+                <li>the list and identifiers of the Facebook Pages you manage and the Instagram business accounts linked to them;</li>
+                <li>Page access tokens (stored encrypted);</li>
+                <li>the identifiers and links of the posts published through the Service;</li>
+                <li>performance statistics (insights) of your Pages, Instagram account and published posts (e.g. reach, impressions, engagement);</li>
+                <li>comments on your published posts, so that you can view and manage them in the Service.</li>
+              </ul>
+              <p>
+                Legal basis: performance of a contract (Art. 6(1)(b) GDPR). These tokens and identifiers are used
+                <strong class="text-dark">exclusively</strong> to publish and manage the content you create in the
+                Service and to show you the performance statistics and comments of that content — see Sections 3 and 4.
+              </p>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.5. Newsletter integration (MailerLite)</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">your MailerLite API key, and the subscriber data stored in your MailerLite account (e-mail addresses, names)</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">composing and sending newsletter campaigns on your behalf</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR)</span></div>
+                <div class="meta-row"><span class="meta-label">Note</span><span class="meta-value">we act in your MailerLite account solely on your instructions; access can be terminated at any time by revoking the API key.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.6. Usage logs</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">logs of content-generation and publishing operations (timestamps, status, error messages)</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">troubleshooting, reliability, and abuse prevention</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">legitimate interest (Art. 6(1)(f) GDPR)</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.7. Content Ninja newsletter</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">e-mail address</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">sending news and updates about the Content Ninja service</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">consent (Art. 6(1)(a) GDPR); withdrawable at any time by unsubscribing</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.8. Website visitors – Meta Pixel</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">behavioural data of website visitors (page views, clicks, conversions), cookie identifiers, IP address</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">marketing, remarketing, measuring ad effectiveness</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">consent (Art. 6(1)(a) GDPR) — the Pixel loads only after you accept it in the cookie banner (see Section 10)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. -->
+        <div class="p-7 doc-section">
+          <h2>3. How we use your data — purposes and legal bases</h2>
+          <p>We use the data described above for the following purposes:</p>
+          <ul>
+            <li><strong class="text-dark">Providing the Service</strong> — generating content, publishing / scheduling it on your behalf to the social media accounts you connected, and displaying the performance statistics (insights) and comments of your published posts (performance of a contract);</li>
+            <li><strong class="text-dark">Invoicing and accounting</strong> (legal obligation);</li>
+            <li><strong class="text-dark">Product improvement and reliability</strong> — usage logs and aggregated statistics (legitimate interest);</li>
+            <li><strong class="text-dark">Marketing on this website</strong> — Meta Pixel remarketing (consent).</li>
+          </ul>
+          <p>
+            <strong class="text-dark">Meta access tokens and Meta platform data are used exclusively to publish and
+            manage the content you create in the Service.</strong> We do not sell them, do not share them with any
+            third party beyond the processors listed in Section 5, and do not use them for advertising, profiling,
+            or any purpose unrelated to the Service.
+          </p>
+        </div>
+
+        <!-- 4. -->
+        <div class="p-7 doc-section">
+          <h2>4. Meta permissions we request and why</h2>
+          <p>When you connect your account with Facebook Login, we request the following permissions:</p>
+          <ul>
+            <li><strong class="text-dark">pages_show_list</strong> — to list the Facebook Pages you manage so you can choose which one to connect;</li>
+            <li><strong class="text-dark">pages_manage_posts</strong> — to create, schedule and publish posts on your connected Page on your behalf;</li>
+            <li><strong class="text-dark">pages_read_engagement</strong> — to read your Page's content and basic engagement data needed for publishing and for verifying that posts went live;</li>
+            <li><strong class="text-dark">instagram_basic</strong> — to identify the Instagram business account linked to your Facebook Page;</li>
+            <li><strong class="text-dark">instagram_content_publish</strong> — to publish content to your connected Instagram business account;</li>
+            <li><strong class="text-dark">read_insights</strong> — to read the performance statistics (insights) of your Page and its posts and display them to you in the Service;</li>
+            <li><strong class="text-dark">instagram_manage_insights</strong> — to read the performance statistics (insights) of your Instagram business account and its posts and display them to you in the Service;</li>
+            <li><strong class="text-dark">pages_manage_engagement</strong> — to read and reply to comments on your Page's posts from within the Service;</li>
+            <li><strong class="text-dark">instagram_manage_comments</strong> — to read and reply to comments on your Instagram posts from within the Service.</li>
+          </ul>
+          <p>
+            You can revoke these permissions at any time in your Facebook settings
+            (<em>Settings &amp; privacy → Settings → Business integrations</em>) or by disconnecting the account
+            inside the Content Ninja application.
+          </p>
+        </div>
+
+        <!-- 5. -->
+        <div class="p-7 doc-section">
+          <h2>5. Who we share data with (processors and sub-processors)</h2>
+          <p>
+            We use the following processors to provide the Service. <strong class="text-dark">We never sell your
+            personal data to third parties.</strong>
+          </p>
+          <div class="mt-4 overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+              <thead>
+                <tr class="bg-light">
+                  <th class="text-left text-dark font-semibold px-4 py-3 rounded-tl-[8px] border border-border">Processor</th>
+                  <th class="text-left text-dark font-semibold px-4 py-3 border-t border-b border-border">Location</th>
+                  <th class="text-left text-dark font-semibold px-4 py-3 rounded-tr-[8px] border border-border">Activity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Supabase, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">EU region</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Database, authentication, file storage</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Vercel, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">EU (Frankfurt)</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Application hosting</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Stripe, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Payment processing</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Meta Platforms, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA / Ireland</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Publishing to Facebook / Instagram; website marketing (Pixel)</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">OpenAI, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI text and image generation</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Anthropic, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI text generation</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google LLC</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI text, image and video generation</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">MailerLite (UAB MailerLite)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Lithuania, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">E-mail delivery</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">GitHub, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Hosting of this marketing website</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-b border-border rounded-bl-[8px]">KBOSS.hu Kft. (Szamlazz.hu)</td>
+                  <td class="px-4 py-3 text-muted border-r border-b border-border">Hungary</td>
+                  <td class="px-4 py-3 text-body border-r border-b border-border rounded-br-[8px]">Invoicing</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-3">
+            When generating content, only the inputs required for generation (e.g. product data, prompts, brand
+            settings) are sent to the AI providers — never your access tokens or account credentials.
+          </p>
+          <p class="mt-3">
+            <strong class="text-dark">Note on Meta Platforms:</strong> when the Service publishes content to your
+            Facebook Page or Instagram account, or reads insights and comments on your behalf, Meta Platforms
+            processes that data as an <strong class="text-dark">independent data controller</strong> under its own
+            <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">privacy policy</a> —
+            not as our processor. Meta acts as our processor only in respect of the Meta Pixel used on this
+            marketing website (see Section 10).
+          </p>
+        </div>
+
+        <!-- 6. -->
+        <div class="p-7 doc-section">
+          <h2>6. Where we store your data, and how we protect it</h2>
+          <ul>
+            <li><strong class="text-dark">Storage in the EU:</strong> your data is stored within the European Union (Supabase EU region, Vercel Frankfurt).</li>
+            <li><strong class="text-dark">Third-country transfers:</strong> some processors operate in the USA (Stripe, Meta, OpenAI, Anthropic, Google, GitHub). Transfers to them rely on the EU–US Data Privacy Framework, covered by the European Commission's adequacy decision, and/or Standard Contractual Clauses.</li>
+            <li><strong class="text-dark">Isolation:</strong> data is separated per user / workspace at the database level (row-level security, RLS).</li>
+            <li><strong class="text-dark">Encryption:</strong> all platform access tokens (Meta user and Page tokens, API keys) are stored encrypted using AES-256-GCM; data in transit is protected by TLS.</li>
+          </ul>
+        </div>
+
+        <!-- 7. -->
+        <div class="p-7 doc-section" id="data-deletion">
+          <h2>7. Retention and deletion</h2>
+          <ul>
+            <li><strong class="text-dark">Account and content data:</strong> retained while your account exists, then deleted within 30 days after account deletion.</li>
+            <li><strong class="text-dark">Meta access tokens and connected-account data:</strong> deleted immediately when you disconnect the account in the app, revoke the app's access in your Facebook settings, or delete your account.</li>
+            <li><strong class="text-dark">Invoicing data:</strong> retained for 8 years, as required by the Hungarian Accounting Act.</li>
+            <li><strong class="text-dark">Usage logs:</strong> retained for up to 12 months.</li>
+            <li><strong class="text-dark">Newsletter data:</strong> retained until you unsubscribe.</li>
+          </ul>
+          <p>You can request deletion of your data at any time, in any of the following ways:</p>
+          <ul>
+            <li>delete your account inside the Content Ninja application;</li>
+            <li>send a deletion request to <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>;</li>
+            <li>remove the app's access in your Facebook settings (<em>Settings &amp; privacy → Settings → Business integrations</em>) — this immediately invalidates the stored tokens.</li>
+          </ul>
+          <p>
+            Deletion requests are completed within 30 days at the latest, except for data we are legally required to
+            retain (e.g. invoices). Step-by-step instructions are available on our
+            <a href="/en/data-deletion">Data Deletion Instructions</a> page.
+          </p>
+        </div>
+
+        <!-- 8. -->
+        <div class="p-7 doc-section">
+          <h2>8. Your rights under the GDPR</h2>
+          <div class="space-y-2">
+            <p><strong class="text-dark">Right of access</strong> — you may request information about the data we process about you.</p>
+            <p><strong class="text-dark">Right to rectification</strong> — you may request the correction of inaccurate data.</p>
+            <p><strong class="text-dark">Right to erasure</strong> — you may request deletion of your data where there is no longer a legal basis for processing.</p>
+            <p><strong class="text-dark">Right to restriction of processing</strong> — you may request that processing be restricted in certain cases.</p>
+            <p><strong class="text-dark">Right to data portability</strong> — you may request your data in a machine-readable format.</p>
+            <p><strong class="text-dark">Right to object</strong> — you may object to processing based on legitimate interest.</p>
+            <p><strong class="text-dark">Right to withdraw consent</strong> — for consent-based processing (newsletter, Meta Pixel), you may withdraw consent at any time without giving reasons; withdrawal does not affect the lawfulness of processing before the withdrawal.</p>
+          </div>
+          <p class="mt-4">
+            You can exercise these rights by e-mailing <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>.
+            We respond to requests within 30 days at the latest.
+          </p>
+        </div>
+
+        <!-- 9. -->
+        <div class="p-7 doc-section">
+          <h2>9. Complaints</h2>
+          <p>
+            If you believe we have infringed the rules on data processing, you may lodge a complaint with the
+            Hungarian supervisory authority:
+          </p>
+          <div class="bg-light rounded-[10px] p-4 mt-3">
+            <div class="meta-row"><span class="meta-label">Name</span><span class="meta-value">Nemzeti Adatvédelmi és Információszabadság Hatóság (NAIH — Hungarian National Authority for Data Protection and Freedom of Information)</span></div>
+            <div class="meta-row"><span class="meta-label">Address</span><span class="meta-value">1055 Budapest, Falk Miksa utca 9-11., Hungary</span></div>
+            <div class="meta-row"><span class="meta-label">Postal address</span><span class="meta-value">1363 Budapest, Pf. 9., Hungary</span></div>
+            <div class="meta-row"><span class="meta-label">Phone</span><span class="meta-value"><a href="tel:+3613911400">+36 1 391 1400</a></span></div>
+            <div class="meta-row"><span class="meta-label">E-mail</span><span class="meta-value"><a href="mailto:ugyfelszolgalat@naih.hu">ugyfelszolgalat@naih.hu</a></span></div>
+            <div class="meta-row"><span class="meta-label">Website</span><span class="meta-value"><a href="https://www.naih.hu" target="_blank" rel="noopener">www.naih.hu</a></span></div>
+          </div>
+          <p class="mt-3">You may also bring the matter before a court, or complain to the supervisory authority of your own EU member state.</p>
+        </div>
+
+        <!-- 10. -->
+        <div class="p-7 doc-section">
+          <h2>10. Cookies</h2>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.1. Strictly necessary cookies</p>
+          <p>Cookies essential for the operation of the website and the application (session handling, login). These do not require consent.</p>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.2. Marketing cookies (Meta Pixel)</p>
+          <p>The Meta Pixel places cookies in the visitor's browser for remarketing and advertising purposes. These are activated only with your explicit consent given in the cookie banner.</p>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.3. Managing cookies</p>
+          <p>You may modify or withdraw your cookie consent at any time via the cookie banner, and cookies can also be deleted or blocked individually in your browser settings.</p>
+        </div>
+
+        <!-- 11. -->
+        <div class="p-7 doc-section">
+          <h2>11. Facebook / Meta platform clause</h2>
+          <p>
+            The application accesses the user's Pages and accounts through the Meta Platform (Facebook Login,
+            Facebook Graph API, Instagram Graph API) <strong class="text-dark">solely for the purpose of publishing
+            and managing content created by the user and displaying the performance statistics (insights) and
+            comments of that content to the user</strong>. This access can be revoked at any time in the user's
+            Facebook settings and within the application. The use and transfer of information received from Meta
+            APIs adheres to the <a href="https://developers.facebook.com/terms/" target="_blank" rel="noopener">Meta Platform Terms</a>
+            and the applicable Meta Developer Policies.
+          </p>
+        </div>
+
+        <!-- 12. -->
+        <div class="p-7 doc-section">
+          <h2>12. Changes to this policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. We will notify registered users of material changes
+            by e-mail and publish the updated policy on this page. This version is effective from 2 July 2026.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer locale={locale} page={page} />
+</BaseLayout>
+
+<style>
+  .doc-section h2 { font-size: 0.9rem; font-weight: 700; color: #1e1e2f; margin-bottom: 0.75rem; }
+  .doc-section p { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.5rem; }
+  .doc-section p:first-of-type { margin-top: 0; }
+  .doc-section a { color: #6c5ce7; text-decoration: underline; }
+  .doc-section ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
+  .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; }
+  .meta-row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; font-size: 0.8125rem; padding: 6px 0; border-bottom: 1px solid #e8e8ef; }
+  .meta-row:last-child { border-bottom: none; }
+  .meta-label { color: #9090a7; font-weight: 500; }
+  .meta-value { color: #1e1e2f; }
+</style>

@@ -1,0 +1,1688 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
+
+const locale = 'en';
+const page = 'demo';
+const title = 'Book a Demo – AI Content Creation for Webshops | Content Ninja';
+const description =
+  'Request a free, ~20-minute online demo of Content Ninja and see live how AI creates your webshop\'s social media content.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Fragment slot="head">
+    <style is:inline>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        /* Custom Web App Flat Design Adjustments */
+        body {
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #4a4a68;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #1e1e2f;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .rounded-16 {
+            border-radius: 16px;
+        }
+
+        .rounded-10 {
+            border-radius: 10px;
+        }
+
+        .flat-shadow {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .icon-box {
+            background-color: rgba(108, 92, 231, 0.1);
+            color: #6c5ce7;
+            border-radius: 16px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-primary:hover {
+            background-color: #5a4bd6;
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: transparent;
+            border: 1.5px solid #6c5ce7;
+            color: #6c5ce7;
+            padding: 14px 28px;
+            border-radius: 10px;
+            transition: background 0.2s ease;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-secondary:hover {
+            background-color: rgba(108, 92, 231, 0.08);
+        }
+
+        .cta-primary .material-symbols-outlined,
+        .cta-secondary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        /* Custom Scrollbar for Form */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
+        }
+
+        @keyframes pulse-soft {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
+        .hero-blob {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-blob-2 {
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        .pulse-dot {
+            animation: pulse-soft 2s ease-in-out infinite;
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Header (focused – conversion-oriented, with language switcher) -->
+    <header class="border-b border-solid border-b-[#f3f0f4] bg-card sticky top-0 z-50 transition-all">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
+        <div class="flex items-center gap-3 text-dark">
+          <a href="/en/">
+            <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
+          </a>
+        </div>
+        <div class="flex flex-1 justify-end items-center gap-8">
+          <LanguageSwitcher locale={locale} page={page} />
+        </div>
+      </div>
+    </header>
+
+        <!-- 1. Hero + Application form -->
+        <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
+            <div class="max-w-[1200px] mx-auto w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                    <!-- Content -->
+                    <div class="flex flex-col gap-4 md:gap-7 text-left">
+
+
+                        <h1
+                            class="text-4xl md:text-[2.85rem] lg:text-5xl font-black leading-[1.08] tracking-[-0.03em] text-dark">
+                            Automate your <span class="text-primary">webshop's</span> social media posting
+                        </h1>
+                        <p class="text-body  text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                            Turn your webshop's products into instantly shareable social media content – AI writes the
+                            copy, edits images, <span class="font-bold text-primary  ">generates
+                                video</span> and posts for you,
+                            too.
+                        </p>
+
+                        <ul class="space-y-3.5 text-body ">
+                            <li class="flex items-start gap-2.5">
+                                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                                <span><strong>No more spending hours</strong> writing posts and editing
+                                    images</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                                <span>A <strong>consistent</strong>, professional <strong>presence</strong> on social
+                                    media – even when you <strong>don't have the
+                                        time</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                                <span>More visitors and buyers in your webshop, with <strong>fewer work hours
+                                        spent</strong></span>
+                            </li>
+                        </ul>
+
+                        <!-- Social proof mini -->
+                        <div class="flex items-center gap-3">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                                <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                                <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                            </div>
+                            <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ local webshops</span> already use it</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Form Container -->
+                    <div class="w-full relative">
+                        <div
+                            class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                            <div id="formIntro">
+                                <h3 class="text-2xl font-bold text-center mb-2 text-primary">Apply for an online
+                                    demo
+                                </h3>
+                                <div
+                                    class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-lg px-4 py-3 mb-3">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                    <p class="text-sm text-body "><strong class="font-bold text-dark ">There's no
+                                            direct self-service
+                                            trial</strong> – but in an online meeting we'll walk you through the
+                                        system in detail, even using your own examples.</p>
+                                </div>
+                            </div>
+
+                            <form id="leadForm"
+                                class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+
+                                <!-- Step 1: Qualifying Questions (marketing level + role) -->
+                                <div class="form-step active" data-step="1">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">Do you have a
+                                                webshop / online store?</label>
+                                            <select name="has_webshop" id="hasWebshop"
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                                <option value="" disabled selected>Choose...</option>
+                                                <option value="Igen, van webshopom">Yes, I have a webshop</option>
+                                                <option value="Igen, hamarosan tervezek nyitni">Yes, I plan to open
+                                                    one soon</option>
+                                                <option value="Nem, más típusú vállalkozásom van">No, I have a
+                                                    different type of business</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">How advanced is
+                                                your company in marketing?</label>
+                                            <select name="marketing_level" id="marketingLevel"
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                                <option value="" disabled selected>Choose...</option>
+                                                <option value="Egyáltalán nem értünk semmit a témához">We don't
+                                                    understand the topic at all</option>
+                                                <option value="Kezdő, minimális tudással">Beginner, with minimal knowledge
+                                                </option>
+                                                <option value="Haladó">Advanced</option>
+                                                <option value="Profi">Pro</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">Who currently does the
+                                                posting?</label>
+                                            <select name="marketing_role" id="marketingRole"
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                                <option value="" disabled selected>Choose...</option>
+                                                <option value="Én, cégvezetőként">Me, as the business owner</option>
+                                                <option value="Belsős marketing csapat">In-house marketing team</option>
+                                                <option value="Külsős ügynökség">External agency</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">If you like what
+                                                you see in the demo, when could you start using the software?</label>
+                                            <select name="timing" id="timing"
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                                <option value="" disabled selected>Choose...</option>
+                                                <option value="Azonnal">Immediately</option>
+                                                <option value="1 hónapon belül">Within 1 month</option>
+                                                <option value="2-3 hónapon belül">Within 2-3 months</option>
+                                                <option value="Még csak érdeklődöm">Just looking around for now</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" onclick="qualifyAndNext()"
+                                            class="w-full mt-4 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Disqualification Screen (hard reject) -->
+                                <div class="form-step" data-step="rejected">
+                                    <div class="text-center py-6 space-y-4">
+                                        <h4 class="text-xl font-bold text-dark">Thank you for your interest!</h4>
+                                        <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                            Based on the details you provided, it looks like our platform wouldn't be
+                                            the right fit for you. We don't want to take up your time, so thank you for
+                                            your understanding!
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Soft Reject Screen (timing not ideal) -->
+                                <div class="form-step" data-step="soft-reject">
+                                    <div class="space-y-5">
+                                        <div class="text-center space-y-3">
+                                            <h4 class="text-xl font-bold text-dark">Thank you for your interest!</h4>
+                                            <p class="text-body leading-relaxed text-sm">
+                                                We can only offer the demo to those who want to start using the system right away. Let's stay in touch in the meantime – we'd be happy to send you a <strong>video demo</strong>.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">Email address</label>
+                                            <input type="email" id="softRejectEmail"
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                                placeholder="e.g. john@company.com">
+                                        </div>
+                                        <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                            <input type="checkbox" id="softRejectPrivacy"
+                                                class="mt-1 rounded text-primary focus:ring-primary">
+                                            <label for="softRejectPrivacy">
+                                                I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy" target="_blank"
+                                                    class="underline hover:text-primary">Privacy Policy</a>.
+                                            </label>
+                                        </div>
+                                        <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                            <input type="checkbox" id="softRejectNewsletter"
+                                                class="mt-1 rounded text-primary focus:ring-primary">
+                                            <label for="softRejectNewsletter">
+                                                I'm interested in exciting content like this! I subscribe to the newsletter.
+                                                (<a href="/en/privacy-policy"
+                                                    class="underline hover:text-primary">Privacy Policy</a>)
+                                            </label>
+                                        </div>
+                                        <button type="button" onclick="submitSoftReject()"
+                                            class="w-full flex items-center justify-center rounded-lg h-12 cta-primary transition-all hover:brightness-95">
+                                            Send me the video
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Soft Reject Thank You Screen -->
+                                <div class="form-step" data-step="soft-reject-thanks">
+                                    <div class="text-center py-6 space-y-4">
+                                        <div
+                                            class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                            <span
+                                                class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                        </div>
+                                        <h4 class="text-xl font-bold text-dark">Got it!</h4>
+                                        <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                            We'll send you the demo video and the latest news soon. Thank you for your
+                                            interest!
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2: Contact Info & Privacy -->
+                                <div class="form-step" data-step="2">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">Name</label>
+                                            <input type="text" name="name" required
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                                placeholder="e.g. John Smith">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">Company email
+                                                address</label>
+                                            <input type="email" name="email" required
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                                placeholder="e.g. john@company.com">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-bold text-body mb-1">Phone number</label>
+                                            <input type="tel" name="phone" required
+                                                class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                                placeholder="+36 30 123 4567">
+                                        </div>
+
+                                        <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                            <input type="checkbox" id="privacy" required
+                                                class="mt-1 rounded text-primary focus:ring-primary">
+                                            <label for="privacy">
+                                                I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy" target="_blank"
+                                                    class="underline hover:text-primary">Privacy
+                                                    Policy</a>.
+                                            </label>
+                                        </div>
+
+                                        <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                            <input type="checkbox" id="newsletter" name="newsletter"
+                                                class="mt-1 rounded text-primary focus:ring-primary">
+                                            <label for="newsletter">
+                                                I'm interested in exciting content like this! I subscribe to the newsletter.
+                                                (<a href="/en/privacy-policy"
+                                                    class="underline hover:text-primary">Privacy Policy</a>)
+                                            </label>
+                                        </div>
+
+                                        <div class="flex gap-3 mt-4">
+                                            <button type="button" onclick="nextStep(1)"
+                                                class="flex-shrink-0 hidden md:flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                                <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                                Back
+                                            </button>
+                                            <button type="submit" id="submitBtn"
+                                                class="flex-1 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                                Continue to booking!
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="bg-card  py-[100px] text-dark ">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+                <div class="text-center max-w-[800px] mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">What our customers say about us</h2>
+                </div>
+
+                <div class="relative">
+                    <button type="button" id="t-prev"
+                        class="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 xl:-left-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                        aria-label="Previous testimonial">
+                        <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+                    </button>
+                    <button type="button" id="t-next"
+                        class="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 xl:-right-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                        aria-label="Next testimonial">
+                        <span class="material-symbols-outlined text-[24px]">chevron_right</span>
+                    </button>
+                    <div class="overflow-hidden" id="t-viewport">
+                        <div class="flex" style="gap:2rem" id="t-track">
+
+                            <!-- Testimonial 1 -->
+                            <div class="t-card flex flex-col bg-light p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                                style="flex-shrink:0">
+                                <div class="mb-4">
+                                    <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                        style="font-variation-settings:'FILL' 1">format_quote</span>
+                                </div>
+                                <div class="flex gap-0.5 mb-4 -mt-2">
+                                    <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span>
+                                </div>
+                                <p class="text-body italic mb-6 leading-relaxed flex-1">„It saves a huge amount of
+                                    time by automatically generating text and images from a product link and posting on
+                                    its own. A big help!"</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div
+                                        class="w-11 h-11 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm uppercase">
+                                        Sz</div>
+                                    <div>
+                                        <p class="font-bold text-dark text-sm">Szabad Mária</p>
+                                        <p class="text-xs text-muted">Károlyi-plast online store</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 2 -->
+                            <div class="t-card flex flex-col bg-light p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                                style="flex-shrink:0">
+                                <div class="mb-4">
+                                    <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                        style="font-variation-settings:'FILL' 1">format_quote</span>
+                                </div>
+                                <div class="flex gap-0.5 mb-4 -mt-2">
+                                    <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span>
+                                </div>
+                                <p class="text-body italic mb-6 leading-relaxed flex-1">„I have little time for
+                                    marketing, yet with this I can still post regularly. It generates content in bulk,
+                                    suggests topics on its own, and its video features keep getting better. A serious
+                                    time saver."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div
+                                        class="w-11 h-11 rounded-full bg-primary/70 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                        L</div>
+                                    <div>
+                                        <p class="font-bold text-dark text-sm">Luca Márió</p>
+                                        <p class="text-xs text-muted">PanDani.hu Toy Store and webshop</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 3 -->
+                            <div class="t-card flex flex-col bg-light p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                                style="flex-shrink:0">
+                                <div class="mb-4">
+                                    <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                        style="font-variation-settings:'FILL' 1">format_quote</span>
+                                </div>
+                                <div class="flex gap-0.5 mb-4 -mt-2">
+                                    <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span>
+                                </div>
+                                <p class="text-body italic mb-6 leading-relaxed flex-1">„I love it! I can finally see
+                                    the light at the end of the tunnel – now I'll actually have posts compared to the
+                                    nothing I had before :) In a word, brilliant! I'd been looking for a tool for my
+                                    problem but couldn't find anything like this..."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div
+                                        class="w-11 h-11 rounded-full bg-primary/50 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                        ÁK</div>
+                                    <div>
+                                        <p class="font-bold text-dark text-sm">Ábrahám Kata</p>
+                                        <p class="text-xs text-muted">Yoga Bazaar online store</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 4 -->
+                            <div class="t-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                                style="flex-shrink:0">
+                                <div class="mb-4">
+                                    <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                        style="font-variation-settings:'FILL' 1">format_quote</span>
+                                </div>
+                                <div class="flex gap-0.5 mb-4 -mt-2">
+                                    <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span>
+                                </div>
+                                <p class="text-body italic mb-6 leading-relaxed flex-1">„It fully lives up to
+                                    expectations.
+                                    It significantly speeds up posting and helps with everything from wording to
+                                    publishing."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div
+                                        class="w-11 h-11 rounded-full bg-primary/40 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                        BG</div>
+                                    <div>
+                                        <p class="font-bold text-dark text-sm">Borgulya Gizella</p>
+                                        <p class="text-xs text-muted">Börzsöny Kosara online store</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 5 (Szmolár Márk) -->
+                            <div class="t-card flex flex-col bg-light p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                                style="flex-shrink:0">
+                                <div class="mb-4">
+                                    <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                        style="font-variation-settings:'FILL' 1">format_quote</span>
+                                </div>
+                                <div class="flex gap-0.5 mb-4 -mt-2">
+                                    <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span>
+                                </div>
+                                <p class="text-body italic mb-6 leading-relaxed flex-1">„It significantly speeds up
+                                    our work and makes posting – which used to take hours – much easier. With custom
+                                    prompts we can create varied content, and audience reactions have been clearly
+                                    positive so far. We'll soon start using it in our other businesses too."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div
+                                        class="w-11 h-11 rounded-full bg-primary/80 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                        SM</div>
+                                    <div>
+                                        <p class="font-bold text-dark text-sm">Szmolár Márk</p>
+                                        <p class="text-xs text-muted">Inkness Kft.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 5 -->
+                            <div class="t-card flex flex-col bg-light p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                                style="flex-shrink:0">
+                                <div class="mb-4">
+                                    <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                        style="font-variation-settings:'FILL' 1">format_quote</span>
+                                </div>
+                                <div class="flex gap-0.5 mb-4 -mt-2">
+                                    <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span>
+                                </div>
+                                <p class="text-body italic mb-6 leading-relaxed flex-1">„I can only recommend it! Very
+                                    useful, and they offer great value for money! They're helpful and solution-oriented!
+                                    Whatever request you have, if it's feasible, they'll make it happen!"</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div
+                                        class="w-11 h-11 rounded-full bg-primary/60 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                        NG</div>
+                                    <div>
+                                        <p class="font-bold text-dark text-sm">Nagy Gábor</p>
+                                        <p class="text-xs text-muted">Amket.hu online store</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 6 -->
+                            <div class="t-card flex flex-col bg-light p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                                style="flex-shrink:0">
+                                <div class="mb-4">
+                                    <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                        style="font-variation-settings:'FILL' 1">format_quote</span>
+                                </div>
+                                <div class="flex gap-0.5 mb-4 -mt-2">
+                                    <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                        class="text-yellow-400">★</span>
+                                </div>
+                                <p class="text-body italic mb-6 leading-relaxed flex-1">„I generate 20-30 pieces of content in 1 hour – it used to take many times longer. It's also a big advantage that I can see all my posts within a single, clear interface."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div
+                                        class="w-11 h-11 rounded-full bg-primary/30 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                        MT</div>
+                                    <div>
+                                        <p class="font-bold text-dark text-sm">Dr. Madarász Tamás</p>
+                                        <p class="text-xs text-muted">DoktorDivat</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="flex justify-center gap-3 mt-10" id="t-dots"></div>
+                </div>
+            </div>
+        </section>
+    <script is:inline>
+                (function () {
+                    var track = document.getElementById('t-track');
+                    var viewport = document.getElementById('t-viewport');
+                    var dotsContainer = document.getElementById('t-dots');
+                    var prevButton = document.getElementById('t-prev');
+                    var nextButton = document.getElementById('t-next');
+                    var cards = track.querySelectorAll('.t-card');
+                    var GAP = 32;
+                    var current = 0;
+                    var autoTimer;
+
+                    function getVisible() {
+                        return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+                    }
+
+                    function getTotal() {
+                        return Math.max(1, cards.length - getVisible() + 1);
+                    }
+
+                    function buildDots() {
+                        dotsContainer.innerHTML = '';
+                        var total = getTotal();
+                        for (var i = 0; i < total; i++) {
+                            (function (idx) {
+                                var btn = document.createElement('button');
+                                btn.style.cssText = 'border:none;cursor:pointer;border-radius:9999px;transition:all 0.3s;height:10px;';
+                                btn.style.background = idx === current ? '#6c5ce7' : 'rgba(108,92,231,0.3)';
+                                btn.style.width = idx === current ? '24px' : '10px';
+                                btn.addEventListener('click', function () { goTo(idx); resetTimer(); });
+                                dotsContainer.appendChild(btn);
+                            })(i);
+                        }
+                    }
+
+                    function layout() {
+                        var vis = getVisible();
+                        var vw = viewport.offsetWidth;
+                        var cw = (vw - GAP * (vis - 1)) / vis;
+                        for (var i = 0; i < cards.length; i++) {
+                            cards[i].style.width = cw + 'px';
+                        }
+                        current = Math.min(current, getTotal() - 1);
+                        buildDots();
+                        goTo(current, false);
+                    }
+
+                    function goTo(index, animate) {
+                        if (animate === undefined) animate = true;
+                        current = Math.max(0, Math.min(index, getTotal() - 1));
+                        var cw = parseFloat(cards[0].style.width);
+                        var offset = current * (cw + GAP);
+                        track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
+                        track.style.transform = 'translateX(-' + offset + 'px)';
+                        buildDots();
+                    }
+
+                    function next() {
+                        goTo(current + 1 < getTotal() ? current + 1 : 0);
+                    }
+
+                    function prev() {
+                        goTo(current - 1 >= 0 ? current - 1 : getTotal() - 1);
+                    }
+
+                    function resetTimer() {
+                        clearInterval(autoTimer);
+                        autoTimer = setInterval(next, 5000);
+                    }
+
+                    layout();
+                    resetTimer();
+
+                    var resizeTimer;
+                    window.addEventListener('resize', function () {
+                        clearTimeout(resizeTimer);
+                        resizeTimer = setTimeout(layout, 100);
+                    });
+
+                    prevButton.addEventListener('click', function () { prev(); resetTimer(); });
+                    nextButton.addEventListener('click', function () { next(); resetTimer(); });
+                    viewport.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+                    viewport.addEventListener('mouseleave', resetTimer);
+                })();
+    </script>
+
+        <!-- 2. How it works -->
+        <section id="hogyan-mukodik" class="bg-[#f8f9fb] py-16 md:py-[120px]">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+                <div class="text-center mb-14">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How
+                        does it work? 🛠️</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps to full automation</h2>
+                    <p class="text-body text-lg">No creative agency or marketing specialist needed. Set it up once, and
+                        the AI handles the rest on its own.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+
+                    <!-- Step 1 -->
+                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                        <div
+                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                            1</div>
+                        <h3 class="font-bold text-lg mb-3">Basic setup</h3>
+                        <p class="text-body text-sm leading-relaxed">You provide your webshop link
+                            and logo once. That's it – the system handles the rest on its own.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                        <div
+                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                            2</div>
+                        <h3 class="font-bold text-lg mb-3">Hunts for ideas</h3>
+                        <p class="text-body text-sm leading-relaxed">The system reviews your webshop on its own,
+                            picks the
+                            most relevant products, and comes up with topic ideas – you have nothing to do with it.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                        <div
+                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                            3</div>
+                        <h3 class="font-bold text-lg mb-3">Generates posts</h3>
+                        <p class="text-body text-sm leading-relaxed">The AI writes the post copy and creates on-brand
+                            creative images, moving animations or videos – in your brand's style, complete with your
+                            logo.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                        <div
+                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                            4</div>
+                        <h3 class="font-bold text-lg mb-3">Publishes on its own</h3>
+                        <p class="text-body text-sm leading-relaxed">The system schedules and publishes the content on
+                            Facebook, Instagram and LinkedIn. All you have to do is approve it – if you want to.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-10">
+                    <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                        Request a demo – free
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Feature: Video Content -->
+        <section class="bg-card  py-16 md:py-[120px] ">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="flex flex-col justify-center order-2 md:order-2">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Video content
+                            🎬</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Punchy promo videos
+                            from your products</h2>
+                        <p class="text-lg text-body mb-8 leading-relaxed">
+                            Our system automatically generates dynamic, instantly shareable video content from your
+                            existing <strong>product descriptions and product images</strong>.
+                        </p>
+
+                        <ul class="space-y-5 mb-8">
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">script</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Copy and script generated
+                                    from the product description</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">animation</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Moving animations from
+                                    static product photos</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Camera movements, zoom and
+                                    effects automatically</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px]">smart_display</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Attention-grabbing content
+                                    for Instagram, TikTok and Stories</span>
+                            </li>
+                        </ul>
+                        <div>
+                            <a href="#hero"
+                                class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                                I have to see this!
+                            </a>
+                        </div>
+                    </div>
+                    <div class=" order-1 md:order-1">
+                        <!-- Video Player -->
+                        <div
+                            class="relative w-full aspect-square rounded-[16px] overflow-hidden group shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
+                            <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
+                                <source src="/assets/video-demo.mp4" type="video/mp4">
+                                Your browser does not support video playback.
+                            </video>
+                            <div
+                                class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span
+                                    class="material-symbols-outlined text-muted text-6xl drop-shadow-card hover:shadow-card-hover transition-all">play_circle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Narrator Video -->
+        <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="flex flex-col justify-center order-2 md:order-1">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Video content
+                            🎬</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Narrated videos
+                            at the push of a button</h2>
+                        <p class="text-lg text-body mb-8 leading-relaxed">
+                            Just enter a product link and the system <strong>creates a complete
+                                narrated video in minutes</strong> – with an AI voice, subtitles and your own product images.
+                        </p>
+
+                        <ul class="space-y-5 mb-8">
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">link</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Creates a script from a
+                                    product link.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px]">record_voice_over</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Reads out the text with AI
+                                    narration.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px]">closed_caption</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Generates subtitles
+                                    for it.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">storefront</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Shows your actual products
+                                    in the video.</span>
+                            </li>
+                        </ul>
+                        <div>
+                            <a href="#hero"
+                                class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                                Get a demo!
+                            </a>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div
+                            class="relative w-full aspect-square rounded-[16px] overflow-hidden group shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
+                            <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
+                                <source src="/assets/narrator-demo.mp4" type="video/mp4">
+                                Your browser does not support video playback.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Feature: AI Influencer -->
+        <section class="bg-card  py-16 md:py-[120px] ">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class=" order-1 md:order-1">
+                        <img src="/assets/teljes-automatizalas.jpg" alt="The full automation process"
+                            class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
+                    </div>
+                    <div class="flex flex-col justify-center order-2 md:order-2">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Limitless
+                            Integration ⚙️</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">It can also run in
+                            fully automatic mode</h2>
+                        <p class="text-lg text-body mb-8 leading-relaxed">
+                            It's just like hiring an agency, only much cheaper and more predictable. Set up self-running
+                            automations for yourself and hand the entire process over to the AI:
+                        </p>
+
+                        <ul class="space-y-5 mb-8">
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">link</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Collects up-to-date
+                                    product data directly from your webshop.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">movie_filter</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Writes copy, edits a
+                                    promotional image to go with it, adds your logo, and turns it into an animation.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px]">schedule_send</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Automatically schedules
+                                    and publishes the final result.</span>
+                            </li>
+                        </ul>
+                        <div>
+                            <a href="#hero"
+                                class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                                I want to automate my webshop!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Examples (Carousel/Grid) -->
+        <!-- Examples section removed as per request -->
+
+        <!-- 9. Visual Marketing Calendar -->
+        <section id="calendar" class="bg-[#f8f9fb]  py-16 md:py-[120px] ">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="flex flex-col justify-center order-2 md:order-1">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Strategic
+                            Planning 📆</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Visual content calendar
+                        </h2>
+                        <p class="text-lg text-body mb-8 leading-relaxed">
+                            On a clear interface you can see when and which post gets published. No more fiddling with
+                            Excel spreadsheets.
+                        </p>
+
+                        <ul class="space-y-5 mb-8">
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px]">drag_indicator</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Drag & drop
+                                        scheduling:</strong> Drag a post onto a day and it reschedules automatically.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">page_control</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1"><strong>One-click
+                                        approval:</strong> Publish the whole week with a single click.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px]">calendar_view_month</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Monthly and weekly
+                                        view:</strong> Plan ahead and see all your campaigns at a glance.</span>
+                            </li>
+                        </ul>
+                        <div>
+                            <a href="#hero"
+                                class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                                I'll try the calendar!
+                            </a>
+                        </div>
+                    </div>
+                    <div class=" order-1 md:order-2">
+                        <img src="/assets/tartalomnaptar.jpg" alt="Visual content calendar"
+                            class="w-full h-auto rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-contain">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10b. Features Cards -->
+        <section id="features-cards" class="bg-card py-16 md:py-[120px]">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+                <div class="text-center max-w-[700px] mx-auto mb-14">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything you need for a successful webshop's
+                        marketing
+                    </h2>
+                    <p class="text-body text-lg">A single, automated system that covers every step.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <div
+                        class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                        <div
+                            class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                            <span class="material-symbols-outlined text-[22px]">send</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Posting system</h3>
+                        <p class="text-body text-sm leading-relaxed">Automatically generates and publishes posts from
+                            your products on Facebook, Instagram and LinkedIn.</p>
+                    </div>
+
+                    <div
+                        class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                        <div
+                            class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                            <span class="material-symbols-outlined text-[22px]">image</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">AI Image Generator</h3>
+                        <p class="text-body text-sm leading-relaxed">Generates on-brand, logo-branded creatives and
+                            product images with a single click, no studio needed.</p>
+                    </div>
+
+                    <div
+                        class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                        <div
+                            class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                            <span class="material-symbols-outlined text-[22px]">movie_filter</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">AI Video Generator</h3>
+                        <p class="text-body text-sm leading-relaxed">Creates moving videos and animations from static
+                            product photos, with camera movements and effects.</p>
+                    </div>
+
+                    <div
+                        class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                        <div
+                            class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                            <span class="material-symbols-outlined text-[22px]">mail</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Newsletter generator</h3>
+                        <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your
+                            products and tailored to your segments.</p>
+                    </div>
+
+                    <div
+                        class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                        <div
+                            class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                            <span class="material-symbols-outlined text-[22px]">ads_click</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Meta ad generator</h3>
+                        <p class="text-body text-sm leading-relaxed">Automatically generates Facebook and Instagram ad
+                            creatives and copy from your products.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- What makes it more than ChatGPT -->
+        <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+            <div class="max-w-[1000px] mx-auto px-4 md:px-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">What makes it more than ChatGPT or other AI?</h2>
+                    <p class="text-lg text-body">An all-in-one AI marketing platform.</p>
+                </div>
+
+                <!-- Comparison header -->
+                <div class="grid grid-cols-2 gap-4 mb-3 px-1">
+                    <div class="text-center">
+                        <span
+                            class="inline-block bg-primary text-white text-sm font-bold px-4 py-2 rounded-full">Content
+                            Ninja</span>
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="inline-block bg-gray-200 text-gray-600 text-sm font-bold px-4 py-2 rounded-full">ChatGPT
+                            / other AI</span>
+                    </div>
+                </div>
+
+                <!-- Comparison rows -->
+                <div class="flex flex-col gap-3 mb-10">
+
+                    <!-- Row 1 -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <p class="text-dark text-sm font-medium leading-snug">Connects to your webshop (Unas,
+                                sitemap) and automatically pulls product data</p>
+                        </div>
+                        <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">cancel</span>
+                            <p class="text-body text-sm leading-snug">You have to enter everything manually</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <p class="text-dark text-sm font-medium leading-snug">Posts for you, too (Facebook,
+                                Instagram, LinkedIn)</p>
+                        </div>
+                        <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">cancel</span>
+                            <p class="text-body text-sm leading-snug">You have to copy and upload manually</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <p class="text-dark text-sm font-medium leading-snug">Everything is already set up – you
+                                don't have to struggle with prompts</p>
+                        </div>
+                        <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">cancel</span>
+                            <p class="text-body text-sm leading-snug">Requires prompt writing, fine-tuning and
+                                experimenting</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <p class="text-dark text-sm font-medium leading-snug">Optimized for the Hungarian language
+                                and webshop context</p>
+                        </div>
+                        <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">cancel</span>
+                            <p class="text-body text-sm leading-snug">A general-purpose tool, not tailored to webshops</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 5 -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <p class="text-dark text-sm font-medium leading-snug">Set the configuration once, then it
+                                produces content week after week – you don't even have to look at it</p>
+                        </div>
+                        <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                            <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5"
+                                style="font-variation-settings:'FILL' 1">cancel</span>
+                            <p class="text-body text-sm leading-snug">You have to start and steer it manually every
+                                time</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="bg-primary/5 border border-primary/20 rounded-[16px] p-7 text-center">
+                    <p class="text-lg font-semibold text-dark">If your time is valuable and you want to move forward,
+                        choose our platform.</p>
+                    <a href="#hero"
+                        class="inline-flex items-center justify-center rounded-lg h-12 px-8 cta-primary text-base mt-5">
+                        Request a demo – free
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Pricing -->
+        <section id="pricing" class="bg-white py-16 md:py-[120px]">
+            <div class="max-w-[900px] mx-auto px-4">
+                <div class="text-center mb-10 md:mb-16">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">PRICING</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, fixed monthly fee</h2>
+                    <p class="text-body text-lg">Join the early adopters and keep the discounted price long-term.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                    <!-- Standard subscription -->
+                    <div
+                        class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                        <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                        <div class="flex items-baseline gap-1 mb-3">
+                            <span class="text-4xl font-bold text-dark">24.990</span>
+                            <span class="text-xl font-bold text-dark">Ft</span>
+                            <span class="text-muted text-sm">+VAT / month</span>
+                        </div>
+                        <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fixed monthly fee, no hidden costs</p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">400 AI credits per month (renews)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">All modules: post writing, newsletters, image and video generation</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">Manage multiple brands (webshops) within one account</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">Unlimited social media accounts</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">On-brand style and tone of voice</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">Marketing calendar and scheduling</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">Continuous development and support</span>
+                            </li>
+                        </ul>
+                        <a href="#hero"
+                            class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                            Request a demo
+                        </a>
+                    </div>
+
+                    <!-- Demo bonus -->
+                    <div
+                        class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+                        <div
+                            class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+                            First month only
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
+                        <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+                            <span class="text-4xl font-bold text-primary">12.495</span>
+                            <span class="text-xl font-bold text-dark">Ft</span>
+                            <span class="text-muted text-sm">+VAT</span>
+                            <span class="text-muted text-sm line-through">24.990 Ft</span>
+                        </div>
+                        <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
+                        <p class="text-body text-sm mb-4">Book a 30-minute demo and:</p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">50% off the first month</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">800 credits instead of 400 (double)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">A personalized demo</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                                </div>
+                                <span class="text-body font-medium">We'll answer all your questions</span>
+                            </li>
+                        </ul>
+                        <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From the 2nd month, the fixed 24.990 Ft / month.</p>
+                        <a href="#hero"
+                            class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                            Book the demo
+                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-7 shadow-card mt-8">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-dark mb-3">What can you do with 400 credits?</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-body">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+                                    <span>1 post copy = 1 credit</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                                    <span>1 image generation (Nano Banana) = 2 credits</span>
+                                </div>
+                                <div class="flex items-center gap-2 font-bold text-dark">
+                                    <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                                    <span>approx. 133 image posts per month</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://contentninjahc.notion.site/Kreditfogyaszt-s-3357c007cc52815590fecdc4b66a836f" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                            Detailed credit pricing
+                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo"
+                                class="h-8 md:h-10"></div>
+                        <p class="text-muted">A system that produces marketing content on your webshop's behalf, on a
+                            production line.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Information</h4>
+                        <ul class="space-y-2">
+                            <li><a href="/en/privacy-policy" class="hover:text-white">Privacy Policy</a></li>
+                            <li><a href="/hu/impresszum" class="hover:text-white">Imprint</a></li>
+                            <li><a href="/en/terms" class="hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p>Copyright © contentninja.hu | 2026</p>
+                </div>
+            </div>
+        </footer>
+    <script is:inline>
+        function nextStep(step) {
+            // Hide all steps
+            const steps = document.querySelectorAll('.form-step');
+            steps.forEach(s => s.classList.remove('active'));
+
+            const formIntro = document.getElementById('formIntro');
+            const hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
+            if (formIntro) {
+                formIntro.classList.toggle('hidden', hideIntroSteps.includes(String(step)));
+            }
+
+            // Show requested step
+            const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            if (activeStep) {
+                activeStep.classList.add('active');
+            }
+        }
+
+        // Store qualifying data for use in soft reject submission
+        let _qualifyData = {};
+
+        function qualifyAndNext() {
+            const webshop = document.getElementById('hasWebshop').value;
+            const level = document.getElementById('marketingLevel').value;
+            const role = document.getElementById('marketingRole').value;
+            const timing = document.getElementById('timing').value;
+
+            // Validate that all four are selected
+            if (!webshop || !level || !role || !timing) {
+                alert('Please answer every question!');
+                return;
+            }
+
+            // Store for later use
+            _qualifyData = { webshop, level, role, timing };
+
+            // Hard disqualify: no webshop OR agency handling posts OR no marketing knowledge
+            const isHardRejected =
+                webshop === 'Nem, más típusú vállalkozásom van' ||
+                level === 'Egyáltalán nem értünk semmit a témához' ||
+                role === 'Külsős ügynökség';
+
+            // Soft reject: no webshop yet OR timing not ideal (but otherwise OK)
+            const isSoftRejected =
+                webshop === 'Igen, hamarosan tervezek nyitni' ||
+                timing === '2-3 hónapon belül' ||
+                timing === 'Még csak érdeklődöm';
+
+            if (isHardRejected) {
+                nextStep('rejected');
+
+                fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        statusz: 'hard_reject',
+                        submission_date: new Date().toISOString(),
+                        has_webshop: webshop,
+                        marketing_level: level,
+                        marketing_role: role,
+                        timing: timing,
+                        source_url: window.location.href
+                    })
+                }).catch(() => { });
+
+            } else if (isSoftRejected) {
+                nextStep('soft-reject');
+
+            } else {
+                nextStep(2);
+            }
+        }
+
+        async function submitSoftReject() {
+            const email = document.getElementById('softRejectEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+
+            const privacy = document.getElementById('softRejectPrivacy');
+            if (!privacy.checked) {
+                alert('Please accept the privacy policy!');
+                return;
+            }
+
+            const newsletterChecked = document.getElementById('softRejectNewsletter').checked;
+
+            const btn = event.target;
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            const payload = {
+                submission_date: new Date().toISOString(),
+                email: email,
+                hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem',
+                has_webshop: _qualifyData.webshop || '',
+                marketing_level: _qualifyData.level || '',
+                marketing_role: _qualifyData.role || '',
+                timing: _qualifyData.timing || '',
+                source_url: window.location.href
+            };
+
+            try {
+                await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...payload, statusz: 'soft_reject' })
+                });
+            } catch (e) { }
+
+            nextStep('soft-reject-thanks');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitBtn = document.getElementById('submitBtn');
+            const FORM_SUBMITTED_KEY = 'ai_tartalomgyartas_form_submitted';
+
+            // Check if form was already submitted in this session
+            if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Already submitted';
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            // Handle Form Submit via Webhook to Make.com
+            document.getElementById('leadForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // Double-check: prevent duplicate submissions
+                if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                    console.log('Form already submitted, preventing duplicate.');
+                    return;
+                }
+
+                const privacy = document.getElementById('privacy');
+                if (!privacy.checked) {
+                    alert("Please accept the privacy policy!");
+                    return;
+                }
+
+                const btn = document.getElementById('submitBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = 'Sending...';
+                btn.disabled = true;
+
+                // Mark as submitted IMMEDIATELY to prevent race conditions
+                sessionStorage.setItem(FORM_SUBMITTED_KEY, 'true');
+
+                const formData = new FormData(this);
+
+                // Collect clean form data
+                const cleanData = {};
+                formData.forEach((value, key) => {
+                    // Handle checkbox arrays (like usage[])
+                    if (cleanData[key]) {
+                        if (!Array.isArray(cleanData[key])) {
+                            cleanData[key] = [cleanData[key]];
+                        }
+                        cleanData[key].push(value);
+                    } else {
+                        cleanData[key] = value;
+                    }
+                });
+
+                // Add source URL and subject
+                cleanData['source_url'] = window.location.href;
+                const customSubject = `🚀 AI Tartalomgyártás jelentkezés: ${cleanData['name']}`;
+                cleanData['subject'] = customSubject;
+
+                // Prepare webhook payload
+                const newsletterChecked = document.getElementById('newsletter').checked;
+                const webhookPayload = {
+                    statusz: 'sikeres',
+                    submission_date: new Date().toISOString(),
+                    nev: cleanData['name'],
+                    email: cleanData['email'],
+                    telefonszam: cleanData['phone'],
+                    source_url: window.location.href,
+                    has_webshop: cleanData['has_webshop'],
+                    marketing_level: cleanData['marketing_level'],
+                    marketing_role: cleanData['marketing_role'],
+                    timing: cleanData['timing'],
+                    hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem'
+                };
+
+                // Prepare formsubmit payload
+                const formsubmitData = { ...cleanData };
+                formsubmitData['_subject'] = customSubject;
+                formsubmitData['_captcha'] = 'false';
+                formsubmitData['_template'] = 'table';
+
+                try {
+                    const result = await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(webhookPayload)
+                    });
+                    console.log('Webhook sent:', result.ok);
+
+                    // Always redirect after submission attempt (prevents re-submission)
+                    window.location.href = "/en/thank-you?lead=1";
+
+                } catch (error) {
+                    console.error('Unexpected error:', error);
+                    // Still redirect to prevent duplicate submissions
+                    window.location.href = "/en/thank-you?lead=1";
+                }
+            });
+        });
+    </script>
+  </div>
+</BaseLayout>

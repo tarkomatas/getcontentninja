@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /bemutato_koszi.html
-
-Sitemap: https://contentninja.hu/sitemap.xml

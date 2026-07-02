@@ -1,0 +1,129 @@
+---
+import '../styles/global.css';
+import { pathFor, alternatesFor, type Locale, type PageKey } from '../i18n/routes';
+import { t } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  title: string;
+  description: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  /** Felülírja a page+locale alapján számolt kanonikus URL-t. */
+  canonical?: string;
+  /** Ne indexelje a kereső (pl. köszönő oldal). */
+  noindex?: boolean;
+  /** A <body> osztályai (alapból a marketing oldalak beállítása). */
+  bodyClass?: string;
+}
+
+const {
+  locale,
+  page,
+  title,
+  description,
+  keywords,
+  ogTitle,
+  ogDescription,
+  ogImage = '/assets/logo.webp',
+  canonical,
+  noindex = false,
+  bodyClass = 'bg-card text-dark font-display antialiased',
+} = Astro.props;
+
+const site = Astro.site!;
+const canonicalUrl = canonical ?? new URL(pathFor(page, locale), site).href;
+const alternates = alternatesFor(page).map((a) => ({
+  hreflang: a.hreflang,
+  href: new URL(a.path, site).href,
+}));
+const ui = t(locale);
+---
+
+<!doctype html>
+<html lang={ui.htmlLang}>
+  <head>
+    <!-- Google tag (gtag.js) – eager -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-10918594401"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-10918594401');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- hreflang alternatívák -->
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={ogTitle ?? title} />
+    <meta property="og:description" content={ogDescription ?? description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(ogImage, site).href} />
+    <meta property="og:locale" content={locale === 'hu' ? 'hu_HU' : 'en_US'} />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind (CDN) + brand config -->
+    <script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script is:inline id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6c5ce7",
+              "primary-hover": "#5a4bd6",
+              dark: "#1e1e2f",
+              body: "#4a4a68",
+              light: "#f8f9fb",
+              card: "#ffffff",
+              success: "#22c55e",
+              border: "#e8e8ef",
+              muted: "#9090a7",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+            boxShadow: {
+              card: "0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)",
+              "card-hover": "0 4px 6px rgba(0,0,0,0.05), 0 10px 24px rgba(0,0,0,0.08)",
+              "primary-glow": "0 8px 30px rgba(108,92,231,0.18)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <slot name="head" />
+  </head>
+
+  <body class={bodyClass} style="overflow-x: clip;">
+    <slot />
+
+    <!-- Consent-gated Meta Pixel + cookie banner -->
+    <script is:inline src="/assets/cookie.js"></script>
+  </body>
+</html>

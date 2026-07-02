@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html class="light" lang="hu">
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
 
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10918594401"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'AW-10918594401');
-    </script>
+const locale = 'hu';
+const page = 'demo';
+const title = 'Bemutatót kérek – AI Tartalomgyártás Webshopoknak | Content Ninja';
+const description =
+  'Kérj egy díjmentes, kb. 20 perces online bemutatót a Content Ninjáról, és nézd meg élesben, hogyan gyártja az AI a webshopod social media tartalmait.';
+---
 
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>AI Tartalomgyártás Webshopoknak - Content Ninja.hu</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <style>
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Fragment slot="head">
+    <style is:inline>
         *,
         *::before,
         *::after {
@@ -123,11 +118,6 @@
             line-height: 1;
             flex-shrink: 0;
         }
-    </style>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <style>
         /* Custom Scrollbar for Form */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -146,42 +136,6 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #9ca3af;
         }
-    </style>
-
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#6c5ce7",
-                        "primary-hover": "#5a4bd6",
-                        dark: "#1e1e2f",
-                        body: "#4a4a68",
-                        light: "#f8f9fb",
-                        card: "#ffffff",
-                        success: "#22c55e",
-                        border: "#e8e8ef",
-                        muted: "#9090a7",
-                    },
-                    fontFamily: {
-                        display: ["Inter", "sans-serif"],
-                        body: ["Inter", "sans-serif"],
-                    },
-                    boxShadow: {
-                        card: "0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)",
-                        "card-hover": "0 4px 6px rgba(0,0,0,0.05), 0 10px 24px rgba(0,0,0,0.08)"
-                    },
-                    letterSpacing: {
-                        "heading": "-0.02em",
-                        "label": "0.05em"
-                    }
-                },
-            },
-        }
-    </script>
-    <style>
         .form-step {
             display: none;
             animation: fadeIn 0.4s ease-out;
@@ -255,22 +209,22 @@
         }
 
     </style>
-</head>
+  </Fragment>
 
-<body class="bg-card text-dark font-display antialiased" style="overflow-x: clip;">
-    <div class="relative flex min-h-screen w-full flex-col">
-
-        <!-- 0. Header (Minimalist) -->
-        <header class="border-b border-solid border-b-[#f3f0f4] bg-card   sticky top-0 z-50 transition-all">
-            <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
-                <div class="flex items-center gap-3 text-dark ">
-                    <img src="assets/logo.webp" alt="Content Ninja Logo" class="h-14 md:h-16 w-auto object-contain">
-                </div>
-                <div class="flex flex-1 justify-end gap-8">
-                    <!-- Navigation removed for conversion focus -->
-                </div>
-            </div>
-        </header>
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Header (fókuszált – konverzió-orientált, nyelvváltóval) -->
+    <header class="border-b border-solid border-b-[#f3f0f4] bg-card sticky top-0 z-50 transition-all">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
+        <div class="flex items-center gap-3 text-dark">
+          <a href="/hu/">
+            <img src="/assets/logo.webp" alt="Content Ninja logó" class="h-14 md:h-16 w-auto object-contain" />
+          </a>
+        </div>
+        <div class="flex flex-1 justify-end items-center gap-8">
+          <LanguageSwitcher locale={locale} page={page} />
+        </div>
+      </div>
+    </header>
 
         <!-- 1. Hero + Jelentkezési űrlap -->
         <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
@@ -435,7 +389,7 @@
                                             <input type="checkbox" id="softRejectPrivacy"
                                                 class="mt-1 rounded text-primary focus:ring-primary">
                                             <label for="softRejectPrivacy">
-                                                Az <a href="adatkezeles.html" target="_blank"
+                                                Az <a href="/hu/adatkezeles" target="_blank"
                                                     class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
                                                 foglaltakat elolvastam, megértettem és tudomásul vettem.
                                             </label>
@@ -445,7 +399,7 @@
                                                 class="mt-1 rounded text-primary focus:ring-primary">
                                             <label for="softRejectNewsletter">
                                                 Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
-                                                (<a href="adatkezeles.html"
+                                                (<a href="/hu/adatkezeles"
                                                     class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
                                             </label>
                                         </div>
@@ -499,7 +453,7 @@
                                             <input type="checkbox" id="privacy" required
                                                 class="mt-1 rounded text-primary focus:ring-primary">
                                             <label for="privacy">
-                                                Az <a href="adatkezeles.html" target="_blank"
+                                                Az <a href="/hu/adatkezeles" target="_blank"
                                                     class="underline hover:text-primary">Adatkezelési
                                                     Tájékoztatóban</a> foglaltakat elolvastam, megértettem és tudomásul
                                                 vettem.
@@ -511,7 +465,7 @@
                                                 class="mt-1 rounded text-primary focus:ring-primary">
                                             <label for="newsletter">
                                                 Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
-                                                (<a href="adatkezeles.html"
+                                                (<a href="/hu/adatkezeles"
                                                     class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
                                             </label>
                                         </div>
@@ -746,7 +700,7 @@
                 </div>
             </div>
         </section>
-        <script>
+    <script is:inline>
                 (function () {
                     var track = document.getElementById('t-track');
                     var viewport = document.getElementById('t-viewport');
@@ -830,7 +784,7 @@
                     viewport.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
                     viewport.addEventListener('mouseleave', resetTimer);
                 })();
-        </script>
+    </script>
 
         <!-- 2. Hogyan működik -->
         <section id="hogyan-mukodik" class="bg-[#f8f9fb] py-16 md:py-[120px]">
@@ -957,7 +911,7 @@
                         <div
                             class="relative w-full aspect-square rounded-[16px] overflow-hidden group shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
                             <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
-                                <source src="assets/video-demo.mp4" type="video/mp4">
+                                <source src="/assets/video-demo.mp4" type="video/mp4">
                                 A böngésződ nem támogatja a videó lejátszást.
                             </video>
                             <div
@@ -1032,7 +986,7 @@
                         <div
                             class="relative w-full aspect-square rounded-[16px] overflow-hidden group shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
                             <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
-                                <source src="assets/narrator-demo.mp4" type="video/mp4">
+                                <source src="/assets/narrator-demo.mp4" type="video/mp4">
                                 A böngésződ nem támogatja a videó lejátszást.
                             </video>
                         </div>
@@ -1046,7 +1000,7 @@
             <div class="max-w-[1200px] mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                     <div class=" order-1 md:order-1">
-                        <img src="assets/teljes-automatizalas.jpg" alt="Teljes automatizálás folyamata"
+                        <img src="/assets/teljes-automatizalas.jpg" alt="Teljes automatizálás folyamata"
                             class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                     </div>
                     <div class="flex flex-col justify-center order-2 md:order-2">
@@ -1150,7 +1104,7 @@
                         </div>
                     </div>
                     <div class=" order-1 md:order-2">
-                        <img src="assets/tartalomnaptar.jpg" alt="Vizuális tartalomnaptár"
+                        <img src="/assets/tartalomnaptar.jpg" alt="Vizuális tartalomnaptár"
                             class="w-full h-auto rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-contain">
                     </div>
                 </div>
@@ -1497,7 +1451,7 @@
             <div class="max-w-[1200px] mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
                     <div>
-                        <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="assets/logo.webp" alt="Logo"
+                        <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo"
                                 class="h-8 md:h-10"></div>
                         <p class="text-muted">Egy rendszer, ami a webshopod nevében készít marketing tartalmakat
                             futószalagon.</p>
@@ -1505,9 +1459,9 @@
                     <div>
                         <h4 class="text-white font-bold mb-4">Információk</h4>
                         <ul class="space-y-2">
-                            <li><a href="adatkezeles.html" class="hover:text-white">Adatkezelési tájékoztató</a></li>
-                            <li><a href="impresszum.html" class="hover:text-white">Impresszum</a></li>
-                            <li><a href="aszf.html" class="hover:text-white">ÁSZF</a></li>
+                            <li><a href="/hu/adatkezeles" class="hover:text-white">Adatkezelési tájékoztató</a></li>
+                            <li><a href="/hu/impresszum" class="hover:text-white">Impresszum</a></li>
+                            <li><a href="/en/terms" class="hover:text-white">ÁSZF (Terms of Service)</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1516,10 +1470,7 @@
                 </div>
             </div>
         </footer>
-
-    </div>
-
-    <script>
+    <script is:inline>
         function nextStep(step) {
             // Hide all steps
             const steps = document.querySelectorAll('.form-step');
@@ -1721,18 +1672,15 @@
                     console.log('Webhook sent:', result.ok);
 
                     // Always redirect after submission attempt (prevents re-submission)
-                    window.location.href = "bemutato_koszi.html?lead=1";
+                    window.location.href = "/hu/koszonjuk?lead=1";
 
                 } catch (error) {
                     console.error('Unexpected error:', error);
                     // Still redirect to prevent duplicate submissions
-                    window.location.href = "bemutato_koszi.html?lead=1";
+                    window.location.href = "/hu/koszonjuk?lead=1";
                 }
             });
         });
     </script>
-
-    <script src="assets/cookie.js"></script>
-</body>
-
-</html>
+  </div>
+</BaseLayout>

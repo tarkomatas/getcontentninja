@@ -1,0 +1,93 @@
+---
+import { pathFor, type Locale, type PageKey } from '../i18n/routes';
+import { t } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+}
+
+const { locale } = Astro.props;
+const ui = t(locale);
+const demo = pathFor('demo', locale);
+const APP_URL = 'https://app.getcontentninja.com';
+
+// Az adatvédelmi tájékoztató és az impresszum nyelvenként létezik.
+// A terms (ÁSZF) és az adattörlési tájékoztató (Meta-követelmény) csak angolul –
+// ezeknél mindig az EN verzióra mutatunk.
+const legal = {
+  privacy: pathFor('privacy', locale),
+  imprint: pathFor('imprint', locale),
+  terms: pathFor('terms', 'en'),
+  dataDeletion: pathFor('dataDeletion', 'en'),
+};
+---
+
+<footer class="bg-dark text-muted py-14 px-4 md:px-10">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <!-- Brand -->
+      <div>
+        <div class="bg-white p-3 rounded-[10px] inline-block mb-4">
+          <img src="/assets/logo.webp" alt={ui.logoAlt} class="h-9 w-auto object-contain" />
+        </div>
+        <p class="text-sm leading-relaxed max-w-[280px] mb-5">{ui.footer.tagline}</p>
+        <div class="flex items-center gap-3">
+          <a
+            href="https://www.facebook.com/profile.php?id=61582389145717"
+            target="_blank"
+            rel="noopener"
+            class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            aria-label="Facebook"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+          </a>
+          <a
+            href="https://www.youtube.com/@ContentNinja_HU"
+            target="_blank"
+            rel="noopener"
+            class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            aria-label="YouTube"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1e1e2f" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Legal links -->
+      <div>
+        <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wide">{ui.footer.legalHeading}</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href={legal.privacy} class="hover:text-white transition-colors">{ui.footer.privacy}</a></li>
+          <li><a href={legal.imprint} class="hover:text-white transition-colors">{ui.footer.imprint}</a></li>
+          <li><a href={legal.terms} class="hover:text-white transition-colors">{ui.footer.terms}</a></li>
+          <li><a href={legal.dataDeletion} class="hover:text-white transition-colors">{ui.footer.dataDeletion}</a></li>
+        </ul>
+      </div>
+
+      <!-- CTAs -->
+      <div>
+        <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wide">{ui.footer.startHeading}</h4>
+        <div class="flex flex-col gap-3">
+          <a href={demo} class="cta-primary bg-primary hover:bg-primary-hover px-5 py-2.5 text-sm w-fit">
+            <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+            {ui.cta.demo}
+          </a>
+          <a href={APP_URL} target="_blank" class="cta-outline-white px-5 py-2.5 text-sm w-fit">
+            <span class="material-symbols-outlined text-[16px]">login</span>
+            {ui.cta.login}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-6 text-center text-xs">
+      <p>{ui.footer.copyright}</p>
+    </div>
+  </div>
+</footer>

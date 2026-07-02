@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'hu';
+const page = 'imprint';
+const title = 'Impresszum – Content Ninja';
+const description = 'A Content Ninja üzemeltetőjének cégadatai és elérhetőségei.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Header locale={locale} page={page} />
+
+  <main class="py-16 md:py-24 px-4 md:px-10">
+        <div class="max-w-[760px] mx-auto">
+
+            <a href="/hu/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Vissza a főoldalra
+            </a>
+
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-10">Impresszum</h1>
+
+            <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+
+                <div class="p-7">
+                    <h2 class="text-base font-bold text-dark mb-4">A weboldal üzemeltetője</h2>
+                    <dl class="space-y-2.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Név</dt>
+                            <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Székhely</dt>
+                            <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Cégjegyzékszám</dt>
+                            <dd class="text-dark font-medium">01-09-426906</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Adószám</dt>
+                            <dd class="text-dark font-medium">32489819-2-43</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Telefonszám</dt>
+                            <dd><a href="tel:+36202838831" class="text-primary font-medium hover:underline">+36 20 283 8831</a></dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">E-mail</dt>
+                            <dd><a href="mailto:support@getcontentninja.com" class="text-primary font-medium hover:underline">support@getcontentninja.com</a></dd>
+                        </div>
+                    </dl>
+                    <p class="text-xs text-muted mt-5 leading-relaxed">
+                        A weboldal üzemeltetője a Budapesti Kereskedelmi és Iparkamara tagja. A weboldal üzemeltetője tekintetében a fogyasztókkal szembeni tisztességtelen kereskedelmi gyakorlat tilalmáról szóló törvény szerinti magatartási kódex nem áll rendelkezésre.
+                    </p>
+                </div>
+
+                <div class="p-7">
+                    <h2 class="text-base font-bold text-dark mb-4">Tárhelyszolgáltató</h2>
+                    <dl class="space-y-2.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Név</dt>
+                            <dd class="text-dark font-medium">GitHub, Inc.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Cím</dt>
+                            <dd class="text-dark font-medium">88 Colin P Kelly Jr St, San Francisco, CA 94107, USA</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Weboldal</dt>
+                            <dd><a href="https://github.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">github.com</a></dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="p-7">
+                    <h2 class="text-base font-bold text-dark mb-4">Domain szolgáltató</h2>
+                    <dl class="space-y-2.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Név</dt>
+                            <dd class="text-dark font-medium">Cloudflare, Inc.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Cím</dt>
+                            <dd class="text-dark font-medium">101 Townsend St, San Francisco, CA 94107, USA</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Weboldal</dt>
+                            <dd><a href="https://www.cloudflare.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">cloudflare.com</a></dd>
+                        </div>
+                    </dl>
+                </div>
+
+            </div>
+        </div>
+  </main>
+
+  <Footer locale={locale} page={page} />
+</BaseLayout>

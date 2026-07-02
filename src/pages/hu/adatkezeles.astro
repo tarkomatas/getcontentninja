@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
+
+const locale = 'hu';
+const page = 'privacy';
+const title = 'Adatkezelési Tájékoztató – Content Ninja';
+const description =
+  'A Content Ninja adatkezelési tájékoztatója angol nyelven érhető el (Privacy Policy).';
+
+const privacyEn = pathFor('privacy', 'en');
+const dataDeletionEn = pathFor('dataDeletion', 'en');
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Header locale={locale} page={page} />
+
+  <main class="py-16 md:py-24 px-4 md:px-10">
+    <div class="max-w-[760px] mx-auto">
+
+      <a href="/hu/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Vissza a főoldalra
+      </a>
+
+      <div class="mb-10">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési Tájékoztató</h1>
+        <p class="text-sm text-muted">Utolsó frissítés: 2026. július 2. · Digitallwork.hu Kft.</p>
+      </div>
+
+      <div class="bg-card rounded-[16px] border border-border shadow-card p-7">
+        <p class="text-sm text-body leading-relaxed">
+          A Content Ninja adatkezelési tájékoztatója (Privacy Policy)
+          <strong class="text-dark">kizárólag angol nyelven érhető el</strong>. Az angol nyelvű dokumentum a
+          hivatalos és teljes körű tájékoztató, amely részletesen leírja, hogy milyen személyes adatokat kezelünk,
+          milyen célból és jogalapon, kikkel osztjuk meg azokat, valamint hogyan kérheted az adataid törlését.
+        </p>
+        <a
+          href={privacyEn}
+          class="cta-primary bg-primary hover:bg-primary-hover px-6 py-3 text-sm w-fit mt-6 inline-flex"
+        >
+          <span class="material-symbols-outlined text-[18px]">description</span>
+          Privacy Policy megnyitása (angol)
+        </a>
+        <p class="text-sm text-body leading-relaxed mt-6">
+          Az adataid törlésének lépéseit (fióktörlés az alkalmazásban, törlési kérelem e-mailben, a
+          Facebook-kapcsolat visszavonása) külön, szintén angol nyelvű
+          <a href={dataDeletionEn} class="text-primary underline">adattörlési tájékoztató (Data Deletion
+          Instructions)</a> írja le.
+        </p>
+        <p class="text-sm text-body leading-relaxed mt-6">
+          Ha az adatkezeléssel kapcsolatban kérdésed van, vagy magyar nyelvű tájékoztatást szeretnél kérni, írj a
+          <a href="mailto:support@getcontentninja.com" class="text-primary underline">support@getcontentninja.com</a> címre,
+          vagy hívd a <a href="tel:+36202838831" class="text-primary underline">+36 20 283 8831</a>-es telefonszámot.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer locale={locale} page={page} />
+</BaseLayout>

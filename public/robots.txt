@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /hu/koszonjuk
+Disallow: /en/thank-you
+
+Sitemap: https://getcontentninja.com/sitemap.xml

@@ -1,0 +1,293 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'en';
+const page = 'terms';
+const title = 'Terms of Service – Content Ninja';
+const description =
+  'Terms of Service governing the use of the Content Ninja AI content generation and social media publishing service.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Header locale={locale} page={page} />
+
+  <main class="py-16 md:py-24 px-4 md:px-10">
+        <div class="max-w-[760px] mx-auto">
+
+            <a href="/en/"
+                class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Back to homepage
+            </a>
+
+            <div class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Terms of Service</h1>
+                <p class="text-sm text-muted">Last updated and effective: 2 July 2026</p>
+            </div>
+
+            <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+
+                <!-- 1. -->
+                <div class="p-7 doc-section">
+                    <h2>1. Service Provider details</h2>
+                    <dl class="space-y-2 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Company name</dt>
+                            <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Registered office</dt>
+                            <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8, Hungary</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Company registration no.</dt>
+                            <dd class="text-dark font-medium">01-09-426906</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Tax number</dt>
+                            <dd class="text-dark font-medium">32489819-2-43</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">E-mail</dt>
+                            <dd><a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a></dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Phone</dt>
+                            <dd><a href="tel:+36202838831">+36 20 283 8831</a></dd>
+                        </div>
+                    </dl>
+                    <p class="mt-4">These Terms of Service (the “Terms”) govern the use of the Content Ninja service
+                        (the “Service”) provided by Digitallwork.hu Kft. (the “Provider”, “we”). By registering for or
+                        using the Service, you (the “User”) agree to be bound by these Terms.</p>
+                </div>
+
+                <!-- 2. -->
+                <div class="p-7 doc-section">
+                    <h2>2. Description of the Service</h2>
+                    <p>2.1. Content Ninja is a software-as-a-service (SaaS) product that uses artificial intelligence
+                        to generate marketing content — texts and images — for online stores based on their product
+                        data, and that publishes this content to connected social media accounts (in particular
+                        Facebook and Instagram pages) on a schedule set by the User.</p>
+                    <p class="mt-2">2.2. The Service is provided exclusively online, through the web interface made
+                        available by the Provider at <a href="https://app.getcontentninja.com" target="_blank"
+                            rel="noopener">app.getcontentninja.com</a>.</p>
+                    <p class="mt-2">2.3. The Provider may improve, extend or otherwise modify individual features of
+                        the Service over time, provided that the essential character of the Service is preserved
+                        during a paid subscription period.</p>
+                </div>
+
+                <!-- 3. -->
+                <div class="p-7 doc-section">
+                    <h2>3. Registration and user account</h2>
+                    <p>3.1. Use of the Service requires registration. The contract between the Provider and the User
+                        is concluded when the User registers and starts a subscription, thereby accepting these
+                        Terms.</p>
+                    <p class="mt-2">3.2. The Service may only be used by natural persons who are at least 18 years old
+                        and have full legal capacity, and by lawfully operating legal entities and sole
+                        proprietors.</p>
+                    <p class="mt-2">3.3. The User must provide accurate and up-to-date information during registration
+                        and keep it current.</p>
+                    <p class="mt-2">3.4. The User is responsible for the security of their account and for all
+                        activity carried out through it. Login credentials must be kept confidential and must not be
+                        shared with third parties. The User must notify the Provider without delay if they suspect
+                        unauthorised access to their account.</p>
+                </div>
+
+                <!-- 4. -->
+                <div class="p-7 doc-section">
+                    <h2>4. Subscription, fees and payment</h2>
+                    <p>4.1. The Service is offered on a monthly subscription basis in several tiers. Each subscription
+                        includes access to the system and a monthly allowance of AI credits belonging to the chosen
+                        tier.</p>
+                    <p class="mt-2">4.2. The subscription fee is payable monthly, in advance. The applicable fees are
+                        displayed on the pricing page and at checkout; for business customers prices are indicated as
+                        net amounts plus VAT where applicable, and for consumers the final gross (VAT-inclusive)
+                        price is always displayed before payment.</p>
+                    <p class="mt-2">4.3. The subscription renews automatically at the end of each billing period until
+                        cancelled by the User.</p>
+                    <p class="mt-2">4.4. Payment is processed by the payment provider Stripe. The Provider does not
+                        store or process card or payment data; such data is handled exclusively by Stripe.</p>
+                    <p class="mt-2">4.5. From time to time the Provider may offer coupon-code discounts under which the
+                        first subscription period is available at a reduced price. The conditions, amount and
+                        validity of coupon codes are determined by the Provider, and a discount can only be claimed
+                        by entering a valid coupon code.</p>
+                    <p class="mt-2">4.6. AI credits included in the monthly fee apply to the given billing period;
+                        unused monthly credits do not roll over to the next month unless the Provider provides
+                        otherwise.</p>
+                    <p class="mt-2">4.7. The User may purchase extra credits in addition to the monthly allowance.
+                        Extra credits are valid for 365 days from the date of purchase and expire unused thereafter.
+                        If the subscription is cancelled, unused extra credits are also forfeited at the end of the
+                        subscription period.</p>
+                    <p class="mt-2">4.8. The User can review their current credit balance, credit usage history and
+                        the expiry date of extra credits at any time in the Usage section of the Content Ninja
+                        interface.</p>
+                    <p class="mt-2">4.9. If the User has used up the credits included in the monthly fee and does not
+                        purchase extra credits, the AI-based content generation features are unavailable until the
+                        start of the next billing period. Other, non-AI features of the system remain available.</p>
+                </div>
+
+                <!-- 5. -->
+                <div class="p-7 doc-section">
+                    <h2>5. Cancellation and refunds</h2>
+                    <p>5.1. The User may cancel their subscription at any time.</p>
+                    <p class="mt-2">5.2. Upon cancellation the subscription remains active until the end of the current
+                        billing period, during which the User may continue to use the Service without restriction.</p>
+                    <p class="mt-2">5.3. Subscription fees already paid are non-refundable, except where a refund is
+                        required by mandatory law.</p>
+                </div>
+
+                <!-- 6. -->
+                <div class="p-7 doc-section">
+                    <h2>6. Acceptable use</h2>
+                    <p>6.1. The User must use the Service lawfully, for its intended purpose and in compliance with
+                        all applicable legislation.</p>
+                    <p class="mt-2">6.2. It is prohibited to generate, upload or publish through the Service any
+                        content that is unlawful, misleading or deceptive, constitutes spam, infringes the
+                        intellectual property or other rights of third parties, or violates the policies of the
+                        platforms to which content is published — in particular the Meta Terms of Service, Community
+                        Standards, Advertising Standards and Platform Terms applicable to Facebook and Instagram.</p>
+                    <p class="mt-2">6.3. The User is solely responsible for the content they generate, approve and
+                        publish through the Service, including its accuracy and legal compliance.</p>
+                    <p class="mt-2">6.4. It is prohibited to reverse-engineer, copy or resell the Service, to
+                        circumvent its technical limitations (including credit limits), or to abuse it in any other
+                        way. The Provider may suspend or restrict accounts engaged in such conduct.</p>
+                </div>
+
+                <!-- 7. -->
+                <div class="p-7 doc-section">
+                    <h2>7. Third-party platforms</h2>
+                    <p>7.1. Publishing to Facebook and Instagram requires the User to connect their own social media
+                        accounts or pages to the Service. Use of these platforms is additionally subject to the
+                        respective platform operator’s own terms and policies (in the case of Facebook and Instagram,
+                        those of Meta Platforms), which the User must accept and comply with independently of these
+                        Terms.</p>
+                    <p class="mt-2">7.2. The Provider is not affiliated with, endorsed by or sponsored by Meta
+                        Platforms or any other platform operator.</p>
+                    <p class="mt-2">7.3. The Provider assumes no responsibility for the availability of third-party
+                        platforms, for changes to their interfaces, APIs, terms or policies, or for any restriction
+                        or suspension of the User’s platform accounts. Such events do not constitute a defect of the
+                        Service.</p>
+                </div>
+
+                <!-- 8. -->
+                <div class="p-7 doc-section">
+                    <h2>8. Intellectual property and generated content</h2>
+                    <p>8.1. The Content Ninja software, its interface, source code, design and trademarks are the
+                        exclusive intellectual property of the Provider. The subscription grants the User a limited,
+                        non-exclusive, non-transferable right to use the Service; no other rights are transferred.</p>
+                    <p class="mt-2">8.2. Content generated with the Service (texts, images, posts) belongs to the
+                        User. The User may use the generated content for any purpose without restriction, including
+                        commercial use.</p>
+                    <p class="mt-2">8.3. The Provider claims no ownership of content uploaded by the User or generated
+                        with the help of the Service. The Provider processes such content solely to the extent
+                        necessary to provide the Service.</p>
+                </div>
+
+                <!-- 9. -->
+                <div class="p-7 doc-section">
+                    <h2>9. Warranties and limitation of liability</h2>
+                    <p>9.1. The Provider strives to keep the Service continuously and reliably available but does not
+                        undertake an availability guarantee (SLA). The Service is provided “as is” and “as
+                        available”, to the extent permitted by applicable law.</p>
+                    <p class="mt-2">9.2. The Provider does not warrant the accuracy, completeness or legal compliance
+                        of AI-generated content. Reviewing, using and lawfully applying the generated content is the
+                        sole responsibility of the User. The Provider is not liable if the User uses generated
+                        content for unlawful purposes or in a manner that infringes third-party rights.</p>
+                    <p class="mt-2">9.3. The Provider is not liable for errors or outages arising from the operation
+                        of third-party services (Stripe, social media platforms, AI providers).</p>
+                    <p class="mt-2">9.4. To the extent permitted by law, the Provider’s aggregate liability is in all
+                        cases limited to the amount of the subscription fee paid by the affected User in the last one
+                        month. Nothing in these Terms excludes or limits liability that cannot be excluded or limited
+                        under mandatory law (including liability for damage caused intentionally or harming human
+                        life, physical integrity or health).</p>
+                    <p class="mt-2">9.5. The Provider is not liable for any failure, suspension or restriction of the
+                        Service resulting from force majeure. Force majeure includes in particular: natural disaster,
+                        war, strike, epidemic, official measures, cyber-attack, as well as outages or service
+                        interruptions of third-party providers used by the Provider (including in particular AI
+                        providers, social media platforms, payment providers and hosting providers) that are beyond
+                        the Provider’s control.</p>
+                </div>
+
+                <!-- 10. -->
+                <div class="p-7 doc-section">
+                    <h2>10. Term and termination</h2>
+                    <p>10.1. The contract is concluded for an indefinite term and remains in force as long as the User
+                        maintains an active subscription.</p>
+                    <p class="mt-2">10.2. The User may terminate the contract at any time by cancelling their
+                        subscription (see Section 5) and may request the deletion of their account.</p>
+                    <p class="mt-2">10.3. The Provider may suspend or, in serious cases, terminate the User’s account
+                        with immediate effect if the User materially breaches these Terms — in particular the
+                        acceptable-use rules in Section 6 — uses the Service unlawfully, or fails to pay the
+                        subscription fee. Where reasonable, the Provider will first warn the User and allow a remedy
+                        period.</p>
+                    <p class="mt-2">10.4. Upon termination the User’s access to the Service ceases and unused credits
+                        lapse. Provisions which by their nature survive termination (in particular Sections 8, 9 and
+                        14) remain in effect.</p>
+                </div>
+
+                <!-- 11. -->
+                <div class="p-7 doc-section">
+                    <h2>11. Data protection</h2>
+                    <p>11.1. The Provider processes personal data in accordance with the GDPR. Detailed information on
+                        the processing of the User’s personal data is set out in the <a
+                            href="/en/privacy-policy">Privacy Policy</a>, which forms an integral part of these
+                        Terms.</p>
+                    <p class="mt-2">11.2. Instructions for requesting the deletion of personal data are available on
+                        the <a href="/en/data-deletion">Data Deletion Instructions</a> page.</p>
+                </div>
+
+                <!-- 12. -->
+                <div class="p-7 doc-section">
+                    <h2>12. Amendments to these Terms</h2>
+                    <p>12.1. The Provider is entitled to unilaterally amend these Terms.</p>
+                    <p class="mt-2">12.2. The Provider will notify Users of any amendment by e-mail at least 15 days
+                        before the amendment takes effect.</p>
+                    <p class="mt-2">12.3. If the User does not accept the amended Terms, they may cancel their
+                        subscription before the amendment takes effect.</p>
+                </div>
+
+                <!-- 13. -->
+                <div class="p-7 doc-section">
+                    <h2>13. Complaints and dispute resolution</h2>
+                    <p>13.1. The User may submit complaints at <a
+                            href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>. The Provider investigates
+                        and responds to complaints within 30 days.</p>
+                    <p class="mt-2">13.2. If the User qualifies as a consumer, they may turn to the conciliation body
+                        (békéltető testület) competent for their place of residence, or to the Hungarian consumer
+                        protection authority.</p>
+                    <p class="mt-2">13.3. EU online dispute resolution platform: <a
+                            href="https://ec.europa.eu/consumers/odr" target="_blank"
+                            rel="noopener">https://ec.europa.eu/consumers/odr</a></p>
+                </div>
+
+                <!-- 14. -->
+                <div class="p-7 doc-section">
+                    <h2>14. Governing law and final provisions</h2>
+                    <p>14.1. These Terms and the contract between the Provider and the User are governed by Hungarian
+                        law — in particular Act V of 2013 on the Civil Code, Act CVIII of 2001 on certain issues of
+                        electronic commerce services, and Government Decree 45/2014 (II. 26.) on the detailed rules
+                        of contracts between consumers and businesses.</p>
+                    <p class="mt-2">14.2. For any dispute not settled amicably, the Hungarian courts having
+                        jurisdiction and competence under the general rules shall proceed. If the User is a consumer
+                        residing in the EU, this does not affect their mandatory statutory rights.</p>
+                    <p class="mt-2">14.3. These Terms are drawn up in English. They are effective as of 2 July 2026
+                        and replace all previous versions.</p>
+                </div>
+
+            </div>
+        </div>
+  </main>
+
+  <Footer locale={locale} page={page} />
+</BaseLayout>
+
+<style>
+  .doc-section h2 { font-size: 0.9rem; font-weight: 700; color: #1e1e2f; margin-bottom: 0.75rem; }
+  .doc-section p { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.5rem; }
+  .doc-section p:first-of-type { margin-top: 0; }
+  .doc-section a { color: #6c5ce7; text-decoration: underline; }
+  .doc-section ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
+  .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; }
+</style>

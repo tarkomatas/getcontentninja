@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Főoldal -->
+  <url>
+    <loc>https://getcontentninja.com/hu/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Bemutató / demo -->
+  <url>
+    <loc>https://getcontentninja.com/hu/bemutato</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/bemutato" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/bemutato" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/demo</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/bemutato" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/bemutato" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Adatvédelmi tájékoztató (a teljes szöveg angolul, a HU oldal rá hivatkozik) -->
+  <url>
+    <loc>https://getcontentninja.com/hu/adatkezeles</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adatkezeles" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adatkezeles" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adatkezeles" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adatkezeles" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- ÁSZF / Terms (csak angol) -->
+  <url>
+    <loc>https://getcontentninja.com/en/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Impresszum / Imprint -->
+  <url>
+    <loc>https://getcontentninja.com/hu/impresszum</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/impresszum" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/imprint" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/impresszum" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/imprint</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/impresszum" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/imprint" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/impresszum" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Adattörlési tájékoztató (csak angol, Meta-követelmény) -->
+  <url>
+    <loc>https://getcontentninja.com/en/data-deletion</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

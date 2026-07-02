@@ -1,0 +1,786 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'en';
+const page = 'home';
+
+const title = 'Content Ninja – AI Content Creation for Webshops | Automatic Posting';
+const description =
+  'Content Ninja is an AI-powered content creation tool for webshops. It automatically generates posts, images and videos from your products, and publishes them for you too. Try it free!';
+const keywords =
+  'Content Ninja, AI content creation, webshop marketing, automatic posting, social media automation, AI influencer, content calendar';
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is Content Ninja?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Content Ninja is an AI-powered content creation and publishing platform built specifically for webshops. It automatically generates social media posts, images and videos from your products, and then publishes them on Facebook, Instagram and LinkedIn.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does a Content Ninja subscription cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The standard subscription is 24.990 Ft + VAT per month, which includes 400 renewing AI credits each month. The 12.495 Ft + VAT demo bonus applies only to the first month; after that the fixed price of 24.990 Ft + VAT / month applies.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need marketing knowledge to use Content Ninja?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No, Content Ninja was made exactly for those who do not have the time or background knowledge for marketing management. The AI does the experts\' work automatically.',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description} keywords={keywords}>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
+  <Header locale={locale} page={page} />
+
+  <main>
+    <!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+    <section id="hero" class="hero-gradient py-10 md:py-28 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+                <!-- Left: szöveg -->
+                <div class="flex flex-col gap-5 animate-fade-up">
+                    <h1
+                        class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
+                        Automate your<br /><span class="text-primary">webshop's</span>
+                        social media posting
+                    </h1>
+
+                    <p class="text-lg text-body leading-snug max-w-[520px]">
+                        Content Ninja's AI writes the copy, edits the images,
+                        <strong class="text-dark">generates the videos</strong> and posts for you too –
+                        from your products, automatically.
+                    </p>
+
+                    <ul class="space-y-2 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">No more spending hours</strong> writing posts and
+                                editing images</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">A consistent, professional presence</strong> on social media –
+                                even when you have no time for it</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
+                                style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>More visitors and buyers, <strong class="text-dark">with fewer work
+                                    hours spent</strong></span>
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                        <a href="/en/demo" class="cta-primary px-7 py-4 text-base">
+                            <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                            Request a free demo
+                        </a>
+                        <a href="https://app.getcontentninja.com" target="_blank" class="cta-secondary px-7 py-4 text-base">
+                            <span class="material-symbols-outlined text-[18px]">login</span>
+                            Log in to the app
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Right: YouTube embed + social proof -->
+                <div class="flex flex-col gap-3 animate-fade-up delay-200">
+                    <div
+                        class="relative rounded-[20px] overflow-hidden shadow-primary-glow border border-primary/10 bg-dark aspect-video">
+                        <iframe id="hero-video" class="w-full h-full" src="https://www.youtube.com/embed/g67df7BUczE"
+                            title="Content Ninja – System overview video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="text-center text-muted text-xs">▶ See how AI content creation works in
+                        practice</p>
+
+                    <!-- Social proof mini -->
+                    <div class="flex items-center justify-center gap-3 pt-1">
+                        <div class="flex -space-x-2">
+                            <div
+                                class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">
+                                Sz</div>
+                            <div
+                                class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">
+                                L</div>
+                            <div
+                                class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">
+                                ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshops</span> already
+                            use it</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+     HOGYAN MŰKÖDIK
+═══════════════════════════════════════ -->
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How does it work?</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps to full automation</h2>
+                <p class="text-body text-lg">No need for a creative agency or a marketing specialist. You set it up
+                    once, and the AI handles the rest on its own.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 relative">
+
+                <!-- Step 1 -->
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
+                    <div
+                        class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                        1</div>
+                    <h3 class="font-bold text-lg mb-3">Initial setup</h3>
+                    <p class="text-body text-sm leading-relaxed">You provide your webshop link
+                        and your logo once. That's it – the system handles the rest on its own.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
+                    <div
+                        class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                        2</div>
+                    <h3 class="font-bold text-lg mb-3">Hunts for ideas</h3>
+                    <p class="text-body text-sm leading-relaxed">The system reviews your webshop on its own, picks the
+                        most relevant products, and comes up with topic ideas – you have nothing to do with it.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
+                    <div
+                        class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                        3</div>
+                    <h3 class="font-bold text-lg mb-3">Generates the post</h3>
+                    <p class="text-body text-sm leading-relaxed">The AI writes the post copy, creates the on-brand
+                        creative image, moving animation or video – in your brand's style, with your logo added.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center">
+                    <div
+                        class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
+                        4</div>
+                    <h3 class="font-bold text-lg mb-3">Publishes independently</h3>
+                    <p class="text-body text-sm leading-relaxed">The system schedules and publishes the content on
+                        Facebook, Instagram and LinkedIn. All you have to do is approve it – if you want to.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="/en/demo" class="cta-primary px-8 py-4 text-base">
+                    Request a demo – free
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+     VÉLEMÉNYEK
+═══════════════════════════════════════ -->
+    <section id="velemenyek" class="bg-card py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="text-center max-w-[700px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Reviews</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What do our customers say about us?</h2>
+            </div>
+
+            <div class="relative">
+                <button type="button" id="ti-prev"
+                    class="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 xl:-left-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                    aria-label="Previous review">
+                    <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+                </button>
+                <button type="button" id="ti-next"
+                    class="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 xl:-right-6 z-10 w-11 h-11 items-center justify-center rounded-full bg-card border border-border text-primary shadow-card hover:shadow-card-hover hover:border-primary transition-all"
+                    aria-label="Next review">
+                    <span class="material-symbols-outlined text-[24px]">chevron_right</span>
+                </button>
+                <div class="overflow-hidden" id="ti-viewport">
+                    <div class="flex" style="gap:2rem" id="ti-track">
+
+                        <!-- T1 -->
+                        <div class="ti-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                            style="flex-shrink:0">
+                            <div class="mb-4">
+                                <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                    style="font-variation-settings:'FILL' 1">format_quote</span>
+                            </div>
+                            <div class="flex gap-0.5 mb-4 -mt-2">
+                                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span>
+                            </div>
+                            <p class="text-body italic mb-6 leading-relaxed flex-1">„It saves a huge amount of time by
+                                generating text and images on its own from a product link and posting automatically too. A big
+                                help!"</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div
+                                    class="w-11 h-11 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm uppercase">
+                                    Sz</div>
+                                <div>
+                                    <p class="font-bold text-dark text-sm">Szabad Mária</p>
+                                    <p class="text-xs text-muted">Károlyi-plast online store</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T2 -->
+                        <div class="ti-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                            style="flex-shrink:0">
+                            <div class="mb-4">
+                                <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                    style="font-variation-settings:'FILL' 1">format_quote</span>
+                            </div>
+                            <div class="flex gap-0.5 mb-4 -mt-2">
+                                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span>
+                            </div>
+                            <p class="text-body italic mb-6 leading-relaxed flex-1">„I have little time for marketing, but
+                                with this I can still post regularly. It generates content in bulk, suggests topics on its
+                                own too, and its video features keep getting better. A serious time saver."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div
+                                    class="w-11 h-11 rounded-full bg-primary/70 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                    L</div>
+                                <div>
+                                    <p class="font-bold text-dark text-sm">Luca Márió</p>
+                                    <p class="text-xs text-muted">PanDani.hu toy store and webshop</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T3 -->
+                        <div class="ti-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                            style="flex-shrink:0">
+                            <div class="mb-4">
+                                <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                    style="font-variation-settings:'FILL' 1">format_quote</span>
+                            </div>
+                            <div class="flex gap-0.5 mb-4 -mt-2">
+                                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span>
+                            </div>
+                            <p class="text-body italic mb-6 leading-relaxed flex-1">„I really like it! At last I can see the
+                                light at the end of the tunnel, so I'll have posts compared to the nothing I had before :)
+                                In a word, brilliant! And I had been looking for a tool for my problem, but couldn't find one
+                                like this..."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div
+                                    class="w-11 h-11 rounded-full bg-primary/50 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                    ÁK</div>
+                                <div>
+                                    <p class="font-bold text-dark text-sm">Ábrahám Kata</p>
+                                    <p class="text-xs text-muted">Yoga Bazaar online store</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T4 -->
+                        <div class="ti-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                            style="flex-shrink:0">
+                            <div class="mb-4">
+                                <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                    style="font-variation-settings:'FILL' 1">format_quote</span>
+                            </div>
+                            <div class="flex gap-0.5 mb-4 -mt-2">
+                                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span>
+                            </div>
+                            <p class="text-body italic mb-6 leading-relaxed flex-1">„It fully meets expectations. It significantly speeds up posting – from the wording to publishing, it helps with everything."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div
+                                    class="w-11 h-11 rounded-full bg-primary/40 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                    BG</div>
+                                <div>
+                                    <p class="font-bold text-dark text-sm">Borgulya Gizella</p>
+                                    <p class="text-xs text-muted">Börzsöny Kosara online store</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T5 -->
+                        <div class="ti-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all"
+                            style="flex-shrink:0">
+                            <div class="mb-4">
+                                <span class="material-symbols-outlined text-primary/10 text-[56px]"
+                                    style="font-variation-settings:'FILL' 1">format_quote</span>
+                            </div>
+                            <div class="flex gap-0.5 mb-4 -mt-2">
+                                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span
+                                    class="text-yellow-400">★</span>
+                            </div>
+                            <p class="text-body italic mb-6 leading-relaxed flex-1">„It significantly speeds up the work and
+                                makes posting easier, which used to take hours. With custom prompts we can produce varied
+                                content, and the audience's reactions have been clearly positive so far.
+                                Soon we'll start using it in our other businesses too."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div
+                                    class="w-11 h-11 rounded-full bg-primary/80 flex items-center justify-center text-white font-bold text-sm uppercase">
+                                    SM</div>
+                                <div>
+                                    <p class="font-bold text-dark text-sm">Szmolár Márk</p>
+                                    <p class="text-xs text-muted">Inkness Kft.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T6 -->
+                        <div class="ti-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all" style="flex-shrink:0">
+                            <div class="mb-4">
+                                <span class="material-symbols-outlined text-primary/10 text-[56px]" style="font-variation-settings:'FILL' 1">format_quote</span>
+                            </div>
+                            <div class="flex gap-0.5 mb-4 -mt-2">
+                                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span>
+                            </div>
+                            <p class="text-body italic mb-6 leading-relaxed flex-1">„I can only recommend it! Very useful and they work at a great price/value ratio! They are helpful and focused on solutions! Whatever request you have, if it's feasible, they'll solve it!"</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-11 h-11 rounded-full bg-primary/60 flex items-center justify-center text-white font-bold text-sm uppercase">NG</div>
+                                <div>
+                                    <p class="font-bold text-dark text-sm">Nagy Gábor</p>
+                                    <p class="text-xs text-muted">Amket.hu online store</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T7 -->
+                        <div class="ti-card flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card hover:shadow-card-hover transition-all" style="flex-shrink:0">
+                            <div class="mb-4">
+                                <span class="material-symbols-outlined text-primary/10 text-[56px]" style="font-variation-settings:'FILL' 1">format_quote</span>
+                            </div>
+                            <div class="flex gap-0.5 mb-4 -mt-2">
+                                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span>
+                            </div>
+                            <p class="text-body italic mb-6 leading-relaxed flex-1">„I generate 20-30 pieces of content in 1 hour – previously this took many times as long. It's also a big advantage that I can see all my posts within a single, clear interface."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-11 h-11 rounded-full bg-primary/30 flex items-center justify-center text-white font-bold text-sm uppercase">MT</div>
+                                <div>
+                                    <p class="font-bold text-dark text-sm">Dr. Madarász Tamás</p>
+                                    <p class="text-xs text-muted">DoktorDivat</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="flex justify-center gap-3 mt-10" id="ti-dots"></div>
+            </div>
+        </div>
+    </section>
+    <script is:inline>
+        (function () {
+            var track = document.getElementById('ti-track');
+            var viewport = document.getElementById('ti-viewport');
+            var dotsContainer = document.getElementById('ti-dots');
+            var prevButton = document.getElementById('ti-prev');
+            var nextButton = document.getElementById('ti-next');
+            var cards = track.querySelectorAll('.ti-card');
+            var GAP = 32;
+            var current = 0;
+            var autoTimer;
+
+            function getVisible() {
+                return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+            }
+
+            function getTotal() {
+                return Math.max(1, cards.length - getVisible() + 1);
+            }
+
+            function buildDots() {
+                dotsContainer.innerHTML = '';
+                var total = getTotal();
+                for (var i = 0; i < total; i++) {
+                    (function (idx) {
+                        var btn = document.createElement('button');
+                        btn.style.cssText = 'border:none;cursor:pointer;border-radius:9999px;transition:all 0.3s;height:10px;';
+                        btn.style.background = idx === current ? '#6c5ce7' : 'rgba(108,92,231,0.3)';
+                        btn.style.width = idx === current ? '24px' : '10px';
+                        btn.addEventListener('click', function () { goTo(idx); resetTimer(); });
+                        dotsContainer.appendChild(btn);
+                    })(i);
+                }
+            }
+
+            function layout() {
+                var vis = getVisible();
+                var vw = viewport.offsetWidth;
+                var cw = (vw - GAP * (vis - 1)) / vis;
+                for (var i = 0; i < cards.length; i++) {
+                    cards[i].style.width = cw + 'px';
+                }
+                current = Math.min(current, getTotal() - 1);
+                buildDots();
+                goTo(current, false);
+            }
+
+            function goTo(index, animate) {
+                if (animate === undefined) animate = true;
+                current = Math.max(0, Math.min(index, getTotal() - 1));
+                var cw = parseFloat(cards[0].style.width);
+                var offset = current * (cw + GAP);
+                track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
+                track.style.transform = 'translateX(-' + offset + 'px)';
+                buildDots();
+            }
+
+            function next() {
+                goTo(current + 1 < getTotal() ? current + 1 : 0);
+            }
+
+            function prev() {
+                goTo(current - 1 >= 0 ? current - 1 : getTotal() - 1);
+            }
+
+            function resetTimer() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(next, 5000);
+            }
+
+            layout();
+            resetTimer();
+
+            var resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(layout, 100);
+            });
+
+            prevButton.addEventListener('click', function () { prev(); resetTimer(); });
+            nextButton.addEventListener('click', function () { next(); resetTimer(); });
+            viewport.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+            viewport.addEventListener('mouseleave', resetTimer);
+        })();
+    </script>
+
+
+    <!-- ═══════════════════════════════════════
+     ÁRAZÁS
+═══════════════════════════════════════ -->
+    <section id="arazas" class="bg-light py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[900px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">PRICING</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, fixed monthly fee</h2>
+                <p class="text-body text-lg">Join the early registrants and keep the discounted price long term.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+
+                <!-- Standard előfizetés -->
+                <div
+                    class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <div class="flex items-baseline gap-1 mb-3">
+                        <span class="text-4xl font-bold text-dark">24.990</span>
+                        <span class="text-xl font-bold text-dark">Ft</span>
+                        <span class="text-muted text-sm">+VAT / month</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fixed monthly fee, no hidden costs</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">400 AI credits per month (renewing)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">All modules: post writing, newsletter, image and video generation</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Manage multiple brands (webshops) within one account</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Unlimited social media accounts</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">On-brand style and tone of voice</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Marketing calendar and scheduling</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Continuous development and support</span>
+                        </li>
+                    </ul>
+                    <a href="/en/demo"
+                        class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Request a demo
+                    </a>
+                </div>
+
+                <!-- Bemutató bónusz -->
+                <div
+                    class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+                    <div
+                        class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+                        1st month only
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
+                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+                        <span class="text-4xl font-bold text-primary">12.495</span>
+                        <span class="text-xl font-bold text-dark">Ft</span>
+                        <span class="text-muted text-sm">+VAT</span>
+                        <span class="text-muted text-sm line-through">24.990 Ft</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
+                    <p class="text-body text-sm mb-4">Book a 30-minute demo, and:</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">50% discount for the 1st month</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">800 credits instead of 400 (double)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Personalized demo</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">We answer all your questions</span>
+                        </li>
+                    </ul>
+                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From the 2nd month, the fixed 24.990 Ft / month.</p>
+                    <a href="/en/demo"
+                        class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book the demo
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-7 shadow-card mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-dark mb-3">What is 400 credits enough for?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-body">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+                                <span>1 post copy = 1 credit</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                                <span>1 image generation (Nano Banana) = 2 credits</span>
+                            </div>
+                            <div class="flex items-center gap-2 font-bold text-dark">
+                                <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                                <span>approx. 133 image posts per month</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://contentninjahc.notion.site/Kreditfogyaszt-s-3357c007cc52815590fecdc4b66a836f" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                        Detailed credit pricing
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+    <section id="faq" class="bg-card py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently asked questions</h2>
+            </div>
+
+            <div class="space-y-3" id="faq-list">
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        What is Content Ninja?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Content Ninja is an AI-powered content creation and publishing platform built specifically for
+                        webshops. It automatically generates social media posts, images and
+                        videos from your products, and then publishes them on the platforms you specify (Facebook, Instagram, LinkedIn).
+                        There's no need for a creative team, a marketing agency or manual posting.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        How does Content Ninja AI content creation work?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        The system connects directly to your webshop (via Unas integration or to any webshop through a
+                        sitemap), and
+                        automatically retrieves the product data – descriptions, images, prices. From these the AI writes copy,
+                        edits on-brand images and video, and then publishes the
+                        posts on the schedule you approve. The entire process can be fully automated.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Which platforms can Content Ninja post to?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Currently it can publish automatically to Facebook, Instagram and LinkedIn. The system
+                        is under continuous development, and we're planning TikTok and Pinterest integration soon.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Do I need marketing knowledge to use it?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        No, Content Ninja was made exactly for those who don't have the time or background knowledge for marketing
+                        management. The AI does the experts' work: it writes copy, edits images, schedules the
+                        posts. All you have to focus on is your products.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        How much does a Content Ninja subscription cost?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        The standard subscription is 24.990 Ft + VAT per month, which includes every feature and 400 renewing
+                        AI credits per month. The 12.495 Ft + VAT demo bonus applies only to the first month; after that the fixed 24.990 Ft
+                        + VAT / month price stays in effect within the current tier.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Does Content Ninja preserve my brand's tone of voice and style?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Yes, this is one of its most important features. During setup you provide your brand's tone of voice (e.g.
+                        casual, friendly vs. premium, formal), visual style and logo. The AI learns these,
+                        and every generated piece of content – both text and image – will be consistent and on-brand.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+     CTA SÁVE
+═══════════════════════════════════════ -->
+    <section class="bg-primary py-16 md:py-20 px-4 md:px-10">
+        <div class="max-w-[700px] mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-[-0.02em]">
+                Ready to let AI create your content?
+            </h2>
+            <p class="text-white/80 text-lg mb-8">
+                Request a free, 20-minute online demo – and see it live, how it works on your own webshop's
+                examples.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/en/demo" class="cta-on-primary px-8 py-4 text-base">
+                    <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                    Request a demo – free
+                </a>
+                <a href="https://app.getcontentninja.com" target="_blank" class="cta-outline-white px-8 py-4 text-base">
+                    <span class="material-symbols-outlined text-[18px]">login</span>
+                    Log in to the app
+                </a>
+            </div>
+        </div>
+    </section>
+  </main>
+
+  <Footer locale={locale} page={page} />
+
+  <!-- FAQ accordion toggle (globális, mert onclick attribútumból hívjuk) -->
+  <script is:inline>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+</BaseLayout>
