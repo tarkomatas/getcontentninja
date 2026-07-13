@@ -21,7 +21,7 @@ const faqLd = {
       name: 'Mi az a Content Ninja?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A Content Ninja egy AI-alapú tartalomgyártó és publikáló platform, amelyet kifejezetten webshopok számára fejlesztettünk. Automatikusan generál social media posztokat, képeket és videókat a termékeidből, majd ezeket Facebookon, Instagramon és LinkedInen közzé is teszi.',
+        text: 'A Content Ninja egy AI-alapú tartalomgyártó és publikáló platform, amelyet kifejezetten webshopok számára fejlesztettünk. Automatikusan generál social media posztokat, képeket és videókat a termékeidből, majd ezeket Facebookon és Instagramon közzé is teszi.',
       },
     },
     {
@@ -93,7 +93,7 @@ const faqLd = {
                     </ul>
 
                     <div class="flex flex-col sm:flex-row gap-3 pt-1">
-                        <a href="/hu/bemutato" class="cta-primary px-7 py-4 text-base">
+                        <a href="/hu/posztolas" class="cta-primary px-7 py-4 text-base">
                             <span class="material-symbols-outlined text-[18px]">calendar_month</span>
                             Díjmentes bemutatót kérek
                         </a>
@@ -154,14 +154,14 @@ const faqLd = {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
 
                 <!-- Automata posztolás -->
-                <a href="/hu/bemutato"
+                <a href="/hu/posztolas"
                     class="group bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">Automata posztolás</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">Az AI a termékeidből szöveget ír, képet és
-                        videót készít, majd időzítve ki is posztolja helyetted – Facebookra, Instagramra és LinkedInre.
+                        videót készít, majd időzítve ki is posztolja helyetted – Facebookra és Instagramra.
                         Neked csak jóvá kell hagynod, ha szeretnéd.</p>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Nézd meg
@@ -240,12 +240,12 @@ const faqLd = {
                         4</div>
                     <h3 class="font-bold text-lg mb-3">Önállóan publikál</h3>
                     <p class="text-body text-sm leading-relaxed">A rendszer beütemezi és közzéteszi a tartalmakat
-                        Facebookon, Instagramon és LinkedInen. Neked csak jóvá kell hagynod – ha szeretnéd.</p>
+                        Facebookon és Instagramon. Neked csak jóvá kell hagynod – ha szeretnéd.</p>
                 </div>
             </div>
 
             <div class="text-center mt-10">
-                <a href="/hu/bemutato" class="cta-primary px-8 py-4 text-base">
+                <a href="/hu/posztolas" class="cta-primary px-8 py-4 text-base">
                     Bemutatót kérek – díjmentes
                 </a>
             </div>
@@ -258,122 +258,77 @@ const faqLd = {
 ═══════════════════════════════════════ -->
     <section id="integraciok" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
-            <div class="text-center max-w-[760px] mx-auto mb-12">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Integrációk</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Csatlakoztasd, amid van – posztol, amerre kell</h2>
-                <p class="text-body text-lg">A Content Ninja összeköti a webshopodat, a forrásaidat és a közösségi
-                    fiókjaidat. Behúzza a termékeidet és a tartalmaidat, legyártja a posztokat és a hírleveleket, majd
-                    publikál is – automatikusan.</p>
-            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-            <!-- Hangsúlyos szemléltető kép: integrációs hub -->
-            <div class="relative mb-14 md:mb-16">
-                <div class="absolute -inset-4 md:-inset-8 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                <div class="relative rounded-[20px] overflow-hidden border border-primary/10 shadow-primary-glow">
-                    <img src="/assets/integraciok-latvanykep.webp"
-                        alt="Content Ninja mint központi integrációs hub: webshop, hírlevél és külső források összekötve a közösségi média fiókokkal"
+                <!-- Szöveg + kategóriák -->
+                <div class="order-2 lg:order-1">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Integrációk</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">Csatlakoztasd, amid van – posztol,
+                        amerre kell</h2>
+                    <p class="text-body text-lg mb-8 leading-relaxed">A Content Ninja összeköti a webshopodat, a
+                        forrásaidat és a közösségi fiókjaidat: behúzza a termékeidet és a tartalmaidat, legyártja a
+                        posztokat és a hírleveleket, majd publikál is – automatikusan.</p>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">share</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Közösségi média</p>
+                                <p class="text-body text-sm">Facebook, Instagram</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">storefront</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Webáruház</p>
+                                <p class="text-body text-sm">Unas, Sitemap <span class="text-muted">(bármely webshop)</span></p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">mail</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Hírlevél</p>
+                                <p class="text-body text-sm">SalesAutopilot, MailerLite</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">rss_feed</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Külsős oldalak</p>
+                                <p class="text-body text-sm">RSS</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Bármilyen link kiemelés -->
+                    <div class="rounded-[14px] border border-primary/25 bg-primary/[0.04] p-4 flex items-start gap-3 mb-8">
+                        <span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">link</span>
+                        <p class="text-body text-sm leading-relaxed"><strong class="text-dark">+ Bármilyen külső vagy
+                            belső linkből is</strong> – terméklink, blogcikk vagy külső oldal tartalmából is kész
+                            posztot készít.</p>
+                    </div>
+
+                    <a href="/hu/posztolas" class="cta-primary px-8 py-4 text-base">
+                        Bemutatót kérek – díjmentes
+                    </a>
+                </div>
+
+                <!-- Szemléltető kép: integrációs hub -->
+                <div class="order-1 lg:order-2 relative">
+                    <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
+                    <img src="/assets/integraciok-hub.webp"
+                        alt="Content Ninja integrációs hub: Unas, Sitemap és RSS források bekötve, majd publikálás Facebookra, Instagramra, SalesAutopilotba és MailerLite-ba"
                         loading="lazy" class="w-full h-auto block">
                 </div>
-            </div>
 
-            <!-- 4 integrációs kategória -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Közösségi média -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">share</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">Közösségi média</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Automatikus posztolás közvetlenül a kész
-                        fiókjaidba.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
-                            Facebook
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGradInt" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradInt)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
-                            Instagram
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Webáruház -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">storefront</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">Webáruház</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Behúzza a termékeidet – Unas integrációval
-                        vagy bármilyen webshopból sitemap alapján.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="w-5 h-5 rounded-md flex items-center justify-center text-white text-[10px] font-extrabold" style="background:#E94E1B">U</span>
-                            Unas
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="material-symbols-outlined text-primary text-[18px]">account_tree</span>
-                            Sitemap
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Hírlevél -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">mail</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">Hírlevél</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">A legyártott hírleveleket egyenesen a
-                        levelezőrendszeredbe küldi.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="w-5 h-5 rounded-md flex items-center justify-center text-white text-[10px] font-extrabold" style="background:#1B6DC1">SA</span>
-                            SalesAutopilot
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="w-5 h-5 rounded-md flex items-center justify-center text-white text-[10px] font-extrabold" style="background:#09C269">ML</span>
-                            MailerLite
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Külsős oldalak -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">rss_feed</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">Külsős oldalak</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Kövess bármilyen forrást, és a friss
-                        tartalmakból automatikusan posztot készít.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#F26522"/><circle cx="7.5" cy="16.5" r="1.7" fill="#fff"/><path d="M6 11.2a6.8 6.8 0 0 1 6.8 6.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><path d="M6 7.2A11.6 11.6 0 0 1 17.6 18.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
-                            RSS
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Bármilyen link kiemelés -->
-            <div class="mt-8 rounded-[16px] border-2 border-primary/25 bg-primary/[0.04] p-6 md:p-7 flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
-                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shrink-0 shadow-primary-glow">
-                    <span class="material-symbols-outlined text-[24px]">link</span>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-bold text-lg text-dark mb-1">+ Bármilyen külső vagy belső linkből tartalmat gyárt</h3>
-                    <p class="text-body text-sm leading-relaxed">Nem csak a beépített integrációk. Adj meg bármilyen
-                        terméklinket, blogcikket vagy külső oldalt – a rendszer kiolvassa a tartalmát, és kész posztot
-                        készít belőle.</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="/hu/bemutato" class="cta-primary px-8 py-4 text-base">
-                    Bemutatót kérek – díjmentes
-                </a>
             </div>
         </div>
     </section>
@@ -729,7 +684,7 @@ const faqLd = {
                             <span class="text-body font-medium">Folyamatos fejlesztés és support</span>
                         </li>
                     </ul>
-                    <a href="/hu/bemutato"
+                    <a href="/hu/posztolas"
                         class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Bemutatót kérek
                     </a>
@@ -778,7 +733,7 @@ const faqLd = {
                         </li>
                     </ul>
                     <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">A 2. hónaptól a fix 24.990 Ft / hó.</p>
-                    <a href="/hu/bemutato"
+                    <a href="/hu/posztolas"
                         class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Lefoglalom a bemutatót
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -839,7 +794,7 @@ const faqLd = {
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         A Content Ninja egy AI-alapú tartalomgyártó és publikáló platform, amelyet kifejezetten
                         webshopok számára fejlesztettünk. Automatikusan generál social media posztokat, képeket és
-                        videókat a termékeidből, majd ezeket a megadott platformokon (Facebook, Instagram, LinkedIn)
+                        videókat a termékeidből, majd ezeket a megadott platformokon (Facebook, Instagram)
                         közzé is teszi. Nincs szükség kreatív csapatra, marketing ügynökségre vagy manuális posztolásra.
                     </div>
                 </div>
@@ -868,7 +823,7 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Jelenleg a Facebook, Instagram és LinkedIn platformokra tud automatikusan publikálni. A rendszer
+                        Jelenleg a Facebook és Instagram platformokra tud automatikusan publikálni. A rendszer
                         folyamatos fejlesztés alatt áll, és hamarosan TikTok és Pinterest integrációt is tervezünk.
                     </div>
                 </div>
@@ -933,7 +888,7 @@ const faqLd = {
                 példáin.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/hu/bemutato" class="cta-on-primary px-8 py-4 text-base">
+                <a href="/hu/posztolas" class="cta-on-primary px-8 py-4 text-base">
                     <span class="material-symbols-outlined text-[18px]">calendar_month</span>
                     Bemutatót kérek – díjmentes
                 </a>

@@ -22,18 +22,18 @@
 
   <!-- Bemutató / demo -->
   <url>
-    <loc>https://getcontentninja.com/hu/bemutato</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/bemutato" />
+    <loc>https://getcontentninja.com/hu/posztolas</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas" />
     <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/bemutato" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/posztolas" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getcontentninja.com/en/demo</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/bemutato" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas" />
     <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/bemutato" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/posztolas" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

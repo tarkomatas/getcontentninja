@@ -26,7 +26,7 @@ export type PageKey =
  */
 export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   home: { hu: '/hu/', en: '/en/' },
-  demo: { hu: '/hu/bemutato', en: '/en/demo' },
+  demo: { hu: '/hu/posztolas', en: '/en/demo' },
   // Nemzetközi terjeszkedés kampányoldal – kétnyelvű, rövid slug.
   international: { hu: '/hu/nemzetkozi', en: '/en/international' },
   // UNAS-integráció kampányoldal – kétnyelvű, rövid slug.

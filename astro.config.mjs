@@ -10,8 +10,10 @@ export default defineConfig({
   // Trailing slash konzisztencia a GitHub Pages-hez.
   trailingSlash: 'ignore',
   // A régi magyar ÁSZF URL az új, kizárólag angol nyelvű Terms oldalra irányít.
+  // A bemutató oldal új slugja /hu/posztolas — a régi /hu/bemutato ide redirectel.
   redirects: {
     '/hu/aszf': '/en/terms',
+    '/hu/bemutato': '/hu/posztolas',
   },
   i18n: {
     defaultLocale: 'hu',

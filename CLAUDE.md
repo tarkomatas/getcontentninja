@@ -19,7 +19,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - **Two locales, both prefixed:** every page lives under `/hu/…` or `/en/…`. Configured in `astro.config.mjs` (`i18n` with `prefixDefaultLocale: true`). The site root `/` (`src/pages/index.astro`) is a JS language-detecting redirect to `/hu/` or `/en/` (default `/hu/`, `noindex`).
 - **Translated slugs**, mapped in `src/i18n/routes.ts` — the single source of truth for URLs, hreflang alternates (`alternatesFor`), and the language switcher target (`switchTarget`). Change URLs here, not by renaming files ad-hoc.
   - `home` → `/hu/` , `/en/`
-  - `demo` → `/hu/bemutato` , `/en/demo`
+  - `demo` → `/hu/posztolas` , `/en/demo` (the old `/hu/bemutato` redirects here via `astro.config.mjs` `redirects`)
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
   - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy` (the full policy text is **English only** for Meta App Review; the HU page is a short referral to it)
   - `terms` → `/en/terms` (**English only** — the old `/hu/aszf` redirects here via `astro.config.mjs` `redirects`; all footers link to the EN page)
@@ -32,7 +32,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 
 - `src/layouts/BaseLayout.astro` — the `<head>` for every page: analytics, inline `tailwind.config`, fonts, canonical + hreflang (computed from `page`+`locale` props), OG tags, and the consent-gated `cookie.js` at end of `<body>`. Props: `locale`, `page`, `title`, `description`, optional `keywords`/`og*`/`canonical`/`noindex`/`bodyClass`.
 - `src/components/` — `Header.astro`, `Footer.astro` (shared chrome, auto-localized via `ui.ts`), `LanguageSwitcher.astro`.
-- `src/pages/hu/*.astro`, `src/pages/en/*.astro` — one file per page per locale. Focused pages (`bemutato`/`demo`, `koszonjuk`/`thank-you`) intentionally omit the shared `Header`/`Footer` and use minimal inline chrome to keep conversion focus.
+- `src/pages/hu/*.astro`, `src/pages/en/*.astro` — one file per page per locale. Focused pages (`posztolas`/`demo`, `koszonjuk`/`thank-you`) intentionally omit the shared `Header`/`Footer` and use minimal inline chrome to keep conversion focus.
 - `src/styles/global.css` — the shared design system (`.cta-*` buttons, nav, hero gradient, FAQ accordion, animations). Imported once by `BaseLayout`.
 - `public/` — static assets (`assets/`), `CNAME`, `robots.txt`, `sitemap.xml`, and **legacy redirect stubs** (`bemutato.html`, `adatkezeles.html`, …) that meta-refresh old indexed URLs to the new `/hu/…` paths.
 
@@ -50,7 +50,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - **Consent** is stored in `localStorage` under `contentninja_cookie_consent_v1` (`"true"`/`"false"`). The pixel never loads without it.
 - **sitemap.xml is hand-maintained** in `public/` (with `xhtml:link` hreflang alternates). The `@astrojs/sitemap` integration was removed due to an Astro-4/sitemap-3.7 hook incompatibility. When adding/renaming a page, update `routes.ts`, `sitemap.xml`, and `robots.txt` (thank-you pages are `Disallow`ed).
 
-## Lead form flow (`bemutato.astro` / `demo.astro`)
+## Lead form flow (`posztolas.astro` / `demo.astro`)
 
 1. Multi-step qualifying form (`#leadForm`); some answer paths route to `rejected` / `soft-reject` steps instead of submission.
 2. On submit, cleaned answers are POSTed as JSON to the **Make.com webhook** `https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7` (the integration point — same endpoint for both locales; do not translate the JSON field names).
