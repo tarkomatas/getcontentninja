@@ -36,6 +36,12 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - `src/styles/global.css` — the shared design system (`.cta-*` buttons, nav, hero gradient, FAQ accordion, animations). Imported once by `BaseLayout`.
 - `public/` — static assets (`assets/`), `CNAME`, `robots.txt`, `sitemap.xml`, and **legacy redirect stubs** (`bemutato.html`, `adatkezeles.html`, …) that meta-refresh old indexed URLs to the new `/hu/…` paths.
 
+## Image generation
+
+- Site images can be generated with `scripts/gen-image.mjs` (Google Gemini "Nano Banana" image API) → `public/assets/`. Run via `npm run gen:image -- -p "PROMPT" -o public/assets/NAME.webp -a 16:9`. Needs `GEMINI_API_KEY` in `.env` (gitignored, never deployed); default model `gemini-3-pro-image-preview`.
+- `.webp` output is auto-converted from the API's JPEG via `sharp` (a devDependency) — prefer `.webp` for site images (≈20× smaller than JPEG).
+- The **`generate-image` skill** (`.claude/skills/generate-image/`) documents the full workflow and prompt best practices (brand palette, style consistency with existing assets, no rendered text in images, aspect ratios). Invoke it whenever creating/replacing/editing a site image. After generating, always wire the `<img>` into the page with locale-appropriate `alt` text.
+
 ## Cross-cutting conventions
 
 - **Tailwind is CDN + inline config** (in `BaseLayout`, `is:inline` so Astro leaves it untouched): `primary #6c5ce7`, `dark #1e1e2f`, `body #4a4a68`, custom `boxShadow` tokens (`card`, `card-hover`, `primary-glow`), Inter font. There is no Tailwind build step.
