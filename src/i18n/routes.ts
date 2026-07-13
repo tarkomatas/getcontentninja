@@ -2,7 +2,15 @@ export const LOCALES = ['hu', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'hu';
 
-export type PageKey = 'home' | 'demo' | 'thanks' | 'privacy' | 'terms' | 'imprint' | 'dataDeletion';
+export type PageKey =
+  | 'home'
+  | 'demo'
+  | 'onlineDemo'
+  | 'thanks'
+  | 'privacy'
+  | 'terms'
+  | 'imprint'
+  | 'dataDeletion';
 
 /**
  * Logikai oldal -> nyelvenkénti teljes path (locale prefixszel, fordított sluggal).
@@ -17,6 +25,9 @@ export type PageKey = 'home' | 'demo' | 'thanks' | 'privacy' | 'terms' | 'imprin
 export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   home: { hu: '/hu/', en: '/en/' },
   demo: { hu: '/hu/bemutato', en: '/en/demo' },
+  // Önálló, nyelvi prefix nélküli kampány-link online konzultációhoz (Fillout-űrlap).
+  // Szándékosan csak egy nyelven (HU) és prefix nélkül él – ez a brief kérése.
+  onlineDemo: { hu: '/online-demo', en: null },
   thanks: { hu: '/hu/koszonjuk', en: '/en/thank-you' },
   privacy: { hu: '/hu/adatkezeles', en: '/en/privacy-policy' },
   terms: { hu: null, en: '/en/terms' },
