@@ -21,7 +21,7 @@ const faqLd = {
       name: 'What is Content Ninja?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Content Ninja is an AI-powered content creation and publishing platform built specifically for webshops. It automatically generates social media posts, images and videos from your products, and then publishes them on Facebook, Instagram and LinkedIn.',
+        text: 'Content Ninja is an AI-powered content creation and publishing platform built specifically for webshops. It automatically generates social media posts, images and videos from your products, and then publishes them on Facebook and Instagram.',
       },
     },
     {
@@ -151,7 +151,7 @@ const faqLd = {
                 <p class="text-body text-lg">Pick your situation – we'll show you how the system helps.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1100px] mx-auto">
 
                 <!-- Automated posting -->
                 <a href="/en/demo"
@@ -161,8 +161,8 @@ const faqLd = {
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">Automated posting</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">The AI writes copy, creates images and videos
-                        from your products, then schedules and publishes them for you – to Facebook, Instagram and
-                        LinkedIn. You just have to approve it, if you want to.</p>
+                        from your products, then schedules and publishes them for you – to Facebook and
+                        Instagram. You just have to approve it, if you want to.</p>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Take a look
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
@@ -171,13 +171,28 @@ const faqLd = {
 
                 <!-- International expansion -->
                 <a href="/en/international"
-                    class="group bg-primary/[0.04] rounded-[16px] border-2 border-primary/30 p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mb-5">
+                    class="group bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">public</span>
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">International expansion</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">Multiple countries, multiple languages? Every
                         language version from one piece of content, every country's accounts in one calendar.</p>
+                    <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                        Learn more
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                    </span>
+                </a>
+
+                <!-- UNAS integration -->
+                <a href="/en/unas"
+                    class="group bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">storefront</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 text-dark">UNAS integration</h3>
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Connect your UNAS webshop in a few clicks –
+                        from then on the AI sees all your products and only creates posts from your top, in-stock items.</p>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Learn more
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
@@ -240,7 +255,7 @@ const faqLd = {
                         4</div>
                     <h3 class="font-bold text-lg mb-3">Publishes independently</h3>
                     <p class="text-body text-sm leading-relaxed">The system schedules and publishes the content on
-                        Facebook, Instagram and LinkedIn. All you have to do is approve it – if you want to.</p>
+                        Facebook and Instagram. All you have to do is approve it – if you want to.</p>
                 </div>
             </div>
 
@@ -258,122 +273,77 @@ const faqLd = {
 ═══════════════════════════════════════ -->
     <section id="integraciok" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
-            <div class="text-center max-w-[760px] mx-auto mb-12">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Integrations</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Connect what you already have – it posts where you need it</h2>
-                <p class="text-body text-lg">Content Ninja connects your webshop, your sources and your social accounts.
-                    It pulls in your products and content, generates the posts and newsletters, and publishes them too –
-                    automatically.</p>
-            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-            <!-- Prominent illustration: integration hub -->
-            <div class="relative mb-14 md:mb-16">
-                <div class="absolute -inset-4 md:-inset-8 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                <div class="relative rounded-[20px] overflow-hidden border border-primary/10 shadow-primary-glow">
-                    <img src="/assets/integraciok-latvanykep.webp"
-                        alt="Content Ninja as a central integration hub: webshop, newsletter and external sources connected to social media accounts"
+                <!-- Text + categories -->
+                <div class="order-2 lg:order-1">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Integrations</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-3 leading-tight">Connect what you already have – it posts
+                        where you need it</h2>
+                    <p class="text-body mb-6 leading-relaxed">Content Ninja connects your webshop, your sources
+                        and your social accounts: it pulls in your products and content, generates the posts and
+                        newsletters, and publishes them too – automatically.</p>
+
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">share</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Social media</p>
+                                <p class="text-body text-sm">Facebook, Instagram</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">storefront</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Webshop</p>
+                                <p class="text-body text-sm">Unas, Sitemap <span class="text-muted">(any webshop)</span></p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">mail</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Newsletter</p>
+                                <p class="text-body text-sm">SalesAutopilot, MailerLite</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">rss_feed</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">External sites</p>
+                                <p class="text-body text-sm">RSS</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Any link highlight -->
+                    <div class="rounded-[14px] border border-primary/25 bg-primary/[0.04] p-4 flex items-start gap-3 mb-6">
+                        <span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">link</span>
+                        <p class="text-body text-sm leading-relaxed"><strong class="text-dark">+ From any external or
+                            internal link too</strong> – it also turns a product link, blog article or external page
+                            into a ready-to-go post.</p>
+                    </div>
+
+                    <a href="/en/demo" class="cta-primary px-8 py-4 text-base">
+                        Request a demo – free
+                    </a>
+                </div>
+
+                <!-- Illustration: integration hub -->
+                <div class="order-1 lg:order-2 relative">
+                    <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
+                    <img src="/assets/integraciok-hub.webp"
+                        alt="Content Ninja integration hub: Unas, Sitemap and RSS sources connected, then publishing to Facebook, Instagram, SalesAutopilot and MailerLite"
                         loading="lazy" class="w-full h-auto block">
                 </div>
-            </div>
 
-            <!-- 4 integration categories -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Social media -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">share</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">Social media</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Automatic posting straight into your existing
-                        accounts.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
-                            Facebook
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGradInt" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradInt)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
-                            Instagram
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Webshop -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">storefront</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">Webshop</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Pulls in your products – via Unas integration
-                        or from any webshop through a sitemap.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="w-5 h-5 rounded-md flex items-center justify-center text-white text-[10px] font-extrabold" style="background:#E94E1B">U</span>
-                            Unas
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="material-symbols-outlined text-primary text-[18px]">account_tree</span>
-                            Sitemap
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Newsletter -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">mail</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">Newsletter</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Sends the generated newsletters straight into
-                        your email platform.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="w-5 h-5 rounded-md flex items-center justify-center text-white text-[10px] font-extrabold" style="background:#1B6DC1">SA</span>
-                            SalesAutopilot
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="w-5 h-5 rounded-md flex items-center justify-center text-white text-[10px] font-extrabold" style="background:#09C269">ML</span>
-                            MailerLite
-                        </span>
-                    </div>
-                </div>
-
-                <!-- External sites -->
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">rss_feed</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1.5 text-dark">External sites</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Follow any source, and it automatically turns
-                        fresh content into posts.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#F26522"/><circle cx="7.5" cy="16.5" r="1.7" fill="#fff"/><path d="M6 11.2a6.8 6.8 0 0 1 6.8 6.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><path d="M6 7.2A11.6 11.6 0 0 1 17.6 18.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
-                            RSS
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Any link highlight -->
-            <div class="mt-8 rounded-[16px] border-2 border-primary/25 bg-primary/[0.04] p-6 md:p-7 flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
-                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shrink-0 shadow-primary-glow">
-                    <span class="material-symbols-outlined text-[24px]">link</span>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-bold text-lg text-dark mb-1">+ Creates content from any external or internal link</h3>
-                    <p class="text-body text-sm leading-relaxed">Not just the built-in integrations. Drop in any product
-                        link, blog article or external page – the system reads its content and turns it into a
-                        ready-to-go post.</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="/en/demo" class="cta-primary px-8 py-4 text-base">
-                    Request a demo – free
-                </a>
             </div>
         </div>
     </section>
@@ -840,7 +810,7 @@ const faqLd = {
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Content Ninja is an AI-powered content creation and publishing platform built specifically for
                         webshops. It automatically generates social media posts, images and
-                        videos from your products, and then publishes them on the platforms you specify (Facebook, Instagram, LinkedIn).
+                        videos from your products, and then publishes them on the platforms you specify (Facebook, Instagram).
                         There's no need for a creative team, a marketing agency or manual posting.
                     </div>
                 </div>
@@ -869,7 +839,7 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Currently it can publish automatically to Facebook, Instagram and LinkedIn. The system
+                        Currently it can publish automatically to Facebook and Instagram. The system
                         is under continuous development, and we're planning TikTok and Pinterest integration soon.
                     </div>
                 </div>

@@ -7,6 +7,7 @@ export type PageKey =
   | 'demo'
   | 'international'
   | 'unas'
+  | 'newsletter'
   | 'onlineDemo'
   | 'thanks'
   | 'privacy'
@@ -31,6 +32,8 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   international: { hu: '/hu/nemzetkozi', en: '/en/international' },
   // UNAS-integráció kampányoldal – kétnyelvű, rövid slug.
   unas: { hu: '/hu/unas', en: '/en/unas' },
+  // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
+  newsletter: { hu: '/hu/hirlevel', en: '/en/newsletter' },
   // Önálló, nyelvi prefix nélküli kampány-link online konzultációhoz (Fillout-űrlap).
   // Szándékosan csak egy nyelven (HU) és prefix nélkül él – ez a brief kérése.
   onlineDemo: { hu: '/online-demo', en: null },
