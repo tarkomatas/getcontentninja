@@ -14,6 +14,7 @@ const home = homeFor(locale);
 const demo = pathFor('demo', locale);
 const international = pathFor('international', locale);
 const unas = pathFor('unas', locale);
+const newsletter = pathFor('newsletter', locale);
 const APP_URL = 'https://app.getcontentninja.com';
 
 // Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
@@ -39,6 +40,12 @@ const solutionItems = [
     icon: 'storefront',
     label: ui.nav.unasIntegration,
     desc: ui.nav.unasIntegrationDesc,
+  },
+  {
+    href: newsletter,
+    icon: 'mail',
+    label: ui.nav.newsletter,
+    desc: ui.nav.newsletterDesc,
   },
 ];
 const navItems = [

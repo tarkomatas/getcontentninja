@@ -74,6 +74,24 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Hírlevél-generálás -->
+  <url>
+    <loc>https://getcontentninja.com/hu/hirlevel</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/newsletter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/hirlevel" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/newsletter</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/newsletter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/hirlevel" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Adatvédelmi tájékoztató (a teljes szöveg angolul, a HU oldal rá hivatkozik) -->
   <url>
     <loc>https://getcontentninja.com/hu/adatkezeles</loc>

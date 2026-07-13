@@ -24,6 +24,8 @@ export const UI = {
       internationalExpansionDesc: 'Több nyelven, több piacra egyszerre',
       unasIntegration: 'UNAS integráció',
       unasIntegrationDesc: 'Kösd be a webshopod, az AI látja a termékeid',
+      newsletter: 'AI hírlevél',
+      newsletterDesc: 'Az AI megírja, megtervezi és kiküldi a hírleveleid',
     },
     cta: {
       login: 'Belépek',
@@ -69,6 +71,8 @@ export const UI = {
       internationalExpansionDesc: 'Multiple languages, more markets at once',
       unasIntegration: 'Webshop integration',
       unasIntegrationDesc: 'Connect your store, the AI sees your products',
+      newsletter: 'AI newsletters',
+      newsletterDesc: 'The AI writes, designs and sends your newsletters',
     },
     cta: {
       login: 'Log in',

@@ -20,6 +20,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - **Translated slugs**, mapped in `src/i18n/routes.ts` — the single source of truth for URLs, hreflang alternates (`alternatesFor`), and the language switcher target (`switchTarget`). Change URLs here, not by renaming files ad-hoc.
   - `home` → `/hu/` , `/en/`
   - `demo` → `/hu/posztolas` , `/en/demo` (the old `/hu/bemutato` redirects here via `astro.config.mjs` `redirects`)
+  - `newsletter` → `/hu/hirlevel` , `/en/newsletter` (AI hírlevél kampányoldal — same lead-form flow, `lead_forras: 'hirlevel'`)
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
   - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy` (the full policy text is **English only** for Meta App Review; the HU page is a short referral to it)
   - `terms` → `/en/terms` (**English only** — the old `/hu/aszf` redirects here via `astro.config.mjs` `redirects`; all footers link to the EN page)
