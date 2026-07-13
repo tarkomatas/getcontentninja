@@ -46,6 +46,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 
 ## Cross-cutting conventions
 
+- **Design tokens & style conventions** are documented in [`DESIGN.md`](DESIGN.md) (canonical section rhythm, eyebrow/heading/card/button/color tokens; homepage is the etalon). Keep new/edited pages on those tokens.
 - **Tailwind is CDN + inline config** (in `BaseLayout`, `is:inline` so Astro leaves it untouched): `primary #6c5ce7`, `dark #1e1e2f`, `body #4a4a68`, custom `boxShadow` tokens (`card`, `card-hover`, `primary-glow`), Inter font. There is no Tailwind build step.
 - **Any inline `<script>` that must stay classic/global** (references from `onclick`, immediate IIFEs, `tailwind.config`, gtag, JSON-LD) is marked **`is:inline`** — otherwise Astro bundles it as a scoped module and `onclick`-referenced globals (e.g. `toggleFaq`) break.
 - **Analytics:** Google Ads gtag (`AW-10918594401`) loads eagerly in `BaseLayout`. The Meta Pixel (`3857575907663677`) is **consent-gated** and injected by `public/assets/cookie.js` only after the user accepts the banner. `cookie.js` localizes its own text from `document.documentElement.lang`.

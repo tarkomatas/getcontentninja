@@ -215,7 +215,7 @@ const description =
 
   <div class="relative flex min-h-screen w-full flex-col">
     <!-- Header (focused – conversion-oriented, with language switcher) -->
-    <header class="border-b border-solid border-b-[#f3f0f4] bg-card sticky top-0 z-50 transition-all">
+    <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
           <a href="/en/">
@@ -229,7 +229,7 @@ const description =
     </header>
 
     <!-- 1. Hero + Application form -->
-    <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
+    <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
         <div class="max-w-[1200px] mx-auto w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
 
@@ -241,7 +241,7 @@ const description =
                         International expansion
                     </span>
 
-                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-black leading-[1.08] tracking-[-0.03em] text-dark">
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
                         Write once. <span class="text-primary">Sell in every market.</span>
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -271,11 +271,11 @@ const description =
                     <!-- Publishing platforms (small cards) -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Posts to:</span>
-                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
                             Facebook
                         </span>
-                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
                             Instagram
                         </span>
@@ -298,7 +298,7 @@ const description =
                     <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
                         <div id="formIntro">
                             <h3 class="text-2xl font-bold text-center mb-2 text-primary">Apply for an online demo</h3>
-                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-lg px-4 py-3 mb-3">
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
                                 <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
                                 <p class="text-sm text-body"><strong class="font-bold text-dark">There's no direct
                                     self-service trial</strong> – but in an online meeting we'll walk you through the
@@ -315,7 +315,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Do you have a webshop /
                                             online store?</label>
                                         <select name="has_webshop" id="hasWebshop"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Igen, van webshopom">Yes, I have a webshop</option>
                                             <option value="Igen, hamarosan tervezek nyitni">Yes, I plan to open one
@@ -328,7 +328,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">In how many countries /
                                             markets are you present (or planning to be)?</label>
                                         <select name="markets" id="markets"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="1 országban, de tervezünk terjeszkedni">In 1 country, but we
                                                 plan to expand</option>
@@ -340,7 +340,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">How advanced is your
                                             company in marketing?</label>
                                         <select name="marketing_level" id="marketingLevel"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Egyáltalán nem értünk semmit a témához">We don't understand
                                                 the topic at all</option>
@@ -353,7 +353,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Who currently does the
                                             posting?</label>
                                         <select name="marketing_role" id="marketingRole"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Én, cégvezetőként">Me, as the business owner</option>
                                             <option value="Belsős marketing csapat">In-house marketing team</option>
@@ -364,7 +364,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">If you like what you see
                                             in the demo, when could you start using the software?</label>
                                         <select name="timing" id="timing"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Azonnal">Immediately</option>
                                             <option value="1 hónapon belül">Within 1 month</option>
@@ -373,7 +373,7 @@ const description =
                                         </select>
                                     </div>
                                     <button type="button" onclick="qualifyAndNext()"
-                                        class="w-full mt-4 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                         Next
                                     </button>
                                 </div>
@@ -405,7 +405,7 @@ const description =
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Email address</label>
                                         <input type="email" id="softRejectEmail"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="e.g. john@company.com">
                                     </div>
                                     <div class="flex items-start gap-2 text-xs text-muted ml-1">
@@ -426,7 +426,7 @@ const description =
                                         </label>
                                     </div>
                                     <button type="button" onclick="submitSoftReject()"
-                                        class="w-full flex items-center justify-center rounded-lg h-12 cta-primary transition-all hover:brightness-95">
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
                                         Send me the video
                                     </button>
                                 </div>
@@ -452,19 +452,19 @@ const description =
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Name</label>
                                         <input type="text" name="name" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="e.g. John Smith">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Company email address</label>
                                         <input type="email" name="email" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="e.g. john@company.com">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Phone number</label>
                                         <input type="tel" name="phone" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="+36 30 123 4567">
                                     </div>
 
@@ -489,12 +489,12 @@ const description =
 
                                     <div class="flex gap-3 mt-4">
                                         <button type="button" onclick="nextStep(1)"
-                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
                                             <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
                                             Back
                                         </button>
                                         <button type="submit" id="submitBtn"
-                                            class="flex-1 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                             Continue to booking!
                                         </button>
                                     </div>
@@ -508,15 +508,15 @@ const description =
     </section>
 
     <!-- 2. Feature: Content in any language -->
-    <section class="bg-card py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/tobb-nyelvu-tartalom.webp" alt="AI producing social media content in several languages at once"
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Any language 🌐</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Any language 🌐</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Content in any language – at
                         native quality</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -547,7 +547,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             I need to see this!
                         </a>
                     </div>
@@ -557,10 +557,10 @@ const description =
     </section>
 
     <!-- 3. Feature: Write once → every language version (custom visual) -->
-    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+    <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1100px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-12">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Smart automation ⚡</span>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Smart automation ⚡</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">Write it once. Get it in every
                     language.</h2>
                 <p class="text-lg text-body leading-relaxed">
@@ -625,11 +625,11 @@ const description =
     </section>
 
     <!-- 3b. Feature: The text AND the image are translated -->
-    <section class="bg-card py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="flex flex-col justify-center order-2 md:order-1">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Not just text 🖼️</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Not just text 🖼️</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">The text <span class="text-primary">and the image</span> are both translated</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
                         Most tools only translate the caption. Content Ninja also localizes the <strong>text baked into
@@ -660,7 +660,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             I need to see this!
                         </a>
                     </div>
@@ -674,11 +674,11 @@ const description =
     </section>
 
     <!-- 4. Feature: Every country in one calendar -->
-    <section id="calendar" class="bg-card py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section id="calendar" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
                 <div class="flex flex-col justify-center order-2 md:order-1 md:col-span-2">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Central overview 📆</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Central overview 📆</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Every account of every country
                         in one calendar</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -710,7 +710,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Let me try the calendar!
                         </a>
                     </div>
@@ -732,8 +732,8 @@ const description =
     </section>
 
     <!-- 5. Feature: Per-market analytics -->
-    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1 md:col-span-3">
                     <div class="rounded-[16px] overflow-hidden border border-border shadow-card-hover transition-all">
@@ -748,7 +748,7 @@ const description =
                     </div>
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2 md:col-span-2">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Data 📊</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Data 📊</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">See which market brings in the
                         most</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -779,7 +779,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Request a demo!
                         </a>
                     </div>
@@ -789,7 +789,7 @@ const description =
     </section>
 
     <!-- 6. Why expand with this (benefit cards) -->
-    <section class="bg-card py-16 md:py-[120px]">
+    <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Why expand with this?</h2>
@@ -798,7 +798,7 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">palette</span>
                     </div>
@@ -806,7 +806,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">The same visuals, logo and tone automatically – the same
                         brand experience in every country.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">rocket_launch</span>
                     </div>
@@ -814,7 +814,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Adding a new language or country is a few clicks – no
                         need to find a local team per country.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">savings</span>
                     </div>
@@ -822,7 +822,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">One flat-fee platform replaces translators and per-country
                         social agencies.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">dashboard</span>
                     </div>
@@ -830,7 +830,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Have several webshops or brands? Manage them all from one
                         place, clearly.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">trending_up</span>
                     </div>
@@ -838,7 +838,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">The same effort on 2 or 12 markets – the system carries
                         the content-production load.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">schedule</span>
                     </div>
@@ -851,7 +851,7 @@ const description =
     </section>
 
     <!-- 7. How it works -->
-    <section id="hogyan-mukodik" class="bg-[#f8f9fb] py-16 md:py-[120px]">
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works? 🛠️</span>
@@ -896,7 +896,7 @@ const description =
     </section>
 
     <!-- 8. And what the system does anyway (general capabilities) -->
-    <section id="features-cards" class="bg-card py-16 md:py-[120px]">
+    <section id="features-cards" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">And what the system does anyway</h2>
@@ -905,7 +905,7 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">send</span>
                     </div>
@@ -913,7 +913,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Automatically generates and publishes posts from your
                         products on Facebook and Instagram.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">image</span>
                     </div>
@@ -921,7 +921,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Generates on-brand, logo-stamped creatives and product
                         images in a single click, without a studio.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">movie_filter</span>
                     </div>
@@ -929,7 +929,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Turns static product photos into moving videos and
                         animations with camera moves and effects.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
                     </div>
@@ -937,7 +937,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">From a product link it builds a full narrator video in
                         minutes – with AI voice, captions and your own product images.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">mail</span>
                     </div>
@@ -945,7 +945,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your products and
                         tailored to your segments.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">ads_click</span>
                     </div>
@@ -958,7 +958,7 @@ const description =
     </section>
 
     <!-- 9. What makes it more than a translation agency / ChatGPT -->
-    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+    <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1000px] mx-auto px-4 md:px-10">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">What makes it more than a translation agency or ChatGPT?</h2>
@@ -976,8 +976,8 @@ const description =
 
             <div class="flex flex-col gap-3 mb-10">
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
-                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                    <div class="flex items-start gap-3 bg-success/10 border border-success/30 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-success text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                         <p class="text-dark text-sm font-medium leading-snug">Every language version automatically from
                             one piece of content</p>
                     </div>
@@ -987,8 +987,8 @@ const description =
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
-                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                    <div class="flex items-start gap-3 bg-success/10 border border-success/30 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-success text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                         <p class="text-dark text-sm font-medium leading-snug">Posts to every country's accounts for you</p>
                     </div>
                     <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
@@ -997,8 +997,8 @@ const description =
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
-                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                    <div class="flex items-start gap-3 bg-success/10 border border-success/30 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-success text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                         <p class="text-dark text-sm font-medium leading-snug">Market-localized tone, not word-for-word
                             translation</p>
                     </div>
@@ -1008,8 +1008,8 @@ const description =
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
-                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                    <div class="flex items-start gap-3 bg-success/10 border border-success/30 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-success text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                         <p class="text-dark text-sm font-medium leading-snug">Every market in one calendar and one
                             analytics view</p>
                     </div>
@@ -1019,8 +1019,8 @@ const description =
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
-                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                    <div class="flex items-start gap-3 bg-success/10 border border-success/30 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-success text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
                         <p class="text-dark text-sm font-medium leading-snug">A fixed monthly fee, no matter how many
                             markets</p>
                     </div>
@@ -1031,10 +1031,10 @@ const description =
                 </div>
             </div>
 
-            <div class="bg-primary/5 border border-primary/20 rounded-[16px] p-7 text-center">
+            <div class="bg-primary/5 border border-primary/20 rounded-[16px] p-8 text-center">
                 <p class="text-lg font-semibold text-dark">If you want to be present in more countries without paying for
                     more teams – this is your system.</p>
-                <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-12 px-8 cta-primary text-base mt-5">
+                <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-12 px-8 cta-primary text-base mt-5">
                     Request a demo – free
                 </a>
             </div>
@@ -1042,8 +1042,8 @@ const description =
     </section>
 
     <!-- 10. Pricing -->
-    <section id="pricing" class="bg-white py-16 md:py-[120px]">
-        <div class="max-w-[900px] mx-auto px-4">
+    <section id="pricing" class="bg-white py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">PRICING</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, fixed monthly fee</h2>
@@ -1157,7 +1157,7 @@ const description =
                 </div>
             </div>
 
-            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-7 shadow-card mt-8">
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div>
                         <h3 class="text-xl font-bold text-dark mb-3">What can you do with 400 credits?</h3>
@@ -1187,7 +1187,7 @@ const description =
 
     <!-- Footer -->
     <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
-        <div class="max-w-[1200px] mx-auto px-4">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
                 <div>
                     <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>

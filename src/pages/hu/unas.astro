@@ -212,7 +212,7 @@ const description =
 
   <div class="relative flex min-h-screen w-full flex-col">
     <!-- Header (fókuszált – konverzió-orientált, nyelvváltóval) -->
-    <header class="border-b border-solid border-b-[#f3f0f4] bg-card sticky top-0 z-50 transition-all">
+    <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
           <a href="/hu/">
@@ -226,7 +226,7 @@ const description =
     </header>
 
     <!-- 1. Hero + Jelentkezési űrlap -->
-    <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
+    <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
         <div class="max-w-[1200px] mx-auto w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
 
@@ -238,7 +238,7 @@ const description =
                         UNAS integráció
                     </span>
 
-                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-black leading-[1.08] tracking-[-0.03em] text-dark">
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
                         Kösd be az <span class="text-primary">UNAS webshopod.</span> A többit az AI intézi.
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -267,11 +267,11 @@ const description =
                     <!-- Publikálás platformok (kis kártyák) -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Ide posztol:</span>
-                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
                             Facebook
                         </span>
-                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
                             Instagram
                         </span>
@@ -294,7 +294,7 @@ const description =
                     <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
                         <div id="formIntro">
                             <h3 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online bemutatóra</h3>
-                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-lg px-4 py-3 mb-3">
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
                                 <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
                                 <p class="text-sm text-body"><strong class="font-bold text-dark">Közvetlen kipróbálásra
                                     nincs lehetőség</strong> – de egy online megbeszélés keretében bemutatjuk neked a
@@ -311,7 +311,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Van webshopod / online
                                             áruházad?</label>
                                         <select name="has_webshop" id="hasWebshop"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="Igen, van webshopom">Igen, van webshopom</option>
                                             <option value="Igen, hamarosan tervezek nyitni">Igen, hamarosan tervezek
@@ -324,7 +324,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Milyen szinten van a céged
                                             a marketingben?</label>
                                         <select name="marketing_level" id="marketingLevel"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="Egyáltalán nem értünk semmit a témához">Egyáltalán nem értünk
                                                 semmit a témához</option>
@@ -337,7 +337,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Ki csinálja jelenleg a
                                             posztolást?</label>
                                         <select name="marketing_role" id="marketingRole"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="Én, cégvezetőként">Én, cégvezetőként</option>
                                             <option value="Belsős marketing csapat">Belsős marketing csapat</option>
@@ -348,7 +348,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Ha a bemutató alapján
                                             tetszik, mikor tudnád elkezdeni használni a szoftvert?</label>
                                         <select name="timing" id="timing"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="Azonnal">Azonnal</option>
                                             <option value="1 hónapon belül">1 hónapon belül</option>
@@ -357,7 +357,7 @@ const description =
                                         </select>
                                     </div>
                                     <button type="button" onclick="qualifyAndNext()"
-                                        class="w-full mt-4 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                         Tovább
                                     </button>
                                 </div>
@@ -388,7 +388,7 @@ const description =
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Email cím</label>
                                         <input type="email" id="softRejectEmail"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="pl. janos@ceg.hu">
                                     </div>
                                     <div class="flex items-start gap-2 text-xs text-muted ml-1">
@@ -410,7 +410,7 @@ const description =
                                         </label>
                                     </div>
                                     <button type="button" onclick="submitSoftReject()"
-                                        class="w-full flex items-center justify-center rounded-lg h-12 cta-primary transition-all hover:brightness-95">
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
                                         Kérem a videót
                                     </button>
                                 </div>
@@ -436,19 +436,19 @@ const description =
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Név</label>
                                         <input type="text" name="name" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="pl. Kovács János">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Céges email cím</label>
                                         <input type="email" name="email" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="pl. janos@ceg.hu">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Telefonszám</label>
                                         <input type="tel" name="phone" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="+36 30 123 4567">
                                     </div>
 
@@ -474,12 +474,12 @@ const description =
 
                                     <div class="flex gap-3 mt-4">
                                         <button type="button" onclick="nextStep(1)"
-                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
                                             <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
                                             Vissza
                                         </button>
                                         <button type="submit" id="submitBtn"
-                                            class="flex-1 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                             Tovább az időpontfoglaláshoz!
                                         </button>
                                     </div>
@@ -493,8 +493,8 @@ const description =
     </section>
 
     <!-- 2. Feature: Pár kattintásos összekötés (1×) -->
-    <section class="bg-card py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <!-- Összekötés-mock -->
@@ -521,22 +521,22 @@ const description =
                         </div>
                         <div class="mt-6 pt-5 border-t border-border grid grid-cols-3 gap-3 text-center">
                             <div>
-                                <p class="text-xl font-black text-primary">2 417</p>
+                                <p class="text-xl font-extrabold text-primary">2 417</p>
                                 <p class="text-xs text-muted leading-tight">termék szinkronban</p>
                             </div>
                             <div>
-                                <p class="text-xl font-black text-primary">automatikus</p>
+                                <p class="text-xl font-extrabold text-primary">automatikus</p>
                                 <p class="text-xs text-muted leading-tight">árak &amp; készlet frissül</p>
                             </div>
                             <div>
-                                <p class="text-xl font-black text-primary">0</p>
+                                <p class="text-xl font-extrabold text-primary">0</p>
                                 <p class="text-xs text-muted leading-tight">kézi feltöltés</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Egyszeri beállítás 🔌</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Egyszeri beállítás 🔌</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Kösd össze egyszer – az AI
                         látja az összes terméked</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -568,7 +568,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Bekötöm a webshopom!
                         </a>
                     </div>
@@ -578,11 +578,11 @@ const description =
     </section>
 
     <!-- 3. Feature: Az AI választ helyetted – csak a top, raktáron lévő termékekből -->
-    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="flex flex-col justify-center order-2 md:order-1">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Okos válogatás 🎯</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Okos válogatás 🎯</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Az AI választ helyetted –
                         csak a legjobb termékekből</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -614,7 +614,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Ezt látnom kell!
                         </a>
                     </div>
@@ -667,7 +667,7 @@ const description =
                             </div>
                         </div>
                         <div class="px-5 pb-5 -mt-1">
-                            <div class="flex items-center gap-2 text-xs text-body bg-light border border-border rounded-lg px-3 py-2">
+                            <div class="flex items-center gap-2 text-xs text-body bg-light border border-border rounded-[10px] px-3 py-2">
                                 <span class="material-symbols-outlined text-primary text-[18px]">block</span>
                                 A készlethiányos terméket az AI automatikusan kihagyja a posztokból.
                             </div>
@@ -679,8 +679,8 @@ const description =
     </section>
 
     <!-- 4. Feature: Blogcikkekből örökzöld posztok -->
-    <section class="bg-card py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/unas-blog-posztok.webp"
@@ -688,7 +688,7 @@ const description =
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Nem csak termékek 📝</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Nem csak termékek 📝</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">A blogcikkeidből örökzöld,
                         edukatív posztok</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -720,7 +720,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Kérek egy demót!
                         </a>
                     </div>
@@ -730,11 +730,11 @@ const description =
     </section>
 
     <!-- 5. Feature: Több termék / kategória egy posztban -->
-    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="flex flex-col justify-center order-2 md:order-1">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Rugalmas tartalom 🧩</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Rugalmas tartalom 🧩</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Több termékből és
                         kategóriából is gyárt posztot</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -766,7 +766,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Ezt látnom kell!
                         </a>
                     </div>
@@ -781,8 +781,8 @@ const description =
     </section>
 
     <!-- 6. Feature: Beépített termékböngésző -->
-    <section class="bg-card py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1 md:col-span-3">
                     <!-- Termékböngésző mock -->
@@ -795,11 +795,11 @@ const description =
                         <div class="p-4 md:p-5">
                             <!-- keresősor -->
                             <div class="flex items-center gap-2 mb-4">
-                                <div class="flex-1 flex items-center gap-2 bg-light border border-border rounded-lg px-3 py-2">
+                                <div class="flex-1 flex items-center gap-2 bg-light border border-border rounded-[10px] px-3 py-2">
                                     <span class="material-symbols-outlined text-muted text-[18px]">search</span>
                                     <span class="text-sm text-muted">Keress a termékeid között…</span>
                                 </div>
-                                <div class="flex items-center gap-1.5 bg-light border border-border rounded-lg px-3 py-2 text-sm text-body font-medium">
+                                <div class="flex items-center gap-1.5 bg-light border border-border rounded-[10px] px-3 py-2 text-sm text-body font-medium">
                                     <span class="material-symbols-outlined text-[18px]">filter_list</span>Szűrő
                                 </div>
                             </div>
@@ -855,7 +855,7 @@ const description =
                     </div>
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2 md:col-span-2">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Teljes kontroll 🖥️</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Teljes kontroll 🖥️</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Az összes terméked
                         kényelmesen, egy felületen</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -886,7 +886,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Kipróbálom!
                         </a>
                     </div>
@@ -896,8 +896,8 @@ const description =
     </section>
 
     <!-- 7. Feature: Több webáruház, több UNAS oldal -->
-    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <!-- Több áruház mock -->
@@ -939,7 +939,7 @@ const description =
                     </div>
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Skálázható 🏬</span>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Skálázható 🏬</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Több webáruház, több UNAS
                         oldal – egy fiókból</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
@@ -970,7 +970,7 @@ const description =
                         </li>
                     </ul>
                     <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Több áruházam van!
                         </a>
                     </div>
@@ -980,7 +980,7 @@ const description =
     </section>
 
     <!-- 8. Hogyan működik -->
-    <section id="hogyan-mukodik" class="bg-card py-16 md:py-[120px]">
+    <section id="hogyan-mukodik" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🛠️</span>
@@ -1024,7 +1024,7 @@ const description =
     </section>
 
     <!-- 9. És amit a rendszer amúgy is tud (általános képességek) -->
-    <section id="features-cards" class="bg-[#f8f9fb] py-16 md:py-[120px]">
+    <section id="features-cards" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">És amit a rendszer amúgy is tud</h2>
@@ -1033,7 +1033,7 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">send</span>
                     </div>
@@ -1041,7 +1041,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Automatikusan generál és publikál posztokat a
                         termékeidből Facebook és Instagram platformokra.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">image</span>
                     </div>
@@ -1049,7 +1049,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Brandazonos, logózott kreatívokat és termékképeket
                         generál egyetlen kattintással, stúdió nélkül.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">movie_filter</span>
                     </div>
@@ -1057,7 +1057,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Statikus termékfotókból mozgó videókat és animációkat
                         készít kameramozgásokkal és effektekkel.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
                     </div>
@@ -1065,7 +1065,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Terméklinkből percek alatt teljes narrátorvideót készít
                         – AI hanggal, felirattal és a saját termékképeiddel.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">mail</span>
                     </div>
@@ -1073,7 +1073,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Személyre szabott hírleveleket generál a termékeidből és
                         a szegmenseidnek megfelelően.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">ads_click</span>
                     </div>
@@ -1086,8 +1086,8 @@ const description =
     </section>
 
     <!-- 10. Árazás -->
-    <section id="pricing" class="bg-white py-16 md:py-[120px]">
-        <div class="max-w-[900px] mx-auto px-4">
+    <section id="pricing" class="bg-white py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">ÁRAZÁS</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
@@ -1201,7 +1201,7 @@ const description =
                 </div>
             </div>
 
-            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-7 shadow-card mt-8">
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div>
                         <h3 class="text-xl font-bold text-dark mb-3">Mire elég 400 kredit?</h3>
@@ -1231,7 +1231,7 @@ const description =
 
     <!-- Footer -->
     <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
-        <div class="max-w-[1200px] mx-auto px-4">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
                 <div>
                     <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>

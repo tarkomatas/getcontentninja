@@ -153,7 +153,7 @@ const description =
 
   <div class="relative flex min-h-screen w-full flex-col">
     <!-- Header (focused – conversion-oriented, with language switcher) -->
-    <header class="border-b border-solid border-b-[#f3f0f4] bg-card sticky top-0 z-50 transition-all">
+    <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
           <a href="/en/">
@@ -167,7 +167,7 @@ const description =
     </header>
 
     <!-- 1. Hero + booking form -->
-    <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
+    <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
         <div class="max-w-[1200px] mx-auto w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
 
@@ -179,7 +179,7 @@ const description =
                         Free online demo
                     </span>
 
-                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-black leading-[1.08] tracking-[-0.03em] text-dark">
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
                         See live how <span class="text-primary">AI automates</span> your webshop's marketing
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -219,7 +219,7 @@ const description =
                     <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
                         <div id="formIntro">
                             <h3 class="text-2xl font-bold text-center mb-2 text-primary">Book an online demo</h3>
-                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-lg px-4 py-3 mb-3">
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
                                 <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
                                 <p class="text-sm text-body"><strong class="font-bold text-dark">There's no direct
                                     self-trial</strong> – but in an online meeting we'll walk you through the system in
@@ -236,7 +236,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Do you have a webshop /
                                             online store?</label>
                                         <select name="has_webshop" id="hasWebshop"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Yes, I have a webshop">Yes, I have a webshop</option>
                                             <option value="Yes, planning to launch soon">Yes, planning to launch
@@ -249,7 +249,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">How advanced is your
                                             company in marketing?</label>
                                         <select name="marketing_level" id="marketingLevel"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="We know nothing about the topic">We know nothing about the
                                                 topic</option>
@@ -263,7 +263,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">Who currently handles your
                                             marketing?</label>
                                         <select name="marketing_role" id="marketingRole"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Me, as the business owner">Me, as the business owner</option>
                                             <option value="In-house marketing team">In-house marketing team</option>
@@ -274,7 +274,7 @@ const description =
                                         <label class="block text-sm font-bold text-body mb-1">If you like what you see in
                                             the demo, when could you start using the software?</label>
                                         <select name="timing" id="timing"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Right away">Right away</option>
                                             <option value="Within 1 month">Within 1 month</option>
@@ -283,7 +283,7 @@ const description =
                                         </select>
                                     </div>
                                     <button type="button" onclick="qualifyAndNext()"
-                                        class="w-full mt-4 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                         Continue
                                     </button>
                                 </div>
@@ -314,7 +314,7 @@ const description =
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Email address</label>
                                         <input type="email" id="softRejectEmail"
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="e.g. john@company.com">
                                     </div>
                                     <div class="flex items-start gap-2 text-xs text-muted ml-1">
@@ -336,7 +336,7 @@ const description =
                                         </label>
                                     </div>
                                     <button type="button" onclick="submitSoftReject()"
-                                        class="w-full flex items-center justify-center rounded-lg h-12 cta-primary transition-all hover:brightness-95">
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
                                         Send me the video
                                     </button>
                                 </div>
@@ -362,19 +362,19 @@ const description =
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Name</label>
                                         <input type="text" name="name" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="e.g. John Smith">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Company email</label>
                                         <input type="email" name="email" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="e.g. john@company.com">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Phone number</label>
                                         <input type="tel" name="phone" required
-                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
                                             placeholder="+1 555 123 4567">
                                     </div>
 
@@ -400,12 +400,12 @@ const description =
 
                                     <div class="flex gap-3 mt-4">
                                         <button type="button" onclick="nextStep(1)"
-                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
                                             <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
                                             Back
                                         </button>
                                         <button type="submit" id="submitBtn"
-                                            class="flex-1 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                             Continue to booking!
                                         </button>
                                     </div>
@@ -419,7 +419,7 @@ const description =
     </section>
 
     <!-- 2. What we'll show you in the demo -->
-    <section class="bg-card py-16 md:py-[100px] px-4 md:px-10">
+    <section class="bg-card py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
             <div class="text-center max-w-[700px] mx-auto mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">What we'll show you in the demo</h2>
@@ -428,7 +428,7 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">send</span>
                     </div>
@@ -437,7 +437,7 @@ const description =
                         products, then posts on schedule to Facebook and Instagram.</p>
                 </div>
 
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">mail</span>
                     </div>
@@ -446,7 +446,7 @@ const description =
                         then sends them from your MailerLite or Salesautopilot account.</p>
                 </div>
 
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">movie_filter</span>
                     </div>
@@ -455,7 +455,7 @@ const description =
                         existing product photos – no studio needed.</p>
                 </div>
 
-                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">schedule_send</span>
                     </div>
@@ -475,7 +475,7 @@ const description =
     </section>
 
     <!-- 3. Testimonials (short, static) -->
-    <section class="bg-[#f8f9fb] py-16 md:py-[100px] px-4 md:px-10">
+    <section class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
             <div class="text-center max-w-[700px] mx-auto mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">What our customers say</h2>
@@ -540,7 +540,7 @@ const description =
 
     <!-- Footer -->
     <footer class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
-        <div class="max-w-[1200px] mx-auto px-4">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
                 <div>
                     <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo"

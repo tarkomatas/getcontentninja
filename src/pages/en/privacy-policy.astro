@@ -13,7 +13,7 @@ const description =
 <BaseLayout locale={locale} page={page} title={title} description={description}>
   <Header locale={locale} page={page} />
 
-  <main class="py-16 md:py-24 px-4 md:px-10">
+  <main class="py-20 md:py-28 px-4 md:px-10">
     <div class="max-w-[760px] mx-auto">
 
       <a href="/en/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
@@ -33,7 +33,7 @@ const description =
       <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
 
         <!-- 1. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>1. Data Controller</h2>
           <p>
             Content Ninja (the "Service") is an AI-powered content marketing tool for e-commerce businesses that
@@ -79,7 +79,7 @@ const description =
         </div>
 
         <!-- 2. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>2. What data we process</h2>
 
           <div class="space-y-5">
@@ -172,7 +172,7 @@ const description =
         </div>
 
         <!-- 3. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>3. How we use your data — purposes and legal bases</h2>
           <p>We use the data described above for the following purposes:</p>
           <ul>
@@ -190,7 +190,7 @@ const description =
         </div>
 
         <!-- 4. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>4. Meta permissions we request and why</h2>
           <p>When you connect your account with Facebook Login, we request the following permissions:</p>
           <ul>
@@ -212,7 +212,7 @@ const description =
         </div>
 
         <!-- 5. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>5. Who we share data with (processors and sub-processors)</h2>
           <p>
             We use the following processors to provide the Service. <strong class="text-dark">We never sell your
@@ -296,7 +296,7 @@ const description =
         </div>
 
         <!-- 6. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>6. Where we store your data, and how we protect it</h2>
           <ul>
             <li><strong class="text-dark">Storage in the EU:</strong> your data is stored within the European Union (Supabase EU region, Vercel Frankfurt).</li>
@@ -307,7 +307,7 @@ const description =
         </div>
 
         <!-- 7. -->
-        <div class="p-7 doc-section" id="data-deletion">
+        <div class="p-8 doc-section" id="data-deletion">
           <h2>7. Retention and deletion</h2>
           <ul>
             <li><strong class="text-dark">Account and content data:</strong> retained while your account exists, then deleted within 30 days after account deletion.</li>
@@ -330,7 +330,7 @@ const description =
         </div>
 
         <!-- 8. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>8. Your rights under the GDPR</h2>
           <div class="space-y-2">
             <p><strong class="text-dark">Right of access</strong> — you may request information about the data we process about you.</p>
@@ -348,7 +348,7 @@ const description =
         </div>
 
         <!-- 9. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>9. Complaints</h2>
           <p>
             If you believe we have infringed the rules on data processing, you may lodge a complaint with the
@@ -366,7 +366,7 @@ const description =
         </div>
 
         <!-- 10. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>10. Cookies</h2>
           <p class="font-semibold text-dark text-sm mt-4 mb-1">10.1. Strictly necessary cookies</p>
           <p>Cookies essential for the operation of the website and the application (session handling, login). These do not require consent.</p>
@@ -377,7 +377,7 @@ const description =
         </div>
 
         <!-- 11. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>11. Facebook / Meta platform clause</h2>
           <p>
             The application accesses the user's Pages and accounts through the Meta Platform (Facebook Login,
@@ -391,7 +391,7 @@ const description =
         </div>
 
         <!-- 12. -->
-        <div class="p-7 doc-section">
+        <div class="p-8 doc-section">
           <h2>12. Changes to this policy</h2>
           <p>
             We may update this Privacy Policy from time to time. We will notify registered users of material changes
@@ -407,13 +407,13 @@ const description =
 </BaseLayout>
 
 <style>
-  .doc-section h2 { font-size: 0.9rem; font-weight: 700; color: #1e1e2f; margin-bottom: 0.75rem; }
+  .doc-section h2 { font-size: 1rem; font-weight: 700; color: #1e1e2f; margin-bottom: 0.75rem; }
   .doc-section p { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.5rem; }
   .doc-section p:first-of-type { margin-top: 0; }
   .doc-section a { color: #6c5ce7; text-decoration: underline; }
   .doc-section ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
   .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; }
-  .meta-row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; font-size: 0.8125rem; padding: 6px 0; border-bottom: 1px solid #e8e8ef; }
+  .meta-row { display: grid; grid-template-columns: 176px 1fr; gap: 8px; font-size: 0.875rem; padding: 6px 0; border-bottom: 1px solid #e8e8ef; }
   .meta-row:last-child { border-bottom: none; }
   .meta-label { color: #9090a7; font-weight: 500; }
   .meta-value { color: #1e1e2f; }
