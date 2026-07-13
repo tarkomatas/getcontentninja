@@ -12,10 +12,35 @@ const { locale, page } = Astro.props;
 const ui = t(locale);
 const home = homeFor(locale);
 const demo = pathFor('demo', locale);
+const international = pathFor('international', locale);
+const unas = pathFor('unas', locale);
 const APP_URL = 'https://app.getcontentninja.com';
 
 // Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
 // (#funkciok) nav-elemet elhagytuk – csak létező horgonyokra mutatunk.
+// A "Megoldások" lenyíló menü önálló kampányoldalakra mutat (nem horgonyokra):
+// az "Automata posztolás" a bemutató/lead oldalra, a "Nemzetközi terjeszkedés"
+// a saját kampányoldalára.
+const solutionItems = [
+  {
+    href: demo,
+    icon: 'auto_awesome',
+    label: ui.nav.autoPosting,
+    desc: ui.nav.autoPostingDesc,
+  },
+  {
+    href: international,
+    icon: 'public',
+    label: ui.nav.internationalExpansion,
+    desc: ui.nav.internationalExpansionDesc,
+  },
+  {
+    href: unas,
+    icon: 'storefront',
+    label: ui.nav.unasIntegration,
+    desc: ui.nav.unasIntegrationDesc,
+  },
+];
 const navItems = [
   { href: `${home}#hogyan-mukodik`, label: ui.nav.how },
   { href: `${home}#velemenyek`, label: ui.nav.testimonials },
@@ -32,6 +57,30 @@ const navItems = [
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8" aria-label={ui.nav.aria}>
+      <!-- Megoldások lenyíló (hoverre + fókuszra nyílik, a pt-2 híd tartja a hovert) -->
+      <div class="relative group">
+        <button
+          type="button"
+          class="nav-link text-sm flex items-center gap-1 cursor-pointer"
+          aria-haspopup="true"
+        >
+          {ui.nav.solutions}
+          <span class="material-symbols-outlined text-[18px] transition-transform duration-150 group-hover:rotate-180">expand_more</span>
+        </button>
+        <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150 z-50">
+          <div class="min-w-[280px] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
+            {solutionItems.map((item) => (
+              <a href={item.href} class="flex items-start gap-3 px-3 py-2.5 rounded-[10px] hover:bg-light transition-colors group/item">
+                <span class="material-symbols-outlined text-primary text-[22px] mt-0.5">{item.icon}</span>
+                <span class="min-w-0">
+                  <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
+                  <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
       {navItems.map((item) => (
         <a href={item.href} class="nav-link text-sm">{item.label}</a>
       ))}
@@ -62,6 +111,15 @@ const navItems = [
   <!-- Mobile nav dropdown -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-card px-4 pb-4">
     <nav class="flex flex-col gap-1 pt-3" aria-label={ui.nav.mobileAria}>
+      <!-- Megoldások szekció -->
+      <span class="px-3 pt-1 pb-1 text-xs font-semibold uppercase tracking-wide text-body/70">{ui.nav.solutions}</span>
+      {solutionItems.map((item) => (
+        <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
+          <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
+          <span class="font-medium text-dark">{item.label}</span>
+        </a>
+      ))}
+      <div class="border-t border-border my-2"></div>
       {navItems.map((item) => (
         <a href={item.href} class="mobile-nav-link nav-link text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
           {item.label}

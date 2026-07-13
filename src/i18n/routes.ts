@@ -5,6 +5,8 @@ export const DEFAULT_LOCALE: Locale = 'hu';
 export type PageKey =
   | 'home'
   | 'demo'
+  | 'international'
+  | 'unas'
   | 'onlineDemo'
   | 'thanks'
   | 'privacy'
@@ -25,6 +27,10 @@ export type PageKey =
 export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   home: { hu: '/hu/', en: '/en/' },
   demo: { hu: '/hu/bemutato', en: '/en/demo' },
+  // Nemzetközi terjeszkedés kampányoldal – kétnyelvű, rövid slug.
+  international: { hu: '/hu/nemzetkozi', en: '/en/international' },
+  // UNAS-integráció kampányoldal – kétnyelvű, rövid slug.
+  unas: { hu: '/hu/unas', en: '/en/unas' },
   // Önálló, nyelvi prefix nélküli kampány-link online konzultációhoz (Fillout-űrlap).
   // Szándékosan csak egy nyelven (HU) és prefix nélkül él – ez a brief kérése.
   onlineDemo: { hu: '/online-demo', en: null },

@@ -1057,8 +1057,8 @@ const description =
         <!-- 9. Visual Marketing Calendar -->
         <section id="calendar" class="bg-[#f8f9fb]  py-16 md:py-[120px] ">
             <div class="max-w-[1200px] mx-auto px-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                    <div class="flex flex-col justify-center order-2 md:order-1">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
+                    <div class="flex flex-col justify-center order-2 md:order-1 md:col-span-2">
                         <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Stratégiai
                             Tervezés 📆</span>
                         <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Vizuális tartalomnaptár
@@ -1103,9 +1103,16 @@ const description =
                             </a>
                         </div>
                     </div>
-                    <div class=" order-1 md:order-2">
-                        <img src="/assets/tartalomnaptar.jpg" alt="Vizuális tartalomnaptár"
-                            class="w-full h-auto rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-contain">
+                    <div class="order-1 md:order-2 md:col-span-3">
+                        <div class="rounded-[16px] overflow-hidden border border-border shadow-card-hover transition-all">
+                            <div class="flex items-center gap-1.5 px-3 py-2.5 bg-light border-b border-border">
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#ff5f57"></span>
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#febc2e"></span>
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#28c840"></span>
+                            </div>
+                            <img src="/assets/naptar-latvanykep.webp" alt="Content Ninja tartalomnaptár több nyelvű posztokkal"
+                                loading="lazy" class="w-full h-auto block">
+                        </div>
                     </div>
                 </div>
             </div>

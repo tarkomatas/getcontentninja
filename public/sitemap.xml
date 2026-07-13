@@ -38,6 +38,42 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Nemzetközi terjeszkedés -->
+  <url>
+    <loc>https://getcontentninja.com/hu/nemzetkozi</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/nemzetkozi" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/international" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/nemzetkozi" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/international</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/nemzetkozi" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/international" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/nemzetkozi" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- UNAS integráció -->
+  <url>
+    <loc>https://getcontentninja.com/hu/unas</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/unas" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/unas" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/unas" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/unas</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/unas" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/unas" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/unas" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Adatvédelmi tájékoztató (a teljes szöveg angolul, a HU oldal rá hivatkozik) -->
   <url>
     <loc>https://getcontentninja.com/hu/adatkezeles</loc>

@@ -1,0 +1,1445 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
+
+const locale = 'en';
+const page = 'unas';
+const title = 'Webshop integration – Connect your store, the AI sees every product | Content Ninja';
+const description =
+  'Connect your webshop (UNAS and more) in a few clicks. The AI then sees all your products and blog articles, picks the best ones automatically or by rules – posting only top, in-stock products, from several stores at once.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Fragment slot="head">
+    <style is:inline>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #4a4a68;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #1e1e2f;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .rounded-16 {
+            border-radius: 16px;
+        }
+
+        .rounded-10 {
+            border-radius: 10px;
+        }
+
+        .flat-shadow {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .icon-box {
+            background-color: rgba(108, 92, 231, 0.1);
+            color: #6c5ce7;
+            border-radius: 16px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-primary:hover {
+            background-color: #5a4bd6;
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: transparent;
+            border: 1.5px solid #6c5ce7;
+            color: #6c5ce7;
+            padding: 14px 28px;
+            border-radius: 10px;
+            transition: background 0.2s ease;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-secondary:hover {
+            background-color: rgba(108, 92, 231, 0.08);
+        }
+
+        .cta-primary .material-symbols-outlined,
+        .cta-secondary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-soft {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
+        .pulse-dot {
+            animation: pulse-soft 2s ease-in-out infinite;
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+
+        .prod-thumb {
+            background: linear-gradient(135deg, #ece9ff 0%, #f4f0ff 100%);
+        }
+
+        .browser-chrome {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 12px;
+            background: #f4f5f8;
+            border-bottom: 1px solid #eceef3;
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Header (focused – conversion-oriented, with language switcher) -->
+    <header class="border-b border-solid border-b-[#f3f0f4] bg-card sticky top-0 z-50 transition-all">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
+        <div class="flex items-center gap-3 text-dark">
+          <a href="/en/">
+            <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
+          </a>
+        </div>
+        <div class="flex flex-1 justify-end items-center gap-8">
+          <LanguageSwitcher locale={locale} page={page} />
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. Hero + Lead form -->
+    <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <!-- Content -->
+                <div class="flex flex-col gap-4 md:gap-7 text-left">
+
+                    <span class="inline-flex items-center gap-2 self-start bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                        <span class="material-symbols-outlined text-[16px]">storefront</span>
+                        Webshop integration
+                    </span>
+
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-black leading-[1.08] tracking-[-0.03em] text-dark">
+                        Connect your <span class="text-primary">webshop.</span> The AI handles the rest.
+                    </h1>
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                        One quick connection – and the AI <span class="font-bold text-primary">sees all your
+                        products</span> and blog articles. It picks the best ones automatically or by your rules, and
+                        keeps generating posts from them.
+                    </p>
+
+                    <ul class="space-y-3.5 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Connect <strong>once</strong> – the AI always works from your
+                                <strong>up-to-date product data</strong></span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Posts only from <strong>top, in-stock</strong> products – skips whatever is out of
+                                stock</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Manage several stores <strong>from a single account</strong></span>
+                        </li>
+                    </ul>
+
+                    <!-- Publishing platforms -->
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <span class="text-sm font-semibold text-muted">Posts to:</span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
+                            Facebook
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
+                            Instagram
+                        </span>
+                    </div>
+
+                    <!-- Social proof mini -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshops</span> already use it</p>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="formIntro">
+                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Book an online demo</h3>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-lg px-4 py-3 mb-3">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">There's no direct
+                                    self-service trial</strong> – but in an online session we'll walk you through the
+                                    system in detail, even with your own store's products.</p>
+                            </div>
+                        </div>
+
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+
+                            <!-- Step 1: Qualifying Questions -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Do you have a webshop /
+                                            online store?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Yes, I have a webshop">Yes, I have a webshop</option>
+                                            <option value="Yes, planning to launch soon">Yes, planning to launch
+                                                soon</option>
+                                            <option value="No, I run a different type of business">No, I run a different
+                                                type of business</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">How advanced is your
+                                            company in marketing?</label>
+                                        <select name="marketing_level" id="marketingLevel"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="We know nothing about the topic">We know nothing about the
+                                                topic</option>
+                                            <option value="Beginner, minimal knowledge">Beginner, minimal
+                                                knowledge</option>
+                                            <option value="Intermediate">Intermediate</option>
+                                            <option value="Pro">Pro</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Who currently does the
+                                            posting?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Me, as the business owner">Me, as the business owner</option>
+                                            <option value="In-house marketing team">In-house marketing team</option>
+                                            <option value="External agency">External agency</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">If you like what you see in
+                                            the demo, when could you start using the software?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Right away">Right away</option>
+                                            <option value="Within 1 month">Within 1 month</option>
+                                            <option value="Within 2-3 months">Within 2-3 months</option>
+                                            <option value="Just exploring for now">Just exploring for now</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                        Continue
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Disqualification Screen (hard reject) -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Thanks for your interest!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Based on your answers, it looks like our platform wouldn't be the right fit for
+                                        you. We don't want to take up your time – thank you for understanding!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Screen (timing not ideal) -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Thanks for your interest!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            We can only offer live demos to those who want to start using the system
+                                            right away. Let's stay in touch in the meantime – we'd be happy to send you a
+                                            <strong>video demo</strong>.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email address</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            I have read, understood and accept the
+                                            <a href="/en/privacy-policy" target="_blank"
+                                                class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            I'm interested in content like this! Sign me up for the newsletter.
+                                            (<a href="/en/privacy-policy"
+                                                class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject()"
+                                        class="w-full flex items-center justify-center rounded-lg h-12 cta-primary transition-all hover:brightness-95">
+                                        Send me the video
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Thank You Screen -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Got it!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        We'll send the demo video and the latest updates shortly. Thanks for your
+                                        interest!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Info & Privacy -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Name</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. John Smith">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Business email
+                                            address</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Phone number</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+1 555 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            I have read, understood and accept the
+                                            <a href="/en/privacy-policy" target="_blank"
+                                                class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            I'm interested in content like this! Sign me up for the newsletter.
+                                            (<a href="/en/privacy-policy"
+                                                class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Back
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                            Continue to booking!
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Feature: One-click connection (once) -->
+    <section class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1">
+                    <!-- Connection mock -->
+                    <div class="bg-light border border-border rounded-[16px] shadow-card p-6 md:p-8">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="flex-1 bg-card border border-border rounded-[14px] p-4 text-center shadow-card">
+                                <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">
+                                    <span class="material-symbols-outlined text-primary text-[24px]">storefront</span>
+                                </div>
+                                <p class="text-sm font-bold text-dark">Your webshop</p>
+                                <p class="text-xs text-muted">UNAS &amp; more</p>
+                            </div>
+                            <div class="flex flex-col items-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[28px] pulse-dot">sync_alt</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest mt-1">Sync</span>
+                            </div>
+                            <div class="flex-1 bg-card border border-border rounded-[14px] p-4 text-center shadow-card">
+                                <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">
+                                    <span class="material-symbols-outlined text-primary text-[24px]">smart_toy</span>
+                                </div>
+                                <p class="text-sm font-bold text-dark">Content Ninja</p>
+                                <p class="text-xs text-muted">the AI engine</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-5 border-t border-border grid grid-cols-3 gap-3 text-center">
+                            <div>
+                                <p class="text-xl font-black text-primary">2,417</p>
+                                <p class="text-xs text-muted leading-tight">products in sync</p>
+                            </div>
+                            <div>
+                                <p class="text-xl font-black text-primary">automatic</p>
+                                <p class="text-xs text-muted leading-tight">prices &amp; stock update</p>
+                            </div>
+                            <div>
+                                <p class="text-xl font-black text-primary">0</p>
+                                <p class="text-xs text-muted leading-tight">manual uploads</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center order-2 md:order-2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">One-time setup 🔌</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Connect once – the AI sees all
+                        your products</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        Connect your webshop (UNAS and others) in a few clicks, and <strong>that's it</strong>. From then
+                        on the system sees your entire product catalog – names, prices, images, descriptions – and always
+                        works from your <strong>latest data</strong>.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">link</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">One-time, few-click connection –
+                                no development, no export-import</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Your whole product catalog is
+                                available to the AI</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">sync</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Prices and stock update
+                                automatically – always current data</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            Connect my store!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Feature: The AI picks for you – only top, in-stock products -->
+    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Smart selection 🎯</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">The AI picks for you – only the
+                        best products</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        You don't have to hand-pick what to post about. The AI selects <strong>automatically</strong> or
+                        by the <strong>rules you set</strong> – and it's smart about it: it only suggests
+                        <strong>top, in-stock</strong> products and skips whatever is out of stock.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">auto_awesome</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">The AI picks the most relevant
+                                products on its own</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">rule</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Or by rules: e.g. only on sale,
+                                only top categories, only new products</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">inventory</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Out-of-stock products are
+                                <strong>never</strong> promoted – you don't post what you can't sell</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            I need to see this!
+                        </a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <!-- Product selection mock -->
+                    <div class="rounded-[16px] overflow-hidden border border-border shadow-card-hover bg-card">
+                        <div class="browser-chrome">
+                            <span class="browser-dot" style="background:#ff5f57"></span>
+                            <span class="browser-dot" style="background:#febc2e"></span>
+                            <span class="browser-dot" style="background:#28c840"></span>
+                            <span class="ml-2 text-xs text-muted font-medium">The AI selects from these</span>
+                        </div>
+                        <div class="p-5 grid grid-cols-3 gap-3">
+                            <!-- top products -->
+                            <div class="relative border border-primary/25 rounded-[12px] p-2 bg-primary/[0.03]">
+                                <span class="absolute top-1.5 left-1.5 bg-primary text-white text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide">Top</span>
+                                <div class="prod-thumb aspect-square rounded-[8px] mb-2"></div>
+                                <p class="text-[11px] font-semibold text-dark leading-tight truncate">Premium leather bag</p>
+                                <p class="text-[11px] text-primary font-bold">$79.00</p>
+                            </div>
+                            <div class="relative border border-primary/25 rounded-[12px] p-2 bg-primary/[0.03]">
+                                <span class="absolute top-1.5 left-1.5 bg-primary text-white text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide">Top</span>
+                                <div class="prod-thumb aspect-square rounded-[8px] mb-2"></div>
+                                <p class="text-[11px] font-semibold text-dark leading-tight truncate">Artisan candle</p>
+                                <p class="text-[11px] text-primary font-bold">$11.00</p>
+                            </div>
+                            <div class="relative border border-primary/25 rounded-[12px] p-2 bg-primary/[0.03]">
+                                <span class="absolute top-1.5 left-1.5 bg-primary text-white text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide">Top</span>
+                                <div class="prod-thumb aspect-square rounded-[8px] mb-2"></div>
+                                <p class="text-[11px] font-semibold text-dark leading-tight truncate">Bamboo cutting board</p>
+                                <p class="text-[11px] text-primary font-bold">$18.00</p>
+                            </div>
+                            <!-- out of stock: skipped -->
+                            <div class="relative border border-border rounded-[12px] p-2 bg-light opacity-60">
+                                <span class="absolute top-1.5 left-1.5 bg-gray-400 text-white text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide">Sold out</span>
+                                <div class="aspect-square rounded-[8px] mb-2 bg-gray-200"></div>
+                                <p class="text-[11px] font-semibold text-muted leading-tight truncate line-through">Canvas backpack</p>
+                                <p class="text-[11px] text-muted font-bold line-through">$59.00</p>
+                            </div>
+                            <div class="relative border border-primary/15 rounded-[12px] p-2">
+                                <div class="prod-thumb aspect-square rounded-[8px] mb-2"></div>
+                                <p class="text-[11px] font-semibold text-dark leading-tight truncate">Ceramic mug</p>
+                                <p class="text-[11px] text-primary font-bold">$8.00</p>
+                            </div>
+                            <div class="relative border border-primary/15 rounded-[12px] p-2">
+                                <div class="prod-thumb aspect-square rounded-[8px] mb-2"></div>
+                                <p class="text-[11px] font-semibold text-dark leading-tight truncate">Essential oil set</p>
+                                <p class="text-[11px] text-primary font-bold">$24.00</p>
+                            </div>
+                        </div>
+                        <div class="px-5 pb-5 -mt-1">
+                            <div class="flex items-center gap-2 text-xs text-body bg-light border border-border rounded-lg px-3 py-2">
+                                <span class="material-symbols-outlined text-primary text-[18px]">block</span>
+                                The AI automatically excludes out-of-stock products from posts.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Feature: Evergreen posts from blog articles -->
+    <section class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1">
+                    <img src="/assets/unas-blog-posztok.webp"
+                        alt="One blog article turned into several evergreen, educational social media posts"
+                        loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
+                </div>
+                <div class="flex flex-col justify-center order-2 md:order-2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Not just products 📝</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Evergreen, educational posts
+                        from your blog</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        The AI doesn't just see your products – it sees your <strong>blog</strong> too. From your existing
+                        articles it automatically produces <strong>evergreen, educational</strong> posts – so you're not
+                        always selling, you're adding value to your followers.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">menu_book</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Educational, value-adding
+                                content from your blog articles</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">eco</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Evergreen posts that stay
+                                relevant weeks later</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">balance</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">A healthy mix: not just selling,
+                                but useful content too</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            Book a demo!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Feature: Posts from multiple products / categories -->
+    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Flexible content 🧩</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Posts from multiple products
+                        and categories</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        It doesn't just post about single products. The AI can combine <strong>multiple products, whole
+                        categories</strong> into a single post – as a collection feature, category highlight or thematic
+                        selection.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">grid_view</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Multiple products in one post –
+                                selection, carousel, collection</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">category</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Highlight entire product
+                                categories in one piece of content</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">sell</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Thematic campaigns: e.g. "fall
+                                favorites", "gift ideas under $20"</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            I need to see this!
+                        </a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="/assets/unas-tobb-termek.webp"
+                        alt="Multiple products and categories combined into a single social media post"
+                        loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Feature: Built-in product browser -->
+    <section class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1 md:col-span-3">
+                    <!-- Product browser mock -->
+                    <div class="rounded-[16px] overflow-hidden border border-border shadow-card-hover bg-card">
+                        <div class="browser-chrome">
+                            <span class="browser-dot" style="background:#ff5f57"></span>
+                            <span class="browser-dot" style="background:#febc2e"></span>
+                            <span class="browser-dot" style="background:#28c840"></span>
+                        </div>
+                        <div class="p-4 md:p-5">
+                            <!-- search bar -->
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="flex-1 flex items-center gap-2 bg-light border border-border rounded-lg px-3 py-2">
+                                    <span class="material-symbols-outlined text-muted text-[18px]">search</span>
+                                    <span class="text-sm text-muted">Search your products…</span>
+                                </div>
+                                <div class="flex items-center gap-1.5 bg-light border border-border rounded-lg px-3 py-2 text-sm text-body font-medium">
+                                    <span class="material-symbols-outlined text-[18px]">filter_list</span>Filter
+                                </div>
+                            </div>
+                            <!-- product grid with selection -->
+                            <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                                <div class="relative border-2 border-primary rounded-[10px] p-2 bg-primary/[0.04]">
+                                    <span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-white text-[12px]">check</span>
+                                    </span>
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Leather bag</p>
+                                </div>
+                                <div class="relative border border-border rounded-[10px] p-2">
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Candle</p>
+                                </div>
+                                <div class="relative border-2 border-primary rounded-[10px] p-2 bg-primary/[0.04]">
+                                    <span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-white text-[12px]">check</span>
+                                    </span>
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Cutting board</p>
+                                </div>
+                                <div class="relative border border-border rounded-[10px] p-2">
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Mug</p>
+                                </div>
+                                <div class="relative border border-border rounded-[10px] p-2">
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Oil set</p>
+                                </div>
+                                <div class="relative border border-border rounded-[10px] p-2">
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Plush toy</p>
+                                </div>
+                                <div class="relative border-2 border-primary rounded-[10px] p-2 bg-primary/[0.04]">
+                                    <span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-white text-[12px]">check</span>
+                                    </span>
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Backpack</p>
+                                </div>
+                                <div class="relative border border-border rounded-[10px] p-2">
+                                    <div class="prod-thumb aspect-square rounded-[8px] mb-1.5"></div>
+                                    <p class="text-[10px] font-semibold text-dark truncate">Notebook</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-border">
+                                <span class="text-xs text-muted">3 products selected</span>
+                                <span class="cta-primary !py-2 !px-4 text-sm">Create post</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center order-2 md:order-2 md:col-span-2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Full control 🖥️</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">All your products, right at
+                        hand in one place</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        If you'd rather decide yourself, you can. Inside the app you <strong>see all your
+                        products</strong>, search for any of them, and select what to post about in a couple of clicks.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">grid_on</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">All your products in a clear
+                                grid</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">search</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Search and filter by name,
+                                category, price</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">touch_app</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Select what you want a post
+                                from – the AI handles the rest</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            Try it out!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Feature: Multiple webshops, multiple stores -->
+    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1">
+                    <!-- Multiple stores mock -->
+                    <div class="bg-card border border-border rounded-[16px] shadow-card-hover p-6 md:p-8 space-y-3">
+                        <div class="flex items-center gap-3 bg-primary/[0.04] border-2 border-primary/30 rounded-[12px] p-3.5">
+                            <div class="w-10 h-10 rounded-[10px] bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">storefront</span>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-bold text-dark truncate">fashion-store.com</p>
+                                <p class="text-xs text-muted">1,240 products · active</p>
+                            </div>
+                            <span class="w-2.5 h-2.5 rounded-full bg-success shrink-0"></span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-light border border-border rounded-[12px] p-3.5">
+                            <div class="w-10 h-10 rounded-[10px] bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">storefront</span>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-bold text-dark truncate">home-decor.com</p>
+                                <p class="text-xs text-muted">860 products · active</p>
+                            </div>
+                            <span class="w-2.5 h-2.5 rounded-full bg-success shrink-0"></span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-light border border-border rounded-[12px] p-3.5">
+                            <div class="w-10 h-10 rounded-[10px] bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">storefront</span>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-bold text-dark truncate">sport-shop.com</p>
+                                <p class="text-xs text-muted">317 products · active</p>
+                            </div>
+                            <span class="w-2.5 h-2.5 rounded-full bg-success shrink-0"></span>
+                        </div>
+                        <button type="button" class="w-full flex items-center justify-center gap-2 border-2 border-dashed border-primary/30 rounded-[12px] p-3 text-primary text-sm font-semibold">
+                            <span class="material-symbols-outlined text-[20px]">add</span>
+                            Add a new store
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center order-2 md:order-2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Scalable 🏬</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Multiple webshops – from one
+                        account</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        More than one webshop? No problem. You can add <strong>multiple stores</strong> and manage them
+                        all from a single account, clearly – each with its own catalog and its own brand voice.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">add_business</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Multiple webshops within one
+                                account</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">swap_horiz</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Quick switching between stores,
+                                each with its own settings</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">palette</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Each store gets its own brand
+                                voice, style and social accounts</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            I have multiple stores!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. How it works -->
+    <section id="hogyan-mukodik" class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works 🛠️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps from connection to finished posts</h2>
+                <p class="text-body text-lg">Connect your webshop once, and the system handles the rest on its own.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
+                    <h3 class="font-bold text-lg mb-3">Connect your webshop</h3>
+                    <p class="text-body text-sm leading-relaxed">A few clicks – and the AI sees all your products,
+                        categories and blog articles, always with fresh data.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
+                    <h3 class="font-bold text-lg mb-3">Set the rules</h3>
+                    <p class="text-body text-sm leading-relaxed">Define your brand voice and rules (e.g. only top,
+                        in-stock products) – or leave the selection to the AI.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
+                    <h3 class="font-bold text-lg mb-3">The AI generates posts</h3>
+                    <p class="text-body text-sm leading-relaxed">It creates text, images and video from products and blog
+                        articles – even from multiple products or categories.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
+                    <h3 class="font-bold text-lg mb-3">Approve and publish</h3>
+                    <p class="text-body text-sm leading-relaxed">Go live to Facebook and Instagram from one calendar. All
+                        you have to do is approve – if you want to.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Book a demo – free
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. What the system does anyway (general capabilities) -->
+    <section id="features-cards" class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">And what the system does anyway</h2>
+                <p class="text-body text-lg">Beyond the webshop integration, Content Ninja is a complete AI marketing
+                    platform – everything a webshop needs for content.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">send</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Posting system</h3>
+                    <p class="text-body text-sm leading-relaxed">Automatically generates and publishes posts from your
+                        products to Facebook and Instagram.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">image</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI Image generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Generates on-brand, logo-branded creatives and product
+                        images with a single click, no studio needed.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI Video generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Turns static product photos into moving videos and
+                        animations with camera moves and effects.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Narrator video</h3>
+                    <p class="text-body text-sm leading-relaxed">Creates a full narrated video from a product link in
+                        minutes – with AI voice, captions and your own product images.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">mail</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Newsletter generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your products and
+                        tailored to your segments.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">ads_click</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Meta ad generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Generates Facebook and Instagram ad creatives and copy
+                        automatically from your products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Pricing -->
+    <section id="pricing" class="bg-white py-16 md:py-[120px]">
+        <div class="max-w-[900px] mx-auto px-4">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">PRICING</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, fixed monthly fee</h2>
+                <p class="text-body text-lg">Join the early adopters and lock in the discounted price long term.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Standard subscription -->
+                <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <div class="flex items-baseline gap-1 mb-3">
+                        <span class="text-4xl font-bold text-dark">€69</span>
+                        <span class="text-muted text-sm">+VAT / month</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fixed monthly fee, no hidden costs</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">400 AI credits per month (renewing)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">All modules: post writing, newsletter, image and video generation</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Manage multiple webshops within one account</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Unlimited social media accounts</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">On-brand style and tone</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Marketing calendar and scheduling</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Continuous development and support</span>
+                        </li>
+                    </ul>
+                    <a href="#hero" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book a demo
+                    </a>
+                </div>
+
+                <!-- Demo bonus -->
+                <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+                        1st month only
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
+                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+                        <span class="text-4xl font-bold text-primary">€34.50</span>
+                        <span class="text-muted text-sm">+VAT</span>
+                        <span class="text-muted text-sm line-through">€69</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
+                    <p class="text-body text-sm mb-4">Book a 30-minute demo, and:</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">50% off the 1st month</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">800 credits instead of 400 (double)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Personalized demo</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">We answer all your questions</span>
+                        </li>
+                    </ul>
+                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From month 2, the fixed €69 / month.</p>
+                    <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book the demo
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-7 shadow-card mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-dark mb-3">What can you do with 400 credits?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-body">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+                                <span>1 post text = 1 credit</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                                <span>1 image generation (Nano Banana) = 2 credits</span>
+                            </div>
+                            <div class="flex items-center gap-2 font-bold text-dark">
+                                <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                                <span>≈ 133 image posts per month</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://contentninjahc.notion.site/Kreditfogyaszt-s-3357c007cc52815590fecdc4b66a836f" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                        Detailed credit costs
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>
+                    <p class="text-muted">A system that creates marketing content on behalf of your webshop, on a
+                        conveyor belt – straight from your product catalog.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Information</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/en/privacy-policy" class="hover:text-white">Privacy policy</a></li>
+                        <li><a href="/en/imprint" class="hover:text-white">Imprint</a></li>
+                        <li><a href="/en/terms" class="hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © contentninja.hu | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lead form script -->
+    <script is:inline>
+        function nextStep(step) {
+            const steps = document.querySelectorAll('.form-step');
+            steps.forEach(s => s.classList.remove('active'));
+
+            const formIntro = document.getElementById('formIntro');
+            const hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
+            if (formIntro) {
+                formIntro.classList.toggle('hidden', hideIntroSteps.includes(String(step)));
+            }
+
+            const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            if (activeStep) {
+                activeStep.classList.add('active');
+            }
+        }
+
+        let _qualifyData = {};
+
+        function qualifyAndNext() {
+            const webshop = document.getElementById('hasWebshop').value;
+            const level = document.getElementById('marketingLevel').value;
+            const role = document.getElementById('marketingRole').value;
+            const timing = document.getElementById('timing').value;
+
+            if (!webshop || !level || !role || !timing) {
+                alert('Please answer every question!');
+                return;
+            }
+
+            _qualifyData = { webshop, level, role, timing };
+
+            const isHardRejected =
+                webshop === 'No, I run a different type of business' ||
+                level === 'We know nothing about the topic' ||
+                role === 'External agency';
+
+            const isSoftRejected =
+                webshop === 'Yes, planning to launch soon' ||
+                timing === 'Within 2-3 months' ||
+                timing === 'Just exploring for now';
+
+            if (isHardRejected) {
+                nextStep('rejected');
+
+                fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        statusz: 'hard_reject',
+                        lead_forras: 'unas',
+                        submission_date: new Date().toISOString(),
+                        has_webshop: webshop,
+                        marketing_level: level,
+                        marketing_role: role,
+                        timing: timing,
+                        source_url: window.location.href
+                    })
+                }).catch(() => { });
+
+            } else if (isSoftRejected) {
+                nextStep('soft-reject');
+
+            } else {
+                nextStep(2);
+            }
+        }
+
+        async function submitSoftReject() {
+            const email = document.getElementById('softRejectEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+
+            const privacy = document.getElementById('softRejectPrivacy');
+            if (!privacy.checked) {
+                alert('Please accept the privacy policy!');
+                return;
+            }
+
+            const newsletterChecked = document.getElementById('softRejectNewsletter').checked;
+
+            const btn = event.target;
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            const payload = {
+                submission_date: new Date().toISOString(),
+                lead_forras: 'unas',
+                email: email,
+                hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem',
+                has_webshop: _qualifyData.webshop || '',
+                marketing_level: _qualifyData.level || '',
+                marketing_role: _qualifyData.role || '',
+                timing: _qualifyData.timing || '',
+                source_url: window.location.href
+            };
+
+            try {
+                await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...payload, statusz: 'soft_reject' })
+                });
+            } catch (e) { }
+
+            nextStep('soft-reject-thanks');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitBtn = document.getElementById('submitBtn');
+            const FORM_SUBMITTED_KEY = 'unas_form_submitted';
+
+            if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Already sent';
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            document.getElementById('leadForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                    console.log('Form already submitted, preventing duplicate.');
+                    return;
+                }
+
+                const privacy = document.getElementById('privacy');
+                if (!privacy.checked) {
+                    alert("Please accept the privacy policy!");
+                    return;
+                }
+
+                const btn = document.getElementById('submitBtn');
+                btn.innerHTML = 'Sending...';
+                btn.disabled = true;
+
+                sessionStorage.setItem(FORM_SUBMITTED_KEY, 'true');
+
+                const formData = new FormData(this);
+                const cleanData = {};
+                formData.forEach((value, key) => {
+                    if (cleanData[key]) {
+                        if (!Array.isArray(cleanData[key])) {
+                            cleanData[key] = [cleanData[key]];
+                        }
+                        cleanData[key].push(value);
+                    } else {
+                        cleanData[key] = value;
+                    }
+                });
+
+                cleanData['source_url'] = window.location.href;
+                const customSubject = `🛒 Webshop integration lead: ${cleanData['name']}`;
+                cleanData['subject'] = customSubject;
+
+                const newsletterChecked = document.getElementById('newsletter').checked;
+                const webhookPayload = {
+                    statusz: 'sikeres',
+                    lead_forras: 'unas',
+                    submission_date: new Date().toISOString(),
+                    nev: cleanData['name'],
+                    email: cleanData['email'],
+                    telefonszam: cleanData['phone'],
+                    source_url: window.location.href,
+                    has_webshop: cleanData['has_webshop'],
+                    marketing_level: cleanData['marketing_level'],
+                    marketing_role: cleanData['marketing_role'],
+                    timing: cleanData['timing'],
+                    hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem'
+                };
+
+                try {
+                    const result = await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(webhookPayload)
+                    });
+                    console.log('Webhook sent:', result.ok);
+                    window.location.href = "/en/thank-you?lead=1";
+                } catch (error) {
+                    console.error('Unexpected error:', error);
+                    window.location.href = "/en/thank-you?lead=1";
+                }
+            });
+        });
+    </script>
+  </div>
+</BaseLayout>

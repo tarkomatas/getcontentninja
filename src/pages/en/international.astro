@@ -1,0 +1,1406 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
+
+const locale = 'en';
+const page = 'international';
+const title = 'International expansion for webshops – More languages, more markets, one system | Content Ninja';
+const description =
+  "Take your webshop abroad without hiring a separate team or agency per country. Write your content once – Content Ninja produces every language version, posts to every country's accounts, and shows it all in one calendar.";
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Fragment slot="head">
+    <style is:inline>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #4a4a68;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #1e1e2f;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .rounded-16 {
+            border-radius: 16px;
+        }
+
+        .rounded-10 {
+            border-radius: 10px;
+        }
+
+        .flat-shadow {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .icon-box {
+            background-color: rgba(108, 92, 231, 0.1);
+            color: #6c5ce7;
+            border-radius: 16px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-primary:hover {
+            background-color: #5a4bd6;
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: transparent;
+            border: 1.5px solid #6c5ce7;
+            color: #6c5ce7;
+            padding: 14px 28px;
+            border-radius: 10px;
+            transition: background 0.2s ease;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-secondary:hover {
+            background-color: rgba(108, 92, 231, 0.08);
+        }
+
+        .cta-primary .material-symbols-outlined,
+        .cta-secondary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-soft {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
+        .pulse-dot {
+            animation: pulse-soft 2s ease-in-out infinite;
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+
+        .lang-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-weight: 600;
+            color: #1e1e2f;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .flag-img {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+            border-radius: 3px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+            display: block;
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Header (focused – conversion-oriented, with language switcher) -->
+    <header class="border-b border-solid border-b-[#f3f0f4] bg-card sticky top-0 z-50 transition-all">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
+        <div class="flex items-center gap-3 text-dark">
+          <a href="/en/">
+            <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
+          </a>
+        </div>
+        <div class="flex flex-1 justify-end items-center gap-8">
+          <LanguageSwitcher locale={locale} page={page} />
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. Hero + Application form -->
+    <section id="hero" class="hero-gradient py-8 md:py-24 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <!-- Content -->
+                <div class="flex flex-col gap-4 md:gap-7 text-left">
+
+                    <span class="inline-flex items-center gap-2 self-start bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                        <span class="material-symbols-outlined text-[16px]">public</span>
+                        International expansion
+                    </span>
+
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-black leading-[1.08] tracking-[-0.03em] text-dark">
+                        Write once. <span class="text-primary">Sell in every market.</span>
+                    </h1>
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                        Take your webshop abroad without hiring a separate marketer or agency for each country. Write
+                        your content once – the AI produces <span class="font-bold text-primary">every language
+                        version</span> and posts it to every country's social accounts.
+                    </p>
+
+                    <ul class="space-y-3.5 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Native-quality</strong> content in any language – not machine translation, but
+                                copy localized to each market</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Write it once, the system <strong>produces the other language versions</strong> on its
+                                own</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Every social account of every country <strong>in one calendar</strong>, in one
+                                place</span>
+                        </li>
+                    </ul>
+
+                    <!-- Publishing platforms (small cards) -->
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <span class="text-sm font-semibold text-muted">Posts to:</span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
+                            Facebook
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-lg px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
+                            Instagram
+                        </span>
+                    </div>
+
+                    <!-- Social proof mini -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ local webshops</span> already use it</p>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="formIntro">
+                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Apply for an online demo</h3>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-lg px-4 py-3 mb-3">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">There's no direct
+                                    self-service trial</strong> – but in an online meeting we'll walk you through the
+                                    system in detail, even using examples from your own markets.</p>
+                            </div>
+                        </div>
+
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+
+                            <!-- Step 1: Qualifying Questions -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Do you have a webshop /
+                                            online store?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Igen, van webshopom">Yes, I have a webshop</option>
+                                            <option value="Igen, hamarosan tervezek nyitni">Yes, I plan to open one
+                                                soon</option>
+                                            <option value="Nem, más típusú vállalkozásom van">No, I have a different
+                                                type of business</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">In how many countries /
+                                            markets are you present (or planning to be)?</label>
+                                        <select name="markets" id="markets"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="1 országban, de tervezünk terjeszkedni">In 1 country, but we
+                                                plan to expand</option>
+                                            <option value="2-3 országban">In 2–3 countries</option>
+                                            <option value="4+ országban">In 4+ countries</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">How advanced is your
+                                            company in marketing?</label>
+                                        <select name="marketing_level" id="marketingLevel"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Egyáltalán nem értünk semmit a témához">We don't understand
+                                                the topic at all</option>
+                                            <option value="Kezdő, minimális tudással">Beginner, with minimal knowledge</option>
+                                            <option value="Haladó">Advanced</option>
+                                            <option value="Profi">Pro</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Who currently does the
+                                            posting?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Én, cégvezetőként">Me, as the business owner</option>
+                                            <option value="Belsős marketing csapat">In-house marketing team</option>
+                                            <option value="Külsős ügynökség">External agency</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">If you like what you see
+                                            in the demo, when could you start using the software?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Azonnal">Immediately</option>
+                                            <option value="1 hónapon belül">Within 1 month</option>
+                                            <option value="2-3 hónapon belül">Within 2-3 months</option>
+                                            <option value="Még csak érdeklődöm">Just looking around for now</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Disqualification Screen (hard reject) -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Thank you for your interest!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Based on the details you provided, it looks like our platform wouldn't be the
+                                        right fit for you. We don't want to take up your time, so thank you for your
+                                        understanding!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Screen (timing not ideal) -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Thank you for your interest!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            We can only offer the demo to those who want to start using the system right
+                                            away. Let's stay in touch in the meantime – we'd be happy to send you a
+                                            <strong>video demo</strong>.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email address</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy" target="_blank"
+                                                class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            I'm interested in exciting content like this! I subscribe to the newsletter.
+                                            (<a href="/en/privacy-policy"
+                                                class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject()"
+                                        class="w-full flex items-center justify-center rounded-lg h-12 cta-primary transition-all hover:brightness-95">
+                                        Send me the video
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Thank You Screen -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Got it!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        We'll send you the demo video and the latest news soon. Thank you for your
+                                        interest!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Info & Privacy -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Name</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. John Smith">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Company email address</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Phone number</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-lg border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+36 30 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy" target="_blank"
+                                                class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            I'm interested in exciting content like this! I subscribe to the newsletter.
+                                            (<a href="/en/privacy-policy"
+                                                class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-lg h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Back
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-lg h-12 cta-primary w-full:shadow-card-hover transition-all hover:brightness-95 transition-all">
+                                            Continue to booking!
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Feature: Content in any language -->
+    <section class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1">
+                    <img src="/assets/tobb-nyelvu-tartalom.webp" alt="AI producing social media content in several languages at once"
+                        loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
+                </div>
+                <div class="flex flex-col justify-center order-2 md:order-2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Any language 🌐</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Content in any language – at
+                        native quality</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        The system doesn't just machine-translate. It produces copy for each market in the <strong>local
+                        tone, culturally on point</strong> – the way a native social media manager would write it.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">translate</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Dozens of languages, native
+                                phrasing</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">diversity_3</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Market-specific tone and hooks
+                                – not word-for-word translation</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">storefront</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">The same product, speaking to
+                                the local buyer in every country</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            I need to see this!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Feature: Write once → every language version (custom visual) -->
+    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1100px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-12">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Smart automation ⚡</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">Write it once. Get it in every
+                    language.</h2>
+                <p class="text-lg text-body leading-relaxed">
+                    You create the content in one language – say English – and the system automatically produces the
+                    language version for every one of your markets. No need to recreate anything country by country.
+                </p>
+            </div>
+
+            <!-- Flow: 1 source -> N language versions -->
+            <div class="bg-card border border-border rounded-[16px] shadow-card p-6 md:p-10">
+                <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,320px)_auto_1fr] gap-8 items-center">
+                    <!-- Source -->
+                    <div class="rounded-[14px] border-2 border-primary/30 bg-primary/[0.04] p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="lang-chip !py-1.5 !px-3 text-sm"><img class="flag-img" src="/assets/flags/gb.svg" alt="UK flag"> English</span>
+                            <span class="text-xs font-bold uppercase tracking-widest text-primary">Source</span>
+                        </div>
+                        <p class="text-sm text-body leading-relaxed">
+                            "New autumn collection just landed – discover the latest pieces in our webshop!"
+                        </p>
+                    </div>
+
+                    <!-- Arrow / automation -->
+                    <div class="flex lg:flex-col items-center justify-center gap-2 text-primary">
+                        <span class="material-symbols-outlined text-[34px] rotate-90 lg:rotate-0">arrow_forward</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-center">Auto<br class="hidden lg:block">translate</span>
+                    </div>
+
+                    <!-- Language versions -->
+                    <div class="grid grid-cols-2 sm:grid-cols-2 gap-3">
+                        <div class="lang-chip"><img class="flag-img" src="/assets/flags/de.svg" alt="German flag"> Deutsch</div>
+                        <div class="lang-chip"><img class="flag-img" src="/assets/flags/fr.svg" alt="French flag"> Français</div>
+                        <div class="lang-chip"><img class="flag-img" src="/assets/flags/ro.svg" alt="Romanian flag"> Română</div>
+                        <div class="lang-chip"><img class="flag-img" src="/assets/flags/pl.svg" alt="Polish flag"> Polski</div>
+                        <div class="lang-chip"><img class="flag-img" src="/assets/flags/it.svg" alt="Italian flag"> Italiano</div>
+                        <div class="lang-chip"><img class="flag-img" src="/assets/flags/nl.svg" alt="Dutch flag"> Nederlands</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-border">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[22px] mt-0.5">bolt</span>
+                        <span class="text-body text-sm leading-snug font-medium">One source, unlimited language versions</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[22px] mt-0.5">verified</span>
+                        <span class="text-body text-sm leading-snug font-medium">Brand voice and message stay consistent throughout</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[22px] mt-0.5">add_circle</span>
+                        <span class="text-body text-sm leading-snug font-medium">A new language = a few clicks, not a new project</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Request a demo – free
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3b. Feature: The text AND the image are translated -->
+    <section class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Not just text 🖼️</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">The text <span class="text-primary">and the image</span> are both translated</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        Most tools only translate the caption. Content Ninja also localizes the <strong>text baked into
+                        the image, the offers and the creative itself</strong> – so the visual speaks the local language
+                        in every market, not just the caption.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">The text on the image (sale,
+                                label, CTA) switches to the local language too</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">wallpaper</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">The same product image, with a
+                                local-language creative per country</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">auto_fix_high</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">No separate designer needed –
+                                the system produces every language version</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            I need to see this!
+                        </a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="/assets/kep-forditas.webp" alt="The same product creative in Hungarian, German and English versions"
+                        loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Feature: Every country in one calendar -->
+    <section id="calendar" class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1 md:col-span-2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Central overview 📆</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Every account of every country
+                        in one calendar</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        Add every social media account of all your markets. In a single visual calendar you can see when,
+                        in which country and in which language each post goes out – no more scattered accounts and
+                        spreadsheets.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Every account of every country
+                                in one place</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">filter_alt</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Filter by country, language and
+                                platform</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">done_all</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Approve the whole week with one
+                                click, across every market</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            Let me try the calendar!
+                        </a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 md:col-span-3">
+                    <div class="rounded-[16px] overflow-hidden border border-border shadow-card-hover transition-all">
+                        <div class="flex items-center gap-1.5 px-3 py-2.5 bg-light border-b border-border">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background:#ff5f57"></span>
+                            <span class="w-2.5 h-2.5 rounded-full" style="background:#febc2e"></span>
+                            <span class="w-2.5 h-2.5 rounded-full" style="background:#28c840"></span>
+                        </div>
+                        <img src="/assets/naptar-latvanykep.webp"
+                            alt="Content Ninja content calendar: multilingual posts (Hungarian and Spanish) in one weekly view"
+                            loading="lazy" class="w-full h-auto block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Feature: Per-market analytics -->
+    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1 md:col-span-3">
+                    <div class="rounded-[16px] overflow-hidden border border-border shadow-card-hover transition-all">
+                        <div class="flex items-center gap-1.5 px-3 py-2.5 bg-light border-b border-border">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background:#ff5f57"></span>
+                            <span class="w-2.5 h-2.5 rounded-full" style="background:#febc2e"></span>
+                            <span class="w-2.5 h-2.5 rounded-full" style="background:#28c840"></span>
+                        </div>
+                        <img src="/assets/analitika-latvanykep.webp"
+                            alt="Content Ninja analytics: views, interactions, follower growth and top posts"
+                            loading="lazy" class="w-full h-auto block">
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center order-2 md:order-2 md:col-span-2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Data 📊</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">See which market brings in the
+                        most</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        Track results per market and per language in one place. You immediately see which country
+                        performs best and where it's worth putting more energy.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">query_stats</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Performance by country and by
+                                language</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">leaderboard</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Which market, which post, which
+                                platform works</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">insights</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Data-driven decisions for
+                                further expansion</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-14 px-8 cta-primary text-lg">
+                            Request a demo!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Why expand with this (benefit cards) -->
+    <section class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why expand with this?</h2>
+                <p class="text-body text-lg">More markets from the same amount of work – without local agencies and
+                    translators.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">palette</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">One consistent brand in every market</h3>
+                    <p class="text-body text-sm leading-relaxed">The same visuals, logo and tone automatically – the same
+                        brand experience in every country.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">rocket_launch</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Launch a new market fast</h3>
+                    <p class="text-body text-sm leading-relaxed">Adding a new language or country is a few clicks – no
+                        need to find a local team per country.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">savings</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">One system instead of many agencies</h3>
+                    <p class="text-body text-sm leading-relaxed">One flat-fee platform replaces translators and per-country
+                        social agencies.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Multiple brands, one account</h3>
+                    <p class="text-body text-sm leading-relaxed">Have several webshops or brands? Manage them all from one
+                        place, clearly.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">trending_up</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Scales with you</h3>
+                    <p class="text-body text-sm leading-relaxed">The same effort on 2 or 12 markets – the system carries
+                        the content-production load.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">schedule</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Presence planned in advance</h3>
+                    <p class="text-body text-sm leading-relaxed">Schedule every market's content weeks ahead and let the
+                        system publish for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. How it works -->
+    <section id="hogyan-mukodik" class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works? 🛠️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps to an international presence</h2>
+                <p class="text-body text-lg">Set up your markets once, and the AI handles the rest on its own –
+                    regardless of language and country.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
+                    <h3 class="font-bold text-lg mb-3">Connect your accounts</h3>
+                    <p class="text-body text-sm leading-relaxed">Your webshop (Unas or any webshop via sitemap) and every
+                        country's social accounts in one place – in a few clicks.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
+                    <h3 class="font-bold text-lg mb-3">Set up your markets</h3>
+                    <p class="text-body text-sm leading-relaxed">Languages, countries and the brand voice. Set once, and
+                        the system follows it from then on.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
+                    <h3 class="font-bold text-lg mb-3">Create the content</h3>
+                    <p class="text-body text-sm leading-relaxed">Write it in one language (or leave it to the AI) – the
+                        system produces every language version.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
+                    <h3 class="font-bold text-lg mb-3">Approve and it publishes</h3>
+                    <p class="text-body text-sm leading-relaxed">Go live to every country's accounts from one calendar.
+                        You just have to approve – if you want to.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Request a demo – free
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. And what the system does anyway (general capabilities) -->
+    <section id="features-cards" class="bg-card py-16 md:py-[120px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">And what the system does anyway</h2>
+                <p class="text-body text-lg">Beyond the international features, Content Ninja is a full AI marketing
+                    platform – everything a webshop needs for content production.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">send</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Posting system</h3>
+                    <p class="text-body text-sm leading-relaxed">Automatically generates and publishes posts from your
+                        products on Facebook and Instagram.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">image</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI image generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Generates on-brand, logo-stamped creatives and product
+                        images in a single click, without a studio.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI video generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Turns static product photos into moving videos and
+                        animations with camera moves and effects.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Narrator video</h3>
+                    <p class="text-body text-sm leading-relaxed">From a product link it builds a full narrator video in
+                        minutes – with AI voice, captions and your own product images.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">mail</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Newsletter generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your products and
+                        tailored to your segments.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-7 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">ads_click</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Meta ad generator</h3>
+                    <p class="text-body text-sm leading-relaxed">Automatically generates Facebook and Instagram ad
+                        creatives and copy from your products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. What makes it more than a translation agency / ChatGPT -->
+    <section class="bg-[#f8f9fb] py-16 md:py-[120px]">
+        <div class="max-w-[1000px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What makes it more than a translation agency or ChatGPT?</h2>
+                <p class="text-lg text-body">Not translation – full, multi-market content production.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-3 px-1">
+                <div class="text-center">
+                    <span class="inline-block bg-primary text-white text-sm font-bold px-4 py-2 rounded-full">Content Ninja</span>
+                </div>
+                <div class="text-center">
+                    <span class="inline-block bg-gray-200 text-gray-600 text-sm font-bold px-4 py-2 rounded-full">Translation agency / agency / ChatGPT</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3 mb-10">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <p class="text-dark text-sm font-medium leading-snug">Every language version automatically from
+                            one piece of content</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
+                        <p class="text-body text-sm leading-snug">A separate order and cost per language</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <p class="text-dark text-sm font-medium leading-snug">Posts to every country's accounts for you</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
+                        <p class="text-body text-sm leading-snug">You have to copy and upload country by country</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <p class="text-dark text-sm font-medium leading-snug">Market-localized tone, not word-for-word
+                            translation</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
+                        <p class="text-body text-sm leading-snug">Machine or literal translation, without local feel</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <p class="text-dark text-sm font-medium leading-snug">Every market in one calendar and one
+                            analytics view</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
+                        <p class="text-body text-sm leading-snug">Scattered accounts, spreadsheets, multiple tools</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-green-600 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <p class="text-dark text-sm font-medium leading-snug">A fixed monthly fee, no matter how many
+                            markets</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
+                        <p class="text-body text-sm leading-snug">A separate agency / translator fee stacks up per market</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-primary/5 border border-primary/20 rounded-[16px] p-7 text-center">
+                <p class="text-lg font-semibold text-dark">If you want to be present in more countries without paying for
+                    more teams – this is your system.</p>
+                <a href="#hero" class="inline-flex items-center justify-center rounded-lg h-12 px-8 cta-primary text-base mt-5">
+                    Request a demo – free
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Pricing -->
+    <section id="pricing" class="bg-white py-16 md:py-[120px]">
+        <div class="max-w-[900px] mx-auto px-4">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">PRICING</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, fixed monthly fee</h2>
+                <p class="text-body text-lg">Join the early adopters and keep the discounted price long-term.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Standard subscription -->
+                <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <div class="flex items-baseline gap-1 mb-3">
+                        <span class="text-4xl font-bold text-dark">24.990</span>
+                        <span class="text-xl font-bold text-dark">Ft</span>
+                        <span class="text-muted text-sm">+VAT / month</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fixed monthly fee, no hidden costs</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">400 AI credits per month (renews)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">All modules: post writing, newsletters, image and video generation</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Manage multiple brands (webshops) within one account</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Unlimited social media accounts</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">On-brand style and tone of voice</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Marketing calendar and scheduling</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Continuous development and support</span>
+                        </li>
+                    </ul>
+                    <a href="#hero" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Request a demo
+                    </a>
+                </div>
+
+                <!-- Demo bonus -->
+                <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+                        First month only
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
+                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+                        <span class="text-4xl font-bold text-primary">12.495</span>
+                        <span class="text-xl font-bold text-dark">Ft</span>
+                        <span class="text-muted text-sm">+VAT</span>
+                        <span class="text-muted text-sm line-through">24.990 Ft</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
+                    <p class="text-body text-sm mb-4">Book a 30-minute demo and:</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">50% off the first month</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">800 credits instead of 400 (double)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">A personalized demo</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">We'll answer all your questions</span>
+                        </li>
+                    </ul>
+                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From the 2nd month, the fixed 24.990 Ft / month.</p>
+                    <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book the demo
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-7 shadow-card mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-dark mb-3">What can you do with 400 credits?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-body">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+                                <span>1 post copy = 1 credit</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                                <span>1 image generation (Nano Banana) = 2 credits</span>
+                            </div>
+                            <div class="flex items-center gap-2 font-bold text-dark">
+                                <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                                <span>approx. 133 image posts per month</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://contentninjahc.notion.site/Kreditfogyaszt-s-3357c007cc52815590fecdc4b66a836f" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                        Detailed credit pricing
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>
+                    <p class="text-muted">A system that produces marketing content on your webshop's behalf, on a
+                        production line – in every language, for every market.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Information</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/en/privacy-policy" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/hu/impresszum" class="hover:text-white">Imprint</a></li>
+                        <li><a href="/en/terms" class="hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © contentninja.hu | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lead form script -->
+    <script is:inline>
+        function nextStep(step) {
+            const steps = document.querySelectorAll('.form-step');
+            steps.forEach(s => s.classList.remove('active'));
+
+            const formIntro = document.getElementById('formIntro');
+            const hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
+            if (formIntro) {
+                formIntro.classList.toggle('hidden', hideIntroSteps.includes(String(step)));
+            }
+
+            const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            if (activeStep) {
+                activeStep.classList.add('active');
+            }
+        }
+
+        let _qualifyData = {};
+
+        function qualifyAndNext() {
+            const webshop = document.getElementById('hasWebshop').value;
+            const markets = document.getElementById('markets').value;
+            const level = document.getElementById('marketingLevel').value;
+            const role = document.getElementById('marketingRole').value;
+            const timing = document.getElementById('timing').value;
+
+            if (!webshop || !markets || !level || !role || !timing) {
+                alert('Please answer every question!');
+                return;
+            }
+
+            _qualifyData = { webshop, markets, level, role, timing };
+
+            const isHardRejected =
+                webshop === 'Nem, más típusú vállalkozásom van' ||
+                level === 'Egyáltalán nem értünk semmit a témához' ||
+                role === 'Külsős ügynökség';
+
+            const isSoftRejected =
+                webshop === 'Igen, hamarosan tervezek nyitni' ||
+                timing === '2-3 hónapon belül' ||
+                timing === 'Még csak érdeklődöm';
+
+            if (isHardRejected) {
+                nextStep('rejected');
+
+                fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        statusz: 'hard_reject',
+                        lead_forras: 'nemzetkozi',
+                        submission_date: new Date().toISOString(),
+                        has_webshop: webshop,
+                        markets: markets,
+                        marketing_level: level,
+                        marketing_role: role,
+                        timing: timing,
+                        source_url: window.location.href
+                    })
+                }).catch(() => { });
+
+            } else if (isSoftRejected) {
+                nextStep('soft-reject');
+
+            } else {
+                nextStep(2);
+            }
+        }
+
+        async function submitSoftReject() {
+            const email = document.getElementById('softRejectEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+
+            const privacy = document.getElementById('softRejectPrivacy');
+            if (!privacy.checked) {
+                alert('Please accept the privacy policy!');
+                return;
+            }
+
+            const newsletterChecked = document.getElementById('softRejectNewsletter').checked;
+
+            const btn = event.target;
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            const payload = {
+                submission_date: new Date().toISOString(),
+                lead_forras: 'nemzetkozi',
+                email: email,
+                hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem',
+                has_webshop: _qualifyData.webshop || '',
+                markets: _qualifyData.markets || '',
+                marketing_level: _qualifyData.level || '',
+                marketing_role: _qualifyData.role || '',
+                timing: _qualifyData.timing || '',
+                source_url: window.location.href
+            };
+
+            try {
+                await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...payload, statusz: 'soft_reject' })
+                });
+            } catch (e) { }
+
+            nextStep('soft-reject-thanks');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitBtn = document.getElementById('submitBtn');
+            const FORM_SUBMITTED_KEY = 'nemzetkozi_form_submitted';
+
+            if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Already submitted';
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            document.getElementById('leadForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                    console.log('Form already submitted, preventing duplicate.');
+                    return;
+                }
+
+                const privacy = document.getElementById('privacy');
+                if (!privacy.checked) {
+                    alert("Please accept the privacy policy!");
+                    return;
+                }
+
+                const btn = document.getElementById('submitBtn');
+                btn.innerHTML = 'Sending...';
+                btn.disabled = true;
+
+                sessionStorage.setItem(FORM_SUBMITTED_KEY, 'true');
+
+                const formData = new FormData(this);
+                const cleanData = {};
+                formData.forEach((value, key) => {
+                    if (cleanData[key]) {
+                        if (!Array.isArray(cleanData[key])) {
+                            cleanData[key] = [cleanData[key]];
+                        }
+                        cleanData[key].push(value);
+                    } else {
+                        cleanData[key] = value;
+                    }
+                });
+
+                cleanData['source_url'] = window.location.href;
+                const customSubject = `🌍 International expansion application: ${cleanData['name']}`;
+                cleanData['subject'] = customSubject;
+
+                const newsletterChecked = document.getElementById('newsletter').checked;
+                const webhookPayload = {
+                    statusz: 'sikeres',
+                    lead_forras: 'nemzetkozi',
+                    submission_date: new Date().toISOString(),
+                    nev: cleanData['name'],
+                    email: cleanData['email'],
+                    telefonszam: cleanData['phone'],
+                    source_url: window.location.href,
+                    has_webshop: cleanData['has_webshop'],
+                    markets: cleanData['markets'],
+                    marketing_level: cleanData['marketing_level'],
+                    marketing_role: cleanData['marketing_role'],
+                    timing: cleanData['timing'],
+                    hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem'
+                };
+
+                try {
+                    const result = await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(webhookPayload)
+                    });
+                    console.log('Webhook sent:', result.ok);
+                    window.location.href = "/en/thank-you?lead=1";
+                } catch (error) {
+                    console.error('Unexpected error:', error);
+                    window.location.href = "/en/thank-you?lead=1";
+                }
+            });
+        });
+    </script>
+  </div>
+</BaseLayout>
