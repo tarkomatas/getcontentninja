@@ -19,7 +19,8 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - **Two locales, both prefixed:** every page lives under `/hu/…` or `/en/…`. Configured in `astro.config.mjs` (`i18n` with `prefixDefaultLocale: true`). The site root `/` (`src/pages/index.astro`) is a JS language-detecting redirect to `/hu/` or `/en/` (default `/hu/`, `noindex`).
 - **Translated slugs**, mapped in `src/i18n/routes.ts` — the single source of truth for URLs, hreflang alternates (`alternatesFor`), and the language switcher target (`switchTarget`). Change URLs here, not by renaming files ad-hoc.
   - `home` → `/hu/` , `/en/`
-  - `demo` → `/hu/posztolas` , `/en/demo` (the old `/hu/bemutato` redirects here via `astro.config.mjs` `redirects`)
+  - `demo` → `/hu/posztolas` , `/en/demo` (the **"Automata posztolás" solution** page, reached from the Solutions dropdown/cards; the old `/hu/bemutato` redirects here via `astro.config.mjs` `redirects`)
+  - `bookDemo` → `/hu/online-bemutato` , `/en/book-demo` (the general **"Bemutatót kérek" / "Book a demo"** landing — hero + lead form covering posting **and** newsletter; every header/footer/homepage demo CTA points here, `lead_forras: 'online-bemutato'`)
   - `newsletter` → `/hu/hirlevel` , `/en/newsletter` (AI hírlevél kampányoldal — same lead-form flow, `lead_forras: 'hirlevel'`)
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
   - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy` (the full policy text is **English only** for Meta App Review; the HU page is a short referral to it)

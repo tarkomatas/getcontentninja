@@ -6,11 +6,11 @@ import Footer from '../../components/Footer.astro';
 const locale = 'en';
 const page = 'home';
 
-const title = 'Content Ninja – AI Content Creation for Webshops | Automatic Posting';
+const title = 'Content Ninja – AI Content Creation for Webshops | Posting & Newsletters';
 const description =
-  'Content Ninja is an AI-powered content creation tool for webshops. It automatically generates posts, images and videos from your products, and publishes them for you too. Try it free!';
+  'Content Ninja is an AI-powered content creation tool for webshops. It automatically generates posts, images and videos from your products and publishes them – and it writes, designs and sends your newsletters for you too. Try it free!';
 const keywords =
-  'Content Ninja, AI content creation, webshop marketing, automatic posting, social media automation, AI influencer, content calendar';
+  'Content Ninja, AI content creation, webshop marketing, automatic posting, AI newsletter, email marketing, social media automation, AI influencer, content calendar';
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -21,7 +21,15 @@ const faqLd = {
       name: 'What is Content Ninja?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Content Ninja is an AI-powered content creation and publishing platform built specifically for webshops. It automatically generates social media posts, images and videos from your products, and then publishes them on Facebook and Instagram.',
+        text: 'Content Ninja is an AI-powered content creation and publishing platform built specifically for webshops. It automatically generates social media posts, images and videos from your products, and then publishes them on Facebook and Instagram – and it also writes, designs and automatically sends your newsletters from your MailerLite or Salesautopilot account.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can Content Ninja send newsletters too?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Alongside posting, Content Ninja includes a full AI newsletter module: the AI writes the copy, designs the layout, adds images, and then automatically sends it to your existing lists from your connected MailerLite or Salesautopilot account – whether a single email or an entire campaign series, with recurring or season-start automations.',
       },
     },
     {
@@ -62,13 +70,14 @@ const faqLd = {
                     <h1
                         class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
                         Automate your<br /><span class="text-primary">webshop's</span>
-                        social media posting
+                        content creation
                     </h1>
 
                     <p class="text-lg text-body leading-snug max-w-[520px]">
                         Content Ninja's AI writes the copy, edits the images,
                         <strong class="text-dark">generates the videos</strong> and posts for you too –
-                        from your products, automatically.
+                        and it also writes, designs and sends your <strong class="text-dark">newsletters</strong>.
+                        From your products, automatically.
                     </p>
 
                     <ul class="space-y-2 text-body">
@@ -81,8 +90,8 @@ const faqLd = {
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
                                 style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">A consistent, professional presence</strong> on social media –
-                                even when you have no time for it</span>
+                            <span><strong class="text-dark">A consistent, professional presence</strong> on social media
+                                and in the inbox – even when you have no time for it</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
@@ -93,7 +102,7 @@ const faqLd = {
                     </ul>
 
                     <div class="flex flex-col sm:flex-row gap-3 pt-1">
-                        <a href="/en/demo" class="cta-primary px-7 py-4 text-base">
+                        <a href="/en/book-demo" class="cta-primary px-7 py-4 text-base">
                             <span class="material-symbols-outlined text-[18px]">calendar_month</span>
                             Request a free demo
                         </a>
@@ -103,23 +112,8 @@ const faqLd = {
                         </a>
                     </div>
 
-                </div>
-
-                <!-- Right: YouTube embed + social proof -->
-                <div class="flex flex-col gap-3 animate-fade-up delay-200">
-                    <div
-                        class="relative rounded-[20px] overflow-hidden shadow-primary-glow border border-primary/10 bg-dark aspect-video">
-                        <iframe id="hero-video" class="w-full h-full" src="https://www.youtube.com/embed/g67df7BUczE"
-                            title="Content Ninja – System overview video" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <p class="text-center text-muted text-xs">▶ See how AI content creation works in
-                        practice</p>
-
-                    <!-- Social proof mini -->
-                    <div class="flex items-center justify-center gap-3 pt-1">
+                    <!-- Social proof (moved to the left) -->
+                    <div class="flex items-center gap-3">
                         <div class="flex -space-x-2">
                             <div
                                 class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">
@@ -134,6 +128,17 @@ const faqLd = {
                         <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshops</span> already
                             use it</p>
                     </div>
+
+                </div>
+
+                <!-- Right: software illustration -->
+                <div class="animate-fade-up delay-200">
+                    <div
+                        class="relative rounded-[20px] overflow-hidden shadow-primary-glow border border-primary/10 bg-light aspect-square">
+                        <img src="/assets/hero-illusztracio.webp" width="1024" height="1024"
+                            alt="Content Ninja turns your webshop's products into social media posts (Facebook, Instagram) and newsletters automatically"
+                            class="w-full h-full object-cover" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,7 +148,7 @@ const faqLd = {
     <!-- ═══════════════════════════════════════
      USE CASES / SOLUTIONS
 ═══════════════════════════════════════ -->
-    <section id="megoldasok" class="bg-card py-20 md:py-28 px-4 md:px-10">
+    <section id="megoldasok" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
             <div class="text-center max-w-[700px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Solutions</span>
@@ -155,7 +160,7 @@ const faqLd = {
 
                 <!-- Automated posting -->
                 <a href="/en/demo"
-                    class="group bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
                     </div>
@@ -169,9 +174,25 @@ const faqLd = {
                     </span>
                 </a>
 
+                <!-- AI newsletter -->
+                <a href="/en/newsletter"
+                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">mail</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 text-dark">AI newsletters</h3>
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">The AI writes, designs and fills your
+                        newsletters with images, then sends them automatically from your MailerLite or Salesautopilot
+                        account – even a whole campaign series.</p>
+                    <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                        Learn more
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                    </span>
+                </a>
+
                 <!-- International expansion -->
                 <a href="/en/international"
-                    class="group bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">public</span>
                     </div>
@@ -186,29 +207,13 @@ const faqLd = {
 
                 <!-- UNAS integration -->
                 <a href="/en/unas"
-                    class="group bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">storefront</span>
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">UNAS integration</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">Connect your UNAS webshop in a few clicks –
                         from then on the AI sees all your products and only creates posts from your top, in-stock items.</p>
-                    <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
-                        Learn more
-                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
-                    </span>
-                </a>
-
-                <!-- AI newsletter -->
-                <a href="/en/newsletter"
-                    class="group bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">mail</span>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2 text-dark">AI newsletters</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">The AI writes, designs and fills your
-                        newsletters with images, then sends them automatically from your MailerLite or Salesautopilot
-                        account – even a whole campaign series.</p>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Learn more
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
@@ -223,7 +228,7 @@ const faqLd = {
     <!-- ═══════════════════════════════════════
      HOGYAN MŰKÖDIK
 ═══════════════════════════════════════ -->
-    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+    <section id="hogyan-mukodik" class="bg-card py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How does it work?</span>
@@ -235,7 +240,7 @@ const faqLd = {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 relative">
 
                 <!-- Step 1 -->
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
+                <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
                     <div
                         class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
                         1</div>
@@ -245,7 +250,7 @@ const faqLd = {
                 </div>
 
                 <!-- Step 2 -->
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
+                <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
                     <div
                         class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
                         2</div>
@@ -255,28 +260,30 @@ const faqLd = {
                 </div>
 
                 <!-- Step 3 -->
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
+                <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center relative">
                     <div
                         class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
                         3</div>
-                    <h3 class="font-bold text-lg mb-3">Generates the post</h3>
-                    <p class="text-body text-sm leading-relaxed">The AI writes the post copy, creates the on-brand
-                        creative image, moving animation or video – in your brand's style, with your logo added.</p>
+                    <h3 class="font-bold text-lg mb-3">Generates the content</h3>
+                    <p class="text-body text-sm leading-relaxed">The AI writes the post copy or the full newsletter,
+                        creates the on-brand creative image, moving animation or video – in your brand's style, with your
+                        logo added.</p>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center">
+                <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card text-center">
                     <div
                         class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
                         4</div>
-                    <h3 class="font-bold text-lg mb-3">Publishes independently</h3>
-                    <p class="text-body text-sm leading-relaxed">The system schedules and publishes the content on
-                        Facebook and Instagram. All you have to do is approve it – if you want to.</p>
+                    <h3 class="font-bold text-lg mb-3">Publishes and sends</h3>
+                    <p class="text-body text-sm leading-relaxed">The system schedules and publishes the posts on
+                        Facebook and Instagram, and sends the newsletters from your MailerLite or Salesautopilot account.
+                        All you have to do is approve it – if you want to.</p>
                 </div>
             </div>
 
             <div class="text-center mt-10">
-                <a href="/en/demo" class="cta-primary px-8 py-4 text-base">
+                <a href="/en/book-demo" class="cta-primary px-8 py-4 text-base">
                     Request a demo – free
                 </a>
             </div>
@@ -347,7 +354,7 @@ const faqLd = {
                             into a ready-to-go post.</p>
                     </div>
 
-                    <a href="/en/demo" class="cta-primary px-8 py-4 text-base">
+                    <a href="/en/book-demo" class="cta-primary px-8 py-4 text-base">
                         Request a demo – free
                     </a>
                 </div>
@@ -716,7 +723,7 @@ const faqLd = {
                             <span class="text-body font-medium">Continuous development and support</span>
                         </li>
                     </ul>
-                    <a href="/en/demo"
+                    <a href="/en/book-demo"
                         class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Request a demo
                     </a>
@@ -765,7 +772,7 @@ const faqLd = {
                         </li>
                     </ul>
                     <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From the 2nd month, the fixed 24.990 Ft / month.</p>
-                    <a href="/en/demo"
+                    <a href="/en/book-demo"
                         class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Book the demo
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -826,8 +833,9 @@ const faqLd = {
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Content Ninja is an AI-powered content creation and publishing platform built specifically for
                         webshops. It automatically generates social media posts, images and
-                        videos from your products, and then publishes them on the platforms you specify (Facebook, Instagram).
-                        There's no need for a creative team, a marketing agency or manual posting.
+                        videos from your products, and then publishes them on the platforms you specify (Facebook, Instagram) –
+                        and it also writes, designs and automatically sends your newsletters from your MailerLite or
+                        Salesautopilot account. There's no need for a creative team, a marketing agency or manual work.
                     </div>
                 </div>
 
@@ -857,6 +865,22 @@ const faqLd = {
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Currently it can publish automatically to Facebook and Instagram. The system
                         is under continuous development, and we're planning TikTok and Pinterest integration soon.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Can Content Ninja send newsletters too?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Yes. Alongside posting, Content Ninja includes a full AI newsletter module: the AI writes the
+                        copy, designs the layout, adds images, and then automatically sends it to your existing lists
+                        from your connected MailerLite or Salesautopilot account – whether a single email or an entire
+                        campaign series, with recurring or season-start automations.
+                        <a href="/en/newsletter" class="text-primary font-semibold underline">See the details on the AI newsletter page.</a>
                     </div>
                 </div>
 
@@ -920,7 +944,7 @@ const faqLd = {
                 examples.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/en/demo" class="cta-on-primary px-8 py-4 text-base">
+                <a href="/en/book-demo" class="cta-on-primary px-8 py-4 text-base">
                     <span class="material-symbols-outlined text-[18px]">calendar_month</span>
                     Request a demo – free
                 </a>

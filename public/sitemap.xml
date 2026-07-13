@@ -20,7 +20,7 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Bemutató / demo -->
+  <!-- Automata posztolás megoldás -->
   <url>
     <loc>https://getcontentninja.com/hu/posztolas</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas" />
@@ -34,6 +34,24 @@
     <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas" />
     <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/posztolas" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Online bemutató / book a demo (általános, posztolás + hírlevél) -->
+  <url>
+    <loc>https://getcontentninja.com/hu/online-bemutato</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/online-bemutato" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/book-demo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/online-bemutato" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/book-demo</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/online-bemutato" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/book-demo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/online-bemutato" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

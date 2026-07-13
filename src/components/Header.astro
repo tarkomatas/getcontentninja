@@ -12,6 +12,7 @@ const { locale, page } = Astro.props;
 const ui = t(locale);
 const home = homeFor(locale);
 const demo = pathFor('demo', locale);
+const bookDemo = pathFor('bookDemo', locale);
 const international = pathFor('international', locale);
 const unas = pathFor('unas', locale);
 const newsletter = pathFor('newsletter', locale);
@@ -20,8 +21,9 @@ const APP_URL = 'https://app.getcontentninja.com';
 // Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
 // (#funkciok) nav-elemet elhagytuk – csak létező horgonyokra mutatunk.
 // A "Megoldások" lenyíló menü önálló kampányoldalakra mutat (nem horgonyokra):
-// az "Automata posztolás" a bemutató/lead oldalra, a "Nemzetközi terjeszkedés"
-// a saját kampányoldalára.
+// az "Automata posztolás" a posztolás megoldás-oldalra, a "Nemzetközi
+// terjeszkedés" a saját kampányoldalára. A fejléc elsődleges "Bemutatót kérek"
+// CTA-ja ezzel szemben az általános demo oldalra (bookDemo) visz.
 const solutionItems = [
   {
     href: demo,
@@ -100,7 +102,7 @@ const navItems = [
         <span class="material-symbols-outlined text-[16px]">login</span>
         {ui.cta.login}
       </a>
-      <a href={demo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm">
+      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm">
         <span class="material-symbols-outlined text-[16px]">calendar_month</span>
         {ui.cta.demo}
       </a>
@@ -139,7 +141,7 @@ const navItems = [
         <span class="material-symbols-outlined text-[16px]">login</span>
         {ui.cta.loginApp}
       </a>
-      <a href={demo} class="cta-primary flex items-center justify-center gap-2 px-4 py-2.5 text-sm">
+      <a href={bookDemo} class="cta-primary flex items-center justify-center gap-2 px-4 py-2.5 text-sm">
         <span class="material-symbols-outlined text-[16px]">calendar_month</span>
         {ui.cta.demo}
       </a>

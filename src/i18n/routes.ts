@@ -5,6 +5,7 @@ export const DEFAULT_LOCALE: Locale = 'hu';
 export type PageKey =
   | 'home'
   | 'demo'
+  | 'bookDemo'
   | 'international'
   | 'unas'
   | 'newsletter'
@@ -27,7 +28,11 @@ export type PageKey =
  */
 export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   home: { hu: '/hu/', en: '/en/' },
+  // Az "Automata posztolás" megoldás-oldal (a Megoldások menüből érhető el).
   demo: { hu: '/hu/posztolas', en: '/en/demo' },
+  // Általános "Bemutatót kérek" kampányoldal – a teljes rendszerről szól
+  // (posztolás ÉS hírlevél), a fejléc/lábléc/főoldali CTA-k ide mutatnak.
+  bookDemo: { hu: '/hu/online-bemutato', en: '/en/book-demo' },
   // Nemzetközi terjeszkedés kampányoldal – kétnyelvű, rövid slug.
   international: { hu: '/hu/nemzetkozi', en: '/en/international' },
   // UNAS-integráció kampányoldal – kétnyelvű, rövid slug.

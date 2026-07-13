@@ -9,7 +9,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const ui = t(locale);
-const demo = pathFor('demo', locale);
+const bookDemo = pathFor('bookDemo', locale);
 const APP_URL = 'https://app.getcontentninja.com';
 
 // Az adatvédelmi tájékoztató és az impresszum nyelvenként létezik.
@@ -74,7 +74,7 @@ const legal = {
       <div>
         <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wide">{ui.footer.startHeading}</h4>
         <div class="flex flex-col gap-3">
-          <a href={demo} class="cta-primary bg-primary hover:bg-primary-hover px-5 py-2.5 text-sm w-fit">
+          <a href={bookDemo} class="cta-primary bg-primary hover:bg-primary-hover px-5 py-2.5 text-sm w-fit">
             <span class="material-symbols-outlined text-[16px]">calendar_month</span>
             {ui.cta.demo}
           </a>
