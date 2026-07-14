@@ -199,19 +199,13 @@
         /* Landing (hirdetési) mód – ?type=ld vagy ?lp=1.
            A BaseLayout lpEnabled propja kapcsolja be; az inline script a <head>-ben
            még az első kirajzolás előtt felteszi a html.lp-mode osztályt, ezért
-           nincs villanás. Jelölés a markupban:
-           - .lp-hide   → landing módban eltűnik (nav, nyelvváltó, login, hamburger)
-           - .lp-show   → landing módban is látszik (pl. mobilon rejtett fő CTA)
-           - .lp-nolink → landing módban nem kattintható (pl. főoldalra mutató logó) */
+           nincs villanás. Jelölés a markupban (Header.astro):
+           - .lp-hide → landing módban eltűnik (nav, login, demo CTA, hamburger)
+           - .lp-show → landing módban is látszik (nyelvváltó, mobilon is) */
         html.lp-mode .lp-hide {
             display: none !important;
         }
 
         html.lp-mode .lp-show {
             display: inline-flex !important;
-        }
-
-        html.lp-mode .lp-nolink {
-            pointer-events: none;
-            cursor: default;
         }

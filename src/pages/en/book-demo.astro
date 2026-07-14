@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
+import Header from '../../components/Header.astro';
 
 const locale = 'en';
 const page = 'bookDemo';
@@ -152,19 +152,8 @@ const description =
   </Fragment>
 
   <div class="relative flex min-h-screen w-full flex-col">
-    <!-- Header (focused – conversion-oriented, with language switcher) -->
-    <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
-      <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
-        <div class="flex items-center gap-3 text-dark">
-          <a href="/en/" class="lp-nolink">
-            <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
-          </a>
-        </div>
-        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
-          <LanguageSwitcher locale={locale} page={page} />
-        </div>
-      </div>
-    </header>
+    <!-- Közös fejléc – ?type=ld (lp-mode) esetén minimálra vált (logó + nyelvváltó) -->
+    <Header locale={locale} page={page} />
 
     <!-- 1. Hero + booking form -->
     <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
