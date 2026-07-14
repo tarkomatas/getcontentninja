@@ -6,7 +6,7 @@ const locale = 'en';
 const page = 'international';
 const title = 'International expansion for webshops – More languages, more markets, one system | Content Ninja';
 const description =
-  "Take your webshop abroad without hiring a separate team or agency per country. Write your content once – Content Ninja produces every language version, posts to every country's accounts, and shows it all in one calendar.";
+  "Take your webshop abroad without hiring a separate team or agency per country. Write your content once – Content Ninja produces every language version, posts to every country's accounts, sends newsletters to each market's subscribers, and shows it all in one calendar.";
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -247,7 +247,8 @@ const description =
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
                         Take your webshop abroad without hiring a separate marketer or agency for each country. Write
                         your content once – the AI produces <span class="font-bold text-primary">every language
-                        version</span> and posts it to every country's social accounts.
+                        version</span>, posts it to every country's social accounts, and
+                        <span class="font-bold text-primary">sends newsletters</span> to your local subscribers.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
@@ -263,14 +264,19 @@ const description =
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Every social account of every country <strong>in one calendar</strong>, in one
+                            <span>Social posts <strong>and newsletters too</strong>, in every market's language – from one
+                                system</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Every account of every country <strong>in one calendar</strong>, in one
                                 place</span>
                         </li>
                     </ul>
 
                     <!-- Publishing platforms (small cards) -->
                     <div class="flex items-center gap-2.5 flex-wrap">
-                        <span class="text-sm font-semibold text-muted">Posts to:</span>
+                        <span class="text-sm font-semibold text-muted">Channels:</span>
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
                             Facebook
@@ -278,6 +284,10 @@ const description =
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
                             Instagram
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <span class="material-symbols-outlined text-primary text-[18px]">forward_to_inbox</span>
+                            Newsletter
                         </span>
                     </div>
 
@@ -302,7 +312,7 @@ const description =
                                 <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
                                 <p class="text-sm text-body"><strong class="font-bold text-dark">There's no direct
                                     self-service trial</strong> – but in an online meeting we'll walk you through the
-                                    system in detail, even using examples from your own markets.</p>
+                                    system in detail, even using examples from your own markets and newsletters.</p>
                             </div>
                         </div>
 
@@ -673,6 +683,99 @@ const description =
         </div>
     </section>
 
+    <!-- 3c. Feature: Newsletters in every market's language -->
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Newsletters too 📬</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Not just posting –
+                        <span class="text-primary">it sends newsletters too</span>, in every market's language</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        The same "write once" logic applies to email. The AI produces the newsletter in
+                        <strong>every one of your markets' languages</strong> – in a native tone, not machine
+                        translation – and sends it to your <strong>local lists</strong> through your
+                        <strong>MailerLite</strong> or <strong>Salesautopilot</strong> account. No rewriting country by
+                        country.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">translate</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">One newsletter source →
+                                every market's language version, automatically</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">forward_to_inbox</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Goes out to your local lists,
+                                from your own sender (MailerLite / Salesautopilot)</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Posts and newsletters from one
+                                system, on a consistent brand voice in every market</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
+                            I need to see this!
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Newsletter localization mock -->
+                <div class="order-1 md:order-2">
+                    <div class="bg-card border border-border rounded-[16px] shadow-card p-6 md:p-8">
+                        <!-- Source newsletter -->
+                        <div class="rounded-[14px] border-2 border-primary/30 bg-primary/[0.04] p-4 mb-4">
+                            <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+                                <span class="lang-chip !py-1 !px-2.5 text-sm"><img class="flag-img" src="/assets/flags/gb.svg" alt="UK flag"> English</span>
+                                <span class="text-xs font-bold uppercase tracking-widest text-primary">Source</span>
+                            </div>
+                            <p class="text-sm font-bold text-dark">☀️ The autumn collection just landed – see it first!</p>
+                            <p class="text-xs text-muted mt-1">Weekly newsletter · finished copy + design</p>
+                        </div>
+
+                        <!-- Auto-translate arrow -->
+                        <div class="flex flex-col items-center justify-center text-primary my-1">
+                            <span class="material-symbols-outlined text-[28px]">arrow_downward</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest">Auto-translate</span>
+                        </div>
+
+                        <!-- Language versions -->
+                        <div class="grid grid-cols-2 gap-2.5 mt-3">
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/de.svg" alt="German flag"> Deutsch</div>
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/fr.svg" alt="French flag"> Français</div>
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/ro.svg" alt="Romanian flag"> Română</div>
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/pl.svg" alt="Polish flag"> Polski</div>
+                        </div>
+
+                        <!-- Sends to local lists -->
+                        <div class="flex items-center justify-between gap-3 pt-4 mt-4 border-t border-border flex-wrap">
+                            <span class="text-xs font-semibold text-muted">Sent to your local lists:</span>
+                            <div class="flex items-center gap-2">
+                                <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-[10px] px-2.5 py-1.5 text-xs font-semibold text-dark">
+                                    <span class="material-symbols-outlined text-primary text-[16px]">forward_to_inbox</span>
+                                    MailerLite
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-[10px] px-2.5 py-1.5 text-xs font-semibold text-dark">
+                                    <span class="material-symbols-outlined text-primary text-[16px]">outgoing_mail</span>
+                                    Salesautopilot
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 4. Feature: Every country in one calendar -->
     <section id="calendar" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
@@ -683,8 +786,8 @@ const description =
                         in one calendar</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
                         Add every social media account of all your markets. In a single visual calendar you can see when,
-                        in which country and in which language each post goes out – no more scattered accounts and
-                        spreadsheets.
+                        in which country and in which language each <strong>post and newsletter</strong> goes out – no
+                        more scattered accounts and spreadsheets.
                     </p>
                     <ul class="space-y-5 mb-8">
                         <li class="flex items-start gap-4">
@@ -816,11 +919,11 @@ const description =
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">savings</span>
+                        <span class="material-symbols-outlined text-[22px]">forum</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">One system instead of many agencies</h3>
-                    <p class="text-body text-sm leading-relaxed">One flat-fee platform replaces translators and per-country
-                        social agencies.</p>
+                    <h3 class="font-bold text-lg mb-2">Social and newsletters from one system</h3>
+                    <p class="text-body text-sm leading-relaxed">One flat-fee platform replaces translators, per-country
+                        social agencies and a separate newsletter tool – in every market.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -864,8 +967,9 @@ const description =
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Connect your accounts</h3>
-                    <p class="text-body text-sm leading-relaxed">Your webshop (Unas or any webshop via sitemap) and every
-                        country's social accounts in one place – in a few clicks.</p>
+                    <p class="text-body text-sm leading-relaxed">Your webshop (Unas or any webshop via sitemap), every
+                        country's social accounts and your newsletter sender (MailerLite / Salesautopilot) in one place –
+                        in a few clicks.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -877,7 +981,7 @@ const description =
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
                     <h3 class="font-bold text-lg mb-3">Create the content</h3>
                     <p class="text-body text-sm leading-relaxed">Write it in one language (or leave it to the AI) – the
-                        system produces every language version.</p>
+                        system produces every language version, for posts and newsletters alike.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
@@ -942,8 +1046,8 @@ const description =
                         <span class="material-symbols-outlined text-[22px]">mail</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Newsletter generator</h3>
-                    <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your products and
-                        tailored to your segments.</p>
+                    <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your products –
+                        in every market's language – and sends them from your own sender (MailerLite / Salesautopilot).</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -994,6 +1098,18 @@ const description =
                     <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
                         <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
                         <p class="text-body text-sm leading-snug">You have to copy and upload country by country</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 bg-success/10 border border-success/30 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-success text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <p class="text-dark text-sm font-medium leading-snug">Social posts and newsletters too, in every
+                            language, from one system</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
+                        <p class="text-body text-sm leading-snug">A separate tool for newsletters, another for posts, redone
+                            per language</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">

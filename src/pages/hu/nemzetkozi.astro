@@ -6,7 +6,7 @@ const locale = 'hu';
 const page = 'international';
 const title = 'Nemzetközi terjeszkedés webshopoknak – Több nyelv, több piac, egy rendszer | Content Ninja';
 const description =
-  'Vidd külföldre a webshopod anélkül, hogy országonként külön csapatot vagy ügynökséget bérelnél. Írd meg a tartalmat egyszer – a Content Ninja legyártja minden nyelvi verziót, kiposztolja minden ország fiókjába, és egy naptárban látod az egészet.';
+  'Vidd külföldre a webshopod anélkül, hogy országonként külön csapatot vagy ügynökséget bérelnél. Írd meg a tartalmat egyszer – a Content Ninja legyártja minden nyelvi verziót, kiposztolja minden ország fiókjába, hírlevelet küld minden piac feliratkozóinak, és egy naptárban látod az egészet.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -260,7 +260,8 @@ const description =
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
                         Vidd külföldre a webshopod anélkül, hogy országonként külön marketingest vagy ügynökséget
                         bérelnél. Írd meg a tartalmat egyszer – az AI legyártja az <span class="font-bold text-primary">összes
-                        nyelvi verziót</span>, és kiposztolja minden ország közösségi fiókjába.
+                        nyelvi verziót</span>, kiposztolja minden ország közösségi fiókjába, és
+                        <span class="font-bold text-primary">hírlevelet küld</span> a helyi feliratkozóknak.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
@@ -276,14 +277,19 @@ const description =
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Minden ország minden közösségi fiókja <strong>egy naptárban</strong>, egy
+                            <span>Social poszt <strong>és hírlevél is</strong> minden piac nyelvén – egy
+                                rendszerből</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Minden ország minden fiókja <strong>egy naptárban</strong>, egy
                                 helyen</span>
                         </li>
                     </ul>
 
                     <!-- Publikálás platformok (kis kártyák) -->
                     <div class="flex items-center gap-2.5 flex-wrap">
-                        <span class="text-sm font-semibold text-muted">Ide posztol:</span>
+                        <span class="text-sm font-semibold text-muted">Csatornák:</span>
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
                             Facebook
@@ -291,6 +297,10 @@ const description =
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
                             Instagram
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <span class="material-symbols-outlined text-primary text-[18px]">forward_to_inbox</span>
+                            Hírlevél
                         </span>
                     </div>
 
@@ -315,7 +325,7 @@ const description =
                                 <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
                                 <p class="text-sm text-body"><strong class="font-bold text-dark">Közvetlen kipróbálásra
                                     nincs lehetőség</strong> – de egy online megbeszélés keretében bemutatjuk neked a
-                                    rendszert részletesen, akár a te saját piacaid példáival.</p>
+                                    rendszert részletesen, akár a te saját piacaid és hírleveleid példáival.</p>
                             </div>
                         </div>
 
@@ -687,6 +697,98 @@ const description =
         </div>
     </section>
 
+    <!-- 3c. Feature: Hírlevél minden piac nyelvén -->
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hírlevél is 📬</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Nem csak posztol –
+                        <span class="text-primary">hírlevelet is küld</span> minden piac nyelvén</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        Ugyanaz az „írd meg egyszer" logika e-mailre is. Az AI a hírlevelet <strong>minden piacod
+                        nyelvén</strong> legyártja – natív hangnemben, nem gépi fordítással –, és a te
+                        <strong>MailerLite</strong> vagy <strong>Salesautopilot</strong> fiókodon keresztül a
+                        <strong>helyi listákra</strong> küldi ki. Nem kell országonként újraírni semmit.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">translate</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Egy hírlevél-forrás →
+                                automatikusan minden piac nyelvi verziója</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">forward_to_inbox</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">A helyi listákra megy ki, a
+                                saját küldődből (MailerLite / Salesautopilot)</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Poszt és hírlevél egy
+                                rendszerből, egységes márkahangon minden piacon</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
+                            Ezt látnom kell!
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hírlevél-lokalizáció mock -->
+                <div class="order-1 md:order-2">
+                    <div class="bg-card border border-border rounded-[16px] shadow-card p-6 md:p-8">
+                        <!-- Forrás hírlevél -->
+                        <div class="rounded-[14px] border-2 border-primary/30 bg-primary/[0.04] p-4 mb-4">
+                            <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+                                <span class="lang-chip !py-1 !px-2.5 text-sm"><img class="flag-img" src="/assets/flags/hu.svg" alt="Magyar zászló"> Magyar</span>
+                                <span class="text-xs font-bold uppercase tracking-widest text-primary">Forrás</span>
+                            </div>
+                            <p class="text-sm font-bold text-dark">☀️ Megjött az őszi kollekció – nézd meg elsőként!</p>
+                            <p class="text-xs text-muted mt-1">Heti hírlevél · kész szöveg + dizájn</p>
+                        </div>
+
+                        <!-- Auto-fordítás nyíl -->
+                        <div class="flex flex-col items-center justify-center text-primary my-1">
+                            <span class="material-symbols-outlined text-[28px]">arrow_downward</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest">Auto-fordítás</span>
+                        </div>
+
+                        <!-- Nyelvi verziók -->
+                        <div class="grid grid-cols-2 gap-2.5 mt-3">
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/de.svg" alt="Német zászló"> Deutsch</div>
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/gb.svg" alt="Brit zászló"> English</div>
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/ro.svg" alt="Román zászló"> Română</div>
+                            <div class="lang-chip !py-2"><img class="flag-img" src="/assets/flags/pl.svg" alt="Lengyel zászló"> Polski</div>
+                        </div>
+
+                        <!-- Kiküldés a helyi listákra -->
+                        <div class="flex items-center justify-between gap-3 pt-4 mt-4 border-t border-border flex-wrap">
+                            <span class="text-xs font-semibold text-muted">Kimegy a helyi listákra:</span>
+                            <div class="flex items-center gap-2">
+                                <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-[10px] px-2.5 py-1.5 text-xs font-semibold text-dark">
+                                    <span class="material-symbols-outlined text-primary text-[16px]">forward_to_inbox</span>
+                                    MailerLite
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 bg-light border border-border rounded-[10px] px-2.5 py-1.5 text-xs font-semibold text-dark">
+                                    <span class="material-symbols-outlined text-primary text-[16px]">outgoing_mail</span>
+                                    Salesautopilot
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 4. Feature: Minden ország egy naptárban -->
     <section id="calendar" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
@@ -697,8 +799,8 @@ const description =
                         egy naptárban</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
                         Add hozzá az összes piacod összes közösségi média fiókját. Egyetlen vizuális naptárban látod,
-                        mikor, melyik országban, milyen nyelven megy ki a poszt – nincs több szétszórt fiók és
-                        Excel-táblázat.
+                        mikor, melyik országban, milyen nyelven megy ki a <strong>poszt és a hírlevél</strong> – nincs
+                        több szétszórt fiók és Excel-táblázat.
                     </p>
                     <ul class="space-y-5 mb-8">
                         <li class="flex items-start gap-4">
@@ -829,11 +931,11 @@ const description =
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">savings</span>
+                        <span class="material-symbols-outlined text-[22px]">forum</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Több ügynökség helyett egy rendszer</h3>
-                    <p class="text-body text-sm leading-relaxed">Egy fix díjas platform kiváltja a fordítókat és az
-                        országonkénti social ügynökségeket.</p>
+                    <h3 class="font-bold text-lg mb-2">Social és hírlevél, egy rendszerből</h3>
+                    <p class="text-body text-sm leading-relaxed">Egy fix díjas platform kiváltja a fordítókat, az
+                        országonkénti social ügynökségeket és a külön hírlevél-eszközt – minden piacon.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -878,7 +980,8 @@ const description =
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Csatlakoztatod a fiókjaidat</h3>
                     <p class="text-body text-sm leading-relaxed">Webshopod (Unas vagy bármilyen webshop sitemap
-                        alapján) és minden ország közösségi fiókja egy helyre – néhány kattintással.</p>
+                        alapján), minden ország közösségi fiókja és a hírlevélküldőd (MailerLite / Salesautopilot) egy
+                        helyre – néhány kattintással.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -890,7 +993,7 @@ const description =
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
                     <h3 class="font-bold text-lg mb-3">Létrehozod a tartalmat</h3>
                     <p class="text-body text-sm leading-relaxed">Egy nyelven megírod (vagy az AI-ra bízod) – a rendszer
-                        legyártja az összes nyelvi verziót.</p>
+                        legyártja az összes nyelvi verziót, poszthoz és hírlevélhez egyaránt.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
@@ -955,8 +1058,8 @@ const description =
                         <span class="material-symbols-outlined text-[22px]">mail</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Hírlevélgeneráló rendszer</h3>
-                    <p class="text-body text-sm leading-relaxed">Személyre szabott hírleveleket generál a termékeidből és
-                        a szegmenseidnek megfelelően.</p>
+                    <p class="text-body text-sm leading-relaxed">Személyre szabott hírleveleket generál a termékeidből –
+                        minden piac nyelvén – és a saját küldődből (MailerLite / Salesautopilot) küldi ki.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -1007,6 +1110,18 @@ const description =
                     <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
                         <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
                         <p class="text-body text-sm leading-snug">Neked kell országonként másolgatni és feltölteni</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 bg-success/10 border border-success/30 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-success text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <p class="text-dark text-sm font-medium leading-snug">Social poszt és hírlevél is, minden nyelven,
+                            egy rendszerből</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-[14px] p-5">
+                        <span class="material-symbols-outlined text-red-500 text-[22px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">cancel</span>
+                        <p class="text-body text-sm leading-snug">Külön eszköz a hírlevélhez, külön a posztokhoz,
+                            nyelvenként újra</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
