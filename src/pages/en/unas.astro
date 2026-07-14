@@ -6,10 +6,10 @@ const locale = 'en';
 const page = 'unas';
 const title = 'Webshop integration – Connect your store, the AI sees every product | Content Ninja';
 const description =
-  'Connect your webshop (UNAS and more) in a few clicks. The AI then sees all your products and blog articles, picks the best ones automatically or by rules – posting only top, in-stock products, from several stores at once.';
+  'Connect your webshop (UNAS and more) in a few clicks. The AI then sees all your products and blog articles, picks the best ones automatically or by rules – creating posts and newsletters only from top, in-stock products, from several stores at once.';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -214,11 +214,11 @@ const description =
     <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
-          <a href="/en/">
+          <a href="/en/" class="lp-nolink">
             <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
-        <div class="flex flex-1 justify-end items-center gap-8">
+        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
           <LanguageSwitcher locale={locale} page={page} />
         </div>
       </div>
@@ -238,24 +238,26 @@ const description =
                     </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        Connect your <span class="text-primary">webshop.</span> The AI handles the rest.
+                        AI marketing system <span class="text-primary">for UNAS webshops</span>
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        One quick connection – and the AI <span class="font-bold text-primary">sees all your
-                        products</span> and blog articles. It picks the best ones automatically or by your rules, and
-                        keeps generating posts from them.
+                        Connect it once in a few clicks – from then on the AI <span class="font-bold text-primary">sees
+                        all your products</span> and blog articles, picks the best ones, and keeps
+                        <span class="font-bold text-primary">posting and sending newsletters</span> from them.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Connect <strong>once</strong> – the AI always works from your
-                                <strong>up-to-date product data</strong></span>
+                            <span>Connect <strong>once</strong> – the AI works from <strong>up-to-date product data</strong></span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Posts only from <strong>top, in-stock</strong> products – skips whatever is out of
-                                stock</span>
+                            <span>Posts only from <strong>top, in-stock</strong> products – skips the rest</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Posts <strong>and newsletters too</strong>, from your products – one system</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
@@ -265,7 +267,7 @@ const description =
 
                     <!-- Publishing platforms -->
                     <div class="flex items-center gap-2.5 flex-wrap">
-                        <span class="text-sm font-semibold text-muted">Posts to:</span>
+                        <span class="text-sm font-semibold text-muted">Channels:</span>
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
                             Facebook
@@ -273,6 +275,10 @@ const description =
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
                             Instagram
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <span class="material-symbols-outlined text-primary text-[18px]">forward_to_inbox</span>
+                            Newsletter
                         </span>
                     </div>
 
@@ -980,39 +986,148 @@ const description =
         </div>
     </section>
 
+    <!-- 7b. Feature: Newsletters from your products -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Newsletters too 📬</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">It doesn't just post – it
+                        sends newsletters from your products</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        From the same product catalog, the AI also builds <strong>ready-to-send newsletters</strong> –
+                        with copy, design and product images – and sends them through your <strong>MailerLite</strong>
+                        or <strong>Salesautopilot</strong> account to your own lists. Here too, it only features top,
+                        in-stock products.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">A finished newsletter with
+                                copy, design and product images – at the push of a button</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">schedule</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Set the automation once – it
+                                runs weekly, monthly or seasonally on its own</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">forward_to_inbox</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Sent from your own sender
+                                (MailerLite / Salesautopilot) – your existing lists stay</span>
+                        </li>
+                    </ul>
+                    <div class="flex items-center gap-4 flex-wrap">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
+                            I need to see this!
+                        </a>
+                        <a href="/en/newsletter" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                            Everything about the newsletter feature
+                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Newsletter mock -->
+                <div class="order-1 md:order-2">
+                    <div class="bg-light border border-border rounded-[16px] shadow-card p-6 md:p-8">
+                        <!-- email preview -->
+                        <div class="bg-card border border-border rounded-[14px] shadow-card overflow-hidden">
+                            <div class="px-4 py-3 border-b border-border">
+                                <p class="text-xs text-muted mb-0.5">Sent in your shop's name</p>
+                                <p class="text-sm font-bold text-dark">🍂 Autumn favorites – this week's top products in one email</p>
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="prod-thumb w-12 h-12 rounded-[8px] shrink-0"></div>
+                                    <div class="min-w-0 flex-1">
+                                        <p class="text-xs font-semibold text-dark truncate">Premium leather bag</p>
+                                        <p class="text-xs text-primary font-bold">$79.00</p>
+                                    </div>
+                                    <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full shrink-0">Shop now</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="prod-thumb w-12 h-12 rounded-[8px] shrink-0"></div>
+                                    <div class="min-w-0 flex-1">
+                                        <p class="text-xs font-semibold text-dark truncate">Artisan candle</p>
+                                        <p class="text-xs text-primary font-bold">$11.00</p>
+                                    </div>
+                                    <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full shrink-0">Shop now</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="prod-thumb w-12 h-12 rounded-[8px] shrink-0"></div>
+                                    <div class="min-w-0 flex-1">
+                                        <p class="text-xs font-semibold text-dark truncate">Bamboo cutting board</p>
+                                        <p class="text-xs text-primary font-bold">$18.00</p>
+                                    </div>
+                                    <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full shrink-0">Shop now</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sending arrow -->
+                        <div class="flex flex-col items-center justify-center text-primary my-2">
+                            <span class="material-symbols-outlined text-[28px] pulse-dot">arrow_downward</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest">Sent automatically</span>
+                        </div>
+
+                        <!-- Senders -->
+                        <div class="flex items-center justify-center gap-2 flex-wrap">
+                            <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-xs font-semibold text-dark shadow-card">
+                                <span class="material-symbols-outlined text-primary text-[16px]">forward_to_inbox</span>
+                                MailerLite
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-xs font-semibold text-dark shadow-card">
+                                <span class="material-symbols-outlined text-primary text-[16px]">outgoing_mail</span>
+                                Salesautopilot
+                            </span>
+                            <span class="text-xs text-muted">→ to your own lists</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 8. How it works -->
-    <section id="hogyan-mukodik" class="bg-card py-20 md:py-28">
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works 🛠️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps from connection to finished posts</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps from connection to finished content</h2>
                 <p class="text-body text-lg">Connect your webshop once, and the system handles the rest on its own.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Connect your webshop</h3>
                     <p class="text-body text-sm leading-relaxed">A few clicks – and the AI sees all your products,
                         categories and blog articles, always with fresh data.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
                     <h3 class="font-bold text-lg mb-3">Set the rules</h3>
                     <p class="text-body text-sm leading-relaxed">Define your brand voice and rules (e.g. only top,
                         in-stock products) – or leave the selection to the AI.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center relative">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">The AI generates posts</h3>
+                    <h3 class="font-bold text-lg mb-3">The AI generates the content</h3>
                     <p class="text-body text-sm leading-relaxed">It creates text, images and video from products and blog
-                        articles – even from multiple products or categories.</p>
+                        articles – for posts and newsletters alike.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Approve and publish</h3>
-                    <p class="text-body text-sm leading-relaxed">Go live to Facebook and Instagram from one calendar. All
-                        you have to do is approve – if you want to.</p>
+                    <h3 class="font-bold text-lg mb-3">Approve and it goes out</h3>
+                    <p class="text-body text-sm leading-relaxed">Go live to Facebook, Instagram and your email lists from
+                        one calendar. All you have to do is approve – if you want to.</p>
                 </div>
             </div>
 
@@ -1025,7 +1140,7 @@ const description =
     </section>
 
     <!-- 9. What the system does anyway (general capabilities) -->
-    <section id="features-cards" class="bg-light py-20 md:py-28">
+    <section id="features-cards" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">And what the system does anyway</h2>
@@ -1034,7 +1149,7 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">send</span>
                     </div>
@@ -1042,7 +1157,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Automatically generates and publishes posts from your
                         products to Facebook and Instagram.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">image</span>
                     </div>
@@ -1050,7 +1165,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Generates on-brand, logo-branded creatives and product
                         images with a single click, no studio needed.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">movie_filter</span>
                     </div>
@@ -1058,7 +1173,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Turns static product photos into moving videos and
                         animations with camera moves and effects.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
                     </div>
@@ -1066,15 +1181,15 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Creates a full narrated video from a product link in
                         minutes – with AI voice, captions and your own product images.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">mail</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Newsletter generator</h3>
-                    <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your products and
-                        tailored to your segments.</p>
+                    <p class="text-body text-sm leading-relaxed">Generates personalized newsletters from your products,
+                        and sends them through your own sender (MailerLite / Salesautopilot).</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">ads_click</span>
                     </div>
