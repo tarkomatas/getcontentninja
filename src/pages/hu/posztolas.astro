@@ -9,7 +9,7 @@ const description =
   'Kérj egy díjmentes, kb. 20 perces online bemutatót a Content Ninjáról, és nézd meg élesben, hogyan gyártja az AI a webshopod social media tartalmait.';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -216,11 +216,11 @@ const description =
     <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
-          <a href="/hu/">
+          <a href="/hu/" class="lp-nolink">
             <img src="/assets/logo.webp" alt="Content Ninja logó" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
-        <div class="flex flex-1 justify-end items-center gap-8">
+        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
           <LanguageSwitcher locale={locale} page={page} />
         </div>
       </div>
@@ -237,13 +237,11 @@ const description =
 
                         <h1
                             class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                            Automatizáld be <span class="text-primary">webshopod</span> közösségi média posztolását
+                            AI közösségi média posztolás <span class="text-primary">webshopoknak</span>
                         </h1>
                         <p class="text-body  text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                            Változtasd webshopod termékeit azonnal megosztható social média tartalommá – az AI szöveget
-                            ír, képet szerkeszt, <span class="font-bold text-primary  ">videót
-                                generál</span> és posztol is
-                            helyetted.
+                            A termékeidből az AI szöveget ír, képet szerkeszt, <span class="font-bold text-primary  ">videót
+                            generál</span> és posztol is helyetted.
                         </p>
 
                         <ul class="space-y-3.5 text-body ">

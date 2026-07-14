@@ -65,7 +65,7 @@ const navItems = [
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-8" aria-label={ui.nav.aria}>
+    <nav class="hidden md:flex items-center gap-8 lp-hide" aria-label={ui.nav.aria}>
       <!-- Megoldások lenyíló (hoverre + fókuszra nyílik, a pt-2 híd tartja a hovert) -->
       <div class="relative group">
         <button
@@ -97,19 +97,19 @@ const navItems = [
 
     <!-- CTAs + language + hamburger -->
     <div class="flex items-center gap-3 shrink-0">
-      <LanguageSwitcher locale={locale} page={page} class="!hidden md:!inline-flex" />
-      <a href={APP_URL} target="_blank" class="cta-secondary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm">
+      <LanguageSwitcher locale={locale} page={page} class="!hidden md:!inline-flex lp-hide" />
+      <a href={APP_URL} target="_blank" class="cta-secondary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-hide">
         <span class="material-symbols-outlined text-[16px]">login</span>
         {ui.cta.login}
       </a>
-      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm">
+      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-show">
         <span class="material-symbols-outlined text-[16px]">calendar_month</span>
         {ui.cta.demo}
       </a>
       <!-- Hamburger (mobile only) -->
       <button
         id="mobile-menu-btn"
-        class="md:hidden flex items-center justify-center w-10 h-10 rounded-[10px] border border-border text-dark hover:bg-light transition-colors"
+        class="md:hidden lp-hide flex items-center justify-center w-10 h-10 rounded-[10px] border border-border text-dark hover:bg-light transition-colors"
         aria-label={ui.nav.menuAria}
       >
         <span id="hamburger-icon" class="material-symbols-outlined text-[22px]">menu</span>
@@ -118,7 +118,7 @@ const navItems = [
   </div>
 
   <!-- Mobile nav dropdown -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-card px-4 pb-4">
+  <div id="mobile-menu" class="hidden md:hidden lp-hide border-t border-border bg-card px-4 pb-4">
     <nav class="flex flex-col gap-1 pt-3" aria-label={ui.nav.mobileAria}>
       <!-- Megoldások szekció -->
       <span class="px-3 pt-1 pb-1 text-xs font-semibold uppercase tracking-wide text-body/70">{ui.nav.solutions}</span>

@@ -47,10 +47,12 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 ## Cross-cutting conventions
 
 - **Design tokens & style conventions** are documented in [`DESIGN.md`](DESIGN.md) (canonical section rhythm, eyebrow/heading/card/button/color tokens; homepage is the etalon). Keep new/edited pages on those tokens.
+- **Copywriting rules** live in the **`page-copy` skill** (`.claude/skills/page-copy/`) — hero formula (H1 = kategória + célcsoport + funkció, `text-primary` highlights, slogan → subhead), 5-second clarity test. Invoke it whenever planning, writing, or reviewing page copy or a hero section.
 - **Tailwind is CDN + inline config** (in `BaseLayout`, `is:inline` so Astro leaves it untouched): `primary #6c5ce7`, `dark #1e1e2f`, `body #4a4a68`, custom `boxShadow` tokens (`card`, `card-hover`, `primary-glow`), Inter font. There is no Tailwind build step.
 - **Any inline `<script>` that must stay classic/global** (references from `onclick`, immediate IIFEs, `tailwind.config`, gtag, JSON-LD) is marked **`is:inline`** — otherwise Astro bundles it as a scoped module and `onclick`-referenced globals (e.g. `toggleFaq`) break.
 - **Analytics:** Google Ads gtag (`AW-10918594401`) loads eagerly in `BaseLayout`. The Meta Pixel (`3857575907663677`) is **consent-gated** and injected by `public/assets/cookie.js` only after the user accepts the banner. `cookie.js` localizes its own text from `document.documentElement.lang`.
 - **Consent** is stored in `localStorage` under `contentninja_cookie_consent_v1` (`"true"`/`"false"`). The pixel never loads without it.
+- **Landing ("lp") mode for ads:** marketing pages pass `lpEnabled` to `BaseLayout`, which emits an early-`<head>` `is:inline` script — on `?type=ld` (or `?lp=1`) it adds `lp-mode` to `<html>` before first paint. `global.css` then applies the markers: `.lp-hide` (hidden in lp mode — nav, language switcher, login, hamburger), `.lp-show` (forced visible — e.g. the header demo CTA on mobile), `.lp-nolink` (kept visible but unclickable — the campaign-page logo link). Legal/technical pages (privacy, terms, imprint, data-deletion, thank-you) intentionally do **not** set `lpEnabled`. Ad final URLs should append `?type=ld`.
 - **sitemap.xml is hand-maintained** in `public/` (with `xhtml:link` hreflang alternates). The `@astrojs/sitemap` integration was removed due to an Astro-4/sitemap-3.7 hook incompatibility. When adding/renaming a page, update `routes.ts`, `sitemap.xml`, and `robots.txt` (thank-you pages are `Disallow`ed).
 
 ## Lead form flow (`posztolas.astro` / `demo.astro`)

@@ -9,7 +9,7 @@ const description =
   'Connect your MailerLite or Salesautopilot account. The AI writes the copy, designs the newsletter layout, adds images, and sends your newsletters automatically on the schedule you set – even a full campaign series in one click.';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -236,11 +236,11 @@ const description =
     <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
-          <a href="/en/">
+          <a href="/en/" class="lp-nolink">
             <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
-        <div class="flex flex-1 justify-end items-center gap-8">
+        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
           <LanguageSwitcher locale={locale} page={page} />
         </div>
       </div>
@@ -260,13 +260,12 @@ const description =
                     </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        Newsletters the AI <span class="text-primary">writes, designs and sends</span> for you.
+                        AI newsletter system <span class="text-primary">for webshops</span>
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Connect your <span class="font-bold text-primary">MailerLite</span> or
-                        <span class="font-bold text-primary">Salesautopilot</span> account. The AI writes the copy,
-                        designs the layout, adds images – and sends your newsletters automatically on the schedule you
-                        set.
+                        The AI <span class="font-bold text-primary">writes, designs and sends</span> your
+                        newsletters – through your <span class="font-bold text-primary">MailerLite</span> or
+                        <span class="font-bold text-primary">Salesautopilot</span> account, on the schedule you set.
                     </p>
 
                     <ul class="space-y-3.5 text-body">

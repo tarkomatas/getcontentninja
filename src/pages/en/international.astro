@@ -9,7 +9,7 @@ const description =
   "Take your webshop abroad without hiring a separate team or agency per country. Write your content once – Content Ninja produces every language version, posts to every country's accounts, sends newsletters to each market's subscribers, and shows it all in one calendar.";
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -218,11 +218,11 @@ const description =
     <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
-          <a href="/en/">
+          <a href="/en/" class="lp-nolink">
             <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
-        <div class="flex flex-1 justify-end items-center gap-8">
+        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
           <LanguageSwitcher locale={locale} page={page} />
         </div>
       </div>
@@ -242,13 +242,11 @@ const description =
                     </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        Write once. <span class="text-primary">Sell in every market.</span>
+                        AI marketing system <span class="text-primary">for webshops</span> expanding internationally
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Take your webshop abroad without hiring a separate marketer or agency for each country. Write
-                        your content once – the AI produces <span class="font-bold text-primary">every language
-                        version</span>, posts it to every country's social accounts, and
-                        <span class="font-bold text-primary">sends newsletters</span> to your local subscribers.
+                        Write once in your language – Content Ninja <span class="font-bold text-primary">translates it
+                        in native quality</span> and publishes it to every country's accounts automatically.
                     </p>
 
                     <ul class="space-y-3.5 text-body">

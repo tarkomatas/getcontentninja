@@ -9,7 +9,7 @@ const description =
   'Request a free, ~20-minute online demo of Content Ninja and see live how AI creates your webshop\'s social media content.';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -216,11 +216,11 @@ const description =
     <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
-          <a href="/en/">
+          <a href="/en/" class="lp-nolink">
             <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
-        <div class="flex flex-1 justify-end items-center gap-8">
+        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
           <LanguageSwitcher locale={locale} page={page} />
         </div>
       </div>
@@ -237,13 +237,11 @@ const description =
 
                         <h1
                             class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                            Automate your <span class="text-primary">webshop's</span> social media posting
+                            AI social media posting <span class="text-primary">for webshops</span>
                         </h1>
                         <p class="text-body  text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                            Turn your webshop's products into instantly shareable social media content – AI writes the
-                            copy, edits images, <span class="font-bold text-primary  ">generates
-                                video</span> and posts for you,
-                            too.
+                            From your products, the AI writes the copy, edits the images, <span class="font-bold text-primary  ">generates
+                            video</span> and posts for you, too.
                         </p>
 
                         <ul class="space-y-3.5 text-body ">

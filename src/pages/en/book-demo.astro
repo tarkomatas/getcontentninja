@@ -9,7 +9,7 @@ const description =
   'Request a free, ~20-minute online demo of Content Ninja and see live how AI creates and publishes your social media content, and how it writes, designs and sends your newsletters – all from your own products.';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -156,11 +156,11 @@ const description =
     <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
-          <a href="/en/">
+          <a href="/en/" class="lp-nolink">
             <img src="/assets/logo.webp" alt="Content Ninja logo" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
-        <div class="flex flex-1 justify-end items-center gap-8">
+        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
           <LanguageSwitcher locale={locale} page={page} />
         </div>
       </div>
@@ -180,11 +180,11 @@ const description =
                     </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        See live how <span class="text-primary">AI automates</span> your webshop's marketing
+                        See live how the AI <span class="text-primary">posts and sends newsletters</span> for your webshop
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        In a ~20-minute online demo we'll show you how AI creates,
-                        <span class="font-bold text-primary">posts and emails out</span> your content – all from your own products.
+                        In a ~20-minute online demo we'll show you the system in action –
+                        <span class="font-bold text-primary">with your own products</span> and your own examples.
                     </p>
 
                     <ul class="space-y-3.5 text-body">

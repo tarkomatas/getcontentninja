@@ -52,7 +52,7 @@ const faqLd = {
 };
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description} keywords={keywords}>
+<BaseLayout locale={locale} page={page} title={title} description={description} keywords={keywords} lpEnabled>
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
 
   <Header locale={locale} page={page} />
@@ -69,15 +69,13 @@ const faqLd = {
                 <div class="flex flex-col gap-5 animate-fade-up">
                     <h1
                         class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        Automate your<br /><span class="text-primary">webshop's</span>
-                        content creation
+                        AI marketing system <span class="text-primary">for webshops</span>
                     </h1>
 
                     <p class="text-lg text-body leading-snug max-w-[520px]">
-                        Content Ninja's AI writes the copy, edits the images,
-                        <strong class="text-dark">generates the videos</strong> and posts for you too –
-                        and it also writes, designs and sends your <strong class="text-dark">newsletters</strong>.
-                        From your products, automatically.
+                        From your products, the AI writes the copy, edits the images,
+                        <strong class="text-dark">generates the videos</strong> and posts – and it writes, designs
+                        and sends your <strong class="text-dark">newsletters</strong>, automatically.
                     </p>
 
                     <ul class="space-y-2 text-body">

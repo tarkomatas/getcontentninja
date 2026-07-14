@@ -18,6 +18,12 @@ interface Props {
   noindex?: boolean;
   /** A <body> osztályai (alapból a marketing oldalak beállítása). */
   bodyClass?: string;
+  /**
+   * Landing (hirdetési) mód engedélyezése: ?type=ld (vagy ?lp=1) paraméterre
+   * a fejléc minimalistára vált (html.lp-mode + .lp-hide/.lp-show/.lp-nolink
+   * osztályok a global.css-ben). Jogi/technikai oldalakon ne kapcsold be.
+   */
+  lpEnabled?: boolean;
 }
 
 const {
@@ -32,6 +38,7 @@ const {
   canonical,
   noindex = false,
   bodyClass = 'bg-card text-dark font-display antialiased',
+  lpEnabled = false,
 } = Astro.props;
 
 const site = Astro.site!;
@@ -57,6 +64,18 @@ const ui = t(locale);
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Landing (hirdetési) mód: a script még az első kirajzolás előtt fut, így nincs villanás -->
+    {lpEnabled && (
+      <script is:inline>
+        (function () {
+          var q = new URLSearchParams(location.search);
+          if (q.get('type') === 'ld' || q.get('lp') === '1') {
+            document.documentElement.classList.add('lp-mode');
+          }
+        })();
+      </script>
+    )}
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}

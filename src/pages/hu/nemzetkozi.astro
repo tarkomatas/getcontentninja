@@ -9,7 +9,7 @@ const description =
   'Vidd külföldre a webshopod anélkül, hogy országonként külön csapatot vagy ügynökséget bérelnél. Írd meg a tartalmat egyszer – a Content Ninja legyártja minden nyelvi verziót, kiposztolja minden ország fiókjába, hírlevelet küld minden piac feliratkozóinak, és egy naptárban látod az egészet.';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -231,11 +231,11 @@ const description =
     <header class="border-b border-solid border-border bg-card sticky top-0 z-50 transition-all">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-2 flex items-center justify-between whitespace-nowrap">
         <div class="flex items-center gap-3 text-dark">
-          <a href="/hu/">
+          <a href="/hu/" class="lp-nolink">
             <img src="/assets/logo.webp" alt="Content Ninja logó" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
-        <div class="flex flex-1 justify-end items-center gap-8">
+        <div class="flex flex-1 justify-end items-center gap-8 lp-hide">
           <LanguageSwitcher locale={locale} page={page} />
         </div>
       </div>
@@ -255,13 +255,11 @@ const description =
                     </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        Írd meg egyszer. <span class="text-primary">Add el minden piacon.</span>
+                        AI marketing rendszer <span class="text-primary">webshopoknak</span> nemzetközi terjeszkedéshez
                     </h1>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Vidd külföldre a webshopod anélkül, hogy országonként külön marketingest vagy ügynökséget
-                        bérelnél. Írd meg a tartalmat egyszer – az AI legyártja az <span class="font-bold text-primary">összes
-                        nyelvi verziót</span>, kiposztolja minden ország közösségi fiókjába, és
-                        <span class="font-bold text-primary">hírlevelet küld</span> a helyi feliratkozóknak.
+                        Írd meg egyszer magyarul – a Content Ninja <span class="font-bold text-primary">natív minőségben
+                        lefordítja</span>, és automatikusan kiküldi minden ország fiókjába.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
