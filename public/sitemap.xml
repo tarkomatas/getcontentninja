@@ -110,6 +110,24 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Árak és kreditdíjak -->
+  <url>
+    <loc>https://getcontentninja.com/hu/arak</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/arak" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/pricing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/arak" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/arak" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/pricing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/arak" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Adatvédelmi tájékoztató (a teljes szöveg angolul, a HU oldal rá hivatkozik) -->
   <url>
     <loc>https://getcontentninja.com/hu/adatkezeles</loc>

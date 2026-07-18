@@ -9,6 +9,7 @@ export type PageKey =
   | 'international'
   | 'unas'
   | 'newsletter'
+  | 'pricing'
   | 'onlineDemo'
   | 'thanks'
   | 'privacy'
@@ -39,6 +40,10 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   unas: { hu: '/hu/unas', en: '/en/unas' },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel', en: '/en/newsletter' },
+  // Részletes ároldal: csomag, teljes kreditdíj-táblázat (#kreditek), extra
+  // kreditvásárlás, fizetés/számlázás és árazási GYIK. A landing oldalak
+  // "Részletes kreditdíjak" linkje ide mutat (korábban egy Notion doksira).
+  pricing: { hu: '/hu/arak', en: '/en/pricing' },
   // Önálló, nyelvi prefix nélküli kampány-link online konzultációhoz (Fillout-űrlap).
   // Szándékosan csak egy nyelven (HU) és prefix nélkül él – ez a brief kérése.
   onlineDemo: { hu: '/online-demo', en: null },

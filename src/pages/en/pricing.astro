@@ -1,0 +1,695 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'en';
+const page = 'pricing';
+
+const title = 'Pricing and credit costs – Content Ninja';
+const description =
+  'Content Ninja pricing: HUF 24,990 + VAT per month with 400 renewing AI credits and no lock-in. See the detailed per-operation credit costs, the extra credit pack price and how payment works.';
+const keywords =
+  'Content Ninja pricing, Content Ninja price, AI credits, credit costs, credit consumption, extra credits, subscription, AI content generation cost';
+
+const STRIPE_PORTAL = 'https://billing.stripe.com/p/login/eVqaEX1jZb0y2rY1zlgnK00';
+const STRIPE_CREDITS = 'https://buy.stripe.com/14A4gz7In5Ge0jQa5RgnK07';
+
+const faqs = [
+  {
+    q: 'How much does Content Ninja cost?',
+    a: 'Content Ninja comes in a single plan: HUF 24,990 + VAT per month, including every module and 400 renewing AI credits each month. If you book a demo, your first month is HUF 12,495 + VAT with a doubled, 800-credit allowance; from the second month the fixed HUF 24,990 + VAT per month price applies.',
+  },
+  {
+    q: 'Is there a lock-in period or a fixed-term contract?',
+    a: 'No. The subscription runs for an indefinite term and can be cancelled at any time. After cancelling you can keep using the system without restriction until the end of the current billing period, after which it simply does not renew. There is no cancellation fee and no minimum term.',
+  },
+  {
+    q: 'Is there an annual plan or a smaller, cheaper tier?',
+    a: 'Neither at the moment. We offer a single monthly plan with a 400 credits/month allowance — there is no smaller, cheaper tier and no annual prepayment option.',
+  },
+  {
+    q: 'What is an AI credit, and what can 400 of them do?',
+    a: 'Credits are the unit we bill AI operations in: every generation (post copy, image, video, newsletter) consumes a set number of credits. One post copy is 1 credit and one Nano Banana image is 2 credits, so a post with an image costs 3 credits — 400 credits a month is roughly 133 posts with images. Publishing and scheduling are not AI operations, so they never consume credits.',
+  },
+  {
+    q: 'What happens when I run out of my monthly allowance?',
+    a: 'AI-based content generation pauses until your next renewal date, while the rest of the system (calendar, scheduling, publishing, statistics) keeps working as usual. If you do not want to wait, you can buy extra credits at any time.',
+  },
+  {
+    q: 'How much do extra credits cost, and how long are they valid?',
+    a: 'There is a single extra credit pack: 400 credits for HUF 11,990 + VAT (HUF 15,227 gross, the amount charged to your card). Purchased extra credits are valid for 365 days from the date of purchase. Important: use the e-mail address you registered with when paying, otherwise we cannot match the payment to your account.',
+  },
+  {
+    q: 'Do unused monthly credits roll over to the next month?',
+    a: 'No. The 400 credits included in the monthly fee apply to that billing period only; they reset and are topped up again on each renewal date. Separately purchased extra credits are different — they stay valid for 365 days. If you cancel your subscription, unused extra credits are also forfeited at the end of the period.',
+  },
+  {
+    q: 'How does payment work? Are my card details safe?',
+    a: 'Payment is made by bank card through Stripe. We never see or store card details — they are handled exclusively by Stripe, and we only store the state of your subscription. Invoices are issued to the billing details you provided at registration, so you do not need to enter them again.',
+  },
+  {
+    q: 'How do I change my card or cancel my subscription?',
+    a: 'Both are handled in the Stripe customer portal: sign in with the e-mail address linked to your subscription and follow the link in the confirmation e-mail you receive. When replacing a card, always add the new payment method first and only then delete the old one. To cancel, open your subscription, then click cancel and confirm.',
+  },
+  {
+    q: 'Can I manage several webshops on one subscription?',
+    a: 'Yes. A single subscription can hold several brands (webshops), each with its own core information, logo and knowledge sources, and you can connect multiple social media accounts per brand — there is no limit on the number of accounts. For technical reasons we can currently provide one user per subscription.',
+  },
+  {
+    q: 'Do you refund fees already paid?',
+    a: 'Subscription fees already paid are non-refundable, except where mandatory law requires otherwise. If you cancel, the service stays active until the end of the period you paid for, so you do not lose what you have already paid.',
+  },
+  {
+    q: 'How can I track my own usage?',
+    a: 'The Usage section in the app shows your current credit balance in real time, along with a per-operation consumption history and the expiry date of your extra credits.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const textOps = [
+  { op: 'Post copy generation / regeneration', credit: '1' },
+  { op: 'Newsletter copy generation / regeneration', credit: '3' },
+  { op: 'Ad copy generation / regeneration', credit: '1' },
+  { op: 'HTML template generation for newsletters', credit: '2' },
+];
+
+const imageOps = [
+  { op: 'New AI image (Nano Banana)', credit: '2' },
+  { op: 'New AI image (Nano Banana Pro)', credit: '5' },
+  { op: 'New AI image (GPT Image)', credit: '5' },
+  { op: 'Image resizing (Nano Banana)', credit: '2' },
+  { op: 'Image resizing (Nano Banana Pro)', credit: '5' },
+  { op: 'Caption rendered onto an image', credit: '2' },
+  { op: 'Short animation from an image (WAN Video)', credit: '2' },
+  { op: 'Short animation from an image (Grok Imagine Video)', credit: '1 / sec' },
+];
+
+const videoOps = [
+  { op: 'Video script generation', credit: '1' },
+  { op: 'Video generation', credit: '1 / sec' },
+];
+
+const narrationOps = [
+  { op: 'Image generation', credit: '2 / image' },
+  { op: 'Narration generation', credit: '1' },
+  { op: 'Background music generation', credit: '1' },
+  { op: 'Subtitle generation', credit: '1' },
+  { op: 'Starting the video render + first 30 sec', credit: '5' },
+  { op: 'Each further started 30 sec', credit: '4' },
+];
+
+const freeOps = [
+  'Publishing and scheduling (Facebook, Instagram, LinkedIn)',
+  'Placing your logo onto an image',
+  'Marketing calendar, approvals, editing',
+  'Viewing statistics and comments',
+];
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  keywords={keywords}
+  lpEnabled
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
+  <Header locale={locale} page={page} />
+
+  <main>
+    <!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+    <section id="hero" class="hero-gradient py-12 md:py-24">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="max-w-[760px] mx-auto text-center flex flex-col gap-5 animate-fade-up">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">PRICING</span>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
+            One plan <span class="text-primary">for webshops</span>, at
+            <span class="text-primary">HUF 24,990 + VAT</span> a month
+          </h1>
+          <p class="text-body text-lg leading-relaxed">
+            Every module is included — posting, newsletters, image and video generation — with
+            400 renewing AI credits a month, spent according to the tables below.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 mt-1">
+            <span class="inline-flex items-center gap-2 bg-success/10 border border-success/30 text-success rounded-[10px] px-4 py-2 text-sm font-bold">
+              <span class="material-symbols-outlined text-[18px]">lock_open</span>
+              No lock-in
+            </span>
+            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
+              <span class="material-symbols-outlined text-primary text-[18px]">credit_card</span>
+              Paid via Stripe
+            </span>
+            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
+              <span class="material-symbols-outlined text-primary text-[18px]">event_repeat</span>
+              Cancel anytime
+            </span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
+            <a href="/en/book-demo" class="cta-primary px-6 h-12 text-sm w-full sm:w-auto justify-center">
+              Book a demo
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+            <a href="#credits" class="cta-secondary px-6 h-12 text-sm w-full sm:w-auto justify-center">
+              Detailed credit costs
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     PLAN
+═══════════════════════════════════════ -->
+    <section id="plan" class="bg-light py-20 md:py-28">
+      <div class="max-w-[900px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">THE PLAN</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, fixed monthly fee</h2>
+          <p class="text-body text-lg">A single tier with every feature — no surcharges, no hidden costs.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <!-- Standard subscription -->
+          <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+            <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+            <div class="flex items-baseline gap-1 mb-3">
+              <span class="text-4xl font-bold text-dark">24,990</span>
+              <span class="text-xl font-bold text-dark">HUF</span>
+              <span class="text-muted text-sm">+VAT / month</span>
+            </div>
+            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">
+              Fixed monthly fee, no hidden costs
+            </p>
+            <ul class="space-y-4 mb-8">
+              {[
+                '400 AI credits per month (renewing)',
+                'All modules: post writing, newsletters, image and video generation',
+                'Manage multiple brands (webshops) in one account',
+                'Unlimited social media accounts',
+                'Unlimited publishing and scheduling (never consumes credits)',
+                'On-brand style and tone of voice',
+                'Marketing calendar and scheduling',
+                'Continuous development and support',
+              ].map((item) => (
+                <li class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                  </div>
+                  <span class="text-body font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="/en/book-demo" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+              Book a demo
+            </a>
+          </div>
+
+          <!-- Demo bonus -->
+          <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+            <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+              First month only
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
+            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+              <span class="text-4xl font-bold text-primary">12,495</span>
+              <span class="text-xl font-bold text-dark">HUF</span>
+              <span class="text-muted text-sm">+VAT</span>
+              <span class="text-muted text-sm line-through">24,990 HUF</span>
+            </div>
+            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
+            <p class="text-body text-sm mb-4">Book a 30-minute demo and get:</p>
+            <ul class="space-y-4 mb-8">
+              {[
+                '50% off your first month',
+                '800 credits instead of 400 (double)',
+                'A personalised walkthrough',
+                'Answers to all of your questions',
+              ].map((item) => (
+                <li class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                  </div>
+                  <span class="text-body font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">
+              From the 2nd month on, the fixed 24,990 HUF / month.
+            </p>
+            <a href="/en/book-demo" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+              Book my demo
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
+          <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-primary text-[24px] shrink-0">info</span>
+            <div>
+              <h3 class="text-base font-bold text-dark mb-2">No annual plan and no smaller tier</h3>
+              <p class="text-body text-sm leading-relaxed">
+                We currently offer a single monthly plan with a 400 credits/month allowance.
+                Annual prepayment and a cheaper tier with fewer credits are not available for
+                now. If the allowance runs short, you can buy
+                <a href="#extra-credits" class="text-primary font-semibold underline">extra credits</a> at any time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     CREDITS – DETAILED COSTS
+═══════════════════════════════════════ -->
+    <section id="credits" class="bg-card py-20 md:py-28 scroll-mt-24">
+      <div class="max-w-[900px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">CREDIT COSTS</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">What does each operation cost?</h2>
+          <p class="text-body text-lg leading-relaxed">
+            Every AI operation consumes a set number of credits. Each run counts as a new
+            operation, and if you use several features at once, the credits add up.
+          </p>
+        </div>
+
+        <!-- Example -->
+        <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mb-10">
+          <h3 class="text-base font-bold text-dark mb-4">Example: one post with an AI image</h3>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 text-sm">
+            <span class="text-body">Post copy <strong class="text-dark">1 credit</strong></span>
+            <span class="text-muted hidden sm:inline">+</span>
+            <span class="text-body">AI image (GPT Image) <strong class="text-dark">5 credits</strong></span>
+            <span class="text-muted hidden sm:inline">+</span>
+            <span class="text-body">logo on the image <strong class="text-success">free</strong></span>
+            <span class="text-muted hidden sm:inline">=</span>
+            <span class="font-bold text-primary">6 credits in total</span>
+          </div>
+        </div>
+
+        <!-- Tables -->
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Text generation</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Operation</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Credits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {textOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Image generation and editing</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Operation</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Credits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {imageOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                  <tr class="border-b border-border last:border-b-0 bg-success/5">
+                    <td class="px-4 py-3 text-body">Placing your logo onto an image</td>
+                    <td class="px-4 py-3 text-success font-bold text-right whitespace-nowrap">free</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Video generation</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Operation</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Credits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {videoOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Narrated video generation</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Operation</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Credits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {narrationOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-muted text-sm mt-3">
+              A one-minute narrated video with 4 images therefore costs
+              <strong class="text-dark">20 credits</strong> in total (4×2 images + 1 narration +
+              1 music + 1 subtitles + 5 for the start and first 30 sec + 4 for the second 30 sec).
+            </p>
+          </div>
+        </div>
+
+        <!-- Free operations -->
+        <div class="bg-success/5 rounded-[16px] border border-success/20 p-5 sm:p-8 mt-10">
+          <h3 class="text-base font-bold text-dark mb-4">These never consume credits</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {freeOps.map((item) => (
+              <div class="flex items-start gap-2 text-sm text-body">
+                <span class="material-symbols-outlined text-success text-[20px] shrink-0">check_circle</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     WHAT 400 CREDITS BUY
+═══════════════════════════════════════ -->
+    <section id="what-you-get" class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">WORKED EXAMPLES</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">What do 400 credits a month buy?</h2>
+          <p class="text-body text-lg">Three typical uses — if you spent the whole allowance on just one thing.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {[
+            {
+              icon: 'edit_note',
+              title: '≈ 133 posts with images',
+              detail: 'Post copy (1) + Nano Banana image (2) = 3 credits per post',
+            },
+            {
+              icon: 'mail',
+              title: '≈ 80 newsletters',
+              detail: 'Newsletter copy (3) + HTML template (2) = 5 credits per e-mail',
+            },
+            {
+              icon: 'movie',
+              title: '≈ 20 narrated videos',
+              detail: 'A one-minute video with 4 images = 20 credits each',
+            },
+          ].map((card) => (
+            <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
+              </div>
+              <h3 class="text-xl font-bold text-dark mb-2">{card.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{card.detail}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+          <h3 class="text-xl font-bold text-dark mb-4">A realistic, mixed month</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm">
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+              <span>60 posts with images <strong class="text-dark">180</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+              <span>8 newsletters <strong class="text-dark">40</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
+              <span>4 narrated videos <strong class="text-dark">80</strong></span>
+            </div>
+            <div class="flex items-center gap-2 font-bold text-dark">
+              <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+              <span>300 credits — 100 left over</span>
+            </div>
+          </div>
+          <p class="text-muted text-sm mt-4">
+            Publishing all of this is unlimited and free on top. The Usage section in the app
+            shows your balance in real time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     EXTRA CREDITS
+═══════════════════════════════════════ -->
+    <section id="extra-credits" class="bg-card py-20 md:py-28 scroll-mt-24">
+      <div class="max-w-[900px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">EXTRA CREDITS</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">When the monthly allowance runs out</h2>
+          <p class="text-body text-lg">
+            No need to switch plans or wait for your renewal date — you can top up your balance
+            at any time.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <div class="bg-light rounded-[16px] border-2 border-primary/40 p-5 sm:p-8 flex flex-col">
+            <h3 class="text-xl font-bold mb-4 text-dark">Extra credit pack</h3>
+            <div class="flex items-baseline gap-1 mb-1">
+              <span class="text-4xl font-bold text-dark">11,990</span>
+              <span class="text-xl font-bold text-dark">HUF</span>
+              <span class="text-muted text-sm">+VAT</span>
+            </div>
+            <p class="text-muted text-sm mb-6 pb-6 border-b border-border">
+              15,227 HUF gross — the amount charged to your card
+            </p>
+            <ul class="space-y-4 mb-8">
+              {[
+                '400 credits in one pack',
+                'Valid for 365 days from purchase',
+                'Added on top of your monthly allowance',
+                'Invoiced to your registration details',
+              ].map((item) => (
+                <li class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                  </div>
+                  <span class="text-body font-medium text-sm">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={STRIPE_CREDITS}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto"
+            >
+              Buy extra credits
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+
+          <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8">
+            <h3 class="text-xl font-bold mb-5 text-dark">How the purchase works</h3>
+            <ol class="space-y-5">
+              {[
+                'Click “Buy extra credits” — you are taken to the Stripe checkout page.',
+                'Pay by bank card. You do not need to enter billing details; the invoice is issued to the details you gave at registration.',
+                'The credits appear on your balance shortly after a successful payment.',
+              ].map((step, i) => (
+                <li class="flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-full bg-primary text-white text-sm font-bold flex items-center justify-center shrink-0">
+                    {i + 1}
+                  </span>
+                  <span class="text-body text-sm leading-relaxed">{step}</span>
+                </li>
+              ))}
+            </ol>
+            <div class="bg-primary/10 rounded-[10px] px-4 py-3 mt-6">
+              <p class="text-dark font-bold text-sm">
+                Use the e-mail address you registered with when paying — otherwise we cannot
+                match the payment to your account.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     PAYMENT AND INVOICING
+═══════════════════════════════════════ -->
+    <section id="payment" class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">PAYMENT AND INVOICING</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">How the money side works</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            {
+              icon: 'credit_card',
+              title: 'Card payment',
+              body: 'Payment is processed by Stripe, monthly in advance. The subscription renews automatically for the next period until you cancel it.',
+            },
+            {
+              icon: 'shield_lock',
+              title: 'We never store card data',
+              body: 'Your card details are handled exclusively by Stripe — we never see or store them, only the state of your subscription.',
+            },
+            {
+              icon: 'receipt_long',
+              title: 'Automatic invoicing',
+              body: 'Invoices are issued to the billing details you gave at registration. Business customers see net + VAT; consumers always see the gross price before paying.',
+            },
+            {
+              icon: 'sync_alt',
+              title: 'Change your card in the portal',
+              body: 'Add a new payment method in the Stripe customer portal. Always add the new one first, and only then delete the old one.',
+            },
+          ].map((card) => (
+            <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
+              </div>
+              <h3 class="text-base font-bold text-dark mb-2">{card.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{card.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h3 class="text-xl font-bold text-dark mb-2">Managing and cancelling your subscription</h3>
+              <p class="text-body text-sm leading-relaxed max-w-[620px]">
+                There is no lock-in: you can cancel any time in the Stripe customer portal.
+                After cancelling you can keep using the system without restriction until your
+                renewal date, after which it simply does not renew. Fees already paid are not
+                refunded, but everything stays yours until the end of the period you paid for.
+              </p>
+            </div>
+            <a
+              href={STRIPE_PORTAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-secondary px-6 h-12 text-sm whitespace-nowrap justify-center shrink-0"
+            >
+              Manage subscription
+              <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+    <section id="faq" class="bg-card py-20 md:py-28">
+      <div class="max-w-[800px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FAQ</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Questions about pricing</h2>
+        </div>
+
+        <div class="space-y-3" id="faq-list">
+          {faqs.map((f) => (
+            <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+              <button
+                class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                onclick="toggleFaq(this)"
+              >
+                {f.q}
+                <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+              </button>
+              <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">{f.a}</div>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-muted text-sm text-center mt-8">
+          The full contractual conditions are set out in our
+          <a href="/en/terms" class="text-primary font-semibold underline">Terms of Service</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     CLOSING CTA
+═══════════════════════════════════════ -->
+    <section class="bg-primary py-16 md:py-20">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">See it live before you pay</h2>
+        <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+          In a 30-minute demo we show you the system running on your own webshop's products —
+          and your first month starts at half price with double credits.
+        </p>
+        <a href="/en/book-demo" class="cta-on-primary px-8 h-14 text-base inline-flex">
+          Book a demo
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer locale={locale} page={page} />
+
+  <script is:inline>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+</BaseLayout>

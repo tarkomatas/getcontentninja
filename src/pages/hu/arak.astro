@@ -1,0 +1,694 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'hu';
+const page = 'pricing';
+
+const title = 'Árak és kreditdíjak – Content Ninja';
+const description =
+  'A Content Ninja ára: 24.990 Ft + ÁFA / hó, havi 400 megújuló AI kredittel, hűségidő nélkül. Nézd meg a részletes kreditdíjakat műveletenként, az extra kreditcsomag árát és a fizetés menetét.';
+const keywords =
+  'Content Ninja ár, Content Ninja árazás, AI kredit, kreditdíjak, kreditfogyasztás, extra kredit, előfizetés, AI tartalomgyártás ára';
+
+const STRIPE_PORTAL = 'https://billing.stripe.com/p/login/eVqaEX1jZb0y2rY1zlgnK00';
+const STRIPE_CREDITS = 'https://buy.stripe.com/14A4gz7In5Ge0jQa5RgnK07';
+
+const faqs = [
+  {
+    q: 'Mennyibe kerül a Content Ninja?',
+    a: 'A Content Ninja egységes csomagban érhető el: 24.990 Ft + ÁFA / hó, ami tartalmazza az összes modult és havi 400 megújuló AI kreditet. Ha bemutatót kérsz, az első hónap 12.495 Ft + ÁFA, dupla, 800 kredites kerettel; a második hónaptól a fix 24.990 Ft + ÁFA / hó ár érvényes.',
+  },
+  {
+    q: 'Van hűségidő vagy határozott idejű szerződés?',
+    a: 'Nincs. Az előfizetés határozatlan időre szól, és bármikor lemondható. Lemondás után a hónapfordulóig még korlátlanul használhatod a rendszert, utána egyszerűen nem újul meg. Nincs felmondási díj és nincs kötelező futamidő.',
+  },
+  {
+    q: 'Van éves előfizetés vagy olcsóbb, kisebb csomag?',
+    a: 'Jelenleg egyik sincs. Egyetlen, havi díjas csomagot kínálunk 400 kredit/hó kerettel — kisebb, olcsóbb szint nem választható, és éves előrefizetéses konstrukció sem érhető el.',
+  },
+  {
+    q: 'Mi az az AI kredit, és mire elég 400?',
+    a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 400 kredit nagyjából 133 képes posztra elég. A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
+  },
+  {
+    q: 'Mi történik, ha elfogy a havi keretem?',
+    a: 'Az AI-alapú tartalomgenerálás a következő hónapfordulóig szünetel, a rendszer többi funkciója (naptár, ütemezés, publikálás, statisztikák) viszont változatlanul működik. Ha nem akarsz várni, bármikor vásárolhatsz extra kreditet.',
+  },
+  {
+    q: 'Mennyibe kerül az extra kredit, és meddig érvényes?',
+    a: 'Egyetlen extra kreditcsomag van: 400 kredit 11.990 Ft + ÁFA áron (bruttó 15.227 Ft, ennyit von le a kártyáról). A megvásárolt extra kredit a vásárlástól számított 365 napig érvényes. Fontos: fizetéskor a regisztrációkor megadott e-mail-címedet használd, különben nem tudjuk a befizetést a fiókodhoz párosítani.',
+  },
+  {
+    q: 'Átgörgethető a fel nem használt havi kredit a következő hónapra?',
+    a: 'Nem. A havidíjban foglalt 400 kredit az adott számlázási időszakra szól, és minden hónapfordulókor nullázódik, majd újratöltődik. A külön vásárolt extra kredit ettől eltérően 365 napig megmarad. Előfizetés lemondása esetén a fel nem használt extra kreditek is elvesznek az időszak végén.',
+  },
+  {
+    q: 'Hogyan történik a fizetés? Biztonságban vannak a kártyaadataim?',
+    a: 'A fizetés Stripe-on keresztül, bankkártyával történik. Kártyaadatot nem látunk és nem tárolunk — azokat kizárólag a Stripe kezeli, mi csak az előfizetésed állapotát tároljuk. A számlát a regisztrációkor megadott számlázási adatokra állítjuk ki, külön adatmegadás nem szükséges.',
+  },
+  {
+    q: 'Hogyan módosíthatom a bankkártyámat vagy mondhatom le az előfizetést?',
+    a: 'Mindkettőt a Stripe ügyfélportálján intézed: belépsz az előfizetéshez tartozó e-mail-címeddel, és a kapott megerősítő e-mail linkjén keresztül lépsz be. Kártyacserénél először mindig az új fizetési módot add hozzá, és csak utána töröld a régit. Lemondásnál kattints az előfizetésre, majd a lemondás és a megerősítés gombra.',
+  },
+  {
+    q: 'Több webshopot is kezelhetek egy előfizetéssel?',
+    a: 'Igen. Egy előfizetésen belül több brandet (webshopot) is felvehetsz, mindegyikhez saját alapinformációkkal, logóval és tudásforrásokkal, és brandenként több közösségi média fiókot is bekötsz — a fiókok száma nincs korlátozva. Technikai okokból viszont jelenleg előfizetésenként egy felhasználót tudunk biztosítani.',
+  },
+  {
+    q: 'Visszatérítitek a már kifizetett díjat?',
+    a: 'A már kifizetett előfizetési díjak nem visszatéríthetők, kivéve ha kötelező jogszabály mást ír elő. Lemondás esetén a szolgáltatás a kifizetett időszak végéig aktív marad, tehát nem veszíted el azt, amit már kifizettél.',
+  },
+  {
+    q: 'Hogyan tudom követni a saját fogyasztásomat?',
+    a: 'Az appban a Fogyasztás menüpont valós időben mutatja az aktuális kreditegyenleged, a műveletenkénti fogyasztási előzményeket és az extra kreditek lejárati dátumát.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const textOps = [
+  { op: 'Poszt szöveg generálás / újragenerálás', credit: '1' },
+  { op: 'Hírlevél szöveg generálás / újragenerálás', credit: '3' },
+  { op: 'Hirdetés szöveg generálás / újragenerálás', credit: '1' },
+  { op: 'HTML sablon generálás hírlevélhez', credit: '2' },
+];
+
+const imageOps = [
+  { op: 'Új AI kép generálása (Nano Banana)', credit: '2' },
+  { op: 'Új AI kép generálása (Nano Banana Pro)', credit: '5' },
+  { op: 'Új AI kép generálása (GPT Image)', credit: '5' },
+  { op: 'Képátméretező (Nano Banana)', credit: '2' },
+  { op: 'Képátméretező (Nano Banana Pro)', credit: '5' },
+  { op: 'Képre felirat generálása', credit: '2' },
+  { op: 'Képből rövid animáció (WAN Video)', credit: '2' },
+  { op: 'Képből rövid animáció (Grok Imagine Video)', credit: '1 / mp' },
+];
+
+const videoOps = [
+  { op: 'Videó forgatókönyv generálás', credit: '1' },
+  { op: 'Videó generálás', credit: '1 / mp' },
+];
+
+const narrationOps = [
+  { op: 'Képgenerálás', credit: '2 / kép' },
+  { op: 'Narráció generálás', credit: '1' },
+  { op: 'Háttérzene generálás', credit: '1' },
+  { op: 'Felirat generálás', credit: '1' },
+  { op: 'Videógenerálás indítása + az első 30 mp', credit: '5' },
+  { op: 'Minden további megkezdett 30 mp', credit: '4' },
+];
+
+const freeOps = [
+  'Publikálás és időzítés (Facebook, Instagram, LinkedIn)',
+  'Képre logó elhelyezése',
+  'Marketing naptár, jóváhagyás, szerkesztés',
+  'Statisztikák és kommentek megtekintése',
+];
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  keywords={keywords}
+  lpEnabled
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
+  <Header locale={locale} page={page} />
+
+  <main>
+    <!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+    <section id="hero" class="hero-gradient py-12 md:py-24">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="max-w-[760px] mx-auto text-center flex flex-col gap-5 animate-fade-up">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">ÁRAZÁS</span>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
+            Egy csomag <span class="text-primary">webshopoknak</span>, havi
+            <span class="text-primary">24.990 Ft + ÁFA</span>
+          </h1>
+          <p class="text-body text-lg leading-relaxed">
+            Minden modul benne van — posztolás, hírlevél, kép- és videógenerálás —, havi 400
+            megújuló AI kredittel, amit az alábbi táblázatok szerint használsz fel.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 mt-1">
+            <span class="inline-flex items-center gap-2 bg-success/10 border border-success/30 text-success rounded-[10px] px-4 py-2 text-sm font-bold">
+              <span class="material-symbols-outlined text-[18px]">lock_open</span>
+              Nincs hűségidő
+            </span>
+            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
+              <span class="material-symbols-outlined text-primary text-[18px]">credit_card</span>
+              Fizetés Stripe-pal
+            </span>
+            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
+              <span class="material-symbols-outlined text-primary text-[18px]">event_repeat</span>
+              Bármikor lemondható
+            </span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
+            <a href="/hu/online-bemutato" class="cta-primary px-6 h-12 text-sm w-full sm:w-auto justify-center">
+              Bemutatót kérek
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+            <a href="#kreditek" class="cta-secondary px-6 h-12 text-sm w-full sm:w-auto justify-center">
+              Részletes kreditdíjak
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     CSOMAG
+═══════════════════════════════════════ -->
+    <section id="csomag" class="bg-light py-20 md:py-28">
+      <div class="max-w-[900px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">A CSOMAG</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
+          <p class="text-body text-lg">Egyetlen szint, minden funkcióval — nincs felár, nincs rejtett költség.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <!-- Standard előfizetés -->
+          <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+            <h3 class="text-xl font-bold mb-4 text-dark">Standard előfizetés</h3>
+            <div class="flex items-baseline gap-1 mb-3">
+              <span class="text-4xl font-bold text-dark">24.990</span>
+              <span class="text-xl font-bold text-dark">Ft</span>
+              <span class="text-muted text-sm">+ÁFA / hó</span>
+            </div>
+            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">
+              Fix havidíj, rejtett költségek nélkül
+            </p>
+            <ul class="space-y-4 mb-8">
+              {[
+                '400 AI kredit havonta (megújul)',
+                'Az összes modul: posztírás, hírlevél, kép- és videógenerálás',
+                'Több brand (webshop) kezelése egy fiókon belül',
+                'Korlátlan közösségi média fiók',
+                'Korlátlan publikálás és időzítés (nem fogyaszt kreditet)',
+                'Márkahű stílus és hangnem',
+                'Marketing naptár és időzítés',
+                'Folyamatos fejlesztés és support',
+              ].map((item) => (
+                <li class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                  </div>
+                  <span class="text-body font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="/hu/online-bemutato" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+              Bemutatót kérek
+            </a>
+          </div>
+
+          <!-- Bemutató bónusz -->
+          <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+            <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+              Csak az 1. hónap
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-dark">Indulj fél áron</h3>
+            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+              <span class="text-4xl font-bold text-primary">12.495</span>
+              <span class="text-xl font-bold text-dark">Ft</span>
+              <span class="text-muted text-sm">+ÁFA</span>
+              <span class="text-muted text-sm line-through">24.990 Ft</span>
+            </div>
+            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">az első hónapra</p>
+            <p class="text-body text-sm mb-4">Foglalj egy 30 perces bemutatót, és:</p>
+            <ul class="space-y-4 mb-8">
+              {[
+                '50% kedvezmény az 1. hónapra',
+                '800 kredit 400 helyett (dupla)',
+                'Személyre szabott bemutató',
+                'Válaszolunk minden kérdésedre',
+              ].map((item) => (
+                <li class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                  </div>
+                  <span class="text-body font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">
+              A 2. hónaptól a fix 24.990 Ft / hó.
+            </p>
+            <a href="/hu/online-bemutato" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+              Lefoglalom a bemutatót
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
+          <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-primary text-[24px] shrink-0">info</span>
+            <div>
+              <h3 class="text-base font-bold text-dark mb-2">Nincs éves csomag és nincs kisebb szint</h3>
+              <p class="text-body text-sm leading-relaxed">
+                Jelenleg egységes, havi díjas csomagot kínálunk 400 kredit/hó kerettel. Éves
+                előrefizetés és olcsóbb, kevesebb kreditet tartalmazó szint egyelőre nem
+                választható. Ha a keret kevés, bármikor vásárolhatsz
+                <a href="#extra-kredit" class="text-primary font-semibold underline">extra kreditet</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     KREDITEK – RÉSZLETES DÍJAK
+═══════════════════════════════════════ -->
+    <section id="kreditek" class="bg-card py-20 md:py-28 scroll-mt-24">
+      <div class="max-w-[900px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">KREDITDÍJAK</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Mennyi kreditet visz egy művelet?</h2>
+          <p class="text-body text-lg leading-relaxed">
+            Minden AI művelet meghatározott számú kreditet használ fel. Minden futtatás új
+            műveletnek számít, és ha több funkciót használsz egyszerre, a kreditek összeadódnak.
+          </p>
+        </div>
+
+        <!-- Példa -->
+        <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mb-10">
+          <h3 class="text-base font-bold text-dark mb-4">Példa: egy képes poszt AI képpel</h3>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 text-sm">
+            <span class="text-body">Poszt szöveg <strong class="text-dark">1 kredit</strong></span>
+            <span class="text-muted hidden sm:inline">+</span>
+            <span class="text-body">AI kép (GPT Image) <strong class="text-dark">5 kredit</strong></span>
+            <span class="text-muted hidden sm:inline">+</span>
+            <span class="text-body">logó a képre <strong class="text-success">ingyenes</strong></span>
+            <span class="text-muted hidden sm:inline">=</span>
+            <span class="font-bold text-primary">összesen 6 kredit</span>
+          </div>
+        </div>
+
+        <!-- Táblázatok -->
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Szöveggenerálás</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Művelet</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Kredit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {textOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Képgenerálás és képszerkesztés</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Művelet</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Kredit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {imageOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                  <tr class="border-b border-border last:border-b-0 bg-success/5">
+                    <td class="px-4 py-3 text-body">Képre logó elhelyezése</td>
+                    <td class="px-4 py-3 text-success font-bold text-right whitespace-nowrap">ingyenes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Videógenerálás</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Művelet</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Kredit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {videoOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-dark mb-4">Narrációvideó generálás</h3>
+            <div class="overflow-x-auto rounded-[12px] border border-border">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-light">
+                    <th class="text-left font-bold text-dark px-4 py-3 border-b border-border">Művelet</th>
+                    <th class="text-right font-bold text-dark px-4 py-3 border-b border-border whitespace-nowrap">Kredit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {narrationOps.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="px-4 py-3 text-body">{row.op}</td>
+                      <td class="px-4 py-3 text-dark font-bold text-right whitespace-nowrap">{row.credit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-muted text-sm mt-3">
+              Egy 1 perces, 4 képes narrációvideó így összesen <strong class="text-dark">20 kredit</strong>
+              (4×2 kép + 1 narráció + 1 zene + 1 felirat + 5 indítás és első 30 mp + 4 a második 30 mp-re).
+            </p>
+          </div>
+        </div>
+
+        <!-- Ingyenes műveletek -->
+        <div class="bg-success/5 rounded-[16px] border border-success/20 p-5 sm:p-8 mt-10">
+          <h3 class="text-base font-bold text-dark mb-4">Ezek nem fogyasztanak kreditet</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {freeOps.map((item) => (
+              <div class="flex items-start gap-2 text-sm text-body">
+                <span class="material-symbols-outlined text-success text-[20px] shrink-0">check_circle</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     MIRE ELÉG 400 KREDIT
+═══════════════════════════════════════ -->
+    <section id="mire-eleg" class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SZÁMPÉLDÁK</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire elég havi 400 kredit?</h2>
+          <p class="text-body text-lg">Három tipikus felhasználás — ha csak egy dologra költenéd a keretet.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {[
+            {
+              icon: 'edit_note',
+              title: '≈ 133 képes poszt',
+              detail: 'Posztszöveg (1) + Nano Banana kép (2) = 3 kredit / poszt',
+            },
+            {
+              icon: 'mail',
+              title: '≈ 80 hírlevél',
+              detail: 'Hírlevél szöveg (3) + HTML sablon (2) = 5 kredit / levél',
+            },
+            {
+              icon: 'movie',
+              title: '≈ 20 narrációvideó',
+              detail: '1 perces, 4 képes videó = 20 kredit / videó',
+            },
+          ].map((card) => (
+            <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
+              </div>
+              <h3 class="text-xl font-bold text-dark mb-2">{card.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{card.detail}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+          <h3 class="text-xl font-bold text-dark mb-4">Egy reális, vegyes hónap</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm">
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+              <span>60 képes poszt <strong class="text-dark">180</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+              <span>8 hírlevél <strong class="text-dark">40</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
+              <span>4 narrációvideó <strong class="text-dark">80</strong></span>
+            </div>
+            <div class="flex items-center gap-2 font-bold text-dark">
+              <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+              <span>300 kredit — marad 100</span>
+            </div>
+          </div>
+          <p class="text-muted text-sm mt-4">
+            A publikálás mindezek mellett korlátlan és ingyenes. Az appban a Fogyasztás
+            menüpontban valós időben követheted az egyenleged.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     EXTRA KREDIT
+═══════════════════════════════════════ -->
+    <section id="extra-kredit" class="bg-card py-20 md:py-28 scroll-mt-24">
+      <div class="max-w-[900px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">EXTRA KREDIT</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ha elfogy a havi keret</h2>
+          <p class="text-body text-lg">
+            Nem kell csomagot váltanod és nem kell a hónapfordulóig várnod — bármikor
+            feltöltheted az egyenleged.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <div class="bg-light rounded-[16px] border-2 border-primary/40 p-5 sm:p-8 flex flex-col">
+            <h3 class="text-xl font-bold mb-4 text-dark">Extra kreditcsomag</h3>
+            <div class="flex items-baseline gap-1 mb-1">
+              <span class="text-4xl font-bold text-dark">11.990</span>
+              <span class="text-xl font-bold text-dark">Ft</span>
+              <span class="text-muted text-sm">+ÁFA</span>
+            </div>
+            <p class="text-muted text-sm mb-6 pb-6 border-b border-border">
+              Bruttó 15.227 Ft — ennyit von le a kártyáról
+            </p>
+            <ul class="space-y-4 mb-8">
+              {[
+                '400 kredit egy csomagban',
+                'A vásárlástól számított 365 napig érvényes',
+                'A havi keret mellé adódik hozzá',
+                'Számla a regisztrációkori adatokra',
+              ].map((item) => (
+                <li class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                  </div>
+                  <span class="text-body font-medium text-sm">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={STRIPE_CREDITS}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto"
+            >
+              Extra kredit vásárlása
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+
+          <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8">
+            <h3 class="text-xl font-bold mb-5 text-dark">A vásárlás menete</h3>
+            <ol class="space-y-5">
+              {[
+                'Kattints az „Extra kredit vásárlása" gombra — a Stripe fizetőoldalára jutsz.',
+                'Fizess bankkártyával. Számlázási adatokat nem kell megadnod, a számlát a regisztrációkori adataidra állítjuk ki.',
+                'A kreditek röviddel a sikeres fizetés után megjelennek az egyenlegeden.',
+              ].map((step, i) => (
+                <li class="flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-full bg-primary text-white text-sm font-bold flex items-center justify-center shrink-0">
+                    {i + 1}
+                  </span>
+                  <span class="text-body text-sm leading-relaxed">{step}</span>
+                </li>
+              ))}
+            </ol>
+            <div class="bg-primary/10 rounded-[10px] px-4 py-3 mt-6">
+              <p class="text-dark font-bold text-sm">
+                Fizetéskor a regisztrációkor megadott e-mail-címedet használd — különben nem
+                tudjuk a befizetést a fiókodhoz párosítani.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     FIZETÉS ÉS SZÁMLÁZÁS
+═══════════════════════════════════════ -->
+    <section id="fizetes" class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FIZETÉS ÉS SZÁMLÁZÁS</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ahogy a pénzügyek működnek</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            {
+              icon: 'credit_card',
+              title: 'Bankkártyás fizetés',
+              body: 'A fizetés a Stripe-on keresztül történik, havonta előre. Az előfizetés a következő időszakra automatikusan megújul, amíg le nem mondod.',
+            },
+            {
+              icon: 'shield_lock',
+              title: 'Kártyaadatot nem tárolunk',
+              body: 'A kártyaadataidat kizárólag a Stripe kezeli — mi nem látjuk és nem tároljuk őket, csak az előfizetésed állapotát.',
+            },
+            {
+              icon: 'receipt_long',
+              title: 'Automatikus számla',
+              body: 'A számlát a regisztrációkor megadott számlázási adatokra állítjuk ki. Cégeknek nettó + ÁFA, magánszemélyeknek a bruttó ár jelenik meg fizetés előtt.',
+            },
+            {
+              icon: 'sync_alt',
+              title: 'Kártyacsere a portálon',
+              body: 'Új fizetési módot a Stripe ügyfélportálján adhatsz hozzá. Először mindig az újat vedd fel, és csak utána töröld a régit.',
+            },
+          ].map((card) => (
+            <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
+              </div>
+              <h3 class="text-base font-bold text-dark mb-2">{card.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{card.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h3 class="text-xl font-bold text-dark mb-2">Előfizetés kezelése és lemondás</h3>
+              <p class="text-body text-sm leading-relaxed max-w-[620px]">
+                Nincs hűségidő: az előfizetést bármikor lemondhatod a Stripe ügyfélportálján.
+                Lemondás után a hónapfordulóig még korlátlanul használhatod a rendszert, utána
+                egyszerűen nem újul meg. A már kifizetett díjat nem térítjük vissza, de a
+                kifizetett időszak végéig minden funkció a tiéd marad.
+              </p>
+            </div>
+            <a
+              href={STRIPE_PORTAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-secondary px-6 h-12 text-sm whitespace-nowrap justify-center shrink-0"
+            >
+              Előfizetés kezelése
+              <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     GYIK
+═══════════════════════════════════════ -->
+    <section id="faq" class="bg-card py-20 md:py-28">
+      <div class="max-w-[800px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Kérdések az árazásról</h2>
+        </div>
+
+        <div class="space-y-3" id="faq-list">
+          {faqs.map((f) => (
+            <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+              <button
+                class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                onclick="toggleFaq(this)"
+              >
+                {f.q}
+                <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+              </button>
+              <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">{f.a}</div>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-muted text-sm text-center mt-8">
+          A teljes szerződéses feltételek az
+          <a href="/en/terms" class="text-primary font-semibold underline">ÁSZF-ben</a> olvashatók.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     ZÁRÓ CTA
+═══════════════════════════════════════ -->
+    <section class="bg-primary py-16 md:py-20">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézd meg élőben, mielőtt fizetsz</h2>
+        <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+          Egy 30 perces bemutatón megmutatjuk a rendszert a saját webshopod termékein — és az
+          első hónapod fél áron, dupla kredittel indul.
+        </p>
+        <a href="/hu/online-bemutato" class="cta-on-primary px-8 h-14 text-base inline-flex">
+          Bemutatót kérek
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer locale={locale} page={page} />
+
+  <script is:inline>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+</BaseLayout>
