@@ -39,15 +39,15 @@ const faqs = [
   },
   {
     q: 'How much do extra credits cost, and how long are they valid?',
-    a: 'There is a single extra credit pack: 400 credits for HUF 11,990 + VAT (HUF 15,227 gross, the amount charged to your card). Purchased extra credits are valid for 365 days from the date of purchase. Important: use the e-mail address you registered with when paying, otherwise we cannot match the payment to your account.',
+    a: 'There is a single extra credit pack: 400 credits for HUF 11,990 + VAT (HUF 15,227 gross, the amount charged to your card). Purchased extra credits are valid for 365 days from the date of purchase and are added on top of your monthly allowance.',
   },
   {
     q: 'Do unused monthly credits roll over to the next month?',
     a: 'No. The 400 credits included in the monthly fee apply to that billing period only; they reset and are topped up again on each renewal date. Separately purchased extra credits are different — they stay valid for 365 days. If you cancel your subscription, unused extra credits are also forfeited at the end of the period.',
   },
   {
-    q: 'How does payment work? Are my card details safe?',
-    a: 'Payment is made by bank card through Stripe. We never see or store card details — they are handled exclusively by Stripe, and we only store the state of your subscription. Invoices are issued to the billing details you provided at registration, so you do not need to enter them again.',
+    q: 'How does payment work?',
+    a: 'Payment is made by bank card through Stripe, monthly in advance. Card details are handled by Stripe, under their own security standards. Invoices are issued to the billing details you provided at registration, so you do not need to enter them again.',
   },
   {
     q: 'How do I change my card or cancel my subscription?',
@@ -59,7 +59,7 @@ const faqs = [
   },
   {
     q: 'Do you refund fees already paid?',
-    a: 'Subscription fees already paid are non-refundable, except where mandatory law requires otherwise. If you cancel, the service stays active until the end of the period you paid for, so you do not lose what you have already paid.',
+    a: 'Subscription fees already paid are non-refundable. If you cancel, the service stays active until the end of the period you paid for, so you do not lose what you have already paid.',
   },
   {
     q: 'How can I track my own usage?',
@@ -90,7 +90,6 @@ const imageOps = [
   { op: 'New AI image (GPT Image)', credit: '5' },
   { op: 'Image resizing (Nano Banana)', credit: '2' },
   { op: 'Image resizing (Nano Banana Pro)', credit: '5' },
-  { op: 'Caption rendered onto an image', credit: '2' },
   { op: 'Short animation from an image (WAN Video)', credit: '2' },
   { op: 'Short animation from an image (Grok Imagine Video)', credit: '1 / sec' },
 ];
@@ -110,7 +109,7 @@ const narrationOps = [
 ];
 
 const freeOps = [
-  'Publishing and scheduling (Facebook, Instagram, LinkedIn)',
+  'Publishing and scheduling (Facebook, Instagram)',
   'Placing your logo onto an image',
   'Marketing calendar, approvals, editing',
   'Viewing statistics and comments',
@@ -554,12 +553,6 @@ const freeOps = [
                 </li>
               ))}
             </ol>
-            <div class="bg-primary/10 rounded-[10px] px-4 py-3 mt-6">
-              <p class="text-dark font-bold text-sm">
-                Use the e-mail address you registered with when paying — otherwise we cannot
-                match the payment to your account.
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -584,13 +577,13 @@ const freeOps = [
             },
             {
               icon: 'shield_lock',
-              title: 'We never store card data',
-              body: 'Your card details are handled exclusively by Stripe — we never see or store them, only the state of your subscription.',
+              title: 'Stripe handles the payment',
+              body: 'Card payments and card details are handled on Stripe’s side, under their own security standards.',
             },
             {
               icon: 'receipt_long',
               title: 'Automatic invoicing',
-              body: 'Invoices are issued to the billing details you gave at registration. Business customers see net + VAT; consumers always see the gross price before paying.',
+              body: 'Invoices are issued to the billing details you gave at registration, with nothing to fill in again. Prices are net amounts, with VAT added on top.',
             },
             {
               icon: 'sync_alt',

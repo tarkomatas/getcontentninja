@@ -39,15 +39,15 @@ const faqs = [
   },
   {
     q: 'Mennyibe kerül az extra kredit, és meddig érvényes?',
-    a: 'Egyetlen extra kreditcsomag van: 400 kredit 11.990 Ft + ÁFA áron (bruttó 15.227 Ft, ennyit von le a kártyáról). A megvásárolt extra kredit a vásárlástól számított 365 napig érvényes. Fontos: fizetéskor a regisztrációkor megadott e-mail-címedet használd, különben nem tudjuk a befizetést a fiókodhoz párosítani.',
+    a: 'Egyetlen extra kreditcsomag van: 400 kredit 11.990 Ft + ÁFA áron (bruttó 15.227 Ft, ennyit von le a kártyáról). A megvásárolt extra kredit a vásárlástól számított 365 napig érvényes, és a havi kereted mellé adódik hozzá.',
   },
   {
     q: 'Átgörgethető a fel nem használt havi kredit a következő hónapra?',
     a: 'Nem. A havidíjban foglalt 400 kredit az adott számlázási időszakra szól, és minden hónapfordulókor nullázódik, majd újratöltődik. A külön vásárolt extra kredit ettől eltérően 365 napig megmarad. Előfizetés lemondása esetén a fel nem használt extra kreditek is elvesznek az időszak végén.',
   },
   {
-    q: 'Hogyan történik a fizetés? Biztonságban vannak a kártyaadataim?',
-    a: 'A fizetés Stripe-on keresztül, bankkártyával történik. Kártyaadatot nem látunk és nem tárolunk — azokat kizárólag a Stripe kezeli, mi csak az előfizetésed állapotát tároljuk. A számlát a regisztrációkor megadott számlázási adatokra állítjuk ki, külön adatmegadás nem szükséges.',
+    q: 'Hogyan történik a fizetés?',
+    a: 'A fizetés bankkártyával, a Stripe felületén keresztül történik, havonta előre. A kártyaadatok kezelését a Stripe végzi, a saját biztonsági szabványai szerint. A számlát a regisztrációkor megadott számlázási adatokra állítjuk ki, külön adatmegadás nem szükséges.',
   },
   {
     q: 'Hogyan módosíthatom a bankkártyámat vagy mondhatom le az előfizetést?',
@@ -59,7 +59,7 @@ const faqs = [
   },
   {
     q: 'Visszatérítitek a már kifizetett díjat?',
-    a: 'A már kifizetett előfizetési díjak nem visszatéríthetők, kivéve ha kötelező jogszabály mást ír elő. Lemondás esetén a szolgáltatás a kifizetett időszak végéig aktív marad, tehát nem veszíted el azt, amit már kifizettél.',
+    a: 'A már kifizetett előfizetési díjak nem visszatéríthetők. Lemondás esetén a szolgáltatás a kifizetett időszak végéig aktív marad, tehát nem veszíted el azt, amit már kifizettél.',
   },
   {
     q: 'Hogyan tudom követni a saját fogyasztásomat?',
@@ -90,7 +90,6 @@ const imageOps = [
   { op: 'Új AI kép generálása (GPT Image)', credit: '5' },
   { op: 'Képátméretező (Nano Banana)', credit: '2' },
   { op: 'Képátméretező (Nano Banana Pro)', credit: '5' },
-  { op: 'Képre felirat generálása', credit: '2' },
   { op: 'Képből rövid animáció (WAN Video)', credit: '2' },
   { op: 'Képből rövid animáció (Grok Imagine Video)', credit: '1 / mp' },
 ];
@@ -110,7 +109,7 @@ const narrationOps = [
 ];
 
 const freeOps = [
-  'Publikálás és időzítés (Facebook, Instagram, LinkedIn)',
+  'Publikálás és időzítés (Facebook, Instagram)',
   'Képre logó elhelyezése',
   'Marketing naptár, jóváhagyás, szerkesztés',
   'Statisztikák és kommentek megtekintése',
@@ -553,12 +552,6 @@ const freeOps = [
                 </li>
               ))}
             </ol>
-            <div class="bg-primary/10 rounded-[10px] px-4 py-3 mt-6">
-              <p class="text-dark font-bold text-sm">
-                Fizetéskor a regisztrációkor megadott e-mail-címedet használd — különben nem
-                tudjuk a befizetést a fiókodhoz párosítani.
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -583,13 +576,13 @@ const freeOps = [
             },
             {
               icon: 'shield_lock',
-              title: 'Kártyaadatot nem tárolunk',
-              body: 'A kártyaadataidat kizárólag a Stripe kezeli — mi nem látjuk és nem tároljuk őket, csak az előfizetésed állapotát.',
+              title: 'A Stripe kezeli a fizetést',
+              body: 'A bankkártyás fizetés és a kártyaadatok kezelése a Stripe felületén, annak saját biztonsági szabványai szerint történik.',
             },
             {
               icon: 'receipt_long',
               title: 'Automatikus számla',
-              body: 'A számlát a regisztrációkor megadott számlázási adatokra állítjuk ki. Cégeknek nettó + ÁFA, magánszemélyeknek a bruttó ár jelenik meg fizetés előtt.',
+              body: 'A számlát a regisztrációkor megadott számlázási adatokra állítjuk ki, külön adatmegadás nélkül. Az árak nettó összegek, amelyekre ÁFA rakódik.',
             },
             {
               icon: 'sync_alt',
