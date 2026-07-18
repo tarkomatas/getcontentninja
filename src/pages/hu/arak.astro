@@ -12,8 +12,9 @@ const description =
 const keywords =
   'Content Ninja ár, Content Ninja árazás, AI kredit, kreditdíjak, kreditfogyasztás, extra kredit, előfizetés, AI tartalomgyártás ára';
 
-const STRIPE_PORTAL = 'https://billing.stripe.com/p/login/eVqaEX1jZb0y2rY1zlgnK00';
-const STRIPE_CREDITS = 'https://buy.stripe.com/14A4gz7In5Ge0jQa5RgnK07';
+// A kreditvásárlás és az előfizetés-kezelés az appon keresztül indul (nem
+// közvetlen Stripe-linkkel), így a felhasználó előbb belép a saját fiókjába.
+const APP_URL = 'https://app.getcontentninja.com';
 
 const faqs = [
   {
@@ -50,7 +51,7 @@ const faqs = [
   },
   {
     q: 'Hogyan módosíthatom a bankkártyámat vagy mondhatom le az előfizetést?',
-    a: 'Mindkettőt a Stripe ügyfélportálján intézed: belépsz az előfizetéshez tartozó e-mail-címeddel, és a kapott megerősítő e-mail linkjén keresztül lépsz be. Kártyacserénél először mindig az új fizetési módot add hozzá, és csak utána töröld a régit. Lemondásnál kattints az előfizetésre, majd a lemondás és a megerősítés gombra.',
+    a: 'Mindkettőt az appból intézheted, miután beléptél a fiókodba. Kártyacserénél először mindig az új fizetési módot add hozzá, és csak utána töröld a régit. Lemondásnál nyisd meg az előfizetésed, majd erősítsd meg a lemondást — a hónapfordulóig utána is használhatod a rendszert.',
   },
   {
     q: 'Több webshopot is kezelhetek egy előfizetéssel?',
@@ -526,7 +527,7 @@ const freeOps = [
               ))}
             </ul>
             <a
-              href={STRIPE_CREDITS}
+              href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto"
@@ -540,8 +541,8 @@ const freeOps = [
             <h3 class="text-xl font-bold mb-5 text-dark">A vásárlás menete</h3>
             <ol class="space-y-5">
               {[
-                'Kattints az „Extra kredit vásárlása" gombra — a Stripe fizetőoldalára jutsz.',
-                'Fizess bankkártyával. Számlázási adatokat nem kell megadnod, a számlát a regisztrációkori adataidra állítjuk ki.',
+                'Lépj be az appba, és indítsd el a kreditvásárlást a saját fiókodból.',
+                'Fizess bankkártyával a Stripe felületén. Számlázási adatokat nem kell megadnod, a számlát a regisztrációkori adataidra állítjuk ki.',
                 'A kreditek röviddel a sikeres fizetés után megjelennek az egyenlegeden.',
               ].map((step, i) => (
                 <li class="flex items-start gap-3">
@@ -592,8 +593,8 @@ const freeOps = [
             },
             {
               icon: 'sync_alt',
-              title: 'Kártyacsere a portálon',
-              body: 'Új fizetési módot a Stripe ügyfélportálján adhatsz hozzá. Először mindig az újat vedd fel, és csak utána töröld a régit.',
+              title: 'Kártyacsere az appból',
+              body: 'Új fizetési módot az appba belépve adhatsz hozzá. Először mindig az újat vedd fel, és csak utána töröld a régit.',
             },
           ].map((card) => (
             <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
@@ -611,14 +612,14 @@ const freeOps = [
             <div>
               <h3 class="text-xl font-bold text-dark mb-2">Előfizetés kezelése és lemondás</h3>
               <p class="text-body text-sm leading-relaxed max-w-[620px]">
-                Nincs hűségidő: az előfizetést bármikor lemondhatod a Stripe ügyfélportálján.
+                Nincs hűségidő: az előfizetést bármikor lemondhatod, miután beléptél az appba.
                 Lemondás után a hónapfordulóig még korlátlanul használhatod a rendszert, utána
                 egyszerűen nem újul meg. A már kifizetett díjat nem térítjük vissza, de a
                 kifizetett időszak végéig minden funkció a tiéd marad.
               </p>
             </div>
             <a
-              href={STRIPE_PORTAL}
+              href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               class="cta-secondary px-6 h-12 text-sm whitespace-nowrap justify-center shrink-0"

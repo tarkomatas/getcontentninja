@@ -12,8 +12,9 @@ const description =
 const keywords =
   'Content Ninja pricing, Content Ninja price, AI credits, credit costs, credit consumption, extra credits, subscription, AI content generation cost';
 
-const STRIPE_PORTAL = 'https://billing.stripe.com/p/login/eVqaEX1jZb0y2rY1zlgnK00';
-const STRIPE_CREDITS = 'https://buy.stripe.com/14A4gz7In5Ge0jQa5RgnK07';
+// Buying credits and managing the subscription both start in the app (rather
+// than via a direct Stripe link), so the user signs in to their account first.
+const APP_URL = 'https://app.getcontentninja.com';
 
 const faqs = [
   {
@@ -50,7 +51,7 @@ const faqs = [
   },
   {
     q: 'How do I change my card or cancel my subscription?',
-    a: 'Both are handled in the Stripe customer portal: sign in with the e-mail address linked to your subscription and follow the link in the confirmation e-mail you receive. When replacing a card, always add the new payment method first and only then delete the old one. To cancel, open your subscription, then click cancel and confirm.',
+    a: 'Both are handled in the app once you are signed in to your account. When replacing a card, always add the new payment method first and only then delete the old one. To cancel, open your subscription and confirm the cancellation — you can keep using the system until your renewal date.',
   },
   {
     q: 'Can I manage several webshops on one subscription?',
@@ -527,7 +528,7 @@ const freeOps = [
               ))}
             </ul>
             <a
-              href={STRIPE_CREDITS}
+              href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto"
@@ -541,8 +542,8 @@ const freeOps = [
             <h3 class="text-xl font-bold mb-5 text-dark">How the purchase works</h3>
             <ol class="space-y-5">
               {[
-                'Click “Buy extra credits” — you are taken to the Stripe checkout page.',
-                'Pay by bank card. You do not need to enter billing details; the invoice is issued to the details you gave at registration.',
+                'Sign in to the app and start the credit purchase from your own account.',
+                'Pay by bank card through Stripe. You do not need to enter billing details; the invoice is issued to the details you gave at registration.',
                 'The credits appear on your balance shortly after a successful payment.',
               ].map((step, i) => (
                 <li class="flex items-start gap-3">
@@ -593,8 +594,8 @@ const freeOps = [
             },
             {
               icon: 'sync_alt',
-              title: 'Change your card in the portal',
-              body: 'Add a new payment method in the Stripe customer portal. Always add the new one first, and only then delete the old one.',
+              title: 'Change your card in the app',
+              body: 'Add a new payment method after signing in to the app. Always add the new one first, and only then delete the old one.',
             },
           ].map((card) => (
             <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
@@ -612,14 +613,14 @@ const freeOps = [
             <div>
               <h3 class="text-xl font-bold text-dark mb-2">Managing and cancelling your subscription</h3>
               <p class="text-body text-sm leading-relaxed max-w-[620px]">
-                There is no lock-in: you can cancel any time in the Stripe customer portal.
+                There is no lock-in: you can cancel any time once you are signed in to the app.
                 After cancelling you can keep using the system without restriction until your
                 renewal date, after which it simply does not renew. Fees already paid are not
                 refunded, but everything stays yours until the end of the period you paid for.
               </p>
             </div>
             <a
-              href={STRIPE_PORTAL}
+              href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               class="cta-secondary px-6 h-12 text-sm whitespace-nowrap justify-center shrink-0"
