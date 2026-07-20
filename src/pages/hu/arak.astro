@@ -81,15 +81,13 @@ const textOps = [
   { op: 'Poszt szöveg generálás / újragenerálás', credit: '1' },
   { op: 'Hírlevél szöveg generálás / újragenerálás', credit: '3' },
   { op: 'Hirdetés szöveg generálás / újragenerálás', credit: '1' },
-  { op: 'HTML sablon generálás hírlevélhez', credit: '2' },
+  { op: 'HTML sablon generálás hírlevélhez (egyszeri)', credit: '2' },
 ];
 
 const imageOps = [
-  { op: 'Új AI kép generálása (Nano Banana)', credit: '2' },
-  { op: 'Új AI kép generálása (Nano Banana Pro)', credit: '5' },
-  { op: 'Új AI kép generálása (GPT Image)', credit: '5' },
-  { op: 'Képátméretező (Nano Banana)', credit: '2' },
-  { op: 'Képátméretező (Nano Banana Pro)', credit: '5' },
+  { op: 'Új / meglévő kép generálása (Nano Banana)', credit: '2' },
+  { op: 'Új / meglévő kép generálása (Nano Banana Pro)', credit: '5' },
+  { op: 'Új / meglévő kép generálása (GPT Image)', credit: '5' },
   { op: 'Képből rövid animáció (WAN Video)', credit: '2' },
   { op: 'Képből rövid animáció (Grok Imagine Video)', credit: '1 / mp' },
 ];
@@ -112,7 +110,8 @@ const freeOps = [
   'Publikálás és időzítés (Facebook, Instagram)',
   'Képre logó elhelyezése',
   'Marketing naptár, jóváhagyás, szerkesztés',
-  'Statisztikák és kommentek megtekintése',
+  'Statisztikák megtekintése',
+  'Az első hozzászólás megírása a poszt alá',
 ];
 ---
 
@@ -352,6 +351,10 @@ const freeOps = [
                 </tbody>
               </table>
             </div>
+            <p class="text-muted text-sm mt-3">
+              Az új kép generálása és a meglévő kép szerkesztése ugyanannyi kreditbe kerül — csak
+              a választott modell számít.
+            </p>
           </div>
 
           <div>
@@ -439,7 +442,8 @@ const freeOps = [
             {
               icon: 'mail',
               title: '≈ 80 hírlevél',
-              detail: 'Hírlevél szöveg (3) + HTML sablon (2) = 5 kredit / levél',
+              detail:
+                'Hírlevél szöveg (3) + 1 kép, Nano Banana (2) = 5 kredit / levél. A HTML sablont elég egyszer legenerálni.',
             },
             {
               icon: 'movie',
