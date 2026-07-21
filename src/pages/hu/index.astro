@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import { videos, hasVideo } from '../../data/videos';
 
 const locale = 'hu';
 const page = 'home';
@@ -272,6 +274,31 @@ const faqLd = {
             </div>
         </div>
     </section>
+
+
+    <!-- ═══════════════════════════════════════
+     MŰKÖDÉS KÖZBEN (videós bemutató)
+═══════════════════════════════════════ -->
+    {hasVideo(videos.overview) && (
+    <section id="bemutato-video" class="bg-dark py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[900px] mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-white/60 font-bold text-sm uppercase tracking-widest block mb-3">Működés közben</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white leading-tight">Nézd meg, mielőtt kipróbálod</h2>
+                <p class="text-white/70 leading-relaxed max-w-[640px] mx-auto">Pár perc alatt végigvezetünk a rendszeren:
+                    a webshop összekötésétől a kész, publikált posztig.</p>
+            </div>
+
+            <VideoEmbed id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
+
+            <div class="text-center mt-10">
+                <a href="/hu/online-bemutato" class="cta-primary px-8 py-4 text-base">
+                    Bemutatót kérek – díjmentes
+                </a>
+            </div>
+        </div>
+    </section>
+    )}
 
 
     <!-- ═══════════════════════════════════════

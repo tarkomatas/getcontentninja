@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import { videos, hasVideo } from '../../data/videos';
 
 const locale = 'hu';
 const page = 'newsletter';
@@ -501,6 +503,22 @@ const description =
             </div>
         </div>
     </section>
+
+    <!-- 1.5 Videós bemutató -->
+    {hasVideo(videos.newsletter) && (
+    <section id="bemutato-video" class="bg-dark py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-10">
+                <span class="text-white/60 font-bold text-sm uppercase tracking-widest block mb-3">Működés közben</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white leading-tight">Így készül a hírleveled</h2>
+                <p class="text-white/70 leading-relaxed max-w-[640px] mx-auto">Végignézheted, hogyan lesz a webshopod
+                    termékeiből kiküldött hírlevél – a szövegtől a dizájnon át a kiküldésig.</p>
+            </div>
+
+            <VideoEmbed id={videos.newsletter} label="AI hírlevél bemutató videó lejátszása" />
+        </div>
+    </section>
+    )}
 
     <!-- 2. Feature: MailerLite + Salesautopilot integráció -->
     <section class="bg-card py-20 md:py-28">

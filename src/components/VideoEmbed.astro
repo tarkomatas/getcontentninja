@@ -1,0 +1,87 @@
+---
+/**
+ * Consent-barát YouTube beágyazás.
+ *
+ * A YouTube iframe csak kattintásra töltődik be (`youtube-nocookie.com`), addig
+ * csak egy cookie-mentes borítókép látszik a ytimg CDN-ről. Így a cookie-banner
+ * elfogadása nélkül sem kerül YouTube-süti a látogatóhoz, és a szekció nem
+ * lassítja az oldal betöltését.
+ */
+interface Props {
+    /** A YouTube videó azonosítója (a ?v= utáni rész). */
+    id: string;
+    /** Kisegítő címke a lejátszó gombra – lokalizált, pl. „Bemutató videó lejátszása”. */
+    label: string;
+    /** Saját borítókép a `public/assets/`-ből; alapból a YouTube maxres thumbnailje. */
+    poster?: string;
+    /** Az iframe `title` attribútuma; alapból a `label`. */
+    title?: string;
+}
+
+const { id, label, poster, title } = Astro.props;
+// A `maxresdefault` csak akkor létezik, ha a videó legalább 720p-ben lett
+// feltöltve – ha nincs, a `hqdefault`-ra esünk vissza (lásd az onerror-t).
+const posterSrc = poster ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+const posterFallback = poster ? undefined : `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+
+<div
+    class="relative w-full aspect-video rounded-[16px] overflow-hidden border border-border shadow-card bg-dark"
+    data-yt-facade
+    data-yt-id={id}
+    data-yt-title={title ?? label}
+>
+    <button
+        type="button"
+        class="group absolute inset-0 w-full h-full cursor-pointer"
+        aria-label={label}
+    >
+        <img
+            src={posterSrc}
+            alt=""
+            width="1280"
+            height="720"
+            loading="lazy"
+            data-poster-fallback={posterFallback}
+            class="absolute inset-0 w-full h-full object-cover"
+        />
+        <span class="absolute inset-0 bg-dark/25 transition-colors group-hover:bg-dark/10"></span>
+        <span
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[68px] h-[68px] rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow transition-transform group-hover:scale-110"
+        >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5v14l11-7z"></path>
+            </svg>
+        </span>
+    </button>
+</div>
+
+<script>
+    document.querySelectorAll<HTMLElement>('[data-yt-facade]').forEach((facade) => {
+        const button = facade.querySelector('button');
+        if (!button) return;
+
+        const poster = facade.querySelector('img');
+        const fallback = poster?.dataset.posterFallback;
+        if (poster && fallback) {
+            poster.addEventListener(
+                'error',
+                () => {
+                    poster.src = fallback;
+                },
+                { once: true },
+            );
+        }
+
+        button.addEventListener('click', () => {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${facade.dataset.ytId}?autoplay=1&rel=0`;
+            iframe.title = facade.dataset.ytTitle ?? '';
+            iframe.allow =
+                'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.className = 'absolute inset-0 w-full h-full border-0';
+            facade.replaceChildren(iframe);
+        });
+    });
+</script>
