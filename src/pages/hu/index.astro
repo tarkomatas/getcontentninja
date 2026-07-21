@@ -233,12 +233,16 @@ const faqLd = {
         <div class="max-w-[1200px] mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-                <!-- Bal: négyzetes illusztráció -->
+                <!-- Bal: videós bemutató (ha nincs videó, marad az illusztráció) -->
                 <div class="relative order-1">
                     <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                    <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
-                        alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
-                        loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto" />
+                    {hasVideo(videos.overview) ? (
+                        <VideoEmbed id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
+                    ) : (
+                        <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
+                            alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
+                            loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto" />
+                    )}
                 </div>
 
                 <!-- Jobb: rövid szöveg -->
@@ -274,31 +278,6 @@ const faqLd = {
             </div>
         </div>
     </section>
-
-
-    <!-- ═══════════════════════════════════════
-     MŰKÖDÉS KÖZBEN (videós bemutató)
-═══════════════════════════════════════ -->
-    {hasVideo(videos.overview) && (
-    <section id="bemutato-video" class="bg-dark py-20 md:py-28 px-4 md:px-10">
-        <div class="max-w-[900px] mx-auto">
-            <div class="text-center mb-10">
-                <span class="text-white/60 font-bold text-sm uppercase tracking-widest block mb-3">Működés közben</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white leading-tight">Nézd meg, mielőtt kipróbálod</h2>
-                <p class="text-white/70 leading-relaxed max-w-[640px] mx-auto">Pár perc alatt végigvezetünk a rendszeren:
-                    a webshop összekötésétől a kész, publikált posztig.</p>
-            </div>
-
-            <VideoEmbed id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
-
-            <div class="text-center mt-10">
-                <a href="/hu/online-bemutato" class="cta-primary px-8 py-4 text-base">
-                    Bemutatót kérek – díjmentes
-                </a>
-            </div>
-        </div>
-    </section>
-    )}
 
 
     <!-- ═══════════════════════════════════════
