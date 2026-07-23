@@ -74,20 +74,20 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- UNAS integráció -->
+  <!-- Webshop mélyintegráció (Unas + Shoprenter) -->
   <url>
-    <loc>https://getcontentninja.com/hu/unas</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/unas" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/unas" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/unas" />
+    <loc>https://getcontentninja.com/hu/webshop-integracio</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/webshop-integracio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/store-integration" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/webshop-integracio" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/unas</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/unas" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/unas" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/unas" />
+    <loc>https://getcontentninja.com/en/store-integration</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/webshop-integracio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/store-integration" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/webshop-integracio" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

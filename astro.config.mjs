@@ -14,6 +14,9 @@ export default defineConfig({
   redirects: {
     '/hu/aszf': '/en/terms',
     '/hu/bemutato': '/hu/posztolas',
+    // A régi UNAS-slugok az új, általános webshop-mélyintegráció oldalra.
+    '/hu/unas': '/hu/webshop-integracio',
+    '/en/unas': '/en/store-integration',
   },
   i18n: {
     defaultLocale: 'hu',

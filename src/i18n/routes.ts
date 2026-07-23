@@ -7,7 +7,7 @@ export type PageKey =
   | 'demo'
   | 'bookDemo'
   | 'international'
-  | 'unas'
+  | 'webshopIntegration'
   | 'newsletter'
   | 'pricing'
   | 'onlineDemo'
@@ -36,8 +36,8 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   bookDemo: { hu: '/hu/online-bemutato', en: '/en/book-demo' },
   // Nemzetközi terjeszkedés kampányoldal – kétnyelvű, rövid slug.
   international: { hu: '/hu/nemzetkozi', en: '/en/international' },
-  // UNAS-integráció kampányoldal – kétnyelvű, rövid slug.
-  unas: { hu: '/hu/unas', en: '/en/unas' },
+  // Webshop mélyintegráció kampányoldal (Unas + Shoprenter) – kétnyelvű.
+  webshopIntegration: { hu: '/hu/webshop-integracio', en: '/en/store-integration' },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel', en: '/en/newsletter' },
   // Részletes ároldal: csomag, teljes kreditdíj-táblázat (#kreditek), extra

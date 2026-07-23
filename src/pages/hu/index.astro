@@ -169,6 +169,10 @@ const faqLd = {
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">Az AI a termékeidből szöveget ír, képet és
                         videót készít, majd időzítve ki is posztolja helyetted – Facebookra és Instagramra.
                         Neked csak jóvá kell hagynod, ha szeretnéd.</p>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGradPost" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradPost)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
+                    </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Nézd meg
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
@@ -185,6 +189,10 @@ const faqLd = {
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">Az AI megírja, megtervezi és képekkel tölti
                         fel a hírleveleidet, majd a MailerLite vagy Salesautopilot fiókodból automatikusan ki is küldi –
                         akár egész kampánysorozatot.</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="/assets/mailerlite-logo.png" alt="MailerLite" class="h-[18px] w-auto" loading="lazy" />
+                        <img src="/assets/salesautopilot-logo.png" alt="Salesautopilot" class="h-6 w-auto" loading="lazy" />
+                    </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Részletek
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
@@ -200,21 +208,32 @@ const faqLd = {
                     <h3 class="font-bold text-xl mb-2 text-dark">Nemzetközi terjeszkedés</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">Több országban, több nyelven? Egy tartalomból
                         minden nyelvi verzió, minden ország közösségi fiókja egy naptárban.</p>
+                    <div class="flex items-center gap-1.5 mb-4">
+                        <span role="img" aria-label="Németország" class="inline-flex w-[22px] h-[22px] rounded-[6px] overflow-hidden border border-border shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="8" fill="#000"/><rect width="24" height="8" y="8" fill="#DD0000"/><rect width="24" height="8" y="16" fill="#FFCE00"/></svg></span>
+                        <span role="img" aria-label="Franciaország" class="inline-flex w-[22px] h-[22px] rounded-[6px] overflow-hidden border border-border shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect width="8" height="24" fill="#0055A4"/><rect width="8" height="24" x="8" fill="#fff"/><rect width="8" height="24" x="16" fill="#EF4135"/></svg></span>
+                        <span role="img" aria-label="Olaszország" class="inline-flex w-[22px] h-[22px] rounded-[6px] overflow-hidden border border-border shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect width="8" height="24" fill="#009246"/><rect width="8" height="24" x="8" fill="#fff"/><rect width="8" height="24" x="16" fill="#CE2B37"/></svg></span>
+                        <span role="img" aria-label="Lengyelország" class="inline-flex w-[22px] h-[22px] rounded-[6px] overflow-hidden border border-border shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="12" fill="#fff"/><rect width="24" height="12" y="12" fill="#DC143C"/></svg></span>
+                        <span class="text-xs text-muted font-medium ml-0.5">+ több piac</span>
+                    </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Részletek
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
                     </span>
                 </a>
 
-                <!-- UNAS integráció -->
-                <a href="/hu/unas"
+                <!-- Webshop mélyintegráció -->
+                <a href="/hu/webshop-integracio"
                     class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">storefront</span>
                     </div>
-                    <h3 class="font-bold text-xl mb-2 text-dark">UNAS integráció</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Kösd be az UNAS webshopod pár kattintással –
-                        az AI onnantól látja az összes terméked, és csak a top, raktáron lévő darabokból gyárt posztokat.</p>
+                    <h3 class="font-bold text-xl mb-2 text-dark">Webshop mélyintegráció</h3>
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Kösd be az Unas vagy Shoprenter webshopod pár
+                        kattintással – az AI onnantól látja az összes terméked, és valós termékadatokból gyárt posztokat.</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
+                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                    </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Részletek
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
@@ -303,7 +322,10 @@ const faqLd = {
                             </div>
                             <div>
                                 <p class="font-semibold text-dark text-[15px] leading-tight">Közösségi média</p>
-                                <p class="text-body text-sm">Facebook, Instagram</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" aria-label="Facebook" role="img"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" aria-label="Instagram" role="img"><defs><linearGradient id="igGradIntg" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradIntg)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
+                                </div>
                             </div>
                         </li>
                         <li class="flex items-center gap-3">
@@ -312,7 +334,11 @@ const faqLd = {
                             </div>
                             <div>
                                 <p class="font-semibold text-dark text-[15px] leading-tight">Webáruház</p>
-                                <p class="text-body text-sm">Unas, Sitemap <span class="text-muted">(bármely webshop)</span></p>
+                                <div class="flex items-center gap-2.5 mt-1 flex-wrap">
+                                    <img src="/assets/unas_logo.png" alt="Unas" class="h-4 w-auto" loading="lazy" />
+                                    <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-4 w-auto" loading="lazy" />
+                                    <span class="text-body text-sm">+ Sitemap <span class="text-muted">(bármely webshop)</span></span>
+                                </div>
                             </div>
                         </li>
                         <li class="flex items-center gap-3">
@@ -321,7 +347,10 @@ const faqLd = {
                             </div>
                             <div>
                                 <p class="font-semibold text-dark text-[15px] leading-tight">Hírlevél</p>
-                                <p class="text-body text-sm">SalesAutopilot, MailerLite</p>
+                                <div class="flex items-center gap-2.5 mt-1">
+                                    <img src="/assets/mailerlite-logo.png" alt="MailerLite" class="h-4 w-auto" loading="lazy" />
+                                    <img src="/assets/salesautopilot-logo.png" alt="Salesautopilot" class="h-5 w-auto" loading="lazy" />
+                                </div>
                             </div>
                         </li>
                         <li class="flex items-center gap-3">
@@ -352,7 +381,7 @@ const faqLd = {
                 <div class="order-1 lg:order-2 relative">
                     <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
                     <img src="/assets/integraciok-hub.webp"
-                        alt="Content Ninja integrációs hub: Unas, Sitemap és RSS források bekötve, majd publikálás Facebookra, Instagramra, SalesAutopilotba és MailerLite-ba"
+                        alt="Content Ninja integrációs hub: Unas, Shoprenter, Sitemap és RSS források bekötve, majd publikálás Facebookra, Instagramra, SalesAutopilotba és MailerLite-ba"
                         loading="lazy" class="w-full h-auto block">
                 </div>
 
@@ -835,8 +864,8 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A rendszer közvetlenül a webshopodhoz kapcsolódik (Unas integrációval vagy bármilyen webshop-hoz
-                        sitemap-on keresztül), és
+                        A rendszer közvetlenül a webshopodhoz kapcsolódik (Unas vagy Shoprenter integrációval, vagy
+                        bármely webshophoz sitemap-on keresztül), és
                         automatikusan lekéri a termékadatokat – leírást, képeket, árakat. Ezekből az AI szöveget ír,
                         brandazonos képet és videót szerkeszt, majd az általad jóváhagyott ütemezés szerint publikálja a
                         posztokat. Az egész folyamat teljesen automatizálható.
