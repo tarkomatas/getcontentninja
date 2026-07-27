@@ -92,6 +92,24 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Shopgrade (termékleírás-újraírás, kategóriaoldal-író, termékkép-szerkesztő) -->
+  <url>
+    <loc>https://getcontentninja.com/hu/shopgrade</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/shopgrade" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/shopgrade" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/shopgrade" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/shopgrade</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/shopgrade" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/shopgrade" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/shopgrade" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Hírlevél-generálás -->
   <url>
     <loc>https://getcontentninja.com/hu/hirlevel</loc>

@@ -8,6 +8,7 @@ export type PageKey =
   | 'bookDemo'
   | 'international'
   | 'webshopIntegration'
+  | 'shopgrade'
   | 'newsletter'
   | 'pricing'
   | 'onlineDemo'
@@ -38,6 +39,10 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   international: { hu: '/hu/nemzetkozi', en: '/en/international' },
   // Webshop mélyintegráció kampányoldal (Unas + Shoprenter) – kétnyelvű.
   webshopIntegration: { hu: '/hu/webshop-integracio', en: '/en/store-integration' },
+  // Shopgrade modul: a webáruház meglévő tartalmát optimalizálja (termékleírás
+  // újraírás + visszatöltés; hamarosan kategóriaoldal-író és termékkép-szerkesztő).
+  // A slug szándékosan a modul neve, hogy a későbbi almodulok is beleférjenek.
+  shopgrade: { hu: '/hu/shopgrade', en: '/en/shopgrade' },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel', en: '/en/newsletter' },
   // Részletes ároldal: csomag, teljes kreditdíj-táblázat (#kreditek), extra

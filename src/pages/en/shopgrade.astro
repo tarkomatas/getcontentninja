@@ -1,0 +1,1285 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+
+const locale = 'en';
+const page = 'shopgrade';
+const title = 'Shopgrade – AI content optimization for Unas & Shoprenter stores | Content Ninja';
+const description =
+  'Shopgrade pulls your existing product descriptions, rewrites them with AI into SEO-friendly, sales-focused copy, then uploads them back to your store – thousands of products at once. Category page writer and product image editor coming soon. Works with Unas and Shoprenter.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
+  <Fragment slot="head">
+    <style is:inline>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #4a4a68;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #1e1e2f;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-primary:hover {
+            background-color: #5a4bd6;
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: transparent;
+            border: 1.5px solid #6c5ce7;
+            color: #6c5ce7;
+            padding: 14px 28px;
+            border-radius: 10px;
+            transition: background 0.2s ease;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-secondary:hover {
+            background-color: rgba(108, 92, 231, 0.08);
+        }
+
+        .cta-primary .material-symbols-outlined,
+        .cta-secondary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Shared header – collapses to logo + language switcher in lp-mode (?type=ld) -->
+    <Header locale={locale} page={page} />
+
+    <!-- 1. Hero + lead form -->
+    <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <!-- Content -->
+                <div class="flex flex-col gap-4 md:gap-7 text-left">
+
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
+                        AI content optimization <span class="text-primary">for webshops</span>
+                    </h1>
+
+                    <!-- Supported platforms -->
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <span class="text-sm font-semibold text-muted">Supported platforms:</span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
+                        </span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                        </span>
+                    </div>
+
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                        It pulls your existing product descriptions, rewrites them into
+                        <span class="font-bold text-primary">SEO- and GEO-friendly</span>, sales-focused copy, then
+                        <span class="font-bold text-primary">uploads them back</span> to your store.
+                    </p>
+
+                    <ul class="space-y-3.5 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>SEO- and GEO-friendly:</strong> Google and AI search engines (ChatGPT, Gemini)
+                                both find your products</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Tuned for conversion</strong>, written to sell – not filler text</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Up to <strong>thousands of products</strong> in one run – no export-import</span>
+                        </li>
+                    </ul>
+
+                    <!-- Coming soon -->
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <span class="text-sm font-semibold text-muted">Coming soon:</span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <span class="material-symbols-outlined text-primary text-[18px]">category</span>
+                            Category page writer
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <span class="material-symbols-outlined text-primary text-[18px]">image</span>
+                            Product image editor
+                        </span>
+                    </div>
+
+                    <!-- Social proof mini -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshops</span> already use it</p>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="formIntro">
+                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Book an online demo</h3>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">There's no direct
+                                    self-service trial</strong> – but in an online session we'll show you how Shopgrade
+                                    rewrites your own product descriptions.</p>
+                            </div>
+                        </div>
+
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+
+                            <!-- Step 1: Qualifying Questions -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Which store platform do you
+                                            use?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="UNAS">UNAS</option>
+                                            <option value="Shoprenter">Shoprenter</option>
+                                            <option value="Other">Other</option>
+                                            <option value="I'm only planning to launch a store">I'm only planning to
+                                                launch a store</option>
+                                            <option value="I run a different type of business">I run a different type of
+                                                business</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">How many products do you
+                                            have in your store?</label>
+                                        <select name="product_count" id="productCount"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Under 100">Under 100</option>
+                                            <option value="100-1,000">100–1,000</option>
+                                            <option value="1,000-10,000">1,000–10,000</option>
+                                            <option value="Over 10,000">Over 10,000</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Who writes your product
+                                            descriptions today?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Me, as the business owner">Me, as the business owner</option>
+                                            <option value="In-house marketing team">In-house marketing team</option>
+                                            <option value="External agency">External agency</option>
+                                            <option value="Nobody – we use the manufacturer's text">Nobody – we use the
+                                                manufacturer's text</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">If you like what you see in
+                                            the demo, when could you start using the software?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Right away">Right away</option>
+                                            <option value="Within 1 month">Within 1 month</option>
+                                            <option value="Within 2-3 months">Within 2-3 months</option>
+                                            <option value="Just exploring for now">Just exploring for now</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Continue
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Disqualification Screen (hard reject) -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Thanks for your interest!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Based on your answers, it looks like our platform wouldn't be the right fit for
+                                        you. We don't want to take up your time – thank you for understanding!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Screen (timing not ideal) -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Thanks for your interest!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            We can only offer live demos to those who want to start using the system
+                                            right away. Let's stay in touch in the meantime – we'd be happy to send you a
+                                            <strong>video demo</strong>.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email address</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            I have read, understood and accept the
+                                            <a href="/en/privacy-policy" target="_blank"
+                                                class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            I'm interested in content like this! Sign me up for the newsletter.
+                                            (<a href="/en/privacy-policy"
+                                                class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject()"
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Send me the video
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Thank You Screen -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Got it!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        We'll send the demo video and the latest updates shortly. Thanks for your
+                                        interest!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Info & Privacy -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Name</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. John Smith">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Business email
+                                            address</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Phone number</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+1 555 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            I have read, understood and accept the
+                                            <a href="/en/privacy-policy" target="_blank"
+                                                class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            I'm interested in content like this! Sign me up for the newsletter.
+                                            (<a href="/en/privacy-policy"
+                                                class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Back
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                            Continue to booking!
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Before / after – text comparison -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Before / after ✍️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Same product, two very different descriptions</h2>
+                <p class="text-body text-lg">Most stores run the manufacturer's spec sheet – the exact same text twenty
+                    other shops use. Google sees duplicate content, and the shopper gets no answer to their questions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+                <!-- Before -->
+                <div class="bg-light rounded-[16px] border border-red-200 p-8 shadow-card flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-5">
+                        <span class="material-symbols-outlined text-red-500 text-[20px]">close</span>
+                        <h3 class="font-bold text-lg text-dark">Before – manufacturer spec sheet</h3>
+                    </div>
+                    <p class="text-body text-sm leading-relaxed italic border-l-2 border-red-200 pl-4 mb-6">
+                        "Stainless steel thermos, 500 ml. Material: 18/8 steel. Weight: 320 g. Colour: black. Not
+                        dishwasher safe."
+                    </p>
+                    <ul class="space-y-3 mt-auto">
+                        <li class="flex items-start gap-2.5 text-body text-sm">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5">remove</span>
+                            <span>The same text runs in twenty other webshops</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5">remove</span>
+                            <span>No keywords, no structure, no context</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5">remove</span>
+                            <span>Answers none of the questions a buyer actually has</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- After -->
+                <div class="bg-light rounded-[16px] border-2 border-success/40 p-8 shadow-card flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-5">
+                        <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                        <h3 class="font-bold text-lg text-dark">After – Shopgrade</h3>
+                    </div>
+                    <p class="text-body text-sm leading-relaxed italic border-l-2 border-success/40 pl-4 mb-6">
+                        "<strong class="not-italic text-dark">Fill it at 7am, still hot at 5pm.</strong> The 500 ml
+                        double-walled 18/8 steel thermos keeps drinks hot for 12 hours and cold for 24 – for the office,
+                        the trail or the commute. Leak-proof screw cap, fits a standard cup holder…"
+                    </p>
+                    <ul class="space-y-3 mt-auto">
+                        <li class="flex items-start gap-2.5 text-body text-sm">
+                            <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
+                            <span>Unique copy that exists only in your store</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm">
+                            <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
+                            <span>Keyword-rich headings and lists – an SEO- and GEO-friendly structure</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm">
+                            <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
+                            <span>Use cases, benefits and objection handling – this is what sells</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Show me this on my own products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. How it works -->
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works? 🛠️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps from old descriptions to new copy</h2>
+                <p class="text-body text-lg">No exports, no CSV files, no copy-pasting – the whole flow runs in one
+                    place.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
+                    <h3 class="font-bold text-lg mb-3">Connect your store</h3>
+                    <p class="text-body text-sm leading-relaxed">Unas or Shoprenter – a few clicks, and Shopgrade pulls
+                        your existing product descriptions.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
+                    <h3 class="font-bold text-lg mb-3">Pick the products</h3>
+                    <p class="text-body text-sm leading-relaxed">The whole catalog, a single category or just a few key
+                        products – you decide what gets rewritten.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
+                    <h3 class="font-bold text-lg mb-3">The AI rewrites them</h3>
+                    <p class="text-body text-sm leading-relaxed">In your brand voice, tuned for SEO and GEO, with a sales
+                        focus – specs turn into customer benefits.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
+                    <h3 class="font-bold text-lg mb-3">Upload back to the store</h3>
+                    <p class="text-body text-sm leading-relaxed">Finished descriptions go straight back into your store –
+                        no manual copy-pasting, even across thousands of products.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Book a demo – free of charge
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SEO + GEO -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SEO and GEO 🔎</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Not just Google – AI search engines find you too</h2>
+                <p class="text-body text-lg">More and more shoppers no longer start from a results page: they ask
+                    ChatGPT, Gemini or Perplexity. Shopgrade optimizes for both worlds.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">search</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Classic SEO</h3>
+                    <p class="text-body text-sm leading-relaxed">Naturally placed keywords, descriptive headings, lists
+                        and a readable length – for the search engine and the human alike.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">smart_toy</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">GEO – AI search optimization</h3>
+                    <p class="text-body text-sm leading-relaxed">AI search engines quote factual, well-structured copy
+                        written in a question-and-answer logic. That's exactly how Shopgrade writes your descriptions.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">fingerprint</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">No more duplicate content</h3>
+                    <p class="text-body text-sm leading-relaxed">Instead of the manufacturer's text, every product gets
+                        its own unique description – one of the strongest organic ranking advantages there is.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Conversion focus -->
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Conversion 💰</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Sales copy, not a spec sheet</h2>
+                <p class="text-body text-lg">A good product description doesn't list parameters – it sells the product.
+                    These six things go into every text the AI writes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">emoji_objects</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Benefits, not specs</h3>
+                    <p class="text-body text-sm leading-relaxed">Instead of "18/8 steel": what that actually means for
+                        the buyer day to day.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">groups</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">In your audience's words</h3>
+                    <p class="text-body text-sm leading-relaxed">The same product speaks differently to an athlete than
+                        to an office commuter.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">quiz</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Objection handling</h3>
+                    <p class="text-body text-sm leading-relaxed">The most common doubts get answered in the description
+                        – not in the cart.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">format_list_bulleted</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Scannable structure</h3>
+                    <p class="text-body text-sm leading-relaxed">Subheadings, short paragraphs and bullets – it stays
+                        readable on mobile too.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">palette</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Your brand voice</h3>
+                    <p class="text-body text-sm leading-relaxed">Set the style and tone once, and every description
+                        sounds like you.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">ads_click</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A closing that moves people</h3>
+                    <p class="text-body text-sm leading-relaxed">Every description ends by pointing the visitor to the
+                        next step.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Scale + control -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1">
+                    <img src="/assets/shopgrade-kontroll.webp"
+                        alt="A list of product descriptions in the app: the top rows are already rewritten and approved, the rest are still processing, next to thousands of finished descriptions and the approval toggle"
+                        loading="lazy" width="1024" height="1024"
+                        class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
+                </div>
+
+                <div class="flex flex-col justify-center order-2 md:order-2">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Scale 📦</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Thousands of products – you stay
+                    in control</h2>
+                <p class="text-lg text-body mb-8 leading-relaxed">Rewriting a large catalog by hand would take months.
+                    Shopgrade works in batches, but it never takes the decision out of your hands.</p>
+
+                <ul class="space-y-5 mb-8">
+                    <li class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+                        </div>
+                        <span class="text-body font-medium text-lg leading-snug pt-1">Batch processing – up to thousands
+                            of descriptions in a single run</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-[20px]">filter_alt</span>
+                        </div>
+                        <span class="text-body font-medium text-lg leading-snug pt-1">You choose which products are
+                            rewritten – by category, by brand or one by one</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-[20px]">fact_check</span>
+                        </div>
+                        <span class="text-body font-medium text-lg leading-snug pt-1">Review the finished copy before it
+                            goes back into your store</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-[20px]">add_business</span>
+                        </div>
+                        <span class="text-body font-medium text-lg leading-snug pt-1">Run several stores from one
+                            account – Unas and Shoprenter side by side</span>
+                    </li>
+                </ul>
+
+                <div>
+                    <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
+                        I need to see this!
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Coming soon – further Shopgrade modules -->
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Coming soon 🚧</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Shopgrade keeps growing</h2>
+                <p class="text-body text-lg">Rewriting product descriptions is the first module. These are next – in the
+                    same account, over the same connection, at no extra cost.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
+                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Coming soon</span>
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">category</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Category page writer</h3>
+                    <p class="text-body text-sm leading-relaxed">Category pages bring the most organic traffic, yet in
+                        most stores they sit empty. The AI writes their intro and closing copy too – tuned for SEO and
+                        GEO.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
+                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Coming soon</span>
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">image</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Product image editor</h3>
+                    <p class="text-body text-sm leading-relaxed">Cleans up and unifies your existing product photos –
+                        tidy, consistent product pages without a studio or a photographer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. The whole platform – Shopgrade is one module of it -->
+    <section id="modulok" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">The whole system 🧩</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Shopgrade is one module of a bigger system</h2>
+                <p class="text-body text-lg">Content Ninja isn't a single feature: it's a complete AI marketing platform
+                    for webshops. Shopgrade improves the content your store <strong>already has</strong> – the other
+                    modules turn the same product catalog into <strong>new</strong> content and publish it. One account,
+                    one brand voice, one subscription.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Automated posting</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">The AI writes posts from your products, creates
+                        images and videos for them, then publishes them on a schedule to Facebook and Instagram.</p>
+                    <a href="/en/demo" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Learn more
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">storefront</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Deep store integration</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">With your Unas or Shoprenter store connected, the
+                        AI sees every product and blog post, and always works from fresh data.</p>
+                    <a href="/en/store-integration" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Learn more
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">mail</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI newsletters</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Finished newsletters with copy, design and product
+                        images – sent from your own MailerLite or Salesautopilot account to your existing lists.</p>
+                    <a href="/en/newsletter" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Learn more
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">public</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">International expansion</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Write it once – the system translates it at native
+                        quality and pushes it out to every market's accounts.</p>
+                    <a href="/en/international" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Learn more
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI image and video generation</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">On-brand creatives, moving product videos and
+                        narrated videos from your own product photos – no studio, no shoot.</p>
+                </div>
+
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">ads_click</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Meta ad generator</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Facebook and Instagram ad creatives and copy
+                        generated automatically from the same product data.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="/en/" class="cta-secondary px-8 py-4 text-base">
+                    See the whole system
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Pricing -->
+    <section id="arazas" class="bg-light py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Pricing</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, flat monthly fee</h2>
+                <p class="text-body text-lg">Shopgrade isn't a separate product: it's included in the same subscription
+                    as posting, newsletters and image/video generation.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Standard subscription -->
+                <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <div class="flex items-baseline gap-1 mb-3">
+                        <span class="text-4xl font-bold text-dark">34,990</span>
+                        <span class="text-xl font-bold text-dark">HUF</span>
+                        <span class="text-muted text-sm">+VAT / month</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Flat monthly fee, no hidden costs</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">500 AI credits per month (renewing)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">All modules: Shopgrade, post writing, newsletters, image and video generation</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Manage several stores from one account</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">On-brand style and tone of voice</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Continuous development and support</span>
+                        </li>
+                    </ul>
+                    <a href="#hero" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book a demo
+                    </a>
+                </div>
+
+                <!-- Demo bonus -->
+                <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+                        First month only
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
+                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+                        <span class="text-4xl font-bold text-primary">17,495</span>
+                        <span class="text-xl font-bold text-dark">HUF</span>
+                        <span class="text-muted text-sm">+VAT</span>
+                        <span class="text-muted text-sm line-through">34,990 HUF</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
+                    <p class="text-body text-sm mb-4">Book a 30-minute demo and get:</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">50% off the first month</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">750 credits instead of 500 (+250 bonus)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">A walkthrough on your own product descriptions</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">We answer all your questions</span>
+                        </li>
+                    </ul>
+                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From month 2, the fixed 34,990 HUF / month.</p>
+                    <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book my demo
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="/en/pricing#credits" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                    Detailed credit costs
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently asked questions</h2>
+            </div>
+
+            <div class="space-y-3">
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        What is Shopgrade?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        A Content Ninja module that improves the content your store <strong>already has</strong>. Today
+                        it pulls your product descriptions, rewrites them with AI into SEO- and GEO-friendly,
+                        sales-focused copy, then uploads them back. A category page writer and a product image editor
+                        are coming next.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Which store platforms does it work with?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Currently <strong>Unas</strong> and <strong>Shoprenter</strong> – these support the two-way
+                        connection, meaning both the download and the upload. If you use a different platform, we'll
+                        look at the options during the demo.
+                        <a href="/en/store-integration" class="text-primary font-semibold underline">More about the deep
+                        store integration.</a>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        What is GEO, and why does it matter?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        GEO (Generative Engine Optimization) means optimizing for AI search engines – ChatGPT, Gemini,
+                        Perplexity, Google AI Overviews. They don't return ten blue links; they compose an answer, and
+                        they quote factual, well-structured, question-and-answer style copy to do it. Shopgrade writes
+                        your descriptions that way from the start, so your products show up in those answers.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Can it really handle thousands of products?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Yes – the system works in batches, so it's usable on large catalogs too; you don't have to start
+                        it product by product. You decide whether the whole catalog, a single category or just a few key
+                        products get rewritten.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Do I need SEO knowledge?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        No. SEO and GEO considerations are built into the generation itself: keywords, structure and the
+                        question-and-answer logic go into the copy automatically. All you set up once is your brand
+                        voice and your audience.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Does Shopgrade cost extra?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        No – it's part of the same 34,990 HUF + VAT / month subscription as every other module, with 500
+                        renewing AI credits included. Generation consumes credits; you'll find the
+                        <a href="/en/pricing#credits" class="text-primary font-semibold underline">detailed credit costs
+                        here</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Closing CTA -->
+    <section class="bg-primary py-16 md:py-20">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">See it on your own products</h2>
+            <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+                In a 30-minute demo we'll show you what Shopgrade does with your product descriptions – and your first
+                month starts at half price, with 250 bonus credits.
+            </p>
+            <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
+                Book a demo
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>
+                    <p class="text-muted">A system that creates marketing content on behalf of your store, on a
+                        conveyor belt – straight from your product catalog.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Information</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/en/privacy-policy" class="hover:text-white">Privacy policy</a></li>
+                        <li><a href="/en/imprint" class="hover:text-white">Imprint</a></li>
+                        <li><a href="/en/terms" class="hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © contentninja.hu | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lead form + FAQ script -->
+    <script is:inline>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        function nextStep(step) {
+            const steps = document.querySelectorAll('.form-step');
+            steps.forEach(s => s.classList.remove('active'));
+
+            const formIntro = document.getElementById('formIntro');
+            const hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
+            if (formIntro) {
+                formIntro.classList.toggle('hidden', hideIntroSteps.includes(String(step)));
+            }
+
+            const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            if (activeStep) {
+                activeStep.classList.add('active');
+            }
+        }
+
+        let _qualifyData = {};
+
+        function qualifyAndNext() {
+            const webshop = document.getElementById('hasWebshop').value;
+            const products = document.getElementById('productCount').value;
+            const role = document.getElementById('marketingRole').value;
+            const timing = document.getElementById('timing').value;
+
+            if (!webshop || !products || !role || !timing) {
+                alert('Please answer all the questions!');
+                return;
+            }
+
+            _qualifyData = { webshop, products, role, timing };
+
+            const isHardRejected =
+                webshop === 'I run a different type of business' ||
+                role === 'External agency';
+
+            const isSoftRejected =
+                webshop === "I'm only planning to launch a store" ||
+                timing === 'Within 2-3 months' ||
+                timing === 'Just exploring for now';
+
+            if (isHardRejected) {
+                nextStep('rejected');
+
+                fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        statusz: 'hard_reject',
+                        lead_forras: 'shopgrade',
+                        submission_date: new Date().toISOString(),
+                        has_webshop: webshop,
+                        product_count: products,
+                        marketing_role: role,
+                        timing: timing,
+                        source_url: window.location.href
+                    })
+                }).catch(() => { });
+
+            } else if (isSoftRejected) {
+                nextStep('soft-reject');
+
+            } else {
+                nextStep(2);
+            }
+        }
+
+        async function submitSoftReject() {
+            const email = document.getElementById('softRejectEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+
+            const privacy = document.getElementById('softRejectPrivacy');
+            if (!privacy.checked) {
+                alert('Please accept the privacy policy!');
+                return;
+            }
+
+            const newsletterChecked = document.getElementById('softRejectNewsletter').checked;
+
+            const btn = event.target;
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            const payload = {
+                submission_date: new Date().toISOString(),
+                lead_forras: 'shopgrade',
+                email: email,
+                hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem',
+                has_webshop: _qualifyData.webshop || '',
+                product_count: _qualifyData.products || '',
+                marketing_role: _qualifyData.role || '',
+                timing: _qualifyData.timing || '',
+                source_url: window.location.href
+            };
+
+            try {
+                await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...payload, statusz: 'soft_reject' })
+                });
+            } catch (e) { }
+
+            nextStep('soft-reject-thanks');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitBtn = document.getElementById('submitBtn');
+            const FORM_SUBMITTED_KEY = 'shopgrade_form_submitted';
+
+            if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Already submitted';
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            document.getElementById('leadForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                    console.log('Form already submitted, preventing duplicate.');
+                    return;
+                }
+
+                const privacy = document.getElementById('privacy');
+                if (!privacy.checked) {
+                    alert('Please accept the privacy policy!');
+                    return;
+                }
+
+                const btn = document.getElementById('submitBtn');
+                btn.innerHTML = 'Sending...';
+                btn.disabled = true;
+
+                sessionStorage.setItem(FORM_SUBMITTED_KEY, 'true');
+
+                const formData = new FormData(this);
+                const cleanData = {};
+                formData.forEach((value, key) => {
+                    if (cleanData[key]) {
+                        if (!Array.isArray(cleanData[key])) {
+                            cleanData[key] = [cleanData[key]];
+                        }
+                        cleanData[key].push(value);
+                    } else {
+                        cleanData[key] = value;
+                    }
+                });
+
+                cleanData['source_url'] = window.location.href;
+                const customSubject = `✍️ Shopgrade application: ${cleanData['name']}`;
+                cleanData['subject'] = customSubject;
+
+                const newsletterChecked = document.getElementById('newsletter').checked;
+                const webhookPayload = {
+                    statusz: 'sikeres',
+                    lead_forras: 'shopgrade',
+                    submission_date: new Date().toISOString(),
+                    nev: cleanData['name'],
+                    email: cleanData['email'],
+                    telefonszam: cleanData['phone'],
+                    source_url: window.location.href,
+                    has_webshop: cleanData['has_webshop'],
+                    product_count: cleanData['product_count'],
+                    marketing_role: cleanData['marketing_role'],
+                    timing: cleanData['timing'],
+                    hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem'
+                };
+
+                try {
+                    const result = await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(webhookPayload)
+                    });
+                    console.log('Webhook sent:', result.ok);
+                    window.location.href = "/en/thank-you?lead=1";
+                } catch (error) {
+                    console.error('Unexpected error:', error);
+                    window.location.href = "/en/thank-you?lead=1";
+                }
+            });
+        });
+    </script>
+  </div>
+</BaseLayout>
