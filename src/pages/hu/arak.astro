@@ -8,7 +8,7 @@ const page = 'pricing';
 
 const title = 'Árak és kreditdíjak – Content Ninja';
 const description =
-  'A Content Ninja ára: 24.990 Ft + ÁFA / hó, havi 400 megújuló AI kredittel, hűségidő nélkül. Nézd meg a részletes kreditdíjakat műveletenként, az extra kreditcsomag árát és a fizetés menetét.';
+  'A Content Ninja ára: 34.990 Ft + ÁFA / hó, havi 500 megújuló AI kredittel, hűségidő nélkül. Nézd meg a részletes kreditdíjakat műveletenként, az extra kreditcsomagok árát és a fizetés menetét.';
 const keywords =
   'Content Ninja ár, Content Ninja árazás, AI kredit, kreditdíjak, kreditfogyasztás, extra kredit, előfizetés, AI tartalomgyártás ára';
 
@@ -19,7 +19,7 @@ const APP_URL = 'https://app.getcontentninja.com';
 const faqs = [
   {
     q: 'Mennyibe kerül a Content Ninja?',
-    a: 'A Content Ninja egységes csomagban érhető el: 24.990 Ft + ÁFA / hó, ami tartalmazza az összes modult és havi 400 megújuló AI kreditet. Ha bemutatót kérsz, az első hónap 12.495 Ft + ÁFA, dupla, 800 kredites kerettel; a második hónaptól a fix 24.990 Ft + ÁFA / hó ár érvényes.',
+    a: 'A Content Ninja egységes csomagban érhető el: 34.990 Ft + ÁFA / hó (bruttó 44.437 Ft), ami tartalmazza az összes modult és havi 500 megújuló AI kreditet. Ha bemutatót kérsz, az első hónap 17.495 Ft + ÁFA, 750 kredites kerettel (500 havi keret + 250 bónusz kredit); a második hónaptól a fix 34.990 Ft + ÁFA / hó ár érvényes.',
   },
   {
     q: 'Van hűségidő vagy határozott idejű szerződés?',
@@ -27,11 +27,11 @@ const faqs = [
   },
   {
     q: 'Van éves előfizetés vagy olcsóbb, kisebb csomag?',
-    a: 'Jelenleg egyik sincs. Egyetlen, havi díjas csomagot kínálunk 400 kredit/hó kerettel — kisebb, olcsóbb szint nem választható, és éves előrefizetéses konstrukció sem érhető el.',
+    a: 'Jelenleg egyik sincs. Egyetlen, havi díjas csomagot kínálunk 500 kredit/hó kerettel — kisebb, olcsóbb szint nem választható, és éves előrefizetéses konstrukció sem érhető el.',
   },
   {
-    q: 'Mi az az AI kredit, és mire elég 400?',
-    a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 400 kredit nagyjából 133 képes posztra elég. A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
+    q: 'Mi az az AI kredit, és mire elég 500?',
+    a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 500 kredit nagyjából 166 képes posztra elég. A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
   },
   {
     q: 'Mi történik, ha elfogy a havi keretem?',
@@ -39,11 +39,11 @@ const faqs = [
   },
   {
     q: 'Mennyibe kerül az extra kredit, és meddig érvényes?',
-    a: 'Egyetlen extra kreditcsomag van: 400 kredit 11.990 Ft + ÁFA áron (bruttó 15.227 Ft, ennyit von le a kártyáról). A megvásárolt extra kredit a vásárlástól számított 365 napig érvényes, és a havi kereted mellé adódik hozzá.',
+    a: 'Két csomag közül választhatsz: 500 kredit 14.990 Ft + ÁFA áron (bruttó 19.037 Ft), nagyobb projektre pedig 5.000 kredit 134.990 Ft + ÁFA áron (bruttó 171.437 Ft, kb. 10% kedvezmény a kreditárban). A megvásárolt extra kredit a vásárlástól számított 365 napig érvényes, és a havi kereted mellé adódik hozzá.',
   },
   {
     q: 'Átgörgethető a fel nem használt havi kredit a következő hónapra?',
-    a: 'Nem. A havidíjban foglalt 400 kredit az adott számlázási időszakra szól, és minden hónapfordulókor nullázódik, majd újratöltődik. A külön vásárolt extra kredit ettől eltérően 365 napig megmarad. Előfizetés lemondása esetén a fel nem használt extra kreditek is elvesznek az időszak végén.',
+    a: 'Nem. A havidíjban foglalt 500 kredit az adott számlázási időszakra szól, és minden hónapfordulókor nullázódik, majd újratöltődik. A külön vásárolt extra kredit ettől eltérően 365 napig megmarad. Előfizetés lemondása esetén a fel nem használt extra kreditek is elvesznek az időszak végén.',
   },
   {
     q: 'Hogyan történik a fizetés?',
@@ -137,10 +137,10 @@ const freeOps = [
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">ÁRAZÁS</span>
           <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
             Egy csomag <span class="text-primary">webshopoknak</span>, havi
-            <span class="text-primary">24.990 Ft + ÁFA</span>
+            <span class="text-primary">34.990 Ft + ÁFA</span>
           </h1>
           <p class="text-body text-lg leading-relaxed">
-            Minden modul benne van — posztolás, hírlevél, kép- és videógenerálás —, havi 400
+            Minden modul benne van — posztolás, hírlevél, kép- és videógenerálás —, havi 500
             megújuló AI kredittel, amit az alábbi táblázatok szerint használsz fel.
           </p>
 
@@ -188,16 +188,17 @@ const freeOps = [
           <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
             <h3 class="text-xl font-bold mb-4 text-dark">Standard előfizetés</h3>
             <div class="flex items-baseline gap-1 mb-3">
-              <span class="text-4xl font-bold text-dark">24.990</span>
+              <span class="text-4xl font-bold text-dark">34.990</span>
               <span class="text-xl font-bold text-dark">Ft</span>
               <span class="text-muted text-sm">+ÁFA / hó</span>
             </div>
+            <p class="text-muted text-sm mb-1">Bruttó 44.437 Ft — ennyit von le a kártyáról</p>
             <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">
               Fix havidíj, rejtett költségek nélkül
             </p>
             <ul class="space-y-4 mb-8">
               {[
-                '400 AI kredit havonta (megújul)',
+                '500 AI kredit havonta (megújul)',
                 'Az összes modul: posztírás, hírlevél, kép- és videógenerálás',
                 'Több brand (webshop) kezelése egy fiókon belül',
                 'Korlátlan közösségi média fiók',
@@ -226,17 +227,17 @@ const freeOps = [
             </div>
             <h3 class="text-xl font-bold mb-4 text-dark">Indulj fél áron</h3>
             <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
-              <span class="text-4xl font-bold text-primary">12.495</span>
+              <span class="text-4xl font-bold text-primary">17.495</span>
               <span class="text-xl font-bold text-dark">Ft</span>
               <span class="text-muted text-sm">+ÁFA</span>
-              <span class="text-muted text-sm line-through">24.990 Ft</span>
+              <span class="text-muted text-sm line-through">34.990 Ft</span>
             </div>
             <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">az első hónapra</p>
             <p class="text-body text-sm mb-4">Foglalj egy 30 perces bemutatót, és:</p>
             <ul class="space-y-4 mb-8">
               {[
                 '50% kedvezmény az 1. hónapra',
-                '800 kredit 400 helyett (dupla)',
+                '750 kredit 500 helyett (+250 bónusz)',
                 'Személyre szabott bemutató',
                 'Válaszolunk minden kérdésedre',
               ].map((item) => (
@@ -249,7 +250,7 @@ const freeOps = [
               ))}
             </ul>
             <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">
-              A 2. hónaptól a fix 24.990 Ft / hó.
+              A 2. hónaptól a fix 34.990 Ft / hó.
             </p>
             <a href="/hu/online-bemutato" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
               Lefoglalom a bemutatót
@@ -264,7 +265,7 @@ const freeOps = [
             <div>
               <h3 class="text-base font-bold text-dark mb-2">Nincs éves csomag és nincs kisebb szint</h3>
               <p class="text-body text-sm leading-relaxed">
-                Jelenleg egységes, havi díjas csomagot kínálunk 400 kredit/hó kerettel. Éves
+                Jelenleg egységes, havi díjas csomagot kínálunk 500 kredit/hó kerettel. Éves
                 előrefizetés és olcsóbb, kevesebb kreditet tartalmazó szint egyelőre nem
                 választható. Ha a keret kevés, bármikor vásárolhatsz
                 <a href="#extra-kredit" class="text-primary font-semibold underline">extra kreditet</a>.
@@ -422,13 +423,13 @@ const freeOps = [
     </section>
 
     <!-- ═══════════════════════════════════════
-     MIRE ELÉG 400 KREDIT
+     MIRE ELÉG 500 KREDIT
 ═══════════════════════════════════════ -->
     <section id="mire-eleg" class="bg-light py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10">
         <div class="text-center mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SZÁMPÉLDÁK</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire elég havi 400 kredit?</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire elég havi 500 kredit?</h2>
           <p class="text-body text-lg">Három tipikus felhasználás — ha csak egy dologra költenéd a keretet.</p>
         </div>
 
@@ -436,18 +437,18 @@ const freeOps = [
           {[
             {
               icon: 'edit_note',
-              title: '≈ 133 képes poszt',
+              title: '≈ 166 képes poszt',
               detail: 'Posztszöveg (1) + Nano Banana kép (2) = 3 kredit / poszt',
             },
             {
               icon: 'mail',
-              title: '≈ 80 hírlevél',
+              title: '≈ 100 hírlevél',
               detail:
                 'Hírlevél szöveg (3) + 1 kép, Nano Banana (2) = 5 kredit / levél. A HTML sablont elég egyszer legenerálni.',
             },
             {
               icon: 'movie',
-              title: '≈ 20 narrációvideó',
+              title: '≈ 25 narrációvideó',
               detail: '1 perces, 4 képes videó = 20 kredit / videó',
             },
           ].map((card) => (
@@ -474,11 +475,11 @@ const freeOps = [
             </div>
             <div class="flex items-center gap-2 text-body">
               <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
-              <span>15 videós tartalom (pl. narrátorvideó) <strong class="text-dark">300</strong></span>
+              <span>20 videós tartalom (pl. narrátorvideó) <strong class="text-dark">400</strong></span>
             </div>
             <div class="flex items-center gap-2 font-bold text-dark">
               <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
-              <span>összesen 400 kredit</span>
+              <span>összesen 500 kredit</span>
             </div>
           </div>
           <p class="text-muted text-sm mt-4">
@@ -496,27 +497,31 @@ const freeOps = [
       <div class="max-w-[900px] mx-auto px-4 md:px-10">
         <div class="text-center mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">EXTRA KREDIT</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ha elfogy a havi keret</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ha több kreditre van szükséged</h2>
           <p class="text-body text-lg">
-            Nem kell csomagot váltanod és nem kell a hónapfordulóig várnod — bármikor
-            feltöltheted az egyenleged.
+            Nem kell csomagot váltanod és nem kell a hónapfordulóig várnod — töltsd fel az
+            egyenleged, vagy vegyél egyszerre nagyobb keretet egy projektre.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <!-- Alap kreditcsomag -->
           <div class="bg-light rounded-[16px] border-2 border-primary/40 p-5 sm:p-8 flex flex-col">
+            <span class="self-start inline-flex items-center bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide mb-3">
+              Ha elfogy a havi keret
+            </span>
             <h3 class="text-xl font-bold mb-4 text-dark">Extra kreditcsomag</h3>
             <div class="flex items-baseline gap-1 mb-1">
-              <span class="text-4xl font-bold text-dark">11.990</span>
+              <span class="text-4xl font-bold text-dark">14.990</span>
               <span class="text-xl font-bold text-dark">Ft</span>
               <span class="text-muted text-sm">+ÁFA</span>
             </div>
             <p class="text-muted text-sm mb-6 pb-6 border-b border-border">
-              Bruttó 15.227 Ft — ennyit von le a kártyáról
+              Bruttó 19.037 Ft — ennyit von le a kártyáról
             </p>
             <ul class="space-y-4 mb-8">
               {[
-                '400 kredit egy csomagban',
+                '500 kredit egy csomagban',
                 'A vásárlástól számított 365 napig érvényes',
                 'A havi keret mellé adódik hozzá',
                 'Számla a regisztrációkori adatokra',
@@ -540,23 +545,63 @@ const freeOps = [
             </a>
           </div>
 
-          <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8">
-            <h3 class="text-xl font-bold mb-5 text-dark">A vásárlás menete</h3>
-            <ol class="space-y-5">
+          <!-- Projekt kreditcsomag -->
+          <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 flex flex-col">
+            <span class="self-start inline-flex items-center bg-dark/5 text-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide mb-3">
+              Nagyobb projektre
+            </span>
+            <h3 class="text-xl font-bold mb-4 text-dark">Projekt kreditcsomag</h3>
+            <div class="flex items-baseline gap-1 mb-1">
+              <span class="text-4xl font-bold text-dark">134.990</span>
+              <span class="text-xl font-bold text-dark">Ft</span>
+              <span class="text-muted text-sm">+ÁFA</span>
+            </div>
+            <p class="text-muted text-sm mb-6 pb-6 border-b border-border">
+              Bruttó 171.437 Ft — ennyit von le a kártyáról
+            </p>
+            <ul class="space-y-4 mb-8">
               {[
-                'Lépj be az appba, és indítsd el a kreditvásárlást a saját fiókodból.',
-                'Fizess bankkártyával a Stripe felületén. Számlázási adatokat nem kell megadnod, a számlát a regisztrációkori adataidra állítjuk ki.',
-                'A kreditek röviddel a sikeres fizetés után megjelennek az egyenlegeden.',
-              ].map((step, i) => (
-                <li class="flex items-start gap-3">
-                  <span class="w-7 h-7 rounded-full bg-primary text-white text-sm font-bold flex items-center justify-center shrink-0">
-                    {i + 1}
-                  </span>
-                  <span class="text-body text-sm leading-relaxed">{step}</span>
+                '5.000 kredit egy csomagban',
+                'Kb. 10% kedvezmény a kreditárban',
+                'Nagyobb projektre: kb. 5.000 termékleírás vagy 450 blogcikk',
+                'A vásárlástól számított 365 napig érvényes',
+              ].map((item) => (
+                <li class="flex items-center gap-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                  </div>
+                  <span class="text-body font-medium text-sm">{item}</span>
                 </li>
               ))}
-            </ol>
+            </ul>
+            <a
+              href={APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto"
+            >
+              Projekt csomag vásárlása
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
           </div>
+        </div>
+
+        <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 mt-8">
+          <h3 class="text-xl font-bold mb-5 text-dark">A vásárlás menete</h3>
+          <ol class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              'Lépj be az appba, és indítsd el a kreditvásárlást a saját fiókodból.',
+              'Fizess bankkártyával a Stripe felületén. Számlázási adatokat nem kell megadnod, a számlát a regisztrációkori adataidra állítjuk ki.',
+              'A kreditek röviddel a sikeres fizetés után megjelennek az egyenlegeden.',
+            ].map((step, i) => (
+              <li class="flex items-start gap-3">
+                <span class="w-7 h-7 rounded-full bg-primary text-white text-sm font-bold flex items-center justify-center shrink-0">
+                  {i + 1}
+                </span>
+                <span class="text-body text-sm leading-relaxed">{step}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
@@ -669,7 +714,7 @@ const freeOps = [
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézd meg élőben, mielőtt fizetsz</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
           Egy 30 perces bemutatón megmutatjuk a rendszert a saját webshopod termékein — és az
-          első hónapod fél áron, dupla kredittel indul.
+          első hónapod fél áron, +250 bónusz kredittel indul.
         </p>
         <a href="/hu/online-bemutato" class="cta-on-primary px-8 h-14 text-base inline-flex">
           Bemutatót kérek
