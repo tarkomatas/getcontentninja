@@ -283,9 +283,99 @@ const freeOps = [
     </section>
 
     <!-- ═══════════════════════════════════════
+     WHAT 500 CREDITS BUY
+═══════════════════════════════════════ -->
+    <section id="what-you-get" class="bg-card py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">WORKED EXAMPLES</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">What do 500 credits a month buy?</h2>
+          <p class="text-body text-lg">Six typical uses — if you spent the whole allowance on just one thing.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {[
+            {
+              icon: 'edit_note',
+              title: '≈ 166 posts with images',
+              detail: 'Post copy (1) + Nano Banana image (2) = 3 credits per post',
+            },
+            {
+              icon: 'article',
+              title: '≈ 71 blog articles',
+              detail: 'Article copy (3) + 2 Nano Banana images (2×2) = 7 credits per article. Deep research is optional, +5.',
+            },
+            {
+              icon: 'edit_document',
+              title: '≈ 500 product descriptions',
+              detail: 'Shopgrade product description rewriting: 1 credit per product page, in bulk too.',
+            },
+            {
+              icon: 'mail',
+              title: '≈ 100 newsletters',
+              detail: 'Newsletter copy (3) + one Nano Banana image (2) = 5 credits per e-mail. The HTML template only needs generating once.',
+            },
+            {
+              icon: 'movie',
+              title: '≈ 25 narrated videos',
+              detail: 'A one-minute video with 4 images = 20 credits each',
+            },
+            {
+              icon: 'image',
+              title: '≈ 250 AI images',
+              detail: 'A Nano Banana image costs 2 credits — on-brand, logo-stamped creative.',
+            },
+          ].map((card) => (
+            <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
+              </div>
+              <h3 class="text-xl font-bold text-dark mb-2">{card.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{card.detail}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+          <h3 class="text-xl font-bold text-dark mb-4">A realistic, mixed month</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+              <span>15 posts with images (3–4 a week) <strong class="text-dark">45</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">article</span>
+              <span>5 blog articles, with images <strong class="text-dark">35</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_document</span>
+              <span>350 product descriptions rewritten <strong class="text-dark">350</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+              <span>6 newsletters <strong class="text-dark">30</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
+              <span>2 narrated videos <strong class="text-dark">40</strong></span>
+            </div>
+            <div class="flex items-center gap-2 font-bold text-dark">
+              <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+              <span>500 credits in total</span>
+            </div>
+          </div>
+          <p class="text-muted text-sm mt-4">
+            Publishing all of this is unlimited and free on top. The Usage section in the app
+            shows your balance in real time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
      CREDITS – DETAILED COSTS
 ═══════════════════════════════════════ -->
-    <section id="credits" class="bg-card py-20 md:py-28 scroll-mt-24">
+    <section id="credits" class="bg-light py-20 md:py-28 scroll-mt-24">
       <div class="max-w-[900px] mx-auto px-4 md:px-10">
         <div class="text-center mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">CREDIT COSTS</span>
@@ -421,96 +511,6 @@ const freeOps = [
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
-     WHAT 400 CREDITS BUY
-═══════════════════════════════════════ -->
-    <section id="what-you-get" class="bg-light py-20 md:py-28">
-      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-        <div class="text-center mb-14">
-          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">WORKED EXAMPLES</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">What do 500 credits a month buy?</h2>
-          <p class="text-body text-lg">Six typical uses — if you spent the whole allowance on just one thing.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {[
-            {
-              icon: 'edit_note',
-              title: '≈ 166 posts with images',
-              detail: 'Post copy (1) + Nano Banana image (2) = 3 credits per post',
-            },
-            {
-              icon: 'article',
-              title: '≈ 71 blog articles',
-              detail: 'Article copy (3) + 2 Nano Banana images (2×2) = 7 credits per article. Deep research is optional, +5.',
-            },
-            {
-              icon: 'edit_document',
-              title: '≈ 500 product descriptions',
-              detail: 'Shopgrade product description rewriting: 1 credit per product page, in bulk too.',
-            },
-            {
-              icon: 'mail',
-              title: '≈ 100 newsletters',
-              detail: 'Newsletter copy (3) + one Nano Banana image (2) = 5 credits per e-mail. The HTML template only needs generating once.',
-            },
-            {
-              icon: 'movie',
-              title: '≈ 25 narrated videos',
-              detail: 'A one-minute video with 4 images = 20 credits each',
-            },
-            {
-              icon: 'image',
-              title: '≈ 250 AI images',
-              detail: 'A Nano Banana image costs 2 credits — on-brand, logo-stamped creative.',
-            },
-          ].map((card) => (
-            <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
-              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
-                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
-              </div>
-              <h3 class="text-xl font-bold text-dark mb-2">{card.title}</h3>
-              <p class="text-body text-sm leading-relaxed">{card.detail}</p>
-            </div>
-          ))}
-        </div>
-
-        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
-          <h3 class="text-xl font-bold text-dark mb-4">A realistic, mixed month</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
-              <span>20 posts with images <strong class="text-dark">60</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">article</span>
-              <span>5 blog articles, with images <strong class="text-dark">35</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">edit_document</span>
-              <span>50 product descriptions rewritten <strong class="text-dark">50</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
-              <span>7 newsletters <strong class="text-dark">35</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
-              <span>16 video pieces (e.g. narrated video) <strong class="text-dark">320</strong></span>
-            </div>
-            <div class="flex items-center gap-2 font-bold text-dark">
-              <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
-              <span>500 credits in total</span>
-            </div>
-          </div>
-          <p class="text-muted text-sm mt-4">
-            Publishing all of this is unlimited and free on top. The Usage section in the app
-            shows your balance in real time.
-          </p>
         </div>
       </div>
     </section>

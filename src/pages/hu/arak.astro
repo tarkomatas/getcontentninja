@@ -282,9 +282,100 @@ const freeOps = [
     </section>
 
     <!-- ═══════════════════════════════════════
+     MIRE ELÉG 500 KREDIT
+═══════════════════════════════════════ -->
+    <section id="mire-eleg" class="bg-card py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SZÁMPÉLDÁK</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire elég havi 500 kredit?</h2>
+          <p class="text-body text-lg">Hat tipikus felhasználás — ha csak egy dologra költenéd a keretet.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {[
+            {
+              icon: 'edit_note',
+              title: '≈ 166 képes poszt',
+              detail: 'Posztszöveg (1) + Nano Banana kép (2) = 3 kredit / poszt',
+            },
+            {
+              icon: 'article',
+              title: '≈ 71 blogcikk',
+              detail: 'Cikkszöveg (3) + 2 kép, Nano Banana (2×2) = 7 kredit / cikk. A mély kutatás opcionális, +5.',
+            },
+            {
+              icon: 'edit_document',
+              title: '≈ 500 termékleírás',
+              detail: 'Shopgrade termékleírás-újraírás: 1 kredit / termékoldal, tömegesen is.',
+            },
+            {
+              icon: 'mail',
+              title: '≈ 100 hírlevél',
+              detail:
+                'Hírlevél szöveg (3) + 1 kép, Nano Banana (2) = 5 kredit / levél. A HTML sablont elég egyszer legenerálni.',
+            },
+            {
+              icon: 'movie',
+              title: '≈ 25 narrációvideó',
+              detail: '1 perces, 4 képes videó = 20 kredit / videó',
+            },
+            {
+              icon: 'image',
+              title: '≈ 250 AI kép',
+              detail: 'Nano Banana kép: 2 kredit / kép, brandazonos, logózott kreatív.',
+            },
+          ].map((card) => (
+            <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
+              </div>
+              <h3 class="text-xl font-bold text-dark mb-2">{card.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{card.detail}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+          <h3 class="text-xl font-bold text-dark mb-4">Egy reális, vegyes hónap</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+              <span>15 képes poszt (heti 3–4) <strong class="text-dark">45</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">article</span>
+              <span>5 blogcikk, képekkel <strong class="text-dark">35</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_document</span>
+              <span>350 termékleírás újraírása <strong class="text-dark">350</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+              <span>6 hírlevél <strong class="text-dark">30</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
+              <span>2 narrátorvideó <strong class="text-dark">40</strong></span>
+            </div>
+            <div class="flex items-center gap-2 font-bold text-dark">
+              <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+              <span>összesen 500 kredit</span>
+            </div>
+          </div>
+          <p class="text-muted text-sm mt-4">
+            A publikálás mindezek mellett korlátlan és ingyenes. Az appban a Fogyasztás
+            menüpontban valós időben követheted az egyenleged.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
      KREDITEK – RÉSZLETES DÍJAK
 ═══════════════════════════════════════ -->
-    <section id="kreditek" class="bg-card py-20 md:py-28 scroll-mt-24">
+    <section id="kreditek" class="bg-light py-20 md:py-28 scroll-mt-24">
       <div class="max-w-[900px] mx-auto px-4 md:px-10">
         <div class="text-center mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">KREDITDÍJAK</span>
@@ -423,97 +514,6 @@ const freeOps = [
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
-     MIRE ELÉG 500 KREDIT
-═══════════════════════════════════════ -->
-    <section id="mire-eleg" class="bg-light py-20 md:py-28">
-      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-        <div class="text-center mb-14">
-          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SZÁMPÉLDÁK</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire elég havi 500 kredit?</h2>
-          <p class="text-body text-lg">Hat tipikus felhasználás — ha csak egy dologra költenéd a keretet.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {[
-            {
-              icon: 'edit_note',
-              title: '≈ 166 képes poszt',
-              detail: 'Posztszöveg (1) + Nano Banana kép (2) = 3 kredit / poszt',
-            },
-            {
-              icon: 'article',
-              title: '≈ 71 blogcikk',
-              detail: 'Cikkszöveg (3) + 2 kép, Nano Banana (2×2) = 7 kredit / cikk. A mély kutatás opcionális, +5.',
-            },
-            {
-              icon: 'edit_document',
-              title: '≈ 500 termékleírás',
-              detail: 'Shopgrade termékleírás-újraírás: 1 kredit / termékoldal, tömegesen is.',
-            },
-            {
-              icon: 'mail',
-              title: '≈ 100 hírlevél',
-              detail:
-                'Hírlevél szöveg (3) + 1 kép, Nano Banana (2) = 5 kredit / levél. A HTML sablont elég egyszer legenerálni.',
-            },
-            {
-              icon: 'movie',
-              title: '≈ 25 narrációvideó',
-              detail: '1 perces, 4 képes videó = 20 kredit / videó',
-            },
-            {
-              icon: 'image',
-              title: '≈ 250 AI kép',
-              detail: 'Nano Banana kép: 2 kredit / kép, brandazonos, logózott kreatív.',
-            },
-          ].map((card) => (
-            <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
-              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
-                <span class="material-symbols-outlined text-primary text-[22px]">{card.icon}</span>
-              </div>
-              <h3 class="text-xl font-bold text-dark mb-2">{card.title}</h3>
-              <p class="text-body text-sm leading-relaxed">{card.detail}</p>
-            </div>
-          ))}
-        </div>
-
-        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
-          <h3 class="text-xl font-bold text-dark mb-4">Egy reális, vegyes hónap</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
-              <span>20 képes poszt <strong class="text-dark">60</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">article</span>
-              <span>5 blogcikk, képekkel <strong class="text-dark">35</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">edit_document</span>
-              <span>50 termékleírás újraírása <strong class="text-dark">50</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
-              <span>7 hírlevél <strong class="text-dark">35</strong></span>
-            </div>
-            <div class="flex items-center gap-2 text-body">
-              <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
-              <span>16 videós tartalom (pl. narrátorvideó) <strong class="text-dark">320</strong></span>
-            </div>
-            <div class="flex items-center gap-2 font-bold text-dark">
-              <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
-              <span>összesen 500 kredit</span>
-            </div>
-          </div>
-          <p class="text-muted text-sm mt-4">
-            A publikálás mindezek mellett korlátlan és ingyenes. Az appban a Fogyasztás
-            menüpontban valós időben követheted az egyenleged.
-          </p>
         </div>
       </div>
     </section>
