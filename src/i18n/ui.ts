@@ -17,6 +17,7 @@ export const UI = {
       pricing: 'Árazás',
       testimonials: 'Vélemények',
       international: 'Nemzetközi',
+      contact: 'Kapcsolat',
       // A "Megoldások" menü elemei (modulnév + egysoros leírás) a
       // `src/data/modules.ts`-ből jönnek, nem innen – egy modul = egy helyen.
       solutions: 'Megoldások',
@@ -30,6 +31,7 @@ export const UI = {
       tagline:
         'Egy AI-alapú rendszer, ami a webshopod nevében készít marketing tartalmakat – automatikusan, nonstop.',
       legalHeading: 'Jogi információk',
+      contact: 'Kapcsolat',
       privacy: 'Adatkezelési tájékoztató',
       imprint: 'Impresszum',
       terms: 'ÁSZF (Terms of Service)',
@@ -58,6 +60,7 @@ export const UI = {
       pricing: 'Pricing',
       testimonials: 'Reviews',
       international: 'International',
+      contact: 'Contact',
       // A "Megoldások" menü elemei a `src/data/modules.ts`-ből jönnek.
       solutions: 'Solutions',
     },
@@ -70,6 +73,7 @@ export const UI = {
       tagline:
         'An AI-powered system that creates marketing content on behalf of your webshop – automatically, around the clock.',
       legalHeading: 'Legal',
+      contact: 'Contact',
       privacy: 'Privacy policy',
       imprint: 'Imprint',
       terms: 'Terms of Service',

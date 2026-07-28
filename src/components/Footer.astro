@@ -15,7 +15,12 @@ const APP_URL = 'https://app.getcontentninja.com';
 // Az adatvédelmi tájékoztató és az impresszum nyelvenként létezik.
 // A terms (ÁSZF) és az adattörlési tájékoztató (Meta-követelmény) csak angolul –
 // ezeknél mindig az EN verzióra mutatunk.
+const contact = pathFor('contact', locale);
+const SUPPORT_EMAIL = 'support@getcontentninja.com';
+const SUPPORT_PHONE = '+36 20 283 8831';
+
 const legal = {
+  contact,
   privacy: pathFor('privacy', locale),
   imprint: pathFor('imprint', locale),
   terms: pathFor('terms', 'en'),
@@ -32,6 +37,16 @@ const legal = {
           <img src="/assets/logo.webp" alt={ui.logoAlt} class="h-9 w-auto object-contain" />
         </div>
         <p class="text-sm leading-relaxed max-w-[280px] mb-5">{ui.footer.tagline}</p>
+        <ul class="space-y-2 text-sm mb-5">
+          <li class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-white/70">mail</span>
+            <a href={`mailto:${SUPPORT_EMAIL}`} class="hover:text-white transition-colors">{SUPPORT_EMAIL}</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-white/70">call</span>
+            <a href="tel:+36202838831" class="hover:text-white transition-colors">{SUPPORT_PHONE}</a>
+          </li>
+        </ul>
         <div class="flex items-center gap-3">
           <a
             href="https://www.facebook.com/profile.php?id=61582389145717"
@@ -63,6 +78,7 @@ const legal = {
       <div>
         <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wide">{ui.footer.legalHeading}</h4>
         <ul class="space-y-2 text-sm">
+          <li><a href={legal.contact} class="hover:text-white transition-colors">{ui.footer.contact}</a></li>
           <li><a href={legal.privacy} class="hover:text-white transition-colors">{ui.footer.privacy}</a></li>
           <li><a href={legal.imprint} class="hover:text-white transition-colors">{ui.footer.imprint}</a></li>
           <li><a href={legal.terms} class="hover:text-white transition-colors">{ui.footer.terms}</a></li>

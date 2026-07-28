@@ -1,0 +1,300 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
+
+const locale = 'hu';
+const page = 'contact';
+const title = 'Kapcsolat – Content Ninja';
+const description =
+  'Lépj kapcsolatba a Content Ninja csapatával: e-mail (support@getcontentninja.com), telefon, cégadatok és kapcsolatfelvételi űrlap. Munkanapokon 1 munkanapon belül válaszolunk.';
+
+const bookDemo = pathFor('bookDemo', locale);
+const imprint = pathFor('imprint', locale);
+const SUPPORT_EMAIL = 'support@getcontentninja.com';
+const SUPPORT_PHONE = '+36 20 283 8831';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Content Ninja',
+      legalName: 'Digitallwork.hu Kft.',
+      url: 'https://getcontentninja.com/',
+      email: 'support@getcontentninja.com',
+      telephone: '+36202838831',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Pálinkás Antal u. 3/A FSZ/8',
+        addressLocality: 'Budapest',
+        postalCode: '1118',
+        addressCountry: 'HU',
+      },
+      contactPoint: [{
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'support@getcontentninja.com',
+        telephone: '+36202838831',
+        availableLanguage: ['hu', 'en'],
+      }],
+    })} />
+  </Fragment>
+
+  <Header locale={locale} page={page} />
+
+  <!-- 1. Hero + kapcsolatfelvételi űrlap -->
+  <section class="hero-gradient py-12 md:py-24 px-4 md:px-10">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+        <!-- Bal oszlop: bevezető + közvetlen elérhetőségek -->
+        <div>
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kapcsolat</span>
+          <h1 class="text-4xl md:text-[2.85rem] font-extrabold leading-[1.08] tracking-[-0.03em] text-dark mb-5">
+            Kérdésed van? <span class="text-primary">Írj nekünk</span> – 1 munkanapon belül válaszolunk
+          </h1>
+          <p class="text-body text-[1.1rem] leading-relaxed max-w-[520px] mb-8">
+            Írd meg, mivel foglalkozik a webshopod és miben segíthetünk – e-mailben, telefonon vagy az űrlapon.
+            Magyarul, munkanapokon 9:00–17:00 között.
+          </p>
+
+          <div class="space-y-4 max-w-[520px]">
+            <a href={`mailto:${SUPPORT_EMAIL}`} class="flex items-start gap-4 bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+              <span class="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[22px]">mail</span>
+              </span>
+              <span class="min-w-0">
+                <span class="block font-bold text-lg text-dark mb-1">E-mail</span>
+                <span class="block text-primary font-semibold break-words">{SUPPORT_EMAIL}</span>
+                <span class="block text-body text-sm leading-relaxed mt-1">Ügyfélszolgálat, technikai kérdések, számlázás.</span>
+              </span>
+            </a>
+
+            <a href="tel:+36202838831" class="flex items-start gap-4 bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+              <span class="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[22px]">call</span>
+              </span>
+              <span class="min-w-0">
+                <span class="block font-bold text-lg text-dark mb-1">Telefon</span>
+                <span class="block text-primary font-semibold">{SUPPORT_PHONE}</span>
+                <span class="block text-body text-sm leading-relaxed mt-1">Munkanapokon 9:00–17:00 között hívható.</span>
+              </span>
+            </a>
+
+            <div class="flex items-start gap-4 bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+              <span class="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[22px]">business</span>
+              </span>
+              <span class="min-w-0">
+                <span class="block font-bold text-lg text-dark mb-1">Iroda</span>
+                <span class="block text-body">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</span>
+                <span class="block text-body text-sm leading-relaxed mt-1">Személyes ügyfélfogadás csak előre egyeztetett időpontban.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jobb oszlop: űrlap -->
+        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card-hover">
+          <h2 class="text-2xl font-bold text-dark mb-2">Kapcsolatfelvétel</h2>
+          <p class="text-body text-sm leading-relaxed mb-6">Töltsd ki az űrlapot, és a csapatunk e-mailben válaszol.</p>
+
+          <form id="contactForm" class="space-y-4">
+            <div>
+              <label for="contactName" class="block text-sm font-bold text-body mb-1">Név</label>
+              <input type="text" id="contactName" name="name" required
+                class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all"
+                placeholder="pl. Kovács János" />
+            </div>
+
+            <div>
+              <label for="contactEmail" class="block text-sm font-bold text-body mb-1">E-mail cím</label>
+              <input type="email" id="contactEmail" name="email" required
+                class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all"
+                placeholder="pl. janos@ceg.hu" />
+            </div>
+
+            <div>
+              <label for="contactPhone" class="block text-sm font-bold text-body mb-1">Telefonszám <span class="font-medium text-muted">(nem kötelező)</span></label>
+              <input type="tel" id="contactPhone" name="phone"
+                class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all"
+                placeholder="+36 30 123 4567" />
+            </div>
+
+            <div>
+              <label for="contactTopic" class="block text-sm font-bold text-body mb-1">Miben segíthetünk?</label>
+              <select id="contactTopic" name="topic" required
+                class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all">
+                <option value="" disabled selected>Válassz...</option>
+                <option value="Érdeklődés a rendszerről">Érdeklődés a rendszerről</option>
+                <option value="Árazás, csomagok, számlázás">Árazás, csomagok, számlázás</option>
+                <option value="Technikai segítség (meglévő ügyfél)">Technikai segítség (meglévő ügyfél)</option>
+                <option value="Partnerség, viszonteladás">Partnerség, viszonteladás</option>
+                <option value="Sajtó, egyéb">Sajtó, egyéb</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="contactMessage" class="block text-sm font-bold text-body mb-1">Üzenet</label>
+              <textarea id="contactMessage" name="message" rows="5" required
+                class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all"
+                placeholder="Írd le röviden, miben segíthetünk. Ha van webshopod, a linkje sokat segít."></textarea>
+            </div>
+
+            <div class="flex items-start gap-2 text-xs text-muted ml-1">
+              <input type="checkbox" id="contactPrivacy" required class="mt-1 rounded text-primary focus:ring-primary" />
+              <label for="contactPrivacy">
+                Az <a href="/hu/adatkezeles" target="_blank" class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                foglaltakat elolvastam, megértettem és tudomásul vettem.
+              </label>
+            </div>
+
+            <p id="contactError" class="hidden text-sm text-red-600 leading-relaxed"></p>
+
+            <button type="submit" id="contactSubmit" class="w-full cta-primary h-12 text-base">
+              <span class="material-symbols-outlined text-[18px]">send</span>
+              Üzenet küldése
+            </button>
+          </form>
+
+          <div id="contactSuccess" class="hidden text-center py-8 space-y-4">
+            <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+              <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark">Megkaptuk az üzeneted!</h3>
+            <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+              Köszönjük, hogy írtál. Munkanapokon 1 munkanapon belül válaszolunk a megadott e-mail címre.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Cégadatok -->
+  <section class="bg-card py-20 md:py-28 px-4 md:px-10">
+    <div class="max-w-[900px] mx-auto">
+      <div class="text-center max-w-[700px] mx-auto mb-12">
+        <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Cégadatok</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ki áll a Content Ninja mögött?</h2>
+        <p class="text-body text-lg">A Content Ninját a Digitallwork.hu Kft. fejleszti és üzemelteti Budapesten.</p>
+      </div>
+
+      <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+        <dl class="space-y-2.5 text-sm">
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Cégnév</dt>
+            <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Székhely</dt>
+            <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Cégjegyzékszám</dt>
+            <dd class="text-dark font-medium">01-09-426906</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Adószám</dt>
+            <dd class="text-dark font-medium">32489819-2-43</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">E-mail</dt>
+            <dd><a href={`mailto:${SUPPORT_EMAIL}`} class="text-primary font-medium hover:underline">{SUPPORT_EMAIL}</a></dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Telefonszám</dt>
+            <dd><a href="tel:+36202838831" class="text-primary font-medium hover:underline">{SUPPORT_PHONE}</a></dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Ügyfélszolgálat</dt>
+            <dd class="text-dark font-medium">Munkanapokon 9:00–17:00</dd>
+          </div>
+        </dl>
+        <p class="text-xs text-muted mt-5 leading-relaxed">
+          A tárhely- és domainszolgáltató adatai, valamint a további kötelező tájékoztatás az
+          <a href={imprint} class="underline hover:text-primary">impresszumban</a> érhető el.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Záró CTA -->
+  <section class="bg-primary py-16 md:py-20 px-4 md:px-10">
+    <div class="max-w-[800px] mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Inkább élőben néznéd meg a rendszert?</h2>
+      <p class="text-white/80 text-lg mb-8">
+        Kérj egy díjmentes, kb. 20 perces online bemutatót – a te termékeiddel mutatjuk meg, hogyan működik.
+      </p>
+      <a href={bookDemo} class="cta-on-primary px-8 py-4 text-base">
+        <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+        Bemutatót kérek
+      </a>
+    </div>
+  </section>
+
+  <Footer locale={locale} page={page} />
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('contactForm');
+      if (!form) return;
+
+      var btn = document.getElementById('contactSubmit');
+      var errorBox = document.getElementById('contactError');
+      var successBox = document.getElementById('contactSuccess');
+      var WEBHOOK = 'https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7';
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        var privacy = document.getElementById('contactPrivacy');
+        if (!privacy.checked) {
+          alert('Kérlek fogadd el az adatkezelési tájékoztatót!');
+          return;
+        }
+
+        errorBox.classList.add('hidden');
+        btn.disabled = true;
+        btn.innerHTML = 'Küldés...';
+
+        var name = document.getElementById('contactName').value.trim();
+        var payload = {
+          statusz: 'kapcsolat',
+          lead_forras: 'kapcsolat',
+          submission_date: new Date().toISOString(),
+          nev: name,
+          email: document.getElementById('contactEmail').value.trim(),
+          telefonszam: document.getElementById('contactPhone').value.trim(),
+          tema: document.getElementById('contactTopic').value,
+          uzenet: document.getElementById('contactMessage').value.trim(),
+          nyelv: 'hu',
+          subject: '✉️ Kapcsolat űrlap: ' + name,
+          source_url: window.location.href
+        };
+
+        try {
+          await fetch(WEBHOOK, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          form.classList.add('hidden');
+          successBox.classList.remove('hidden');
+          successBox.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        } catch (err) {
+          btn.disabled = false;
+          btn.innerHTML = 'Újraküldés';
+          errorBox.textContent = 'Az üzenetet nem sikerült elküldeni. Kérlek próbáld újra, vagy írj közvetlenül a support@getcontentninja.com címre.';
+          errorBox.classList.remove('hidden');
+        }
+      });
+    })();
+  </script>
+</BaseLayout>
+</content>
+</invoke>

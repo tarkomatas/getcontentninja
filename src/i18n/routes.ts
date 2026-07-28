@@ -13,6 +13,7 @@ export type PageKey =
   | 'newsletter'
   | 'pricing'
   | 'onlineDemo'
+  | 'contact'
   | 'thanks'
   | 'privacy'
   | 'terms'
@@ -56,6 +57,9 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // Önálló, nyelvi prefix nélküli kampány-link online konzultációhoz (Fillout-űrlap).
   // Szándékosan csak egy nyelven (HU) és prefix nélkül él – ez a brief kérése.
   onlineDemo: { hu: '/online-demo', en: null },
+  // Kapcsolat: cégadatok, közvetlen elérhetőségek (e-mail, telefon) és
+  // általános kapcsolatfelvételi űrlap. A fejléc/lábléc "Kapcsolat" linkje ide visz.
+  contact: { hu: '/hu/kapcsolat', en: '/en/contact' },
   thanks: { hu: '/hu/koszonjuk', en: '/en/thank-you' },
   privacy: { hu: '/hu/adatkezeles', en: '/en/privacy-policy' },
   terms: { hu: null, en: '/en/terms' },
