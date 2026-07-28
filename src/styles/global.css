@@ -209,3 +209,14 @@
         html.lp-mode .lp-show {
             display: inline-flex !important;
         }
+
+        /* Lapozgatható kártyasáv (Carousel.astro): a natív scrollbart elrejtjük,
+           a lapozás a nyilakkal / pontokkal / swipe-pal történik. */
+        .no-scrollbar {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }

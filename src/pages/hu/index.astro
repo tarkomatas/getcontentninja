@@ -3,16 +3,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import VideoEmbed from '../../components/VideoEmbed.astro';
+import Carousel from '../../components/Carousel.astro';
 import { videos, hasVideo } from '../../data/videos';
 
 const locale = 'hu';
 const page = 'home';
 
-const title = 'Content Ninja – AI Tartalomgyártás Webshopoknak | Posztolás és Hírlevélküldés';
+const title = 'Content Ninja – All-in-one AI marketing webshopoknak | Posztolás, blog, hírlevél';
 const description =
-  'A Content Ninja AI-alapú tartalomgyártó eszköz webshopoknak. Automatikusan generál posztokat, képeket és videókat a termékeidből és publikálja is – sőt, hírleveleket is ír, tervez és kiküld helyetted. Próbáld ki díjmentesen!';
+  'A Content Ninja all-in-one AI marketing rendszer webshopoknak: posztol Facebookra és Instagramra, SEO-blogcikket ír a webshopod blogjába, hírlevelet tervez és küld, a termékleírásaidat pedig eladósabbra írja – mindezt a saját termékadataidból. Kérj díjmentes bemutatót!';
 const keywords =
-  'Content Ninja, AI tartalomgyártás, webshop marketing, automatikus posztolás, AI hírlevél, hírlevélküldés, social media automatizálás, AI influenszer, tartalomnaptár';
+  'Content Ninja, all-in-one AI marketing, AI tartalomgyártás, webshop marketing, automatikus posztolás, AI blogcikk író, termékleírás újraírás, Shopgrade, AI hírlevél, social media automatizálás, tartalomnaptár';
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -23,7 +24,15 @@ const faqLd = {
       name: 'Mi az a Content Ninja?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A Content Ninja egy AI-alapú tartalomgyártó és publikáló platform, amelyet kifejezetten webshopok számára fejlesztettünk. Automatikusan generál social media posztokat, képeket és videókat a termékeidből, majd ezeket Facebookon és Instagramon közzé is teszi – sőt, hírleveleket is ír, megtervez és a MailerLite vagy Salesautopilot fiókodból automatikusan ki is küld.',
+        text: 'A Content Ninja egy all-in-one AI marketing rendszer webshopoknak. Egy fiókból, ugyanabból a termékkatalógusból dolgozik: social media posztokat ír és publikál Facebookra és Instagramra, SEO- és GEO-barát blogcikket ír a webshopod blogjába, hírlevelet tervez és küld a MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat pedig eladósabb szövegre írja át – a képeket és videókat is az AI készíti hozzá.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Milyen modulok vannak benne, és mind az előfizetés része?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Hat modulnak van saját oldala: automata posztolás, blogcikk író, Shopgrade (termékleírás-újraírás), AI hírlevél, webshop mélyintegráció és nemzetközi terjeszkedés. Ezekhez jön az AI kép-, videó- és narrátorvideó-generálás, valamint a Meta hirdetésgeneráló. Mind a 34.990 Ft + ÁFA / hó előfizetés része, nincs modulonkénti felár – a havi 500 AI kreditet szabadon oszthatod el közöttük.',
       },
     },
     {
@@ -69,30 +78,31 @@ const faqLd = {
 
                 <!-- Left: szöveg -->
                 <div class="flex flex-col gap-5 animate-fade-up">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest">6 modul · 1 előfizetés</span>
+
                     <h1
                         class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        AI marketing rendszer <span class="text-primary">webshopoknak</span>
+                        All-in-one AI marketing rendszer <span class="text-primary">webshopoknak</span>
                     </h1>
 
                     <p class="text-lg text-body leading-snug max-w-[520px]">
-                        A termékeidből az AI szöveget ír, képet szerkeszt,
-                        <strong class="text-dark">videót generál</strong> és posztol – a
-                        <strong class="text-dark">hírleveleidet</strong> pedig megírja, megtervezi és kiküldi,
-                        automatikusan.
+                        Posztolás, blogcikk, hírlevél és termékleírás <strong class="text-dark">egy rendszerben</strong>:
+                        bekötöd a webshopod, és az AI a termékeidből megírja, megtervezi és publikálja a tartalmat
+                        helyetted.
                     </p>
 
                     <ul class="space-y-2 text-body">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
                                 style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Nem kell többé órákat töltened</strong> posztok írásával és
-                                képek szerkesztésével</span>
+                            <span><strong class="text-dark">Hat modul egy előfizetésben</strong> – posztolás, blogcikk,
+                                hírlevél, termékleírás, kép és videó</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
                                 style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Folyamatos, profi jelenlét</strong> a social médiában és a
-                                postaládákban – akkor is, ha nincs rá időd</span>
+                            <span><strong class="text-dark">Folyamatos, profi jelenlét</strong> a Google-ben, a social
+                                médiában és a postaládákban</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5"
@@ -102,15 +112,15 @@ const faqLd = {
                         </li>
                     </ul>
 
-                    <div class="flex flex-col sm:flex-row gap-3 pt-1">
-                        <a href="/hu/online-bemutato" class="cta-primary px-7 py-4 text-base">
-                            <span class="material-symbols-outlined text-[18px]">calendar_month</span>
-                            Díjmentes bemutatót kérek
-                        </a>
-                        <a href="https://app.getcontentninja.com" target="_blank" class="cta-secondary px-7 py-4 text-base">
-                            <span class="material-symbols-outlined text-[18px]">login</span>
-                            Belépek az appba
-                        </a>
+                    <!-- Webshop mélyintegráció – a hero CTA-gombok helyett a támogatott rendszerek -->
+                    <div class="flex items-center gap-2.5 flex-wrap pt-1">
+                        <span class="text-sm font-semibold text-muted">Webshop mélyintegráció:</span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" />
+                        </span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" />
+                        </span>
                     </div>
 
                     <!-- Social proof (balra helyezve) -->
@@ -137,7 +147,7 @@ const faqLd = {
                     <div
                         class="relative rounded-[20px] overflow-hidden shadow-primary-glow border border-primary/10 bg-light aspect-square">
                         <img src="/assets/hero-illusztracio.webp" width="1024" height="1024"
-                            alt="A Content Ninja a webshopod termékeiből automatikusan közösségi média posztokat (Facebook, Instagram) és hírleveleket gyárt"
+                            alt="A Content Ninja a webshopod termékeiből automatikusan közösségi média posztokat (Facebook, Instagram), blogcikkeket, hírleveleket és termékleírásokat gyárt"
                             class="w-full h-full object-cover" />
                     </div>
                 </div>
@@ -154,14 +164,15 @@ const faqLd = {
             <div class="text-center max-w-[700px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Megoldások</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire használják a Content Ninját?</h2>
-                <p class="text-body text-lg">Válaszd ki, mi a te helyzeted – megmutatjuk, hogyan segít a rendszer.</p>
+                <p class="text-body text-lg">Hat modul, ugyanabból a termékkatalógusból – válaszd ki, mi a te
+                    helyzeted, és megmutatjuk, hogyan segít a rendszer.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1200px] mx-auto">
+            <Carousel label="Megoldások" prevLabel="Előző megoldások" nextLabel="További megoldások">
 
                 <!-- Automata posztolás -->
                 <a href="/hu/posztolas"
-                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
                     </div>
@@ -179,9 +190,49 @@ const faqLd = {
                     </span>
                 </a>
 
+                <!-- Blogcikk író -->
+                <a href="/hu/blogcikk-iro"
+                    class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">article</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 text-dark">Blogcikk író</h3>
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Kikutatja, mire keresnek a vásárlóid, megírja
+                        rá a SEO- és GEO-barát cikket, majd publikálja is a webshopod blogjában – forgalom a Google-ből és
+                        az AI-keresőkből.</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
+                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                    </div>
+                    <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                        Részletek
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                    </span>
+                </a>
+
+                <!-- Shopgrade – termékleírás újraírás -->
+                <a href="/hu/shopgrade"
+                    class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">edit_document</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 text-dark">Termékleírás újraírás</h3>
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">A <strong class="text-dark">Shopgrade</strong>
+                        modul a meglévő termékleírásaidat írja át SEO- és GEO-barát, eladósabb szöveggé, majd vissza is
+                        tölti a webshopodba – tömegesen, a te jóváhagyásoddal.</p>
+                    <div class="flex items-center gap-2 mb-4 flex-wrap">
+                        <span class="text-xs font-bold text-primary bg-primary/5 border border-primary/20 rounded-[10px] px-2.5 py-1">SEO + GEO</span>
+                        <span class="text-xs font-bold text-primary bg-primary/5 border border-primary/20 rounded-[10px] px-2.5 py-1">Visszatöltés</span>
+                    </div>
+                    <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                        Részletek
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                    </span>
+                </a>
+
                 <!-- AI hírlevél -->
                 <a href="/hu/hirlevel"
-                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">mail</span>
                     </div>
@@ -201,7 +252,7 @@ const faqLd = {
 
                 <!-- Nemzetközi terjeszkedés -->
                 <a href="/hu/nemzetkozi"
-                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">public</span>
                     </div>
@@ -223,7 +274,7 @@ const faqLd = {
 
                 <!-- Webshop mélyintegráció -->
                 <a href="/hu/webshop-integracio"
-                    class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">storefront</span>
                     </div>
@@ -240,7 +291,7 @@ const faqLd = {
                     </span>
                 </a>
 
-            </div>
+            </Carousel>
         </div>
     </section>
 
@@ -281,11 +332,11 @@ const faqLd = {
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-9 h-9 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 shadow-primary-glow">3</div>
-                            <p class="text-body pt-1"><strong class="text-dark">Tartalmat generál.</strong> Posztszöveg vagy hírlevél – képpel, videóval, márkahűen.</p>
+                            <p class="text-body pt-1"><strong class="text-dark">Tartalmat generál.</strong> Poszt, blogcikk, hírlevél vagy termékleírás – képpel, videóval, márkahűen.</p>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-9 h-9 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 shadow-primary-glow">4</div>
-                            <p class="text-body pt-1"><strong class="text-dark">Publikál és küld.</strong> Az AI <span class="text-primary font-semibold">posztolja, hírlevélben kiküldi</span> helyetted.</p>
+                            <p class="text-body pt-1"><strong class="text-dark">Publikál és küld.</strong> Az AI <span class="text-primary font-semibold">kiposztolja, blogba felteszi, hírlevélben kiküldi</span> helyetted.</p>
                         </li>
                     </ul>
 
@@ -707,7 +758,7 @@ const faqLd = {
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body font-medium">Az összes modul: posztírás, hírlevél, kép- és videógenerálás</span>
+                            <span class="text-body font-medium">Az összes modul: posztírás, blogcikk, Shopgrade, hírlevél, kép- és videógenerálás</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
@@ -848,11 +899,32 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A Content Ninja egy AI-alapú tartalomgyártó és publikáló platform, amelyet kifejezetten
-                        webshopok számára fejlesztettünk. Automatikusan generál social media posztokat, képeket és
-                        videókat a termékeidből, majd ezeket a megadott platformokon (Facebook, Instagram)
-                        közzé is teszi – sőt, hírleveleket is ír, megtervez és a MailerLite vagy Salesautopilot fiókodból
-                        ki is küld. Nincs szükség kreatív csapatra, marketing ügynökségre vagy manuális munkára.
+                        A Content Ninja egy <strong>all-in-one AI marketing rendszer webshopoknak</strong>. Egy fiókból,
+                        ugyanabból a termékkatalógusból dolgozik: social media posztokat ír és publikál (Facebook,
+                        Instagram), SEO- és GEO-barát blogcikket ír a webshopod blogjába, hírlevelet tervez és küld a
+                        MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat pedig eladósabb szövegre
+                        írja át – a képeket és videókat is az AI készíti hozzá. Nincs szükség kreatív csapatra,
+                        marketing ügynökségre vagy manuális munkára.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Milyen modulok vannak benne, és mind az előfizetés része?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Hat modulnak van saját oldala: <a href="/hu/posztolas" class="text-primary font-semibold underline">automata
+                        posztolás</a>, <a href="/hu/blogcikk-iro" class="text-primary font-semibold underline">blogcikk író</a>,
+                        <a href="/hu/shopgrade" class="text-primary font-semibold underline">Shopgrade</a>
+                        (termékleírás-újraírás), <a href="/hu/hirlevel" class="text-primary font-semibold underline">AI
+                        hírlevél</a>, <a href="/hu/webshop-integracio" class="text-primary font-semibold underline">webshop
+                        mélyintegráció</a> és <a href="/hu/nemzetkozi" class="text-primary font-semibold underline">nemzetközi
+                        terjeszkedés</a>. Ezekhez jön az AI kép-, videó- és narrátorvideó-generálás, valamint a Meta
+                        hirdetésgeneráló. Mind a 34.990 Ft + ÁFA / hó előfizetés része, nincs modulonkénti felár – a havi
+                        500 AI kreditet szabadon oszthatod el közöttük.
                     </div>
                 </div>
 

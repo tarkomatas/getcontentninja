@@ -17,15 +17,9 @@ export const UI = {
       pricing: 'Árazás',
       testimonials: 'Vélemények',
       international: 'Nemzetközi',
+      // A "Megoldások" menü elemei (modulnév + egysoros leírás) a
+      // `src/data/modules.ts`-ből jönnek, nem innen – egy modul = egy helyen.
       solutions: 'Megoldások',
-      autoPosting: 'Automata posztolás',
-      autoPostingDesc: 'AI-tartalom a webshopod nevében, nonstop',
-      internationalExpansion: 'Nemzetközi terjeszkedés',
-      internationalExpansionDesc: 'Több nyelven, több piacra egyszerre',
-      storeIntegration: 'Webshop mélyintegráció',
-      storeIntegrationDesc: 'Unas, Shoprenter – az AI látja a termékeid',
-      newsletter: 'AI hírlevél',
-      newsletterDesc: 'Az AI megírja, megtervezi és kiküldi a hírleveleid',
     },
     cta: {
       login: 'Belépek',
@@ -64,15 +58,8 @@ export const UI = {
       pricing: 'Pricing',
       testimonials: 'Reviews',
       international: 'International',
+      // A "Megoldások" menü elemei a `src/data/modules.ts`-ből jönnek.
       solutions: 'Solutions',
-      autoPosting: 'Automated posting',
-      autoPostingDesc: 'AI content on behalf of your webshop, 24/7',
-      internationalExpansion: 'International expansion',
-      internationalExpansionDesc: 'Multiple languages, more markets at once',
-      storeIntegration: 'Deep store integration',
-      storeIntegrationDesc: 'Connect Unas or Shoprenter, the AI sees your products',
-      newsletter: 'AI newsletters',
-      newsletterDesc: 'The AI writes, designs and sends your newsletters',
     },
     cta: {
       login: 'Log in',

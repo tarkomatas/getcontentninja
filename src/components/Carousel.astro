@@ -1,0 +1,122 @@
+---
+/**
+ * Vízszintes, lapozgatható kártyasáv (scroll-snap + nyilak + pontok).
+ *
+ * A kártyák slotban jönnek, és ŐK határozzák meg, hány látszik egyszerre –
+ * a szélességet a hívó oldal adja meg rajtuk (pl. a főoldali megoldás-kártyák
+ * `lg:basis-[calc((100%-4.5rem)/4)]`, tehát desktopon 4 kártya látszik).
+ * A nyíl EGY kártyát lép, így a látható sávban soha nincs üres hely.
+ *
+ * Külső könyvtár nélkül: natív scroll-snap + pár soros JS. Több példány is
+ * lehet egy oldalon (a JS a `[data-carousel]` gyökérre szűkít).
+ */
+interface Props {
+  label: string;
+  prevLabel: string;
+  nextLabel: string;
+  /** Extra osztályok a külső wrapperre. */
+  class?: string;
+}
+
+const { label, prevLabel, nextLabel, class: className = '' } = Astro.props;
+---
+
+<div class={`relative ${className}`} data-carousel>
+  <div
+    data-carousel-track
+    class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2"
+    role="group"
+    aria-label={label}
+  >
+    <slot />
+  </div>
+
+  <div class="flex items-center justify-center gap-4 mt-8">
+    <button
+      type="button"
+      data-carousel-prev
+      aria-label={prevLabel}
+      class="w-11 h-11 rounded-full border border-border bg-card text-dark shadow-card flex items-center justify-center transition-all hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none"
+    >
+      <span class="material-symbols-outlined text-[22px]">chevron_left</span>
+    </button>
+
+    <div class="flex items-center gap-2" data-carousel-dots></div>
+
+    <button
+      type="button"
+      data-carousel-next
+      aria-label={nextLabel}
+      class="w-11 h-11 rounded-full border border-border bg-card text-dark shadow-card flex items-center justify-center transition-all hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none"
+    >
+      <span class="material-symbols-outlined text-[22px]">chevron_right</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-carousel]').forEach((root) => {
+    const track = root.querySelector('[data-carousel-track]') as HTMLElement | null;
+    const prev = root.querySelector('[data-carousel-prev]') as HTMLButtonElement | null;
+    const next = root.querySelector('[data-carousel-next]') as HTMLButtonElement | null;
+    const dotsWrap = root.querySelector('[data-carousel-dots]') as HTMLElement | null;
+    if (!track || !prev || !next || !dotsWrap) return;
+
+    const cards = Array.from(track.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    // Egy lépés = kártyaszélesség + rés (a rés a tényleges pozíciókból jön ki).
+    const step = () =>
+      cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : cards[0].offsetWidth;
+
+    // Hány kártya látszik egyszerre – ez töréspontonként más, ezért mérjük.
+    const visible = () => Math.max(1, Math.round(track.clientWidth / step()));
+
+    let dots: HTMLButtonElement[] = [];
+
+    function renderDots() {
+      // Csak annyi pont, ahány pozícióra tényleg lehet lapozni.
+      const count = Math.max(1, cards.length - visible() + 1);
+      if (dots.length === count) return;
+      dotsWrap.innerHTML = '';
+      dots = Array.from({ length: count }, (_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'h-2 rounded-full bg-border transition-all';
+        dot.setAttribute('aria-label', String(i + 1));
+        dot.addEventListener('click', () => {
+          track.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+        });
+        dotsWrap.appendChild(dot);
+        return dot;
+      });
+    }
+
+    function update() {
+      const max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+
+      renderDots();
+      const active = Math.min(dots.length - 1, Math.round(track.scrollLeft / step()));
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-primary', i === active);
+        dot.classList.toggle('bg-border', i !== active);
+        dot.classList.toggle('w-6', i === active);
+        dot.classList.toggle('w-2', i !== active);
+      });
+
+      // Egyetlen "oldal" esetén (minden kártya kilátszik) nincs mit lapozni.
+      const idle = max <= 2;
+      prev.classList.toggle('hidden', idle);
+      next.classList.toggle('hidden', idle);
+      dotsWrap.classList.toggle('hidden', idle);
+    }
+
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+</script>

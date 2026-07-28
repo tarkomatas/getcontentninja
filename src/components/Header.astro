@@ -1,6 +1,7 @@
 ---
 import { homeFor, pathFor, type Locale, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
+import { MODULE_UI, navModulesFor } from '../data/modules';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
@@ -11,45 +12,17 @@ interface Props {
 const { locale, page } = Astro.props;
 const ui = t(locale);
 const home = homeFor(locale);
-const demo = pathFor('demo', locale);
 const bookDemo = pathFor('bookDemo', locale);
-const international = pathFor('international', locale);
-const webshopIntegration = pathFor('webshopIntegration', locale);
-const newsletter = pathFor('newsletter', locale);
 const APP_URL = 'https://app.getcontentninja.com';
 
 // Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
 // (#funkciok) nav-elemet elhagytuk – csak létező horgonyokra mutatunk.
-// A "Megoldások" lenyíló menü önálló kampányoldalakra mutat (nem horgonyokra):
-// az "Automata posztolás" a posztolás megoldás-oldalra, a "Nemzetközi
-// terjeszkedés" a saját kampányoldalára. A fejléc elsődleges "Bemutatót kérek"
-// CTA-ja ezzel szemben az általános demo oldalra (bookDemo) visz.
-const solutionItems = [
-  {
-    href: demo,
-    icon: 'auto_awesome',
-    label: ui.nav.autoPosting,
-    desc: ui.nav.autoPostingDesc,
-  },
-  {
-    href: international,
-    icon: 'public',
-    label: ui.nav.internationalExpansion,
-    desc: ui.nav.internationalExpansionDesc,
-  },
-  {
-    href: webshopIntegration,
-    icon: 'storefront',
-    label: ui.nav.storeIntegration,
-    desc: ui.nav.storeIntegrationDesc,
-  },
-  {
-    href: newsletter,
-    icon: 'mail',
-    label: ui.nav.newsletter,
-    desc: ui.nav.newsletterDesc,
-  },
-];
+// A "Megoldások" lenyíló menü önálló kampányoldalakra mutat (nem horgonyokra),
+// és a `src/data/modules.ts`-ből épül: minden modul, aminek van saját oldala.
+// Hat elem már nem fér el egy hasábban, ezért a panel 2 hasábos. A fejléc
+// elsődleges "Bemutatót kérek" CTA-ja ezzel szemben a bookDemo oldalra visz.
+const solutionItems = navModulesFor(locale);
+const moduleUi = MODULE_UI[locale];
 const navItems = [
   { href: `${home}#hogyan-mukodik`, label: ui.nav.how },
   { href: `${home}#velemenyek`, label: ui.nav.testimonials },
@@ -77,16 +50,22 @@ const navItems = [
           <span class="material-symbols-outlined text-[18px] transition-transform duration-150 group-hover:rotate-180">expand_more</span>
         </button>
         <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150 z-50">
-          <div class="min-w-[280px] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
-            {solutionItems.map((item) => (
-              <a href={item.href} class="flex items-start gap-3 px-3 py-2.5 rounded-[10px] hover:bg-light transition-colors group/item">
-                <span class="material-symbols-outlined text-primary text-[22px] mt-0.5">{item.icon}</span>
-                <span class="min-w-0">
-                  <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
-                  <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
-                </span>
-              </a>
-            ))}
+          <div class="w-[580px] max-w-[calc(100vw-3rem)] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
+            <div class="grid grid-cols-2 gap-x-1">
+              {solutionItems.map((item) => (
+                <a href={item.href} class="flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-light transition-colors group/item">
+                  <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">{item.icon}</span>
+                  <span class="min-w-0">
+                    <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
+                    <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+            <a href={`${home}#megoldasok`} class="flex items-center justify-center gap-1.5 mt-1 pt-2.5 border-t border-border text-sm font-bold text-primary hover:bg-light rounded-[10px] py-2.5 transition-colors">
+              {moduleUi.allSolutions}
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
           </div>
         </div>
       </div>

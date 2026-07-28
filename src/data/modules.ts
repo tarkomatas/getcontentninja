@@ -24,14 +24,23 @@ export type ModuleId =
   | 'narration'
   | 'metaAds';
 
+interface ModuleText {
+  title: string;
+  desc: string;
+  /** Rövidebb név a fejléc "Megoldások" menüjéhez (ha a `title` túl hosszú oda). */
+  navLabel?: string;
+  /** Egysoros leírás a "Megoldások" menü sorai alá. */
+  navDesc?: string;
+}
+
 export interface ModuleDef {
   id: ModuleId;
   /** Material Symbols ikonnév. */
   icon: string;
   /** Saját kampányoldal (routes.ts kulcs). Ha nincs, a kártya link nélküli. */
   page?: PageKey;
-  hu: { title: string; desc: string };
-  en: { title: string; desc: string };
+  hu: ModuleText;
+  en: ModuleText;
 }
 
 export const MODULES: ModuleDef[] = [
@@ -42,10 +51,12 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Automata posztolás',
       desc: 'Az AI a termékeidből posztokat ír, képet és videót készít hozzájuk, majd időzítve publikálja Facebookra és Instagramra.',
+      navDesc: 'AI-tartalom a webshopod nevében, nonstop',
     },
     en: {
       title: 'Automated posting',
       desc: 'The AI writes posts from your products, creates images and videos for them, then publishes them on a schedule to Facebook and Instagram.',
+      navDesc: 'AI content on behalf of your webshop, 24/7',
     },
   },
   {
@@ -55,10 +66,12 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Blogcikk író',
       desc: 'Kikutatja, mire keresnek a vásárlóid, megírja rá a SEO- és GEO-barát blogcikket, majd publikálja is a webshopod blogjában.',
+      navDesc: 'Kulcsszókutatás és SEO-cikk a webshop blogjába',
     },
     en: {
       title: 'Blog writer',
       desc: 'It researches what your customers search for, writes the SEO- and GEO-friendly article, then publishes it straight to your webshop blog.',
+      navDesc: 'Keyword research and SEO articles for your blog',
     },
   },
   {
@@ -68,10 +81,16 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Shopgrade – tartalomoptimalizálás',
       desc: 'A meglévő termékleírásaidat írja át SEO- és GEO-barát, értékesítési fókuszú szöveggé, majd vissza is tölti a webshopodba.',
+      // A menüben a funkció vezet, a modul neve utána jön – a "Shopgrade" név
+      // önmagában nem érthető annak, aki most találkozik vele.
+      navLabel: 'Termékleírás újraírás',
+      navDesc: 'Shopgrade – a meglévő leírásaid felturbózva',
     },
     en: {
       title: 'Shopgrade – content optimization',
       desc: 'It rewrites your existing product descriptions into SEO- and GEO-friendly, sales-focused copy, then uploads them back to your webshop.',
+      navLabel: 'Product description rewriting',
+      navDesc: 'Shopgrade – your existing descriptions, upgraded',
     },
   },
   {
@@ -81,10 +100,12 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'AI hírlevél',
       desc: 'Kész hírlevél szöveggel, dizájnnal és termékképekkel – a saját MailerLite vagy Salesautopilot fiókodból, a meglévő listáidra.',
+      navDesc: 'Az AI megírja, megtervezi és kiküldi a hírleveleid',
     },
     en: {
       title: 'AI newsletter',
       desc: 'Ready-made newsletters with copy, design and product images – from your own MailerLite or Salesautopilot account, to your existing lists.',
+      navDesc: 'The AI writes, designs and sends your newsletters',
     },
   },
   {
@@ -94,10 +115,12 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Webshop mélyintegráció',
       desc: 'Az Unas vagy Shoprenter áruházad bekötve: az AI látja az összes terméked és blogcikked, és mindig friss adatokból dolgozik.',
+      navDesc: 'Unas, Shoprenter – az AI látja a termékeid',
     },
     en: {
       title: 'Deep store integration',
       desc: 'With your Unas or Shoprenter store connected, the AI sees all your products and blog posts, and always works from fresh data.',
+      navDesc: 'Connect Unas or Shoprenter, the AI sees your products',
     },
   },
   {
@@ -107,10 +130,12 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Nemzetközi terjeszkedés',
       desc: 'Írd meg egyszer magyarul – a rendszer natív minőségben lefordítja, és minden piacod fiókjába kiküldi.',
+      navDesc: 'Több nyelven, több piacra egyszerre',
     },
     en: {
       title: 'International expansion',
       desc: "Write it once in your own language – the system translates it at native quality and sends it to every market's account.",
+      navDesc: 'Multiple languages, more markets at once',
     },
   },
   {
@@ -183,8 +208,36 @@ export function modulesFor(locale: Locale, exclude: ModuleId[] = []): ModuleCard
   }));
 }
 
+export interface NavModule {
+  icon: string;
+  href: string;
+  label: string;
+  desc: string;
+}
+
+/**
+ * A fejléc "Megoldások" menüjének elemei: azok a modulok, amiknek van saját
+ * kampányoldala. A sorrend a `MODULES` sorrendje.
+ */
+export function navModulesFor(locale: Locale): NavModule[] {
+  return MODULES.filter((m) => m.page).map((m) => ({
+    icon: m.icon,
+    href: pathFor(m.page as PageKey, locale),
+    label: m[locale].navLabel ?? m[locale].title,
+    desc: m[locale].navDesc ?? m[locale].desc,
+  }));
+}
+
 /** A kártyalink és a záró CTA szövege nyelvenként. */
 export const MODULE_UI = {
-  hu: { details: 'Részletek', wholeSystem: 'Nézd meg a teljes rendszert' },
-  en: { details: 'Details', wholeSystem: 'See the full system' },
+  hu: {
+    details: 'Részletek',
+    wholeSystem: 'Nézd meg a teljes rendszert',
+    allSolutions: 'Összes megoldás',
+  },
+  en: {
+    details: 'Details',
+    wholeSystem: 'See the full system',
+    allSolutions: 'All solutions',
+  },
 } as const;
