@@ -110,6 +110,24 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blogcikk író (kulcsszókutatás, cikkírás, publikálás) -->
+  <url>
+    <loc>https://getcontentninja.com/hu/blogcikk-iro</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/blogcikk-iro" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/blog-writer" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/blogcikk-iro" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcontentninja.com/en/blog-writer</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/blogcikk-iro" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/blog-writer" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/blogcikk-iro" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Hírlevél-generálás -->
   <url>
     <loc>https://getcontentninja.com/hu/hirlevel</loc>

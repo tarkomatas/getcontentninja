@@ -9,6 +9,7 @@ export type PageKey =
   | 'international'
   | 'webshopIntegration'
   | 'shopgrade'
+  | 'blogWriter'
   | 'newsletter'
   | 'pricing'
   | 'onlineDemo'
@@ -43,6 +44,9 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // újraírás + visszatöltés; hamarosan kategóriaoldal-író és termékkép-szerkesztő).
   // A slug szándékosan a modul neve, hogy a későbbi almodulok is beleférjenek.
   shopgrade: { hu: '/hu/shopgrade', en: '/en/shopgrade' },
+  // Blogcikk író modul: kulcsszókutatás -> SEO/GEO-barát blogcikk -> publikálás
+  // közvetlenül a webshop blogjába (Unas + Shoprenter).
+  blogWriter: { hu: '/hu/blogcikk-iro', en: '/en/blog-writer' },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel', en: '/en/newsletter' },
   // Részletes ároldal: csomag, teljes kreditdíj-táblázat (#kreditek), extra

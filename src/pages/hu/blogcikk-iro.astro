@@ -1,0 +1,1163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+
+const locale = 'hu';
+const page = 'blogWriter';
+const title = 'AI blogcikk író webshopoknak – kulcsszókutatás, cikkírás, publikálás | Content Ninja';
+const description =
+  'A Content Ninja Blogcikk író modulja kikutatja, mire keresnek a vásárlóid, megírja rá a SEO- és GEO-barát blogcikket, majd publikálja is a webshopod blogjában. Unas és Shoprenter integrációval.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
+  <Fragment slot="head">
+    <style is:inline>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #4a4a68;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #1e1e2f;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-primary:hover {
+            background-color: #5a4bd6;
+        }
+
+        .cta-primary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Közös fejléc – ?type=ld (lp-mode) esetén minimálra vált (logó + nyelvváltó) -->
+    <Header locale={locale} page={page} />
+
+    <!-- 1. Hero + Jelentkezési űrlap -->
+    <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <!-- Content -->
+                <div class="flex flex-col gap-4 md:gap-7 text-left">
+
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
+                        AI blogcikk-író <span class="text-primary">webshopoknak</span>
+                    </h1>
+
+                    <!-- Támogatott rendszerek -->
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <span class="text-sm font-semibold text-muted">Támogatott rendszerek:</span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
+                        </span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                        </span>
+                    </div>
+
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                        Kikutatja, <span class="font-bold text-primary">mire keresnek rá a vásárlóid</span>, megírja rá a
+                        SEO- és GEO-barát blogcikket, majd <span class="font-bold text-primary">publikálja is</span> a
+                        webshopod blogjában.
+                    </p>
+
+                    <ul class="space-y-3.5 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Kulcsszókutatás:</strong> valós keresési adatokból áll össze a cikkterv – nem
+                                találgatásból</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>SEO + GEO:</strong> a Google és az AI-keresők (ChatGPT, Gemini, Perplexity) is
+                                megtalálják és idézik</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Publikálás egy kattintással</strong> a webshopod blogjába – a saját
+                                termékeidre linkelve</span>
+                        </li>
+                    </ul>
+
+                    <!-- Social proof mini -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ hazai webshop</span> már használja</p>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="formIntro">
+                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online bemutatóra</h3>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">Közvetlen kipróbálásra
+                                    nincs lehetőség</strong> – de egy online megbeszélés keretében megmutatjuk, milyen
+                                    kulcsszavakra és milyen cikkeket írna a rendszer a te webshopodnak.</p>
+                            </div>
+                        </div>
+
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+
+                            <!-- Step 1: Qualifying Questions -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="UNAS">UNAS</option>
+                                            <option value="Shoprenter">Shoprenter</option>
+                                            <option value="Egyéb">Egyéb</option>
+                                            <option value="Csak tervezek webshopot indítani">Csak tervezek webshopot
+                                                indítani</option>
+                                            <option value="Más típusú vállalkozásom van">Más típusú vállalkozásom
+                                                van</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Jelenik meg blogcikk a
+                                            webáruházadban?</label>
+                                        <select name="blog_frequency" id="blogFrequency"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Rendszeresen, havi több cikk">Rendszeresen, havi több
+                                                cikk</option>
+                                            <option value="Ritkán, alkalomszerűen">Ritkán, alkalomszerűen</option>
+                                            <option value="Van blog, de nem frissül">Van blog, de nem frissül</option>
+                                            <option value="Nincs blogunk">Nincs blogunk</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ki írja jelenleg a
+                                            tartalmakat?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Én, cégvezetőként">Én, cégvezetőként</option>
+                                            <option value="Belsős marketing csapat">Belsős marketing csapat</option>
+                                            <option value="Külsős ügynökség">Külsős ügynökség</option>
+                                            <option value="Senki – nem készül tartalom">Senki – nem készül
+                                                tartalom</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ha a bemutató alapján
+                                            tetszik, mikor tudnád elkezdeni használni a szoftvert?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Azonnal">Azonnal</option>
+                                            <option value="1 hónapon belül">1 hónapon belül</option>
+                                            <option value="2-3 hónapon belül">2-3 hónapon belül</option>
+                                            <option value="Még csak érdeklődöm">Még csak érdeklődöm</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Tovább
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Disqualification Screen (hard reject) -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        A megadott adatok alapján úgy látjuk, hogy nem lenne a platformunk megfelelő
+                                        számodra. Így nem is szeretnénk az idődet húzni, megértésed köszönjük!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Screen (timing not ideal) -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            A bemutatót csak olyanoknak tudjuk vállalni, akik azonnal használni szeretnék
+                                            a rendszert. Maradjunk kapcsolatban addig is – szívesen elküldenénk egy
+                                            <strong>videós bemutatót</strong> neked.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email cím</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            Az <a href="/hu/adatkezeles" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject()"
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Kérem a videót
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Thank You Screen -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Megkaptuk!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Hamarosan elküldjük a bemutató videót és az aktuális újdonságokat. Köszönjük az
+                                        érdeklődésedet!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Info & Privacy -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Név</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. Kovács János">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Céges email cím</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Telefonszám</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+36 30 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            Az <a href="/hu/adatkezeles" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Vissza
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                            Tovább az időpontfoglaláshoz!
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Miért blog -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Miért blog? 🔍</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">A termékoldalad csak arra hoz forgalmat, aki már tudja,
+                    mit akar</h2>
+                <p class="text-body text-lg">A vásárlók többsége nem terméknévre keres, hanem kérdez – a Google-ben és
+                    egyre inkább a ChatGPT-ben. A blogcikk az a tartalom, amivel ott is megjelenhetsz.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">help</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A kérdésekre te válaszolsz</h3>
+                    <p class="text-body text-sm leading-relaxed">„Melyik a jobb, ha…", „mennyi ideig bírja", „mire kell
+                        figyelni vásárláskor" – ezek a keresések a versenytársadhoz visznek, ha nálad nincs rájuk
+                        cikk.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">smart_toy</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Az AI-keresők a cikkekből idéznek</h3>
+                    <p class="text-body text-sm leading-relaxed">A ChatGPT és a Gemini nem termékadatlapot olvas fel,
+                        hanem kifejtett, tényszerű tartalomból fogalmaz választ – és megnevezi a forrást.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">trending_up</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Nem kell hirdetésre költened</h3>
+                    <p class="text-body text-sm leading-relaxed">A hirdetés addig hoz forgalmat, amíg fizeted. Egy jó
+                        cikk évekig dolgozik – és minden új cikk hozzáad az előzőekhez.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Hogyan működik -->
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🛠️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Kulcsszókutatástól a publikálásig – egy felületen</h2>
+                <p class="text-body text-lg">Nincs külön kulcsszókutató eszköz, nincs Google Doc, nincs másolgatás a
+                    webshop adminba.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
+                    <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
+                    <p class="text-body text-sm leading-relaxed">Unas vagy Shoprenter – pár kattintás, és a rendszer
+                        látja a termékeidet, a kategóriáidat és a meglévő blogodat.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
+                    <h3 class="font-bold text-lg mb-3">Kulcsszókutatás</h3>
+                    <p class="text-body text-sm leading-relaxed">Az AI megnézi, mire keresnek a te piacodon, és
+                        cikktémákat javasol – olyanokat, amikhez van is terméked.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
+                    <h3 class="font-bold text-lg mb-3">Megírja a cikket</h3>
+                    <p class="text-body text-sm leading-relaxed">Kifejtett, SEO- és GEO-barát szerkezetű blogcikk a
+                        márkahangodon, a saját termékeidre hivatkozva.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
+                    <h3 class="font-bold text-lg mb-3">Publikálás</h3>
+                    <p class="text-body text-sm leading-relaxed">Átnézed, jóváhagyod – és a cikk kimegy a webshopod
+                        blogjába. Kézi bemásolás nélkül.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Bemutatót kérek – díjmentes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Kulcsszókutatás -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kulcsszókutatás 🎯</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem az írás a nehéz, hanem eldönteni, miről írj</h2>
+                <p class="text-body text-lg">A legtöbb webshopblog azért nem hoz forgalmat, mert olyan témákról szól,
+                    amikre senki nem keres. A rendszer ezért a témaválasztással kezdi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">query_stats</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Valós keresési adatok</h3>
+                    <p class="text-body text-sm leading-relaxed">Nem tippelünk: a rendszer azt nézi, mire keresnek
+                        ténylegesen a te kategóriádban.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">forum</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Kérdés alapú keresések</h3>
+                    <p class="text-body text-sm leading-relaxed">Pont azok a hosszabb, kérdő keresések, amikből az
+                        AI-keresők is válaszokat építenek.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">inventory_2</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A saját kínálatodhoz kötve</h3>
+                    <p class="text-body text-sm leading-relaxed">Csak olyan témát javasol, amihez van terméked – így a
+                        cikk nem csak olvasót, vásárlót is hoz.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">checklist</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Kész cikkterv, jóváhagyásra</h3>
+                    <p class="text-body text-sm leading-relaxed">A javasolt témákból te választod ki, mi íródjon meg –
+                        vagy adsz saját témát.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SEO + GEO -->
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SEO és GEO 🔎</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem csak a Google – az AI-keresők is megtalálják</h2>
+                <p class="text-body text-lg">A vásárlók egyre nagyobb része már nem a Google találati listájáról indul,
+                    hanem ChatGPT-t, Geminit vagy Perplexityt kérdez. A cikkek mindkét világra készülnek.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">search</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Klasszikus SEO</h3>
+                    <p class="text-body text-sm leading-relaxed">Kulcsszóra hangolt cím és alcímek, logikus H2–H3
+                        szerkezet, meta cím és leírás – a keresőnek és az olvasónak is.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">psychology</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">GEO – AI-keresőoptimalizálás</h3>
+                    <p class="text-body text-sm leading-relaxed">Tényszerű, kérdés–válasz logikájú blokkok, amikből az
+                        AI-keresők szívesen idéznek – a te webshopodat megnevezve.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">link</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Belső linkek a termékeidre</h3>
+                    <p class="text-body text-sm leading-relaxed">Minden cikk a saját termékeidre és kategóriáidra
+                        hivatkozik – az olvasót továbbviszi, a keresőnek pedig struktúrát ad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Publikálás -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Publikálás 🚀</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">A kész cikk nem egy dokumentumban landol</h2>
+                <p class="text-body text-lg">A legtöbb AI-szövegíró eszköznél a munka nagyja a másolás-beillesztés. Itt
+                    a cikk oda kerül, ahol dolgoznia kell: a webshopod blogjába.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">publish</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Közvetlenül a blogodba</h3>
+                    <p class="text-body text-sm leading-relaxed">Unas és Shoprenter webáruházba egy kattintással, formázva
+                        – nem kell az adminba bemásolni.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">fact_check</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Te hagyod jóvá</h3>
+                    <p class="text-body text-sm leading-relaxed">Semmi nem megy ki magától: a kész cikket átnézed,
+                        szerkeszted, és csak utána publikálod.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">palette</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A te márkahangodon</h3>
+                    <p class="text-body text-sm leading-relaxed">Egyszer beállítod a stílust, a hangnemet és a
+                        célcsoportot – minden cikk úgy szól.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">share</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Továbbmegy a többi csatornára</h3>
+                    <p class="text-body text-sm leading-relaxed">Ugyanabból a rendszerből mehet közösségi poszt és
+                        hírlevél is – a cikk nem áll meg a blogon.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Ezt látnom kell!
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. A teljes rendszer -->
+    <section id="modulok" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">A teljes rendszer 🧩</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">A blogcikk író egy nagyobb rendszer egyik modulja</h2>
+                <p class="text-body text-lg">A Content Ninja nem egyetlen funkció: egy komplett AI marketing platform
+                    webshopoknak. Ugyanabból a termékkatalógusból dolgozik minden modul – egy fiók, egy márkahang, egy
+                    előfizetés.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Automata posztolás</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Az AI a termékeidből posztokat ír, képet és videót
+                        készít hozzájuk, majd időzítve publikálja Facebookra és Instagramra.</p>
+                    <a href="/hu/posztolas" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Részletek
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">edit_document</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Shopgrade – tartalomoptimalizálás</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">A meglévő termékleírásaidat írja át SEO- és
+                        GEO-barát, értékesítési fókuszú szöveggé, majd vissza is tölti a webshopodba.</p>
+                    <a href="/hu/shopgrade" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Részletek
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">storefront</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Webshop mélyintegráció</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Az Unas vagy Shoprenter áruházad bekötve: az AI
+                        látja az összes terméked és blogcikked, és mindig friss adatokból dolgozik.</p>
+                    <a href="/hu/webshop-integracio" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Részletek
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">mail</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI hírlevél</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Kész hírlevél szöveggel, dizájnnal és
+                        termékképekkel – a saját MailerLite vagy Salesautopilot fiókodból, a meglévő listáidra.</p>
+                    <a href="/hu/hirlevel" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Részletek
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">public</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Nemzetközi terjeszkedés</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Írd meg egyszer magyarul – a rendszer natív
+                        minőségben lefordítja, és minden piacod fiókjába kiküldi.</p>
+                    <a href="/hu/nemzetkozi" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                        Részletek
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI kép- és videógenerálás</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Brandazonos kreatívok, mozgó termékvideók és
+                        narrátorvideók a saját termékfotóidból – stúdió és forgatás nélkül.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="/hu/" class="cta-secondary px-8 py-4 text-base">
+                    Nézd meg a teljes rendszert
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Árazás -->
+    <section id="arazas" class="bg-card py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
+                <p class="text-body text-lg">A blogcikk író nem külön termék: benne van ugyanabban az előfizetésben, mint
+                    a posztolás, a hírlevél és a kép-videó generálás.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Standard előfizetés -->
+                <div class="bg-light rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                    <h3 class="text-xl font-bold mb-4 text-dark">Standard előfizetés</h3>
+                    <div class="flex items-baseline gap-1 mb-3">
+                        <span class="text-4xl font-bold text-dark">34.990</span>
+                        <span class="text-xl font-bold text-dark">Ft</span>
+                        <span class="text-muted text-sm">+ÁFA / hó</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fix havidíj, rejtett költségek nélkül</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">500 AI kredit havonta (megújul)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Az összes modul: blogcikk író, Shopgrade, posztírás, hírlevél, kép- és videógenerálás</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Több webáruház kezelése egy fiókon belül</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Márkahű stílus és hangnem</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Folyamatos fejlesztés és support</span>
+                        </li>
+                    </ul>
+                    <a href="#hero" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Bemutatót kérek
+                    </a>
+                </div>
+
+                <!-- Bemutató bónusz -->
+                <div class="bg-light rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+                        Csak az 1. hónap
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Indulj fél áron</h3>
+                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+                        <span class="text-4xl font-bold text-primary">17.495</span>
+                        <span class="text-xl font-bold text-dark">Ft</span>
+                        <span class="text-muted text-sm">+ÁFA</span>
+                        <span class="text-muted text-sm line-through">34.990 Ft</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">az első hónapra</p>
+                    <p class="text-body text-sm mb-4">Foglalj egy 30 perces bemutatót, és:</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">50% kedvezmény az 1. hónapra</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">750 kredit 500 helyett (+250 bónusz)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Kulcsszó- és cikkterv a saját webshopodra</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Válaszolunk minden kérdésedre</span>
+                        </li>
+                    </ul>
+                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">A 2. hónaptól a fix 34.990 Ft / hó.</p>
+                    <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Lefoglalom a bemutatót
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="/hu/arak#kreditek" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                    Részletes kreditdíjak
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. GYIK -->
+    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Gyakran ismételt kérdések</h2>
+            </div>
+
+            <div class="space-y-3">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Honnan tudja, miről érdemes cikket írni?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        A kulcsszókutatásból. A rendszer megnézi, mire keresnek a te piacodon, és ezt összeveti a saját
+                        termékkínálatoddal – így olyan témákat javasol, amikre van kereslet, és amikhez van is mit
+                        eladnod. A javasolt témákból te választasz, vagy adhatsz saját témát is.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Milyen webshoprendszerekbe tud publikálni?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Jelenleg <strong>Unas</strong> és <strong>Shoprenter</strong> webáruházakba – ezeknél működik a
+                        közvetlen kapcsolat. Ha más rendszert használsz, a bemutatón megnézzük, mi a lehetőség.
+                        <a href="/hu/webshop-integracio" class="text-primary font-semibold underline">Részletek a webshop
+                        mélyintegrációról.</a>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Mi az a GEO, és miért fontos?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        A GEO (Generative Engine Optimization) az AI-keresőkre – ChatGPT, Gemini, Perplexity, Google AI
+                        Overviews – való optimalizálás. Ezek nem tíz kék linket adnak, hanem választ fogalmaznak, és
+                        ehhez a tényszerű, jól strukturált, kérdés–válasz logikájú tartalmakból idéznek. A cikkek eleve
+                        így épülnek fel, hogy a webshopod ezekben a válaszokban is szerepeljen.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Automatikusan kimennek a cikkek?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Csak ha te úgy akarod. Alapból a kész cikket átnézed és jóváhagyod, mielőtt kikerül a blogodba –
+                        szerkeszteni is tudsz rajta. A kontroll végig nálad marad.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Kell hozzá SEO-tudás?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Nem. A kulcsszókutatás, a cikkszerkezet, a meta adatok és a belső linkelés a folyamat része –
+                        neked a márkahangot és a célcsoportot kell egyszer beállítanod, a témát pedig jóváhagynod.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Kerül külön pénzbe a blogcikk író?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Nem, ugyanaz a 34.990 Ft + ÁFA / hó előfizetés tartalmazza, mint a többi modult, havi 500
+                        megújuló AI kredittel. A generálás kreditet fogyaszt – a
+                        <a href="/hu/arak#kreditek" class="text-primary font-semibold underline">részletes
+                        kreditdíjakat itt találod</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Záró CTA -->
+    <section class="bg-primary py-16 md:py-20">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg a saját webshopodon</h2>
+            <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+                Egy 30 perces bemutatón megmutatjuk, milyen kulcsszavakra és milyen cikkeket írna a rendszer neked – és
+                az első hónapod fél áron, +250 bónusz kredittel indul.
+            </p>
+            <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
+                Bemutatót kérek
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>
+                    <p class="text-muted">Egy rendszer, ami a webshopod nevében készít marketing tartalmakat
+                        futószalagon – közvetlenül a webáruházad termékeiből.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Információk</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/hu/adatkezeles" class="hover:text-white">Adatkezelési tájékoztató</a></li>
+                        <li><a href="/hu/impresszum" class="hover:text-white">Impresszum</a></li>
+                        <li><a href="/en/terms" class="hover:text-white">ÁSZF (Terms of Service)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © contentninja.hu | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lead form + GYIK script -->
+    <script is:inline>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        function nextStep(step) {
+            const steps = document.querySelectorAll('.form-step');
+            steps.forEach(s => s.classList.remove('active'));
+
+            const formIntro = document.getElementById('formIntro');
+            const hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
+            if (formIntro) {
+                formIntro.classList.toggle('hidden', hideIntroSteps.includes(String(step)));
+            }
+
+            const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            if (activeStep) {
+                activeStep.classList.add('active');
+            }
+        }
+
+        let _qualifyData = {};
+
+        function qualifyAndNext() {
+            const webshop = document.getElementById('hasWebshop').value;
+            const blogFrequency = document.getElementById('blogFrequency').value;
+            const role = document.getElementById('marketingRole').value;
+            const timing = document.getElementById('timing').value;
+
+            if (!webshop || !blogFrequency || !role || !timing) {
+                alert('Kérlek válaszolj minden kérdésre!');
+                return;
+            }
+
+            _qualifyData = { webshop, blogFrequency, role, timing };
+
+            // A külsős ügynökséggel dolgozó webshop szándékosan NEM reject – nekik pont
+            // az ügynökségi cikkdíj kiváltása az ajánlat.
+            const isHardRejected =
+                webshop === 'Más típusú vállalkozásom van';
+
+            const isSoftRejected =
+                webshop === 'Csak tervezek webshopot indítani' ||
+                timing === '2-3 hónapon belül' ||
+                timing === 'Még csak érdeklődöm';
+
+            if (isHardRejected) {
+                nextStep('rejected');
+
+                fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        statusz: 'hard_reject',
+                        lead_forras: 'blogcikk-iro',
+                        submission_date: new Date().toISOString(),
+                        has_webshop: webshop,
+                        blog_frequency: blogFrequency,
+                        marketing_role: role,
+                        timing: timing,
+                        source_url: window.location.href
+                    })
+                }).catch(() => { });
+
+            } else if (isSoftRejected) {
+                nextStep('soft-reject');
+
+            } else {
+                nextStep(2);
+            }
+        }
+
+        async function submitSoftReject() {
+            const email = document.getElementById('softRejectEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Kérlek adj meg egy érvényes email címet!');
+                return;
+            }
+
+            const privacy = document.getElementById('softRejectPrivacy');
+            if (!privacy.checked) {
+                alert('Kérlek fogadd el az adatkezelési tájékoztatót!');
+                return;
+            }
+
+            const newsletterChecked = document.getElementById('softRejectNewsletter').checked;
+
+            const btn = event.target;
+            btn.innerHTML = 'Küldés...';
+            btn.disabled = true;
+
+            const payload = {
+                submission_date: new Date().toISOString(),
+                lead_forras: 'blogcikk-iro',
+                email: email,
+                hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem',
+                has_webshop: _qualifyData.webshop || '',
+                blog_frequency: _qualifyData.blogFrequency || '',
+                marketing_role: _qualifyData.role || '',
+                timing: _qualifyData.timing || '',
+                source_url: window.location.href
+            };
+
+            try {
+                await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...payload, statusz: 'soft_reject' })
+                });
+            } catch (e) { }
+
+            nextStep('soft-reject-thanks');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitBtn = document.getElementById('submitBtn');
+            const FORM_SUBMITTED_KEY = 'blogcikk_iro_form_submitted';
+
+            if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Már elküldve';
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            document.getElementById('leadForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
+                    console.log('Form already submitted, preventing duplicate.');
+                    return;
+                }
+
+                const privacy = document.getElementById('privacy');
+                if (!privacy.checked) {
+                    alert("Kérlek fogadd el az adatkezelési tájékoztatót!");
+                    return;
+                }
+
+                const btn = document.getElementById('submitBtn');
+                btn.innerHTML = 'Küldés...';
+                btn.disabled = true;
+
+                sessionStorage.setItem(FORM_SUBMITTED_KEY, 'true');
+
+                const formData = new FormData(this);
+                const cleanData = {};
+                formData.forEach((value, key) => {
+                    if (cleanData[key]) {
+                        if (!Array.isArray(cleanData[key])) {
+                            cleanData[key] = [cleanData[key]];
+                        }
+                        cleanData[key].push(value);
+                    } else {
+                        cleanData[key] = value;
+                    }
+                });
+
+                cleanData['source_url'] = window.location.href;
+                const customSubject = `📝 Blogcikk író jelentkezés: ${cleanData['name']}`;
+                cleanData['subject'] = customSubject;
+
+                const newsletterChecked = document.getElementById('newsletter').checked;
+                const webhookPayload = {
+                    statusz: 'sikeres',
+                    lead_forras: 'blogcikk-iro',
+                    submission_date: new Date().toISOString(),
+                    nev: cleanData['name'],
+                    email: cleanData['email'],
+                    telefonszam: cleanData['phone'],
+                    source_url: window.location.href,
+                    has_webshop: cleanData['has_webshop'],
+                    blog_frequency: cleanData['blog_frequency'],
+                    marketing_role: cleanData['marketing_role'],
+                    timing: cleanData['timing'],
+                    hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem'
+                };
+
+                try {
+                    const result = await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(webhookPayload)
+                    });
+                    console.log('Webhook sent:', result.ok);
+                    window.location.href = "/hu/koszonjuk?lead=1";
+                } catch (error) {
+                    console.error('Unexpected error:', error);
+                    window.location.href = "/hu/koszonjuk?lead=1";
+                }
+            });
+        });
+    </script>
+  </div>
+</BaseLayout>
