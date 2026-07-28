@@ -12,11 +12,8 @@ export const UI = {
       aria: 'Főnavigáció',
       mobileAria: 'Mobil navigáció',
       menuAria: 'Menü',
-      features: 'Funkciók',
-      how: 'Hogyan működik?',
       pricing: 'Árazás',
       testimonials: 'Vélemények',
-      international: 'Nemzetközi',
       contact: 'Kapcsolat',
       // A "Megoldások" menü elemei (modulnév + egysoros leírás) a
       // `src/data/modules.ts`-ből jönnek, nem innen – egy modul = egy helyen.
@@ -26,6 +23,8 @@ export const UI = {
       login: 'Belépek',
       loginApp: 'Belépek az appba',
       demo: 'Bemutatót kérek',
+      /** Rövid változat a mobil fejlécbe (landing módban ott is látszik a CTA). */
+      demoShort: 'Bemutató',
     },
     footer: {
       tagline:
@@ -55,11 +54,8 @@ export const UI = {
       aria: 'Main navigation',
       mobileAria: 'Mobile navigation',
       menuAria: 'Menu',
-      features: 'Features',
-      how: 'How it works',
       pricing: 'Pricing',
       testimonials: 'Reviews',
-      international: 'International',
       contact: 'Contact',
       // A "Megoldások" menü elemei a `src/data/modules.ts`-ből jönnek.
       solutions: 'Solutions',
@@ -68,6 +64,8 @@ export const UI = {
       login: 'Log in',
       loginApp: 'Log in to the app',
       demo: 'Book a demo',
+      /** Short variant for the mobile header (in landing mode the CTA shows there too). */
+      demoShort: 'Demo',
     },
     footer: {
       tagline:

@@ -24,7 +24,6 @@ const APP_URL = 'https://app.getcontentninja.com';
 const solutionItems = navModulesFor(locale);
 const moduleUi = MODULE_UI[locale];
 const navItems = [
-  { href: `${home}#hogyan-mukodik`, label: ui.nav.how },
   { href: `${home}#velemenyek`, label: ui.nav.testimonials },
   { href: `${home}#arazas`, label: ui.nav.pricing },
   { href: pathFor('contact', locale), label: ui.nav.contact },
@@ -82,9 +81,14 @@ const navItems = [
         <span class="material-symbols-outlined text-[16px]">login</span>
         {ui.cta.login}
       </a>
-      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-hide">
+      <!-- A demo-CTA landing módban IS látszik (lp-show), mobilon is: a főoldali hero
+           CTA-gombok helyére az integrációs logósor került, így hirdetési forgalomnál
+           ez az első kattintható konverziós pont. Mobilon rövid felirattal, hogy a
+           logó + nyelvváltó mellett elférjen. (A nav és a login továbbra is lp-hide.) -->
+      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-show">
         <span class="material-symbols-outlined text-[16px]">calendar_month</span>
-        {ui.cta.demo}
+        <span class="hidden md:inline">{ui.cta.demo}</span>
+        <span class="md:hidden">{ui.cta.demoShort}</span>
       </a>
       <!-- Hamburger (mobile only) -->
       <button
