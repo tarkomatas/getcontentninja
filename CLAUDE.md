@@ -51,6 +51,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - **Copywriting rules** live in the **`page-copy` skill** (`.claude/skills/page-copy/`) — hero formula (H1 = kategória + célcsoport + funkció, `text-primary` highlights, slogan → subhead), 5-second clarity test. Invoke it whenever planning, writing, or reviewing page copy or a hero section.
 - **Tailwind is CDN + inline config** (in `BaseLayout`, `is:inline` so Astro leaves it untouched): `primary #6c5ce7`, `dark #1e1e2f`, `body #4a4a68`, custom `boxShadow` tokens (`card`, `card-hover`, `primary-glow`), Inter font. There is no Tailwind build step.
 - **Any inline `<script>` that must stay classic/global** (references from `onclick`, immediate IIFEs, `tailwind.config`, gtag, JSON-LD) is marked **`is:inline`** — otherwise Astro bundles it as a scoped module and `onclick`-referenced globals (e.g. `toggleFaq`) break.
+- **`define:vars` ráadásul IIFE-be csomagolja a scriptet**, ezért az `is:inline` önmagában NEM elég: a benne deklarált függvények nem lesznek globálisak, és az `onclick="valami()"` némán elszáll. Ilyenkor kézzel kell kitenni őket (`window.qualifyAndNext = qualifyAndNext;` — lásd `LeadFormScript.astro`).
 - **Videós bemutatók:** YouTube-beágyazás a `VideoEmbed.astro` komponenssel — click-to-load facade, az iframe csak kattintásra töltődik be `youtube-nocookie.com`-ról, addig csak a cookie-mentes ytimg borítókép látszik (így a consent-banner előtt sem kerül YouTube-süti a látogatóhoz). A videó-azonosítók **egy helyen**, a `src/data/videos.ts`-ben vannak. A meglévő két bemutató magyar nyelvű, ezért **csak a `/hu/` oldalakon** (főoldal, hírlevél) szerepel — az `/en/` párjaikba szándékosan nem került be. A `public/assets/*.mp4` fájlok ettől függetlenül a *termék által generált* minta-videók (posztolás oldalak), nem walkthrough-k.
 - **Modulrács ("mit tud a rendszer") – EGY forrás:** a modulok listája **kizárólag** a `src/data/modules.ts`-ben él (10 modul: posztolás, blogcikk író, Shopgrade, hírlevél, webshop-integráció, nemzetközi, kép, videó, narrátorvideó, Meta hirdetés), és a `src/components/ModuleGrid.astro` rakja ki. Minden kampányoldal a saját témáját hagyja ki (`exclude="newsletter"` stb.), így **9 kártya = tiszta 3×3 rács**; aminek van kampányoldala, arra "Részletek →" link kerül. **Új modulnál csak a `modules.ts`-t kell bővíteni** — korábban ez a blokk 12 oldalon kézzel volt másolva, ezért maradtak ki belőle az új modulok. Ugyanebből a fájlból épül a fejléc **"Megoldások" lenyílója** is (`navModulesFor`, `navLabel`/`navDesc` mezők; 6 elem → 2 hasábos, ~580px panel + "Összes megoldás →" sor a főoldal `#megoldasok` szekciójára), ezért a modulnevek NEM a `ui.ts`-ben élnek. Kivétel: az `online-bemutato`/`book-demo` "Mit mutatunk meg a bemutatón?" rácsa szándékosan kézi (nem modullista, a "Teljes automatizálás" kártya miatt).
 - **Lapozgatható kártyasáv:** `src/components/Carousel.astro` (natív scroll-snap + nyíl + pontok, külső könyvtár nélkül). A kártyák slotban jönnek, és **ők adják meg, hány látszik egyszerre** (a főoldali megoldás-kártyák `lg:basis-[calc((100%-4.5rem)/4)]` → desktopon 4). A nyíl egy kártyát lép, a pontok száma töréspontonként újraszámolódik (`kártyák - látható + 1`), a scrollbart a `global.css` `.no-scrollbar` rejti el. A főoldali "Megoldások" szekció ezt használja, hogy a 6 modul ne törje szét a rácsot.
@@ -59,9 +60,45 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - **Landing ("lp") mode for ads:** marketing pages pass `lpEnabled` to `BaseLayout`, which emits an early-`<head>` `is:inline` script — on `?type=ld` (or `?lp=1`) it adds `lp-mode` to `<html>` before first paint. In lp mode the shared `Header` collapses to **logo + language switcher** via the `global.css` markers `.lp-hide` (nav, login, demo CTA, hamburger) and `.lp-show` (language switcher, forced visible on mobile too). Nothing is persisted — param-less internal navigation always shows the full header. Legal/technical pages (privacy, terms, imprint, data-deletion, thank-you) intentionally do **not** set `lpEnabled`. Ad final URLs should append `?type=ld`.
 - **sitemap.xml is hand-maintained** in `public/` (with `xhtml:link` hreflang alternates). The `@astrojs/sitemap` integration was removed due to an Astro-4/sitemap-3.7 hook incompatibility. When adding/renaming a page, update `routes.ts`, `sitemap.xml`, and `robots.txt` (thank-you pages are `Disallow`ed).
 
-## Lead form flow (`posztolas.astro` / `demo.astro`)
+## Űrlap-beküldés – EGY forrás (mind a 16 űrlap)
 
-1. Multi-step qualifying form (`#leadForm`); some answer paths route to `rejected` / `soft-reject` steps instead of submission.
-2. On submit, cleaned answers are POSTed as JSON to the **Make.com webhook** `https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7` (the integration point — same endpoint for both locales; do not translate the JSON field names).
-3. Duplicate submissions are blocked via `localStorage` key `ai_tartalomgyartas_form_submitted`.
-4. **Regardless of webhook success/failure**, the user is redirected to the localized thank-you page with `?lead=1` (`/hu/koszonjuk?lead=1` or `/en/thank-you?lead=1`) so the `Lead` conversion still fires and re-submission is prevented.
+A honlap összes űrlapja **közvetlenül az appnak** küld: `POST https://app.getcontentninja.com/api/leads/intake`.
+A korábbi Make.com webhook ki lett vezetve (a forgatókönyv leállítva, de visszakapcsolható). A fogadó
+oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja le, a honlap-oldali terv:
+[`docs/urlap-kuldes-terv.md`](docs/urlap-kuldes-terv.md).
+
+- **`src/data/forms.ts`** – az egyetlen igazságforrás: a végpont-URL, a `lead_forras` kulcsok, a belső
+  levél tárgy-előtagjai és a storage-kulcsok. **A végpont sehol máshol nincs leírva.**
+- **`src/components/IntakeClient.astro`** – a szállítás: `window.cnIntake.send(payload, { waitMs })`.
+  A `BaseLayout` teszi ki **minden** oldalra, és ez nem elírás: a sikeres beküldés után azonnal
+  átirányítunk, tehát a bent maradt beküldést a **köszönőoldal** `flush()`-a küldi el. Nem mérés és nem
+  süti → hozzájárulás nélkül is működnie kell.
+- **`src/components/LeadFormScript.astro`** – a többlépcsős lead-űrlap teljes logikája (korábban 14
+  oldalfájlban másolva). Props: `locale`, `source`. Az oldal csak a markupot adja.
+- **`src/components/HoneypotField.astro`** – a rejtett `website` mező (`.hp-field` a `global.css`-ben).
+- A kapcsolat-űrlapok (`kapcsolat`/`contact`) saját, rövid inline scriptet használnak, de szintén a
+  `window.cnIntake`-en mennek – URL ott sincs.
+
+**Ami oldalanként eltér, azt a MARKUP hordozza, nem a script:**
+
+- a minősítő kérdéseket a `.form-step[data-step="1"]` alatti `name`-es mezőkből olvassuk ki
+  (`has_webshop`, `marketing_level`, `product_count`, `blog_frequency`, `markets`, `marketing_role`, `timing`),
+- a kiszűrés szabályát az **`<option data-reject="hard|soft">`** attribútum mondja meg. Ha valaki
+  átfogalmaz egy választ, a szabály vele együtt mozog — korábban ez kézzel másolt JS-szövegkonstansokban
+  élt, és némán elromlott.
+
+**A négy `statusz` ág:** `hard_reject` (csak minősítő válaszok, nincs kapcsolati adat) · `soft_reject`
+(e-mail + hírlevél-opt-in) · `sikeres` (teljes adat, majd átirányítás `/hu/koszonjuk/?lead=1`-re) ·
+`kapcsolat`. Minden beküldés visz `submission_id`-t (UUID, **idempotencia-kulcs**), `nyelv`-et,
+`adatkezeles`-t és üres `website` honeypotot. **Az EN oldal is a magyar `lead_forras` kulcsot küldi**
+(`/en/shopgrade` → `shopgrade`); a nyelvet a `nyelv` mező hordozza.
+
+**"Ne vesszen el semmi":** a beküldés a küldés ELŐTT bekerül a `localStorage` retry-sorba
+(`cn_intake_queue_v1`), a `fetch` `keepalive`-val megy, és ami kint marad, azt a következő oldalbetöltés
+újraküldi ugyanazzal a `submission_id`-vel (az app dedupál). A felhasználót nem várakoztatjuk: a sikeres
+ág legfeljebb 2 másodpercet vár, aztán mindenképp átirányít.
+
+**A minősítés-emlékezet** (`cn_qualify_v1`, 30 nap, témánként) a régi „Már elküldve" zár helyett áll: nem
+a beküldést, hanem a **minősítés kimenetelét** jegyzi meg, hogy a kiszűrt látogató ne tudja újratöltéssel,
+más válaszokkal végigpróbálni az űrlapot. Sikeres beküldés után **nincs** zár (az app dedupál, és aki
+elgépelte az adatait, javíthasson). Kliens-oldali emlékezet: inkognitóval megkerülhető — a cél a súrlódás.
