@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
 
 const locale = 'en';
 const page = 'blogWriter';
@@ -625,103 +626,20 @@ const description =
         </div>
     </section>
 
-    <!-- 7. The full system -->
-    <section id="modulok" class="bg-light py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[760px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">The full system 🧩</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">The blog writer is one module of a bigger system</h2>
-                <p class="text-body text-lg">Content Ninja isn't a single feature: it's a complete AI marketing platform
-                    for webshops. Every module works from the same product catalogue – one account, one brand voice, one
-                    subscription.</p>
-            </div>
+<!-- 7. The full system (shared module grid) -->
+    <ModuleGrid
+        locale={locale}
+        exclude="blogWriter"
+        sectionId="modulok"
+        sectionClass="bg-light py-20 md:py-28"
+        cardClass="bg-card"
+        eyebrow="The full system 🧩"
+        heading="The blog writer is one module of a bigger system"
+        lead="Content Ninja isn't a single feature: it's a complete AI marketing platform for webshops. Every module works from the same product catalogue – one account, one brand voice, one subscription."
+        homeCta
+    />
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Automated posting</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">The AI writes posts from your products, creates
-                        images and videos for them, then publishes them on Facebook and Instagram on a schedule.</p>
-                    <a href="/en/demo" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Details
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">edit_document</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Shopgrade – content optimization</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">It rewrites your existing product descriptions into
-                        SEO- and GEO-friendly, sales-focused copy, then uploads them back to your webshop.</p>
-                    <a href="/en/shopgrade" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Details
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">storefront</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Deep store integration</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">With your Unas or Shoprenter store connected, the
-                        AI sees all your products and blog posts, and always works from fresh data.</p>
-                    <a href="/en/store-integration" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Details
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">mail</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI newsletter</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Ready-made newsletters with copy, design and
-                        product images – from your own MailerLite or Salesautopilot account, to your existing lists.</p>
-                    <a href="/en/newsletter" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Details
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">public</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">International expansion</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Write it once in your own language – the system
-                        translates it at native quality and sends it to every market's account.</p>
-                    <a href="/en/international" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Details
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI image and video generation</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">On-brand creatives, moving product videos and
-                        presenter videos from your own product photos – no studio, no shoot.</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="/en/" class="cta-secondary px-8 py-4 text-base">
-                    See the full system
-                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Pricing -->
+        <!-- 8. Pricing -->
     <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
@@ -752,7 +670,7 @@ const description =
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body font-medium">All modules: blog writer, Shopgrade, post writing, newsletters, image and video generation</span>
+                            <span class="text-body font-medium">All modules: post writing, blog articles, Shopgrade, newsletters, image and video generation</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">

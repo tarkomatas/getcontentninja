@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
 
 const locale = 'en';
 const page = 'newsletter';
@@ -915,69 +916,18 @@ const description =
         </div>
     </section>
 
-    <!-- 8. What the system can do anyway (general capabilities) -->
-    <section id="features-cards" class="bg-card py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">And what the system can do anyway</h2>
-                <p class="text-body text-lg">Beyond newsletter generation, Content Ninja is a full AI marketing platform
-                    – everything a webshop needs for content creation.</p>
-            </div>
+<!-- 8. What the system can do anyway (shared module grid) -->
+    <ModuleGrid
+        locale={locale}
+        exclude="newsletter"
+        sectionId="features-cards"
+        sectionClass="bg-card py-20 md:py-28"
+        cardClass="bg-light"
+        heading="And what the system can do anyway"
+        lead="Beyond newsletter generation, Content Ninja is a full AI marketing platform – everything a webshop needs for content creation."
+    />
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">send</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Posting system</h3>
-                    <p class="text-body text-sm leading-relaxed">Automatically generates and publishes posts from your
-                        products to Facebook and Instagram.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">image</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI Image Generator</h3>
-                    <p class="text-body text-sm leading-relaxed">Generates on-brand, logoed creatives and product images
-                        with a single click, no studio needed.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI Video Generator</h3>
-                    <p class="text-body text-sm leading-relaxed">Turns static product photos into moving videos and
-                        animations with camera moves and effects.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Narrated video</h3>
-                    <p class="text-body text-sm leading-relaxed">Builds a full narrated video from a product link in
-                        minutes – with an AI voice, captions and your own product images.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">storefront</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Webshop integration</h3>
-                    <p class="text-body text-sm leading-relaxed">Connects your webshop and works from your fresh, in-stock
-                        product data – for both posts and newsletters.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">ads_click</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Meta ad generator</h3>
-                    <p class="text-body text-sm leading-relaxed">Generates Facebook and Instagram ad creatives and copy
-                        automatically from your products.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. Pricing -->
+        <!-- 9. Pricing -->
     <section id="pricing" class="bg-white py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
@@ -1007,7 +957,7 @@ const description =
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body font-medium">All modules: newsletters, posting, image & video generation</span>
+                            <span class="text-body font-medium">All modules: post writing, blog articles, Shopgrade, newsletters, image and video generation</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">

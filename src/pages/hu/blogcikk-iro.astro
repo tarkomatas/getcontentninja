@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
 
 const locale = 'hu';
 const page = 'blogWriter';
@@ -623,103 +624,20 @@ const description =
         </div>
     </section>
 
-    <!-- 7. A teljes rendszer -->
-    <section id="modulok" class="bg-light py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[760px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">A teljes rendszer 🧩</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">A blogcikk író egy nagyobb rendszer egyik modulja</h2>
-                <p class="text-body text-lg">A Content Ninja nem egyetlen funkció: egy komplett AI marketing platform
-                    webshopoknak. Ugyanabból a termékkatalógusból dolgozik minden modul – egy fiók, egy márkahang, egy
-                    előfizetés.</p>
-            </div>
+<!-- 7. A teljes rendszer (közös modulrács) -->
+    <ModuleGrid
+        locale={locale}
+        exclude="blogWriter"
+        sectionId="modulok"
+        sectionClass="bg-light py-20 md:py-28"
+        cardClass="bg-card"
+        eyebrow="A teljes rendszer 🧩"
+        heading="A blogcikk író egy nagyobb rendszer egyik modulja"
+        lead="A Content Ninja nem egyetlen funkció: egy komplett AI marketing platform webshopoknak. Ugyanabból a termékkatalógusból dolgozik minden modul – egy fiók, egy márkahang, egy előfizetés."
+        homeCta
+    />
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Automata posztolás</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Az AI a termékeidből posztokat ír, képet és videót
-                        készít hozzájuk, majd időzítve publikálja Facebookra és Instagramra.</p>
-                    <a href="/hu/posztolas" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Részletek
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">edit_document</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Shopgrade – tartalomoptimalizálás</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">A meglévő termékleírásaidat írja át SEO- és
-                        GEO-barát, értékesítési fókuszú szöveggé, majd vissza is tölti a webshopodba.</p>
-                    <a href="/hu/shopgrade" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Részletek
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">storefront</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Webshop mélyintegráció</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Az Unas vagy Shoprenter áruházad bekötve: az AI
-                        látja az összes terméked és blogcikked, és mindig friss adatokból dolgozik.</p>
-                    <a href="/hu/webshop-integracio" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Részletek
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">mail</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI hírlevél</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Kész hírlevél szöveggel, dizájnnal és
-                        termékképekkel – a saját MailerLite vagy Salesautopilot fiókodból, a meglévő listáidra.</p>
-                    <a href="/hu/hirlevel" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Részletek
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">public</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Nemzetközi terjeszkedés</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Írd meg egyszer magyarul – a rendszer natív
-                        minőségben lefordítja, és minden piacod fiókjába kiküldi.</p>
-                    <a href="/hu/nemzetkozi" class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
-                        Részletek
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI kép- és videógenerálás</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Brandazonos kreatívok, mozgó termékvideók és
-                        narrátorvideók a saját termékfotóidból – stúdió és forgatás nélkül.</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="/hu/" class="cta-secondary px-8 py-4 text-base">
-                    Nézd meg a teljes rendszert
-                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Árazás -->
+        <!-- 8. Árazás -->
     <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
@@ -750,7 +668,7 @@ const description =
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body font-medium">Az összes modul: blogcikk író, Shopgrade, posztírás, hírlevél, kép- és videógenerálás</span>
+                            <span class="text-body font-medium">Az összes modul: posztírás, blogcikk, Shopgrade, hírlevél, kép- és videógenerálás</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">

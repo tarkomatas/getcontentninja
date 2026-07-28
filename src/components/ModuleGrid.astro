@@ -1,0 +1,90 @@
+---
+/**
+ * "Mit tud még a rendszer" / "A teljes rendszer" modulrács.
+ *
+ * A kártyák tartalma a `src/data/modules.ts`-ből jön (egyetlen forrás) – az
+ * oldal csak a saját témáját hagyja ki (`exclude`) és a szekció szövegeit adja.
+ * Aminek van saját kampányoldala, arra a kártyára "Részletek →" link kerül.
+ */
+import { homeFor, type Locale } from '../i18n/routes';
+import { MODULE_UI, modulesFor, type ModuleId } from '../data/modules';
+
+interface Props {
+  locale: Locale;
+  /** A saját téma(k), amit ez az oldal nem ismétel meg. */
+  exclude?: ModuleId | ModuleId[];
+  heading: string;
+  /** Bevezető szöveg – engedélyezett benne inline HTML (pl. <strong>). */
+  lead?: string;
+  eyebrow?: string;
+  sectionId?: string;
+  /** A szekció háttere – tartsa a bg-light ↔ bg-card váltakozást. */
+  sectionClass?: string;
+  /** A kártyák háttere – a szekcióval kontrasztos legyen. */
+  cardClass?: string;
+  /** Záró "Nézd meg a teljes rendszert" gomb a főoldalra. */
+  homeCta?: boolean;
+}
+
+const {
+  locale,
+  exclude = [],
+  heading,
+  lead,
+  eyebrow,
+  sectionId,
+  sectionClass = 'bg-card py-20 md:py-28',
+  cardClass = 'bg-light',
+  homeCta = false,
+} = Astro.props;
+
+const excluded = Array.isArray(exclude) ? exclude : [exclude];
+const cards = modulesFor(locale, excluded);
+const ui = MODULE_UI[locale];
+const home = homeFor(locale);
+---
+
+<section id={sectionId} class={sectionClass}>
+  <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+    <div class="text-center max-w-[760px] mx-auto mb-14">
+      {eyebrow && (
+        <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">{eyebrow}</span>
+      )}
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
+      {lead && <p class="text-body text-lg" set:html={lead} />}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        cards.map((m) => (
+          <div
+            class={`${cardClass} rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col`}
+          >
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+              <span class="material-symbols-outlined text-[22px]">{m.icon}</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2">{m.title}</h3>
+            <p class="text-body text-sm leading-relaxed mb-4">{m.desc}</p>
+            {m.href && (
+              <a href={m.href} class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
+                {ui.details}
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            )}
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      homeCta && (
+        <div class="text-center mt-10">
+          <a href={home} class="cta-secondary px-8 py-4 text-base">
+            {ui.wholeSystem}
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

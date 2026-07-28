@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
 
 const locale = 'hu';
 const page = 'international';
@@ -996,69 +997,18 @@ const description =
         </div>
     </section>
 
-    <!-- 8. És amit a rendszer amúgy is tud (általános képességek) -->
-    <section id="features-cards" class="bg-card py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">És amit a rendszer amúgy is tud</h2>
-                <p class="text-body text-lg">A nemzetközi funkciók mellett a Content Ninja egy teljes AI marketing
-                    platform – minden, ami egy webshop tartalomgyártásához kell.</p>
-            </div>
+<!-- 8. És amit a rendszer amúgy is tud (közös modulrács) -->
+    <ModuleGrid
+        locale={locale}
+        exclude="international"
+        sectionId="features-cards"
+        sectionClass="bg-card py-20 md:py-28"
+        cardClass="bg-light"
+        heading="És amit a rendszer amúgy is tud"
+        lead="A nemzetközi funkciók mellett a Content Ninja egy teljes AI marketing platform – minden, ami egy webshop tartalomgyártásához kell."
+    />
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">send</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Posztoló rendszer</h3>
-                    <p class="text-body text-sm leading-relaxed">Automatikusan generál és publikál posztokat a
-                        termékeidből Facebook és Instagram platformokra.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">image</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI Képgeneráló</h3>
-                    <p class="text-body text-sm leading-relaxed">Brandazonos, logózott kreatívokat és termékképeket
-                        generál egyetlen kattintással, stúdió nélkül.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">AI Videógeneráló</h3>
-                    <p class="text-body text-sm leading-relaxed">Statikus termékfotókból mozgó videókat és animációkat
-                        készít kameramozgásokkal és effektekkel.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Narrátorvideó</h3>
-                    <p class="text-body text-sm leading-relaxed">Terméklinkből percek alatt teljes narrátorvideót készít
-                        – AI hanggal, felirattal és a saját termékképeiddel.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">mail</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Hírlevélgeneráló rendszer</h3>
-                    <p class="text-body text-sm leading-relaxed">Személyre szabott hírleveleket generál a termékeidből –
-                        minden piac nyelvén – és a saját küldődből (MailerLite / Salesautopilot) küldi ki.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">ads_click</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Meta hirdetésgeneráló rendszer</h3>
-                    <p class="text-body text-sm leading-relaxed">Facebook és Instagram hirdetési kreatívokat és
-                        szövegeket generál automatikusan a termékeidből.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. Mitől több, mint a fordítóiroda / ChatGPT -->
+        <!-- 9. Mitől több, mint a fordítóiroda / ChatGPT -->
     <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1000px] mx-auto px-4 md:px-10">
             <div class="text-center mb-12">
@@ -1183,7 +1133,7 @@ const description =
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-success text-[14px]">check</span>
                             </div>
-                            <span class="text-body font-medium">Az összes modul: posztírás, hírlevél, kép- és videógenerálás</span>
+                            <span class="text-body font-medium">Az összes modul: posztírás, blogcikk, Shopgrade, hírlevél, kép- és videógenerálás</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
