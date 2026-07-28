@@ -46,47 +46,54 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
     <div class="max-w-[1200px] mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
 
-        <!-- Bal oszlop: elérhetőség + cégadatok -->
-        <div>
-          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kapcsolat</span>
-          <h1 class="text-4xl md:text-[2.6rem] font-extrabold leading-[1.1] tracking-[-0.03em] text-dark mb-4">
+        <!-- Bal oszlop: elérhetőség -->
+        <div class="flex flex-col gap-6 max-w-[540px]">
+          <span class="inline-flex items-center gap-2 self-start bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+            <span class="material-symbols-outlined text-[16px]">support_agent</span>
+            Kapcsolat
+          </span>
+
+          <h1 class="text-4xl md:text-[2.6rem] font-extrabold leading-[1.1] tracking-[-0.03em] text-dark">
             Írj nekünk – <span class="text-primary">1 munkanapon belül</span> válaszolunk
           </h1>
-          <p class="text-body leading-relaxed mb-7">Munkanapokon 9:00–17:00 között vagyunk elérhetők.</p>
 
-          <a href={`mailto:${SUPPORT_EMAIL}`} class="flex items-center gap-4 bg-card rounded-[16px] border border-border p-5 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 mb-4">
-            <span class="w-11 h-11 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-              <span class="material-symbols-outlined text-[20px]">mail</span>
+          <a href={`mailto:${SUPPORT_EMAIL}`} class="group flex items-center gap-4 rounded-[16px] border border-primary/25 bg-card p-5 shadow-card hover:shadow-card-hover hover:border-primary/40 transition-all hover:-translate-y-0.5">
+            <span class="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[22px]">mail</span>
             </span>
             <span class="min-w-0">
-              <span class="block text-xs uppercase tracking-wide text-muted font-semibold">E-mail</span>
-              <span class="block text-primary font-bold break-words">{SUPPORT_EMAIL}</span>
+              <span class="block text-xs uppercase tracking-widest text-muted font-bold">E-mail</span>
+              <span class="block text-primary font-bold text-lg break-words">{SUPPORT_EMAIL}</span>
             </span>
+            <span class="material-symbols-outlined text-primary ml-auto shrink-0 transition-transform group-hover:translate-x-1">arrow_forward</span>
           </a>
 
-          <div class="bg-card rounded-[16px] border border-border p-5 shadow-card">
-            <h2 class="text-sm font-bold text-dark mb-3">Cégadatok</h2>
-            <dl class="space-y-1.5 text-sm">
-              <div class="flex flex-col sm:flex-row sm:gap-4">
-                <dt class="text-muted w-44 shrink-0">Cégnév</dt>
-                <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:gap-4">
-                <dt class="text-muted w-44 shrink-0">Székhely</dt>
-                <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</dd>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:gap-4">
-                <dt class="text-muted w-44 shrink-0">Cégjegyzékszám</dt>
-                <dd class="text-dark font-medium">01-09-426906</dd>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:gap-4">
-                <dt class="text-muted w-44 shrink-0">Adószám</dt>
-                <dd class="text-dark font-medium">32489819-2-43</dd>
-              </div>
-            </dl>
-            <p class="text-xs text-muted mt-3">
-              További adatok az <a href={imprint} class="underline hover:text-primary">impresszumban</a>.
-            </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 rounded-[12px] border border-border bg-card/70 px-4 py-3">
+              <span class="material-symbols-outlined text-primary text-[20px] shrink-0">schedule</span>
+              <span class="text-sm font-semibold text-dark">Munkanapokon 9:00–17:00</span>
+            </div>
+            <div class="flex items-center gap-3 rounded-[12px] border border-border bg-card/70 px-4 py-3">
+              <span class="material-symbols-outlined text-primary text-[20px] shrink-0">mark_email_read</span>
+              <span class="text-sm font-semibold text-dark">Válasz 1 munkanapon belül</span>
+            </div>
+            <div class="flex items-center gap-3 rounded-[12px] border border-border bg-card/70 px-4 py-3">
+              <span class="material-symbols-outlined text-primary text-[20px] shrink-0">translate</span>
+              <span class="text-sm font-semibold text-dark">Magyarul és angolul</span>
+            </div>
+            <div class="flex items-center gap-3 rounded-[12px] border border-border bg-card/70 px-4 py-3">
+              <span class="material-symbols-outlined text-primary text-[20px] shrink-0">location_on</span>
+              <span class="text-sm font-semibold text-dark">Budapest, Magyarország</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="flex -space-x-2">
+              <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+              <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+              <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+            </div>
+            <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ hazai webshop</span> már használja</p>
           </div>
         </div>
 
@@ -110,21 +117,8 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
             </div>
 
             <div>
-              <label for="contactTopic" class="block text-sm font-bold text-body mb-1">Téma</label>
-              <select id="contactTopic" name="topic" required
-                class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all">
-                <option value="" disabled selected>Válassz...</option>
-                <option value="Érdeklődés a rendszerről">Érdeklődés a rendszerről</option>
-                <option value="Árazás, számlázás">Árazás, számlázás</option>
-                <option value="Technikai segítség">Technikai segítség</option>
-                <option value="Partnerség, viszonteladás">Partnerség, viszonteladás</option>
-                <option value="Egyéb">Egyéb</option>
-              </select>
-            </div>
-
-            <div>
               <label for="contactMessage" class="block text-sm font-bold text-body mb-1">Üzenet</label>
-              <textarea id="contactMessage" name="message" rows="4" required
+              <textarea id="contactMessage" name="message" rows="5" required
                 class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all"
                 placeholder="Miben segíthetünk?"></textarea>
             </div>
@@ -154,6 +148,50 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Cégadatok -->
+  <section class="bg-card py-20 md:py-28 px-4 md:px-10">
+    <div class="max-w-[900px] mx-auto">
+      <div class="text-center max-w-[700px] mx-auto mb-12">
+        <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Cégadatok</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ki áll a Content Ninja mögött?</h2>
+        <p class="text-body text-lg">A Content Ninját a Digitallwork.hu Kft. fejleszti és üzemelteti Budapesten.</p>
+      </div>
+
+      <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+        <dl class="space-y-2.5 text-sm">
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Cégnév</dt>
+            <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Székhely</dt>
+            <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Cégjegyzékszám</dt>
+            <dd class="text-dark font-medium">01-09-426906</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Adószám</dt>
+            <dd class="text-dark font-medium">32489819-2-43</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">E-mail</dt>
+            <dd><a href={`mailto:${SUPPORT_EMAIL}`} class="text-primary font-medium hover:underline">{SUPPORT_EMAIL}</a></dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="text-muted w-44 shrink-0">Ügyfélszolgálat</dt>
+            <dd class="text-dark font-medium">Munkanapokon 9:00–17:00</dd>
+          </div>
+        </dl>
+        <p class="text-xs text-muted mt-5 leading-relaxed">
+          A tárhely- és domainszolgáltató adatai, valamint a további kötelező tájékoztatás az
+          <a href={imprint} class="underline hover:text-primary">impresszumban</a> érhető el.
+        </p>
       </div>
     </div>
   </section>
@@ -200,7 +238,6 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
           submission_date: new Date().toISOString(),
           nev: name,
           email: document.getElementById('contactEmail').value.trim(),
-          tema: document.getElementById('contactTopic').value,
           uzenet: document.getElementById('contactMessage').value.trim(),
           nyelv: 'hu',
           subject: '✉️ Kapcsolat űrlap: ' + name,
