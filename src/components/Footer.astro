@@ -17,7 +17,6 @@ const APP_URL = 'https://app.getcontentninja.com';
 // ezeknél mindig az EN verzióra mutatunk.
 const contact = pathFor('contact', locale);
 const SUPPORT_EMAIL = 'support@getcontentninja.com';
-const SUPPORT_PHONE = '+36 20 283 8831';
 
 const legal = {
   contact,
@@ -37,16 +36,10 @@ const legal = {
           <img src="/assets/logo.webp" alt={ui.logoAlt} class="h-9 w-auto object-contain" />
         </div>
         <p class="text-sm leading-relaxed max-w-[280px] mb-5">{ui.footer.tagline}</p>
-        <ul class="space-y-2 text-sm mb-5">
-          <li class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px] text-white/70">mail</span>
-            <a href={`mailto:${SUPPORT_EMAIL}`} class="hover:text-white transition-colors">{SUPPORT_EMAIL}</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px] text-white/70">call</span>
-            <a href="tel:+36202838831" class="hover:text-white transition-colors">{SUPPORT_PHONE}</a>
-          </li>
-        </ul>
+        <a href={`mailto:${SUPPORT_EMAIL}`} class="flex items-center gap-2 text-sm mb-5 hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px] text-white/70">mail</span>
+          {SUPPORT_EMAIL}
+        </a>
         <div class="flex items-center gap-3">
           <a
             href="https://www.facebook.com/profile.php?id=61582389145717"
