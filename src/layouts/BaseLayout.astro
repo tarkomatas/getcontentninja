@@ -34,7 +34,9 @@ const {
   keywords,
   ogTitle,
   ogDescription,
-  ogImage = '/assets/logo.webp',
+  // Alapértelmezett megosztási kép: a főoldali all-in-one illusztráció (1200×630).
+  // A modul-oldalak saját `ogImage`-et adnak; a jogi/technikai oldalak ezt kapják.
+  ogImage = '/assets/og-fooldal.jpg',
   canonical,
   noindex = false,
   bodyClass = 'bg-card text-dark font-display antialiased',
@@ -87,13 +89,22 @@ const ui = t(locale);
       <link rel="alternate" hreflang={a.hreflang} href={a.href} />
     ))}
 
-    <!-- Open Graph -->
+    <!-- Open Graph.
+         A megosztási képek 1200×630-as JPEG-ek (`public/assets/og-*.jpg`) – JPEG,
+         mert a LinkedIn a WebP OG-képet gyakran nem rendereli. A méret-meta azért
+         fix, mert minden og-*.jpg pontosan 1200×630 (lásd a generálást). -->
     <meta property="og:title" content={ogTitle ?? title} />
     <meta property="og:description" content={ogDescription ?? description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={new URL(ogImage, site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content={locale === 'hu' ? 'hu_HU' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle ?? title} />
+    <meta name="twitter:description" content={ogDescription ?? description} />
+    <meta name="twitter:image" content={new URL(ogImage, site).href} />
 
     <!-- Fonts -->
     <link

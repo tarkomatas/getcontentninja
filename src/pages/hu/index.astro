@@ -63,7 +63,7 @@ const faqLd = {
 };
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description} keywords={keywords} lpEnabled>
+<BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-fooldal.jpg" keywords={keywords} lpEnabled>
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
 
   <Header locale={locale} page={page} />
