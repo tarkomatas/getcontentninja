@@ -7,16 +7,19 @@ const SITE = 'https://getcontentninja.com';
 
 export default defineConfig({
   site: SITE,
-  // Trailing slash konzisztencia a GitHub Pages-hez.
-  trailingSlash: 'ignore',
+  // A GitHub Pages a könyvtár-alapú buildből MINDIG a záró perjeles URL-t
+  // szolgálja ki (a perjel nélkülit 301-gyel odairányítja), ezért a canonical,
+  // a hreflang, a sitemap és a belső linkek is a perjeles alakot használják
+  // (`src/i18n/routes.ts`). Így egyetlen deklarált URL sem fut redirectbe.
+  trailingSlash: 'always',
   // A régi magyar ÁSZF URL az új, kizárólag angol nyelvű Terms oldalra irányít.
   // A bemutató oldal új slugja /hu/posztolas — a régi /hu/bemutato ide redirectel.
   redirects: {
-    '/hu/aszf': '/en/terms',
-    '/hu/bemutato': '/hu/posztolas',
+    '/hu/aszf': '/en/terms/',
+    '/hu/bemutato': '/hu/posztolas/',
     // A régi UNAS-slugok az új, általános webshop-mélyintegráció oldalra.
-    '/hu/unas': '/hu/webshop-integracio',
-    '/en/unas': '/en/store-integration',
+    '/hu/unas': '/hu/webshop-integracio/',
+    '/en/unas': '/en/store-integration/',
   },
   i18n: {
     defaultLocale: 'hu',

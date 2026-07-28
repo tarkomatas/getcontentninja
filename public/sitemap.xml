@@ -22,212 +22,212 @@
 
   <!-- Automata posztolás megoldás -->
   <url>
-    <loc>https://getcontentninja.com/hu/posztolas</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/posztolas" />
+    <loc>https://getcontentninja.com/hu/posztolas/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/posztolas/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/demo</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/posztolas" />
+    <loc>https://getcontentninja.com/en/demo/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/posztolas/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/demo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/posztolas/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Online bemutató / book a demo (általános, posztolás + hírlevél) -->
   <url>
-    <loc>https://getcontentninja.com/hu/online-bemutato</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/online-bemutato" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/book-demo" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/online-bemutato" />
+    <loc>https://getcontentninja.com/hu/online-bemutato/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/online-bemutato/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/book-demo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/online-bemutato/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/book-demo</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/online-bemutato" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/book-demo" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/online-bemutato" />
+    <loc>https://getcontentninja.com/en/book-demo/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/online-bemutato/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/book-demo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/online-bemutato/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Nemzetközi terjeszkedés -->
   <url>
-    <loc>https://getcontentninja.com/hu/nemzetkozi</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/nemzetkozi" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/international" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/nemzetkozi" />
+    <loc>https://getcontentninja.com/hu/nemzetkozi/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/nemzetkozi/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/international/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/nemzetkozi/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/international</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/nemzetkozi" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/international" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/nemzetkozi" />
+    <loc>https://getcontentninja.com/en/international/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/nemzetkozi/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/international/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/nemzetkozi/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Webshop mélyintegráció (Unas + Shoprenter) -->
   <url>
-    <loc>https://getcontentninja.com/hu/webshop-integracio</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/webshop-integracio" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/store-integration" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/webshop-integracio" />
+    <loc>https://getcontentninja.com/hu/webshop-integracio/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/webshop-integracio/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/store-integration/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/webshop-integracio/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/store-integration</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/webshop-integracio" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/store-integration" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/webshop-integracio" />
+    <loc>https://getcontentninja.com/en/store-integration/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/webshop-integracio/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/store-integration/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/webshop-integracio/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Shopgrade (termékleírás-újraírás, kategóriaoldal-író, termékkép-szerkesztő) -->
   <url>
-    <loc>https://getcontentninja.com/hu/shopgrade</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/shopgrade" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/shopgrade" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/shopgrade" />
+    <loc>https://getcontentninja.com/hu/shopgrade/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/shopgrade/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/shopgrade/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/shopgrade/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/shopgrade</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/shopgrade" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/shopgrade" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/shopgrade" />
+    <loc>https://getcontentninja.com/en/shopgrade/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/shopgrade/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/shopgrade/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/shopgrade/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blogcikk író (kulcsszókutatás, cikkírás, publikálás) -->
   <url>
-    <loc>https://getcontentninja.com/hu/blogcikk-iro</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/blogcikk-iro" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/blog-writer" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/blogcikk-iro" />
+    <loc>https://getcontentninja.com/hu/blogcikk-iro/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/blogcikk-iro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/blog-writer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/blogcikk-iro/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/blog-writer</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/blogcikk-iro" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/blog-writer" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/blogcikk-iro" />
+    <loc>https://getcontentninja.com/en/blog-writer/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/blogcikk-iro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/blog-writer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/blogcikk-iro/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Hírlevél-generálás -->
   <url>
-    <loc>https://getcontentninja.com/hu/hirlevel</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/newsletter" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/hirlevel" />
+    <loc>https://getcontentninja.com/hu/hirlevel/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/newsletter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/hirlevel/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/newsletter</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/newsletter" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/hirlevel" />
+    <loc>https://getcontentninja.com/en/newsletter/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/newsletter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/hirlevel/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Árak és kreditdíjak -->
   <url>
-    <loc>https://getcontentninja.com/hu/arak</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/arak" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/pricing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/arak" />
+    <loc>https://getcontentninja.com/hu/arak/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/arak/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/pricing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/arak/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/pricing</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/arak" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/pricing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/arak" />
+    <loc>https://getcontentninja.com/en/pricing/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/arak/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/pricing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/arak/" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Kapcsolat (cégadatok, elérhetőségek, kapcsolatfelvételi űrlap) -->
   <url>
-    <loc>https://getcontentninja.com/hu/kapcsolat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/contact" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/kapcsolat" />
+    <loc>https://getcontentninja.com/hu/kapcsolat/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/kapcsolat/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/kapcsolat/" />
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/contact</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/contact" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/kapcsolat" />
+    <loc>https://getcontentninja.com/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/kapcsolat/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/kapcsolat/" />
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- Adatvédelmi tájékoztató (a teljes szöveg angolul, a HU oldal rá hivatkozik) -->
   <url>
-    <loc>https://getcontentninja.com/hu/adatkezeles</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adatkezeles" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/privacy-policy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adatkezeles" />
+    <loc>https://getcontentninja.com/hu/adatkezeles/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adatkezeles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adatkezeles/" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/privacy-policy</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adatkezeles" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/privacy-policy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adatkezeles" />
+    <loc>https://getcontentninja.com/en/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adatkezeles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adatkezeles/" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <!-- ÁSZF / Terms (csak angol) -->
   <url>
-    <loc>https://getcontentninja.com/en/terms</loc>
+    <loc>https://getcontentninja.com/en/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <!-- Impresszum / Imprint -->
   <url>
-    <loc>https://getcontentninja.com/hu/impresszum</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/impresszum" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/imprint" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/impresszum" />
+    <loc>https://getcontentninja.com/hu/impresszum/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/impresszum/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/imprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/impresszum/" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://getcontentninja.com/en/imprint</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/impresszum" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/imprint" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/impresszum" />
+    <loc>https://getcontentninja.com/en/imprint/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/impresszum/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/imprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/impresszum/" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <!-- Adattörlési tájékoztató (csak angol, Meta-követelmény) -->
   <url>
-    <loc>https://getcontentninja.com/en/data-deletion</loc>
+    <loc>https://getcontentninja.com/en/data-deletion/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

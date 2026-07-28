@@ -396,7 +396,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectPrivacy">
                                             I have read, understood and accept the
-                                            <a href="/en/privacy-policy" target="_blank"
+                                            <a href="/en/privacy-policy/" target="_blank"
                                                 class="underline hover:text-primary">Privacy Policy</a>.
                                         </label>
                                     </div>
@@ -405,7 +405,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectNewsletter">
                                             I'm interested in content like this! Sign me up for the newsletter.
-                                            (<a href="/en/privacy-policy"
+                                            (<a href="/en/privacy-policy/"
                                                 class="underline hover:text-primary">Privacy Policy</a>)
                                         </label>
                                     </div>
@@ -458,7 +458,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="privacy">
                                             I have read, understood and accept the
-                                            <a href="/en/privacy-policy" target="_blank"
+                                            <a href="/en/privacy-policy/" target="_blank"
                                                 class="underline hover:text-primary">Privacy Policy</a>.
                                         </label>
                                     </div>
@@ -468,7 +468,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="newsletter">
                                             I'm interested in content like this! Sign me up for the newsletter.
-                                            (<a href="/en/privacy-policy"
+                                            (<a href="/en/privacy-policy/"
                                                 class="underline hover:text-primary">Privacy Policy</a>)
                                         </label>
                                     </div>
@@ -838,7 +838,7 @@ const description =
                         <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             I need to see this!
                         </a>
-                        <a href="/en/newsletter" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                        <a href="/en/newsletter/" class="text-primary font-bold text-sm inline-flex items-center gap-1">
                             Everything about the newsletter feature
                             <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                         </a>
@@ -1045,7 +1045,7 @@ const description =
                             </div>
                         </div>
                     </div>
-                    <a href="/en/pricing#credits" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                    <a href="/en/pricing/#credits" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
                         Detailed credit costs
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
@@ -1066,9 +1066,9 @@ const description =
                 <div>
                     <h4 class="text-white font-bold mb-4">Information</h4>
                     <ul class="space-y-2">
-                        <li><a href="/en/privacy-policy" class="hover:text-white">Privacy policy</a></li>
-                        <li><a href="/en/imprint" class="hover:text-white">Imprint</a></li>
-                        <li><a href="/en/terms" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="/en/privacy-policy/" class="hover:text-white">Privacy policy</a></li>
+                        <li><a href="/en/imprint/" class="hover:text-white">Imprint</a></li>
+                        <li><a href="/en/terms/" class="hover:text-white">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
@@ -1259,10 +1259,10 @@ const description =
                         body: JSON.stringify(webhookPayload)
                     });
                     console.log('Webhook sent:', result.ok);
-                    window.location.href = "/en/thank-you?lead=1";
+                    window.location.href = "/en/thank-you/?lead=1";
                 } catch (error) {
                     console.error('Unexpected error:', error);
-                    window.location.href = "/en/thank-you?lead=1";
+                    window.location.href = "/en/thank-you/?lead=1";
                 }
             });
         });

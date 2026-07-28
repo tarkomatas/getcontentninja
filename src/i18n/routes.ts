@@ -33,38 +33,38 @@ export type PageKey =
 export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   home: { hu: '/hu/', en: '/en/' },
   // Az "Automata posztolás" megoldás-oldal (a Megoldások menüből érhető el).
-  demo: { hu: '/hu/posztolas', en: '/en/demo' },
+  demo: { hu: '/hu/posztolas/', en: '/en/demo/' },
   // Általános "Bemutatót kérek" kampányoldal – a teljes rendszerről szól
   // (posztolás ÉS hírlevél), a fejléc/lábléc/főoldali CTA-k ide mutatnak.
-  bookDemo: { hu: '/hu/online-bemutato', en: '/en/book-demo' },
+  bookDemo: { hu: '/hu/online-bemutato/', en: '/en/book-demo/' },
   // Nemzetközi terjeszkedés kampányoldal – kétnyelvű, rövid slug.
-  international: { hu: '/hu/nemzetkozi', en: '/en/international' },
+  international: { hu: '/hu/nemzetkozi/', en: '/en/international/' },
   // Webshop mélyintegráció kampányoldal (Unas + Shoprenter) – kétnyelvű.
-  webshopIntegration: { hu: '/hu/webshop-integracio', en: '/en/store-integration' },
+  webshopIntegration: { hu: '/hu/webshop-integracio/', en: '/en/store-integration/' },
   // Shopgrade modul: a webáruház meglévő tartalmát optimalizálja (termékleírás
   // újraírás + visszatöltés; hamarosan kategóriaoldal-író és termékkép-szerkesztő).
   // A slug szándékosan a modul neve, hogy a későbbi almodulok is beleférjenek.
-  shopgrade: { hu: '/hu/shopgrade', en: '/en/shopgrade' },
+  shopgrade: { hu: '/hu/shopgrade/', en: '/en/shopgrade/' },
   // Blogcikk író modul: kulcsszókutatás -> SEO/GEO-barát blogcikk -> publikálás
   // közvetlenül a webshop blogjába (Unas + Shoprenter).
-  blogWriter: { hu: '/hu/blogcikk-iro', en: '/en/blog-writer' },
+  blogWriter: { hu: '/hu/blogcikk-iro/', en: '/en/blog-writer/' },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
-  newsletter: { hu: '/hu/hirlevel', en: '/en/newsletter' },
+  newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // Részletes ároldal: csomag, teljes kreditdíj-táblázat (#kreditek), extra
   // kreditvásárlás, fizetés/számlázás és árazási GYIK. A landing oldalak
   // "Részletes kreditdíjak" linkje ide mutat (korábban egy Notion doksira).
-  pricing: { hu: '/hu/arak', en: '/en/pricing' },
+  pricing: { hu: '/hu/arak/', en: '/en/pricing/' },
   // Önálló, nyelvi prefix nélküli kampány-link online konzultációhoz (Fillout-űrlap).
   // Szándékosan csak egy nyelven (HU) és prefix nélkül él – ez a brief kérése.
-  onlineDemo: { hu: '/online-demo', en: null },
+  onlineDemo: { hu: '/online-demo/', en: null },
   // Kapcsolat: cégadatok, közvetlen elérhetőségek (e-mail, telefon) és
   // általános kapcsolatfelvételi űrlap. A fejléc/lábléc "Kapcsolat" linkje ide visz.
-  contact: { hu: '/hu/kapcsolat', en: '/en/contact' },
-  thanks: { hu: '/hu/koszonjuk', en: '/en/thank-you' },
-  privacy: { hu: '/hu/adatkezeles', en: '/en/privacy-policy' },
-  terms: { hu: null, en: '/en/terms' },
-  imprint: { hu: '/hu/impresszum', en: '/en/imprint' },
-  dataDeletion: { hu: null, en: '/en/data-deletion' },
+  contact: { hu: '/hu/kapcsolat/', en: '/en/contact/' },
+  thanks: { hu: '/hu/koszonjuk/', en: '/en/thank-you/' },
+  privacy: { hu: '/hu/adatkezeles/', en: '/en/privacy-policy/' },
+  terms: { hu: null, en: '/en/terms/' },
+  imprint: { hu: '/hu/impresszum/', en: '/en/imprint/' },
+  dataDeletion: { hu: null, en: '/en/data-deletion/' },
 };
 
 /** Az adott oldal path-ja egy adott nyelven (üres string, ha nincs). */

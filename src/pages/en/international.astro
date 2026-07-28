@@ -410,7 +410,7 @@ const description =
                                         <input type="checkbox" id="softRejectPrivacy"
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectPrivacy">
-                                            I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy" target="_blank"
+                                            I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy/" target="_blank"
                                                 class="underline hover:text-primary">Privacy Policy</a>.
                                         </label>
                                     </div>
@@ -419,7 +419,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectNewsletter">
                                             I'm interested in exciting content like this! I subscribe to the newsletter.
-                                            (<a href="/en/privacy-policy"
+                                            (<a href="/en/privacy-policy/"
                                                 class="underline hover:text-primary">Privacy Policy</a>)
                                         </label>
                                     </div>
@@ -470,7 +470,7 @@ const description =
                                         <input type="checkbox" id="privacy" required
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="privacy">
-                                            I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy" target="_blank"
+                                            I have read, understood and acknowledged the terms set out in the <a href="/en/privacy-policy/" target="_blank"
                                                 class="underline hover:text-primary">Privacy Policy</a>.
                                         </label>
                                     </div>
@@ -480,7 +480,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="newsletter">
                                             I'm interested in exciting content like this! I subscribe to the newsletter.
-                                            (<a href="/en/privacy-policy"
+                                            (<a href="/en/privacy-policy/"
                                                 class="underline hover:text-primary">Privacy Policy</a>)
                                         </label>
                                     </div>
@@ -1227,7 +1227,7 @@ const description =
                             </div>
                         </div>
                     </div>
-                    <a href="/en/pricing#credits" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                    <a href="/en/pricing/#credits" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
                         Detailed credit pricing
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
@@ -1248,9 +1248,9 @@ const description =
                 <div>
                     <h4 class="text-white font-bold mb-4">Information</h4>
                     <ul class="space-y-2">
-                        <li><a href="/en/privacy-policy" class="hover:text-white">Privacy Policy</a></li>
-                        <li><a href="/hu/impresszum" class="hover:text-white">Imprint</a></li>
-                        <li><a href="/en/terms" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="/en/privacy-policy/" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/hu/impresszum/" class="hover:text-white">Imprint</a></li>
+                        <li><a href="/en/terms/" class="hover:text-white">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
@@ -1445,10 +1445,10 @@ const description =
                         body: JSON.stringify(webhookPayload)
                     });
                     console.log('Webhook sent:', result.ok);
-                    window.location.href = "/en/thank-you?lead=1";
+                    window.location.href = "/en/thank-you/?lead=1";
                 } catch (error) {
                     console.error('Unexpected error:', error);
-                    window.location.href = "/en/thank-you?lead=1";
+                    window.location.href = "/en/thank-you/?lead=1";
                 }
             });
         });

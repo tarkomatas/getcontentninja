@@ -336,7 +336,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectPrivacy">
                                             I have read, understood and accept the
-                                            <a href="/en/privacy-policy" target="_blank"
+                                            <a href="/en/privacy-policy/" target="_blank"
                                                 class="underline hover:text-primary">Privacy Policy</a>.
                                         </label>
                                     </div>
@@ -345,7 +345,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectNewsletter">
                                             I'm interested in content like this! Sign me up for the newsletter.
-                                            (<a href="/en/privacy-policy"
+                                            (<a href="/en/privacy-policy/"
                                                 class="underline hover:text-primary">Privacy Policy</a>)
                                         </label>
                                     </div>
@@ -398,7 +398,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="privacy">
                                             I have read, understood and accept the
-                                            <a href="/en/privacy-policy" target="_blank"
+                                            <a href="/en/privacy-policy/" target="_blank"
                                                 class="underline hover:text-primary">Privacy Policy</a>.
                                         </label>
                                     </div>
@@ -408,7 +408,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="newsletter">
                                             I'm interested in content like this! Sign me up for the newsletter.
-                                            (<a href="/en/privacy-policy"
+                                            (<a href="/en/privacy-policy/"
                                                 class="underline hover:text-primary">Privacy Policy</a>)
                                         </label>
                                     </div>
@@ -865,7 +865,7 @@ const description =
             </div>
 
             <div class="text-center mt-8">
-                <a href="/en/pricing#credits" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                <a href="/en/pricing/#credits" class="text-primary font-bold text-sm inline-flex items-center gap-1">
                     Detailed credit costs
                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
@@ -906,7 +906,7 @@ const description =
                         Currently <strong>Unas</strong> and <strong>Shoprenter</strong> – these support the two-way
                         connection, meaning both the download and the upload. If you use a different platform, we'll
                         look at the options during the demo.
-                        <a href="/en/store-integration" class="text-primary font-semibold underline">More about the deep
+                        <a href="/en/store-integration/" class="text-primary font-semibold underline">More about the deep
                         store integration.</a>
                     </div>
                 </div>
@@ -960,7 +960,7 @@ const description =
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         No – it's part of the same 34,990 HUF + VAT / month subscription as every other module, with 500
                         renewing AI credits included. Generation consumes credits; you'll find the
-                        <a href="/en/pricing#credits" class="text-primary font-semibold underline">detailed credit costs
+                        <a href="/en/pricing/#credits" class="text-primary font-semibold underline">detailed credit costs
                         here</a>.
                     </div>
                 </div>
@@ -995,9 +995,9 @@ const description =
                 <div>
                     <h4 class="text-white font-bold mb-4">Information</h4>
                     <ul class="space-y-2">
-                        <li><a href="/en/privacy-policy" class="hover:text-white">Privacy policy</a></li>
-                        <li><a href="/en/imprint" class="hover:text-white">Imprint</a></li>
-                        <li><a href="/en/terms" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="/en/privacy-policy/" class="hover:text-white">Privacy policy</a></li>
+                        <li><a href="/en/imprint/" class="hover:text-white">Imprint</a></li>
+                        <li><a href="/en/terms/" class="hover:text-white">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
@@ -1194,10 +1194,10 @@ const description =
                         body: JSON.stringify(webhookPayload)
                     });
                     console.log('Webhook sent:', result.ok);
-                    window.location.href = "/en/thank-you?lead=1";
+                    window.location.href = "/en/thank-you/?lead=1";
                 } catch (error) {
                     console.error('Unexpected error:', error);
-                    window.location.href = "/en/thank-you?lead=1";
+                    window.location.href = "/en/thank-you/?lead=1";
                 }
             });
         });

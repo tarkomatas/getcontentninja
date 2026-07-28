@@ -334,7 +334,7 @@ const description =
                                         <input type="checkbox" id="softRejectPrivacy"
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectPrivacy">
-                                            Az <a href="/hu/adatkezeles" target="_blank"
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
                                                 class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
                                             foglaltakat elolvastam, megértettem és tudomásul vettem.
                                         </label>
@@ -344,7 +344,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="softRejectNewsletter">
                                             Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
-                                            (<a href="/hu/adatkezeles"
+                                            (<a href="/hu/adatkezeles/"
                                                 class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
                                         </label>
                                     </div>
@@ -395,7 +395,7 @@ const description =
                                         <input type="checkbox" id="privacy" required
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="privacy">
-                                            Az <a href="/hu/adatkezeles" target="_blank"
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
                                                 class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
                                             foglaltakat elolvastam, megértettem és tudomásul vettem.
                                         </label>
@@ -406,7 +406,7 @@ const description =
                                             class="mt-1 rounded text-primary focus:ring-primary">
                                         <label for="newsletter">
                                             Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
-                                            (<a href="/hu/adatkezeles"
+                                            (<a href="/hu/adatkezeles/"
                                                 class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
                                         </label>
                                     </div>
@@ -864,7 +864,7 @@ const description =
             </div>
 
             <div class="text-center mt-8">
-                <a href="/hu/arak#kreditek" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                <a href="/hu/arak/#kreditek" class="text-primary font-bold text-sm inline-flex items-center gap-1">
                     Részletes kreditdíjak
                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
@@ -904,7 +904,7 @@ const description =
                         Jelenleg <strong>Unas</strong> és <strong>Shoprenter</strong> webáruházakkal – ezeknél működik a
                         kétirányú kapcsolat, vagyis a letöltés és a visszatöltés is. Ha más rendszert használsz, a
                         bemutatón megnézzük, mi a lehetőség.
-                        <a href="/hu/webshop-integracio" class="text-primary font-semibold underline">Részletek a webshop
+                        <a href="/hu/webshop-integracio/" class="text-primary font-semibold underline">Részletek a webshop
                         mélyintegrációról.</a>
                     </div>
                 </div>
@@ -958,7 +958,7 @@ const description =
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Nem, ugyanaz a 34.990 Ft + ÁFA / hó előfizetés tartalmazza, mint a többi modult, havi 500
                         megújuló AI kredittel. A generálás kreditet fogyaszt – a
-                        <a href="/hu/arak#kreditek" class="text-primary font-semibold underline">részletes
+                        <a href="/hu/arak/#kreditek" class="text-primary font-semibold underline">részletes
                         kreditdíjakat itt találod</a>.
                     </div>
                 </div>
@@ -993,9 +993,9 @@ const description =
                 <div>
                     <h4 class="text-white font-bold mb-4">Információk</h4>
                     <ul class="space-y-2">
-                        <li><a href="/hu/adatkezeles" class="hover:text-white">Adatkezelési tájékoztató</a></li>
-                        <li><a href="/hu/impresszum" class="hover:text-white">Impresszum</a></li>
-                        <li><a href="/en/terms" class="hover:text-white">ÁSZF (Terms of Service)</a></li>
+                        <li><a href="/hu/adatkezeles/" class="hover:text-white">Adatkezelési tájékoztató</a></li>
+                        <li><a href="/hu/impresszum/" class="hover:text-white">Impresszum</a></li>
+                        <li><a href="/en/terms/" class="hover:text-white">ÁSZF (Terms of Service)</a></li>
                     </ul>
                 </div>
             </div>
@@ -1192,10 +1192,10 @@ const description =
                         body: JSON.stringify(webhookPayload)
                     });
                     console.log('Webhook sent:', result.ok);
-                    window.location.href = "/hu/koszonjuk?lead=1";
+                    window.location.href = "/hu/koszonjuk/?lead=1";
                 } catch (error) {
                     console.error('Unexpected error:', error);
-                    window.location.href = "/hu/koszonjuk?lead=1";
+                    window.location.href = "/hu/koszonjuk/?lead=1";
                 }
             });
         });
