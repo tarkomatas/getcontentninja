@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: 'Mi az az AI kredit, és mire elég 500?',
-    a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 500 kredit nagyjából 166 képes posztra elég. A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
+    a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 500 kredit nagyjából 166 képes posztra elég. Egy blogcikk szövege 3 kredit (a cikkbe kerülő képek 2 kredit/kép), egy termékleírás újraírása pedig 1 kredit / termékoldal. A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
   },
   {
     q: 'Mi történik, ha elfogy a havi keretem?',
@@ -80,6 +80,9 @@ const faqLd = {
 const textOps = [
   { op: 'Poszt szöveg generálás / újragenerálás', credit: '1' },
   { op: 'Hírlevél szöveg generálás / újragenerálás', credit: '3' },
+  { op: 'Blogcikk szöveg generálás / újragenerálás', credit: '3' },
+  { op: 'Blogcikk mély kutatás (opcionális, internetes kereséssel)', credit: '5' },
+  { op: 'Termékleírás újraírás (Shopgrade)', credit: '1 / termék' },
   { op: 'Hirdetés szöveg generálás / újragenerálás', credit: '1' },
   { op: 'HTML sablon generálás hírlevélhez (egyszeri)', credit: '2' },
 ];
@@ -88,6 +91,7 @@ const imageOps = [
   { op: 'Új / meglévő kép generálása (Nano Banana)', credit: '2' },
   { op: 'Új / meglévő kép generálása (Nano Banana Pro)', credit: '5' },
   { op: 'Új / meglévő kép generálása (GPT Image)', credit: '5' },
+  { op: 'Blogcikk képei (borító + beágyazott, Nano Banana)', credit: '2 / kép' },
   { op: 'Képből rövid animáció (WAN Video)', credit: '2' },
   { op: 'Képből rövid animáció (Grok Imagine Video)', credit: '1 / mp' },
 ];
@@ -431,7 +435,7 @@ const freeOps = [
         <div class="text-center mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SZÁMPÉLDÁK</span>
           <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire elég havi 500 kredit?</h2>
-          <p class="text-body text-lg">Három tipikus felhasználás — ha csak egy dologra költenéd a keretet.</p>
+          <p class="text-body text-lg">Hat tipikus felhasználás — ha csak egy dologra költenéd a keretet.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -440,6 +444,16 @@ const freeOps = [
               icon: 'edit_note',
               title: '≈ 166 képes poszt',
               detail: 'Posztszöveg (1) + Nano Banana kép (2) = 3 kredit / poszt',
+            },
+            {
+              icon: 'article',
+              title: '≈ 71 blogcikk',
+              detail: 'Cikkszöveg (3) + 2 kép, Nano Banana (2×2) = 7 kredit / cikk. A mély kutatás opcionális, +5.',
+            },
+            {
+              icon: 'edit_document',
+              title: '≈ 500 termékleírás',
+              detail: 'Shopgrade termékleírás-újraírás: 1 kredit / termékoldal, tömegesen is.',
             },
             {
               icon: 'mail',
@@ -451,6 +465,11 @@ const freeOps = [
               icon: 'movie',
               title: '≈ 25 narrációvideó',
               detail: '1 perces, 4 képes videó = 20 kredit / videó',
+            },
+            {
+              icon: 'image',
+              title: '≈ 250 AI kép',
+              detail: 'Nano Banana kép: 2 kredit / kép, brandazonos, logózott kreatív.',
             },
           ].map((card) => (
             <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
