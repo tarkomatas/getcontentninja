@@ -1,22 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
     const COOKIE_NAME = "contentninja_cookie_consent_v1";
     const PIXEL_ID = "3857575907663677";
+    const ADS_ID = "AW-10918594401";
 
-    // A teljes tájékoztató angolul él (/en/privacy-policy); a /hu/adatkezeles
+    // A teljes tájékoztató angolul él (/en/privacy-policy/); a /hu/adatkezeles/
     // egy arra hivatkozó rövid magyar oldal.
-    const PRIVACY_URLS = { hu: "/hu/adatkezeles", en: "/en/privacy-policy" };
+    const PRIVACY_URLS = { hu: "/hu/adatkezeles/", en: "/en/privacy-policy/" };
 
     const STRINGS = {
         hu: {
             title: "Sütiket (cookie-kat) használunk",
-            body: "a legjobb felhasználói élmény és analitikai mérések biztosításához (Meta Pixel).",
+            body: "a legjobb felhasználói élmény és analitikai mérések biztosításához (Meta Pixel, Google Ads).",
             link: "Adatkezelési tájékoztató",
             accept: "Elfogadom",
             reject: "Elutasítom",
         },
         en: {
             title: "We use cookies",
-            body: "to ensure the best user experience and analytics measurement (Meta Pixel).",
+            body: "to ensure the best user experience and analytics measurement (Meta Pixel, Google Ads).",
             link: "Privacy policy",
             accept: "Accept",
             reject: "Decline",
@@ -44,10 +45,33 @@ document.addEventListener("DOMContentLoaded", function () {
         fbq('track', 'PageView');
     }
 
+    // A gtag() parancssort a BaseLayout állítja fel; itt csak a tényleges
+    // scriptet húzzuk be, hozzájárulás után. A queue-ban addig összegyűlt
+    // hívások a betöltéskor visszamenőleg lefutnak.
+    function loadGoogleAds() {
+        if (document.querySelector('script[data-gtag]')) return;
+
+        const s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + ADS_ID;
+        s.setAttribute("data-gtag", "");
+        document.head.appendChild(s);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { window.dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', ADS_ID);
+    }
+
+    function loadTrackers() {
+        loadMetaPixel();
+        loadGoogleAds();
+    }
+
     const consent = localStorage.getItem(COOKIE_NAME);
 
     if (consent === "true") {
-        loadMetaPixel();
+        loadTrackers();
     } else if (consent === null) {
         showCookieBanner();
     }
@@ -141,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("cookie-accept").addEventListener("click", function () {
             localStorage.setItem(COOKIE_NAME, "true");
-            loadMetaPixel();
+            loadTrackers();
             banner.remove();
         });
 

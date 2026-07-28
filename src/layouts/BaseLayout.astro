@@ -55,13 +55,17 @@ const ui = t(locale);
 <!doctype html>
 <html lang={ui.htmlLang}>
   <head>
-    <!-- Google tag (gtag.js) – eager -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-10918594401"></script>
+    <!--
+      Google Ads (gtag.js) – NEM tölt be magától. Itt csak a parancssor áll fel:
+      a gtag() hívások a dataLayerbe gyűlnek, hálózati kérés és süti nélkül.
+      Magát a gtag.js-t a `public/assets/cookie.js` húzza be, kizárólag a
+      süti-hozzájárulás után (ugyanúgy, mint a Meta Pixelt), és onnantól a
+      queue visszamenőleg lefut. Így egy jövőbeli konverziós gtag('event', …)
+      hívás sem száll el, ha a látogató még nem döntött.
+    -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-10918594401');
     </script>
 
     <meta charset="utf-8" />
