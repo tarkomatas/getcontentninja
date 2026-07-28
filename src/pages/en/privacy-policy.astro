@@ -23,7 +23,7 @@ const description =
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-        <p class="text-sm text-muted">Last updated: 2 July 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted">Last updated: 28 July 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           This Privacy Policy is provided in English only. A tájékoztató kizárólag angol nyelven érhető el –
           kérdés esetén írj a <a href="mailto:support@getcontentninja.com" class="text-primary underline">support@getcontentninja.com</a> címre.
@@ -266,7 +266,17 @@ const description =
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">MailerLite (UAB MailerLite)</td>
                   <td class="px-4 py-3 text-muted border-r border-border">Lithuania, EU</td>
-                  <td class="px-4 py-3 text-body border-r border-border">E-mail delivery</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Newsletter delivery</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Mailjet (Sinch Email)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">France, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Transactional e-mail delivery (account, billing and system notifications)</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Sentry (Functional Software, Inc.)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">EU region</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Error logging</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">GitHub, Inc.</td>
@@ -284,6 +294,13 @@ const description =
           <p class="mt-3">
             When generating content, only the inputs required for generation (e.g. product data, prompts, brand
             settings) are sent to the AI providers — never your access tokens or account credentials.
+          </p>
+          <p class="mt-3">
+            <strong class="text-dark">Note on Sentry:</strong> when an error occurs in the application, the technical
+            details of that error (error message, page address, browser type, timestamp) are sent to Sentry's European
+            servers so that we can fix it. We do not send IP addresses, cookies, form contents, or the part of the web
+            address after the question mark. Purpose: bug fixing and operational reliability; legal basis: our
+            legitimate interest; retention: 90 days at most.
           </p>
           <p class="mt-3">
             <strong class="text-dark">Note on Meta Platforms:</strong> when the Service publishes content to your
@@ -314,6 +331,7 @@ const description =
             <li><strong class="text-dark">Meta access tokens and connected-account data:</strong> deleted immediately when you disconnect the account in the app, revoke the app's access in your Facebook settings, or delete your account.</li>
             <li><strong class="text-dark">Invoicing data:</strong> retained for 8 years, as required by the Hungarian Accounting Act.</li>
             <li><strong class="text-dark">Usage logs:</strong> retained for up to 12 months.</li>
+            <li><strong class="text-dark">Error logs (Sentry):</strong> retained for up to 90 days.</li>
             <li><strong class="text-dark">Newsletter data:</strong> retained until you unsubscribe.</li>
           </ul>
           <p>You can request deletion of your data at any time, in any of the following ways:</p>
