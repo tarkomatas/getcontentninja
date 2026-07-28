@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
+import LeadFormScript from '../../components/LeadFormScript.astro';
 
 const locale = 'en';
 const page = 'demo';
@@ -313,6 +315,7 @@ const description =
 
                             <form id="leadForm"
                                 class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                            <HoneypotField />
 
                                 <!-- Step 1: Qualifying Questions (marketing level + role) -->
                                 <div class="form-step active" data-step="1">
@@ -324,9 +327,9 @@ const description =
                                                 class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                                 <option value="" disabled selected>Choose...</option>
                                                 <option value="Igen, van webshopom">Yes, I have a webshop</option>
-                                                <option value="Igen, hamarosan tervezek nyitni">Yes, I plan to open
+                                                <option value="Igen, hamarosan tervezek nyitni" data-reject="soft">Yes, I plan to open
                                                     one soon</option>
-                                                <option value="Nem, más típusú vállalkozásom van">No, I have a
+                                                <option value="Nem, más típusú vállalkozásom van" data-reject="hard">No, I have a
                                                     different type of business</option>
                                             </select>
                                         </div>
@@ -336,7 +339,7 @@ const description =
                                             <select name="marketing_level" id="marketingLevel"
                                                 class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                                 <option value="" disabled selected>Choose...</option>
-                                                <option value="Egyáltalán nem értünk semmit a témához">We don't
+                                                <option value="Egyáltalán nem értünk semmit a témához" data-reject="hard">We don't
                                                     understand the topic at all</option>
                                                 <option value="Kezdő, minimális tudással">Beginner, with minimal knowledge
                                                 </option>
@@ -352,7 +355,7 @@ const description =
                                                 <option value="" disabled selected>Choose...</option>
                                                 <option value="Én, cégvezetőként">Me, as the business owner</option>
                                                 <option value="Belsős marketing csapat">In-house marketing team</option>
-                                                <option value="Külsős ügynökség">External agency</option>
+                                                <option value="Külsős ügynökség" data-reject="hard">External agency</option>
                                             </select>
                                         </div>
                                         <div>
@@ -363,8 +366,8 @@ const description =
                                                 <option value="" disabled selected>Choose...</option>
                                                 <option value="Azonnal">Immediately</option>
                                                 <option value="1 hónapon belül">Within 1 month</option>
-                                                <option value="2-3 hónapon belül">Within 2-3 months</option>
-                                                <option value="Még csak érdeklődöm">Just looking around for now</option>
+                                                <option value="2-3 hónapon belül" data-reject="soft">Within 2-3 months</option>
+                                                <option value="Még csak érdeklődöm" data-reject="soft">Just looking around for now</option>
                                             </select>
                                         </div>
                                         <button type="button" onclick="qualifyAndNext()"
@@ -418,7 +421,7 @@ const description =
                                                     class="underline hover:text-primary">Privacy Policy</a>)
                                             </label>
                                         </div>
-                                        <button type="button" onclick="submitSoftReject()"
+                                        <button type="button" onclick="submitSoftReject(this)"
                                             class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
                                             Send me the video
                                         </button>
@@ -434,10 +437,14 @@ const description =
                                                 class="material-symbols-outlined text-success text-3xl">check_circle</span>
                                         </div>
                                         <h4 class="text-xl font-bold text-dark">Got it!</h4>
-                                        <p class="text-body leading-relaxed max-w-[400px] mx-auto">
-                                            We'll send you the demo video and the latest news soon. Thank you for your
-                                            interest!
-                                        </p>
+                                        <!-- Two variants: the "updates" half is only true if they also asked for the
+                                         newsletter. The video goes out either way – the script picks one. -->
+                                    <p data-thanks="plain" class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        We'll send over the demo video within a few minutes. Thanks for your interest!
+                                    </p>
+                                    <p data-thanks="newsletter" class="hidden text-body leading-relaxed max-w-[400px] mx-auto">
+                                        We'll send over the demo video within a few minutes, and we'll keep you posted on the latest updates. Thanks for your interest!
+                                    </p>
                                     </div>
                                 </div>
 
@@ -1439,217 +1446,6 @@ const description =
                 </div>
             </div>
         </footer>
-    <script is:inline>
-        function nextStep(step) {
-            // Hide all steps
-            const steps = document.querySelectorAll('.form-step');
-            steps.forEach(s => s.classList.remove('active'));
-
-            const formIntro = document.getElementById('formIntro');
-            const hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
-            if (formIntro) {
-                formIntro.classList.toggle('hidden', hideIntroSteps.includes(String(step)));
-            }
-
-            // Show requested step
-            const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
-            if (activeStep) {
-                activeStep.classList.add('active');
-            }
-        }
-
-        // Store qualifying data for use in soft reject submission
-        let _qualifyData = {};
-
-        function qualifyAndNext() {
-            const webshop = document.getElementById('hasWebshop').value;
-            const level = document.getElementById('marketingLevel').value;
-            const role = document.getElementById('marketingRole').value;
-            const timing = document.getElementById('timing').value;
-
-            // Validate that all four are selected
-            if (!webshop || !level || !role || !timing) {
-                alert('Please answer every question!');
-                return;
-            }
-
-            // Store for later use
-            _qualifyData = { webshop, level, role, timing };
-
-            // Hard disqualify: no webshop OR agency handling posts OR no marketing knowledge
-            const isHardRejected =
-                webshop === 'Nem, más típusú vállalkozásom van' ||
-                level === 'Egyáltalán nem értünk semmit a témához' ||
-                role === 'Külsős ügynökség';
-
-            // Soft reject: no webshop yet OR timing not ideal (but otherwise OK)
-            const isSoftRejected =
-                webshop === 'Igen, hamarosan tervezek nyitni' ||
-                timing === '2-3 hónapon belül' ||
-                timing === 'Még csak érdeklődöm';
-
-            if (isHardRejected) {
-                nextStep('rejected');
-
-                fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        statusz: 'hard_reject',
-                        submission_date: new Date().toISOString(),
-                        has_webshop: webshop,
-                        marketing_level: level,
-                        marketing_role: role,
-                        timing: timing,
-                        source_url: window.location.href
-                    })
-                }).catch(() => { });
-
-            } else if (isSoftRejected) {
-                nextStep('soft-reject');
-
-            } else {
-                nextStep(2);
-            }
-        }
-
-        async function submitSoftReject() {
-            const email = document.getElementById('softRejectEmail').value.trim();
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address!');
-                return;
-            }
-
-            const privacy = document.getElementById('softRejectPrivacy');
-            if (!privacy.checked) {
-                alert('Please accept the privacy policy!');
-                return;
-            }
-
-            const newsletterChecked = document.getElementById('softRejectNewsletter').checked;
-
-            const btn = event.target;
-            btn.innerHTML = 'Sending...';
-            btn.disabled = true;
-
-            const payload = {
-                submission_date: new Date().toISOString(),
-                email: email,
-                hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem',
-                has_webshop: _qualifyData.webshop || '',
-                marketing_level: _qualifyData.level || '',
-                marketing_role: _qualifyData.role || '',
-                timing: _qualifyData.timing || '',
-                source_url: window.location.href
-            };
-
-            try {
-                await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ...payload, statusz: 'soft_reject' })
-                });
-            } catch (e) { }
-
-            nextStep('soft-reject-thanks');
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const submitBtn = document.getElementById('submitBtn');
-            const FORM_SUBMITTED_KEY = 'ai_tartalomgyartas_form_submitted';
-
-            // Check if form was already submitted in this session
-            if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = 'Already submitted';
-                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            }
-
-            // Handle Form Submit via Webhook to Make.com
-            document.getElementById('leadForm').addEventListener('submit', async function (e) {
-                e.preventDefault();
-
-                // Double-check: prevent duplicate submissions
-                if (sessionStorage.getItem(FORM_SUBMITTED_KEY) === 'true') {
-                    console.log('Form already submitted, preventing duplicate.');
-                    return;
-                }
-
-                const privacy = document.getElementById('privacy');
-                if (!privacy.checked) {
-                    alert("Please accept the privacy policy!");
-                    return;
-                }
-
-                const btn = document.getElementById('submitBtn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = 'Sending...';
-                btn.disabled = true;
-
-                // Mark as submitted IMMEDIATELY to prevent race conditions
-                sessionStorage.setItem(FORM_SUBMITTED_KEY, 'true');
-
-                const formData = new FormData(this);
-
-                // Collect clean form data
-                const cleanData = {};
-                formData.forEach((value, key) => {
-                    // Handle checkbox arrays (like usage[])
-                    if (cleanData[key]) {
-                        if (!Array.isArray(cleanData[key])) {
-                            cleanData[key] = [cleanData[key]];
-                        }
-                        cleanData[key].push(value);
-                    } else {
-                        cleanData[key] = value;
-                    }
-                });
-
-                // Add source URL and subject
-                cleanData['source_url'] = window.location.href;
-                const customSubject = `🚀 AI Tartalomgyártás jelentkezés: ${cleanData['name']}`;
-                cleanData['subject'] = customSubject;
-
-                // Prepare webhook payload
-                const newsletterChecked = document.getElementById('newsletter').checked;
-                const webhookPayload = {
-                    statusz: 'sikeres',
-                    submission_date: new Date().toISOString(),
-                    nev: cleanData['name'],
-                    email: cleanData['email'],
-                    telefonszam: cleanData['phone'],
-                    source_url: window.location.href,
-                    has_webshop: cleanData['has_webshop'],
-                    marketing_level: cleanData['marketing_level'],
-                    marketing_role: cleanData['marketing_role'],
-                    timing: cleanData['timing'],
-                    hirlevel_feliratkozas: newsletterChecked ? 'Igen' : 'Nem'
-                };
-
-                // Prepare formsubmit payload
-                const formsubmitData = { ...cleanData };
-                formsubmitData['_subject'] = customSubject;
-                formsubmitData['_captcha'] = 'false';
-                formsubmitData['_template'] = 'table';
-
-                try {
-                    const result = await fetch('https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(webhookPayload)
-                    });
-                    console.log('Webhook sent:', result.ok);
-
-                    // Always redirect after submission attempt (prevents re-submission)
-                    window.location.href = "/en/thank-you/?lead=1";
-
-                } catch (error) {
-                    console.error('Unexpected error:', error);
-                    // Still redirect to prevent duplicate submissions
-                    window.location.href = "/en/thank-you/?lead=1";
-                }
-            });
-        });
-    </script>
+    <LeadFormScript locale={locale} source="posztolas" />
   </div>
 </BaseLayout>

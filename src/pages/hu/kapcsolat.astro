@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
 import { pathFor } from '../../i18n/routes';
 
 const locale = 'hu';
@@ -102,6 +103,7 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
           <h2 class="text-2xl font-bold text-dark mb-5">Kapcsolatfelvétel</h2>
 
           <form id="contactForm" class="space-y-4">
+            <HoneypotField />
             <div>
               <label for="contactName" class="block text-sm font-bold text-body mb-1">Név</label>
               <input type="text" id="contactName" name="name" required
@@ -208,6 +210,10 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
 
   <Footer locale={locale} page={page} />
 
+  <!--
+    A kapcsolat-űrlap a közös `window.cnIntake`-en megy (IntakeClient.astro): a
+    végpont-URL nincs itt, és ami nem megy el elsőre, azt a retry-sor viszi.
+  -->
   <script is:inline>
     (function () {
       var form = document.getElementById('contactForm');
@@ -216,9 +222,8 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
       var btn = document.getElementById('contactSubmit');
       var errorBox = document.getElementById('contactError');
       var successBox = document.getElementById('contactSuccess');
-      var WEBHOOK = 'https://hook.eu1.make.com/ihohtlulor66lvhouyoty9azbut7lzx7';
 
-      form.addEventListener('submit', async function (e) {
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
 
         var privacy = document.getElementById('contactPrivacy');
@@ -232,6 +237,7 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
         btn.innerHTML = 'Küldés...';
 
         var name = document.getElementById('contactName').value.trim();
+        var honeypot = form.querySelector('[name="website"]');
         var payload = {
           statusz: 'kapcsolat',
           lead_forras: 'kapcsolat',
@@ -240,24 +246,26 @@ const SUPPORT_EMAIL = 'support@getcontentninja.com';
           email: document.getElementById('contactEmail').value.trim(),
           uzenet: document.getElementById('contactMessage').value.trim(),
           nyelv: 'hu',
+          adatkezeles: 'Igen',
           subject: '✉️ Kapcsolat űrlap: ' + name,
-          source_url: window.location.href
+          source_url: window.location.href,
+          website: honeypot ? honeypot.value : ''
         };
 
-        try {
-          await fetch(WEBHOOK, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          form.classList.add('hidden');
-          successBox.classList.remove('hidden');
-        } catch (err) {
+        window.cnIntake.send(payload).then(function (result) {
+          if (result && result.ok) {
+            form.classList.add('hidden');
+            successBox.classList.remove('hidden');
+            return;
+          }
+          // A beküldés a sorban van, magától újramegy – de itt nem fogadkozunk,
+          // hanem felajánljuk a közvetlen elérhetőséget is.
           btn.disabled = false;
           btn.innerHTML = 'Újraküldés';
-          errorBox.textContent = 'Az üzenetet nem sikerült elküldeni. Kérlek próbáld újra, vagy írj a support@getcontentninja.com címre.';
+          errorBox.textContent =
+            'Az üzenetet nem sikerült azonnal elküldeni. Elmentettük és automatikusan újrapróbáljuk – ha sürgős, írj a support@getcontentninja.com címre.';
           errorBox.classList.remove('hidden');
-        }
+        });
       });
     })();
   </script>
