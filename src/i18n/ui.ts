@@ -36,7 +36,7 @@ export const UI = {
       terms: 'ÁSZF (Terms of Service)',
       dataDeletion: 'Adatok törlése (Data Deletion)',
       startHeading: 'Kezdd el most',
-      copyright: 'Copyright © contentninja.hu | 2026',
+      copyright: 'Copyright © getcontentninja.com | 2026',
     },
     cookie: {
       title: 'Sütiket (cookie-kat) használunk',
@@ -77,7 +77,7 @@ export const UI = {
       terms: 'Terms of Service',
       dataDeletion: 'Data Deletion Instructions',
       startHeading: 'Get started now',
-      copyright: 'Copyright © contentninja.hu | 2026',
+      copyright: 'Copyright © getcontentninja.com | 2026',
     },
     cookie: {
       title: 'We use cookies',
