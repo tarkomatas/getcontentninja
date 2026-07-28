@@ -1,0 +1,197 @@
+---
+import {
+  INTAKE_ENDPOINT,
+  QUEUE_KEY,
+  QUEUE_MAX_AGE_MS,
+  QUEUE_MAX_ATTEMPTS,
+} from '../data/forms';
+
+/**
+ * Az űrlap-beküldés "szállítója": `window.cnIntake`. A `BaseLayout` teszi ki
+ * MINDEN oldalra – beleértve a köszönőoldalakat, és ez a lényeg: a sikeres
+ * beküldés után azonnal átirányítunk, tehát a bent maradt beküldést a
+ * köszönőoldal `flush()`-a küldi el.
+ *
+ * A "ne vesszen el semmi" garancia három lábon áll:
+ *   1. a beküldés MÉG A KÜLDÉS ELŐTT bekerül a localStorage-sorba,
+ *   2. a `fetch` `keepalive`-val megy, így az átirányítás sem szakítja meg,
+ *   3. ami mégis kint marad, azt a következő oldalbetöltés újraküldi –
+ *      ugyanazzal a `submission_id`-vel, ezért nem lesz belőle duplikátum.
+ */
+const cfg = {
+  endpoint: INTAKE_ENDPOINT,
+  queueKey: QUEUE_KEY,
+  maxAge: QUEUE_MAX_AGE_MS,
+  maxAttempts: QUEUE_MAX_ATTEMPTS,
+};
+---
+
+<script is:inline define:vars={{ cnIntakeConfig: cfg }}>
+  (function () {
+    var CFG = cnIntakeConfig;
+    if (window.cnIntake) return;
+
+    function readQueue() {
+      try {
+        var raw = localStorage.getItem(CFG.queueKey);
+        var list = raw ? JSON.parse(raw) : [];
+        return Array.isArray(list) ? list : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function writeQueue(list) {
+      try {
+        localStorage.setItem(CFG.queueKey, JSON.stringify(list));
+      } catch (e) {
+        /* tele van a tárhely / privát mód – a küldés ettől még megpróbálkozik */
+      }
+    }
+
+    /** Élesben https, dev-ben localhost – mindkettő secure context; a fallback öv+nadrágtartó. */
+    function uuid() {
+      try {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+          return window.crypto.randomUUID();
+        }
+      } catch (e) {}
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (Math.random() * 16) | 0;
+        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      });
+    }
+
+    function enqueue(payload) {
+      var list = readQueue();
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].payload && list[i].payload.submission_id === payload.submission_id) return;
+      }
+      list.push({ payload: payload, attempts: 0, queued_at: Date.now() });
+      writeQueue(list);
+    }
+
+    function drop(id) {
+      writeQueue(
+        readQueue().filter(function (item) {
+          return !item.payload || item.payload.submission_id !== id;
+        })
+      );
+    }
+
+    function bump(id) {
+      var list = readQueue();
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].payload && list[i].payload.submission_id === id) {
+          list[i].attempts = (list[i].attempts || 0) + 1;
+        }
+      }
+      writeQueue(list);
+    }
+
+    /** A soron kívül eső (túl régi) beküldéseket takarítjuk – személyes adat, ne álljon hetekig. */
+    function prune() {
+      var cutoff = Date.now() - CFG.maxAge;
+      var list = readQueue().filter(function (item) {
+        return (item.queued_at || 0) > cutoff;
+      });
+      writeQueue(list);
+      return list;
+    }
+
+    function post(payload) {
+      return fetch(CFG.endpoint, {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          // 2xx = eltároltuk (a `duplicate` és az `invalid_json` is lezárt ügy),
+          // 413 = túl nagy törzs: kódhiba, újrapróbálni értelmetlen.
+          if (res.ok || res.status === 413) {
+            drop(payload.submission_id);
+            return { ok: res.ok, retryable: false };
+          }
+          // 5xx: nálunk akadt el a mentés → marad a sorban.
+          return { ok: false, retryable: true };
+        })
+        .catch(function () {
+          // Hálózati hiba / offline / megszakadt kérés → marad a sorban.
+          return { ok: false, retryable: true };
+        });
+    }
+
+    /**
+     * Egy beküldés elküldése. `options.waitMs` esetén legfeljebb annyit várunk a
+     * válaszra – a hívó (pl. az átirányítás) ne múljon a szerver sebességén.
+     */
+    function send(payload, options) {
+      var opts = options || {};
+      if (!payload.submission_id) payload.submission_id = uuid();
+      enqueue(payload);
+      var pending = post(payload);
+      if (!opts.waitMs) return pending;
+      return Promise.race([
+        pending,
+        new Promise(function (resolve) {
+          setTimeout(function () {
+            resolve({ ok: false, retryable: true, timedOut: true });
+          }, opts.waitMs);
+        }),
+      ]);
+    }
+
+    var flushing = false;
+
+    function flush() {
+      if (flushing) return;
+      if (navigator.onLine === false) return;
+      var list = prune();
+      if (!list.length) return;
+      flushing = true;
+      var chain = Promise.resolve();
+      list.forEach(function (item) {
+        if (!item.payload || (item.attempts || 0) >= CFG.maxAttempts) return;
+        chain = chain.then(function () {
+          bump(item.payload.submission_id);
+          return post(item.payload);
+        });
+      });
+      chain.then(
+        function () {
+          flushing = false;
+        },
+        function () {
+          flushing = false;
+        }
+      );
+    }
+
+    /** Lapelhagyáskor a maradék `sendBeacon`-nal is kimehet (az app a text/plain törzset is fogadja). */
+    function beaconRemaining() {
+      if (!navigator.sendBeacon) return;
+      readQueue().forEach(function (item) {
+        if (!item.payload) return;
+        try {
+          navigator.sendBeacon(
+            CFG.endpoint,
+            new Blob([JSON.stringify(item.payload)], { type: 'text/plain' })
+          );
+        } catch (e) {}
+      });
+    }
+
+    window.cnIntake = { send: send, flush: flush, uuid: uuid };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', flush);
+    } else {
+      flush();
+    }
+    window.addEventListener('online', flush);
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') beaconRemaining();
+    });
+  })();
+</script>

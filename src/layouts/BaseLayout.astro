@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { pathFor, alternatesFor, type Locale, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
+import IntakeClient from '../components/IntakeClient.astro';
 
 interface Props {
   locale: Locale;
@@ -156,6 +157,14 @@ const ui = t(locale);
 
   <body class={bodyClass} style="overflow-x: clip;">
     <slot />
+
+    <!--
+      Űrlap-küldés: window.cnIntake + a localStorage retry-sor. MINDEN oldalon
+      ott van, mert a sikeres beküldés után azonnal átirányítunk – a bent maradt
+      beküldést a köszönőoldal küldi el. Nem mérés, nem süti: hozzájárulás
+      nélkül is működnie kell, különben pont a mentőövet vágnánk el.
+    -->
+    <IntakeClient />
 
     <!-- Consent-gated Meta Pixel + cookie banner -->
     <script is:inline src="/assets/cookie.js"></script>

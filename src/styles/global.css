@@ -220,3 +220,15 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
+        /* Honeypot (HoneypotField.astro): valódi input, csak a képernyőn kívül.
+           Szándékosan NEM display:none és NEM type="hidden" – a botok azt
+           kiszűrik, márpedig pont az kell, hogy kitöltsék. */
+        .hp-field {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }

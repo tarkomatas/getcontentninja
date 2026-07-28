@@ -1,0 +1,13 @@
+---
+/**
+ * Rejtett csapdamező a botoknak. Valódi `<input>`, NEM `type="hidden"` – azt a
+ * botok kiszűrik. Vizuálisan a képernyőn kívülre tesszük (`.hp-field` a
+ * `global.css`-ben), a fókuszból és a képernyőolvasóból is kivesszük, így
+ * valódi felhasználó nem látja és nem tölti ki. Ha mégis érték kerül bele,
+ * az app botnak veszi a beküldést.
+ */
+---
+
+<div class="hp-field" aria-hidden="true">
+  <input type="text" name="website" tabindex="-1" autocomplete="off" />
+</div>

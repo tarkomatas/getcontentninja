@@ -1,0 +1,284 @@
+---
+import { SUBJECT_PREFIX, QUALIFY_KEY, QUALIFY_MAX_AGE_MS, type FormSource } from '../data/forms';
+import { pathFor, type Locale } from '../i18n/routes';
+
+/**
+ * A többlépcsős lead-űrlap teljes kliens-logikája – korábban 14 oldalfájlban
+ * volt lemásolva. Az oldalak csak a markupot adják; ami oldalanként eltér, azt
+ * a MARKUP hordozza, nem ez a script:
+ *
+ *  - a minősítő kérdéseket a `.form-step[data-step="1"]` alatti `name`-es
+ *    mezőkből olvassuk ki (`has_webshop`, `product_count`, `markets`, …),
+ *  - a kiszűrés szabályát az `<option data-reject="hard|soft">` attribútum
+ *    mondja meg. Így ha valaki átfogalmaz egy választ, a szabály vele együtt
+ *    mozog – korábban ez JS-ben, kézzel másolt szövegkonstansokban élt, és
+ *    némán elromlott.
+ *
+ * A `nextStep()` / `qualifyAndNext()` / `submitSoftReject()` függvényeket az
+ * `onclick` attribútumok hívják, ezért GLOBÁLISNAK kell maradniuk – a script
+ * emiatt `is:inline` (a `define:vars` amúgy is azzá teszi).
+ */
+interface Props {
+  locale: Locale;
+  source: FormSource;
+}
+
+const { locale, source } = Astro.props;
+
+const cfg = {
+  source,
+  locale,
+  thanksUrl: `${pathFor('thanks', locale)}?lead=1`,
+  subjectPrefix: SUBJECT_PREFIX[source][locale],
+  qualifyKey: QUALIFY_KEY,
+  qualifyMaxAge: QUALIFY_MAX_AGE_MS,
+  texts:
+    locale === 'hu'
+      ? {
+          fillAll: 'Kérlek válaszolj minden kérdésre!',
+          email: 'Kérlek adj meg egy érvényes email címet!',
+          privacy: 'Kérlek fogadd el az adatkezelési tájékoztatót!',
+          sending: 'Küldés...',
+        }
+      : {
+          fillAll: 'Please answer every question!',
+          email: 'Please enter a valid email address!',
+          privacy: 'Please accept the privacy policy!',
+          sending: 'Sending...',
+        },
+};
+---
+
+<script is:inline define:vars={{ cnFormConfig: cfg }}>
+  var CFG = cnFormConfig;
+  var _qualifyData = {};
+
+  function nextStep(step) {
+    document.querySelectorAll('.form-step').forEach(function (s) {
+      s.classList.remove('active');
+    });
+
+    var formIntro = document.getElementById('formIntro');
+    var hideIntroSteps = ['rejected', 'soft-reject', 'soft-reject-thanks'];
+    if (formIntro) {
+      formIntro.classList.toggle('hidden', hideIntroSteps.indexOf(String(step)) !== -1);
+    }
+
+    var activeStep = document.querySelector('.form-step[data-step="' + step + '"]');
+    if (activeStep) activeStep.classList.add('active');
+  }
+
+  /** A közös mezők minden ágban (a részleteket lásd az app repó feladat-doksijában). */
+  function cnPayload(statusz, extra) {
+    var honeypot = document.querySelector('#leadForm [name="website"]');
+    var payload = {
+      statusz: statusz,
+      lead_forras: CFG.source,
+      nyelv: CFG.locale,
+      submission_date: new Date().toISOString(),
+      source_url: window.location.href,
+      website: honeypot ? honeypot.value : '',
+    };
+    if (extra) {
+      Object.keys(extra).forEach(function (key) {
+        payload[key] = extra[key];
+      });
+    }
+    return payload;
+  }
+
+  // --- Minősítés-emlékezet: aki kiesett, ne tudja újratöltéssel átjátszani ---
+
+  function cnReadQualify() {
+    try {
+      var all = JSON.parse(localStorage.getItem(CFG.qualifyKey) || '{}');
+      var entry = all[CFG.source];
+      if (!entry) return null;
+      if (Date.now() - (entry.at || 0) > CFG.qualifyMaxAge) return null;
+      return entry;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function cnWriteQualify(outcome, extra) {
+    try {
+      var all = JSON.parse(localStorage.getItem(CFG.qualifyKey) || '{}');
+      var entry = all[CFG.source] || {};
+      entry.outcome = outcome;
+      entry.at = Date.now();
+      if (extra) {
+        Object.keys(extra).forEach(function (key) {
+          entry[key] = extra[key];
+        });
+      }
+      all[CFG.source] = entry;
+      localStorage.setItem(CFG.qualifyKey, JSON.stringify(all));
+    } catch (e) {}
+  }
+
+  /** A minősítő válaszok + a kiszűrés eredménye, a markupból (lásd a fejlécet). */
+  function cnCollectQualifiers() {
+    var step = document.querySelector('#leadForm .form-step[data-step="1"]');
+    var result = { values: {}, missing: false, outcome: null };
+    if (!step) {
+      result.missing = true;
+      return result;
+    }
+
+    step.querySelectorAll('select[name], input[name], textarea[name]').forEach(function (el) {
+      var value = (el.value || '').trim();
+      if (!value) result.missing = true;
+      result.values[el.name] = value;
+
+      if (el.tagName === 'SELECT') {
+        var option = el.options[el.selectedIndex];
+        var reject = option ? option.getAttribute('data-reject') : null;
+        if (reject === 'hard') result.outcome = 'hard';
+        else if (reject === 'soft' && result.outcome !== 'hard') result.outcome = 'soft';
+      }
+    });
+
+    return result;
+  }
+
+  function qualifyAndNext() {
+    var q = cnCollectQualifiers();
+    if (q.missing) {
+      alert(CFG.texts.fillAll);
+      return;
+    }
+    _qualifyData = q.values;
+
+    if (q.outcome === 'hard') {
+      // A hard reject ágban NINCS név és e-mail – a látogató odáig el sem jutott.
+      cnWriteQualify('hard_reject');
+      nextStep('rejected');
+      window.cnIntake.send(cnPayload('hard_reject', q.values));
+    } else if (q.outcome === 'soft') {
+      cnWriteQualify('soft_reject');
+      nextStep('soft-reject');
+    } else {
+      nextStep(2);
+    }
+  }
+
+  /**
+   * A „Megkaptuk!" képernyő két szövegváltozata: az „aktuális újdonságokat" fél
+   * mondat csak akkor igaz, ha a hírlevelet is bepipálta. A videót az app
+   * minden esetben kiküldi.
+   */
+  function cnShowSoftThanks(newsletter) {
+    var step = document.querySelector('.form-step[data-step="soft-reject-thanks"]');
+    if (step) {
+      var withNewsletter = step.querySelector('[data-thanks="newsletter"]');
+      var withoutNewsletter = step.querySelector('[data-thanks="plain"]');
+      if (withNewsletter) withNewsletter.classList.toggle('hidden', !newsletter);
+      if (withoutNewsletter) withoutNewsletter.classList.toggle('hidden', !!newsletter);
+    }
+    nextStep('soft-reject-thanks');
+  }
+
+  function submitSoftReject(button) {
+    var emailField = document.getElementById('softRejectEmail');
+    var email = ((emailField && emailField.value) || '').trim();
+    if (!email || email.indexOf('@') === -1) {
+      alert(CFG.texts.email);
+      return;
+    }
+
+    var privacy = document.getElementById('softRejectPrivacy');
+    if (!privacy || !privacy.checked) {
+      alert(CFG.texts.privacy);
+      return;
+    }
+
+    var newsletterField = document.getElementById('softRejectNewsletter');
+    var newsletter = !!(newsletterField && newsletterField.checked);
+
+    if (button) {
+      button.innerHTML = CFG.texts.sending;
+      button.disabled = true;
+    }
+
+    if (!Object.keys(_qualifyData).length) _qualifyData = cnCollectQualifiers().values;
+
+    var extra = {};
+    Object.keys(_qualifyData).forEach(function (key) {
+      extra[key] = _qualifyData[key];
+    });
+    extra.email = email;
+    extra.hirlevel_feliratkozas = newsletter ? 'Igen' : 'Nem';
+    extra.adatkezeles = 'Igen';
+
+    window.cnIntake.send(cnPayload('soft_reject', extra));
+    cnWriteQualify('soft_reject', { emailed: true, newsletter: newsletter });
+    cnShowSoftThanks(newsletter);
+  }
+
+  // FIGYELEM: a `define:vars` a teljes scriptet egy IIFE-be csomagolja, ezért a
+  // fenti függvények NEM lennének globálisak – az `onclick` attribútumok pedig
+  // pont onnan hívják őket. Kézzel tesszük ki mindhármat.
+  window.nextStep = nextStep;
+  window.qualifyAndNext = qualifyAndNext;
+  window.submitSoftReject = submitSoftReject;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('leadForm');
+    if (!form) return;
+
+    var remembered = cnReadQualify();
+    if (remembered && remembered.outcome === 'hard_reject') {
+      nextStep('rejected');
+    } else if (remembered && remembered.outcome === 'soft_reject') {
+      if (remembered.emailed) cnShowSoftThanks(!!remembered.newsletter);
+      else nextStep('soft-reject');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var privacy = document.getElementById('privacy');
+      if (!privacy || !privacy.checked) {
+        alert(CFG.texts.privacy);
+        return;
+      }
+
+      var button = document.getElementById('submitBtn');
+      if (button) {
+        button.innerHTML = CFG.texts.sending;
+        button.disabled = true;
+      }
+
+      var data = {};
+      new FormData(form).forEach(function (value, key) {
+        if (data[key] === undefined) data[key] = value;
+        else if (Array.isArray(data[key])) data[key].push(value);
+        else data[key] = [data[key], value];
+      });
+
+      var newsletterField = document.getElementById('newsletter');
+      var extra = {
+        nev: data.name || '',
+        email: data.email || '',
+        telefonszam: data.phone || '',
+        hirlevel_feliratkozas: newsletterField && newsletterField.checked ? 'Igen' : 'Nem',
+        adatkezeles: 'Igen',
+        subject: CFG.subjectPrefix + ': ' + (data.name || ''),
+      };
+
+      // A minősítő válaszok a saját `name`-jükkel mennek tovább – oldalanként
+      // eltérnek, ezért nincs fix lista.
+      var handled = ['name', 'email', 'phone', 'newsletter', 'website'];
+      Object.keys(data).forEach(function (key) {
+        if (handled.indexOf(key) === -1) extra[key] = data[key];
+      });
+
+      // Nem várakoztatjuk a felhasználót: a `keepalive` miatt a kérés az
+      // átirányítás után is elmegy, a maradékot a köszönőoldal küldi újra.
+      window.cnIntake.send(cnPayload('sikeres', extra), { waitMs: 2000 }).then(function () {
+        window.location.href = CFG.thanksUrl;
+      });
+    });
+  });
+</script>
