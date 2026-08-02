@@ -140,7 +140,8 @@ a minősítésen.
 A mai `sessionStorage['<téma>_form_submitted']` zár erre alkalmatlan: a *beküldés* gombot tiltja, a
 minősítő kérdéseket nem, és fülbezárásig él. Helyette:
 
-- `localStorage['cn_qualify_v1']` → `{ "<lead_forras>": { outcome: "hard_reject" | "soft_reject", at: "<ISO>" } }`
+- `localStorage['cn_qualify_v2']` → `{ "<lead_forras>": { outcome: "hard_reject" | "soft_reject", at: "<ISO>" } }`
+  (a verziószám a szabály lazulásakor nő — így a régi kimenetel nem tart bent egy azóta átengedett választ)
 - A minősítés **kimenetét** rögzítjük, amint megszületik (nem a beküldést)
 - Oldalbetöltéskor: ha az adott témára van érvényes `hard_reject` bejegyzés, az űrlap **egyből a lezáró
   lépésen nyílik** — a kérdésekhez vissza sem lehet lépni. `soft_reject` esetén a soft-reject lépés jön

@@ -98,7 +98,9 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
 újraküldi ugyanazzal a `submission_id`-vel (az app dedupál). A felhasználót nem várakoztatjuk: a sikeres
 ág legfeljebb 2 másodpercet vár, aztán mindenképp átirányít.
 
-**A minősítés-emlékezet** (`cn_qualify_v1`, 30 nap, témánként) a régi „Már elküldve" zár helyett áll: nem
+**A minősítés-emlékezet** (`cn_qualify_v2`, 30 nap, témánként) a régi „Már elküldve" zár helyett áll: nem
 a beküldést, hanem a **minősítés kimenetelét** jegyzi meg, hogy a kiszűrt látogató ne tudja újratöltéssel,
 más válaszokkal végigpróbálni az űrlapot. Sikeres beküldés után **nincs** zár (az app dedupál, és aki
 elgépelte az adatait, javíthasson). Kliens-oldali emlékezet: inkognitóval megkerülhető — a cél a súrlódás.
+**Ha a kiszűrés szabálya lazul, emeld a kulcs verziószámát** (`forms.ts`) — különben a régi kimenetel 30
+napig kizárva tartja azt is, akit már átengednénk.

@@ -63,6 +63,10 @@ export const QUEUE_MAX_ATTEMPTS = 5;
  * Témánként (`lead_forras`) érvényes, hogy egy félrekattintás ne zárja ki a
  * teljes honlapról. Kliens-oldali emlékezet: inkognitóval megkerülhető – a cél
  * a súrlódás, nem a szándékos megkerülés kizárása.
+ *
+ * A kulcs VERZIÓSZÁMÁT akkor emeljük, ha a kiszűrés szabálya lazul: a régi
+ * kimenetel különben 30 napig kizárva tartaná azt is, akit már átengednénk.
+ * (v1 → v2: a „Külsős ügynökség" már nem hard reject.)
  */
-export const QUALIFY_KEY = 'cn_qualify_v1';
+export const QUALIFY_KEY = 'cn_qualify_v2';
 export const QUALIFY_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
