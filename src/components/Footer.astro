@@ -19,6 +19,9 @@ const APP_URL = 'https://app.getcontentninja.com';
 const contact = pathFor('contact', locale);
 const SUPPORT_EMAIL = 'support@getcontentninja.com';
 
+// Publikus changelog: az app aldomainjén él, nyelvenként külön útvonalon.
+const CHANGELOG_URL = locale === 'en' ? `${APP_URL}/changelog/en` : `${APP_URL}/changelog`;
+
 const legal = {
   contact,
   privacy: pathFor('privacy', locale),
@@ -91,6 +94,7 @@ const solutions = navModulesFor(locale);
           <li><a href={legal.imprint} class="hover:text-white transition-colors">{ui.footer.imprint}</a></li>
           <li><a href={legal.terms} class="hover:text-white transition-colors">{ui.footer.terms}</a></li>
           <li><a href={legal.dataDeletion} class="hover:text-white transition-colors">{ui.footer.dataDeletion}</a></li>
+          <li><a href={CHANGELOG_URL} class="hover:text-white transition-colors">{ui.footer.whatsNew}</a></li>
         </ul>
       </div>
 
