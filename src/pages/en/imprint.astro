@@ -2,11 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
 
 const locale = 'en';
 const page = 'imprint';
 const title = 'Imprint – Content Ninja';
-const description = 'Company details and contact information of the operator of Content Ninja.';
+const description = 'Company details, hosting and data-storage providers, and contact information of the operator of Content Ninja.';
+
+const terms = pathFor('terms', locale);
+const privacy = pathFor('privacy', locale);
+const dataDeletion = pathFor('dataDeletion', locale);
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -58,7 +63,7 @@ const description = 'Company details and contact information of the operator of 
                 </div>
 
                 <div class="p-8">
-                    <h2 class="text-base font-bold text-dark mb-4">Hosting provider</h2>
+                    <h2 class="text-base font-bold text-dark mb-4">Hosting provider — marketing website (getcontentninja.com)</h2>
                     <dl class="space-y-2.5 text-sm">
                         <div class="flex flex-col sm:flex-row sm:gap-4">
                             <dt class="text-muted w-44 shrink-0">Name</dt>
@@ -76,7 +81,51 @@ const description = 'Company details and contact information of the operator of 
                 </div>
 
                 <div class="p-8">
-                    <h2 class="text-base font-bold text-dark mb-4">Domain registrar</h2>
+                    <h2 class="text-base font-bold text-dark mb-4">Hosting provider — application (app.getcontentninja.com)</h2>
+                    <dl class="space-y-2.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Name</dt>
+                            <dd class="text-dark font-medium">Vercel, Inc.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Address</dt>
+                            <dd class="text-dark font-medium">340 S Lemon Ave #4133, Walnut, CA 91789, USA</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Serving region</dt>
+                            <dd class="text-dark font-medium">EU (Frankfurt)</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Website</dt>
+                            <dd><a href="https://vercel.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">vercel.com</a></dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="p-8">
+                    <h2 class="text-base font-bold text-dark mb-4">Database and file storage</h2>
+                    <dl class="space-y-2.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Name</dt>
+                            <dd class="text-dark font-medium">Supabase, Inc.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Address</dt>
+                            <dd class="text-dark font-medium">970 Toa Payoh North #07-04, Singapore 318992</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Storage location</dt>
+                            <dd class="text-dark font-medium">EU region</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Website</dt>
+                            <dd><a href="https://supabase.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">supabase.com</a></dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="p-8">
+                    <h2 class="text-base font-bold text-dark mb-4">Domain and content delivery (CDN)</h2>
                     <dl class="space-y-2.5 text-sm">
                         <div class="flex flex-col sm:flex-row sm:gap-4">
                             <dt class="text-muted w-44 shrink-0">Name</dt>
@@ -91,6 +140,15 @@ const description = 'Company details and contact information of the operator of 
                             <dd><a href="https://www.cloudflare.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">cloudflare.com</a></dd>
                         </div>
                     </dl>
+                </div>
+
+                <div class="p-8">
+                    <h2 class="text-base font-bold text-dark mb-4">Legal documents</h2>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href={terms} class="text-primary font-medium hover:underline">Terms of Service</a></li>
+                        <li><a href={privacy} class="text-primary font-medium hover:underline">Privacy Policy</a></li>
+                        <li><a href={dataDeletion} class="text-primary font-medium hover:underline">Data Deletion Instructions</a></li>
+                    </ul>
                 </div>
 
             </div>

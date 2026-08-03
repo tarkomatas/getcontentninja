@@ -11,6 +11,7 @@ const description =
   'How to delete your personal data from Content Ninja: delete your account in the app, request deletion by email, or revoke the Facebook/Instagram connection.';
 
 const privacyEn = pathFor('privacy', 'en');
+const dataDeletionHu = pathFor('dataDeletion', 'hu');
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -26,7 +27,11 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Data Deletion Instructions</h1>
-        <p class="text-sm text-muted">Last updated: 2 July 2026</p>
+        <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026</p>
+        <p class="text-sm text-muted mt-2">
+          These instructions are available in Hungarian and English. In case of any discrepancy, the
+          <a href={dataDeletionHu} class="text-primary underline">Hungarian text</a> prevails.
+        </p>
       </div>
 
       <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
@@ -129,8 +134,9 @@ const privacyEn = pathFor('privacy', 'en');
             <li>your account data (name, email address, company name);</li>
             <li>product data imported from your webshop (names, descriptions, images, prices, categories);</li>
             <li>Facebook and Instagram access data, including all stored Meta access tokens;</li>
-            <li>your MailerLite API key and any subscriber data accessed through it;</li>
-            <li>data you provided via our demo request form.</li>
+            <li>your webshop and newsletter provider access keys (MailerLite, SalesAutopilot, UNAS, Shoprenter) and any data accessed through them;</li>
+            <li>your Ninja AI assistant conversations and the “memories” saved to your workspace;</li>
+            <li>data you provided via our website forms.</li>
           </ul>
           <p class="text-sm text-body leading-relaxed mt-3">
             <strong class="text-dark">Exception:</strong> data we are legally required to retain is kept for the

@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
+
+const locale = 'hu';
+const page = 'dataDeletion';
+const title = 'Adattörlési útmutató – Content Ninja';
+const description =
+  'Hogyan töröltetheted a személyes adataidat a Content Ninjából: fióktörlés az alkalmazásban, törlési kérelem e-mailben, vagy a Facebook/Instagram kapcsolat visszavonása.';
+
+const privacy = pathFor('privacy', locale);
+const dataDeletionEn = pathFor('dataDeletion', 'en');
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Header locale={locale} page={page} />
+
+  <main class="py-20 md:py-28 px-4 md:px-10">
+    <div class="max-w-[760px] mx-auto">
+
+      <a href="/hu/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Vissza a főoldalra
+      </a>
+
+      <div class="mb-10">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adattörlési útmutató</h1>
+        <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól</p>
+        <p class="text-sm text-muted mt-2">
+          Az útmutató magyar és angol nyelven érhető el; eltérés esetén a magyar szöveg az irányadó. Az angol
+          változat <a href={dataDeletionEn} class="text-primary underline">itt olvasható</a>.
+        </p>
+      </div>
+
+      <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+
+        <!-- Adatkezelő -->
+        <div class="p-8">
+          <h2 class="text-base font-bold text-dark mb-4">Az adatkezelő</h2>
+          <dl class="space-y-2.5 text-sm">
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Cégnév</dt>
+              <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Székhely</dt>
+              <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Cégjegyzékszám</dt>
+              <dd class="text-dark font-medium">01-09-426906</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Adószám</dt>
+              <dd class="text-dark font-medium">32489819-2-43</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Adatvédelmi kapcsolat</dt>
+              <dd><a href="mailto:support@getcontentninja.com" class="text-primary font-medium hover:underline">support@getcontentninja.com</a></dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Telefonszám</dt>
+              <dd><a href="tel:+36202838831" class="text-primary font-medium hover:underline">+36 20 283 8831</a></dd>
+            </div>
+          </dl>
+          <p class="text-sm text-body mt-5 leading-relaxed">
+            A Content Ninját a Digitallwork.hu Kft., magyarországi (Európai Unió) bejegyzésű társaság üzemelteti. A
+            személyes adatokat az (EU) 2016/679 rendeletnek (GDPR) megfelelően kezeljük. Ez az oldal azt írja le,
+            hogyan töröltetheted a személyes adataidat a rendszereinkből — ideértve a bekötött Facebook / Instagram
+            adatokat és a tárolt hozzáférési tokeneket is.
+          </p>
+        </div>
+
+        <!-- 1. -->
+        <div class="p-8">
+          <h2 class="text-base font-bold text-dark mb-3">1. Töröld a fiókodat az alkalmazásban</h2>
+          <p class="text-sm text-body leading-relaxed mb-3">
+            Ha van Content Ninja fiókod, magad is törölheted:
+          </p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>Lépj be az alkalmazásba az <a href="https://app.getcontentninja.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">app.getcontentninja.com</a> címen.</li>
+            <li>Nyisd meg a <strong class="text-dark">Profil / Fiókbeállítások</strong> menüpontot.</li>
+            <li>Válaszd a <strong class="text-dark">Fiók törlése</strong> lehetőséget, és erősítsd meg.</li>
+          </ol>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            A fiók törlésével a személyes adataid eltűnnek a rendszereinkből, ideértve a bekötött Facebook /
+            Instagram integrációkat és a nevedben tárolt Meta hozzáférési tokeneket is (a részleteket és a
+            határidőket lásd a 4. pontban).
+          </p>
+        </div>
+
+        <!-- 2. -->
+        <div class="p-8">
+          <h2 class="text-base font-bold text-dark mb-3">2. Kérd a törlést e-mailben</h2>
+          <p class="text-sm text-body leading-relaxed">
+            Ha már nem férsz hozzá a fiókodhoz — vagy nincs fiókod, de úgy véled, hogy személyes adatot tárolunk
+            rólad (például kitöltötted a bemutató-jelentkezési űrlapunkat) —, küldj törlési kérelmet a
+            <a href="mailto:support@getcontentninja.com" class="text-primary font-medium hover:underline">support@getcontentninja.com</a>
+            címre.
+          </p>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            A kérelmet arról az e-mail címről küldd, amely a fiókodhoz tartozik (vagy add meg ezt a címet az
+            üzenetben), hogy azonosítani tudjunk. Tárgyként például ezt írd:
+            <span class="text-dark font-medium">„Adattörlési kérelem”</span>. Külön formanyomtatvány nem szükséges.
+          </p>
+        </div>
+
+        <!-- 3. -->
+        <div class="p-8">
+          <h2 class="text-base font-bold text-dark mb-3">3. Vond vissza a Facebook / Instagram kapcsolatot</h2>
+          <p class="text-sm text-body leading-relaxed mb-3">
+            A Content Ninja hozzáférését közvetlenül a Facebookon is megszüntetheted, anélkül hogy minket kellene
+            megkeresned:
+          </p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>Nyisd meg a <strong class="text-dark">Facebook → Beállítások és adatvédelem → Beállítások</strong> menüt.</li>
+            <li>Lépj az <strong class="text-dark">Üzleti integrációk</strong> (vagy <strong class="text-dark">Alkalmazások és webhelyek</strong>) pontra.</li>
+            <li>Keresd meg a <strong class="text-dark">Content Ninja</strong> bejegyzést, és kattints az <strong class="text-dark">Eltávolítás</strong> gombra.</li>
+          </ol>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            Az integráció eltávolítása érvényteleníti a nálunk tárolt hozzáférési tokeneket. Ha azt is szeretnéd,
+            hogy a rendszereinkben már tárolt adatok törlődjenek, ezen felül töröld a fiókodat (1. pont), vagy írj
+            nekünk (2. pont).
+          </p>
+        </div>
+
+        <!-- 4. -->
+        <div class="p-8">
+          <h2 class="text-base font-bold text-dark mb-3">4. Mit törlünk és mikor</h2>
+          <p class="text-sm text-body leading-relaxed mb-3">
+            A fiókod törlésétől, illetve az azonosított törlési kérelmed beérkezésétől számított
+            <strong class="text-dark">30 napon belül</strong> véglegesen töröljük:
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>a fiókadataidat (név, e-mail cím, cégnév);</li>
+            <li>a webáruházadból importált termékadatokat (név, leírás, kép, ár, kategória);</li>
+            <li>a Facebook és Instagram hozzáférési adatokat, ideértve minden tárolt Meta hozzáférési tokent;</li>
+            <li>a webáruház- és hírlevél-szolgáltatói hozzáférési kulcsaidat (MailerLite, SalesAutopilot, UNAS, Shoprenter) és az azokon keresztül elért adatokat;</li>
+            <li>a Ninja AI asszisztens beszélgetéseit és a munkatérhez mentett „emlékeket”;</li>
+            <li>a honlapi űrlapjainkon megadott adataidat.</li>
+          </ul>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            <strong class="text-dark">Kivétel:</strong> azokat az adatokat, amelyek megőrzésére jogszabály kötelez,
+            kizárólag a törvényi ideig őrizzük meg — különösen a számlázási és könyvelési bizonylatokat, amelyeket a
+            számvitelről szóló 2000. évi C. törvény alapján 8 évig kell megőrizni. Ezeket az adatokat semmilyen más
+            célra nem használjuk, és a megőrzési idő lejártával töröljük.
+          </p>
+        </div>
+
+        <!-- 5. -->
+        <div class="p-8">
+          <h2 class="text-base font-bold text-dark mb-3">5. Visszaigazolás és kapcsolat</h2>
+          <p class="text-sm text-body leading-relaxed">
+            Minden törlési kérelem teljesítését e-mailben visszaigazoljuk. Ha bármilyen kérdésed van a folyamatról,
+            vagy 30 napon belül nem kaptál visszaigazolást, írj a
+            <a href="mailto:support@getcontentninja.com" class="text-primary font-medium hover:underline">support@getcontentninja.com</a>
+            címre.
+          </p>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            Az adatkezelés részletei — köztük a GDPR szerinti további jogaid és a magyar felügyeleti hatóságnál
+            (NAIH) tehető panasz módja — az
+            <a href={privacy} class="text-primary font-medium hover:underline">Adatkezelési tájékoztatóban</a>
+            olvashatók.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer locale={locale} page={page} />
+</BaseLayout>

@@ -24,10 +24,19 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
   - `bookDemo` → `/hu/online-bemutato` , `/en/book-demo` (the general **"Bemutatót kérek" / "Book a demo"** landing — hero + lead form covering posting **and** newsletter; every header/footer/homepage demo CTA points here, `lead_forras: 'online-bemutato'`)
   - `newsletter` → `/hu/hirlevel` , `/en/newsletter` (AI hírlevél kampányoldal — same lead-form flow, `lead_forras: 'hirlevel'`)
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
-  - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy` (the full policy text is **English only** for Meta App Review; the HU page is a short referral to it)
-  - `terms` → `/en/terms` (**English only** — the old `/hu/aszf` redirects here via `astro.config.mjs` `redirects`; all footers link to the EN page)
+  - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy`
+  - `terms` → `/hu/aszf` , `/en/terms`
   - `imprint` → `/hu/impresszum` , `/en/imprint`
-  - `dataDeletion` → `/en/data-deletion` (**English only** — Meta-required data deletion instructions)
+  - `dataDeletion` → `/hu/adattorles` , `/en/data-deletion` (Meta-required data deletion instructions)
+
+  **A jogi oldalak 2026 augusztusa óta MINDKÉT nyelven teljes szöveggel élnek** (korábban a `terms`,
+  a `dataDeletion` és a `privacy` teljes szövege csak angolul volt meg). A `/hu/aszf` → `/en/terms`
+  átirányítás megszűnt az `astro.config.mjs`-ből — **ne tedd vissza**. A magyar szöveg az elsődleges
+  és irányadó (nyelvi záradék minden jogi oldal fejlécében), az angol a Meta App Review és a
+  külföldi ügyfelek miatt marad. A `Footer.astro` és a kampányoldalak inline láblécei mind az
+  **azonos nyelvű** jogi oldalra mutatnak; a kereszthivatkozások (ÁSZF ↔ adatkezelési tájékoztató ↔
+  adattörlés) is nyelven belül maradnak, `pathFor(..., locale)`-lel. Az átvezetés forrása a
+  `C:\DEV\Content Ninja\docs\legal\jogi-doksi-frissites-brief.md` brief.
 - **Section anchor ids are identical across locales** (`#funkciok`, `#hogyan-mukodik`, `#arazas`, `#velemenyek`) so the shared nav works in both languages. Do not translate these ids.
 - **Chrome strings** (nav, footer, cookie banner, language switcher) live in `src/i18n/ui.ts` keyed by locale. **Page prose** lives directly in each locale's page file (not in a dictionary) — translate by editing the `/en/` page against its `/hu/` counterpart.
 

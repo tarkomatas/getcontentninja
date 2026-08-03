@@ -183,7 +183,7 @@
     <priority>0.5</priority>
   </url>
 
-  <!-- Adatvédelmi tájékoztató (a teljes szöveg angolul, a HU oldal rá hivatkozik) -->
+  <!-- Adatkezelési tájékoztató (teljes szöveg mindkét nyelven; a magyar az irányadó) -->
   <url>
     <loc>https://getcontentninja.com/hu/adatkezeles/</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adatkezeles/" />
@@ -201,9 +201,20 @@
     <priority>0.3</priority>
   </url>
 
-  <!-- ÁSZF / Terms (csak angol) -->
+  <!-- ÁSZF / Terms (mindkét nyelven; eltérés esetén a magyar az irányadó) -->
+  <url>
+    <loc>https://getcontentninja.com/hu/aszf/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/aszf/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/aszf/" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
   <url>
     <loc>https://getcontentninja.com/en/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/aszf/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/aszf/" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -226,9 +237,20 @@
     <priority>0.3</priority>
   </url>
 
-  <!-- Adattörlési tájékoztató (csak angol, Meta-követelmény) -->
+  <!-- Adattörlési útmutató (Meta-követelmény; mindkét nyelven) -->
+  <url>
+    <loc>https://getcontentninja.com/hu/adattorles/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adattorles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/data-deletion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adattorles/" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
   <url>
     <loc>https://getcontentninja.com/en/data-deletion/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/adattorles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/data-deletion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/adattorles/" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

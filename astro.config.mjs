@@ -12,10 +12,10 @@ export default defineConfig({
   // a hreflang, a sitemap és a belső linkek is a perjeles alakot használják
   // (`src/i18n/routes.ts`). Így egyetlen deklarált URL sem fut redirectbe.
   trailingSlash: 'always',
-  // A régi magyar ÁSZF URL az új, kizárólag angol nyelvű Terms oldalra irányít.
+  // A /hu/aszf 2026 augusztusától VALÓDI magyar ÁSZF-oldal (src/pages/hu/aszf.astro),
+  // ezért a korábbi /hu/aszf -> /en/terms/ átirányítás megszűnt. Ne tedd vissza.
   // A bemutató oldal új slugja /hu/posztolas — a régi /hu/bemutato ide redirectel.
   redirects: {
-    '/hu/aszf': '/en/terms/',
     '/hu/bemutato': '/hu/posztolas/',
     // A régi UNAS-slugok az új, általános webshop-mélyintegráció oldalra.
     '/hu/unas': '/hu/webshop-integracio/',

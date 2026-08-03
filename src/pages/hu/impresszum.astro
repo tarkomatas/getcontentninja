@@ -2,11 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
 
 const locale = 'hu';
 const page = 'imprint';
 const title = 'Impresszum – Content Ninja';
-const description = 'A Content Ninja üzemeltetőjének cégadatai és elérhetőségei.';
+const description = 'A Content Ninja üzemeltetőjének cégadatai, tárhely- és adatfeldolgozási adatai, valamint elérhetőségei.';
+
+const terms = pathFor('terms', locale);
+const privacy = pathFor('privacy', locale);
+const dataDeletion = pathFor('dataDeletion', locale);
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -58,7 +63,7 @@ const description = 'A Content Ninja üzemeltetőjének cégadatai és elérhet�
                 </div>
 
                 <div class="p-8">
-                    <h2 class="text-base font-bold text-dark mb-4">Tárhelyszolgáltató</h2>
+                    <h2 class="text-base font-bold text-dark mb-4">Tárhelyszolgáltató — marketing-honlap (getcontentninja.com)</h2>
                     <dl class="space-y-2.5 text-sm">
                         <div class="flex flex-col sm:flex-row sm:gap-4">
                             <dt class="text-muted w-44 shrink-0">Név</dt>
@@ -76,7 +81,51 @@ const description = 'A Content Ninja üzemeltetőjének cégadatai és elérhet�
                 </div>
 
                 <div class="p-8">
-                    <h2 class="text-base font-bold text-dark mb-4">Domain szolgáltató</h2>
+                    <h2 class="text-base font-bold text-dark mb-4">Tárhelyszolgáltató — alkalmazás (app.getcontentninja.com)</h2>
+                    <dl class="space-y-2.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Név</dt>
+                            <dd class="text-dark font-medium">Vercel, Inc.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Cím</dt>
+                            <dd class="text-dark font-medium">340 S Lemon Ave #4133, Walnut, CA 91789, USA</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Kiszolgáló régió</dt>
+                            <dd class="text-dark font-medium">EU (Frankfurt)</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Weboldal</dt>
+                            <dd><a href="https://vercel.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">vercel.com</a></dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="p-8">
+                    <h2 class="text-base font-bold text-dark mb-4">Adatbázis- és fájltárolás</h2>
+                    <dl class="space-y-2.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Név</dt>
+                            <dd class="text-dark font-medium">Supabase, Inc.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Cím</dt>
+                            <dd class="text-dark font-medium">970 Toa Payoh North #07-04, Singapore 318992</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Tárolás helye</dt>
+                            <dd class="text-dark font-medium">EU régió</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Weboldal</dt>
+                            <dd><a href="https://supabase.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">supabase.com</a></dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="p-8">
+                    <h2 class="text-base font-bold text-dark mb-4">Domain- és tartalomkiszolgálás (CDN)</h2>
                     <dl class="space-y-2.5 text-sm">
                         <div class="flex flex-col sm:flex-row sm:gap-4">
                             <dt class="text-muted w-44 shrink-0">Név</dt>
@@ -91,6 +140,15 @@ const description = 'A Content Ninja üzemeltetőjének cégadatai és elérhet�
                             <dd><a href="https://www.cloudflare.com" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">cloudflare.com</a></dd>
                         </div>
                     </dl>
+                </div>
+
+                <div class="p-8">
+                    <h2 class="text-base font-bold text-dark mb-4">Jogi dokumentumok</h2>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href={terms} class="text-primary font-medium hover:underline">Általános Szerződési Feltételek (ÁSZF)</a></li>
+                        <li><a href={privacy} class="text-primary font-medium hover:underline">Adatkezelési tájékoztató</a></li>
+                        <li><a href={dataDeletion} class="text-primary font-medium hover:underline">Adattörlési útmutató</a></li>
+                    </ul>
                 </div>
 
             </div>

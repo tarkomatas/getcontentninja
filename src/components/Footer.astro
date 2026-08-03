@@ -13,9 +13,9 @@ const ui = t(locale);
 const bookDemo = pathFor('bookDemo', locale);
 const APP_URL = 'https://app.getcontentninja.com';
 
-// Az adatvédelmi tájékoztató és az impresszum nyelvenként létezik.
-// A terms (ÁSZF) és az adattörlési tájékoztató (Meta-követelmény) csak angolul –
-// ezeknél mindig az EN verzióra mutatunk.
+// 2026 augusztusa óta MINDEN jogi oldal létezik mindkét nyelven, ezért mindegyik
+// az aktuális locale saját verziójára mutat (korábban a terms és a dataDeletion
+// fixen az EN oldalra ment).
 const contact = pathFor('contact', locale);
 const SUPPORT_EMAIL = 'support@getcontentninja.com';
 
@@ -23,8 +23,8 @@ const legal = {
   contact,
   privacy: pathFor('privacy', locale),
   imprint: pathFor('imprint', locale),
-  terms: pathFor('terms', 'en'),
-  dataDeletion: pathFor('dataDeletion', 'en'),
+  terms: pathFor('terms', locale),
+  dataDeletion: pathFor('dataDeletion', locale),
 };
 
 // A "Megoldások" hasáb ugyanabból a listából épül, mint a fejléc menü és a

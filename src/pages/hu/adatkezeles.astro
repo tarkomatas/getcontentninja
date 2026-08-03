@@ -6,12 +6,14 @@ import { pathFor } from '../../i18n/routes';
 
 const locale = 'hu';
 const page = 'privacy';
-const title = 'Adatkezelési Tájékoztató – Content Ninja';
+const title = 'Adatkezelési tájékoztató – Content Ninja';
 const description =
-  'A Content Ninja adatkezelési tájékoztatója angol nyelven érhető el (Privacy Policy).';
+  'A Content Ninja adatkezelési tájékoztatója: milyen személyes adatokat kezelünk, milyen célból és jogalapon, kik az adatfeldolgozóink, meddig őrizzük az adatokat, és milyen jogaid vannak a GDPR alapján.';
 
+// Kereszthivatkozások MINDIG az azonos nyelvű dokumentumra (brief §6.6).
+const terms = pathFor('terms', locale);
+const dataDeletion = pathFor('dataDeletion', locale);
 const privacyEn = pathFor('privacy', 'en');
-const dataDeletionEn = pathFor('dataDeletion', 'en');
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -26,39 +28,569 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
       </a>
 
       <div class="mb-10">
-        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési Tájékoztató</h1>
-        <p class="text-sm text-muted">Utolsó frissítés: 2026. július 28. · Digitallwork.hu Kft.</p>
-      </div>
-
-      <div class="bg-card rounded-[16px] border border-border shadow-card p-8">
-        <p class="text-sm text-body leading-relaxed">
-          A Content Ninja adatkezelési tájékoztatója (Privacy Policy)
-          <strong class="text-dark">kizárólag angol nyelven érhető el</strong>. Az angol nyelvű dokumentum a
-          hivatalos és teljes körű tájékoztató, amely részletesen leírja, hogy milyen személyes adatokat kezelünk,
-          milyen célból és jogalapon, kikkel osztjuk meg azokat, valamint hogyan kérheted az adataid törlését.
-        </p>
-        <a
-          href={privacyEn}
-          class="cta-primary bg-primary hover:bg-primary-hover px-6 py-3 text-sm w-fit mt-6 inline-flex"
-        >
-          <span class="material-symbols-outlined text-[18px]">description</span>
-          Privacy Policy megnyitása (angol)
-        </a>
-        <p class="text-sm text-body leading-relaxed mt-6">
-          Az adataid törlésének lépéseit (fióktörlés az alkalmazásban, törlési kérelem e-mailben, a
-          Facebook-kapcsolat visszavonása) külön, szintén angol nyelvű
-          <a href={dataDeletionEn} class="text-primary underline">adattörlési tájékoztató (Data Deletion
-          Instructions)</a> írja le.
-        </p>
-        <p class="text-sm text-body leading-relaxed mt-6">
-          Ha az adatkezeléssel kapcsolatban kérdésed van, vagy magyar nyelvű tájékoztatást szeretnél kérni, írj a
-          <a href="mailto:support@getcontentninja.com" class="text-primary underline">support@getcontentninja.com</a> címre,
-          vagy hívd a <a href="tel:+36202838831" class="text-primary underline">+36 20 283 8831</a>-es telefonszámot.
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
+        <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted mt-2">
+          A tájékoztató magyar és angol nyelven érhető el; eltérés esetén a magyar szöveg az irányadó. Az angol
+          változat <a href={privacyEn} class="text-primary underline">itt olvasható</a>.
         </p>
       </div>
 
+      <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+
+        <!-- 1. -->
+        <div class="p-8 doc-section">
+          <h2>1. Az adatkezelő</h2>
+          <p>
+            A Content Ninja („Szolgáltatás”) mesterséges intelligenciára épülő tartalommarketing-eszköz webáruházak
+            számára. A Szolgáltatás közösségi média tartalmat (szöveg, kép, videó) készít és tesz közzé a felhasználó
+            nevében a felhasználó saját Facebook-oldalain és Instagram üzleti fiókjaiban, továbbá hírlevelet állít
+            össze és küld ki a felhasználó saját hírlevél-szolgáltatói fiókján keresztül, blogcikket tesz közzé a
+            felhasználó webáruházában, termékleírásokat ír újra, hirdetési kreatívokat készít, valamint kulcsszó- és
+            témakutatást végez. A Szolgáltatás kizárólag vállalkozások részére érhető el. A Szolgáltatás üzemeltetője:
+          </p>
+          <dl class="space-y-2 text-sm mt-4">
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Cégnév</dt>
+              <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Székhely</dt>
+              <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Cégjegyzékszám</dt>
+              <dd class="text-dark font-medium">01-09-426906</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Adószám</dt>
+              <dd class="text-dark font-medium">32489819-2-43</dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Adatvédelmi kapcsolat</dt>
+              <dd><a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a></dd>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="text-muted w-44 shrink-0">Telefonszám</dt>
+              <dd><a href="tel:+36202838831">+36 20 283 8831</a></dd>
+            </div>
+          </dl>
+          <p class="mt-4">
+            A jelen tájékoztató a marketing-honlapra (getcontentninja.com) és a Content Ninja alkalmazásra
+            (app.getcontentninja.com) egyaránt vonatkozik. A tájékoztató az Európai Parlament és a Tanács (EU)
+            2016/679 rendelete (általános adatvédelmi rendelet, „GDPR”), az információs önrendelkezési jogról és az
+            információszabadságról szóló 2011. évi CXII. törvény, valamint a számvitelről szóló 2000. évi C. törvény
+            rendelkezései alapján készült.
+          </p>
+          <p class="mt-2">
+            A Szolgáltatás igénybevételének szerződéses feltételeit az <a href={terms}>Általános Szerződési
+            Feltételek</a> tartalmazzák; a jelen tájékoztató annak elválaszthatatlan részét képezi.
+          </p>
+        </div>
+
+        <!-- 2. -->
+        <div class="p-8 doc-section">
+          <h2>2. Milyen adatokat kezelünk</h2>
+
+          <div class="space-y-5">
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.1. Fiók- és regisztrációs adatok</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">név, e-mail cím, jelszó (hashelt/titkosított formában), számlázási cégnév, adószám</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">a felhasználói fiók létrehozása és kezelése, a Szolgáltatás nyújtása, számlázás</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">szerződés teljesítése (GDPR 6. cikk (1) b)); a számlázás körében jogi kötelezettség teljesítése (6. cikk (1) c))</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.2. Fizetési adatok</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">előfizetési csomag és státusz, fizetési tranzakció-azonosítók</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">az előfizetési díjak beszedése</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">szerződés teljesítése (GDPR 6. cikk (1) b))</span></div>
+                <div class="meta-row"><span class="meta-label">Megjegyzés</span><span class="meta-value">a kártyaadatokat kizárólag a Stripe fizetési szolgáltató kezeli. Kártyaszámot nem látunk és nem tárolunk; csak az előfizetésed állapotát tároljuk.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.3. Tartalom-adatok</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">az általad létrehozott márkák és arculati beállítások, promptok, generált tartalom (szöveg, kép, videó, narrátorvideó), feltöltött médiafájlok, tudásforrás-bejegyzések, a webáruházadból importált termékadatok (terméknév, leírás, kép, ár, kategória), a hírlevél-, blog- és hirdetés-tartalmaid, valamint a bekötött külső rendszerek <strong class="text-dark">hozzáférési kulcsai titkosított formában</strong> (webáruház-, hírlevél- és közösségi platform-kulcsok)</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">AI-alapú tartalomgenerálás és ütemezett közzététel a márkád stílusában</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">szerződés teljesítése (GDPR 6. cikk (1) b))</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.4. Facebook / Instagram (Meta) adatok</p>
+              <p>
+                Amikor a <strong class="text-dark">Facebook bejelentkezéssel</strong> beköti a fiókját, a Meta Graph
+                API-n keresztül az alábbi adatokhoz férünk hozzá és azokat tároljuk:
+              </p>
+              <ul>
+                <li>a hosszú élettartamú felhasználói hozzáférési token (titkosítva tárolva);</li>
+                <li>az általad kezelt Facebook-oldalak és a hozzájuk kapcsolt Instagram üzleti fiókok listája és azonosítói;</li>
+                <li>oldal-hozzáférési tokenek (titkosítva tárolva);</li>
+                <li>a Szolgáltatáson keresztül közzétett posztok azonosítói és linkjei;</li>
+                <li>az oldalaid, az Instagram-fiókod és a közzétett posztok teljesítmény-statisztikái (insights: elérés, megjelenés, interakció);</li>
+                <li>a közzétett posztokra érkezett hozzászólások, hogy a Szolgáltatásban megtekinthesd és kezelhesd őket.</li>
+              </ul>
+              <p>
+                Jogalap: szerződés teljesítése (GDPR 6. cikk (1) b)). Ezeket a tokeneket és azonosítókat
+                <strong class="text-dark">kizárólag</strong> a Szolgáltatásban létrehozott tartalmad közzétételére és
+                kezelésére, valamint a tartalom teljesítmény-statisztikáinak és hozzászólásainak megjelenítésére
+                használjuk — lásd a 3. és 4. pontot.
+              </p>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.5. Hírlevél-integráció (MailerLite, SalesAutopilot)</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">a hírlevél-szolgáltatód hozzáférési kulcsa (MailerLite API-kulcs, illetve SalesAutopilot felhasználónév és jelszó, titkosítva), valamint a saját hírlevél-fiókodban tárolt feliratkozói adatok (e-mail cím, név, listák és szegmensek)</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">hírlevél-kampányok összeállítása és kiküldése a nevedben</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">szerződés teljesítése (GDPR 6. cikk (1) b))</span></div>
+                <div class="meta-row"><span class="meta-label">Megjegyzés</span><span class="meta-value">a hírlevél-fiókodban kizárólag a te utasításodra járunk el; a hozzáférés a kulcs visszavonásával bármikor megszüntethető. <strong class="text-dark">Ebben a körben te vagy az adatkezelő és mi az adatfeldolgozó</strong> — a feltételeket az <a href={terms}>ÁSZF</a> 1. számú melléklete tartalmazza.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.6. Naplók</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">a tartalom-generálási és publikálási műveletek naplója (időbélyeg, státusz, hibaüzenet, modell- és költségadatok); <strong class="text-dark">sorszintű adat-audit napló</strong> (melyik adat mikor, miről mire változott — az érzékeny mezők értéke maszkolva); technikai hibanapló</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">hibakeresés, megbízhatóság, visszaélés-megelőzés, a műveletek visszakövethetősége</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">jogos érdek (GDPR 6. cikk (1) f))</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.7. Content Ninja hírlevél</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">e-mail cím</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">hírek és újdonságok küldése a Content Ninja szolgáltatásról</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">hozzájárulás (GDPR 6. cikk (1) a)); leiratkozással bármikor visszavonható</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.8. Honlaplátogatók – Meta Pixel</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">a honlaplátogatók viselkedési adatai (oldalmegtekintés, kattintás, konverzió), süti-azonosítók, IP-cím</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">marketing, remarketing, a hirdetések hatékonyságának mérése</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">hozzájárulás (GDPR 6. cikk (1) a)) — a Pixel csak a süti-sávban adott elfogadás után töltődik be (lásd 10. pont)</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.9. Érdeklődők adatai (honlapi űrlapok, bemutató-jelentkezés)</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">név, cégnév, e-mail cím, telefonszám, a honlapi űrlap kérdéseire adott válaszok (pl. van-e webáruházad, ki készíti ma a tartalmat, mikor kezdenél), a beküldés forrás-oldala és a kampányazonosítók (UTM), a bemutató időpontja és a videóhívás linkje, a kapcsolattartás során keletkezett belső jegyzet, a kiküldött kedvezménykupon, valamint — visszaélés-védelemből — a beküldés technikai adatai</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">kapcsolatfelvétel, a bemutató megszervezése, ajánlatadás, értékesítési kapcsolattartás, a jelentkezések nyomon követése</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">az érintett kérésére tett, szerződéskötést megelőző lépések (GDPR 6. cikk (1) b)); az ezt követő értékesítési megkeresésekre jogos érdek (6. cikk (1) f)); a hírlevélre hozzájárulás (6. cikk (1) a))</span></div>
+                <div class="meta-row"><span class="meta-label">Megőrzés</span><span class="meta-value">az utolsó érdemi kapcsolatfelvételtől számított 24 hónap, kivéve, ha időközben ügyféllé válsz — ekkor a fiókodra vonatkozó szabályok érvényesek. A kapcsolatfelvétel bármikor letiltható a support@getcontentninja.com címen.</span></div>
+                <div class="meta-row"><span class="meta-label">Címzettek</span><span class="meta-value">a beküldésekről belső értesítő e-mail megy a csapatunknak; az érdeklődők e-mail címe a saját MailerLite-fiókunk életciklus-csoportjaiba kerülhet (érdeklődő / ügyfél / lemorzsolódott), a bemutató-időpontokat a Fillout foglalási űrlapja továbbítja.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.10. Nyilvános felületek (Ninja AI bemutató-chat, mintaposzt-generátor)</p>
+              <p>A <code>demo-chat</code> és a <code>sample-post</code> oldal bejelentkezés nélkül használható.</p>
+              <div class="bg-light rounded-[10px] p-4 mt-2">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">a beszélgetés üzenetei, a beszélgetés során általad megadott adatok (e-mail cím, webáruház címe, szerepkör, érdeklődés oka), a böngésződben elhelyezett azonosító token, a látogató <strong class="text-dark">IP-címének álneves lenyomata</strong> (nyers IP-címet nem tárolunk), a mintaposzt létrehozásához megadott termék- vagy bolt-link és a generált minta-tartalom</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">a bemutató működtetése és folytathatósága, visszaélés- és költségvédelem, a kért kedvezménykupon kiküldése, a szolgáltatás fejlesztése</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">az érintett kérésére nyújtott szolgáltatás és szerződéskötést megelőző lépések (GDPR 6. cikk (1) b)); a visszaélés-védelemre jogos érdek (6. cikk (1) f))</span></div>
+                <div class="meta-row"><span class="meta-label">Megőrzés</span><span class="meta-value">ameddig a bemutató folytathatóságához, a kupon beváltásának ellenőrzéséhez és a visszaélés-megelőzéshez szükséges. Ha a beszélgetésből érdeklődő lesz, az adatokra a 2.9. pont szabályai vonatkoznak.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.11. A Ninja AI asszisztens beszélgetései és emlékei</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">a belépett felhasználó és az AI asszisztens közötti beszélgetések, az asszisztens által végrehajtott műveletek nyoma, valamint a munkatérhez tartósan elmentett „emlékek” (a felhasználó által megadott vagy az asszisztens által megjegyzett, a munkához szükséges tények — például a márka jellemzői, visszatérő kérések)</span></div>
+                <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">az asszisztens működtetése, a korábbi beszélgetések folytathatósága, személyre szabott segítség</span></div>
+                <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">szerződés teljesítése (GDPR 6. cikk (1) b))</span></div>
+                <div class="meta-row"><span class="meta-label">Megjegyzés</span><span class="meta-value">az emlékek a felületen bármikor megtekinthetők, szerkeszthetők és törölhetők.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.12. Támogatói hozzáférés a fiókodhoz</p>
+              <p>
+                Hibakereséshez és ügyfélszolgálati segítségnyújtáshoz munkatársunk
+                <strong class="text-dark">legfeljebb 60 percre, csak olvasható módon</strong> megnézheti a fiókodat a
+                te nézőpontodból. Ilyenkor adat nem módosul, kredit nem fogy, tartalom nem kerül ki. Minden ilyen
+                belépést naplózunk (ki, kit, mikor, meddig és milyen indokkal).
+              </p>
+              <p class="mt-2">
+                Jogalap: szerződés teljesítése és jogos érdek a támogatás minőségéhez (GDPR 6. cikk (1) b) és f)).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. -->
+        <div class="p-8 doc-section">
+          <h2>3. Mire használjuk az adataidat — célok és jogalapok</h2>
+          <p>A fent leírt adatokat az alábbi célokra használjuk:</p>
+          <ul>
+            <li><strong class="text-dark">A Szolgáltatás nyújtása</strong> — tartalom generálása, a nevedben történő közzététel / ütemezés a bekötött közösségi fiókokba, hírlevél kiküldése és blogcikk közzététele a te utasításodra, valamint a közzétett posztok teljesítmény-statisztikáinak és hozzászólásainak megjelenítése (szerződés teljesítése);</li>
+            <li><strong class="text-dark">Számlázás és könyvelés</strong> (jogi kötelezettség);</li>
+            <li><strong class="text-dark">Termékfejlesztés és megbízhatóság</strong> — naplók és összesített statisztikák (jogos érdek);</li>
+            <li><strong class="text-dark">Értékesítési kapcsolattartás az érdeklődőkkel</strong> — az űrlap-beküldések megválaszolása, bemutatók szervezése, ajánlatadás (szerződéskötést megelőző lépések, jogos érdek);</li>
+            <li><strong class="text-dark">Marketing ezen a honlapon</strong> — Meta Pixel remarketing (hozzájárulás).</li>
+          </ul>
+          <p>
+            <strong class="text-dark">A Meta hozzáférési tokeneket és a Meta platform-adatokat kizárólag a
+            Szolgáltatásban létrehozott tartalom közzétételére és kezelésére használjuk.</strong> Ezeket nem adjuk
+            el, az 5. pontban felsorolt adatfeldolgozókon túl harmadik féllel nem osztjuk meg, és nem használjuk
+            hirdetésre, profilalkotásra vagy bármely, a Szolgáltatástól független célra.
+          </p>
+        </div>
+
+        <!-- 4. -->
+        <div class="p-8 doc-section">
+          <h2>4. Milyen Meta-engedélyeket kérünk és miért</h2>
+          <p>Amikor Facebook bejelentkezéssel beköti a fiókját, az alábbi engedélyeket kérjük:</p>
+          <ul>
+            <li><strong class="text-dark">pages_show_list</strong> — hogy felsoroljuk az általad kezelt Facebook-oldalakat, és kiválaszthasd, melyiket kötöd be;</li>
+            <li><strong class="text-dark">pages_manage_posts</strong> — hogy a nevedben posztot hozzunk létre, ütemezzünk és tegyünk közzé a bekötött oldaladon;</li>
+            <li><strong class="text-dark">pages_read_engagement</strong> — hogy olvassuk az oldalad tartalmát és azokat az alap interakciós adatokat, amelyek a közzétételhez és a megjelenés ellenőrzéséhez kellenek;</li>
+            <li><strong class="text-dark">instagram_basic</strong> — hogy azonosítsuk a Facebook-oldaladhoz kapcsolt Instagram üzleti fiókot;</li>
+            <li><strong class="text-dark">instagram_content_publish</strong> — hogy tartalmat tegyünk közzé a bekötött Instagram üzleti fiókodban;</li>
+            <li><strong class="text-dark">read_insights</strong> — hogy beolvassuk az oldalad és a posztjaid teljesítmény-statisztikáit (insights), és megjelenítsük neked a Szolgáltatásban;</li>
+            <li><strong class="text-dark">instagram_manage_insights</strong> — hogy beolvassuk az Instagram üzleti fiókod és posztjaid teljesítmény-statisztikáit, és megjelenítsük neked a Szolgáltatásban;</li>
+            <li><strong class="text-dark">pages_manage_engagement</strong> — hogy a Szolgáltatáson belül olvashasd és megválaszolhasd az oldalad posztjaira érkezett hozzászólásokat;</li>
+            <li><strong class="text-dark">instagram_manage_comments</strong> — hogy a Szolgáltatáson belül olvashasd és megválaszolhasd az Instagram-posztjaidra érkezett hozzászólásokat.</li>
+          </ul>
+          <p>
+            Ezeket az engedélyeket bármikor visszavonhatod a Facebook-beállításaidban
+            (<em>Beállítások és adatvédelem → Beállítások → Üzleti integrációk</em>), vagy a fiók lekötésével a
+            Content Ninja alkalmazáson belül.
+          </p>
+        </div>
+
+        <!-- 5. -->
+        <div class="p-8 doc-section">
+          <h2>5. Kikkel osztjuk meg az adatokat (adatfeldolgozók)</h2>
+          <p>
+            A Szolgáltatás nyújtásához az alábbi adatfeldolgozókat vesszük igénybe.
+            <strong class="text-dark">A személyes adataidat soha nem adjuk el harmadik félnek.</strong>
+          </p>
+          <div class="mt-4 overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+              <thead>
+                <tr class="bg-light">
+                  <th class="text-left text-dark font-semibold px-4 py-3 rounded-tl-[8px] border border-border">Adatfeldolgozó</th>
+                  <th class="text-left text-dark font-semibold px-4 py-3 border-t border-b border-border">Hely</th>
+                  <th class="text-left text-dark font-semibold px-4 py-3 rounded-tr-[8px] border border-border">Tevékenység</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Supabase, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">EU régió</td>
+                  <td class="px-4 py-3 text-body border-r border-border">adatbázis, hitelesítés, fájltárolás</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Vercel, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">EU (Frankfurt)</td>
+                  <td class="px-4 py-3 text-body border-r border-border">az alkalmazás üzemeltetése</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Cloudflare, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">domain- és tartalomkiszolgálás (CDN), védelem</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">GitHub, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">a marketing-honlap tárhelye</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Stripe, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">fizetés-feldolgozás</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">KBOSS.hu Kft. (Számlázz.hu)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Magyarország</td>
+                  <td class="px-4 py-3 text-body border-r border-border">számlázás</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Meta Platforms, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA / Írország</td>
+                  <td class="px-4 py-3 text-body border-r border-border">közzététel Facebookra és Instagramra; honlapi marketing (Pixel)</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">OpenAI, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI szöveg- és képgenerálás, elemzés, kutatás</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Anthropic, PBC</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI szöveggenerálás, Ninja AI asszisztens</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google LLC</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI szöveg-, kép- és videógenerálás</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">xAI Corp.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI videógenerálás</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Replicate, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">képből animáció készítése</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">MiniMax (MiniMax AI)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Szingapúr</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI hang- és zenegenerálás a narrátorvideóhoz</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Shotstack Pty Ltd</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Ausztrália</td>
+                  <td class="px-4 py-3 text-body border-r border-border">videó-összeállítás és -renderelés</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">DataForSEO</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">harmadik ország</td>
+                  <td class="px-4 py-3 text-body border-r border-border">kulcsszó- és keresési adatok lekérése</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">MailerLite (UAB MailerLite)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Litvánia, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">hírlevél-kiküldés (az ügyfél fiókjában), a saját lead-listánk kezelése</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">SalesAutopilot Kft.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Magyarország</td>
+                  <td class="px-4 py-3 text-body border-r border-border">hírlevél-kiküldés az ügyfél fiókjában</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Mailjet (Sinch Email)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Franciaország, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">tranzakciós levelek (fiók-, számlázási és rendszerértesítések)</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Fillout, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">bemutató-foglalási űrlap</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-b border-border rounded-bl-[8px]">Sentry (Functional Software, Inc.)</td>
+                  <td class="px-4 py-3 text-muted border-r border-b border-border">EU régió</td>
+                  <td class="px-4 py-3 text-body border-r border-b border-border rounded-br-[8px]">hibanapló</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-3">
+            Tartalom generálásakor kizárólag a generáláshoz szükséges bemenetek kerülnek át az AI-szolgáltatókhoz
+            (például termékadat, prompt, márka-beállítás, feltöltött kép) — hozzáférési tokened vagy fiók-jelszavad
+            soha. <strong class="text-dark">Az AI-szolgáltatók a szerződéses feltételeik alapján nem használják fel
+            az átadott adatokat modelljeik tanítására.</strong>
+          </p>
+          <p class="mt-3">
+            <strong class="text-dark">Megjegyzés a Sentryről:</strong> ha az alkalmazásban hiba történik, a hiba
+            technikai adatai (hibaüzenet, oldalcím, böngészőtípus, időbélyeg) a Sentry európai szervereire kerülnek,
+            hogy javítani tudjuk. IP-címet, sütiket, űrlaptartalmat és a webcím kérdőjel utáni részét nem küldjük el.
+            Cél: hibajavítás és üzembiztonság; jogalap: jogos érdekünk; megőrzés: legfeljebb 90 nap.
+          </p>
+          <p class="mt-3">
+            <strong class="text-dark">Megjegyzés a Meta Platformsról:</strong> amikor a Szolgáltatás tartalmat tesz
+            közzé a Facebook-oldaladon vagy Instagram-fiókodban, illetve a nevedben statisztikát és hozzászólásokat
+            olvas, a Meta Platforms ezeket az adatokat
+            <strong class="text-dark">önálló adatkezelőként</strong>, a saját
+            <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">adatvédelmi
+            szabályzata</a> szerint kezeli — nem a mi adatfeldolgozónkként. A Meta kizárólag az ezen a
+            marketing-honlapon használt Meta Pixel tekintetében jár el adatfeldolgozóként (lásd 10. pont).
+          </p>
+          <p class="mt-3">
+            <strong class="text-dark">Megjegyzés a webáruházadról és a hírlevél-szolgáltatódról:</strong> az UNAS, a
+            Shoprenter és a hírlevél-szolgáltatód a <strong class="text-dark">te saját rendszereid</strong>. A
+            Szolgáltatás a te hozzáférési kulcsoddal, a te utasításodra olvas belőlük és ír beléjük. Ezek
+            üzemeltetői a saját adatkezelési tájékoztatójuk szerint, önálló adatkezelőként járnak el.
+          </p>
+        </div>
+
+        <!-- 6. -->
+        <div class="p-8 doc-section">
+          <h2>6. Hol tároljuk az adataidat, és hogyan védjük</h2>
+          <ul>
+            <li><strong class="text-dark">Tárolás az EU-ban:</strong> az adataid az Európai Unión belül tárolódnak (Supabase EU régió, Vercel Frankfurt).</li>
+            <li>
+              <strong class="text-dark">Harmadik országba történő továbbítás:</strong> egyes adatfeldolgozóink az
+              Európai Unión kívül működnek. Az Egyesült Államokba történő továbbítás (Stripe, Meta, OpenAI,
+              Anthropic, Google, xAI, Replicate, GitHub, Cloudflare, Fillout) az
+              <strong class="text-dark">EU–USA adatvédelmi keret</strong> szerinti megfelelőségi határozaton és/vagy
+              az Európai Bizottság <strong class="text-dark">általános szerződési feltételein (SCC)</strong> alapul.
+              A <strong class="text-dark">Szingapúrba</strong> (MiniMax),
+              <strong class="text-dark">Ausztráliába</strong> (Shotstack) és az egyéb harmadik országokba
+              (DataForSEO) irányuló továbbítás alapja az Európai Bizottság
+              <strong class="text-dark">általános szerződési feltételei (SCC)</strong>, a szükséges kiegészítő
+              intézkedésekkel. Ezekhez a szolgáltatókhoz kizárólag a generálás bemenetei kerülnek (szöveg, kép,
+              hang-szöveg), fiók-azonosító és hozzáférési token soha.
+            </li>
+            <li><strong class="text-dark">Elkülönítés:</strong> az adatok felhasználónként / munkatérenként, adatbázis-szinten elkülönülnek (sor-szintű biztonság, RLS).</li>
+            <li><strong class="text-dark">Titkosítás:</strong> minden platform-hozzáférési token (Meta felhasználói és oldal-tokenek, webáruház- és hírlevél API-kulcsok) AES-256-GCM titkosítással tárolódik; az átvitelt TLS védi.</li>
+          </ul>
+        </div>
+
+        <!-- 7. -->
+        <div class="p-8 doc-section" id="adattorles">
+          <h2>7. Megőrzés és törlés</h2>
+          <ul>
+            <li><strong class="text-dark">Fiók- és tartalom-adatok:</strong> a fiók fennállásáig, majd a fiók törlését követő 30 napon belül törölve.</li>
+            <li><strong class="text-dark">Meta hozzáférési tokenek és bekötött fiókok adatai:</strong> azonnal törölve, amikor lekötöd a fiókot az appban, visszavonod a hozzáférést a Facebook-beállításokban, vagy törlöd a fiókodat.</li>
+            <li><strong class="text-dark">Bekötött webáruház- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal.</li>
+            <li><strong class="text-dark">Számlázási adatok:</strong> 8 év (a számvitelről szóló 2000. évi C. törvény alapján).</li>
+            <li><strong class="text-dark">Műveleti napló:</strong> a fiók fennállásáig, illetve ameddig a hibakereséshez, a kreditfelhasználás elszámolásához és a visszaélés-megelőzéshez szükséges; ezt követően törölve.</li>
+            <li><strong class="text-dark">Adat-audit napló:</strong> legfeljebb 90 nap (automatikus törlés).</li>
+            <li><strong class="text-dark">Hibanapló (Sentry):</strong> legfeljebb 90 nap.</li>
+            <li><strong class="text-dark">Biztonsági mentések:</strong> a mentési ciklus szerint, ameddig a legutóbbi mentések visszaállíthatóságához szükséges; a törölt adat a mentési ciklus lejártával tűnik el a mentésekből is.</li>
+            <li><strong class="text-dark">Érdeklődők (lead-)adatai:</strong> az utolsó érdemi kapcsolatfelvételtől számított 24 hónap.</li>
+            <li><strong class="text-dark">Nyilvános bemutató-beszélgetések:</strong> ameddig a bemutató folytathatóságához, a kupon beváltásának ellenőrzéséhez és a visszaélés-megelőzéshez szükséges.</li>
+            <li><strong class="text-dark">Hírlevél-feliratkozás:</strong> a leiratkozásig.</li>
+          </ul>
+          <p>Az adataid törlését bármikor kérheted, az alábbi módok bármelyikén:</p>
+          <ul>
+            <li>töröld a fiókodat a Content Ninja alkalmazásban;</li>
+            <li>küldj törlési kérelmet a <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a> címre;</li>
+            <li>vond vissza az alkalmazás hozzáférését a Facebook-beállításaidban (<em>Beállítások és adatvédelem → Beállítások → Üzleti integrációk</em>) — ez azonnal érvényteleníti a tárolt tokeneket.</li>
+          </ul>
+          <p>
+            A törlési kérelmeket legkésőbb 30 napon belül teljesítjük, kivéve azokat az adatokat, amelyek megőrzésére
+            jogszabály kötelez (például számlák). A lépésenkénti útmutatót az
+            <a href={dataDeletion}>Adattörlési útmutató</a> oldalon találod.
+          </p>
+        </div>
+
+        <!-- 8. -->
+        <div class="p-8 doc-section">
+          <h2>8. A jogaid a GDPR alapján</h2>
+          <div class="space-y-2">
+            <p><strong class="text-dark">Hozzáféréshez való jog</strong> — tájékoztatást kérhetsz arról, milyen adatokat kezelünk rólad.</p>
+            <p><strong class="text-dark">Helyesbítéshez való jog</strong> — kérheted a pontatlan adatok javítását.</p>
+            <p><strong class="text-dark">Törléshez való jog</strong> — kérheted az adataid törlését, ha az adatkezelésnek már nincs jogalapja.</p>
+            <p><strong class="text-dark">Az adatkezelés korlátozásához való jog</strong> — bizonyos esetekben kérheted az adatkezelés korlátozását.</p>
+            <p><strong class="text-dark">Adathordozhatósághoz való jog</strong> — kérheted az adataidat géppel olvasható formátumban.</p>
+            <p><strong class="text-dark">Tiltakozáshoz való jog</strong> — tiltakozhatsz a jogos érdeken alapuló adatkezelés ellen.</p>
+            <p><strong class="text-dark">A hozzájárulás visszavonásához való jog</strong> — a hozzájáruláson alapuló adatkezelésnél (hírlevél, Meta Pixel) a hozzájárulásodat indokolás nélkül, bármikor visszavonhatod; a visszavonás nem érinti a korábbi adatkezelés jogszerűségét.</p>
+          </div>
+          <p class="mt-4">
+            E jogaidat a <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a> címre küldött
+            e-mailben gyakorolhatod. A kérelmekre legkésőbb 30 napon belül válaszolunk.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">8.1. Automatizált döntéshozatal</p>
+          <p>
+            Nem hozunk kizárólag automatizált adatkezelésen alapuló, rád nézve joghatással járó döntést. A
+            Szolgáltatás AI-funkciói tartalmat <strong class="text-dark">javasolnak és állítanak elő</strong>; a
+            közzétételről és a felhasználásról mindig te döntesz.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">8.2. Adatvédelmi incidens</p>
+          <p>
+            Adatvédelmi incidens esetén a jogszabályi határidőn belül (a tudomásszerzéstől számított 72 órán belül)
+            értesítjük a felügyeleti hatóságot, és — ha az incidens valószínűsíthetően magas kockázattal jár — az
+            érintetteket is.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">8.3. Adatvédelmi tisztviselő</p>
+          <p>
+            Tevékenységünk alapján adatvédelmi tisztviselő kijelölése nem kötelező; adatvédelmi kérdésekben a
+            <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a> címen fordulhatsz hozzánk.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">8.4. Korlátozás életkor és felhasználói kör szerint</p>
+          <p>
+            A Szolgáltatás kizárólag vállalkozások részére érhető el; 18 év alatti személyek adatait tudatosan nem
+            kezeljük.
+          </p>
+        </div>
+
+        <!-- 9. -->
+        <div class="p-8 doc-section">
+          <h2>9. Panasz</h2>
+          <p>
+            Ha úgy véled, hogy megsértettük az adatkezelésre vonatkozó szabályokat, panasszal fordulhatsz a magyar
+            felügyeleti hatósághoz:
+          </p>
+          <div class="bg-light rounded-[10px] p-4 mt-3">
+            <div class="meta-row"><span class="meta-label">Név</span><span class="meta-value">Nemzeti Adatvédelmi és Információszabadság Hatóság (NAIH)</span></div>
+            <div class="meta-row"><span class="meta-label">Cím</span><span class="meta-value">1055 Budapest, Falk Miksa utca 9-11.</span></div>
+            <div class="meta-row"><span class="meta-label">Postacím</span><span class="meta-value">1363 Budapest, Pf. 9.</span></div>
+            <div class="meta-row"><span class="meta-label">Telefon</span><span class="meta-value"><a href="tel:+3613911400">+36 1 391 1400</a></span></div>
+            <div class="meta-row"><span class="meta-label">E-mail</span><span class="meta-value"><a href="mailto:ugyfelszolgalat@naih.hu">ugyfelszolgalat@naih.hu</a></span></div>
+            <div class="meta-row"><span class="meta-label">Honlap</span><span class="meta-value"><a href="https://www.naih.hu" target="_blank" rel="noopener">www.naih.hu</a></span></div>
+          </div>
+          <p class="mt-3">Az ügyben bírósághoz is fordulhatsz, illetve panaszt tehetsz a saját uniós tagállamod felügyeleti hatóságánál.</p>
+        </div>
+
+        <!-- 10. -->
+        <div class="p-8 doc-section">
+          <h2>10. Sütik</h2>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.1. Feltétlenül szükséges sütik</p>
+          <p>
+            A honlap és az alkalmazás működéséhez elengedhetetlen sütik: a bejelentkezési munkamenet fenntartása
+            (Supabase munkamenet-süti), a bekötési folyamat biztonsági (CSRF-) sütije, valamint a nyilvános
+            bemutató-felületeken a beszélgetés folytathatóságát biztosító böngésző-azonosító. Ezekhez nem kérünk
+            hozzájárulást.
+          </p>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.2. Marketing sütik (Meta Pixel)</p>
+          <p>A Meta Pixel remarketing és hirdetési célból helyez el sütiket a látogató böngészőjében. Ezek kizárólag a süti-sávban adott kifejezett hozzájárulásoddal aktiválódnak.</p>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.3. A sütik kezelése</p>
+          <p>A süti-hozzájárulásodat bármikor módosíthatod vagy visszavonhatod a süti-sávon keresztül, a sütik pedig a böngésződ beállításaiban egyenként is törölhetők vagy letilthatók.</p>
+        </div>
+
+        <!-- 11. -->
+        <div class="p-8 doc-section">
+          <h2>11. Facebook / Meta platform-záradék</h2>
+          <p>
+            Az alkalmazás a Meta Platformon keresztül (Facebook bejelentkezés, Facebook Graph API, Instagram Graph
+            API) <strong class="text-dark">kizárólag a felhasználó által létrehozott tartalom közzététele és
+            kezelése, valamint a tartalom teljesítmény-statisztikáinak (insights) és hozzászólásainak a felhasználó
+            részére történő megjelenítése céljából</strong> fér hozzá a felhasználó oldalaihoz és fiókjaihoz. Ez a
+            hozzáférés bármikor visszavonható a felhasználó Facebook-beállításaiban és az alkalmazáson belül. A Meta
+            API-któl kapott információk felhasználása és továbbítása megfelel a
+            <a href="https://developers.facebook.com/terms/" target="_blank" rel="noopener">Meta platformfeltételeknek</a>
+            és a vonatkozó Meta fejlesztői szabályzatoknak.
+          </p>
+        </div>
+
+        <!-- 12. -->
+        <div class="p-8 doc-section">
+          <h2>12. A tájékoztató módosítása</h2>
+          <p>
+            A jelen tájékoztatót időről időre frissítjük. A lényeges változásokról a regisztrált felhasználókat
+            e-mailben értesítjük, és a frissített változatot ezen az oldalon közzétesszük. Ez a változat
+            <strong class="text-dark">2026. augusztus 20-tól</strong> hatályos. A tájékoztató magyar és angol nyelven
+            érhető el; eltérés esetén a <strong class="text-dark">magyar szöveg az irányadó</strong>.
+          </p>
+        </div>
+
+      </div>
     </div>
   </main>
 
   <Footer locale={locale} page={page} />
 </BaseLayout>
+
+<style>
+  .doc-section h2 { font-size: 1rem; font-weight: 700; color: #1e1e2f; margin-bottom: 0.75rem; }
+  .doc-section p { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.5rem; }
+  .doc-section p:first-of-type { margin-top: 0; }
+  .doc-section a { color: #6c5ce7; text-decoration: underline; }
+  .doc-section ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
+  .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; }
+  .doc-section code { font-size: 0.8125rem; background: #f4f4f8; padding: 1px 5px; border-radius: 4px; }
+  .meta-row { display: grid; grid-template-columns: 176px 1fr; gap: 8px; font-size: 0.875rem; padding: 6px 0; border-bottom: 1px solid #e8e8ef; }
+  .meta-row:last-child { border-bottom: none; }
+  .meta-label { color: #9090a7; font-weight: 500; }
+  .meta-value { color: #1e1e2f; }
+  .meta-value a { color: #6c5ce7; text-decoration: underline; }
+</style>

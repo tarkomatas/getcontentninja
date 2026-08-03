@@ -2,12 +2,18 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
 
 const locale = 'en';
 const page = 'privacy';
 const title = 'Privacy Policy – Content Ninja';
 const description =
-  'Privacy Policy of Content Ninja: what personal data we collect, how we use it to publish content to your Facebook and Instagram accounts, and your rights under the GDPR.';
+  'Privacy Policy of Content Ninja: what personal data we collect, how we use it to publish content, send newsletters and manage prospects, who our processors are, and your rights under the GDPR.';
+
+// Kereszthivatkozások MINDIG az azonos nyelvű dokumentumra (brief §6.6).
+const terms = pathFor('terms', locale);
+const dataDeletion = pathFor('dataDeletion', locale);
+const privacyHu = pathFor('privacy', 'hu');
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -23,10 +29,10 @@ const description =
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-        <p class="text-sm text-muted">Last updated: 28 July 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
-          This Privacy Policy is provided in English only. A tájékoztató kizárólag angol nyelven érhető el –
-          kérdés esetén írj a <a href="mailto:support@getcontentninja.com" class="text-primary underline">support@getcontentninja.com</a> címre.
+          This policy is available in Hungarian and English. In case of any discrepancy, the
+          <a href={privacyHu} class="text-primary underline">Hungarian text</a> prevails.
         </p>
       </div>
 
@@ -36,9 +42,12 @@ const description =
         <div class="p-8 doc-section">
           <h2>1. Data Controller</h2>
           <p>
-            Content Ninja (the "Service") is an AI-powered content marketing tool for e-commerce businesses that
+            Content Ninja (the "Service") is an AI-powered content marketing tool for online stores. The Service
             creates social media content (text, images, video) and publishes it on the user's behalf to the user's
-            own Facebook Pages and Instagram business accounts. The Service is operated by:
+            own Facebook Pages and Instagram business accounts; composes and sends newsletters through the user's own
+            newsletter provider account; publishes blog articles to the user's webshop; rewrites product
+            descriptions; creates advertising creatives; and performs keyword and topic research. The Service is
+            available to businesses only. It is operated by:
           </p>
           <dl class="space-y-2 text-sm mt-4">
             <div class="flex flex-col sm:flex-row sm:gap-4">
@@ -74,7 +83,7 @@ const description =
           </p>
           <p class="mt-2">
             The contractual conditions of using the Service are set out in the
-            <a href="/en/terms/">Terms of Service</a>; this Privacy Policy forms an integral part of them.
+            <a href={terms}>Terms of Service</a>; this Privacy Policy forms an integral part of them.
           </p>
         </div>
 
@@ -105,7 +114,7 @@ const description =
             <div>
               <p class="font-semibold text-dark text-sm mb-2">2.3. Content data</p>
               <div class="bg-light rounded-[10px] p-4">
-                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">brands and brand-identity settings you create, prompts, generated content (text, images, video), uploaded media files, knowledge-base entries, and product data imported from your webshop (product names, descriptions, images, prices, categories)</span></div>
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">brands and brand-identity settings you create, prompts, generated content (text, images, video, narrated video), uploaded media files, knowledge-base entries, product data imported from your webshop (product names, descriptions, images, prices, categories), your newsletter, blog and advertising content, and the access keys of the external systems you connect, <strong class="text-dark">stored in encrypted form</strong> (webshop, newsletter and social platform keys)</span></div>
                 <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">AI-based content generation and scheduled publishing in your brand's style</span></div>
                 <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR)</span></div>
               </div>
@@ -133,20 +142,20 @@ const description =
             </div>
 
             <div>
-              <p class="font-semibold text-dark text-sm mb-2">2.5. Newsletter integration (MailerLite)</p>
+              <p class="font-semibold text-dark text-sm mb-2">2.5. Newsletter integrations (MailerLite, SalesAutopilot)</p>
               <div class="bg-light rounded-[10px] p-4">
-                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">your MailerLite API key, and the subscriber data stored in your MailerLite account (e-mail addresses, names)</span></div>
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">the access key of your newsletter provider (MailerLite API key, or SalesAutopilot username and password, stored encrypted), and the subscriber data stored in your own newsletter account (e-mail addresses, names, lists and segments)</span></div>
                 <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">composing and sending newsletter campaigns on your behalf</span></div>
                 <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR)</span></div>
-                <div class="meta-row"><span class="meta-label">Note</span><span class="meta-value">we act in your MailerLite account solely on your instructions; access can be terminated at any time by revoking the API key.</span></div>
+                <div class="meta-row"><span class="meta-label">Note</span><span class="meta-value">we act in your newsletter account solely on your instructions; access can be terminated at any time by revoking the key. <strong class="text-dark">In this respect you are the controller and we are the processor</strong> — the terms are set out in Annex 1 to the <a href={terms}>Terms of Service</a>.</span></div>
               </div>
             </div>
 
             <div>
               <p class="font-semibold text-dark text-sm mb-2">2.6. Usage logs</p>
               <div class="bg-light rounded-[10px] p-4">
-                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">logs of content-generation and publishing operations (timestamps, status, error messages)</span></div>
-                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">troubleshooting, reliability, and abuse prevention</span></div>
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">logs of content-generation and publishing operations (timestamp, status, error message, model and cost data); <strong class="text-dark">row-level data audit log</strong> (which record changed when, from what to what — the values of sensitive fields are masked); technical error log</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">troubleshooting, reliability, abuse prevention, traceability of operations</span></div>
                 <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">legitimate interest (Art. 6(1)(f) GDPR)</span></div>
               </div>
             </div>
@@ -168,6 +177,52 @@ const description =
                 <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">consent (Art. 6(1)(a) GDPR) — the Pixel loads only after you accept it in the cookie banner (see Section 10)</span></div>
               </div>
             </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.9. Data of prospects (website forms, demo requests)</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">name, company name, e-mail address, phone number, the answers you gave to the questions on the website form (e.g. whether you have a webshop, who creates your content today, when you would start), the source page of the submission and the campaign identifiers (UTM), the time of the demo and the video-call link, internal notes created during our contact with you, the discount coupon sent to you, and — for abuse protection — the technical data of the submission</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">getting in touch, organising the demo, making an offer, sales contact, tracking applications</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">steps taken at your request prior to entering into a contract (Art. 6(1)(b) GDPR); legitimate interest for subsequent sales contact (Art. 6(1)(f)); consent for the newsletter (Art. 6(1)(a))</span></div>
+                <div class="meta-row"><span class="meta-label">Retention</span><span class="meta-value">24 months from the last meaningful contact, unless you become a customer in the meantime — in that case the rules applicable to your account apply. You can opt out of being contacted at any time at support@getcontentninja.com.</span></div>
+                <div class="meta-row"><span class="meta-label">Recipients</span><span class="meta-value">an internal notification e-mail about each submission is sent to our team; prospects' e-mail addresses may be placed into the lifecycle groups of our own MailerLite account (prospect / customer / churned), and demo appointments are transmitted by the Fillout booking form.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.10. Public surfaces (Ninja AI demo chat, sample post generator)</p>
+              <p>The <code>demo-chat</code> and <code>sample-post</code> pages can be used without logging in.</p>
+              <div class="bg-light rounded-[10px] p-4 mt-2">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">the messages of the conversation, the data you provide during the conversation (e-mail address, webshop address, role, reason for your interest), the identifier token placed in your browser, a <strong class="text-dark">pseudonymous hash of the visitor's IP address</strong> (we do not store raw IP addresses), the product or store link given for creating the sample post, and the generated sample content</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">operating the demo and allowing you to continue it, abuse and cost protection, sending the requested discount coupon, improving the service</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">a service provided at your request and steps prior to entering into a contract (Art. 6(1)(b) GDPR); legitimate interest for abuse protection (Art. 6(1)(f))</span></div>
+                <div class="meta-row"><span class="meta-label">Retention</span><span class="meta-value">for as long as it is necessary to continue the demo, to verify coupon redemption and to prevent abuse; if the conversation results in a prospect, the rules in Section 2.9 apply.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.11. Ninja AI assistant conversations and memories</p>
+              <div class="bg-light rounded-[10px] p-4">
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">the conversations between the logged-in user and the AI assistant, the trace of the operations performed by the assistant, and the "memories" saved persistently to the workspace (facts needed for the work, provided by the user or noted by the assistant — for example brand characteristics or recurring requests)</span></div>
+                <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">operating the assistant, allowing earlier conversations to be continued, personalised assistance</span></div>
+                <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR)</span></div>
+                <div class="meta-row"><span class="meta-label">Note</span><span class="meta-value">memories can be viewed, edited and deleted at any time in the interface.</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.12. Support access to your account</p>
+              <p>
+                For troubleshooting and customer support, a member of our staff may view your account from your
+                perspective for <strong class="text-dark">a maximum of 60 minutes, in read-only mode</strong>. During
+                such access no data is modified, no credits are consumed and no content is published. Every such
+                access is logged (who, whose account, when, for how long and on what grounds).
+              </p>
+              <p class="mt-2">
+                Legal basis: performance of a contract and legitimate interest in the quality of support
+                (Art. 6(1)(b) and (f) GDPR).
+              </p>
+            </div>
           </div>
         </div>
 
@@ -176,9 +231,10 @@ const description =
           <h2>3. How we use your data — purposes and legal bases</h2>
           <p>We use the data described above for the following purposes:</p>
           <ul>
-            <li><strong class="text-dark">Providing the Service</strong> — generating content, publishing / scheduling it on your behalf to the social media accounts you connected, and displaying the performance statistics (insights) and comments of your published posts (performance of a contract);</li>
+            <li><strong class="text-dark">Providing the Service</strong> — generating content, publishing / scheduling it on your behalf to the social media accounts you connected, sending newsletters and publishing blog articles on your instruction, and displaying the performance statistics (insights) and comments of your published posts (performance of a contract);</li>
             <li><strong class="text-dark">Invoicing and accounting</strong> (legal obligation);</li>
             <li><strong class="text-dark">Product improvement and reliability</strong> — usage logs and aggregated statistics (legitimate interest);</li>
+            <li><strong class="text-dark">Sales contact with prospects</strong> — replying to form submissions, organising demos, making offers (steps prior to a contract, legitimate interest);</li>
             <li><strong class="text-dark">Marketing on this website</strong> — Meta Pixel remarketing (consent).</li>
           </ul>
           <p>
@@ -239,9 +295,24 @@ const description =
                   <td class="px-4 py-3 text-body border-r border-border">Application hosting</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Cloudflare, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Domain and content delivery (CDN), protection</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">GitHub, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Hosting of this marketing website</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Stripe, Inc.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
                   <td class="px-4 py-3 text-body border-r border-border">Payment processing</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">KBOSS.hu Kft. (Szamlazz.hu)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Hungary</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Invoicing</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Meta Platforms, Inc.</td>
@@ -251,12 +322,12 @@ const description =
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">OpenAI, Inc.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
-                  <td class="px-4 py-3 text-body border-r border-border">AI text and image generation</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI text and image generation, analysis, research</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
-                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Anthropic, Inc.</td>
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Anthropic, PBC</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
-                  <td class="px-4 py-3 text-body border-r border-border">AI text generation</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI text generation, Ninja AI assistant</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google LLC</td>
@@ -264,9 +335,39 @@ const description =
                   <td class="px-4 py-3 text-body border-r border-border">AI text, image and video generation</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">xAI Corp.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI video generation</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Replicate, Inc.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">USA</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Image-to-animation generation</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">MiniMax (MiniMax AI)</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Singapore</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI voice and music generation for narrated video</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Shotstack Pty Ltd</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Australia</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Video composition and rendering</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">DataForSEO</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Third country</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Retrieving keyword and search data</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">MailerLite (UAB MailerLite)</td>
                   <td class="px-4 py-3 text-muted border-r border-border">Lithuania, EU</td>
-                  <td class="px-4 py-3 text-body border-r border-border">Newsletter delivery</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Newsletter delivery (in the customer's account), managing our own prospect list</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">SalesAutopilot Kft.</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Hungary</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Newsletter delivery in the customer's account</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Mailjet (Sinch Email)</td>
@@ -274,26 +375,23 @@ const description =
                   <td class="px-4 py-3 text-body border-r border-border">Transactional e-mail delivery (account, billing and system notifications)</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
-                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Sentry (Functional Software, Inc.)</td>
-                  <td class="px-4 py-3 text-muted border-r border-border">EU region</td>
-                  <td class="px-4 py-3 text-body border-r border-border">Error logging</td>
-                </tr>
-                <tr class="border-b border-border hover:bg-light/60 transition-colors">
-                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">GitHub, Inc.</td>
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Fillout, Inc.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
-                  <td class="px-4 py-3 text-body border-r border-border">Hosting of this marketing website</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Demo booking form</td>
                 </tr>
                 <tr>
-                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-b border-border rounded-bl-[8px]">KBOSS.hu Kft. (Szamlazz.hu)</td>
-                  <td class="px-4 py-3 text-muted border-r border-b border-border">Hungary</td>
-                  <td class="px-4 py-3 text-body border-r border-b border-border rounded-br-[8px]">Invoicing</td>
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-b border-border rounded-bl-[8px]">Sentry (Functional Software, Inc.)</td>
+                  <td class="px-4 py-3 text-muted border-r border-b border-border">EU region</td>
+                  <td class="px-4 py-3 text-body border-r border-b border-border rounded-br-[8px]">Error logging</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p class="mt-3">
             When generating content, only the inputs required for generation (e.g. product data, prompts, brand
-            settings) are sent to the AI providers — never your access tokens or account credentials.
+            settings, uploaded images) are sent to the AI providers — never your access tokens or account
+            credentials. <strong class="text-dark">Under their contractual terms, the AI providers do not use the
+            data submitted to them to train their models.</strong>
           </p>
           <p class="mt-3">
             <strong class="text-dark">Note on Sentry:</strong> when an error occurs in the application, the technical
@@ -310,6 +408,12 @@ const description =
             not as our processor. Meta acts as our processor only in respect of the Meta Pixel used on this
             marketing website (see Section 10).
           </p>
+          <p class="mt-3">
+            <strong class="text-dark">Note on your webshop and newsletter provider:</strong> UNAS, Shoprenter and
+            your newsletter provider are <strong class="text-dark">your own systems</strong>. The Service reads from
+            and writes to them using your access key, on your instruction. Their operators act as independent
+            controllers under their own privacy policies.
+          </p>
         </div>
 
         <!-- 6. -->
@@ -317,9 +421,20 @@ const description =
           <h2>6. Where we store your data, and how we protect it</h2>
           <ul>
             <li><strong class="text-dark">Storage in the EU:</strong> your data is stored within the European Union (Supabase EU region, Vercel Frankfurt).</li>
-            <li><strong class="text-dark">Third-country transfers:</strong> some processors operate in the USA (Stripe, Meta, OpenAI, Anthropic, Google, GitHub). Transfers to them rely on the EU–US Data Privacy Framework, covered by the European Commission's adequacy decision, and/or Standard Contractual Clauses.</li>
+            <li>
+              <strong class="text-dark">Third-country transfers:</strong> some of our processors operate outside the
+              European Union. Transfers to the United States (Stripe, Meta, OpenAI, Anthropic, Google, xAI,
+              Replicate, GitHub, Cloudflare, Fillout) rely on the adequacy decision under the
+              <strong class="text-dark">EU–US Data Privacy Framework</strong> and/or on the European Commission's
+              <strong class="text-dark">Standard Contractual Clauses (SCC)</strong>. Transfers to
+              <strong class="text-dark">Singapore</strong> (MiniMax), <strong class="text-dark">Australia</strong>
+              (Shotstack) and other third countries (DataForSEO) are based on the European Commission's
+              <strong class="text-dark">Standard Contractual Clauses (SCC)</strong> with the necessary supplementary
+              measures. Only the inputs of generation (text, image, narration script) are sent to these providers —
+              never account identifiers or access tokens.
+            </li>
             <li><strong class="text-dark">Isolation:</strong> data is separated per user / workspace at the database level (row-level security, RLS).</li>
-            <li><strong class="text-dark">Encryption:</strong> all platform access tokens (Meta user and Page tokens, API keys) are stored encrypted using AES-256-GCM; data in transit is protected by TLS.</li>
+            <li><strong class="text-dark">Encryption:</strong> all platform access tokens (Meta user and Page tokens, webshop and newsletter API keys) are stored encrypted using AES-256-GCM; data in transit is protected by TLS.</li>
           </ul>
         </div>
 
@@ -329,9 +444,14 @@ const description =
           <ul>
             <li><strong class="text-dark">Account and content data:</strong> retained while your account exists, then deleted within 30 days after account deletion.</li>
             <li><strong class="text-dark">Meta access tokens and connected-account data:</strong> deleted immediately when you disconnect the account in the app, revoke the app's access in your Facebook settings, or delete your account.</li>
-            <li><strong class="text-dark">Invoicing data:</strong> retained for 8 years, as required by the Hungarian Accounting Act.</li>
-            <li><strong class="text-dark">Usage logs:</strong> retained for up to 12 months.</li>
+            <li><strong class="text-dark">Connected webshop and newsletter keys:</strong> deleted immediately when the connection is removed.</li>
+            <li><strong class="text-dark">Invoicing data:</strong> retained for 8 years, as required by the Hungarian Accounting Act (Act C of 2000).</li>
+            <li><strong class="text-dark">Usage logs:</strong> retained while your account exists and for as long as they are necessary for troubleshooting, accounting for credit usage and preventing abuse; they are deleted thereafter.</li>
+            <li><strong class="text-dark">Data audit log:</strong> retained for up to 90 days (deleted automatically).</li>
             <li><strong class="text-dark">Error logs (Sentry):</strong> retained for up to 90 days.</li>
+            <li><strong class="text-dark">Backups:</strong> retained for the duration of the backup cycle, for as long as it is necessary to be able to restore the most recent backups; deleted data disappears from the backups when that cycle expires.</li>
+            <li><strong class="text-dark">Prospect (lead) data:</strong> 24 months from the last meaningful contact.</li>
+            <li><strong class="text-dark">Public demo conversations:</strong> for as long as it is necessary to continue the demo, to verify coupon redemption and to prevent abuse.</li>
             <li><strong class="text-dark">Newsletter data:</strong> retained until you unsubscribe.</li>
           </ul>
           <p>You can request deletion of your data at any time, in any of the following ways:</p>
@@ -343,7 +463,7 @@ const description =
           <p>
             Deletion requests are completed within 30 days at the latest, except for data we are legally required to
             retain (e.g. invoices). Step-by-step instructions are available on our
-            <a href="/en/data-deletion/">Data Deletion Instructions</a> page.
+            <a href={dataDeletion}>Data Deletion Instructions</a> page.
           </p>
         </div>
 
@@ -362,6 +482,32 @@ const description =
           <p class="mt-4">
             You can exercise these rights by e-mailing <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>.
             We respond to requests within 30 days at the latest.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">8.1. Automated decision-making</p>
+          <p>
+            We do not take decisions based solely on automated processing that produce legal effects concerning you.
+            The AI features of the Service <strong class="text-dark">suggest and produce</strong> content; the
+            decision to publish and use it is always yours.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">8.2. Personal data breach</p>
+          <p>
+            In the event of a personal data breach we notify the supervisory authority within the statutory deadline
+            (72 hours from becoming aware of it) and — if the breach is likely to result in a high risk — the data
+            subjects as well.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">8.3. Data Protection Officer</p>
+          <p>
+            Based on the nature of our activity, appointing a Data Protection Officer is not mandatory; for data
+            protection matters you can reach us at
+            <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">8.4. Restriction by age and user group</p>
+          <p>
+            The Service is available to businesses only; we do not knowingly process the data of persons under 18.
           </p>
         </div>
 
@@ -387,7 +533,11 @@ const description =
         <div class="p-8 doc-section">
           <h2>10. Cookies</h2>
           <p class="font-semibold text-dark text-sm mt-4 mb-1">10.1. Strictly necessary cookies</p>
-          <p>Cookies essential for the operation of the website and the application (session handling, login). These do not require consent.</p>
+          <p>
+            Cookies essential for the operation of the website and the application: maintaining the login session
+            (Supabase session cookie), the security (CSRF) cookie of the connection flow, and the browser identifier
+            that allows a conversation on the public demo surfaces to be continued. These do not require consent.
+          </p>
           <p class="font-semibold text-dark text-sm mt-4 mb-1">10.2. Marketing cookies (Meta Pixel)</p>
           <p>The Meta Pixel places cookies in the visitor's browser for remarketing and advertising purposes. These are activated only with your explicit consent given in the cookie banner.</p>
           <p class="font-semibold text-dark text-sm mt-4 mb-1">10.3. Managing cookies</p>
@@ -413,7 +563,9 @@ const description =
           <h2>12. Changes to this policy</h2>
           <p>
             We may update this Privacy Policy from time to time. We will notify registered users of material changes
-            by e-mail and publish the updated policy on this page. This version is effective from 2 July 2026.
+            by e-mail and publish the updated policy on this page. This version is effective from
+            <strong class="text-dark">20 August 2026</strong>. The policy is available in Hungarian and English; in
+            case of any discrepancy, the <a href={privacyHu}>Hungarian text</a> prevails.
           </p>
         </div>
 
@@ -431,8 +583,10 @@ const description =
   .doc-section a { color: #6c5ce7; text-decoration: underline; }
   .doc-section ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
   .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; }
+  .doc-section code { font-size: 0.8125rem; background: #f4f4f8; padding: 1px 5px; border-radius: 4px; }
   .meta-row { display: grid; grid-template-columns: 176px 1fr; gap: 8px; font-size: 0.875rem; padding: 6px 0; border-bottom: 1px solid #e8e8ef; }
   .meta-row:last-child { border-bottom: none; }
   .meta-label { color: #9090a7; font-weight: 500; }
   .meta-value { color: #1e1e2f; }
+  .meta-value a { color: #6c5ce7; text-decoration: underline; }
 </style>

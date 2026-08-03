@@ -2,12 +2,18 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
 
 const locale = 'en';
 const page = 'terms';
 const title = 'Terms of Service – Content Ninja';
 const description =
-  'Terms of Service governing the use of the Content Ninja AI content generation and social media publishing service.';
+  'Terms of Service governing the business use of the Content Ninja AI content generation, publishing and newsletter service, including the Annex on data processing.';
+
+// Kereszthivatkozások MINDIG az azonos nyelvű dokumentumra (brief §6.6).
+const privacy = pathFor('privacy', locale);
+const dataDeletion = pathFor('dataDeletion', locale);
+const termsHu = pathFor('terms', 'hu');
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description}>
@@ -24,7 +30,11 @@ const description =
 
             <div class="mb-10">
                 <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Terms of Service</h1>
-                <p class="text-sm text-muted">Last updated and effective: 2 July 2026</p>
+                <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026</p>
+                <p class="text-sm text-muted mt-2">
+                    These Terms are drawn up in Hungarian and English. In case of any discrepancy, the
+                    <a href={termsHu} class="text-primary underline">Hungarian text</a> prevails.
+                </p>
             </div>
 
             <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
@@ -67,13 +77,36 @@ const description =
                 <div class="p-8 doc-section">
                     <h2>2. Description of the Service</h2>
                     <p>2.1. Content Ninja is a software-as-a-service (SaaS) product that uses artificial intelligence
-                        to generate marketing content — texts and images — for online stores based on their product
-                        data, and that publishes this content to connected social media accounts (in particular
-                        Facebook and Instagram pages) on a schedule set by the User.</p>
-                    <p class="mt-2">2.2. The Service is provided exclusively online, through the web interface made
+                        to create marketing content for online stores and publishes it, on the schedule set by the
+                        User, to the channels the User has connected. In particular, the Service allows the User to:</p>
+                    <ul>
+                        <li>a) create <strong class="text-dark">social media content</strong> (text, images, animation,
+                            video, narrated video) and publish it — on a schedule or immediately — to the Facebook
+                            Pages and Instagram business accounts connected by the User;</li>
+                        <li>b) create and send <strong class="text-dark">newsletters</strong> through the User’s
+                            <strong class="text-dark">own newsletter provider account</strong> (currently MailerLite or
+                            SalesAutopilot);</li>
+                        <li>c) create and publish <strong class="text-dark">blog articles</strong> to the blog of the
+                            User’s <strong class="text-dark">own webshop</strong> (currently UNAS or Shoprenter);</li>
+                        <li>d) <strong class="text-dark">rewrite product descriptions</strong> and, upon the User’s
+                            approval, write them back to the User’s webshop;</li>
+                        <li>e) create <strong class="text-dark">advertising creatives</strong> (copy and visuals);
+                            placing the advertisement on the ad platform is the User’s task — the Service does not
+                            publish advertisements;</li>
+                        <li>f) perform <strong class="text-dark">keyword and topic research</strong>, manage knowledge
+                            sources, use the marketing calendar, and view the performance statistics and comments of
+                            published content;</li>
+                        <li>g) use the <strong class="text-dark">AI assistant (“Ninja AI”)</strong>, which performs
+                            operations inside the Service on the User’s instruction and stores the information needed
+                            for that work.</li>
+                    </ul>
+                    <p class="mt-2">2.2. The features under points b)–d) <strong class="text-dark">write into the
+                        User’s own external systems</strong> (webshop, newsletter provider). The Provider performs
+                        these operations solely on the User’s instruction and with the User’s approval.</p>
+                    <p class="mt-2">2.3. The Service is provided exclusively online, through the web interface made
                         available by the Provider at <a href="https://app.getcontentninja.com" target="_blank"
                             rel="noopener">app.getcontentninja.com</a>.</p>
-                    <p class="mt-2">2.3. The Provider may improve, extend or otherwise modify individual features of
+                    <p class="mt-2">2.4. The Provider may improve, extend or otherwise modify individual features of
                         the Service over time, provided that the essential character of the Service is preserved
                         during a paid subscription period.</p>
                 </div>
@@ -84,12 +117,20 @@ const description =
                     <p>3.1. Use of the Service requires registration. The contract between the Provider and the User
                         is concluded when the User registers and starts a subscription, thereby accepting these
                         Terms.</p>
-                    <p class="mt-2">3.2. The Service may only be used by natural persons who are at least 18 years old
-                        and have full legal capacity, and by lawfully operating legal entities and sole
-                        proprietors.</p>
-                    <p class="mt-2">3.3. The User must provide accurate and up-to-date information during registration
+                    <p class="mt-2">3.2. The Service may be used <strong class="text-dark">for business purposes
+                        only</strong>. Only a <strong class="text-dark">legal entity, sole proprietor or other
+                        organisation</strong> using the Service within its trade, business, craft or profession may be
+                        a User. The Service is not available to consumers.</p>
+                    <p class="mt-2">3.3. By registering, the User <strong class="text-dark">declares that it is not
+                        acting as a consumer</strong> and that it is authorised to conclude a contract on behalf of
+                        the business it represents. The User must provide the business details required for invoicing
+                        (business name, registered address, tax number).</p>
+                    <p class="mt-2">3.4. If it later transpires that the User does not meet the conditions of Section
+                        3.2, the Provider may terminate the contract with immediate effect and close the account. This
+                        does not affect any rights the User has under mandatory law.</p>
+                    <p class="mt-2">3.5. The User must provide accurate and up-to-date information during registration
                         and keep it current.</p>
-                    <p class="mt-2">3.4. The User is responsible for the security of their account and for all
+                    <p class="mt-2">3.6. The User is responsible for the security of their account and for all
                         activity carried out through it. Login credentials must be kept confidential and must not be
                         shared with third parties. The User must notify the Provider without delay if they suspect
                         unauthorised access to their account.</p>
@@ -101,10 +142,11 @@ const description =
                     <p>4.1. The Service is offered on a monthly subscription basis in several tiers. Each subscription
                         includes access to the system and a monthly allowance of AI credits belonging to the chosen
                         tier.</p>
-                    <p class="mt-2">4.2. The subscription fee is payable monthly, in advance. The applicable fees are
-                        displayed on the pricing page and at checkout; for business customers prices are indicated as
-                        net amounts plus VAT where applicable, and for consumers the final gross (VAT-inclusive)
-                        price is always displayed before payment.</p>
+                    <p class="mt-2">4.2. The applicable fees are shown on the pricing page and at checkout. As the
+                        Service is available to businesses only, prices are indicated as
+                        <strong class="text-dark">net amounts</strong> plus VAT at the applicable rate. The Provider
+                        issues an <strong class="text-dark">electronic invoice</strong> for each payment and sends it
+                        by e-mail.</p>
                     <p class="mt-2">4.3. The subscription renews automatically at the end of each billing period until
                         cancelled by the User.</p>
                     <p class="mt-2">4.4. Payment is processed by the payment provider Stripe. The Provider does not
@@ -126,6 +168,13 @@ const description =
                     <p class="mt-2">4.9. If the User has used up the credits included in the monthly fee and does not
                         purchase extra credits, the AI-based content generation features are unavailable until the
                         start of the next billing period. Other, non-AI features of the system remain available.</p>
+                    <p class="mt-2">4.10. The Provider may change the subscription fee and the content of the
+                        subscription tiers. Such a change does not affect a billing period that has already started
+                        and been paid for. The Provider will notify the User by e-mail
+                        <strong class="text-dark">at least 30 days</strong> before the change takes effect. If the
+                        User does not accept the change, they may cancel their subscription before it takes effect;
+                        failing to cancel and paying the fee for the next period constitutes acceptance of the
+                        change.</p>
                 </div>
 
                 <!-- 5. -->
@@ -135,7 +184,9 @@ const description =
                     <p class="mt-2">5.2. Upon cancellation the subscription remains active until the end of the current
                         billing period, during which the User may continue to use the Service without restriction.</p>
                     <p class="mt-2">5.3. Subscription fees already paid are non-refundable, except where a refund is
-                        required by mandatory law.</p>
+                        required by mandatory law. As the User is not a consumer, the right of withdrawal and
+                        termination under Government Decree 45/2014 (II. 26.) on contracts between consumers and
+                        businesses does not apply.</p>
                 </div>
 
                 <!-- 6. -->
@@ -153,6 +204,25 @@ const description =
                     <p class="mt-2">6.4. It is prohibited to reverse-engineer, copy or resell the Service, to
                         circumvent its technical limitations (including credit limits), or to abuse it in any other
                         way. The Provider may suspend or restrict accounts engaged in such conduct.</p>
+                    <p class="mt-2">6.5. <strong class="text-dark">Sending newsletters.</strong> Where the User sends
+                        newsletters or other electronic marketing through the Service,
+                        <strong class="text-dark">the User is solely responsible</strong> for ensuring that recipients
+                        are on the list with valid, demonstrable consent, that an unsubscribe option is provided, and
+                        that the sending complies with the GDPR, Hungarian Act XLVIII of 2008 on the basic conditions
+                        of commercial advertising and Act CVIII of 2001 on electronic commerce services. The Provider
+                        does not verify, and is not obliged to verify, the origin of mailing lists. Abusive sending
+                        constitutes a material breach of these Terms.</p>
+                    <p class="mt-2">6.6. <strong class="text-dark">Writing to external systems.</strong> Publishing
+                        blog articles and updating product descriptions
+                        <strong class="text-dark">modify data in the User’s own webshop</strong>. These operations are
+                        triggered solely by the User’s approval; the User is responsible for the content written back
+                        or published, for its accuracy and for its legal compliance. The Provider recommends that the
+                        User back up their webshop before any large-scale modification.</p>
+                    <p class="mt-2">6.7. <strong class="text-dark">Third-party personal data.</strong> Where the User
+                        uploads material containing personal data (e.g. photographs, mailing lists, customer data) to
+                        the Service or connects it from an external system, the User
+                        <strong class="text-dark">warrants that it has an appropriate legal basis and
+                        authorisation</strong> to do so and that it has properly informed the data subjects.</p>
                 </div>
 
                 <!-- 7. -->
@@ -162,7 +232,11 @@ const description =
                         accounts or pages to the Service. Use of these platforms is additionally subject to the
                         respective platform operator’s own terms and policies (in the case of Facebook and Instagram,
                         those of Meta Platforms), which the User must accept and comply with independently of these
-                        Terms.</p>
+                        Terms. Certain features of the Service connect to further external accounts of the User: the
+                        webshop platform (currently UNAS or Shoprenter) and the newsletter provider (currently
+                        MailerLite or SalesAutopilot). The use of these systems is also subject to the respective
+                        provider’s own terms, which the User accepts and complies with independently. The Provider is
+                        not liable for the availability, operation or interface changes of these systems.</p>
                     <p class="mt-2">7.2. The Provider is not affiliated with, endorsed by or sponsored by Meta
                         Platforms or any other platform operator.</p>
                     <p class="mt-2">7.3. The Provider assumes no responsibility for the availability of third-party
@@ -183,6 +257,18 @@ const description =
                     <p class="mt-2">8.3. The Provider claims no ownership of content uploaded by the User or generated
                         with the help of the Service. The Provider processes such content solely to the extent
                         necessary to provide the Service.</p>
+                    <p class="mt-2">8.4. <strong class="text-dark">Marking of AI-generated content.</strong> The
+                        Provider marks outputs generated by artificial intelligence in a machine-readable format, as
+                        far as technically feasible, in accordance with Article 50 of Regulation (EU) 2024/1689 on
+                        artificial intelligence. The User acknowledges that, as the publisher of the content,
+                        <strong class="text-dark">the User may also be subject to disclosure obligations</strong> (in
+                        particular for images or videos that deceptively depict real persons or events, and for text
+                        published on matters of public interest), and that complying with those obligations is the
+                        User’s responsibility.</p>
+                    <p class="mt-2">8.5. <strong class="text-dark">No AI training.</strong> The Provider does
+                        <strong class="text-dark">not use the User’s content or data to train artificial intelligence
+                        models</strong>, and under the contractual terms applicable to the AI providers used by the
+                        Service, those providers do not train on the data submitted by the User either.</p>
                 </div>
 
                 <!-- 9. -->
@@ -208,6 +294,12 @@ const description =
                         interruptions of third-party providers used by the Provider (including in particular AI
                         providers, social media platforms, payment providers and hosting providers) that are beyond
                         the Provider’s control.</p>
+                    <p class="mt-2">9.6. The Provider is not liable for data loss or erroneous modification occurring
+                        in external systems connected by the User (webshop, newsletter provider, social media
+                        platform) where this results from the execution of an operation approved by the User.</p>
+                    <p class="mt-2">9.7. Actual delivery of newsletters is the responsibility of the User’s newsletter
+                        provider. The Provider is responsible for correctly initiating the send, but not for delivery,
+                        spam classification or restrictions imposed by that provider.</p>
                 </div>
 
                 <!-- 10. -->
@@ -231,11 +323,15 @@ const description =
                 <div class="p-8 doc-section">
                     <h2>11. Data protection</h2>
                     <p>11.1. The Provider processes personal data in accordance with the GDPR. Detailed information on
-                        the processing of the User’s personal data is set out in the <a
-                            href="/en/privacy-policy/">Privacy Policy</a>, which forms an integral part of these
-                        Terms.</p>
+                        the processing of the User’s personal data is set out in the <a href={privacy}>Privacy
+                        Policy</a>, which forms an integral part of these Terms.</p>
                     <p class="mt-2">11.2. Instructions for requesting the deletion of personal data are available on
-                        the <a href="/en/data-deletion/">Data Deletion Instructions</a> page.</p>
+                        the <a href={dataDeletion}>Data Deletion Instructions</a> page.</p>
+                    <p class="mt-2">11.3. Where the User processes the personal data of its own customers, subscribers
+                        or other data subjects through the Service, <strong class="text-dark">the User acts as the
+                        controller and the Provider as the processor</strong> in that respect. The processing terms
+                        between the parties are set out in <a href="#annex-1">Annex 1</a> (Data Processing Terms) to
+                        these Terms, which the User accepts upon registration.</p>
                 </div>
 
                 <!-- 12. -->
@@ -254,26 +350,80 @@ const description =
                     <p>13.1. The User may submit complaints at <a
                             href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>. The Provider investigates
                         and responds to complaints within 30 days.</p>
-                    <p class="mt-2">13.2. If the User qualifies as a consumer, they may turn to the conciliation body
-                        (békéltető testület) competent for their place of residence, or to the Hungarian consumer
-                        protection authority.</p>
-                    <p class="mt-2">13.3. EU online dispute resolution platform: <a
-                            href="https://ec.europa.eu/consumers/odr" target="_blank"
-                            rel="noopener">https://ec.europa.eu/consumers/odr</a></p>
+                    <p class="mt-2">13.2. The parties shall seek to settle any dispute primarily by negotiation.</p>
                 </div>
 
                 <!-- 14. -->
                 <div class="p-8 doc-section">
                     <h2>14. Governing law and final provisions</h2>
-                    <p>14.1. These Terms and the contract between the Provider and the User are governed by Hungarian
-                        law — in particular Act V of 2013 on the Civil Code, Act CVIII of 2001 on certain issues of
-                        electronic commerce services, and Government Decree 45/2014 (II. 26.) on the detailed rules
-                        of contracts between consumers and businesses.</p>
+                    <p>14.1. These Terms and the contract between the parties are governed by
+                        <strong class="text-dark">Hungarian law</strong>, in particular Act V of 2013 on the Civil
+                        Code and Act CVIII of 2001 on certain issues of electronic commerce services.</p>
                     <p class="mt-2">14.2. For any dispute not settled amicably, the Hungarian courts having
-                        jurisdiction and competence under the general rules shall proceed. If the User is a consumer
-                        residing in the EU, this does not affect their mandatory statutory rights.</p>
-                    <p class="mt-2">14.3. These Terms are drawn up in English. They are effective as of 2 July 2026
-                        and replace all previous versions.</p>
+                        jurisdiction and competence under the general rules shall proceed.</p>
+                    <p class="mt-2">14.3. These Terms are drawn up in Hungarian and English.
+                        <strong class="text-dark">In case of any discrepancy, the Hungarian text prevails.</strong>
+                        They are effective as of the date indicated above and replace all previous versions.</p>
+                </div>
+
+                <!-- Annex 1 -->
+                <div class="p-8 doc-section" id="annex-1">
+                    <h2>Annex 1 — Data Processing Terms</h2>
+                    <p><strong class="text-dark">1. Subject matter.</strong> This Annex sets out the terms required by
+                        Article 28 GDPR for cases where the User (the <strong class="text-dark">Controller</strong>)
+                        processes personal data through the Service and the Provider (the
+                        <strong class="text-dark">Processor</strong>) carries out processing operations on the
+                        Controller’s behalf.</p>
+                    <p class="mt-2"><strong class="text-dark">2. Nature and purpose of the processing.</strong>
+                        Producing and publishing marketing content, compiling and sending newsletter campaigns,
+                        processing webshop data, and the storage and technical operations necessary to provide the
+                        Service.</p>
+                    <p class="mt-2"><strong class="text-dark">3. Duration of the processing.</strong> For the term of
+                        the subscription, or until the Controller instructs deletion.</p>
+                    <p class="mt-2"><strong class="text-dark">4. Categories of data subjects.</strong> The
+                        Controller’s newsletter subscribers, customers and contact persons, and persons appearing in
+                        material uploaded by the Controller.</p>
+                    <p class="mt-2"><strong class="text-dark">5. Types of personal data.</strong> Name, e-mail
+                        address, other fields present in the mailing list, likenesses appearing in uploaded media
+                        files, and any other data provided by the Controller.</p>
+                    <p class="mt-2"><strong class="text-dark">6. Processing on instructions.</strong> The Processor
+                        processes personal data solely on the documented instructions of the Controller — including
+                        operations carried out through the interface of the Service — unless required to do otherwise
+                        by Union or Member State law; in that case the Processor informs the Controller beforehand,
+                        unless the law prohibits it.</p>
+                    <p class="mt-2"><strong class="text-dark">7. Confidentiality.</strong> The Processor ensures that
+                        persons authorised to access the data have committed themselves to confidentiality.</p>
+                    <p class="mt-2"><strong class="text-dark">8. Security measures.</strong> The Processor applies the
+                        measures required by Article 32 GDPR, in particular: storage of data within the EU;
+                        per-user, database-level isolation (row-level security); encrypted storage of access keys and
+                        tokens (AES-256-GCM); encrypted transmission (TLS); logging and access control; daily
+                        backups.</p>
+                    <p class="mt-2"><strong class="text-dark">9. Sub-processors.</strong> The Controller gives general
+                        authorisation for the engagement of sub-processors. The current list of sub-processors
+                        engaged is available in Section 5 of the <a href={privacy}>Privacy Policy</a>. In the event of
+                        a change, the Processor publishes a notice <strong class="text-dark">at least 30 days</strong>
+                        in advance, against which the Controller may object; in the event of an objection the
+                        Controller may terminate its subscription.</p>
+                    <p class="mt-2"><strong class="text-dark">10. Data subject rights.</strong> The Processor assists
+                        the Controller in fulfilling data subject requests through the features of the Service and, if
+                        needed, through reasonable cooperation. If such a request reaches the Processor, it forwards
+                        the request to the Controller and does not fulfil it independently.</p>
+                    <p class="mt-2"><strong class="text-dark">11. Personal data breach.</strong> The Processor
+                        notifies the Controller of any personal data breach it becomes aware of
+                        <strong class="text-dark">without undue delay and no later than 48 hours</strong>, and
+                        provides the information necessary for notification.</p>
+                    <p class="mt-2"><strong class="text-dark">12. Deletion or return.</strong> On termination of the
+                        relationship the Processor deletes or returns the personal data at the Controller’s choice,
+                        no later than <strong class="text-dark">within 30 days</strong>, unless retention is required
+                        by law.</p>
+                    <p class="mt-2"><strong class="text-dark">13. Audit.</strong> The Processor makes available to the
+                        Controller the information necessary to demonstrate compliance with this Annex and — subject
+                        to reasonable prior notice, at most once a year, and without unreasonable disruption of
+                        business operations — allows for audits.</p>
+                    <p class="mt-2"><strong class="text-dark">14. Transfers to third countries.</strong> Where data is
+                        transferred to a third country, the transfer takes place on the basis of an adequacy decision
+                        of the European Commission or Standard Contractual Clauses (SCC); details are set out in
+                        Section 6 of the <a href={privacy}>Privacy Policy</a>.</p>
                 </div>
 
             </div>
@@ -288,6 +438,6 @@ const description =
   .doc-section p { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.5rem; }
   .doc-section p:first-of-type { margin-top: 0; }
   .doc-section a { color: #6c5ce7; text-decoration: underline; }
-  .doc-section ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
-  .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; }
+  .doc-section ul { list-style: none; padding-left: 0.75rem; margin-top: 0.5rem; }
+  .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.35rem; }
 </style>

@@ -23,12 +23,13 @@ export type PageKey =
 /**
  * Logikai oldal -> nyelvenkénti teljes path (locale prefixszel, fordított sluggal).
  * `null` = az adott oldalnak nincs verziója az adott nyelven.
- * Az adatvédelmi tájékoztató teljes szövege KIZÁRÓLAG angolul létezik (Meta App
- * Review követelmény) — a /hu/adatkezeles csak egy rá hivatkozó rövid oldal.
- * A terms (ÁSZF) kizárólag angolul létezik (Meta App Review követelmény) —
- * a régi /hu/aszf URL a /en/terms-re redirectel.
- * A dataDeletion (Meta által megkövetelt adattörlési tájékoztató) szándékosan
- * csak angolul létezik — a magyar oldalak erre hivatkoznak.
+ *
+ * A jogi oldalak 2026 augusztusától MINDKÉT nyelven teljes szöveggel léteznek
+ * (ÁSZF, adatkezelési tájékoztató, adattörlési útmutató). A magyar szöveg az
+ * elsődleges és irányadó, az angol a Meta App Review és a külföldi ügyfelek
+ * miatt marad. Korábban a /hu/aszf a /en/terms-re redirectelt és a
+ * /hu/adatkezeles csak egy rövid, angolra mutató hivatkozó oldal volt — ezt a
+ * `astro.config.mjs` redirects listájából is kivezettük.
  */
 export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   home: { hu: '/hu/', en: '/en/' },
@@ -62,9 +63,9 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   contact: { hu: '/hu/kapcsolat/', en: '/en/contact/' },
   thanks: { hu: '/hu/koszonjuk/', en: '/en/thank-you/' },
   privacy: { hu: '/hu/adatkezeles/', en: '/en/privacy-policy/' },
-  terms: { hu: null, en: '/en/terms/' },
+  terms: { hu: '/hu/aszf/', en: '/en/terms/' },
   imprint: { hu: '/hu/impresszum/', en: '/en/imprint/' },
-  dataDeletion: { hu: null, en: '/en/data-deletion/' },
+  dataDeletion: { hu: '/hu/adattorles/', en: '/en/data-deletion/' },
 };
 
 /** Az adott oldal path-ja egy adott nyelven (üres string, ha nincs). */

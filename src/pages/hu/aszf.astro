@@ -1,0 +1,464 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { pathFor } from '../../i18n/routes';
+
+const locale = 'hu';
+const page = 'terms';
+const title = 'Általános Szerződési Feltételek (ÁSZF) – Content Ninja';
+const description =
+  'A Content Ninja AI tartalomgyártó, publikáló és hírlevél-szolgáltatás igénybevételének Általános Szerződési Feltételei, az adatfeldolgozási feltételeket tartalmazó 1. számú melléklettel.';
+
+// Kereszthivatkozások MINDIG az azonos nyelvű dokumentumra (brief §6.6).
+const privacy = pathFor('privacy', locale);
+const dataDeletion = pathFor('dataDeletion', locale);
+const termsEn = pathFor('terms', 'en');
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description}>
+  <Header locale={locale} page={page} />
+
+  <main class="py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[760px] mx-auto">
+
+            <a href="/hu/"
+                class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Vissza a főoldalra
+            </a>
+
+            <div class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Általános Szerződési Feltételek</h1>
+                <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól</p>
+                <p class="text-sm text-muted mt-2">
+                    A jelen ÁSZF magyar és angol nyelven készült. Eltérés esetén a magyar szöveg az irányadó; az
+                    angol változat <a href={termsEn} class="text-primary underline">itt olvasható</a>.
+                </p>
+            </div>
+
+            <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+
+                <!-- 1. -->
+                <div class="p-8 doc-section">
+                    <h2>1. A Szolgáltató adatai</h2>
+                    <dl class="space-y-2 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Cégnév</dt>
+                            <dd class="text-dark font-medium">Digitallwork.hu Kft.</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Székhely</dt>
+                            <dd class="text-dark font-medium">1118 Budapest, Pálinkás Antal u. 3/A FSZ/8</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Cégjegyzékszám</dt>
+                            <dd class="text-dark font-medium">01-09-426906</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Adószám</dt>
+                            <dd class="text-dark font-medium">32489819-2-43</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">E-mail</dt>
+                            <dd><a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a></dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:gap-4">
+                            <dt class="text-muted w-44 shrink-0">Telefonszám</dt>
+                            <dd><a href="tel:+36202838831">+36 20 283 8831</a></dd>
+                        </div>
+                    </dl>
+                    <p class="mt-4">A jelen Általános Szerződési Feltételek (a továbbiakban: „ÁSZF”) a Digitallwork.hu
+                        Kft. (a továbbiakban: „Szolgáltató”, „mi”) által nyújtott Content Ninja szolgáltatás (a
+                        továbbiakban: „Szolgáltatás”) igénybevételét szabályozzák. A regisztrációval, illetve a
+                        Szolgáltatás használatával Ön (a továbbiakban: „Felhasználó”) elfogadja a jelen ÁSZF-et.</p>
+                </div>
+
+                <!-- 2. -->
+                <div class="p-8 doc-section">
+                    <h2>2. A Szolgáltatás leírása</h2>
+                    <p>2.1. A Content Ninja szoftver-mint-szolgáltatás (SaaS), amely mesterséges intelligencia
+                        segítségével marketingtartalmat készít webáruházak számára, és azt a Felhasználó által
+                        beállított ütemezés szerint közzéteszi a Felhasználó által bekötött csatornákon. A Szolgáltatás
+                        keretében a Felhasználó különösen az alábbi funkciókat használhatja:</p>
+                    <ul>
+                        <li>a) <strong class="text-dark">közösségi média tartalom</strong> (szöveg, kép, animáció,
+                            videó, narrátorvideó) készítése és ütemezett vagy azonnali közzététele a Felhasználó által
+                            bekötött Facebook-oldalakon és Instagram üzleti fiókokban;</li>
+                        <li>b) <strong class="text-dark">hírlevél</strong> készítése és kiküldése a Felhasználó
+                            <strong class="text-dark">saját hírlevél-szolgáltatói fiókján</strong> keresztül (jelenleg
+                            MailerLite vagy SalesAutopilot);</li>
+                        <li>c) <strong class="text-dark">blogcikk</strong> készítése és közzététele a Felhasználó
+                            <strong class="text-dark">saját webáruházának blogjában</strong> (jelenleg UNAS vagy
+                            Shoprenter);</li>
+                        <li>d) <strong class="text-dark">termékleírások újraírása</strong>, és a Felhasználó
+                            jóváhagyását követően azok visszaírása a Felhasználó webáruházába;</li>
+                        <li>e) <strong class="text-dark">hirdetési kreatívok</strong> (szöveg és vizuál) készítése; a
+                            hirdetés feladása a hirdetési platformon a Felhasználó feladata — a Szolgáltatás hirdetést
+                            nem tesz közzé;</li>
+                        <li>f) <strong class="text-dark">kulcsszó- és témakutatás</strong>, tudásforrás-kezelés,
+                            marketingnaptár, valamint a közzétett tartalmak teljesítmény-statisztikáinak és
+                            hozzászólásainak megjelenítése;</li>
+                        <li>g) <strong class="text-dark">AI asszisztens („Ninja AI”)</strong>, amely a Felhasználó
+                            utasítására a Szolgáltatáson belül műveleteket hajt végre és a munkához szükséges
+                            információkat megjegyzi.</li>
+                    </ul>
+                    <p class="mt-2">2.2. A b)–d) pont szerinti funkciók a Felhasználó
+                        <strong class="text-dark">saját külső rendszereibe írnak</strong> (webáruház,
+                        hírlevél-szolgáltató). A Szolgáltató ezeket a műveleteket kizárólag a Felhasználó utasítására
+                        és jóváhagyásával hajtja végre.</p>
+                    <p class="mt-2">2.3. A Szolgáltatás kizárólag online, a Szolgáltató által az
+                        <a href="https://app.getcontentninja.com" target="_blank" rel="noopener">app.getcontentninja.com</a>
+                        címen elérhető webes felületen keresztül vehető igénybe.</p>
+                    <p class="mt-2">2.4. A Szolgáltató a Szolgáltatás egyes funkcióit időről időre fejlesztheti,
+                        bővítheti vagy módosíthatja, feltéve, hogy a Szolgáltatás lényegi jellege a kifizetett
+                        előfizetési időszak alatt nem változik.</p>
+                </div>
+
+                <!-- 3. -->
+                <div class="p-8 doc-section">
+                    <h2>3. Regisztráció és felhasználói fiók</h2>
+                    <p>3.1. A Szolgáltatás igénybevétele regisztrációhoz kötött. A Szolgáltató és a Felhasználó
+                        közötti szerződés akkor jön létre, amikor a Felhasználó regisztrál és előfizetést indít,
+                        ezzel elfogadva a jelen ÁSZF-et.</p>
+                    <p class="mt-2">3.2. A Szolgáltatás <strong class="text-dark">kizárólag vállalkozási célra</strong>
+                        vehető igénybe. Felhasználó kizárólag <strong class="text-dark">jogi személy, egyéni
+                        vállalkozó vagy egyéb szervezet</strong> lehet, amely a Szolgáltatást szakmája, önálló
+                        foglalkozása vagy üzleti tevékenysége körében veszi igénybe. A Szolgáltatás fogyasztók részére
+                        nem érhető el.</p>
+                    <p class="mt-2">3.3. A Felhasználó a regisztrációval <strong class="text-dark">kijelenti, hogy nem
+                        fogyasztóként jár el</strong>, és hogy jogosult a képviselt vállalkozás nevében szerződést
+                        kötni. A regisztráció során meg kell adnia a számlázáshoz szükséges vállalkozási adatokat (a
+                        vállalkozás neve, székhelye, adószáma).</p>
+                    <p class="mt-2">3.4. Ha utóbb kiderül, hogy a Felhasználó a 3.2 pont feltételeinek nem felel meg,
+                        a Szolgáltató jogosult a szerződést azonnali hatállyal felmondani és a fiókot megszüntetni. Ez
+                        nem érinti azokat a jogokat, amelyek a Felhasználót kógens jogszabály alapján megilletik.</p>
+                    <p class="mt-2">3.5. A Felhasználó a regisztráció során köteles valós és naprakész adatokat
+                        megadni, és azokat naprakészen tartani.</p>
+                    <p class="mt-2">3.6. A Felhasználó felel a fiókja biztonságáért és a fiókján keresztül végzett
+                        minden tevékenységért. A belépési adatokat bizalmasan kell kezelni, azok harmadik személlyel
+                        nem oszthatók meg. A Felhasználó köteles késedelem nélkül értesíteni a Szolgáltatót, ha a
+                        fiókjához való jogosulatlan hozzáférést gyanít.</p>
+                </div>
+
+                <!-- 4. -->
+                <div class="p-8 doc-section">
+                    <h2>4. Előfizetés, díjak és fizetés</h2>
+                    <p>4.1. A Szolgáltatás havi előfizetéses konstrukcióban, több csomagban érhető el. Minden
+                        előfizetés tartalmazza a rendszerhez való hozzáférést és a választott csomaghoz tartozó havi
+                        AI-keretet (kreditet).</p>
+                    <p class="mt-2">4.2. A díjak a Szolgáltató árlistáján és a fizetési felületen szerepelnek. Mivel a
+                        Szolgáltatás kizárólag vállalkozások részére érhető el, a díjakat
+                        <strong class="text-dark">nettó összegben</strong> tüntetjük fel, amelyet a mindenkori
+                        általános forgalmi adó terhel. A befizetésről a Szolgáltató
+                        <strong class="text-dark">elektronikus számlát</strong> állít ki, amelyet e-mailben küld
+                        meg.</p>
+                    <p class="mt-2">4.3. Az előfizetés minden számlázási időszak végén automatikusan megújul, amíg a
+                        Felhasználó le nem mondja.</p>
+                    <p class="mt-2">4.4. A fizetést a Stripe fizetési szolgáltató bonyolítja. A Szolgáltató kártya- és
+                        fizetési adatot nem tárol és nem kezel; ezeket kizárólag a Stripe kezeli.</p>
+                    <p class="mt-2">4.5. A Szolgáltató időről időre kuponkódos kedvezményt kínálhat, amellyel az első
+                        előfizetési időszak kedvezményes áron vehető igénybe. A kuponkódok feltételeit, mértékét és
+                        érvényességét a Szolgáltató határozza meg, a kedvezmény kizárólag érvényes kuponkód
+                        megadásával vehető igénybe.</p>
+                    <p class="mt-2">4.6. A havi díjban foglalt AI-kreditek az adott számlázási időszakra
+                        vonatkoznak; a fel nem használt havi kreditek — eltérő szolgáltatói rendelkezés hiányában —
+                        nem vihetők át a következő hónapra.</p>
+                    <p class="mt-2">4.7. A Felhasználó a havi kereten felül extra kreditet vásárolhat. Az extra
+                        kreditek a vásárlástól számított 365 napig érvényesek, ezt követően felhasználatlanul
+                        lejárnak. Az előfizetés megszűnése esetén a fel nem használt extra kreditek az előfizetési
+                        időszak végén szintén elvesznek.</p>
+                    <p class="mt-2">4.8. A Felhasználó az aktuális kreditegyenlegét, a kreditfelhasználás előzményeit
+                        és az extra kreditek lejáratát bármikor megtekintheti a Content Ninja felületének
+                        Felhasználás menüpontjában.</p>
+                    <p class="mt-2">4.9. Ha a Felhasználó elhasználta a havi díjban foglalt kreditet és nem vásárol
+                        extra kreditet, az AI-alapú tartalomgenerálási funkciók a következő számlázási időszak
+                        kezdetéig nem érhetők el. A rendszer egyéb, nem AI-alapú funkciói továbbra is
+                        használhatók.</p>
+                    <p class="mt-2">4.10. A Szolgáltató jogosult az előfizetési díjat és a csomagok tartalmát
+                        megváltoztatni. A már megkezdett és kifizetett számlázási időszakot a változás nem érinti. A
+                        díjváltozásról a Szolgáltató a hatálybalépés előtt
+                        <strong class="text-dark">legalább 30 nappal</strong> e-mailben értesíti a Felhasználót. Ha a
+                        Felhasználó a változást nem fogadja el, előfizetését a hatálybalépés előtt lemondhatja; ha nem
+                        mondja le, és a következő időszak díja levonásra kerül, az a változás elfogadásának
+                        minősül.</p>
+                </div>
+
+                <!-- 5. -->
+                <div class="p-8 doc-section">
+                    <h2>5. Lemondás és visszatérítés</h2>
+                    <p>5.1. A Felhasználó előfizetését bármikor lemondhatja.</p>
+                    <p class="mt-2">5.2. A lemondást követően az előfizetés az aktuális számlázási időszak végéig
+                        aktív marad, ezalatt a Felhasználó korlátozás nélkül használhatja a Szolgáltatást.</p>
+                    <p class="mt-2">5.3. A már kifizetett előfizetési díj nem téríthető vissza, kivéve, ha a
+                        visszatérítést kógens jogszabály írja elő. A Felhasználó nem fogyasztó, ezért a fogyasztó és a
+                        vállalkozás közötti szerződések részletes szabályairól szóló
+                        <strong class="text-dark">45/2014. (II. 26.) Korm. rendelet szerinti elállási és felmondási
+                        jog nem illeti meg</strong>.</p>
+                </div>
+
+                <!-- 6. -->
+                <div class="p-8 doc-section">
+                    <h2>6. Tiltott és felelős használat</h2>
+                    <p>6.1. A Felhasználó a Szolgáltatást jogszerűen, rendeltetésszerűen és a vonatkozó jogszabályok
+                        betartásával köteles használni.</p>
+                    <p class="mt-2">6.2. Tilos a Szolgáltatáson keresztül olyan tartalmat előállítani, feltölteni vagy
+                        közzétenni, amely jogszabályba ütközik, megtévesztő, kéretlen reklámnak (spam) minősül,
+                        harmadik személy szellemi tulajdonhoz fűződő vagy egyéb jogát sérti, illetve sérti azoknak a
+                        platformoknak a szabályzatait, ahová a tartalom kikerül — különösen a Facebookra és
+                        Instagramra vonatkozó Meta felhasználási feltételeket, közösségi alapelveket, hirdetési
+                        szabályzatot és platformfeltételeket.</p>
+                    <p class="mt-2">6.3. A Felhasználó kizárólagosan felel az általa a Szolgáltatással előállított,
+                        jóváhagyott és közzétett tartalomért, annak helyességéért és jogszerűségéért.</p>
+                    <p class="mt-2">6.4. Tilos a Szolgáltatás visszafejtése, másolása vagy továbbértékesítése, a
+                        technikai korlátok (ideértve a kreditkorlátokat) megkerülése, valamint bármely egyéb
+                        visszaélésszerű használat. A Szolgáltató az ilyen magatartást tanúsító fiókokat
+                        felfüggesztheti vagy korlátozhatja.</p>
+                    <p class="mt-2">6.5. <strong class="text-dark">Hírlevél-küldés.</strong> Ha a Felhasználó a
+                        Szolgáltatáson keresztül hírlevelet vagy egyéb elektronikus reklámot küld,
+                        <strong class="text-dark">kizárólag a Felhasználó felel</strong> azért, hogy a címzettek
+                        érvényes, bizonyítható hozzájárulással szerepeljenek a listán, a leiratkozás lehetősége
+                        biztosított legyen, és a küldés megfeleljen a GDPR-nak, a gazdasági reklámtevékenység
+                        alapvető feltételeiről szóló <strong class="text-dark">2008. évi XLVIII. törvénynek</strong>
+                        és az elektronikus kereskedelmi szolgáltatásokról szóló
+                        <strong class="text-dark">2001. évi CVIII. törvénynek</strong>. A Szolgáltató a címlisták
+                        eredetét nem ellenőrzi és nem is köteles ellenőrizni. A visszaélésszerű küldés az ÁSZF súlyos
+                        megszegésének minősül.</p>
+                    <p class="mt-2">6.6. <strong class="text-dark">Külső rendszerbe írás.</strong> A
+                        blogcikk-közzététel és a termékleírás-frissítés a Felhasználó
+                        <strong class="text-dark">saját webáruházában módosít adatot</strong>. Ezeket a műveleteket
+                        kizárólag a Felhasználó jóváhagyása indítja el; a közzétett vagy visszaírt tartalomért, annak
+                        helyességéért és jogszerűségéért a Felhasználó felel. A Szolgáltató javasolja, hogy a
+                        Felhasználó nagyobb tömegű módosítás előtt készítsen mentést a webáruházáról.</p>
+                    <p class="mt-2">6.7. <strong class="text-dark">Harmadik személyek adatai.</strong> Ha a Felhasználó
+                        személyes adatot tartalmazó anyagot (például fényképet, címlistát, ügyféladatot) tölt fel a
+                        Szolgáltatásba vagy köt be külső rendszerből,
+                        <strong class="text-dark">szavatolja, hogy ehhez megfelelő jogalappal és jogosultsággal
+                        rendelkezik</strong>, és hogy az érintetteket megfelelően tájékoztatta.</p>
+                </div>
+
+                <!-- 7. -->
+                <div class="p-8 doc-section">
+                    <h2>7. Harmadik felek platformjai</h2>
+                    <p>7.1. A Facebookra és Instagramra történő publikáláshoz a Felhasználónak be kell kötnie a saját
+                        közösségi média fiókjait vagy oldalait a Szolgáltatásba. E platformok használatára az adott
+                        platformüzemeltető saját feltételei és szabályzatai is vonatkoznak (Facebook és Instagram
+                        esetén a Meta Platformsé), amelyeket a Felhasználó a jelen ÁSZF-től függetlenül, önállóan
+                        fogad el és tart be. A Szolgáltatás egyes funkciói a Felhasználó további külső fiókjaihoz
+                        kapcsolódnak: a webáruház-motorhoz (jelenleg UNAS vagy Shoprenter) és a
+                        hírlevél-szolgáltatóhoz (jelenleg MailerLite vagy SalesAutopilot). E rendszerek használatára
+                        az adott szolgáltató saját feltételei is vonatkoznak, amelyeket a Felhasználó önállóan fogad
+                        el és tart be. A Szolgáltató nem felel e rendszerek elérhetőségéért, működéséért vagy
+                        felületük megváltozásáért.</p>
+                    <p class="mt-2">7.2. A Szolgáltató nem áll kapcsolatban a Meta Platformsszal vagy bármely más
+                        platformüzemeltetővel, azok nem támogatják és nem szponzorálják.</p>
+                    <p class="mt-2">7.3. A Szolgáltató nem vállal felelősséget a harmadik felek platformjainak
+                        elérhetőségéért, felületük, API-juk, feltételeik vagy szabályzataik változásáért, illetve a
+                        Felhasználó platform-fiókjainak korlátozásáért vagy felfüggesztéséért. Ezek az események nem
+                        minősülnek a Szolgáltatás hibájának.</p>
+                </div>
+
+                <!-- 8. -->
+                <div class="p-8 doc-section">
+                    <h2>8. Szellemi tulajdon és a generált tartalom</h2>
+                    <p>8.1. A Content Ninja szoftver, annak felülete, forráskódja, arculata és védjegyei a Szolgáltató
+                        kizárólagos szellemi tulajdonát képezik. Az előfizetés a Felhasználó számára korlátozott, nem
+                        kizárólagos, át nem ruházható felhasználási jogot biztosít a Szolgáltatás használatára; egyéb
+                        jog nem száll át.</p>
+                    <p class="mt-2">8.2. A Szolgáltatással előállított tartalom (szöveg, kép, poszt) a Felhasználót
+                        illeti. A Felhasználó a generált tartalmat korlátozás nélkül, bármilyen célra — ideértve az
+                        üzleti felhasználást is — használhatja.</p>
+                    <p class="mt-2">8.3. A Szolgáltató nem formál tulajdonjogot a Felhasználó által feltöltött vagy a
+                        Szolgáltatás segítségével előállított tartalomra. A Szolgáltató ezeket kizárólag a
+                        Szolgáltatás nyújtásához szükséges mértékben kezeli.</p>
+                    <p class="mt-2">8.4. <strong class="text-dark">Az AI-tartalom jelölése.</strong> A Szolgáltató a
+                        mesterséges intelligenciával előállított kimeneteket az uniós mesterséges intelligenciáról
+                        szóló rendelet (2024/1689/EU) 50. cikkének megfelelően — a technikai lehetőségekhez mérten —
+                        géppel olvasható módon megjelöli. A Felhasználó tudomásul veszi, hogy a tartalom
+                        közzétevőjeként <strong class="text-dark">őt magát is terhelhetik tájékoztatási
+                        kötelezettségek</strong> (különösen valós személyt vagy eseményt megtévesztően ábrázoló kép
+                        vagy videó, illetve közérdekű témában közzétett szöveg esetén), és e kötelezettségek
+                        teljesítése az ő felelőssége.</p>
+                    <p class="mt-2">8.5. <strong class="text-dark">AI-tanítás kizárása.</strong> A Szolgáltató a
+                        Felhasználó tartalmát és adatait <strong class="text-dark">nem használja fel mesterséges
+                        intelligencia modellek tanítására</strong>, és a Szolgáltatás által igénybe vett
+                        AI-szolgáltatókkal fennálló szerződéses feltételek alapján ezek a szolgáltatók sem tanítanak
+                        a Felhasználó által átadott adatokon.</p>
+                </div>
+
+                <!-- 9. -->
+                <div class="p-8 doc-section">
+                    <h2>9. Szavatosság és felelősségkorlátozás</h2>
+                    <p>9.1. A Szolgáltató törekszik a Szolgáltatás folyamatos és megbízható elérhetőségére, de
+                        rendelkezésre állási garanciát (SLA) nem vállal. A Szolgáltatás — a jogszabályok által
+                        megengedett mértékben — „adott állapotában” és „elérhetőség szerint” áll rendelkezésre.</p>
+                    <p class="mt-2">9.2. A Szolgáltató nem szavatolja az AI által generált tartalom pontosságát,
+                        teljességét vagy jogszerűségét. A generált tartalom ellenőrzése, felhasználása és jogszerű
+                        alkalmazása kizárólag a Felhasználó felelőssége. A Szolgáltató nem felel azért, ha a
+                        Felhasználó a generált tartalmat jogellenes célra vagy harmadik személy jogát sértő módon
+                        használja fel.</p>
+                    <p class="mt-2">9.3. A Szolgáltató nem felel a harmadik felek szolgáltatásainak működéséből eredő
+                        hibákért vagy kimaradásokért (Stripe, közösségi média platformok, AI-szolgáltatók).</p>
+                    <p class="mt-2">9.4. A jogszabályok által megengedett mértékben a Szolgáltató teljes felelőssége
+                        minden esetben az érintett Felhasználó által az utolsó egy hónapban megfizetett előfizetési
+                        díj összegére korlátozódik. A jelen ÁSZF egyetlen rendelkezése sem zárja ki vagy korlátozza
+                        azt a felelősséget, amely kógens jogszabály alapján nem zárható ki vagy korlátozható
+                        (ideértve a szándékosan okozott, illetve az emberi életet, testi épséget vagy egészséget
+                        károsító károkozásért való felelősséget).</p>
+                    <p class="mt-2">9.5. A Szolgáltató nem felel a vis maiorból eredő szolgáltatáskiesésért,
+                        felfüggesztésért vagy korlátozásért. Vis maiornak minősül különösen: természeti katasztrófa,
+                        háború, sztrájk, járvány, hatósági intézkedés, kibertámadás, valamint a Szolgáltató által
+                        igénybe vett harmadik fél szolgáltatók (különösen AI-szolgáltatók, közösségi média
+                        platformok, fizetési szolgáltatók és tárhelyszolgáltatók) olyan kimaradása vagy
+                        szolgáltatás-megszakítása, amely a Szolgáltató érdekkörén kívül esik.</p>
+                    <p class="mt-2">9.6. A Szolgáltató nem felel a Felhasználó által bekötött külső rendszerekben
+                        (webáruház, hírlevél-szolgáltató, közösségi oldal) bekövetkező adatvesztésért vagy téves
+                        módosításért, ha az a Felhasználó által jóváhagyott művelet végrehajtásából ered.</p>
+                    <p class="mt-2">9.7. A hírlevelek tényleges kézbesítéséért a Felhasználó hírlevél-szolgáltatója
+                        felel. A Szolgáltató a küldés szabályszerű elindításáért felel, a kézbesítésért, a levelek
+                        spam-besorolásáért vagy a szolgáltató korlátozásaiért nem.</p>
+                </div>
+
+                <!-- 10. -->
+                <div class="p-8 doc-section">
+                    <h2>10. A szerződés időtartama és megszűnése</h2>
+                    <p>10.1. A szerződés határozatlan időre jön létre, és mindaddig hatályban marad, amíg a
+                        Felhasználó aktív előfizetéssel rendelkezik.</p>
+                    <p class="mt-2">10.2. A Felhasználó a szerződést bármikor megszüntetheti az előfizetése
+                        lemondásával (lásd 5. pont), és kérheti a fiókja törlését.</p>
+                    <p class="mt-2">10.3. A Szolgáltató felfüggesztheti, súlyos esetben azonnali hatállyal
+                        megszüntetheti a Felhasználó fiókját, ha a Felhasználó a jelen ÁSZF-et lényegesen megszegi —
+                        különösen a 6. pont szerinti használati szabályokat —, a Szolgáltatást jogellenesen használja,
+                        vagy az előfizetési díjat nem fizeti meg. Amennyiben ez ésszerű, a Szolgáltató előbb
+                        figyelmezteti a Felhasználót és póthatáridőt biztosít.</p>
+                    <p class="mt-2">10.4. A megszűnéssel a Felhasználó hozzáférése a Szolgáltatáshoz megszűnik, a fel
+                        nem használt kreditek elvesznek. Azok a rendelkezések, amelyek jellegüknél fogva a megszűnést
+                        követően is hatályban maradnak (különösen a 8., 9. és 14. pont), továbbra is
+                        alkalmazandók.</p>
+                </div>
+
+                <!-- 11. -->
+                <div class="p-8 doc-section">
+                    <h2>11. Adatvédelem</h2>
+                    <p>11.1. A Szolgáltató a személyes adatokat a GDPR-nak megfelelően kezeli. A Felhasználó személyes
+                        adatainak kezeléséről részletes tájékoztatást az <a href={privacy}>Adatkezelési
+                        tájékoztató</a> ad, amely a jelen ÁSZF elválaszthatatlan részét képezi.</p>
+                    <p class="mt-2">11.2. A személyes adatok törlésének kéréséhez szükséges lépéseket az
+                        <a href={dataDeletion}>Adattörlési útmutató</a> tartalmazza.</p>
+                    <p class="mt-2">11.3. Ha a Felhasználó a Szolgáltatáson keresztül a saját ügyfeleinek,
+                        feliratkozóinak vagy más érintetteknek a személyes adatait kezeli, e vonatkozásban
+                        <strong class="text-dark">a Felhasználó az adatkezelő és a Szolgáltató az
+                        adatfeldolgozó</strong>. A felek közötti adatfeldolgozási feltételeket a jelen ÁSZF
+                        <a href="#melleklet-1">1. számú melléklete</a> (Adatfeldolgozási feltételek) tartalmazza,
+                        amelyet a Felhasználó a regisztrációval elfogad.</p>
+                </div>
+
+                <!-- 12. -->
+                <div class="p-8 doc-section">
+                    <h2>12. Az ÁSZF módosítása</h2>
+                    <p>12.1. A Szolgáltató jogosult a jelen ÁSZF-et egyoldalúan módosítani.</p>
+                    <p class="mt-2">12.2. A módosításról a Szolgáltató a hatálybalépés előtt legalább 15 nappal
+                        e-mailben értesíti a Felhasználókat.</p>
+                    <p class="mt-2">12.3. Ha a Felhasználó a módosított ÁSZF-et nem fogadja el, előfizetését a
+                        módosítás hatálybalépése előtt lemondhatja.</p>
+                </div>
+
+                <!-- 13. -->
+                <div class="p-8 doc-section">
+                    <h2>13. Panaszkezelés és jogviták</h2>
+                    <p>13.1. A Felhasználó panaszát a
+                        <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a> címen jelentheti
+                        be. A Szolgáltató a panaszt 30 napon belül kivizsgálja és megválaszolja.</p>
+                    <p class="mt-2">13.2. A felek a vitás kérdéseket elsősorban egyeztetés útján rendezik.</p>
+                </div>
+
+                <!-- 14. -->
+                <div class="p-8 doc-section">
+                    <h2>14. Irányadó jog és záró rendelkezések</h2>
+                    <p>14.1. A jelen ÁSZF-re és a felek közötti szerződésre a <strong class="text-dark">magyar
+                        jog</strong> az irányadó, különösen a Polgári Törvénykönyvről szóló
+                        <strong class="text-dark">2013. évi V. törvény</strong> és az elektronikus kereskedelmi
+                        szolgáltatásokról szóló <strong class="text-dark">2001. évi CVIII. törvény</strong>.</p>
+                    <p class="mt-2">14.2. A békés úton nem rendezett jogvitákban az általános szabályok szerint
+                        hatáskörrel és illetékességgel rendelkező magyar bíróságok járnak el.</p>
+                    <p class="mt-2">14.3. A jelen ÁSZF magyar és angol nyelven készült.
+                        <strong class="text-dark">Eltérés esetén a magyar szöveg az irányadó.</strong> Az ÁSZF a fenti
+                        hatálybalépési naptól hatályos, és a korábbi változatok helyébe lép.</p>
+                </div>
+
+                <!-- 1. számú melléklet -->
+                <div class="p-8 doc-section" id="melleklet-1">
+                    <h2>1. számú melléklet — Adatfeldolgozási feltételek</h2>
+                    <p><strong class="text-dark">1. A megállapodás tárgya.</strong> A jelen melléklet a GDPR 28. cikke
+                        szerinti feltételeket rögzíti arra az esetre, ha a Felhasználó
+                        (<strong class="text-dark">Adatkezelő</strong>) a Szolgáltatáson keresztül személyes adatot
+                        kezel, és ehhez a Szolgáltató (<strong class="text-dark">Adatfeldolgozó</strong>) az ő nevében
+                        adatfeldolgozási műveleteket végez.</p>
+                    <p class="mt-2"><strong class="text-dark">2. Az adatkezelés tárgya, jellege és célja.</strong>
+                        Marketingtartalom előállítása és közzététele, hírlevél-kampányok összeállítása és kiküldése,
+                        webáruház-adatok feldolgozása, valamint a Szolgáltatás nyújtásához szükséges tárolás és
+                        technikai műveletek.</p>
+                    <p class="mt-2"><strong class="text-dark">3. Az adatkezelés időtartama.</strong> Az előfizetői
+                        jogviszony fennállása, illetve az Adatkezelő törlési utasításáig.</p>
+                    <p class="mt-2"><strong class="text-dark">4. Az érintettek köre.</strong> Az Adatkezelő
+                        hírlevél-feliratkozói, ügyfelei és kapcsolattartói, valamint az Adatkezelő által feltöltött
+                        anyagokon szereplő személyek.</p>
+                    <p class="mt-2"><strong class="text-dark">5. A személyes adatok típusai.</strong> Név, e-mail cím,
+                        a hírlevél-listában szereplő egyéb mezők, a feltöltött médiafájlokon szereplő képmás, valamint
+                        az Adatkezelő által megadott egyéb adatok.</p>
+                    <p class="mt-2"><strong class="text-dark">6. Utasításhoz kötöttség.</strong> Az Adatfeldolgozó a
+                        személyes adatokat kizárólag az Adatkezelő írásbeli utasítása alapján kezeli — ideértve a
+                        Szolgáltatás felületén tett műveleteket is —, kivéve, ha uniós vagy tagállami jog kötelezi
+                        eltérésre; ez esetben erről előzetesen tájékoztatja az Adatkezelőt, hacsak azt jogszabály nem
+                        tiltja.</p>
+                    <p class="mt-2"><strong class="text-dark">7. Titoktartás.</strong> Az Adatfeldolgozó biztosítja,
+                        hogy az adatokhoz hozzáférő személyek titoktartási kötelezettséget vállaltak.</p>
+                    <p class="mt-2"><strong class="text-dark">8. Biztonsági intézkedések.</strong> Az Adatfeldolgozó a
+                        GDPR 32. cikke szerinti intézkedéseket alkalmazza, különösen: az adatok EU-n belüli tárolása;
+                        felhasználónkénti, adatbázis-szintű elkülönítés (sor-szintű biztonság); a hozzáférési kulcsok
+                        és tokenek titkosított tárolása (AES-256-GCM); titkosított átvitel (TLS); naplózás és
+                        hozzáférés-korlátozás; napi mentés.</p>
+                    <p class="mt-2"><strong class="text-dark">9. További adatfeldolgozók.</strong> Az Adatkezelő
+                        általános felhatalmazást ad további adatfeldolgozók igénybevételére. Az igénybe vett további
+                        adatfeldolgozók aktuális listája az <a href={privacy}>Adatkezelési tájékoztató</a> 5.
+                        pontjában érhető el. Változás esetén az Adatfeldolgozó
+                        <strong class="text-dark">legalább 30 nappal</strong> előre értesítést tesz közzé, amellyel
+                        szemben az Adatkezelő kifogást emelhet; kifogás esetén az Adatkezelő az előfizetését
+                        felmondhatja.</p>
+                    <p class="mt-2"><strong class="text-dark">10. Az érintettek jogai.</strong> Az Adatfeldolgozó a
+                        Szolgáltatás funkcióival és — szükség esetén — ésszerű együttműködéssel segíti az Adatkezelőt
+                        az érintetti kérelmek teljesítésében. Ha az Adatfeldolgozóhoz érkezik ilyen kérelem, azt
+                        továbbítja az Adatkezelőnek, és önállóan nem teljesíti.</p>
+                    <p class="mt-2"><strong class="text-dark">11. Adatvédelmi incidens.</strong> Az Adatfeldolgozó az
+                        általa észlelt adatvédelmi incidensről <strong class="text-dark">indokolatlan késedelem
+                        nélkül, legkésőbb 48 órán belül</strong> értesíti az Adatkezelőt, és megadja a bejelentéshez
+                        szükséges információkat.</p>
+                    <p class="mt-2"><strong class="text-dark">12. Törlés vagy visszaadás.</strong> A jogviszony
+                        megszűnésekor az Adatfeldolgozó az Adatkezelő választása szerint törli vagy visszaadja a
+                        személyes adatokat, legkésőbb <strong class="text-dark">30 napon belül</strong>, kivéve, ha
+                        jogszabály a megőrzést előírja.</p>
+                    <p class="mt-2"><strong class="text-dark">13. Ellenőrzés.</strong> Az Adatfeldolgozó az Adatkezelő
+                        rendelkezésére bocsátja a jelen melléklet teljesítésének igazolásához szükséges
+                        információkat, és — ésszerű előzetes értesítés mellett, évente legfeljebb egy alkalommal, az
+                        üzletmenet indokolatlan zavarása nélkül — lehetővé teszi az ellenőrzést.</p>
+                    <p class="mt-2"><strong class="text-dark">14. Harmadik országba történő továbbítás.</strong> Ahol
+                        az adattovábbítás harmadik országba történik, arra az Európai Bizottság megfelelőségi
+                        határozata vagy általános szerződési feltételek (SCC) alapján kerül sor; a részletek az
+                        <a href={privacy}>Adatkezelési tájékoztató</a> 6. pontjában találhatók.</p>
+                </div>
+
+            </div>
+        </div>
+  </main>
+
+  <Footer locale={locale} page={page} />
+</BaseLayout>
+
+<style>
+  .doc-section h2 { font-size: 1rem; font-weight: 700; color: #1e1e2f; margin-bottom: 0.75rem; }
+  .doc-section p { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.5rem; }
+  .doc-section p:first-of-type { margin-top: 0; }
+  .doc-section a { color: #6c5ce7; text-decoration: underline; }
+  .doc-section ul { list-style: none; padding-left: 0.75rem; margin-top: 0.5rem; }
+  .doc-section ul li { font-size: 0.875rem; color: #4a4a68; line-height: 1.75; margin-top: 0.35rem; }
+</style>
