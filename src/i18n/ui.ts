@@ -29,7 +29,7 @@ export const UI = {
     footer: {
       tagline:
         'Egy AI-alapú rendszer, ami a webshopod nevében készít marketing tartalmakat – automatikusan, nonstop.',
-      legalHeading: 'Jogi információk',
+      infoHeading: 'Információk',
       contact: 'Kapcsolat',
       privacy: 'Adatkezelési tájékoztató',
       imprint: 'Impresszum',
@@ -71,7 +71,7 @@ export const UI = {
     footer: {
       tagline:
         'An AI-powered system that creates marketing content on behalf of your webshop – automatically, around the clock.',
-      legalHeading: 'Legal',
+      infoHeading: 'Information',
       contact: 'Contact',
       privacy: 'Privacy policy',
       imprint: 'Imprint',

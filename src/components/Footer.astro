@@ -85,16 +85,16 @@ const solutions = navModulesFor(locale);
         </ul>
       </div>
 
-      <!-- Legal links -->
+      <!-- Információk: elöl a nem jogi elemek (kapcsolat, changelog), utánuk a jogi oldalak -->
       <div>
-        <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wide">{ui.footer.legalHeading}</h4>
+        <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wide">{ui.footer.infoHeading}</h4>
         <ul class="space-y-2 text-sm">
           <li><a href={legal.contact} class="hover:text-white transition-colors">{ui.footer.contact}</a></li>
+          <li><a href={CHANGELOG_URL} class="hover:text-white transition-colors">{ui.footer.whatsNew}</a></li>
           <li><a href={legal.privacy} class="hover:text-white transition-colors">{ui.footer.privacy}</a></li>
           <li><a href={legal.imprint} class="hover:text-white transition-colors">{ui.footer.imprint}</a></li>
           <li><a href={legal.terms} class="hover:text-white transition-colors">{ui.footer.terms}</a></li>
           <li><a href={legal.dataDeletion} class="hover:text-white transition-colors">{ui.footer.dataDeletion}</a></li>
-          <li><a href={CHANGELOG_URL} class="hover:text-white transition-colors">{ui.footer.whatsNew}</a></li>
         </ul>
       </div>
 
