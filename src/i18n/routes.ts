@@ -6,6 +6,7 @@ export type PageKey =
   | 'home'
   | 'demo'
   | 'bookDemo'
+  | 'allInOne'
   | 'international'
   | 'webshopIntegration'
   | 'shopgrade'
@@ -38,6 +39,15 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // Általános "Bemutatót kérek" kampányoldal – a teljes rendszerről szól
   // (posztolás ÉS hírlevél), a fejléc/lábléc/főoldali CTA-k ide mutatnak.
   bookDemo: { hu: '/hu/online-bemutato/', en: '/en/book-demo/' },
+  // "Teljes rendszer" kampányoldal: ugyanaz az AJÁNLAT, mint a bookDemo (online
+  // bemutató, ugyanaz az űrlap és minősítés), de más a SZÖG — nem a bemutató
+  // eseménye, hanem az all-in-one ígéret a horog. Külön `lead_forras`
+  // ('teljes-rendszer'), hogy mérhető legyen, melyik szög hoz több bemutatót.
+  // Tisztán fizetett landing: `noindex` + robots.txt Disallow, nem versenyez
+  // sem a főoldallal, sem az online-bemutatóval ugyanarra az ígéretre.
+  // TODO: az EN path ('/en/all-in-one/') akkor kerül ide, amikor az oldal
+  // elkészül — addig a nyelvváltó az EN főoldalra esik vissza (404 helyett).
+  allInOne: { hu: '/hu/teljes-rendszer/', en: null },
   // Nemzetközi terjeszkedés kampányoldal – kétnyelvű, rövid slug.
   international: { hu: '/hu/nemzetkozi/', en: '/en/international/' },
   // Webshop mélyintegráció kampányoldal (Unas + Shoprenter) – kétnyelvű.

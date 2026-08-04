@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /hu/koszonjuk
 Disallow: /en/thank-you
+Disallow: /hu/teljes-rendszer
 
 Sitemap: https://getcontentninja.com/sitemap.xml

@@ -20,6 +20,7 @@ export const INTAKE_ENDPOINT = 'https://app.getcontentninja.com/api/leads/intake
 export type FormSource =
   | 'posztolas'
   | 'online-bemutato'
+  | 'teljes-rendszer'
   | 'hirlevel'
   | 'shopgrade'
   | 'nemzetkozi'
@@ -34,6 +35,12 @@ export type FormSource =
 export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
   posztolas: { hu: '🚀 Automata posztolás jelentkezés', en: '🚀 Automated posting lead' },
   'online-bemutato': { hu: '🚀 Bemutató jelentkezés', en: '🚀 Demo request' },
+  // Ugyanaz az ajánlat, mint az `online-bemutato` — a külön kulcs csak azért
+  // van, hogy az all-in-one kampány eredménye elkülönüljön az általános
+  // bemutató-forgalomtól. Az app az ismeretlen forrást nyersen tárolja és
+  // jeleníti meg; ha a kampány marad, érdemes felvenni az app oldalán a
+  // `FORM_LABELS`/`PATH_TO_FORRAS` táblákba is.
+  'teljes-rendszer': { hu: '🧩 Teljes rendszer jelentkezés', en: '🧩 All-in-one lead' },
   hirlevel: { hu: '✉️ Hírlevél jelentkezés', en: '✉️ Newsletter lead' },
   shopgrade: { hu: '✍️ Shopgrade jelentkezés', en: '✍️ Shopgrade application' },
   nemzetkozi: {

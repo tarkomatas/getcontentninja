@@ -24,6 +24,12 @@ interface Props {
   cardClass?: string;
   /** Záró "Nézd meg a teljes rendszert" gomb a főoldalra. */
   homeCta?: boolean;
+  /**
+   * Sűrűbb rács: kisebb kártyák, négy hasáb, szűkebb térközök. Ott hasznos, ahol
+   * a rács nem a főszekció, csak felsorolja a teljes kínálatot (pl. a
+   * „teljes rendszer" kampányoldalon mind a 10 modul kikerül).
+   */
+  compact?: boolean;
 }
 
 const {
@@ -36,6 +42,7 @@ const {
   sectionClass = 'bg-card py-20 md:py-28',
   cardClass = 'bg-light',
   homeCta = false,
+  compact = false,
 } = Astro.props;
 
 const excluded = Array.isArray(exclude) ? exclude : [exclude];
@@ -46,7 +53,7 @@ const home = homeFor(locale);
 
 <section id={sectionId} class={sectionClass}>
   <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-    <div class="text-center max-w-[760px] mx-auto mb-14">
+    <div class={`text-center max-w-[760px] mx-auto ${compact ? 'mb-10' : 'mb-14'}`}>
       {eyebrow && (
         <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">{eyebrow}</span>
       )}
@@ -54,17 +61,21 @@ const home = homeFor(locale);
       {lead && <p class="text-body text-lg" set:html={lead} />}
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      class={`grid grid-cols-1 sm:grid-cols-2 ${compact ? 'lg:grid-cols-4 gap-4' : 'lg:grid-cols-3 gap-6'}`}
+    >
       {
         cards.map((m) => (
           <div
-            class={`${cardClass} rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col`}
+            class={`${cardClass} rounded-[16px] border border-border ${compact ? 'p-5' : 'p-8'} shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col`}
           >
-            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-              <span class="material-symbols-outlined text-[22px]">{m.icon}</span>
+            <div
+              class={`${compact ? 'w-10 h-10 mb-3' : 'w-12 h-12 mb-5'} bg-primary/10 rounded-full flex items-center justify-center text-primary`}
+            >
+              <span class={`material-symbols-outlined ${compact ? 'text-[20px]' : 'text-[22px]'}`}>{m.icon}</span>
             </div>
-            <h3 class="font-bold text-lg mb-2">{m.title}</h3>
-            <p class="text-body text-sm leading-relaxed mb-4">{m.desc}</p>
+            <h3 class={`font-bold ${compact ? 'text-base mb-1.5' : 'text-lg mb-2'}`}>{m.title}</h3>
+            <p class={`text-body leading-relaxed ${compact ? 'text-[13px] mb-3' : 'text-sm mb-4'}`}>{m.desc}</p>
             {m.href && (
               <a href={m.href} class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
                 {ui.details}
