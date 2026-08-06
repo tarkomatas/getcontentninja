@@ -45,9 +45,7 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // ('teljes-rendszer'), hogy mérhető legyen, melyik szög hoz több bemutatót.
   // Tisztán fizetett landing: `noindex` + robots.txt Disallow, nem versenyez
   // sem a főoldallal, sem az online-bemutatóval ugyanarra az ígéretre.
-  // TODO: az EN path ('/en/all-in-one/') akkor kerül ide, amikor az oldal
-  // elkészül — addig a nyelvváltó az EN főoldalra esik vissza (404 helyett).
-  allInOne: { hu: '/hu/teljes-rendszer/', en: null },
+  allInOne: { hu: '/hu/teljes-rendszer/', en: '/en/all-in-one/' },
   // Nemzetközi terjeszkedés kampányoldal – kétnyelvű, rövid slug.
   international: { hu: '/hu/nemzetkozi/', en: '/en/international/' },
   // Webshop mélyintegráció kampányoldal (Unas + Shoprenter) – kétnyelvű.

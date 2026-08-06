@@ -23,6 +23,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
   - `demo` → `/hu/posztolas` , `/en/demo` (the **"Automata posztolás" solution** page, reached from the Solutions dropdown/cards; the old `/hu/bemutato` redirects here via `astro.config.mjs` `redirects`)
   - `bookDemo` → `/hu/online-bemutato` , `/en/book-demo` (the general **"Bemutatót kérek" / "Book a demo"** landing — hero + lead form covering posting **and** newsletter; every header/footer/homepage demo CTA points here, `lead_forras: 'online-bemutato'`)
   - `newsletter` → `/hu/hirlevel` , `/en/newsletter` (AI hírlevél kampányoldal — same lead-form flow, `lead_forras: 'hirlevel'`)
+  - `allInOne` → `/hu/teljes-rendszer` , `/en/all-in-one` (**all-in-one kampányoldal, csak fizetett forgalomra**: `noindex` + `robots.txt` Disallow. Az AJÁNLAT azonos a `bookDemo`-éval — ugyanaz az űrlap, ugyanazok a kiszűrő kérdések, ugyanaz a köszönőoldal —, csak a HOROG más: nem a bemutató eseménye, hanem az „egy rendszer az egész webshop-marketingedre" ígéret. Külön `lead_forras: 'teljes-rendszer'` méri, melyik szög hoz több jelentkezést; **a kiszűrő kérdéseket ezért nem szabad eltéríteni a `bookDemo`-étól**. Egy pluszkérdése van, a `module_interest` (max. 3 pipa → rejtett mezőbe fűzve), amin nincs `data-reject`, tehát a minősítést nem befolyásolja)
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
   - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy`
   - `terms` → `/hu/aszf` , `/en/terms`
@@ -62,14 +63,14 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 - **Any inline `<script>` that must stay classic/global** (references from `onclick`, immediate IIFEs, `tailwind.config`, gtag, JSON-LD) is marked **`is:inline`** — otherwise Astro bundles it as a scoped module and `onclick`-referenced globals (e.g. `toggleFaq`) break.
 - **`define:vars` ráadásul IIFE-be csomagolja a scriptet**, ezért az `is:inline` önmagában NEM elég: a benne deklarált függvények nem lesznek globálisak, és az `onclick="valami()"` némán elszáll. Ilyenkor kézzel kell kitenni őket (`window.qualifyAndNext = qualifyAndNext;` — lásd `LeadFormScript.astro`).
 - **Videós bemutatók:** YouTube-beágyazás a `VideoEmbed.astro` komponenssel — click-to-load facade, az iframe csak kattintásra töltődik be `youtube-nocookie.com`-ról, addig csak a cookie-mentes ytimg borítókép látszik (így a consent-banner előtt sem kerül YouTube-süti a látogatóhoz). A videó-azonosítók **egy helyen**, a `src/data/videos.ts`-ben vannak. A meglévő két bemutató magyar nyelvű, ezért **csak a `/hu/` oldalakon** (főoldal, hírlevél) szerepel — az `/en/` párjaikba szándékosan nem került be. A `public/assets/*.mp4` fájlok ettől függetlenül a *termék által generált* minta-videók (posztolás oldalak), nem walkthrough-k.
-- **Modulrács ("mit tud a rendszer") – EGY forrás:** a modulok listája **kizárólag** a `src/data/modules.ts`-ben él (10 modul: posztolás, blogcikk író, Shopgrade, hírlevél, webshop-integráció, nemzetközi, kép, videó, narrátorvideó, Meta hirdetés), és a `src/components/ModuleGrid.astro` rakja ki. Minden kampányoldal a saját témáját hagyja ki (`exclude="newsletter"` stb.), így **9 kártya = tiszta 3×3 rács**; aminek van kampányoldala, arra "Részletek →" link kerül. **Új modulnál csak a `modules.ts`-t kell bővíteni** — korábban ez a blokk 12 oldalon kézzel volt másolva, ezért maradtak ki belőle az új modulok. Ugyanebből a fájlból épül a fejléc **"Megoldások" lenyílója** is (`navModulesFor`, `navLabel`/`navDesc` mezők; 6 elem → 2 hasábos, ~580px panel + "Összes megoldás →" sor a főoldal `#megoldasok` szekciójára), ezért a modulnevek NEM a `ui.ts`-ben élnek. Kivétel: az `online-bemutato`/`book-demo` "Mit mutatunk meg a bemutatón?" rácsa szándékosan kézi (nem modullista, a "Teljes automatizálás" kártya miatt).
+- **Modulrács ("mit tud a rendszer") – EGY forrás:** a modulok listája **kizárólag** a `src/data/modules.ts`-ben él (10 modul: posztolás, blogcikk író, Shopgrade, hírlevél, webshop-integráció, nemzetközi, kép, videó, narrátorvideó, Meta hirdetés), és a `src/components/ModuleGrid.astro` rakja ki. Minden kampányoldal a saját témáját hagyja ki (`exclude="newsletter"` stb.), így **9 kártya = tiszta 3×3 rács**; aminek van kampányoldala, arra "Részletek →" link kerül. **Új modulnál csak a `modules.ts`-t kell bővíteni** — korábban ez a blokk 12 oldalon kézzel volt másolva, ezért maradtak ki belőle az új modulok. Ugyanebből a fájlból épül a fejléc **"Megoldások" lenyílója** is (`navModulesFor`, `navLabel`/`navDesc` mezők; 6 elem → 2 hasábos, ~580px panel + "Összes megoldás →" sor a főoldal `#megoldasok` szekciójára), ezért a modulnevek NEM a `ui.ts`-ben élnek. Kivétel: az `online-bemutato`/`book-demo` "Mit mutatunk meg a bemutatón?" rácsa szándékosan kézi (nem modullista, a "Teljes automatizálás" kártya miatt). A `teljes-rendszer`/`all-in-one` oldalpár ezzel szemben `exclude` NÉLKÜL, `compact` proppal kéri a rácsot (4 hasáb, kisebb kártyák) — ott pont a teljesség a termék, és mind a 10 modul kikerül.
 - **Lapozgatható kártyasáv:** `src/components/Carousel.astro` (natív scroll-snap + nyíl + pontok, külső könyvtár nélkül). A kártyák slotban jönnek, és **ők adják meg, hány látszik egyszerre** (a főoldali megoldás-kártyák `lg:basis-[calc((100%-4.5rem)/4)]` → desktopon 4). A nyíl egy kártyát lép, a pontok száma töréspontonként újraszámolódik (`kártyák - látható + 1`), a scrollbart a `global.css` `.no-scrollbar` rejti el. A főoldali "Megoldások" szekció ezt használja, hogy a 6 modul ne törje szét a rácsot.
 - **Analytics:** **both** trackers are consent-gated — `public/assets/cookie.js` injects the Meta Pixel (`3857575907663677`) and the Google Ads gtag (`AW-10918594401`) only after the user accepts the banner (`loadTrackers()`). `BaseLayout` emits just the `gtag()` **queue stub** (`dataLayer.push`, no network, no cookies), so a conversion call placed on a page still works: it queues and replays once gtag.js loads. Never move the gtag.js `<script>` back into `BaseLayout` — that reintroduces ad cookies before consent. `cookie.js` localizes its own text from `document.documentElement.lang`.
 - **Consent** is stored in `localStorage` under `contentninja_cookie_consent_v1` (`"true"`/`"false"`). The pixel never loads without it.
 - **Landing ("lp") mode for ads:** marketing pages pass `lpEnabled` to `BaseLayout`, which emits an early-`<head>` `is:inline` script — on `?type=ld` (or `?lp=1`) it adds `lp-mode` to `<html>` before first paint. In lp mode the shared `Header` collapses to **logo + language switcher** via the `global.css` markers `.lp-hide` (nav, login, demo CTA, hamburger) and `.lp-show` (language switcher, forced visible on mobile too). Nothing is persisted — param-less internal navigation always shows the full header. Legal/technical pages (privacy, terms, imprint, data-deletion, thank-you) intentionally do **not** set `lpEnabled`. Ad final URLs should append `?type=ld`.
 - **sitemap.xml is hand-maintained** in `public/` (with `xhtml:link` hreflang alternates). The `@astrojs/sitemap` integration was removed due to an Astro-4/sitemap-3.7 hook incompatibility. When adding/renaming a page, update `routes.ts`, `sitemap.xml`, and `robots.txt` (thank-you pages are `Disallow`ed).
 
-## Űrlap-beküldés – EGY forrás (mind a 16 űrlap)
+## Űrlap-beküldés – EGY forrás (mind a 18 űrlap)
 
 A honlap összes űrlapja **közvetlenül az appnak** küld: `POST https://app.getcontentninja.com/api/leads/intake`.
 A korábbi Make.com webhook ki lett vezetve (a forgatókönyv leállítva, de visszakapcsolható). A fogadó
@@ -95,12 +96,21 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
 - a kiszűrés szabályát az **`<option data-reject="hard|soft">`** attribútum mondja meg. Ha valaki
   átfogalmaz egy választ, a szabály vele együtt mozog — korábban ez kézzel másolt JS-szövegkonstansokban
   élt, és némán elromlott.
+- a gyűjtő **mezőnként EGY értéket** olvas (`el.value`), ezért többválasztós kérdéshez jelölőnégyzetek
+  kellenek `name` NÉLKÜL, plusz egy rejtett `name`-es mező, amibe egy rövid `is:inline` script összefűzi
+  a kipipáltakat (lásd `module_interest` a `teljes-rendszer`/`all-in-one` oldalpáron). Ha a
+  jelölőnégyzetek maguk kapnának `name`-et, a gyűjtő a kipipálatlanokat is kitöltöttnek látná, és csak
+  az utolsó érték maradna meg.
 
 **A négy `statusz` ág:** `hard_reject` (csak minősítő válaszok, nincs kapcsolati adat) · `soft_reject`
 (e-mail + hírlevél-opt-in) · `sikeres` (teljes adat, majd átirányítás `/hu/koszonjuk/?lead=1`-re) ·
 `kapcsolat`. Minden beküldés visz `submission_id`-t (UUID, **idempotencia-kulcs**), `nyelv`-et,
 `adatkezeles`-t és üres `website` honeypotot. **Az EN oldal is a magyar `lead_forras` kulcsot küldi**
-(`/en/shopgrade` → `shopgrade`); a nyelvet a `nyelv` mező hordozza.
+(`/en/shopgrade` → `shopgrade`); a nyelvet a `nyelv` mező hordozza. Ugyanezért maradnak magyarok az EN
+`module_interest` jelölőnégyzeteinek `value`-i is: a két nyelv válaszai egy oszlopban szűrhetők.
+**Új `lead_forras` felvételekor** az app oldalán is érdemes bővíteni a `FORM_LABELS` és `PATH_TO_FORRAS`
+táblákat (`src/lib/admin/lead-submission-fields.ts`) — enélkül működik, csak a nyers kulcs látszik
+címke helyett.
 
 **"Ne vesszen el semmi":** a beküldés a küldés ELŐTT bekerül a `localStorage` retry-sorba
 (`cn_intake_queue_v1`), a `fetch` `keepalive`-val megy, és ami kint marad, azt a következő oldalbetöltés
