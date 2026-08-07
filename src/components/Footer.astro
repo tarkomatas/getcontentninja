@@ -74,10 +74,6 @@ const solutions = navModulesFor(locale);
             </svg>
           </a>
         </div>
-
-        <!-- Meta Tech Provider – minden oldalon látszó hitelesítés. A jelvény sötét
-             szövegű, ezért `theme="dark"`: fehér lapra kerül, mint a logó fölötte. -->
-        <MetaTechProvider locale={locale} variant="bare" theme="dark" class="mt-5" />
       </div>
 
       <!-- Megoldások (modulok) -->
@@ -116,6 +112,10 @@ const solutions = navModulesFor(locale);
             {ui.cta.login}
           </a>
         </div>
+
+        <!-- Meta Tech Provider – minden oldalon látszó hitelesítés, a CTA-k alatt.
+             A jelvény sötét szövegű, ezért `theme="dark"`: fehér lapra kerül. -->
+        <MetaTechProvider locale={locale} variant="bare" theme="dark" class="mt-6" />
       </div>
     </div>
 

@@ -416,10 +416,6 @@ const faqLd = {
                         </li>
                     </ul>
 
-                    <!-- Meta Tech Provider – itt van a kontextusa: közvetlenül a
-                         Facebook/Instagram integráció felsorolása alatt -->
-                    <MetaTechProvider locale={locale} class="mb-6" />
-
                     <!-- Bármilyen link kiemelés -->
                     <div class="rounded-[14px] border border-primary/25 bg-primary/[0.04] p-4 flex items-start gap-3 mb-6">
                         <span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">link</span>
@@ -427,6 +423,10 @@ const faqLd = {
                             belső linkből is</strong> – terméklink, blogcikk vagy külső oldal tartalmából is kész
                             posztot készít.</p>
                     </div>
+
+                    <!-- Meta Tech Provider – a felsorolás lezárása, közvetlenül a CTA előtt:
+                         „ezek a csatornák be vannak kötve, és a Meta hivatalosan is jóváhagyta" -->
+                    <MetaTechProvider locale={locale} block class="mb-6" />
 
                     <a href="/hu/online-bemutato/" class="cta-primary px-8 py-4 text-base">
                         Bemutatót kérek – díjmentes
@@ -436,8 +436,8 @@ const faqLd = {
                 <!-- Szemléltető kép: integrációs hub -->
                 <div class="order-1 lg:order-2 relative">
                     <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                    <img src="/assets/integraciok-hub.webp"
-                        alt="Content Ninja integrációs hub: Unas, Shoprenter, Sitemap és RSS források bekötve, majd publikálás Facebookra, Instagramra, SalesAutopilotba és MailerLite-ba"
+                    <img src="/assets/integraciok-hub-portrait.webp" width="896" height="1200"
+                        alt="Content Ninja integrációs hub: felül az Unas, Shoprenter, Sitemap és RSS források bekötve, alul publikálás Facebookra, Instagramra, SalesAutopilotba, MailerLite-ba, a webshop blogjába és a termékleírásokba (Shopgrade)"
                         loading="lazy" class="w-full h-auto block">
                 </div>
 

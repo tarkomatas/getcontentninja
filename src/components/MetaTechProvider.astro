@@ -21,10 +21,12 @@ interface Props {
   variant?: 'card' | 'bare';
   /** Sötét háttéren (footer) a jelvény köré fehér lap kell – a lockup sötét szövegű. */
   theme?: 'light' | 'dark';
+  /** `card` esetén teljes oszlopszélesség, hogy a fölötte lévő dobozokkal egy vonalban álljon. */
+  block?: boolean;
   class?: string;
 }
 
-const { locale, variant = 'card', theme = 'light', class: className = '' } = Astro.props;
+const { locale, variant = 'card', theme = 'light', block = false, class: className = '' } = Astro.props;
 
 const copy = {
   hu: {
@@ -52,12 +54,12 @@ const badgeClass = theme === 'dark'
       width="650"
       height="383"
       loading="lazy"
-      class="h-12 w-auto"
+      class="h-20 w-auto"
     />
   </span>
 ) : (
   <div
-    class={`flex items-center gap-2 bg-card border border-border rounded-[12px] pl-2.5 pr-4 py-2 shadow-card w-fit max-w-[520px] ${className}`}
+    class={`flex items-center gap-2 bg-card border border-border rounded-[12px] pl-2.5 pr-4 py-2 shadow-card ${block ? 'w-full' : 'w-fit max-w-[520px]'} ${className}`}
   >
     <img
       src="/assets/meta-tech-provider.png"

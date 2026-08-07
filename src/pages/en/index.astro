@@ -410,10 +410,6 @@ const faqLd = {
                         </li>
                     </ul>
 
-                    <!-- Meta Tech Provider – this is where it has context: right below
-                         the Facebook/Instagram integration entry -->
-                    <MetaTechProvider locale={locale} class="mb-6" />
-
                     <!-- Any link highlight -->
                     <div class="rounded-[14px] border border-primary/25 bg-primary/[0.04] p-4 flex items-start gap-3 mb-6">
                         <span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">link</span>
@@ -421,6 +417,9 @@ const faqLd = {
                             internal link too</strong> – it also turns a product link, blog article or external page
                             into a ready-to-go post.</p>
                     </div>
+
+                    <!-- Meta Tech Provider – closes the list, right before the CTA -->
+                    <MetaTechProvider locale={locale} block class="mb-6" />
 
                     <a href="/en/book-demo/" class="cta-primary px-8 py-4 text-base">
                         Request a demo – free
@@ -430,8 +429,8 @@ const faqLd = {
                 <!-- Illustration: integration hub -->
                 <div class="order-1 lg:order-2 relative">
                     <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                    <img src="/assets/integraciok-hub.webp"
-                        alt="Content Ninja integration hub: Unas, Shoprenter, Sitemap and RSS sources connected, then publishing to Facebook, Instagram, SalesAutopilot and MailerLite"
+                    <img src="/assets/integraciok-hub-portrait.webp" width="896" height="1200"
+                        alt="Content Ninja integration hub: Unas, Shoprenter, Sitemap and RSS sources connected at the top, publishing to Facebook, Instagram, SalesAutopilot, MailerLite, the webshop blog and product descriptions (Shopgrade) at the bottom"
                         loading="lazy" class="w-full h-auto block">
                 </div>
 
