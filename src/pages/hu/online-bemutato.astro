@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import MetaTechProvider from '../../components/MetaTechProvider.astro';
 
 const locale = 'hu';
 const page = 'bookDemo';
@@ -206,6 +207,9 @@ const description =
                         </div>
                         <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ hazai webshop</span> már használja</p>
                     </div>
+
+                    <!-- Meta Tech Provider – a hero bizalmi blokkjának zárása, közvetlenül a lead-űrlap mellett -->
+                    <MetaTechProvider locale={locale} class="mt-1" />
 
                 </div>
 

@@ -2,6 +2,7 @@
 import { pathFor, type Locale, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { navModulesFor } from '../data/modules';
+import MetaTechProvider from './MetaTechProvider.astro';
 
 interface Props {
   locale: Locale;
@@ -73,6 +74,10 @@ const solutions = navModulesFor(locale);
             </svg>
           </a>
         </div>
+
+        <!-- Meta Tech Provider – minden oldalon látszó hitelesítés. A jelvény sötét
+             szövegű, ezért `theme="dark"`: fehér lapra kerül, mint a logó fölötte. -->
+        <MetaTechProvider locale={locale} variant="bare" theme="dark" class="mt-5" />
       </div>
 
       <!-- Megoldások (modulok) -->

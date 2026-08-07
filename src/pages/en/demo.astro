@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import MetaTechProvider from '../../components/MetaTechProvider.astro';
 
 const locale = 'en';
 const page = 'demo';
@@ -291,6 +292,10 @@ const description =
                             </div>
                             <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ local webshops</span> already use it</p>
                         </div>
+
+                        <!-- Meta Tech Provider – closes the hero trust block: a direct answer to
+                             the "is it safe to hand over my Facebook page access?" objection -->
+                        <MetaTechProvider locale={locale} class="mt-1" />
 
                     </div>
 

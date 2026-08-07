@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Carousel from '../../components/Carousel.astro';
+import MetaTechProvider from '../../components/MetaTechProvider.astro';
 
 const locale = 'en';
 const page = 'home';
@@ -408,6 +409,10 @@ const faqLd = {
                             </div>
                         </li>
                     </ul>
+
+                    <!-- Meta Tech Provider – this is where it has context: right below
+                         the Facebook/Instagram integration entry -->
+                    <MetaTechProvider locale={locale} class="mb-6" />
 
                     <!-- Any link highlight -->
                     <div class="rounded-[14px] border border-primary/25 bg-primary/[0.04] p-4 flex items-start gap-3 mb-6">

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import MetaTechProvider from '../../components/MetaTechProvider.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 
 /**
@@ -238,6 +239,9 @@ const description =
                         </div>
                         <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshops</span> already use it</p>
                     </div>
+
+                    <!-- Meta Tech Provider – closes the hero trust block, right next to the lead form -->
+                    <MetaTechProvider locale={locale} class="mt-1" />
 
                 </div>
 

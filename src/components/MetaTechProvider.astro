@@ -1,0 +1,74 @@
+---
+// Hivatalos Meta Tech Provider jelvény + a mellé tartozó magyarázat.
+//
+// A jelvény önmagában keveset mond a magyar webshopos közönségnek, ezért mindig
+// egy fél mondat kíséri: a valódi bizalmi üzenet az, hogy a posztolás a Meta
+// hivatalos API-ján megy, nem jelszóátadással.
+//
+// A kártya függőleges paddingja szándékosan szűk: a jelvény PNG-je maga hozza a
+// Meta által előírt körbefutó üresjáratot (a lockup a fájl magasságának kb. fele),
+// a kártyáé ehhez hozzáadódna. Ezért is kell a képnek nagyobb `h-*`, mint amilyen
+// nagynak látszik.
+//
+// FONTOS: a jelvényt a Meta márkairányelvei szerint módosítatlanul kell
+// használni, és NEM állítható vele „Meta partner" / „a Meta ajánlja" – a
+// státusz ennél kevesebb. A szövegeket ezért ne írd át erre.
+import type { Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  /** `card`: fehér kártya + magyarázó szöveg (alap). `bare`: csak a jelvény, keret nélkül. */
+  variant?: 'card' | 'bare';
+  /** Sötét háttéren (footer) a jelvény köré fehér lap kell – a lockup sötét szövegű. */
+  theme?: 'light' | 'dark';
+  class?: string;
+}
+
+const { locale, variant = 'card', theme = 'light', class: className = '' } = Astro.props;
+
+const copy = {
+  hu: {
+    alt: 'Meta Tech Provider',
+    strong: 'Hivatalos Meta Tech Provider.',
+    text: 'A posztolás a Meta által jóváhagyott hivatalos API-n megy.',
+  },
+  en: {
+    alt: 'Meta Tech Provider',
+    strong: 'Official Meta Tech Provider.',
+    text: 'Posting runs through Meta’s approved official API.',
+  },
+}[locale];
+
+const badgeClass = theme === 'dark'
+  ? 'bg-white rounded-[10px] px-2 py-1'
+  : '';
+---
+
+{variant === 'bare' ? (
+  <span class={`inline-flex items-center ${badgeClass} ${className}`}>
+    <img
+      src="/assets/meta-tech-provider.png"
+      alt={copy.alt}
+      width="650"
+      height="383"
+      loading="lazy"
+      class="h-12 w-auto"
+    />
+  </span>
+) : (
+  <div
+    class={`flex items-center gap-2 bg-card border border-border rounded-[12px] pl-2.5 pr-4 py-2 shadow-card w-fit max-w-[520px] ${className}`}
+  >
+    <img
+      src="/assets/meta-tech-provider.png"
+      alt={copy.alt}
+      width="650"
+      height="383"
+      loading="lazy"
+      class="h-14 w-auto shrink-0"
+    />
+    <p class="text-[0.8rem] leading-snug text-muted">
+      <strong class="text-dark font-semibold">{copy.strong}</strong>{' '}{copy.text}
+    </p>
+  </div>
+)}

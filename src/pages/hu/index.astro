@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import VideoEmbed from '../../components/VideoEmbed.astro';
 import Carousel from '../../components/Carousel.astro';
+import MetaTechProvider from '../../components/MetaTechProvider.astro';
 import { videos, hasVideo } from '../../data/videos';
 
 const locale = 'hu';
@@ -414,6 +415,10 @@ const faqLd = {
                             </div>
                         </li>
                     </ul>
+
+                    <!-- Meta Tech Provider – itt van a kontextusa: közvetlenül a
+                         Facebook/Instagram integráció felsorolása alatt -->
+                    <MetaTechProvider locale={locale} class="mb-6" />
 
                     <!-- Bármilyen link kiemelés -->
                     <div class="rounded-[14px] border border-primary/25 bg-primary/[0.04] p-4 flex items-start gap-3 mb-6">
