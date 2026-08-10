@@ -462,7 +462,9 @@ const description =
           </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <!-- `items-stretch`: asztali nézetben a két kártya egyforma magas legyen
+             (mobilon egymás alatt vannak, ott a saját magasságuk a helyes). -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           <!-- Minta-eredmény: a pontszám ITT él, bizonyítékként – nem az oldal ígéreteként. -->
           <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
             <div class="flex items-center justify-between mb-6">
@@ -547,29 +549,47 @@ const description =
             </h3>
             <ul class="space-y-4">
               <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                <span
+                  class="material-symbols-outlined text-success text-[18px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
                 Ki van-e töltve az a cím és leírás, amit a Google a találati listában mutat – és
                 jó-e a hosszuk
               </li>
               <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                <span
+                  class="material-symbols-outlined text-success text-[18px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
                 Van-e a szövegben konkrét adat – méret, anyag, teljesítmény –, vagy csak
                 általánosság
               </li>
               <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                <span
+                  class="material-symbols-outlined text-success text-[18px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
                 Tagolt-e a leírás, vagy egyetlen tömbben áll
               </li>
               <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                <span
+                  class="material-symbols-outlined text-success text-[18px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
                 Kiderül-e belőle, kinek való a termék – és kinek nem
               </li>
               <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                <span
+                  class="material-symbols-outlined text-success text-[18px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
                 Mennyire hasonlít a szöveged bármelyik hasonló termék leírására
               </li>
               <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                <span
+                  class="material-symbols-outlined text-success text-[18px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
                 Ugyanilyen alapos-e a boltod többi terméklapja is
               </li>
             </ul>
