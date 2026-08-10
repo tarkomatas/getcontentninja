@@ -1,0 +1,977 @@
+---
+/**
+ * OPT-IN (squeeze) OLDAL — ingyenes termékleírás-diagnózis.
+ *
+ * Ez az első ilyen oldal a honlapon, ezért érdemes rögzíteni, miben tér el a
+ * többi kampányoldaltól:
+ *
+ *  1. **Nincs navigáció.** A kampányoldalak a közös `Header`-t használják (teljes
+ *     nav, `?type=ld`-re minimálra vált); egy opt-in oldalon viszont minden kifelé
+ *     mutató link konverziót visz. Itt ezért — a köszönőoldalak mintájára — saját,
+ *     linkmentes fejléc van, és a jogi linkek a lábjegyzetbe kerültek.
+ *  2. **A csali AZONNAL jár.** Sikeres beküldés után nem a köszönőoldalra megyünk,
+ *     hanem egyenesen az app diagnózis-oldalára (`AUDIT_START_URL`). Ezért kapja a
+ *     `LeadFormScript` a `successUrl` propot — és ezért lövi el ő maga a Meta
+ *     `Lead` eseményt, amit egyébként a `koszonjuk` oldal intézne.
+ *  3. **`noindex` + robots Disallow.** Tisztán fizetett forgalomra készült, nem
+ *     versenyezhet a `/hu/shopgrade/` oldallal ugyanarra a kifejezésre.
+ *  4. **Csak magyarul.** Az app diagnózisa egynyelvű, angol opt-in magyar
+ *     eredmény-oldalra vinne (`routes.ts`: `shopgradeAudit.en === null`).
+ *
+ * ⚠️ **Az ígéretek forrása** az app repó `docs/features/shopgrade-audit.md`-je.
+ * A diagnózis CSAK OLVAS: nem ír a látogató boltjába, és nem generál minta-szöveget.
+ * Ezért nem szabad ide „megírjuk neked az első 10 leírást" típusú ígéretet tenni.
+ *
+ * **A kiszűrés szabálya itt (`data-reject`, a markupban):**
+ *  - `has_webshop`: „Egyéb" és „Más típusú vállalkozás" → **hard** (user-döntés: a mai,
+ *    szigorú minta – a visszatöltés csak UNAS/Shoprenteren megy, ne mérjünk olyat, amin
+ *    utána nem tudunk segíteni). „Csak tervezek webshopot" → **soft**: neki nincs élő
+ *    terméklapja, tehát nincs mit megmérni, de a videós bemutató még értelmes.
+ *  - A `timing` kérdésen SZÁNDÉKOSAN NINCS `data-reject`, szemben a bemutató-oldalakkal.
+ *    Ott a „még csak érdeklődöm" soft reject, mert az ajánlat egy értékesítési hívás;
+ *    itt viszont a diagnózis maga a tölcsér TETEJE (app-doksi §1: „akinek még nincs
+ *    fiókja"), tehát aki csak nézelődik, pont a célközönség. A választ az értékesítés
+ *    jelzésként kapja meg. Ha mégis szűrni kellene vele, elég egy `data-reject="soft"`.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
+import LeadFormScript from '../../components/LeadFormScript.astro';
+import { AUDIT_START_URL } from '../../data/forms';
+
+const locale = 'hu';
+const page = 'shopgradeAudit';
+const title = 'Ingyenes termékleírás-diagnózis webshopoknak | Content Ninja';
+const description =
+  'Kapj 0–100 pontos értékelést a webshopod termékleírásairól: mi hiányzik belőlük, szó szerinti idézetekkel a saját szövegedből, és mennyibe kerülne kijavítani. Regisztráció nélkül, pár perc alatt.';
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  ogImage="/assets/og-shopgrade.jpg"
+  noindex={true}
+>
+  <Fragment slot="head">
+    <style is:inline>
+      /* Csak az, ami a global.css-ből hiányzik – a gombokat, a hero-gradienst és
+         a GYIK-harmonikát onnan örököljük. */
+      .form-step {
+        display: none;
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      .form-step.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-form-card {
+        background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+        border: 1.5px solid rgba(108, 92, 231, 0.24);
+        box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+      }
+
+      /* A minta-eredmény pontszám-gyűrűje. A `--score` a kitöltöttség százaléka. */
+      .score-ring {
+        background: conic-gradient(#ef4444 calc(var(--score) * 1%), #e8e8ef 0);
+      }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Fejléc: szándékosan linkmentes, hogy ne legyen kiút az oldalról. -->
+    <header class="bg-card border-b border-border">
+      <div
+        class="max-w-[1200px] mx-auto px-4 md:px-10 py-4 flex items-center justify-between gap-4"
+      >
+        <img
+          src="/assets/logo.webp"
+          alt="Content Ninja logó"
+          class="h-12 md:h-14 w-auto object-contain"
+        />
+        <div
+          class="hidden sm:flex items-center gap-2 bg-success/10 border border-success/20 rounded-[10px] px-3 py-2"
+        >
+          <span
+            class="material-symbols-outlined text-success text-[18px]"
+            style="font-variation-settings:'FILL' 1">lock</span
+          >
+          <span class="text-sm font-semibold text-dark">Ingyenes · regisztráció nélkül</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. Hero + opt-in űrlap -->
+    <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
+      <div class="max-w-[1200px] mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
+          <!-- Bal: ígéret -->
+          <div class="flex flex-col gap-4 md:gap-6 text-left">
+            <span class="text-primary font-bold text-sm uppercase tracking-widest block"
+              >Ingyenes diagnózis 🔍</span
+            >
+
+            <h1
+              class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark"
+            >
+              Ingyenes AI diagnózis <span class="text-primary">webshopoknak</span>, ami
+              <span class="text-primary">lepontozza a termékleírásaidat</span>
+            </h1>
+
+            <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[540px]">
+              Bedobsz egy terméklinket a boltodból, és kapsz rá egy 0–100 pontos értékelést –
+              szó szerinti idézetekkel a saját szövegedből arról, mi hiányzik belőle.
+            </p>
+
+            <ul class="space-y-3.5 text-body">
+              <li class="flex items-start gap-2.5">
+                <span
+                  class="material-symbols-outlined text-primary text-[20px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
+                <span
+                  ><strong>Nem általánosság:</strong> a te saját terméklapodat mérjük meg,
+                  idézetekkel bizonyítva</span
+                >
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span
+                  class="material-symbols-outlined text-primary text-[20px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
+                <span
+                  >Megmutatjuk, <strong>hova jutna a pontszámod</strong> átírás után, és
+                  mennyibe kerülne a teljes katalógusod</span
+                >
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span
+                  class="material-symbols-outlined text-primary text-[20px] mt-0.5"
+                  style="font-variation-settings:'FILL' 1">check_circle</span
+                >
+                <span
+                  ><strong>Nem nyúlunk a boltodhoz.</strong> A diagnózis csak olvas – nem ír
+                  bele semmit, és nem kell hozzá összekötés</span
+                >
+              </li>
+            </ul>
+
+            <!-- Támogatott rendszerek: előre szűr, hogy ne töltsön ki hiába, akit nem tudunk kiszolgálni -->
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <span class="text-sm font-semibold text-muted">Támogatott rendszerek:</span>
+              <span
+                class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card"
+              >
+                <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
+              </span>
+              <span
+                class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card"
+              >
+                <img
+                  src="/assets/shoprenter-logo.png"
+                  alt="Shoprenter"
+                  class="h-[18px] w-auto"
+                  loading="lazy"
+                />
+              </span>
+            </div>
+
+            <!-- Social proof -->
+            <div class="flex items-center gap-3">
+              <div class="flex -space-x-2">
+                <div
+                  class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white"
+                >
+                  Sz
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white"
+                >
+                  L
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white"
+                >
+                  ÁK
+                </div>
+              </div>
+              <p class="text-sm text-muted">
+                <span class="font-semibold text-dark">50+ hazai webshop</span> már használja a Content
+                Ninját
+              </p>
+            </div>
+          </div>
+
+          <!-- Jobb: az opt-in űrlap -->
+          <div class="w-full relative">
+            <div class="hero-form-card relative w-full rounded-[16px] py-6 px-4 md:py-8 md:px-5">
+              <div id="formIntro">
+                <h2 class="text-2xl font-bold text-center mb-2 text-primary">
+                  Kérem az ingyenes diagnózist
+                </h2>
+                <p class="text-sm text-body text-center mb-4">
+                  Két lépés, kb. fél perc. Utána egyből átviszünk a diagnózis-oldalra.
+                </p>
+              </div>
+
+              <form id="leadForm" class="space-y-4">
+                <HoneypotField />
+
+                <!-- 1. lépés: minősítő kérdések -->
+                <div class="form-step active" data-step="1">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1"
+                        >Milyen webshopod van?</label
+                      >
+                      <select
+                        name="has_webshop"
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                      >
+                        <option value="" disabled selected>Válassz...</option>
+                        <option value="UNAS">UNAS</option>
+                        <option value="Shoprenter">Shoprenter</option>
+                        <option value="Egyéb" data-reject="hard">Egyéb</option>
+                        <option value="Csak tervezek webshopot indítani" data-reject="soft"
+                          >Csak tervezek webshopot indítani</option
+                        >
+                        <option value="Más típusú vállalkozásom van" data-reject="hard"
+                          >Más típusú vállalkozásom van</option
+                        >
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1"
+                        >Hány terméked van a webáruházban?</label
+                      >
+                      <select
+                        name="product_count"
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                      >
+                        <option value="" disabled selected>Válassz...</option>
+                        <option value="100 alatt">100 alatt</option>
+                        <option value="100-1.000">100–1.000</option>
+                        <option value="1.000-10.000">1.000–10.000</option>
+                        <option value="10.000 felett">10.000 felett</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1"
+                        >Ki írja jelenleg a termékleírásokat?</label
+                      >
+                      <select
+                        name="marketing_role"
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                      >
+                        <option value="" disabled selected>Válassz...</option>
+                        <option value="Én, cégvezetőként">Én, cégvezetőként</option>
+                        <option value="Belsős marketing csapat">Belsős marketing csapat</option>
+                        <option value="Külsős ügynökség">Külsős ügynökség</option>
+                        <option value="Senki – a gyártói leírás van fent"
+                          >Senki – a gyártói leírás van fent</option
+                        >
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1"
+                        >Mennyire aktuális nálad a termékleírások javítása?</label
+                      >
+                      <select
+                        name="timing"
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                      >
+                        <option value="" disabled selected>Válassz...</option>
+                        <option value="Most ez a fő feladatom">Most ez a fő feladatom</option>
+                        <option value="1 hónapon belül nekiállnék"
+                          >1 hónapon belül nekiállnék</option
+                        >
+                        <option value="2-3 hónapon belül">2-3 hónapon belül</option>
+                        <option value="Egyelőre csak kíváncsi vagyok"
+                          >Egyelőre csak kíváncsi vagyok</option
+                        >
+                      </select>
+                    </div>
+
+                    <button
+                      type="button"
+                      onclick="qualifyAndNext()"
+                      class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95"
+                    >
+                      Tovább
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Hard reject -->
+                <div class="form-step" data-step="rejected">
+                  <div class="text-center py-6 space-y-4">
+                    <h3 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h3>
+                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                      A diagnózis a termékleírások visszatöltésére épül, amit ma UNAS és
+                      Shoprenter webáruházaknál tudunk elvégezni. A megadott adatok alapján a
+                      rendszerünk most nem lenne megfelelő számodra – nem szeretnénk az idődet
+                      húzni, megértésed köszönjük!
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Soft reject: még nincs webshopja, tehát nincs mit megmérni -->
+                <div class="form-step" data-step="soft-reject">
+                  <div class="space-y-5">
+                    <div class="text-center space-y-3">
+                      <h3 class="text-xl font-bold text-dark">Egy kicsit korán jöttél 🙂</h3>
+                      <p class="text-body leading-relaxed text-sm">
+                        A diagnózishoz egy élő terméklap kell a boltodból – ha még csak tervezed
+                        a webshopot, egyelőre nincs mit megmérnünk. Küldünk helyette egy
+                        <strong>videós bemutatót</strong> arról, hogyan írja át a rendszer a
+                        termékleírásokat.
+                      </p>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1">Email cím</label>
+                      <input
+                        type="email"
+                        id="softRejectEmail"
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                        placeholder="pl. janos@ceg.hu"
+                      />
+                    </div>
+                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                      <input
+                        type="checkbox"
+                        id="softRejectPrivacy"
+                        class="mt-1 rounded text-primary focus:ring-primary"
+                      />
+                      <label for="softRejectPrivacy">
+                        Az <a
+                          href="/hu/adatkezeles/"
+                          target="_blank"
+                          class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a
+                        > foglaltakat elolvastam, megértettem és tudomásul vettem.
+                      </label>
+                    </div>
+                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                      <input
+                        type="checkbox"
+                        id="softRejectNewsletter"
+                        class="mt-1 rounded text-primary focus:ring-primary"
+                      />
+                      <label for="softRejectNewsletter">
+                        Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre. (<a
+                          href="/hu/adatkezeles/"
+                          class="underline hover:text-primary">Adatkezelési tájékoztató</a
+                        >)
+                      </label>
+                    </div>
+                    <button
+                      type="button"
+                      onclick="submitSoftReject(this)"
+                      class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95"
+                    >
+                      Kérem a videót
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Soft reject köszönő -->
+                <div class="form-step" data-step="soft-reject-thanks">
+                  <div class="text-center py-6 space-y-4">
+                    <div
+                      class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto"
+                    >
+                      <span class="material-symbols-outlined text-success text-3xl"
+                        >check_circle</span
+                      >
+                    </div>
+                    <h3 class="text-xl font-bold text-dark">Megkaptuk!</h3>
+                    <p data-thanks="plain" class="text-body leading-relaxed max-w-[400px] mx-auto">
+                      Néhány percen belül elküldjük a bemutató videót. Köszönjük az
+                      érdeklődésedet!
+                    </p>
+                    <p
+                      data-thanks="newsletter"
+                      class="hidden text-body leading-relaxed max-w-[400px] mx-auto"
+                    >
+                      Néhány percen belül elküldjük a bemutató videót, és ezentúl az aktuális
+                      újdonságokról is hírt adunk. Köszönjük az érdeklődésedet!
+                    </p>
+                  </div>
+                </div>
+
+                <!-- 2. lépés: kapcsolati adatok -->
+                <div class="form-step" data-step="2">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1">Név</label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                        placeholder="pl. Kovács János"
+                      />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1">Céges email cím</label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                        placeholder="pl. janos@ceg.hu"
+                      />
+                    </div>
+                    <!-- A telefonszám itt SZÁNDÉKOSAN nem kötelező: ingyenes csalinál ez a
+                         legdrágább mező, és az eredményt amúgy is a képernyőn kapja meg. -->
+                    <div>
+                      <label class="block text-sm font-bold text-body mb-1"
+                        >Telefonszám <span class="font-normal text-muted">(nem kötelező)</span></label
+                      >
+                      <input
+                        type="tel"
+                        name="phone"
+                        class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                        placeholder="+36 30 123 4567"
+                      />
+                    </div>
+
+                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                      <input
+                        type="checkbox"
+                        id="privacy"
+                        required
+                        class="mt-1 rounded text-primary focus:ring-primary"
+                      />
+                      <label for="privacy">
+                        Az <a
+                          href="/hu/adatkezeles/"
+                          target="_blank"
+                          class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a
+                        > foglaltakat elolvastam, megértettem és tudomásul vettem.
+                      </label>
+                    </div>
+
+                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                      <input
+                        type="checkbox"
+                        id="newsletter"
+                        name="newsletter"
+                        class="mt-1 rounded text-primary focus:ring-primary"
+                      />
+                      <label for="newsletter">
+                        Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre. (<a
+                          href="/hu/adatkezeles/"
+                          class="underline hover:text-primary">Adatkezelési tájékoztató</a
+                        >)
+                      </label>
+                    </div>
+
+                    <div class="flex gap-3 mt-4">
+                      <button
+                        type="button"
+                        onclick="nextStep(1)"
+                        class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all"
+                      >
+                        <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                        Vissza
+                      </button>
+                      <button
+                        type="submit"
+                        id="submitBtn"
+                        class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95"
+                      >
+                        Mehet a diagnózis
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                      </button>
+                    </div>
+
+                    <!-- Elvárás-kezelés: a látogatónak a következő oldalon még dolga lesz -->
+                    <p class="text-xs text-muted text-center leading-relaxed">
+                      A gombra kattintva átviszünk a diagnózis-oldalra, ahol egy terméklinket
+                      kérünk a boltodból. Az eredmény pár másodperc múlva ott lesz a képernyőn.
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Mit kapsz – a csali megmutatása (a lead magnet legfontosabb szekciója) -->
+    <section class="bg-card py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[720px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3"
+            >Mit kapsz 📄</span
+          >
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem egy PDF. A saját terméklapod mérése.</h2>
+          <p class="text-body text-lg">
+            A legtöbb „ingyenes elemzés" egy általános ellenőrzőlista. Ez a diagnózis
+            megnyitja a te terméklapodat, megméri, és a saját szövegedből idéz.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          <!-- Minta-eredmény -->
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-bold uppercase tracking-wide text-muted">Minta-eredmény</span>
+              <span
+                class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-[10px] uppercase tracking-wide"
+                >Példa</span
+              >
+            </div>
+
+            <div class="flex items-center gap-5 mb-6">
+              <div
+                class="score-ring w-20 h-20 rounded-full flex items-center justify-center shrink-0"
+                style="--score: 38"
+              >
+                <div
+                  class="w-[62px] h-[62px] rounded-full bg-light flex items-center justify-center"
+                >
+                  <span class="text-xl font-extrabold text-dark">38</span>
+                </div>
+              </div>
+              <div>
+                <p class="font-bold text-dark text-lg leading-tight">A terméklapod: 38 / 100</p>
+                <p class="text-body text-sm mt-1">
+                  A leírásod <strong class="text-dark">68%-a</strong> bármelyik hasonló termékre
+                  igaz lenne.
+                </p>
+              </div>
+            </div>
+
+            <div class="border-l-2 border-red-200 pl-4 mb-6">
+              <p class="text-xs font-bold text-muted uppercase tracking-wide mb-1">
+                Idézet a te szövegedből
+              </p>
+              <p class="text-body text-sm italic leading-relaxed">
+                „praktikus kialakításának köszönhetően a mindennapi alkalmazás gyors"
+              </p>
+            </div>
+
+            <div class="space-y-3 mb-6">
+              <div class="flex items-center gap-3">
+                <span class="text-sm text-body w-36 shrink-0">Keresőbarát</span>
+                <div class="flex-1 h-2 bg-border rounded-full overflow-hidden">
+                  <div class="h-full bg-red-400 rounded-full" style="width: 22%"></div>
+                </div>
+                <span class="text-xs font-bold text-red-500 w-16 text-right">gyenge</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-sm text-body w-36 shrink-0">AI-barát</span>
+                <div class="flex-1 h-2 bg-border rounded-full overflow-hidden">
+                  <div class="h-full bg-red-400 rounded-full" style="width: 18%"></div>
+                </div>
+                <span class="text-xs font-bold text-red-500 w-16 text-right">gyenge</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-sm text-body w-36 shrink-0">Értékesítés-fókusz</span>
+                <div class="flex-1 h-2 bg-border rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 55%"></div>
+                </div>
+                <span class="text-xs font-bold text-amber-500 w-16 text-right">közepes</span>
+              </div>
+            </div>
+
+            <div class="bg-success/10 border border-success/20 rounded-[10px] px-4 py-3">
+              <p class="text-sm text-dark font-semibold">
+                Átírás után reálisan kb. <span class="text-success">78 pont</span>
+              </p>
+              <p class="text-xs text-body mt-0.5">Becslés a most mért hiányokból.</p>
+            </div>
+          </div>
+
+          <!-- Mit tartalmaz -->
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div
+                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-primary text-[22px]">query_stats</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1 text-dark">Pontszám három tengely mentén</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  Keresőbarát, AI-barát és értékesítés-fókusz. Tengelyenként látod, mi hiányzik –
+                  zöld pipa vagy piros iksz, nem homályos „javítanivaló van".
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-primary text-[22px]">format_quote</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1 text-dark">Cserélhetőség – szó szerint idézve</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  Megmutatjuk, a leírásod hány százaléka lenne igaz bármelyik hasonló termékre – és
+                  idézzük is azokat a mondatokat. Ez az a szám, ami miatt a Google nem tud dönteni
+                  közted és húsz másik bolt között.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-primary text-[22px]">rule</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1 text-dark">Egységesség a boltod többi lapján</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  Egyetlen linket kérünk, de a boltod nyilvános oldaltérképéből még 2-3 adatlapot
+                  megnézünk, és megmérjük, mekkora köztük a szórás.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-primary text-[22px]">calculate</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1 text-dark">Mennyibe kerülne kijavítani</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  Állítható ütemű kalkulátor a te termékszámoddal: mennyi idő, hány kredit és
+                  mekkora összeg a teljes katalógusod átírása – és melyik korlát fog be először.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-primary text-[22px]">local_activity</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1 text-dark">50% kedvezmény az első hónapra</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  A diagnózis végén kapsz egy kuponkódot – a képernyőn és e-mailben is –, ha úgy
+                  döntesz, hogy neki is állsz a javításnak.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a href="#hero" class="cta-primary px-8 py-4 text-base">
+            Kérem az ingyenes diagnózist
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Így működik -->
+    <section class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[720px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3"
+            >Így működik 🛠️</span
+          >
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Három lépés, néhány perc</h2>
+          <p class="text-body text-lg">
+            Nincs regisztráció, nincs bankkártya, és nem kell összekötnöd a webáruházadat.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+            <div
+              class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow"
+            >
+              1
+            </div>
+            <h3 class="font-bold text-lg mb-3">Kitöltöd a fenti űrlapot</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Négy kérdés a boltodról és az elérhetőséged – ebből tudjuk, hogy tudunk-e egyáltalán
+              segíteni.
+            </p>
+          </div>
+          <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+            <div
+              class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow"
+            >
+              2
+            </div>
+            <h3 class="font-bold text-lg mb-3">Bedobsz egy terméklinket</h3>
+            <p class="text-body text-sm leading-relaxed">
+              A diagnózis-oldalon bemásolsz egy tetszőleges terméklapot a boltodból, és megjelölöd,
+              mit érzel a legnagyobb bajnak.
+            </p>
+          </div>
+          <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+            <div
+              class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow"
+            >
+              3
+            </div>
+            <h3 class="font-bold text-lg mb-3">Megkapod az eredményt</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Pár másodperc, és ott a pontszám, a levezetés és a kalkulátor. Az eredmény saját
+              linket kap – bármikor visszanyithatod és megoszthatod.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Miért hihető – ez kezeli a legnagyobb kifogást egy AI-pontszámnál -->
+    <section class="bg-card py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[720px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3"
+            >Miért hihető 🔬</span
+          >
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">A pontszám nagyobb részét nem AI adja</h2>
+          <p class="text-body text-lg">
+            Egy ingadozó AI-szám egyetlen szkeptikus próbával megfogható lenne – ezért a diagnózis
+            túlnyomó része mérés, nem vélemény.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <div
+              class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5"
+            >
+              <span class="material-symbols-outlined text-[22px]">straighten</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Legalább 70% mérés</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Van-e keresőbarát cím és leírás, belefér-e a 60/155 karakteres keretbe, van-e h1,
+              hány szám+egység és tényszerű adatpár szerepel a szövegben, van-e tagolás. Ezek nem
+              ízlés kérdései.
+            </p>
+          </div>
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <div
+              class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5"
+            >
+              <span class="material-symbols-outlined text-[22px]">format_quote</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Az AI kötelezően idéz</h3>
+            <p class="text-body text-sm leading-relaxed">
+              A maradék legfeljebb 30%-ot adó AI-értékelés csak szó szerinti idézettel együtt
+              fogadható el. Idézet nélküli állítást a rendszer nem enged ki – az idézet
+              ellenőrizhető, a „megérzés" nem.
+            </p>
+          </div>
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <div
+              class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5"
+            >
+              <span class="material-symbols-outlined text-[22px]">visibility</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Csak olvasunk</h3>
+            <p class="text-body text-sm leading-relaxed">
+              A diagnózis nem ír a boltodba, nem módosít semmit, és nem kell hozzá API-kulcs vagy
+              belépés. Ugyanazt látjuk, amit bármelyik látogatód – csak megmérjük.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-light border border-border rounded-[16px] p-6 md:p-8 flex items-start gap-4 max-w-[860px] mx-auto"
+        >
+          <span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-0.5"
+            >balance</span
+          >
+          <p class="text-body text-sm leading-relaxed">
+            <strong class="text-dark">És azt is megmondjuk, mit NEM javítunk.</strong> A képeket, a
+            kép alt-szövegeket, a strukturált adatokat és a vásárlói véleményeket nem mi hozzuk
+            rendbe – ezek kontextusként szerepelnek az eredményben, nem ígéretként. Ha a
+            terméklapod amúgy is gazdag, azt is ki fogjuk mondani, és nem ígérünk nagy ugrást.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. GYIK – kifogáskezelés -->
+    <section class="bg-light py-20 md:py-28 px-4 md:px-10">
+      <div class="max-w-[800px] mx-auto">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Mielőtt kitöltöd</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+            <button
+              class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+              onclick="toggleFaq(this)"
+            >
+              Tényleg ingyenes? Mi a csavar?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
+                >add</span
+              >
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Tényleg ingyenes, és nem kérünk bankkártyát. A diagnózis a termékünk egy darabja: ha
+              látod a saját számaidat, sokkal könnyebb eldöntened, érdemes-e velünk dolgoznod. A
+              cserébe kért ellenszolgáltatás az elérhetőséged – ezért kérjük ki előre.
+            </div>
+          </div>
+
+          <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+            <button
+              class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+              onclick="toggleFaq(this)"
+            >
+              Kell hozzá regisztráció vagy webshop-összekötés?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
+                >add</span
+              >
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Nem. A diagnózis belépés nélkül fut, és nem kér hozzáférést a webáruházadhoz. Egy
+              nyilvános terméklap linkje elég – ugyanazt olvassuk be, amit bárki más is lát.
+            </div>
+          </div>
+
+          <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+            <button
+              class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+              onclick="toggleFaq(this)"
+            >
+              Módosít bármit a boltomban?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
+                >add</span
+              >
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Nem. A diagnózis <strong>csak olvas</strong>: nem ír a boltodba, nem generál oda
+              szöveget, és nem archiváljuk a terméklapodat. Csak azt tároljuk, ami az értékeléshez
+              és az idézetekhez kell.
+            </div>
+          </div>
+
+          <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+            <button
+              class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+              onclick="toggleFaq(this)"
+            >
+              Nem UNAS vagy Shoprenter a boltom – akkor mi van?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
+                >add</span
+              >
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              A termékleírások visszatöltése ma UNAS és Shoprenter webáruházaknál működik, ezért a
+              diagnózist is ezekre a rendszerekre tartjuk fenn – nem szeretnénk olyat mérni, amin
+              utána nem tudunk segíteni. Ha más rendszert használsz, írj nekünk a
+              <a href="/hu/kapcsolat/" class="text-primary font-semibold underline">kapcsolati
+              oldalon</a>, és jelezzük, ha bővül a kör.
+            </div>
+          </div>
+
+          <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+            <button
+              class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+              onclick="toggleFaq(this)"
+            >
+              Mi történik az adataimmal?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
+                >add</span
+              >
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Az elérhetőségedet azért kérjük, hogy elérhessünk, ha kérdésed van az eredményről –
+              hírlevelet csak akkor küldünk, ha külön bepipálod. A részleteket az
+              <a href="/hu/adatkezeles/" class="text-primary font-semibold underline"
+                >adatkezelési tájékoztatóban</a
+              > találod.
+            </div>
+          </div>
+
+          <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+            <button
+              class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+              onclick="toggleFaq(this)"
+            >
+              Mi van, ha a terméklapomat nem tudjátok beolvasni?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
+                >add</span
+              >
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Nem zsákutca: ilyenkor beillesztheted magát a leírás szövegét, és abból is kapsz
+              értékelést. Annyi a különbség, hogy a keresőbarát mezőket ilyenkor nem tudjuk mérni –
+              és ezt az eredményben ki is mondjuk.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Záró CTA -->
+    <section class="bg-primary py-16 md:py-20">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Nézzük meg, hol állnak a termékleírásaid
+        </h2>
+        <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+          Egy terméklink, néhány perc – és pontosan látod, mi hiányzik a szövegeidből, és mennyibe
+          kerülne rendbe tenni.
+        </p>
+        <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
+          Kérem az ingyenes diagnózist
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Lábléc: minimál, csak a jogilag szükséges linkekkel -->
+    <footer class="py-10 bg-dark text-muted text-sm">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center space-y-4">
+        <div class="bg-white p-3 rounded-xl inline-block">
+          <img src="/assets/logo.webp" alt="Content Ninja logó" class="h-8" />
+        </div>
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <li><a href="/hu/adatkezeles/" class="hover:text-white">Adatkezelési tájékoztató</a></li>
+          <li><a href="/hu/aszf/" class="hover:text-white">ÁSZF</a></li>
+          <li><a href="/hu/impresszum/" class="hover:text-white">Impresszum</a></li>
+          <li><a href="/hu/kapcsolat/" class="hover:text-white">Kapcsolat</a></li>
+        </ul>
+        <p>Copyright © getcontentninja.com | 2026</p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      function toggleFaq(btn) {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      }
+    </script>
+
+    <LeadFormScript locale={locale} source="termekleiras-diagnozis" successUrl={AUDIT_START_URL} />
+  </div>
+</BaseLayout>

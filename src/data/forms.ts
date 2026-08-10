@@ -13,6 +13,25 @@ import type { Locale } from '../i18n/routes';
 export const INTAKE_ENDPOINT = 'https://app.getcontentninja.com/api/leads/intake';
 
 /**
+ * Az app **ingyenes termékleírás-diagnózisa** — a `termekleiras-diagnozis` opt-in
+ * oldal csalija. A látogató sikeres beküldés után ide megy tovább (nem a
+ * köszönőoldalra): egy opt-in oldal ígéretét azonnal be kell váltani.
+ *
+ * ⚠️ **Átadás (`handoff`) nélkül linkeljük, és ez szándékos.** Az app kínál egy
+ * `POST /api/shopgrade-audit/handoff` végpontot, amivel a termékszám előre
+ * kitölthető és az e-mail is átadható — de az `Authorization: Bearer <titok>`-ot
+ * kér, és a titok **szerver-oldali**. Ez a honlap statikus (Astro, GitHub Pages,
+ * nincs szerver), tehát a hívás csak a böngészőből mehetne, ami kiszivárogtatná a
+ * titkot. Az app doksija (`docs/shopgrade-audit-landing-integracio.md`) kimondja,
+ * hogy a diagnózis-oldal **átadás nélkül is működik** — a látogatónak csak eggyel
+ * több kérdésre kell válaszolnia (a termékszámra), a leadet pedig mi amúgy is
+ * elküldjük a saját `INTAKE_ENDPOINT`-unkra. Ha valaha kell az átadás, az app
+ * oldalán kell egy böngészőből is hívható (origin-ellenőrzött, rate-limitelt)
+ * változat — az `intake` végpont mintájára.
+ */
+export const AUDIT_START_URL = 'https://app.getcontentninja.com/shopgrade-audit';
+
+/**
  * A beküldés forrása. **Az angol oldal is a magyar kulcsot küldi**
  * (`/en/shopgrade` → `shopgrade`) – a nyelvet a külön `nyelv` mező hordozza,
  * így egy szűrővel látszik a téma összes érdeklődője, nyelvtől függetlenül.
@@ -23,6 +42,7 @@ export type FormSource =
   | 'teljes-rendszer'
   | 'hirlevel'
   | 'shopgrade'
+  | 'termekleiras-diagnozis'
   | 'nemzetkozi'
   | 'blogcikk-iro'
   | 'webshop-integracio'
@@ -43,6 +63,12 @@ export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
   'teljes-rendszer': { hu: '🧩 Teljes rendszer jelentkezés', en: '🧩 All-in-one lead' },
   hirlevel: { hu: '✉️ Hírlevél jelentkezés', en: '✉️ Newsletter lead' },
   shopgrade: { hu: '✍️ Shopgrade jelentkezés', en: '✍️ Shopgrade application' },
+  // Opt-in oldal az ingyenes diagnózisra. Külön kulcs, hogy elkülönüljön a
+  // `shopgrade` bemutató-forgalomtól: itt a lead a csaliért jött, nem bemutatóért.
+  'termekleiras-diagnozis': {
+    hu: '🔍 Ingyenes diagnózis jelentkezés',
+    en: '🔍 Free audit lead',
+  },
   nemzetkozi: {
     hu: '🌍 Nemzetközi terjeszkedés jelentkezés',
     en: '🌍 International expansion application',

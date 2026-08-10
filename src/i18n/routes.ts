@@ -10,6 +10,7 @@ export type PageKey =
   | 'international'
   | 'webshopIntegration'
   | 'shopgrade'
+  | 'shopgradeAudit'
   | 'blogWriter'
   | 'newsletter'
   | 'pricing'
@@ -54,6 +55,18 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // újraírás + visszatöltés; hamarosan kategóriaoldal-író és termékkép-szerkesztő).
   // A slug szándékosan a modul neve, hogy a későbbi almodulok is beleférjenek.
   shopgrade: { hu: '/hu/shopgrade/', en: '/en/shopgrade/' },
+  // Opt-in (squeeze) oldal a Shopgrade-hez: a csali maga a TERMÉK egy darabja —
+  // az app ingyenes, belépés nélküli termékleírás-diagnózisa. Az űrlap után a
+  // látogató NEM a köszönőoldalra megy, hanem egyenesen az app diagnózis-oldalára
+  // (`AUDIT_START_URL`), mert egy opt-in oldal ígéretét azonnal be kell váltani.
+  //
+  // **Csak magyarul.** Az app diagnózis-oldala egynyelvű (a több nyelv a v1-ből
+  // kimaradt), egy angol opt-in tehát magyar diagnózisra vinne. `en: null` →
+  // a nyelvváltó az EN főoldalra esik vissza.
+  //
+  // Tisztán fizetett landing: `noindex` + robots.txt Disallow — nem versenyzik a
+  // `/hu/shopgrade/` oldallal ugyanarra a kifejezésre (`allInOne` mintája).
+  shopgradeAudit: { hu: '/hu/termekleiras-diagnozis/', en: null },
   // Blogcikk író modul: kulcsszókutatás -> SEO/GEO-barát blogcikk -> publikálás
   // közvetlenül a webshop blogjába (Unas + Shoprenter).
   blogWriter: { hu: '/hu/blogcikk-iro/', en: '/en/blog-writer/' },

@@ -24,6 +24,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
   - `bookDemo` → `/hu/online-bemutato` , `/en/book-demo` (the general **"Bemutatót kérek" / "Book a demo"** landing — hero + lead form covering posting **and** newsletter; every header/footer/homepage demo CTA points here, `lead_forras: 'online-bemutato'`)
   - `newsletter` → `/hu/hirlevel` , `/en/newsletter` (AI hírlevél kampányoldal — same lead-form flow, `lead_forras: 'hirlevel'`)
   - `allInOne` → `/hu/teljes-rendszer` , `/en/all-in-one` (**all-in-one kampányoldal, csak fizetett forgalomra**: `noindex` + `robots.txt` Disallow. Az AJÁNLAT azonos a `bookDemo`-éval — ugyanaz az űrlap, ugyanazok a kiszűrő kérdések, ugyanaz a köszönőoldal —, csak a HOROG más: nem a bemutató eseménye, hanem az „egy rendszer az egész webshop-marketingedre" ígéret. Külön `lead_forras: 'teljes-rendszer'` méri, melyik szög hoz több jelentkezést; **a kiszűrő kérdéseket ezért nem szabad eltéríteni a `bookDemo`-étól**. Egy pluszkérdése van, a `module_interest` (max. 3 pipa → rejtett mezőbe fűzve), amin nincs `data-reject`, tehát a minősítést nem befolyásolja)
+  - `shopgradeAudit` → `/hu/termekleiras-diagnozis` , **csak magyarul** (`en: null`) — az **opt-in (squeeze) oldal**: a csali az app ingyenes, belépés nélküli termékleírás-diagnózisa. Három dologban tér el minden más kampányoldaltól: (1) **nincs navigáció** — nem a közös `Header`-t használja, hanem saját, linkmentes fejlécet (a köszönőoldalak mintájára), mert egy opt-in oldalon minden kifelé mutató link konverziót visz; (2) **a csali azonnal jár** — sikeres beküldés után nem a köszönőoldalra megy, hanem az app diagnózis-oldalára (lásd `successUrl` lentebb); (3) `noindex` + `robots.txt` Disallow, hogy ne versenyezzen a `/hu/shopgrade/` oldallal ugyanarra a kifejezésre. Azért csak magyarul, mert az app diagnózisa egynyelvű — egy angol opt-in magyar eredményoldalra vinne.
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
   - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy`
   - `terms` → `/hu/aszf` , `/en/terms`
@@ -86,6 +87,14 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
 - **`src/components/LeadFormScript.astro`** – a többlépcsős lead-űrlap teljes logikája (korábban 14
   oldalfájlban másolva). Props: `locale`, `source`. Az oldal csak a markupot adja.
 - **`src/components/HoneypotField.astro`** – a rejtett `website` mező (`.hp-field` a `global.css`-ben).
+- **Opt-in oldalak: `successUrl`.** A `LeadFormScript` opcionális `successUrl` propja felülírja a
+  köszönőoldalra mutató átirányítást — ezt használja a `termekleiras-diagnozis` oldal, hogy a
+  látogató egyből az app diagnózisára (`AUDIT_START_URL`, `forms.ts`) kerüljön. ⚠️ **A Meta `Lead`
+  eseményt ilyenkor a `LeadFormScript` maga lövi el** (`trackLeadHere`), közvetlenül a beküldés
+  előtt, mert a köszönőoldal — ami egyébként a `?lead=1`-re tüzelne — kimarad az útból. Enélkül a
+  konverzió némán elveszne. Az app **diagnózis-átadó** (`handoff`) végpontját szándékosan NEM
+  hívjuk: `Bearer` titkot kér és szerver-oldali, ez a honlap viszont statikus — a részletek a
+  `forms.ts` `AUDIT_START_URL` kommentjében.
 - A kapcsolat-űrlapok (`kapcsolat`/`contact`) saját, rövid inline scriptet használnak, de szintén a
   `window.cnIntake`-en mennek – URL ott sincs.
 

@@ -21,14 +21,24 @@ import { pathFor, type Locale } from '../i18n/routes';
 interface Props {
   locale: Locale;
   source: FormSource;
+  /**
+   * Hova vigyük a látogatót sikeres beküldés után, a köszönőoldal HELYETT.
+   * Az opt-in oldalak használják, ahol a csalit azonnal át kell adni (pl. az app
+   * ingyenes diagnózisa). Ilyenkor a köszönőoldal kimarad, ezért a Meta `Lead`
+   * eseményt — amit egyébként a `koszonjuk` oldal lő el a `?lead=1`-re — itt kell
+   * elsütni, különben a konverzió némán elveszne.
+   */
+  successUrl?: string;
 }
 
-const { locale, source } = Astro.props;
+const { locale, source, successUrl } = Astro.props;
 
 const cfg = {
   source,
   locale,
-  thanksUrl: `${pathFor('thanks', locale)}?lead=1`,
+  thanksUrl: successUrl ?? `${pathFor('thanks', locale)}?lead=1`,
+  /** Igaz, ha a köszönőoldalt kihagyjuk – ilyenkor itt mérünk `Lead`-et. */
+  trackLeadHere: !!successUrl,
   subjectPrefix: SUBJECT_PREFIX[source][locale],
   qualifyKey: QUALIFY_KEY,
   qualifyMaxAge: QUALIFY_MAX_AGE_MS,
@@ -274,8 +284,19 @@ const cfg = {
         if (handled.indexOf(key) === -1) extra[key] = data[key];
       });
 
+      // A pixel-eseményt MÉG A KÜLDÉS ELŐTT sütjük el: így az alatta futó
+      // legfeljebb 2 másodperces várakozás egyben időt is ad neki, hogy kimenjen
+      // az átirányítás előtt. (Hozzájárulás nélkül nincs `fbq` – ez a helyes:
+      // a pixelt a `cookie.js` csak elfogadás után tölti be.)
+      if (CFG.trackLeadHere) {
+        try {
+          if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
+        } catch (e) {}
+      }
+
       // Nem várakoztatjuk a felhasználót: a `keepalive` miatt a kérés az
-      // átirányítás után is elmegy, a maradékot a köszönőoldal küldi újra.
+      // átirányítás után is elmegy, a maradékot a köszönőoldal (vagy a következő
+      // oldalbetöltés) `flush()`-a küldi újra.
       window.cnIntake.send(cnPayload('sikeres', extra), { waitMs: 2000 }).then(function () {
         window.location.href = CFG.thanksUrl;
       });

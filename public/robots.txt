@@ -3,5 +3,6 @@ Disallow: /hu/koszonjuk
 Disallow: /en/thank-you
 Disallow: /hu/teljes-rendszer
 Disallow: /en/all-in-one
+Disallow: /hu/termekleiras-diagnozis
 
 Sitemap: https://getcontentninja.com/sitemap.xml
