@@ -137,14 +137,14 @@ const description =
           <!-- Bal: ígéret -->
           <div class="flex flex-col gap-4 md:gap-6 text-left">
             <span class="text-primary font-bold text-sm uppercase tracking-widest block"
-              >Termékleírás-elemzés 🔍</span
+              >Ingyenes termékadatlap-elemzés 🔍</span
             >
 
             <h1
               class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark"
             >
-              Ingyenes elemzés <span class="text-primary">webshopoknak</span>: miért a
-              <span class="text-primary">versenytársad termékét</span> hozza a keresés?
+              Miért nem a te <span class="text-primary">webshopodat</span> ajánlja az
+              <span class="text-primary">AI vagy a Google</span>?
             </h1>
 
             <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[540px]">
@@ -172,13 +172,6 @@ const description =
                   >Mi hiányzik ahhoz, hogy a <strong>keresők és az AI-válaszmotorok</strong> is
                   dolgozni tudjanak a termékeiddel</span
                 >
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span
-                  class="material-symbols-outlined text-primary text-[20px] mt-0.5"
-                  style="font-variation-settings:'FILL' 1">check_circle</span
-                >
-                <span>És hogy <strong>mennyibe kerülne</strong> rendbe tenni az egész katalógusodat</span>
               </li>
             </ul>
 
@@ -459,12 +452,13 @@ const description =
             >Mit kapsz 📄</span
           >
           <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Egy elemzést, ami csak a te boltodról szól
+            Webshopodra szabott javaslatcsomagot
           </h2>
           <p class="text-body text-lg">
-            Nem egy letölthető útmutatót kapsz, amit előtted már ezren megkaptak. Megnyitjuk a saját
-            terméklapodat, megnézzük, mi van rajta, és a <strong>te mondataidat idézve</strong> írjuk
-            le, mit érdemes rajta javítani.
+            Megmutatja, milyen <strong>konkrét dolgokat kell módosítanod</strong> ahhoz, hogy jobb
+            legyen a webshopod az AI és a Google szemében. Nem egy letölthető útmutatót kapsz, amit
+            előtted már ezren megkaptak – a saját terméklapodat nyitjuk meg, és a te mondataidat
+            idézzük.
           </p>
         </div>
 
@@ -609,14 +603,52 @@ const description =
               </div>
             </div>
 
-            <div class="pt-2">
-              <a href="#hero" class="cta-primary px-8 py-4 text-base"> Nézzük meg a terméklapomat </a>
-              <p class="text-xs text-muted mt-3 max-w-[420px]">
-                Az elemzés a végén ad egy kedvezménykódot is, ha úgy döntesz, hogy nekiállsz – de
-                semmire nem kötelez, és e nélkül is a tiéd az eredmény.
-              </p>
-            </div>
           </div>
+        </div>
+
+        <!-- Rövid példák arra, mit vizsgál. A lista az app mérhető ellenőrzéseinek
+             laikus fordítása (`docs/features/shopgrade-audit.md`, „A pontozás") –
+             ha ott változik a mérés, ezt is igazítani kell. -->
+        <div class="mt-10 bg-light rounded-[16px] border border-border p-8 shadow-card">
+          <h3 class="font-bold text-lg mb-6 text-dark flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-primary text-[22px]">checklist</span>
+            Mit vizsgálunk – néhány példa
+          </h3>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+              Ki van-e töltve az a cím és leírás, amit a Google a találati listában mutat – és jó-e a
+              hosszuk
+            </li>
+            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+              Van-e a szövegben konkrét adat – méret, anyag, teljesítmény –, vagy csak általánosság
+            </li>
+            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+              Tagolt-e a leírás, vagy egyetlen tömbben áll
+            </li>
+            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+              Kiderül-e belőle, kinek való a termék – és kinek nem
+            </li>
+            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+              Mennyire hasonlít a szöveged bármelyik hasonló termék leírására
+            </li>
+            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+              Ugyanilyen alapos-e a boltod többi terméklapja is
+            </li>
+          </ul>
+        </div>
+
+        <div class="text-center mt-10">
+          <a href="#hero" class="cta-primary px-8 py-4 text-base">Nézzük meg a terméklapomat</a>
+          <p class="text-xs text-muted mt-3 max-w-[460px] mx-auto">
+            Az elemzés a végén ad egy kedvezménykódot is, ha úgy döntesz, hogy nekiállsz – de
+            semmire nem kötelez, és e nélkül is a tiéd az eredmény.
+          </p>
         </div>
       </div>
     </section>
