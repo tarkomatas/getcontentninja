@@ -49,6 +49,14 @@
  *
  * ⚠️ A minősítés így is KÜLÖN LÉPÉS marad, e-mail bekérése ELŐTT – a `hard_reject` ág
  * szándékosan kapcsolati adat nélküli, azt a kiszűrttől nem is akarjuk elkérni.
+ *
+ * **EBBŐL A BEKÜLDÉSBŐL NEM LESZ CRM-LEAD** (user-döntés, 2026-08-10) – szemben a honlap összes
+ * többi űrlapjával. A látogató itt azért adta meg a címét, hogy MEGKAPJA az elemzést, nem azért,
+ * hogy jelentkezzen; jelentkező akkor lesz belőle, ha az elemzés végén a kupont is kéri – azt már
+ * az app intézi, a pontszámmal együtt. A kivételt az app oldalán a `SOURCES_WITHOUT_DIRECT_LEAD`
+ * halmaz tartja (`src/lib/admin/lead-submissions.ts`), a `lead_forras` alapján; itt a honlapon
+ * ehhez nincs teendő. A beküldés ettől nem vész el: a napló-sor, a belső értesítő és a
+ * hírlevél-feliratkozás megmarad.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
