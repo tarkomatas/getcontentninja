@@ -835,11 +835,18 @@ const description =
     </script>
 
     <!--
-      Két pixel-esemény a sikeres beküldésre. Mindkettő UGYANARRA a kattintásra
-      tüzel (a landingen ez az egyetlen mérhető pillanat – a látogató utána már
-      az app oldalán van), tehát a két szám mindig együtt mozog. A Meta-kampány
-      optimalizálását ezért CSAK AZ EGYIKRE szabad állítani, különben ugyanaz a
-      konverzió kétszer súlyozódik.
+      EGY pixel-esemény a sikeres beküldésre (user-döntés): ez az oldal
+      szándékosan `CompleteRegistration`-nel mér, nem `Lead`-del.
+
+      Miért nem `Lead`, mint a többi 17 űrlapon? Mert azokon a köszönőoldal süti
+      el a `?lead=1`-re, ez az oldal viszont kihagyja a köszönőoldalt (egyből az
+      app elemzésére küld). A `Lead` így ide került volna át — de a landingen
+      EGYETLEN mérhető pillanat van, a beküldés, tehát a két esemény ugyanarra a
+      kattintásra tüzelt volna, azonos számokkal. Egy kattintás, egy esemény.
+
+      ⚠️ **Következmény:** ez az oldal nem jelenik meg semmiben, ami `Lead`
+      eseményre épül (a többi űrlappal közös riport, `Lead`-alapú egyéni
+      közönség). Ez a kampány külön mérésének az ára.
 
       Ha valaha az „elemzés tényleg elkészült" pillanatot kellene mérni, az nem
       itt van, hanem az app eredményoldalán – oda viszont előbb pixel és
@@ -849,10 +856,7 @@ const description =
       locale={locale}
       source="termekleiras-diagnozis"
       successUrl={AUDIT_START_URL}
-      pixelEvents={[
-        { name: 'Lead' },
-        { name: 'CompleteRegistration', params: { content_name: 'auto_diagnozis' } },
-      ]}
+      pixelEvents={[{ name: 'CompleteRegistration', params: { content_name: 'auto_diagnozis' } }]}
     />
   </div>
 </BaseLayout>
