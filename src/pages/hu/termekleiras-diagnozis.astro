@@ -536,111 +536,99 @@ const description =
             </div>
           </div>
 
-          <!-- Mit tartalmaz -->
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div
-                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
-              >
-                <span class="material-symbols-outlined text-primary text-[22px]">search</span>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">Mi hiányzik a terméklapodról</h3>
-                <p class="text-body text-sm leading-relaxed">
-                  Tételesen, pipával és iksszel: mi az, ami rendben van, és mi az, ami hiányzik
-                  ahhoz, hogy a keresők és az AI dolgozni tudjanak a termékeddel. Egy linket kérünk,
-                  de a boltodból még 2-3 másik terméklapot is megnézünk – így az is kiderül, mennyire
-                  egyenletes a színvonal.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-              <div
-                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
-              >
-                <span class="material-symbols-outlined text-primary text-[22px]">format_quote</span>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">Mennyire egyedi a szöveged</h3>
-                <p class="text-body text-sm leading-relaxed">
-                  Megmutatjuk, a leírásod hány százaléka lenne szó szerint ugyanígy igaz bármelyik
-                  hasonló termékre – és idézzük is azokat a mondatokat. Ez az a szám, ami miatt a
-                  kereső nem tud választani közted és húsz másik bolt között.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-              <div
-                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
-              >
-                <span class="material-symbols-outlined text-primary text-[22px]">calculate</span>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">Hol érdemes elkezdened</h3>
-                <p class="text-body text-sm leading-relaxed">
-                  Nem csak azt mondjuk meg, mi a baj, hanem azt is, mivel kezdd. Van, amit néhány
-                  termékkel érdemes kipróbálni előbb, és van, amit nyugodtan ráérsz később – hogy ne
-                  az egész katalógusnak ess neki egyszerre.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-              <div
-                class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
-              >
-                <span class="material-symbols-outlined text-primary text-[22px]">event_available</span>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">Mennyi munka lenne az egész bolt</h3>
-                <p class="text-body text-sm leading-relaxed">
-                  Beállítod, milyen ütemben haladnál, és megmutatjuk, mennyi idő alatt érnél a
-                  végére a te termékszámoddal – és hol akadna el először. Így nem kell megérzésből
-                  eldöntened, belefér-e.
-                </p>
-              </div>
-            </div>
-
+          <!-- Rövid példák arra, mit vizsgál – a minta-eredmény MELLETT: bal oldalt
+               látja, mit kap, jobb oldalt, hogy miből jön. A lista az app mérhető
+               ellenőrzéseinek laikus fordítása (`docs/features/shopgrade-audit.md`,
+               „A pontozás") – ha ott változik a mérés, ezt is igazítani kell. -->
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <h3 class="font-bold text-lg mb-6 text-dark flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-primary text-[22px]">checklist</span>
+              Mit vizsgálunk – néhány példa
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                Ki van-e töltve az a cím és leírás, amit a Google a találati listában mutat – és
+                jó-e a hosszuk
+              </li>
+              <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                Van-e a szövegben konkrét adat – méret, anyag, teljesítmény –, vagy csak
+                általánosság
+              </li>
+              <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                Tagolt-e a leírás, vagy egyetlen tömbben áll
+              </li>
+              <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                Kiderül-e belőle, kinek való a termék – és kinek nem
+              </li>
+              <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                Mennyire hasonlít a szöveged bármelyik hasonló termék leírására
+              </li>
+              <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
+                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
+                Ugyanilyen alapos-e a boltod többi terméklapja is
+              </li>
+            </ul>
           </div>
         </div>
 
-        <!-- Rövid példák arra, mit vizsgál. A lista az app mérhető ellenőrzéseinek
-             laikus fordítása (`docs/features/shopgrade-audit.md`, „A pontozás") –
-             ha ott változik a mérés, ezt is igazítani kell. -->
-        <div class="mt-10 bg-light rounded-[16px] border border-border p-8 shadow-card">
-          <h3 class="font-bold text-lg mb-6 text-dark flex items-center gap-2.5">
-            <span class="material-symbols-outlined text-primary text-[22px]">checklist</span>
-            Mit vizsgálunk – néhány példa
-          </h3>
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
-            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
-              Ki van-e töltve az a cím és leírás, amit a Google a találati listában mutat – és jó-e a
-              hosszuk
-            </li>
-            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
-              Van-e a szövegben konkrét adat – méret, anyag, teljesítmény –, vagy csak általánosság
-            </li>
-            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
-              Tagolt-e a leírás, vagy egyetlen tömbben áll
-            </li>
-            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
-              Kiderül-e belőle, kinek való a termék – és kinek nem
-            </li>
-            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
-              Mennyire hasonlít a szöveged bármelyik hasonló termék leírására
-            </li>
-            <li class="flex items-start gap-2.5 text-body text-sm leading-relaxed">
-              <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>
-              Ugyanilyen alapos-e a boltod többi terméklapja is
-            </li>
-          </ul>
+        <!-- Mit tartalmaz a javaslatcsomag – a rács alatt, teljes szélességben. -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+          <div>
+            <div
+              class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mb-4"
+            >
+              <span class="material-symbols-outlined text-primary text-[22px]">search</span>
+            </div>
+            <h3 class="font-bold text-lg mb-1 text-dark">Mi hiányzik a terméklapodról</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Tételesen, pipával és iksszel: mi az, ami rendben van, és mi az, ami nincs. Egy
+              linket kérünk, de a boltodból még 2-3 másik terméklapot is megnézünk.
+            </p>
+          </div>
+
+          <div>
+            <div
+              class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mb-4"
+            >
+              <span class="material-symbols-outlined text-primary text-[22px]">format_quote</span>
+            </div>
+            <h3 class="font-bold text-lg mb-1 text-dark">Mennyire egyedi a szöveged</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Megmutatjuk, a leírásod hány százaléka lenne szó szerint ugyanígy igaz bármelyik
+              hasonló termékre – és idézzük is azokat a mondatokat.
+            </p>
+          </div>
+
+          <div>
+            <div
+              class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mb-4"
+            >
+              <span class="material-symbols-outlined text-primary text-[22px]">flag</span>
+            </div>
+            <h3 class="font-bold text-lg mb-1 text-dark">Hol érdemes elkezdened</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Nem csak azt mondjuk meg, mi a baj, hanem azt is, mivel kezdd – hogy ne az egész
+              katalógusnak ess neki egyszerre.
+            </p>
+          </div>
+
+          <div>
+            <div
+              class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mb-4"
+            >
+              <span class="material-symbols-outlined text-primary text-[22px]">event_available</span>
+            </div>
+            <h3 class="font-bold text-lg mb-1 text-dark">Mennyi munka lenne az egész bolt</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Beállítod, milyen ütemben haladnál, és megmutatjuk, mennyi idő alatt érnél a végére
+              a te termékszámoddal – és hol akadna el először.
+            </p>
+          </div>
         </div>
 
         <div class="text-center mt-10">
