@@ -274,7 +274,8 @@ const cfg = {
         telefonszam: data.phone || '',
         hirlevel_feliratkozas: newsletterField && newsletterField.checked ? 'Igen' : 'Nem',
         adatkezeles: 'Igen',
-        subject: CFG.subjectPrefix + ': ' + (data.name || ''),
+        // Az opt-in oldalak nem kérnek nevet – ott az e-mail azonosít.
+        subject: CFG.subjectPrefix + ': ' + (data.name || data.email || ''),
       };
 
       // A minősítő válaszok a saját `name`-jükkel mennek tovább – oldalanként
