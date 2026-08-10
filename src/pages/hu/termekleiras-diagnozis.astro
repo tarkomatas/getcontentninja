@@ -459,11 +459,12 @@ const description =
             >Mit kapsz 📄</span
           >
           <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Nem egy PDF. A saját terméklapod mérése.
+            Egy elemzést, ami csak a te boltodról szól
           </h2>
           <p class="text-body text-lg">
-            A legtöbb „ingyenes elemzés" egy általános ellenőrzőlista. Ez megnyitja a te
-            terméklapodat, megméri, és a saját szövegedből idéz.
+            Nem egy letölthető útmutatót kapsz, amit előtted már ezren megkaptak. Megnyitjuk a saját
+            terméklapodat, megnézzük, mi van rajta, és a <strong>te mondataidat idézve</strong> írjuk
+            le, mit érdemes rajta javítani.
           </p>
         </div>
 
@@ -550,13 +551,12 @@ const description =
                 <span class="material-symbols-outlined text-primary text-[22px]">search</span>
               </div>
               <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">
-                  Mi hiányzik a keresőknek és az AI-nak
-                </h3>
+                <h3 class="font-bold text-lg mb-1 text-dark">Mi hiányzik a terméklapodról</h3>
                 <p class="text-body text-sm leading-relaxed">
-                  Keresőbarát mezők, tényszerűség, szerkezet – tengelyenként látod, mi van rendben
-                  és mi nincs. Egy linket kérünk, de a boltod oldaltérképéből még 2-3 adatlapot
-                  megnézünk, hogy az egységességet is mérni tudjuk.
+                  Tételesen, pipával és iksszel: mi az, ami rendben van, és mi az, ami hiányzik
+                  ahhoz, hogy a keresők és az AI dolgozni tudjanak a termékeddel. Egy linket kérünk,
+                  de a boltodból még 2-3 másik terméklapot is megnézünk – így az is kiderül, mennyire
+                  egyenletes a színvonal.
                 </p>
               </div>
             </div>
@@ -568,11 +568,11 @@ const description =
                 <span class="material-symbols-outlined text-primary text-[22px]">format_quote</span>
               </div>
               <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">Mennyire cserélhető a szöveged</h3>
+                <h3 class="font-bold text-lg mb-1 text-dark">Mennyire egyedi a szöveged</h3>
                 <p class="text-body text-sm leading-relaxed">
-                  Megmutatjuk, a leírásod hány százaléka lenne igaz bármelyik hasonló termékre – és
-                  idézzük is azokat a mondatokat. Ez az a szám, ami miatt a kereső nem tud dönteni
-                  közted és húsz másik bolt között.
+                  Megmutatjuk, a leírásod hány százaléka lenne szó szerint ugyanígy igaz bármelyik
+                  hasonló termékre – és idézzük is azokat a mondatokat. Ez az a szám, ami miatt a
+                  kereső nem tud választani közted és húsz másik bolt között.
                 </p>
               </div>
             </div>
@@ -584,10 +584,11 @@ const description =
                 <span class="material-symbols-outlined text-primary text-[22px]">calculate</span>
               </div>
               <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">Mennyibe kerülne kijavítani</h3>
+                <h3 class="font-bold text-lg mb-1 text-dark">Hol érdemes elkezdened</h3>
                 <p class="text-body text-sm leading-relaxed">
-                  Állítható ütemű kalkulátor a te termékszámoddal: mennyi idő, hány kredit és
-                  mekkora összeg a teljes katalógusod átírása – és melyik korlát fog be először.
+                  Nem csak azt mondjuk meg, mi a baj, hanem azt is, mivel kezdd. Van, amit néhány
+                  termékkel érdemes kipróbálni előbb, és van, amit nyugodtan ráérsz később – hogy ne
+                  az egész katalógusnak ess neki egyszerre.
                 </p>
               </div>
             </div>
@@ -596,21 +597,24 @@ const description =
               <div
                 class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
               >
-                <span class="material-symbols-outlined text-primary text-[22px]"
-                  >local_activity</span
-                >
+                <span class="material-symbols-outlined text-primary text-[22px]">event_available</span>
               </div>
               <div>
-                <h3 class="font-bold text-lg mb-1 text-dark">50% kedvezmény az első hónapra</h3>
+                <h3 class="font-bold text-lg mb-1 text-dark">Mennyi munka lenne az egész bolt</h3>
                 <p class="text-body text-sm leading-relaxed">
-                  Az elemzés végén kapsz egy kuponkódot – a képernyőn és e-mailben is –, ha úgy
-                  döntesz, hogy neki is állsz a javításnak.
+                  Beállítod, milyen ütemben haladnál, és megmutatjuk, mennyi idő alatt érnél a
+                  végére a te termékszámoddal – és hol akadna el először. Így nem kell megérzésből
+                  eldöntened, belefér-e.
                 </p>
               </div>
             </div>
 
             <div class="pt-2">
               <a href="#hero" class="cta-primary px-8 py-4 text-base"> Nézzük meg a terméklapomat </a>
+              <p class="text-xs text-muted mt-3 max-w-[420px]">
+                Az elemzés a végén ad egy kedvezménykódot is, ha úgy döntesz, hogy nekiállsz – de
+                semmire nem kötelez, és e nélkül is a tiéd az eredmény.
+              </p>
             </div>
           </div>
         </div>
@@ -652,18 +656,29 @@ const description =
               class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
               onclick="toggleFaq(this)"
             >
-              Mennyire megbízható ez? Nem csak egy AI véleménye?
+              Honnan tudom, hogy igaza van? Nem csak egy AI tippel?
               <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
                 >add</span
               >
             </button>
             <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-              Az eredmény <strong>legalább 70%-a mérés</strong>, nem vélemény: van-e keresőbarát cím
-              és leírás, belefér-e a karakteres keretbe, van-e h1, hány szám+egység és tényszerű
-              adatpár szerepel a szövegben, van-e tagolás. Ezek nem ízlés kérdései. A maradék
-              legfeljebb 30%-ot adó AI-értékelés pedig csak <strong>szó szerinti idézettel</strong>
-              együtt fogadható el – idézet nélküli állítást a rendszer nem enged ki. És ha a
-              terméklapod amúgy is gazdag, azt is kimondjuk, és nem ígérünk nagy ugrást.
+              <p class="mb-3">
+                Az eredmény nagyobbik része <strong>mérés, nem vélemény</strong>. Olyasmiket nézünk
+                meg a terméklapodon, amikre egyértelmű a válasz: ki van-e töltve az a rövid szöveg,
+                amit a Google a találati listában mutat; szerepel-e a leírásban konkrét adat –
+                méret, anyag, mennyiség –, vagy csak általánosságok; tagolva van-e, vagy egy
+                tömbben áll. Ezekben nincs ízlés-kérdés.
+              </p>
+              <p class="mb-3">
+                Az AI csak ezután szólal meg, és nála az a szabály, hogy <strong
+                  >minden állítását a te szövegedből vett idézettel</strong
+                > kell alátámasztania. Idézet nélkül a rendszer ki sem engedi – így te magad tudod
+                ellenőrizni, hogy igaza van-e.
+              </p>
+              <p>
+                És ha a terméklapod amúgy is rendben van, azt is megmondjuk. Nem az a dolgunk, hogy
+                mindenáron hibát találjunk.
+              </p>
             </div>
           </div>
 
