@@ -13,23 +13,38 @@ import type { Locale } from '../i18n/routes';
 export const INTAKE_ENDPOINT = 'https://app.getcontentninja.com/api/leads/intake';
 
 /**
- * Az app **ingyenes termékleírás-diagnózisa** — a `termekleiras-diagnozis` opt-in
+ * Az app **ingyenes termékleírás-elemzése** — a `termekleiras-diagnozis` opt-in
  * oldal csalija. A látogató sikeres beküldés után ide megy tovább (nem a
  * köszönőoldalra): egy opt-in oldal ígéretét azonnal be kell váltani.
  *
- * ⚠️ **Átadás (`handoff`) nélkül linkeljük, és ez szándékos.** Az app kínál egy
- * `POST /api/shopgrade-audit/handoff` végpontot, amivel a termékszám előre
- * kitölthető és az e-mail is átadható — de az `Authorization: Bearer <titok>`-ot
- * kér, és a titok **szerver-oldali**. Ez a honlap statikus (Astro, GitHub Pages,
- * nincs szerver), tehát a hívás csak a böngészőből mehetne, ami kiszivárogtatná a
- * titkot. Az app doksija (`docs/shopgrade-audit-landing-integracio.md`) kimondja,
- * hogy a diagnózis-oldal **átadás nélkül is működik** — a látogatónak csak eggyel
- * több kérdésre kell válaszolnia (a termékszámra), a leadet pedig mi amúgy is
- * elküldjük a saját `INTAKE_ENDPOINT`-unkra. Ha valaha kell az átadás, az app
- * oldalán kell egy böngészőből is hívható (origin-ellenőrzött, rate-limitelt)
- * változat — az `intake` végpont mintájára.
+ * Ez a **tartalék** cím: átadás nélkül is teljes értékű elemzést ad (az app
+ * doksija ezt kifejezetten kimondja), csak a látogatónak kell megadnia mindent,
+ * amit egyébként mi adnánk át. Ide esünk vissza, ha az átadás bármiért nem jön
+ * össze — lásd `AUDIT_HANDOFF_ENDPOINT`.
  */
 export const AUDIT_START_URL = 'https://app.getcontentninja.com/shopgrade-audit';
+
+/**
+ * **Átadás az elemzésnek** (`docs/shopgrade-audit-landing-integracio.md`). A siker-ág
+ * ide POST-olja, amit a látogatóról már tudunk (e-mail + hozzájárulás, boltmotor,
+ * utm/referrer), és a válasz `redirect_url`-jére megy tovább a látogató. Haszna:
+ * az e-mail **nem kerül URL-be**, viszont az app már az elemzés indulásakor tudja,
+ * kiről van szó — így a kuponkód magától kimegy, és a diagnózisból lead lesz a
+ * pontszámmal együtt.
+ *
+ * ⚠️ **Titok nélkül hívjuk, a böngészőből — és ez így szándékos.** A doksi eredetileg
+ * szerver-oldali `Authorization: Bearer` hívást írt elő, de ez a honlap statikus
+ * (Astro + GitHub Pages), tehát **nincs szervere, ami a titkot tarthatná**. Ugyanez a
+ * helyzet állt elő az `INTAKE_ENDPOINT`-nál, és ott ez már eldöntött minta: nincs
+ * URL-titok, a védelmet origin-allowlist + IP-alapú rate limit adja. Az app
+ * `handoff` végpontja 2026-08-10 óta ezt a második bejáratot is kínálja; a
+ * `Bearer`-es út változatlanul él a szerver-oldali hívóknak.
+ *
+ * **Ha bármi elhasal** (hálózat, 401, 429, 5xx), a látogató az `AUDIT_START_URL`-re
+ * megy — az átadás elrontása sosem zsákutca.
+ */
+export const AUDIT_HANDOFF_ENDPOINT =
+  'https://app.getcontentninja.com/api/shopgrade-audit/handoff';
 
 /**
  * A beküldés forrása. **Az angol oldal is a magyar kulcsot küldi**

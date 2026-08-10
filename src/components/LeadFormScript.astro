@@ -295,11 +295,39 @@ const cfg = {
         } catch (e) {}
       }
 
+      // Az oldal FELÜLÍRHATJA a cél-URL-t egy `window.cnResolveSuccessUrl(extra)`
+      // függvénnyel, ami URL-t (vagy `null`-t) adó ígérettel tér vissza. Az opt-in
+      // oldal ezzel adja át az adatot az app elemzésének, és kap cserébe egy
+      // személyre szóló belépő linket. Ami `null`-t vagy hibát ad, az egyszerűen a
+      // szokásos célra esik vissza — a feloldó sosem lehet zsákutca.
+      var resolved = Promise.resolve(null);
+      if (typeof window.cnResolveSuccessUrl === 'function') {
+        try {
+          resolved = Promise.resolve(window.cnResolveSuccessUrl(extra)).catch(function () {
+            return null;
+          });
+        } catch (e) {}
+      }
+
+      // A feloldó legfeljebb ennyit kap: a látogatót nem várakoztatjuk egy külső
+      // hívás miatt, és egy beragadt kérés nem foghatja meg örökre az átirányítást.
+      var target = Promise.race([
+        resolved,
+        new Promise(function (done) {
+          setTimeout(function () {
+            done(null);
+          }, 2500);
+        }),
+      ]);
+
       // Nem várakoztatjuk a felhasználót: a `keepalive` miatt a kérés az
       // átirányítás után is elmegy, a maradékot a köszönőoldal (vagy a következő
-      // oldalbetöltés) `flush()`-a küldi újra.
-      window.cnIntake.send(cnPayload('sikeres', extra), { waitMs: 2000 }).then(function () {
-        window.location.href = CFG.thanksUrl;
+      // oldalbetöltés) `flush()`-a küldi újra. A két várakozás párhuzamos.
+      Promise.all([
+        window.cnIntake.send(cnPayload('sikeres', extra), { waitMs: 2000 }),
+        target,
+      ]).then(function (results) {
+        window.location.href = results[1] || CFG.thanksUrl;
       });
     });
   });

@@ -53,7 +53,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
-import { AUDIT_START_URL } from '../../data/forms';
+import { AUDIT_HANDOFF_ENDPOINT, AUDIT_START_URL } from '../../data/forms';
 
 const locale = 'hu';
 const page = 'shopgradeAudit';
@@ -760,6 +760,78 @@ const description =
         document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
         if (!isOpen) item.classList.add('open');
       }
+    </script>
+
+    <!--
+      ÁTADÁS az app elemzésének (`docs/shopgrade-audit-landing-integracio.md`).
+
+      A `LeadFormScript` a beküldés után meghívja ezt, és a visszaadott URL-re
+      irányít; `null`-nál vagy hibánál az `AUDIT_START_URL`-re esik vissza. Ezért
+      NINCS benne hibakezelő felület: az átadás elrontása sosem lehet zsákutca.
+
+      Amit átadunk: e-mail + hozzájárulás (így a kuponkód magától kimegy, és a
+      diagnózisból lead lesz a pontszámmal), a boltmotor (a záró gombot változtatja)
+      és az utm/referrer blokk. **Az e-mail nem kerül URL-be** — pont ezért van az
+      átadó végpont a query-paraméter helyett.
+
+      A `define:vars` IIFE-be csomagolja a scriptet, ezért a `window.`-ra kézzel
+      kell kitenni a függvényt (lásd CLAUDE.md).
+    -->
+    <script
+      is:inline
+      define:vars={{
+        cnHandoff: { endpoint: AUDIT_HANDOFF_ENDPOINT, landingId: 'termekleiras-diagnozis' },
+      }}
+    >
+      // A boltmotor a mi címkéinkről az app allowlistjére. Ami nincs a táblában,
+      // az `null` marad – az app a kiértékelést amúgy sem ebből végzi, csak a
+      // záró gombot igazítja vele. (A többi válasz hard reject, ide sem jut el.)
+      var CN_ENGINES = { UNAS: 'unas', Shoprenter: 'shoprenter' };
+
+      function cnCampaignSource() {
+        var out = {};
+        try {
+          var params = new URLSearchParams(window.location.search);
+          ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(
+            function (key) {
+              var value = params.get(key);
+              if (value) out[key] = value;
+            }
+          );
+        } catch (e) {}
+        if (document.referrer) out.referrer = document.referrer;
+        return out;
+      }
+
+      window.cnResolveSuccessUrl = function (extra) {
+        var email = (extra && extra.email) || '';
+        // Hozzájárulás nélkül NEM adunk át e-mailt: az app ilyenkor amúgy is
+        // eldobná, és ez a doksi kifejezett kérése is.
+        var consent = !!extra && extra.adatkezeles === 'Igen';
+        if (!email || !consent) return Promise.resolve(null);
+
+        return fetch(cnHandoff.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            consent: true,
+            consent_at: new Date().toISOString(),
+            engine: CN_ENGINES[extra.has_webshop] || null,
+            source: cnCampaignSource(),
+            landing_id: cnHandoff.landingId,
+          }),
+        })
+          .then(function (res) {
+            return res.ok ? res.json() : null;
+          })
+          .then(function (data) {
+            return (data && data.redirect_url) || null;
+          })
+          .catch(function () {
+            return null;
+          });
+      };
     </script>
 
     <LeadFormScript locale={locale} source="termekleiras-diagnozis" successUrl={AUDIT_START_URL} />

@@ -87,14 +87,20 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
 - **`src/components/LeadFormScript.astro`** – a többlépcsős lead-űrlap teljes logikája (korábban 14
   oldalfájlban másolva). Props: `locale`, `source`. Az oldal csak a markupot adja.
 - **`src/components/HoneypotField.astro`** – a rejtett `website` mező (`.hp-field` a `global.css`-ben).
-- **Opt-in oldalak: `successUrl`.** A `LeadFormScript` opcionális `successUrl` propja felülírja a
-  köszönőoldalra mutató átirányítást — ezt használja a `termekleiras-diagnozis` oldal, hogy a
-  látogató egyből az app diagnózisára (`AUDIT_START_URL`, `forms.ts`) kerüljön. ⚠️ **A Meta `Lead`
-  eseményt ilyenkor a `LeadFormScript` maga lövi el** (`trackLeadHere`), közvetlenül a beküldés
-  előtt, mert a köszönőoldal — ami egyébként a `?lead=1`-re tüzelne — kimarad az útból. Enélkül a
-  konverzió némán elveszne. Az app **diagnózis-átadó** (`handoff`) végpontját szándékosan NEM
-  hívjuk: `Bearer` titkot kér és szerver-oldali, ez a honlap viszont statikus — a részletek a
-  `forms.ts` `AUDIT_START_URL` kommentjében.
+- **Opt-in oldalak: `successUrl` + `cnResolveSuccessUrl`.** A `LeadFormScript` opcionális `successUrl`
+  propja felülírja a köszönőoldalra mutató átirányítást — ezt használja a `termekleiras-diagnozis`
+  oldal, hogy a látogató egyből az app elemzésére kerüljön. ⚠️ **A Meta `Lead` eseményt ilyenkor a
+  `LeadFormScript` maga lövi el** (`trackLeadHere`), közvetlenül a beküldés előtt, mert a köszönőoldal
+  — ami egyébként a `?lead=1`-re tüzelne — kimarad az útból. Enélkül a konverzió némán elveszne.
+- **Átadás az elemzésnek (`handoff`).** Az oldal definiálhat egy `window.cnResolveSuccessUrl(extra)`
+  függvényt; a `LeadFormScript` megvárja (max. 2,5 mp), és a visszaadott URL-re irányít, `null`/hiba
+  esetén a `successUrl`-re. A `termekleiras-diagnozis` ezzel POST-ol az app
+  `AUDIT_HANDOFF_ENDPOINT`-jára (e-mail + hozzájárulás, boltmotor, utm) — így az **e-mail nem kerül
+  URL-be**, a kuponkód magától kimegy, és az elemzésből lead lesz a pontszámmal. ⚠️ **Titok nélkül,
+  a böngészőből hívjuk:** a doksi eredetileg szerver-oldali `Bearer`-t írt elő, de ez a honlap
+  statikus. Az app végpontja 2026-08-10 óta ezért kínál egy második, origin-allowlistes +
+  rate-limitelt bejáratot is — az `INTAKE_ENDPOINT` bevett mintája szerint. Részletek a `forms.ts`
+  `AUDIT_HANDOFF_ENDPOINT` kommentjében és az app `docs/shopgrade-audit-landing-integracio.md`-jében.
 - A kapcsolat-űrlapok (`kapcsolat`/`contact`) saját, rövid inline scriptet használnak, de szintén a
   `window.cnIntake`-en mennek – URL ott sincs.
 
