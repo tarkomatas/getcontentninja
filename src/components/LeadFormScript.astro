@@ -29,16 +29,27 @@ interface Props {
    * elsütni, különben a konverzió némán elveszne.
    */
   successUrl?: string;
+  /**
+   * Meta pixel események a SIKERES beküldéskor, sorrendben.
+   *
+   * Alapértelmezés: `successUrl` esetén egyetlen `Lead` (a köszönőoldal marad ki
+   * az útból, tehát az ő `?lead=1`-es mérését itt kell pótolni); `successUrl`
+   * nélkül semmi, mert akkor a köszönőoldal mér.
+   *
+   * ⚠️ Ha több eseményt adsz meg, mindegyik UGYANARRA a cselekvésre tüzel — a
+   * hirdetési optimalizálást tehát egyre kell állítani, nem mindre, különben
+   * ugyanaz a konverzió kétszer számít.
+   */
+  pixelEvents?: { name: string; params?: Record<string, unknown> }[];
 }
 
-const { locale, source, successUrl } = Astro.props;
+const { locale, source, successUrl, pixelEvents } = Astro.props;
 
 const cfg = {
   source,
   locale,
   thanksUrl: successUrl ?? `${pathFor('thanks', locale)}?lead=1`,
-  /** Igaz, ha a köszönőoldalt kihagyjuk – ilyenkor itt mérünk `Lead`-et. */
-  trackLeadHere: !!successUrl,
+  pixelEvents: pixelEvents ?? (successUrl ? [{ name: 'Lead' }] : []),
   subjectPrefix: SUBJECT_PREFIX[source][locale],
   qualifyKey: QUALIFY_KEY,
   qualifyMaxAge: QUALIFY_MAX_AGE_MS,
@@ -285,15 +296,17 @@ const cfg = {
         if (handled.indexOf(key) === -1) extra[key] = data[key];
       });
 
-      // A pixel-eseményt MÉG A KÜLDÉS ELŐTT sütjük el: így az alatta futó
-      // legfeljebb 2 másodperces várakozás egyben időt is ad neki, hogy kimenjen
-      // az átirányítás előtt. (Hozzájárulás nélkül nincs `fbq` – ez a helyes:
-      // a pixelt a `cookie.js` csak elfogadás után tölti be.)
-      if (CFG.trackLeadHere) {
+      // A pixel-eseményeket MÉG A KÜLDÉS ELŐTT sütjük el: így az alatta futó
+      // legfeljebb 2 másodperces várakozás egyben időt is ad nekik, hogy
+      // kimenjenek az átirányítás előtt. (Hozzájárulás nélkül nincs `fbq` – ez a
+      // helyes: a pixelt a `cookie.js` csak elfogadás után tölti be.)
+      (CFG.pixelEvents || []).forEach(function (event) {
         try {
-          if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
+          if (typeof window.fbq !== 'function') return;
+          if (event.params) window.fbq('track', event.name, event.params);
+          else window.fbq('track', event.name);
         } catch (e) {}
-      }
+      });
 
       // Az oldal FELÜLÍRHATJA a cél-URL-t egy `window.cnResolveSuccessUrl(extra)`
       // függvénnyel, ami URL-t (vagy `null`-t) adó ígérettel tér vissza. Az opt-in
