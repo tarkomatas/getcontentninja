@@ -834,6 +834,25 @@ const description =
       };
     </script>
 
-    <LeadFormScript locale={locale} source="termekleiras-diagnozis" successUrl={AUDIT_START_URL} />
+    <!--
+      Két pixel-esemény a sikeres beküldésre. Mindkettő UGYANARRA a kattintásra
+      tüzel (a landingen ez az egyetlen mérhető pillanat – a látogató utána már
+      az app oldalán van), tehát a két szám mindig együtt mozog. A Meta-kampány
+      optimalizálását ezért CSAK AZ EGYIKRE szabad állítani, különben ugyanaz a
+      konverzió kétszer súlyozódik.
+
+      Ha valaha az „elemzés tényleg elkészült" pillanatot kellene mérni, az nem
+      itt van, hanem az app eredményoldalán – oda viszont előbb pixel és
+      hozzájárulás-kezelés kell, ma egyik sincs.
+    -->
+    <LeadFormScript
+      locale={locale}
+      source="termekleiras-diagnozis"
+      successUrl={AUDIT_START_URL}
+      pixelEvents={[
+        { name: 'Lead' },
+        { name: 'CompleteRegistration', params: { content_name: 'auto_diagnozis' } },
+      ]}
+    />
   </div>
 </BaseLayout>
