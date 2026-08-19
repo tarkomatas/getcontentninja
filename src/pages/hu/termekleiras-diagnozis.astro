@@ -18,8 +18,11 @@
  *     hanem egyenesen az app elemző oldalára (`AUDIT_START_URL`). Ezért kapja a
  *     `LeadFormScript` a `successUrl` propot — és ezért lövi el ő maga a Meta
  *     `Lead` eseményt, amit egyébként a `koszonjuk` oldal intézne.
- *  4. **`noindex` + robots Disallow.** Tisztán fizetett forgalomra készült, nem
- *     versenyezhet a `/hu/shopgrade/` oldallal ugyanarra a kifejezésre.
+ *  4. **`noindex`, de NEM robots Disallow.** Tisztán fizetett forgalomra készült,
+ *     nem versenyezhet a `/hu/shopgrade/` oldallal ugyanarra a kifejezésre — ezt a
+ *     `noindex` intézi. A `robots.txt`-ből viszont kikerült a tiltás: a `noindex`-et
+ *     a Google csak akkor látja, ha be tudja tölteni az oldalt, és így az AI-fetcherek
+ *     is olvassák a szöveget (a sitemapban se volt, most sincs benne).
  *  5. **Csak magyarul.** Az app elemzése egynyelvű, angol opt-in magyar
  *     eredmény-oldalra vinne (`routes.ts`: `shopgradeAudit.en === null`).
  *

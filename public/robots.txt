@@ -1,8 +1,11 @@
+# A /hu/termekleiras-diagnozis SZÁNDÉKOSAN nincs itt: a `noindex` meta tartja ki a
+# találatokból, azt viszont a Google csak akkor látja, ha be tudja tölteni az oldalt.
+# Így az AI-fetcherek (ChatGPT, Claude) is olvassák a szöveget. Ne tedd vissza.
+
 User-agent: *
 Disallow: /hu/koszonjuk
 Disallow: /en/thank-you
 Disallow: /hu/teljes-rendszer
 Disallow: /en/all-in-one
-Disallow: /hu/termekleiras-diagnozis
 
 Sitemap: https://getcontentninja.com/sitemap.xml
