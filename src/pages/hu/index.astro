@@ -12,9 +12,9 @@ const page = 'home';
 
 const title = 'Content Ninja – All-in-one AI marketing webshopoknak | Posztolás, blog, hírlevél';
 const description =
-  'A Content Ninja all-in-one AI marketing rendszer webshopoknak: posztol Facebookra és Instagramra, SEO-blogcikket ír a webshopod blogjába, hírlevelet tervez és küld, a termékleírásaidat pedig eladósabbra írja – mindezt a saját termékadataidból. Kérj díjmentes bemutatót!';
+  'A Content Ninja all-in-one AI marketing rendszer webshopoknak: posztol Facebookra és Instagramra, SEO-blogcikket ír a webshopod blogjába, hírlevelet tervez és küld, a termékleírásaidat és kategóriaoldalaidat pedig eladósabbra írja – mindezt a saját termékadataidból. Kérj díjmentes bemutatót!';
 const keywords =
-  'Content Ninja, all-in-one AI marketing, AI tartalomgyártás, webshop marketing, automatikus posztolás, AI blogcikk író, termékleírás újraírás, Shopgrade, AI hírlevél, social media automatizálás, tartalomnaptár';
+  'Content Ninja, all-in-one AI marketing, AI tartalomgyártás, webshop marketing, automatikus posztolás, AI blogcikk író, termékleírás újraírás, kategóriaoldal szöveg, Shopgrade, AI hírlevél, social media automatizálás, tartalomnaptár';
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -25,7 +25,7 @@ const faqLd = {
       name: 'Mi az a Content Ninja?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A Content Ninja egy all-in-one AI marketing rendszer webshopoknak. Egy fiókból, ugyanabból a termékkatalógusból dolgozik: social media posztokat ír és publikál Facebookra és Instagramra, SEO- és GEO-barát blogcikket ír a webshopod blogjába, hírlevelet tervez és küld a MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat pedig eladósabb szövegre írja át – a képeket és videókat is az AI készíti hozzá.',
+        text: 'A Content Ninja egy all-in-one AI marketing rendszer webshopoknak. Egy fiókból, ugyanabból a termékkatalógusból dolgozik: social media posztokat ír és publikál Facebookra és Instagramra, SEO- és GEO-barát blogcikket ír a webshopod blogjába, hírlevelet tervez és küld a MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat és kategóriaoldalaid szövegét pedig eladósabb szövegre írja át – a képeket és videókat is az AI készíti hozzá.',
       },
     },
     {
@@ -33,7 +33,7 @@ const faqLd = {
       name: 'Milyen modulok vannak benne, és mind az előfizetés része?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Hat modulnak van saját oldala: automata posztolás, blogcikk író, Shopgrade (termékleírás-újraírás), AI hírlevél, webshop mélyintegráció és nemzetközi terjeszkedés. Ezekhez jön az AI kép-, videó- és narrátorvideó-generálás, valamint a Meta hirdetésgeneráló. Mind a 34.990 Ft + ÁFA / hó előfizetés része, nincs modulonkénti felár – a havi 500 AI kreditet szabadon oszthatod el közöttük.',
+        text: 'Hat modulnak van saját oldala: automata posztolás, blogcikk író, Shopgrade (termékleírás- és kategóriaoldal-újraírás), AI hírlevél, webshop mélyintegráció és nemzetközi terjeszkedés. Ezekhez jön az AI kép-, videó- és narrátorvideó-generálás, valamint a Meta hirdetésgeneráló. Mind a 34.990 Ft + ÁFA / hó előfizetés része, nincs modulonkénti felár – a havi 500 AI kreditet szabadon oszthatod el közöttük.',
       },
     },
     {
@@ -211,19 +211,19 @@ const faqLd = {
                     </span>
                 </a>
 
-                <!-- Shopgrade – termékleírás újraírás -->
+                <!-- Shopgrade – termék- és kategóriaoldal-író -->
                 <a href="/hu/shopgrade/"
                     class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">edit_document</span>
                     </div>
-                    <h3 class="font-bold text-xl mb-2 text-dark">Termékleírás újraírás</h3>
+                    <h3 class="font-bold text-xl mb-2 text-dark">Termék- és kategóriaoldal-író</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">A <strong class="text-dark">Shopgrade</strong>
-                        modul a meglévő termékleírásaidat írja át SEO- és GEO-barát, eladósabb szöveggé, majd vissza is
-                        tölti a webshopodba – tömegesen, a te jóváhagyásoddal.</p>
-                    <div class="flex items-center gap-2 mb-4 flex-wrap">
-                        <span class="text-xs font-bold text-primary bg-primary/5 border border-primary/20 rounded-[10px] px-2.5 py-1">SEO + GEO</span>
-                        <span class="text-xs font-bold text-primary bg-primary/5 border border-primary/20 rounded-[10px] px-2.5 py-1">Visszatöltés</span>
+                        modul a meglévő termékleírásaidat és kategóriaoldalaid szövegét írja át SEO- és GEO-barát,
+                        eladósabb szöveggé, majd vissza is tölti a webshopodba – tömegesen, a te jóváhagyásoddal.</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
+                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
                     </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Részletek
@@ -907,8 +907,8 @@ const faqLd = {
                         A Content Ninja egy <strong>all-in-one AI marketing rendszer webshopoknak</strong>. Egy fiókból,
                         ugyanabból a termékkatalógusból dolgozik: social media posztokat ír és publikál (Facebook,
                         Instagram), SEO- és GEO-barát blogcikket ír a webshopod blogjába, hírlevelet tervez és küld a
-                        MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat pedig eladósabb szövegre
-                        írja át – a képeket és videókat is az AI készíti hozzá. Nincs szükség kreatív csapatra,
+                        MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat és kategóriaoldalaid
+                        szövegét pedig eladósabb szövegre írja át – a képeket és videókat is az AI készíti hozzá. Nincs szükség kreatív csapatra,
                         marketing ügynökségre vagy manuális munkára.
                     </div>
                 </div>
@@ -924,7 +924,7 @@ const faqLd = {
                         Hat modulnak van saját oldala: <a href="/hu/posztolas/" class="text-primary font-semibold underline">automata
                         posztolás</a>, <a href="/hu/blogcikk-iro/" class="text-primary font-semibold underline">blogcikk író</a>,
                         <a href="/hu/shopgrade/" class="text-primary font-semibold underline">Shopgrade</a>
-                        (termékleírás-újraírás), <a href="/hu/hirlevel/" class="text-primary font-semibold underline">AI
+                        (termékleírás- és kategóriaoldal-újraírás), <a href="/hu/hirlevel/" class="text-primary font-semibold underline">AI
                         hírlevél</a>, <a href="/hu/webshop-integracio/" class="text-primary font-semibold underline">webshop
                         mélyintegráció</a> és <a href="/hu/nemzetkozi/" class="text-primary font-semibold underline">nemzetközi
                         terjeszkedés</a>. Ezekhez jön az AI kép-, videó- és narrátorvideó-generálás, valamint a Meta

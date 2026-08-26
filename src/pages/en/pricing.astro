@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: 'What is an AI credit, and what can 500 of them do?',
-    a: 'Credits are the unit we bill AI operations in: every generation (post copy, image, video, newsletter) consumes a set number of credits. One post copy is 1 credit and one Nano Banana image is 2 credits, so a post with an image costs 3 credits — 500 credits a month is roughly 166 posts with images. A blog article costs 3 credits for the copy (plus 2 credits per image in the article), and rewriting a product description is 1 credit per product page. Publishing and scheduling are not AI operations, so they never consume credits.',
+    a: 'Credits are the unit we bill AI operations in: every generation (post copy, image, video, newsletter) consumes a set number of credits. One post copy is 1 credit and one Nano Banana image is 2 credits, so a post with an image costs 3 credits — 500 credits a month is roughly 166 posts with images. A blog article costs 3 credits for the copy (plus 2 credits per image in the article), and rewriting a product description is 1 credit per product page (2 credits for a category page). Publishing and scheduling are not AI operations, so they never consume credits.',
   },
   {
     q: 'What happens when I run out of my monthly allowance?',
@@ -83,6 +83,7 @@ const textOps = [
   { op: 'Blog article copy generation / regeneration', credit: '3' },
   { op: 'Blog deep research (optional, with web search)', credit: '5' },
   { op: 'Product description rewriting (Shopgrade)', credit: '1 / product' },
+  { op: 'Category page rewriting (Shopgrade)', credit: '2 / category' },
   { op: 'Ad copy generation / regeneration', credit: '1' },
   { op: 'HTML template generation for newsletters', credit: '2' },
 ];
@@ -308,7 +309,7 @@ const freeOps = [
             {
               icon: 'edit_document',
               title: '≈ 500 product descriptions',
-              detail: 'Shopgrade product description rewriting: 1 credit per product page, in bulk too.',
+              detail: 'Shopgrade: 1 credit per product page, 2 credits per category page – in bulk too.',
             },
             {
               icon: 'mail',

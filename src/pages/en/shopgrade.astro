@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
@@ -9,7 +9,7 @@ const locale = 'en';
 const page = 'shopgrade';
 const title = 'Shopgrade – AI content optimization for Unas & Shoprenter stores | Content Ninja';
 const description =
-  'Shopgrade pulls your existing product descriptions, rewrites them with AI into SEO-friendly, sales-focused copy, then uploads them back to your store – thousands of products at once. Category page writer and product image editor coming soon. Works with Unas and Shoprenter.';
+  'Shopgrade pulls your existing product descriptions and category pages, rewrites them with AI into SEO-friendly, sales-focused copy, then uploads them back to your store – thousands of products at once. Works with Unas and Shoprenter.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-shopgrade.jpg" lpEnabled>
@@ -167,7 +167,8 @@ const description =
                 <div class="flex flex-col gap-4 md:gap-7 text-left">
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        AI product description writer <span class="text-primary">for Unas and Shoprenter stores</span>
+                        AI product and category page writer
+                        <span class="text-primary">for Unas and Shoprenter stores</span>
                     </h1>
 
                     <!-- Supported platforms -->
@@ -182,7 +183,7 @@ const description =
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        It pulls your existing product descriptions, rewrites them into
+                        It pulls your existing product descriptions and category page copy, rewrites them into
                         <span class="font-bold text-primary">SEO- and GEO-friendly</span>, sales-focused copy, then
                         <span class="font-bold text-primary">uploads them back</span> to your store.
                     </p>
@@ -207,12 +208,12 @@ const description =
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Coming soon:</span>
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="material-symbols-outlined text-primary text-[18px]">category</span>
-                            Category page writer
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <span class="material-symbols-outlined text-primary text-[18px]">image</span>
                             Product image editor
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <span class="material-symbols-outlined text-primary text-[18px]">translate</span>
+                            Localization
                         </span>
                     </div>
 
@@ -275,16 +276,16 @@ const description =
                                         </select>
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-bold text-body mb-1">Who writes your product
-                                            descriptions today?</label>
+                                        <label class="block text-sm font-bold text-body mb-1">Who writes your product and
+                                            category page copy today?</label>
                                         <select name="marketing_role" id="marketingRole"
                                             class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="Me, as the business owner">Me, as the business owner</option>
                                             <option value="In-house marketing team">In-house marketing team</option>
                                             <option value="External agency">External agency</option>
-                                            <option value="Nobody – we use the manufacturer's text">Nobody – we use the
-                                                manufacturer's text</option>
+                                            <option value="Nobody – we use the manufacturer's text">Nobody – manufacturer
+                                                text on products, empty categories</option>
                                         </select>
                                     </div>
                                     <div>
@@ -575,7 +576,7 @@ const description =
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works? 🛠️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps from old descriptions to new copy</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 steps from old copy to new</h2>
                 <p class="text-body text-lg">No exports, no CSV files, no copy-pasting – the whole flow runs in one
                     place.</p>
             </div>
@@ -585,13 +586,13 @@ const description =
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Connect your store</h3>
                     <p class="text-body text-sm leading-relaxed">Unas or Shoprenter – a few clicks, and Shopgrade pulls
-                        your existing product descriptions.</p>
+                        your existing product descriptions and your category tree.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Pick the products</h3>
-                    <p class="text-body text-sm leading-relaxed">The whole catalog, a single category or just a few key
-                        products – you decide what gets rewritten.</p>
+                    <h3 class="font-bold text-lg mb-3">Pick what to rewrite</h3>
+                    <p class="text-body text-sm leading-relaxed">Product pages or category pages: the whole catalog, a
+                        single category or just a few key pages – you decide what gets rewritten.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
@@ -783,45 +784,132 @@ const description =
         </div>
     </section>
 
-    <!-- 7. Coming soon – further Shopgrade modules -->
+    <!-- 7. Category pages – the SECOND page type Shopgrade rewrites (live since 2026-08-25).
+         Deliberately after the product-description story: finish the main proof first, then widen
+         the scope. The remaining "coming soon" items live at the end of this section, so the
+         section count – and the bg-light / bg-card alternation – stays put. -->
     <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Coming soon 🚧</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Shopgrade keeps growing</h2>
-                <p class="text-body text-lg">Rewriting product descriptions is the first module. These are next – in the
-                    same account, over the same connection, at no extra cost.</p>
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Category pages 📁</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">The buyer chooses on your category page – and yours is empty</h2>
+                <p class="text-body text-lg">Forty-one nasal aspirators listed one after another, nothing to go on.
+                    Someone who can't decide which one to buy <strong class="text-dark">doesn't buy</strong>: they go
+                    back to the search box and decide somewhere else. This is one of the most visited pages in your
+                    store – and Shopgrade now writes it too.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1100px] mx-auto">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
-                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Coming soon</span>
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">category</span>
+            <!-- Pain → desire: on the left what the buyer does NOT get today, on the right what they
+                 read instead. The machinery (computing the parameter spread) is deliberately left to
+                 the FAQ. -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-6">
+                <div class="bg-card rounded-[16px] border border-red-200 p-8 shadow-card flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-5">
+                        <span class="material-symbols-outlined text-red-500 text-[20px]">help</span>
+                        <h3 class="font-bold text-lg text-dark">The questions they never get answered</h3>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Category page writer</h3>
-                    <p class="text-body text-sm leading-relaxed">Category pages bring the most organic traffic, yet in
-                        most stores they sit empty. The AI writes their intro and closing copy too – tuned for SEO and
-                        GEO.</p>
+                    <ul class="space-y-3 mb-5">
+                        <li class="flex items-start gap-2.5 text-body text-sm italic">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
+                            <span>"Should it be quiet or strong?"</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm italic">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
+                            <span>"Battery or mains?"</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm italic">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
+                            <span>"Which one is right for a newborn?"</span>
+                        </li>
+                    </ul>
+                    <p class="text-body text-sm leading-relaxed mt-auto">The product list answers none of them. So the
+                        buyer either emails you – or, far more often, <strong class="text-dark">quietly moves on</strong>.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
-                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Coming soon</span>
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">image</span>
+
+                <div class="bg-card rounded-[16px] border-2 border-success/40 p-8 shadow-card flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-5">
+                        <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                        <h3 class="font-bold text-lg text-dark">What they read instead</h3>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Product image editor</h3>
-                    <p class="text-body text-sm leading-relaxed">Cleans up and unifies your existing product photos –
-                        tidy, consistent product pages without a studio or a photographer.</p>
+                    <p class="text-body text-sm leading-relaxed italic border-l-2 border-success/40 pl-4 mb-5">
+                        "With an electric nasal aspirator three things decide it: suction, noise, and whether it runs on
+                        a battery or from the mains. In this category the models
+                        <strong class="not-italic text-dark">range from 55 to 78 dB</strong> – for a newborn the quieter
+                        one matters more, because the strongest suction is worth nothing if it wakes the baby."
+                    </p>
+                    <p class="text-body text-sm leading-relaxed mt-auto">A salesperson on the floor, not filler text.
+                        And every sentence comes from <strong class="text-dark">your products' real data</strong> – we
+                        don't invent facts here either.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
-                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Coming soon</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">translate</span>
+                        <span class="material-symbols-outlined text-[22px]">bolt</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Localization</h3>
-                    <p class="text-body text-sm leading-relaxed">It writes the finished product descriptions in your
-                        store's other languages too – at native quality, not raw machine translation, so your foreign
-                        markets get the local buyer's words as well.</p>
+                    <h3 class="font-bold text-lg mb-2">One click for you</h3>
+                    <p class="text-body text-sm leading-relaxed">By hand this would mean comparing forty-one products
+                        spec by spec – <strong class="text-dark">for a single category</strong>. That's why no store has
+                        it written. This is the work it takes off your hands.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">travel_explore</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">In your buyers' words</h3>
+                    <p class="text-body text-sm leading-relaxed">We don't guess: we look up what people
+                        <strong class="text-dark">actually</strong> search for and ask on Google. Those words go into
+                        the copy – which is how people still browsing end up finding you.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">shield</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Your store won't break</h3>
+                    <p class="text-body text-sm leading-relaxed">The category <strong class="text-dark">name, URL and
+                        product list stay exactly as they are</strong> – only the copy changes, and only after your
+                        approval. It can be rolled back any time.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    See it on my own categories
+                </a>
+            </div>
+
+            <p class="text-center text-body max-w-[720px] mx-auto mt-8">
+                In a search engine's eyes your product and category pages form one whole with your blog.
+                <a href="/en/webshop-seo-geo/" class="text-primary font-semibold underline">See how the three become one
+                system →</a>
+            </p>
+
+            <!-- Coming soon – further Shopgrade modules (the category page writer moved out of here:
+                 it went live on 2026-08-25) -->
+            <div class="max-w-[900px] mx-auto mt-16 pt-12 border-t border-border">
+                <h3 class="text-center text-xl font-bold text-dark mb-2">Coming soon in Shopgrade 🚧</h3>
+                <p class="text-center text-body text-sm mb-8">In the same account, over the same connection, at no extra
+                    cost.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-card rounded-[16px] border border-border p-6 shadow-card relative">
+                        <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Coming soon</span>
+                        <div class="flex items-center gap-2 mb-2 pr-28">
+                            <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                            <h4 class="font-bold text-base text-dark">Product image editor</h4>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed">Cleans up and unifies your existing product photos –
+                            tidy, consistent product pages without a studio or a photographer.</p>
+                    </div>
+                    <div class="bg-card rounded-[16px] border border-border p-6 shadow-card relative">
+                        <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Coming soon</span>
+                        <div class="flex items-center gap-2 mb-2 pr-28">
+                            <span class="material-symbols-outlined text-primary text-[20px]">translate</span>
+                            <h4 class="font-bold text-base text-dark">Localization</h4>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed">It writes the finished copy in your store's other
+                            languages too – at native quality, not raw machine translation.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -970,10 +1058,26 @@ const description =
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A Content Ninja module that improves the content your store <strong>already has</strong>. Today
-                        it pulls your product descriptions, rewrites them with AI into SEO- and GEO-friendly,
-                        sales-focused copy, then uploads them back. A category page writer and a product image editor
+                        A Content Ninja module that improves the content your store <strong>already has</strong>: it
+                        pulls your product descriptions and category page copy, rewrites them with AI into SEO- and
+                        GEO-friendly, sales-focused text, then uploads it back. A product image editor and localization
                         are coming next.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        What exactly does it write on a category page?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Four fields, and you decide field by field which ones you want: a <strong>short intro</strong>
+                        above the product list, a <strong>longer, subheaded text</strong> below it, plus the
+                        <strong>SEO title and description</strong>. The copy works from the real parameter spread of the
+                        products in that category – from how the models actually differ – so it gives buying criteria,
+                        not a generic intro. The category's <strong>name, URL and product list are left
+                        untouched</strong>.
                     </div>
                 </div>
 
@@ -1092,7 +1196,8 @@ const description =
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         No – it's part of the same 34,990 HUF + VAT / month subscription as every other module, with 500
-                        renewing AI credits included. Generation consumes credits; you'll find the
+                        renewing AI credits included. Generation consumes credits: <strong>1 credit per product page</strong>
+                        and <strong>2 credits per category page</strong>. You'll find the
                         <a href="/en/pricing/#credits" class="text-primary font-semibold underline">detailed credit costs
                         here</a>.
                     </div>

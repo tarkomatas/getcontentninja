@@ -30,6 +30,12 @@ interface Props {
    * „teljes rendszer" kampányoldalon mind a 10 modul kikerül).
    */
   compact?: boolean;
+  /**
+   * Elhagyja a kártyák "Részletek →" linkjeit. Konverziós kampányoldalon
+   * (fizetett forgalom + űrlap) minden kifelé mutató link kiszökés: a rács ott
+   * csak azt mutassa meg, mi mindent tud a rendszer, ne vigye el a látogatót.
+   */
+  noLinks?: boolean;
 }
 
 const {
@@ -43,6 +49,7 @@ const {
   cardClass = 'bg-light',
   homeCta = false,
   compact = false,
+  noLinks = false,
 } = Astro.props;
 
 const excluded = Array.isArray(exclude) ? exclude : [exclude];
@@ -76,7 +83,7 @@ const home = homeFor(locale);
             </div>
             <h3 class={`font-bold ${compact ? 'text-base mb-1.5' : 'text-lg mb-2'}`}>{m.title}</h3>
             <p class={`text-body leading-relaxed ${compact ? 'text-[13px] mb-3' : 'text-sm mb-4'}`}>{m.desc}</p>
-            {m.href && (
+            {m.href && !noLinks && (
               <a href={m.href} class="text-primary font-bold text-sm inline-flex items-center gap-1 mt-auto">
                 {ui.details}
                 <span class="material-symbols-outlined text-[16px]">arrow_forward</span>

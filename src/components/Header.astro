@@ -1,7 +1,7 @@
 ---
 import { homeFor, pathFor, type Locale, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { MODULE_UI, navModulesFor } from '../data/modules';
+import { MODULE_UI, NAV_INTEGRATION, navGroupsFor } from '../data/modules';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
@@ -18,10 +18,20 @@ const APP_URL = 'https://app.getcontentninja.com';
 // Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
 // (#funkciok) nav-elemet elhagytuk – csak létező horgonyokra mutatunk.
 // A "Megoldások" lenyíló menü önálló kampányoldalakra mutat (nem horgonyokra),
-// és a `src/data/modules.ts`-ből épül: minden modul, aminek van saját oldala.
-// Hat elem már nem fér el egy hasábban, ezért a panel 2 hasábos. A fejléc
-// elsődleges "Bemutatót kérek" CTA-ja ezzel szemben a bookDemo oldalra visz.
-const solutionItems = navModulesFor(locale);
+// és a `src/data/modules.ts` NAV_GROUPS listájából épül – ami szándékosan NEM a
+// modulok leképezése (lásd az ottani kommentet: a blogcikk író két csoportban
+// szerepel, a Shopgrade két néven). Két hasáb, csoportonként egy blokk; a
+// csoportcím maga is link, ha van gyűjtőoldala. A panel alján külön sávban a
+// webshop-integráció, a támogatott boltmotorok logójával – ez válaszolja meg a
+// leggyakoribb néma kérdést („az én rendszeremmel működik?").
+// A fejléc elsődleges "Bemutatót kérek" CTA-ja ezzel szemben a bookDemo oldalra visz.
+const solutionGroups = navGroupsFor(locale);
+const integration = {
+  href: pathFor(NAV_INTEGRATION.page, locale),
+  label: NAV_INTEGRATION[locale].label,
+  icon: NAV_INTEGRATION.icon,
+  logos: NAV_INTEGRATION.logos,
+};
 const moduleUi = MODULE_UI[locale];
 const navItems = [
   { href: `${home}#velemenyek`, label: ui.nav.testimonials },
@@ -50,19 +60,45 @@ const navItems = [
           <span class="material-symbols-outlined text-[18px] transition-transform duration-150 group-hover:rotate-180">expand_more</span>
         </button>
         <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150 z-50">
-          <div class="w-[580px] max-w-[calc(100vw-3rem)] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
-            <div class="grid grid-cols-2 gap-x-1">
-              {solutionItems.map((item) => (
-                <a href={item.href} class="flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-light transition-colors group/item">
-                  <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">{item.icon}</span>
-                  <span class="min-w-0">
-                    <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
-                    <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
-                  </span>
-                </a>
+          <div class="w-[600px] max-w-[calc(100vw-3rem)] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
+            <div class="grid grid-cols-2 gap-x-1 gap-y-2 items-start">
+              {solutionGroups.map((group) => (
+                <div>
+                  {group.href ? (
+                    <a href={group.href} class="flex items-center gap-1 px-3 pt-1 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-body/60 hover:text-primary transition-colors">
+                      {group.label}
+                      <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                    </a>
+                  ) : (
+                    <span class="block px-3 pt-1 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-body/60">{group.label}</span>
+                  )}
+                  {group.items.map((item) => (
+                    <a href={item.href} class="flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-light transition-colors group/item">
+                      <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">{item.icon}</span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
+                        <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
+                      </span>
+                    </a>
+                  ))}
+                </div>
               ))}
             </div>
-            <a href={`${home}#megoldasok`} class="flex items-center justify-center gap-1.5 mt-1 pt-2.5 border-t border-border text-sm font-bold text-primary hover:bg-light rounded-[10px] py-2.5 transition-colors">
+
+            <!-- Integrációs sáv: a feltétel, nem megoldás – ezért van a csoportokon kívül -->
+            <a href={integration.href} class="flex items-center justify-between gap-3 mt-1 px-3 py-2.5 border-t border-border hover:bg-light rounded-[10px] transition-colors group/int">
+              <span class="flex items-center gap-2.5 min-w-0">
+                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">{integration.icon}</span>
+                <span class="text-sm font-semibold text-dark group-hover/int:text-primary transition-colors">{integration.label}</span>
+              </span>
+              <span class="flex items-center gap-2.5 shrink-0">
+                {integration.logos.map((logo) => (
+                  <img src={logo.src} alt={logo.alt} class="h-[20px] w-auto opacity-80" loading="lazy" />
+                ))}
+              </span>
+            </a>
+
+            <a href={`${home}#megoldasok`} class="flex items-center justify-center gap-1.5 pt-2 border-t border-border text-sm font-bold text-primary hover:bg-light rounded-[10px] py-2.5 transition-colors">
               {moduleUi.allSolutions}
               <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
@@ -104,14 +140,31 @@ const navItems = [
   <!-- Mobile nav dropdown -->
   <div id="mobile-menu" class="hidden md:hidden lp-hide border-t border-border bg-card px-4 pb-4">
     <nav class="flex flex-col gap-1 pt-3" aria-label={ui.nav.mobileAria}>
-      <!-- Megoldások szekció -->
+      <!-- Megoldások szekció – ugyanazokkal a csoportokkal, mint a desktop panel -->
       <span class="px-3 pt-1 pb-1 text-xs font-semibold uppercase tracking-wide text-body/70">{ui.nav.solutions}</span>
-      {solutionItems.map((item) => (
-        <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
-          <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
-          <span class="font-medium text-dark">{item.label}</span>
-        </a>
+      {solutionGroups.map((group) => (
+        <>
+          <span class="px-3 pt-2 pb-0.5 text-[11px] font-bold uppercase tracking-wider text-body/50">{group.label}</span>
+          {group.items.map((item) => (
+            <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
+              <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
+              <span class="font-medium text-dark">{item.label}</span>
+            </a>
+          ))}
+        </>
       ))}
+      <!-- Az integráció mobilon is külön sáv: elválasztó vonal, nehogy a
+           tartalommarketing csoport negyedik elemének látsszon. -->
+      <div class="border-t border-border mt-3 mb-2"></div>
+      <a href={integration.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
+        <span class="material-symbols-outlined text-primary text-[20px]">{integration.icon}</span>
+        <span class="font-medium text-dark">{integration.label}</span>
+        <span class="flex items-center gap-2.5 ml-auto">
+          {integration.logos.map((logo) => (
+            <img src={logo.src} alt={logo.alt} class="h-[18px] w-auto opacity-80" loading="lazy" />
+          ))}
+        </span>
+      </a>
       <div class="border-t border-border my-2"></div>
       {navItems.map((item) => (
         <a href={item.href} class="mobile-nav-link nav-link text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">

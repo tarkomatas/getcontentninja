@@ -1,4 +1,4 @@
-import type { Locale } from '../i18n/routes';
+﻿import type { Locale } from '../i18n/routes';
 
 /**
  * Az űrlap-beküldés EGYETLEN igazságforrása (a `modules.ts` mintájára).
@@ -60,6 +60,7 @@ export type FormSource =
   | 'termekleiras-diagnozis'
   | 'nemzetkozi'
   | 'blogcikk-iro'
+  | 'webshop-seo-geo'
   | 'webshop-integracio'
   | 'kapcsolat';
 
@@ -89,6 +90,10 @@ export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
     en: '🌍 International expansion application',
   },
   'blogcikk-iro': { hu: '📝 Blogcikk író jelentkezés', en: '📝 Blog writer lead' },
+  // A keresőtartalom-gyűjtőoldal (`webshopSeoGeo`): a Shopgrade és a blogcikk író
+  // EGYBEN eladva. Külön kulcs, hogy mérhető legyen, a „webshop SEO + GEO" szög
+  // hoz-e több bemutatót, mint a két modul-oldal külön-külön.
+  'webshop-seo-geo': { hu: '🔍 Webshop SEO + GEO jelentkezés', en: '🔍 Webshop SEO + GEO lead' },
   'webshop-integracio': { hu: '🛒 Webshop integráció jelentkezés', en: '🛒 Store integration lead' },
   kapcsolat: { hu: '✉️ Kapcsolat űrlap', en: '✉️ Contact form' },
 };

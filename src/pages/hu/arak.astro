@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: 'Mi az az AI kredit, és mire elég 500?',
-    a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 500 kredit nagyjából 166 képes posztra elég. Egy blogcikk szövege 3 kredit (a cikkbe kerülő képek 2 kredit/kép), egy termékleírás újraírása pedig 1 kredit / termékoldal. A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
+    a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 500 kredit nagyjából 166 képes posztra elég. Egy blogcikk szövege 3 kredit (a cikkbe kerülő képek 2 kredit/kép), egy termékleírás újraírása pedig 1 kredit / termékoldal (kategóriaoldalnál 2 kredit). A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
   },
   {
     q: 'Mi történik, ha elfogy a havi keretem?',
@@ -83,6 +83,7 @@ const textOps = [
   { op: 'Blogcikk szöveg generálás / újragenerálás', credit: '3' },
   { op: 'Blogcikk mély kutatás (opcionális, internetes kereséssel)', credit: '5' },
   { op: 'Termékleírás újraírás (Shopgrade)', credit: '1 / termék' },
+  { op: 'Kategóriaoldal újraírás (Shopgrade)', credit: '2 / kategória' },
   { op: 'Hirdetés szöveg generálás / újragenerálás', credit: '1' },
   { op: 'HTML sablon generálás hírlevélhez (egyszeri)', credit: '2' },
 ];
@@ -307,7 +308,7 @@ const freeOps = [
             {
               icon: 'edit_document',
               title: '≈ 500 termékleírás',
-              detail: 'Shopgrade termékleírás-újraírás: 1 kredit / termékoldal, tömegesen is.',
+              detail: 'Shopgrade: 1 kredit / termékoldal, 2 kredit / kategóriaoldal – tömegesen is.',
             },
             {
               icon: 'mail',

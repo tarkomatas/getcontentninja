@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
@@ -9,7 +9,7 @@ const locale = 'hu';
 const page = 'shopgrade';
 const title = 'Shopgrade – AI tartalomoptimalizálás Unas és Shoprenter webshopoknak | Content Ninja';
 const description =
-  'A Shopgrade letölti a webáruházad meglévő termékleírásait, az AI SEO- és értékesítés-fókuszú szöveggé írja át őket, majd vissza is tölti a webshopodba – akár több ezer terméket egyszerre. Hamarosan kategóriaoldal-íróval és termékkép-szerkesztővel. Unas és Shoprenter integrációval.';
+  'A Shopgrade letölti a webáruházad meglévő termékleírásait és kategóriaoldalait, az AI SEO- és értékesítés-fókuszú szöveggé írja át őket, majd vissza is tölti a webshopodba – akár több ezer terméket egyszerre. Unas és Shoprenter integrációval.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-shopgrade.jpg" lpEnabled>
@@ -167,7 +167,8 @@ const description =
                 <div class="flex flex-col gap-4 md:gap-7 text-left">
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        AI termékleírás-író <span class="text-primary">Unas és Shoprenter webshopoknak</span>
+                        AI termék- és kategóriaoldal-író
+                        <span class="text-primary">Unas és Shoprenter webshopoknak</span>
                     </h1>
 
                     <!-- Támogatott rendszerek -->
@@ -182,7 +183,7 @@ const description =
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Letölti a meglévő termékleírásaidat, az AI
+                        Letölti a meglévő termékleírásaidat és kategóriaoldalaid szövegét, az AI
                         <span class="font-bold text-primary">SEO- és GEO-barát</span>, eladásra hangolt szöveggé írja át,
                         majd <span class="font-bold text-primary">vissza is tölti</span> a webshopodba.
                     </p>
@@ -207,12 +208,12 @@ const description =
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Hamarosan:</span>
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="material-symbols-outlined text-primary text-[18px]">category</span>
-                            Kategóriaoldal-író
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <span class="material-symbols-outlined text-primary text-[18px]">image</span>
                             Termékkép-szerkesztő
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <span class="material-symbols-outlined text-primary text-[18px]">translate</span>
+                            Nyelvesítés
                         </span>
                     </div>
 
@@ -274,16 +275,16 @@ const description =
                                         </select>
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-bold text-body mb-1">Ki írja jelenleg a
-                                            termékleírásokat?</label>
+                                        <label class="block text-sm font-bold text-body mb-1">Ki írja jelenleg a termék- és
+                                            kategóriaoldalak szövegét?</label>
                                         <select name="marketing_role" id="marketingRole"
                                             class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="Én, cégvezetőként">Én, cégvezetőként</option>
                                             <option value="Belsős marketing csapat">Belsős marketing csapat</option>
                                             <option value="Külsős ügynökség">Külsős ügynökség</option>
-                                            <option value="Senki – a gyártói leírás van fent">Senki – a gyártói leírás
-                                                van fent</option>
+                                            <option value="Senki – a gyártói leírás van fent">Senki – a gyártói leírás van
+                                                fent, a kategóriák üresek</option>
                                         </select>
                                     </div>
                                     <div>
@@ -571,7 +572,7 @@ const description =
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🛠️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 lépés a régi leírásoktól az új szövegekig</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 lépés a régi szövegektől az újakig</h2>
                 <p class="text-body text-lg">Nincs export, nincs CSV, nincs másolgatás – a folyamat végig egy
                     felületen fut.</p>
             </div>
@@ -581,13 +582,13 @@ const description =
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
                     <p class="text-body text-sm leading-relaxed">Unas vagy Shoprenter – pár kattintás, és a Shopgrade
-                        letölti a meglévő termékleírásaidat.</p>
+                        letölti a meglévő termékleírásaidat és a kategóriafádat.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Kiválasztod a termékeket</h3>
-                    <p class="text-body text-sm leading-relaxed">A teljes katalógus, egy kategória vagy csak néhány
-                        kiemelt termék – te döntöd el, mi kerüljön sorra.</p>
+                    <h3 class="font-bold text-lg mb-3">Kiválasztod, mit írjon át</h3>
+                    <p class="text-body text-sm leading-relaxed">Termékoldalak vagy kategóriaoldalak: a teljes katalógus,
+                        egy kategória vagy csak néhány kiemelt lap – te döntöd el, mi kerüljön sorra.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
@@ -778,45 +779,131 @@ const description =
         </div>
     </section>
 
-    <!-- 7. Hamarosan – a Shopgrade további moduljai -->
+    <!-- 7. Kategóriaoldalak – a MÁSODIK laptípus, amit a Shopgrade átír (2026-08-25 óta él).
+         Szándékosan a termékleírás-történet UTÁN áll: előbb legyen kész a fő bizonyítás, aztán
+         nyíljon a kör. A szekció végén megy tovább a „hamarosan" lista (2 tétel), így a szekciók
+         száma – és a bg-light / bg-card váltakozás – nem csúszik el. -->
     <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hamarosan 🚧</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">A Shopgrade tovább épül</h2>
-                <p class="text-body text-lg">A termékleírás-újraírás az első modul. Ezek a következők – ugyanabban a
-                    fiókban, ugyanazzal az összekötéssel, felár nélkül.</p>
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kategóriaoldalak 📁</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">A vevő a kategóriaoldalon választ – a tiéd üresen áll</h2>
+                <p class="text-body text-lg">Negyvenegy orrszívó egymás alatt, semmi támpont. Aki nem tudja eldönteni,
+                    melyiket vegye, az <strong class="text-dark">nem vesz</strong>: visszamegy a keresőbe, és máshol
+                    dönt. Pedig ez a boltod egyik legtöbbet látogatott lapja – a Shopgrade mostantól ezt is megírja.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1100px] mx-auto">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
-                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Hamarosan</span>
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">category</span>
+            <!-- Fájdalom → vágy: balra az, amit a vevő ma NEM kap meg, jobbra amit ezután olvas.
+                 A gépezet (paraméter-szórás számítása) szándékosan nincs kirakva – a GYIK viszi. -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-6">
+                <div class="bg-card rounded-[16px] border border-red-200 p-8 shadow-card flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-5">
+                        <span class="material-symbols-outlined text-red-500 text-[20px]">help</span>
+                        <h3 class="font-bold text-lg text-dark">Ezekre vár választ – és nem kapja meg</h3>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Kategóriaoldal-író</h3>
-                    <p class="text-body text-sm leading-relaxed">A kategóriaoldalak hozzák a legtöbb organikus
-                        forgalmat, mégis a legtöbb webshopban üresen állnak. Az AI ezekre is megírja a bevezető és
-                        záró szövegeket – SEO-ra és GEO-ra hangolva.</p>
+                    <ul class="space-y-3 mb-5">
+                        <li class="flex items-start gap-2.5 text-body text-sm italic">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
+                            <span>„Halk vagy erős legyen?"</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm italic">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
+                            <span>„Akkus vagy hálózati?"</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-body text-sm italic">
+                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
+                            <span>„Újszülötthöz melyik jó?"</span>
+                        </li>
+                    </ul>
+                    <p class="text-body text-sm leading-relaxed mt-auto">A terméklista egyikre sem válaszol. A vevő vagy
+                        téged kérdez meg e-mailben, vagy – sokkal gyakrabban – <strong class="text-dark">csendben
+                        továbbáll</strong>.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
-                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Hamarosan</span>
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">image</span>
+
+                <div class="bg-card rounded-[16px] border-2 border-success/40 p-8 shadow-card flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-5">
+                        <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                        <h3 class="font-bold text-lg text-dark">Ezt olvassa helyette</h3>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Webshop termékkép-szerkesztő</h3>
-                    <p class="text-body text-sm leading-relaxed">A meglévő termékképeidet tisztítja fel és teszi
-                        egységessé – rendezett, egy stílusú termékoldalak stúdió és fotós nélkül.</p>
+                    <p class="text-body text-sm leading-relaxed italic border-l-2 border-success/40 pl-4 mb-5">
+                        „Elektromos orrszívónál három dolog dönt: a szívóerő, a zajszint, és hogy akkumulátorról vagy
+                        hálózatról megy. Ebben a kategóriában <strong class="not-italic text-dark">55 és 78 dB között
+                        szórnak a modellek</strong> – újszülöttnél a halkabb a fontosabb, mert amire a baba felébred, az
+                        a legerősebb szívóerővel sem ér semmit."
+                    </p>
+                    <p class="text-body text-sm leading-relaxed mt-auto">Eladó a boltban, nem szövegkitöltés. És minden
+                        mondata <strong class="text-dark">a te termékeid valódi adataiból</strong> jön – tényt itt sem
+                        találunk ki.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card relative">
-                    <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Hamarosan</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">translate</span>
+                        <span class="material-symbols-outlined text-[22px]">bolt</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Nyelvesítés</h3>
-                    <p class="text-body text-sm leading-relaxed">A kész termékleírásokat a webáruházad többi nyelvére is
-                        megírja – natív minőségben, nem nyers gépi fordítással, hogy a külföldi piacodon is a helyi vevő
-                        szavai legyenek benne.</p>
+                    <h3 class="font-bold text-lg mb-2">Neked egy kattintás</h3>
+                    <p class="text-body text-sm leading-relaxed">Kézzel ez azt jelentené, hogy negyvenegy terméket
+                        hasonlítasz össze paraméterről paraméterre – <strong class="text-dark">egyetlen kategóriához</strong>.
+                        Ezért nincs megírva egyik boltban sem. Ezt a munkát veszi le rólad.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">travel_explore</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A vevőid szavaival</h3>
+                    <p class="text-body text-sm leading-relaxed">Nem tippelünk: megnézzük, mire keresnek rá
+                        <strong class="text-dark">tényleg</strong>, és mit kérdeznek a Google-ben. Ezek a szavak kerülnek
+                        a szövegbe – ezért talál rád az is, aki még csak nézelődik.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">shield</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A boltod nem borul fel</h3>
+                    <p class="text-body text-sm leading-relaxed">A kategória <strong class="text-dark">neve, URL-je és a
+                        terméklista marad</strong>, ahogy van – csak a szöveg változik, az is csak a jóváhagyásod után.
+                        És bármikor visszaállítható.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Nézzük meg a saját kategóriáimon
+                </a>
+            </div>
+
+            <p class="text-center text-body max-w-[720px] mx-auto mt-8">
+                A termék- és kategóriaoldal a kereső szemében egy egészet alkot a blogoddal.
+                <a href="/hu/webshop-seo-geo/" class="text-primary font-semibold underline">Így áll össze a három egy
+                rendszerré →</a>
+            </p>
+
+            <!-- Hamarosan – a Shopgrade további moduljai (a kategóriaoldal-író innen került ki, mert
+                 2026-08-25 óta él) -->
+            <div class="max-w-[900px] mx-auto mt-16 pt-12 border-t border-border">
+                <h3 class="text-center text-xl font-bold text-dark mb-2">Hamarosan a Shopgrade-ben 🚧</h3>
+                <p class="text-center text-body text-sm mb-8">Ugyanabban a fiókban, ugyanazzal az összekötéssel, felár
+                    nélkül.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-card rounded-[16px] border border-border p-6 shadow-card relative">
+                        <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Hamarosan</span>
+                        <div class="flex items-center gap-2 mb-2 pr-24">
+                            <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                            <h4 class="font-bold text-base text-dark">Termékkép-szerkesztő</h4>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed">A meglévő termékképeidet tisztítja fel és teszi
+                            egységessé – rendezett, egy stílusú termékoldalak stúdió és fotós nélkül.</p>
+                    </div>
+                    <div class="bg-card rounded-[16px] border border-border p-6 shadow-card relative">
+                        <span class="absolute top-0 right-0 bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-bl-[16px] rounded-tr-[16px] uppercase tracking-wide">Hamarosan</span>
+                        <div class="flex items-center gap-2 mb-2 pr-24">
+                            <span class="material-symbols-outlined text-primary text-[20px]">translate</span>
+                            <h4 class="font-bold text-base text-dark">Nyelvesítés</h4>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed">A kész szövegeket a webáruházad többi nyelvére is
+                            megírja – natív minőségben, nem nyers gépi fordítással.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -965,9 +1052,26 @@ const description =
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A Content Ninja modulja, ami a webáruházad <strong>meglévő</strong> tartalmát javítja fel. Ma a
-                        termékleírásokat tölti le, írja át AI-val SEO- és GEO-barát, értékesítési fókuszú szöveggé, majd
-                        tölti vissza a webshopodba. Hamarosan kategóriaoldal-íróval és termékkép-szerkesztővel bővül.
+                        A Content Ninja modulja, ami a webáruházad <strong>meglévő</strong> tartalmát javítja fel: a
+                        termékleírásokat és a kategóriaoldalak szövegét tölti le, írja át AI-val SEO- és GEO-barát,
+                        értékesítési fókuszú szöveggé, majd tölti vissza a webshopodba. Hamarosan termékkép-szerkesztővel
+                        és nyelvesítéssel bővül.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Pontosan mit ír a kategóriaoldalra?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Négy mezőt tud írni, és mezőnként te döntöd el, melyik kelljen: <strong>rövid leírást</strong> a
+                        terméklista fölé, <strong>hosszabb, alcímekkel tagolt szöveget</strong> alá, valamint a
+                        <strong>keresőbarát címet és leírást</strong>. A szöveg a kategóriában lévő termékek valódi
+                        paraméter-szórásából dolgozik – abból, hogy a modellek miben térnek el egymástól –, így választási
+                        szempontokat ad, nem általános bevezetőt. A kategória <strong>nevéhez, URL-jéhez és a
+                        terméklistához nem nyúlunk</strong>.
                     </div>
                 </div>
 
@@ -1087,7 +1191,8 @@ const description =
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Nem, ugyanaz a 34.990 Ft + ÁFA / hó előfizetés tartalmazza, mint a többi modult, havi 500
-                        megújuló AI kredittel. A generálás kreditet fogyaszt – a
+                        megújuló AI kredittel. A generálás kreditet fogyaszt: <strong>1 kredit / termékoldal</strong> és
+                        <strong>2 kredit / kategóriaoldal</strong> – a
                         <a href="/hu/arak/#kreditek" class="text-primary font-semibold underline">részletes
                         kreditdíjakat itt találod</a>.
                     </div>

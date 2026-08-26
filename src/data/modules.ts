@@ -1,4 +1,4 @@
-import type { Locale, PageKey } from '../i18n/routes';
+﻿import type { Locale, PageKey } from '../i18n/routes';
 import { pathFor } from '../i18n/routes';
 
 /**
@@ -27,10 +27,6 @@ export type ModuleId =
 interface ModuleText {
   title: string;
   desc: string;
-  /** Rövidebb név a fejléc "Megoldások" menüjéhez (ha a `title` túl hosszú oda). */
-  navLabel?: string;
-  /** Egysoros leírás a "Megoldások" menü sorai alá. */
-  navDesc?: string;
 }
 
 export interface ModuleDef {
@@ -51,12 +47,10 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Automata posztolás',
       desc: 'Az AI a termékeidből posztokat ír, képet és videót készít hozzájuk, majd időzítve publikálja Facebookra és Instagramra.',
-      navDesc: 'AI-tartalom a webshopod nevében, nonstop',
     },
     en: {
       title: 'Automated posting',
       desc: 'The AI writes posts from your products, creates images and videos for them, then publishes them on a schedule to Facebook and Instagram.',
-      navDesc: 'AI content on behalf of your webshop, 24/7',
     },
   },
   {
@@ -66,12 +60,10 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Blogcikk író',
       desc: 'Kikutatja, mire keresnek a vásárlóid, megírja rá a SEO- és GEO-barát blogcikket, majd publikálja is a webshopod blogjában.',
-      navDesc: 'Kulcsszókutatás és SEO-cikk a webshop blogjába',
     },
     en: {
       title: 'Blog writer',
       desc: 'It researches what your customers search for, writes the SEO- and GEO-friendly article, then publishes it straight to your webshop blog.',
-      navDesc: 'Keyword research and SEO articles for your blog',
     },
   },
   {
@@ -80,17 +72,11 @@ export const MODULES: ModuleDef[] = [
     page: 'shopgrade',
     hu: {
       title: 'Shopgrade – tartalomoptimalizálás',
-      desc: 'A meglévő termékleírásaidat írja át SEO- és GEO-barát, értékesítési fókuszú szöveggé, majd vissza is tölti a webshopodba.',
-      // A menüben a funkció vezet, a modul neve utána jön – a "Shopgrade" név
-      // önmagában nem érthető annak, aki most találkozik vele.
-      navLabel: 'Termékleírás újraírás',
-      navDesc: 'Shopgrade – a meglévő leírásaid felturbózva',
+      desc: 'A meglévő termékleírásaidat és kategóriaoldalaid szövegét írja át SEO- és GEO-barát, értékesítési fókuszú szöveggé, majd vissza is tölti a webshopodba.',
     },
     en: {
       title: 'Shopgrade – content optimization',
-      desc: 'It rewrites your existing product descriptions into SEO- and GEO-friendly, sales-focused copy, then uploads them back to your webshop.',
-      navLabel: 'Product description rewriting',
-      navDesc: 'Shopgrade – your existing descriptions, upgraded',
+      desc: 'It rewrites your existing product descriptions and category page copy into SEO- and GEO-friendly, sales-focused text, then uploads it back to your webshop.',
     },
   },
   {
@@ -100,12 +86,10 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'AI hírlevél',
       desc: 'Kész hírlevél szöveggel, dizájnnal és termékképekkel – a saját MailerLite vagy Salesautopilot fiókodból, a meglévő listáidra.',
-      navDesc: 'Az AI megírja, megtervezi és kiküldi a hírleveleid',
     },
     en: {
       title: 'AI newsletter',
       desc: 'Ready-made newsletters with copy, design and product images – from your own MailerLite or Salesautopilot account, to your existing lists.',
-      navDesc: 'The AI writes, designs and sends your newsletters',
     },
   },
   {
@@ -115,12 +99,10 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Webshop mélyintegráció',
       desc: 'Az Unas vagy Shoprenter áruházad bekötve: az AI látja az összes terméked és blogcikked, és mindig friss adatokból dolgozik.',
-      navDesc: 'Unas, Shoprenter – az AI látja a termékeid',
     },
     en: {
       title: 'Deep store integration',
       desc: 'With your Unas or Shoprenter store connected, the AI sees all your products and blog posts, and always works from fresh data.',
-      navDesc: 'Connect Unas or Shoprenter, the AI sees your products',
     },
   },
   {
@@ -130,12 +112,10 @@ export const MODULES: ModuleDef[] = [
     hu: {
       title: 'Nemzetközi terjeszkedés',
       desc: 'Írd meg egyszer magyarul – a rendszer natív minőségben lefordítja, és minden piacod fiókjába kiküldi.',
-      navDesc: 'Több nyelven, több piacra egyszerre',
     },
     en: {
       title: 'International expansion',
       desc: "Write it once in your own language – the system translates it at native quality and sends it to every market's account.",
-      navDesc: 'Multiple languages, more markets at once',
     },
   },
   {
@@ -215,17 +195,177 @@ export interface NavModule {
   desc: string;
 }
 
+export interface NavGroup {
+  label: string;
+  /** A csoportcím linkje (gyűjtőoldal), ha van. */
+  href?: string;
+  items: NavModule[];
+}
+
+interface NavItemDef {
+  page: PageKey;
+  icon: string;
+  hu: { label: string; desc: string };
+  en: { label: string; desc: string };
+}
+
+interface NavGroupDef {
+  hu: string;
+  en: string;
+  /** A csoportcím maga is vihet egy gyűjtőoldalra. */
+  page?: PageKey;
+  items: NavItemDef[];
+}
+
 /**
- * A fejléc "Megoldások" menüjének elemei: azok a modulok, amiknek van saját
- * kampányoldala. A sorrend a `MODULES` sorrendje.
+ * A "Megoldások" menü – **saját, kézzel írt lista**, nem a `MODULES` leképezése.
+ *
+ * Ez szándékos: a menü nem a modulokat sorolja fel, hanem azt, amit a látogató
+ * KERES, és a kettő nem fedi egymást.
+ *
+ * - A **blogcikk író kétszer** szerepel: keresőtartalomként és
+ *   tartalommarketingként is – mindkét fejben ott a helye, és ugyanarra az
+ *   oldalra visz.
+ * - A **Shopgrade két néven** jelenik meg („Termékleírás író", „Kategóriaoldal
+ *   író"), mert a modul neve önmagában nem mond semmit, a két funkcióra viszont
+ *   külön-külön keresnek. Mindkettő a `shopgrade` oldalra megy.
+ * - A **webshop-integráció** nem megoldás, hanem előfeltétel, ezért kikerült a
+ *   csoportokból a panel alján futó saját sávba (`NAV_INTEGRATION`).
+ * - Ami **nincs itt, az sem tűnik el**: a `navModulesFor` a lábléchez hozzáfűzi
+ *   az összes olyan modult, aminek van kampányoldala, de a menübe nem fért be
+ *   (ilyen a nemzetközi terjeszkedés) – így egy indexelhető oldal sem marad
+ *   belső hivatkozás nélkül.
+ *
+ * A modulrács (`ModuleGrid`) ettől függetlenül továbbra is a `MODULES`-ból épül.
+ */
+export const NAV_GROUPS: NavGroupDef[] = [
+  {
+    hu: 'Kereső- és AI-optimalizálás',
+    en: 'Search & AI optimization',
+    page: 'webshopSeoGeo',
+    items: [
+      {
+        page: 'blogWriter',
+        icon: 'article',
+        hu: { label: 'Blogcikk író', desc: 'Kulcsszókutatás és kész cikk a blogodba' },
+        en: { label: 'Blog writer', desc: 'Keyword research and a finished article' },
+      },
+      {
+        page: 'shopgrade',
+        icon: 'edit_document',
+        hu: { label: 'Termékleírás író', desc: 'A gyártói szöveg helyett egyedi leírás' },
+        en: { label: 'Product description writer', desc: "Your own copy, not the maker's" },
+      },
+      {
+        page: 'shopgrade',
+        icon: 'category',
+        hu: { label: 'Kategóriaoldal író', desc: 'A kategóriaszövegek keresésre hangolva' },
+        en: { label: 'Category page writer', desc: 'Category copy tuned to what people search' },
+      },
+    ],
+  },
+  {
+    hu: 'Tartalommarketing',
+    en: 'Content marketing',
+    items: [
+      {
+        page: 'demo',
+        icon: 'auto_awesome',
+        hu: { label: 'Automata posztolás', desc: 'AI-tartalom a webshopod nevében, nonstop' },
+        en: { label: 'Automated posting', desc: 'AI content on behalf of your webshop, 24/7' },
+      },
+      {
+        page: 'newsletter',
+        icon: 'mail',
+        hu: { label: 'AI hírlevél küldés', desc: 'Az AI megírja, megtervezi és kiküldi' },
+        en: { label: 'AI newsletter sending', desc: 'The AI writes, designs and sends it' },
+      },
+      {
+        page: 'blogWriter',
+        icon: 'article',
+        hu: { label: 'Blogcikk író', desc: 'Rendszeres tartalom a webshop blogjába' },
+        en: { label: 'Blog writer', desc: 'Regular content for your webshop blog' },
+      },
+    ],
+  },
+];
+
+/**
+ * A lenyíló alján futó külön sáv: a webshop-integráció + a támogatott
+ * boltmotorok logója. Nem csoportelem, mert nem választható megoldás, hanem az
+ * a feltétel, amitől a többi működik – a két logó pedig azonnal megválaszolja a
+ * leggyakoribb néma kérdést („az én rendszeremmel működik?").
+ */
+export const NAV_INTEGRATION = {
+  page: 'webshopIntegration' as PageKey,
+  icon: 'storefront',
+  logos: [
+    { src: '/assets/unas_logo.png', alt: 'Unas' },
+    { src: '/assets/shoprenter-logo.png', alt: 'Shoprenter' },
+  ],
+  hu: { label: 'Webshop mélyintegráció' },
+  en: { label: 'Deep store integration' },
+} as const;
+
+/** A "Megoldások" menü csoportjai egy adott nyelven. */
+export function navGroupsFor(locale: Locale): NavGroup[] {
+  return NAV_GROUPS.map((g) => ({
+    label: g[locale],
+    href: g.page ? pathFor(g.page, locale) : undefined,
+    items: g.items.map((i) => ({
+      icon: i.icon,
+      href: pathFor(i.page, locale),
+      label: i[locale].label,
+      desc: i[locale].desc,
+    })),
+  }));
+}
+
+/**
+ * Ugyanaz lapos listaként (lábléc "Megoldások" hasáb), a csoportok sorrendjében,
+ * plusz a lenyíló alján futó integrációs sáv.
+ *
+ * **Duplikátumszűrés kell:** a blogcikk író két csoportban is szerepel, a
+ * láblécben viszont egyszer akarjuk látni. A kulcs a link ÉS a címke együtt –
+ * így a Shopgrade két külön néven futó bejegyzése (termékleírás / kategóriaoldal)
+ * megmarad, hiába visz mindkettő ugyanarra az oldalra.
  */
 export function navModulesFor(locale: Locale): NavModule[] {
-  return MODULES.filter((m) => m.page).map((m) => ({
-    icon: m.icon,
-    href: pathFor(m.page as PageKey, locale),
-    label: m[locale].navLabel ?? m[locale].title,
-    desc: m[locale].navDesc ?? m[locale].desc,
-  }));
+  const out: NavModule[] = [];
+  const seen = new Set<string>();
+
+  // 1. A menü elemei + az integrációs sáv. A blogcikk író két csoportban is ott
+  //    van, ezért kell a link+címke kulcs; a Shopgrade két bejegyzése viszont
+  //    külön címkével fut, tehát megmarad mind a kettő.
+  const listed = [
+    ...navGroupsFor(locale).flatMap((g) => g.items),
+    {
+      icon: NAV_INTEGRATION.icon,
+      href: pathFor(NAV_INTEGRATION.page, locale),
+      label: NAV_INTEGRATION[locale].label,
+      desc: '',
+    },
+  ];
+  for (const item of listed) {
+    const key = `${item.href}|${item.label}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(item);
+  }
+
+  // 2. Amit a menü nem sorol fel, de van saját kampányoldala (ma: nemzetközi
+  //    terjeszkedés) – hogy egy indexelhető oldal se maradjon belső hivatkozás
+  //    nélkül, még ha a fejlécből ki is vettük.
+  const linked = new Set(out.map((i) => i.href));
+  for (const m of MODULES) {
+    if (!m.page) continue;
+    const href = pathFor(m.page, locale);
+    if (!href || linked.has(href)) continue;
+    linked.add(href);
+    out.push({ icon: m.icon, href, label: m[locale].title, desc: m[locale].desc });
+  }
+
+  return out;
 }
 
 /** A kártyalink és a záró CTA szövege nyelvenként. */

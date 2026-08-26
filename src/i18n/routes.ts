@@ -1,4 +1,4 @@
-export const LOCALES = ['hu', 'en'] as const;
+﻿export const LOCALES = ['hu', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'hu';
 
@@ -12,6 +12,7 @@ export type PageKey =
   | 'shopgrade'
   | 'shopgradeAudit'
   | 'blogWriter'
+  | 'webshopSeoGeo'
   | 'newsletter'
   | 'pricing'
   | 'onlineDemo'
@@ -51,8 +52,8 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   international: { hu: '/hu/nemzetkozi/', en: '/en/international/' },
   // Webshop mélyintegráció kampányoldal (Unas + Shoprenter) – kétnyelvű.
   webshopIntegration: { hu: '/hu/webshop-integracio/', en: '/en/store-integration/' },
-  // Shopgrade modul: a webáruház meglévő tartalmát optimalizálja (termékleírás
-  // újraírás + visszatöltés; hamarosan kategóriaoldal-író és termékkép-szerkesztő).
+  // Shopgrade modul: a webáruház meglévő tartalmát optimalizálja (termékleírás- ÉS
+  // kategóriaoldal-újraírás + visszatöltés; hamarosan termékkép-szerkesztő és nyelvesítés).
   // A slug szándékosan a modul neve, hogy a későbbi almodulok is beleférjenek.
   shopgrade: { hu: '/hu/shopgrade/', en: '/en/shopgrade/' },
   // Opt-in (squeeze) oldal a Shopgrade-hez: a csali maga a TERMÉK egy darabja —
@@ -70,6 +71,21 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // Blogcikk író modul: kulcsszókutatás -> SEO/GEO-barát blogcikk -> publikálás
   // közvetlenül a webshop blogjába (Unas + Shoprenter).
   blogWriter: { hu: '/hu/blogcikk-iro/', en: '/en/blog-writer/' },
+  // **Gyűjtő (hub) kampányoldal a keresőtartalomra.** A `shopgrade` (termékleírás +
+  // kategóriaoldal) és a `blogWriter` (blogcikk) külön-külön egy-egy modul, SEO/GEO
+  // szempontból viszont EGY egész: a kereső és az AI nem egy oldalt pontoz, hanem a
+  // webshop egészét. Ez az oldal ezt az összefüggést adja el, és onnan oszt tovább a
+  // két modul-oldalra — vagyis a saját honlapunkon is egy tematikus klasztert épít
+  // (hub + 2 spoke), pont azt, amit a termék csinál.
+  //
+  // A slug SZÁNDÉKOSAN mondja ki mind a kettőt: a GEO (az AI-keresőkre való
+  // optimalizálás) önálló ígéret, nem a SEO lábjegyzete — egy csak-„seo" URL a
+  // fele terméket hirdetné.
+  //
+  // Indexelhető (nem `noindex`, mint az `allInOne`): más kifejezésre megy
+  // („webshop SEO + GEO"), mint a modul-oldalak („termékleírás író", „blogcikk
+  // író"), ezért nem kannibalizál. Hirdetési forgalmat is ide terelünk (`?type=ld`).
+  webshopSeoGeo: { hu: '/hu/webshop-seo-geo/', en: '/en/webshop-seo-geo/' },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // Részletes ároldal: csomag, teljes kreditdíj-táblázat (#kreditek), extra

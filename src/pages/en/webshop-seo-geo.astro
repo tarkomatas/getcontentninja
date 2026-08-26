@@ -1,0 +1,1065 @@
+﻿---
+/**
+ * The `/hu/webshop-seo-geo/` page's English twin — the search-content hub that sells
+ * the Shopgrade (product + category copy) and blog writer modules as ONE thing.
+ *
+ * Keep it structurally identical to the Hungarian original (same sections, same
+ * highlights); the ad traffic goes to the HU page, this exists so the hreflang
+ * pair and the English nav stay complete.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
+import LeadFormScript from '../../components/LeadFormScript.astro';
+
+const locale = 'en';
+const page = 'webshopSeoGeo';
+const title = 'Webshop SEO and GEO in one system – category, product copy, blog | Content Ninja';
+const description =
+  'Content Ninja writes your category pages, product descriptions and blog posts – SEO- and GEO-friendly – then uploads them back to your webshop. With Unas and Shoprenter integration.';
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-shopgrade.jpg" lpEnabled>
+  <Fragment slot="head">
+    <style is:inline>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #4a4a68;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #1e1e2f;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-primary:hover {
+            background-color: #5a4bd6;
+        }
+
+        .cta-primary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+
+        .compare-table th,
+        .compare-table td {
+            border-bottom: 1px solid #e8e8f0;
+            padding: 14px 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .compare-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cmp-icon {
+            display: inline-block;
+            margin-right: 6px;
+            font-size: 1.05em;
+            line-height: 1;
+            vertical-align: -0.08em;
+        }
+
+        .compare-table tr.cmp-win td {
+            background-color: rgba(108, 92, 231, 0.07);
+        }
+
+        .compare-table tr.cmp-win td:first-child {
+            box-shadow: inset 3px 0 0 #6c5ce7;
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <Header locale={locale} page={page} />
+
+    <!-- 1. Hero + lead form -->
+    <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <div class="flex flex-col gap-4 md:gap-7 text-left">
+
+                    <!-- No jargon in the H1 (see the HU twin): "SEO" and "GEO" only appear further
+                         down, and there we explain first and name second. -->
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
+                        Complete <span class="text-primary">search and AI optimization</span> for webshops
+                    </h1>
+
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <span class="text-sm font-semibold text-muted">Supported platforms:</span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
+                        </span>
+                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
+                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                        </span>
+                    </div>
+
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                        It writes your <span class="font-bold text-primary">category pages</span>, your
+                        <span class="font-bold text-primary">product descriptions</span> and your
+                        <span class="font-bold text-primary">blog posts</span> – and that's exactly what Google and
+                        ChatGPT read when they recommend something to your customer.
+                    </p>
+
+                    <ul class="space-y-3.5 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>It checks what people search for:</strong> real search data, not
+                                guesswork</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>For Google and for ChatGPT:</strong> neither recommends anything that isn't
+                                written the way it likes to read</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Fully automatic:</strong> it researches, pulls in, writes and uploads – you
+                                just approve it (if you want to)</span>
+                        </li>
+                    </ul>
+
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshops</span> already use it</p>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="formIntro">
+                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Book an online demo</h3>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">There is no self-serve
+                                    trial</strong> – but on a live call we'll show you, on your own webshop, where your
+                                    content stands today and what the system would write instead.</p>
+                            </div>
+                        </div>
+
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                            <HoneypotField />
+
+                            <!-- Step 1: Qualifying Questions -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">What kind of webshop do you have?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="UNAS">UNAS</option>
+                                            <option value="Shoprenter">Shoprenter</option>
+                                            <option value="Egyéb" data-reject="hard">Other</option>
+                                            <option value="Csak tervezek webshopot indítani" data-reject="soft">I'm only planning to start one</option>
+                                            <option value="Más típusú vállalkozásom van" data-reject="hard">I run a different kind of business</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">How many products do you have?</label>
+                                        <select name="product_count" id="productCount"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="100 alatt">Under 100</option>
+                                            <option value="100-1.000">100–1,000</option>
+                                            <option value="1.000-10.000">1,000–10,000</option>
+                                            <option value="10.000 felett">Over 10,000</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Who writes your store's copy today?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Én, cégvezetőként">Me, as the owner</option>
+                                            <option value="Belsős marketing csapat">In-house marketing team</option>
+                                            <option value="Külsős ügynökség">External agency</option>
+                                            <option value="Senki – a gyártói leírás van fent">Nobody – the manufacturer's text is up, categories are empty</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">If you like what you see on the demo, when could you start using it?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="Azonnal">Right away</option>
+                                            <option value="1 hónapon belül">Within 1 month</option>
+                                            <option value="2-3 hónapon belül" data-reject="soft">In 2–3 months</option>
+                                            <option value="Még csak érdeklődöm" data-reject="soft">Just browsing for now</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Disqualification Screen (hard reject) -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Thank you for your interest!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Based on your answers, our platform would not be a good fit for you. We don't
+                                        want to take up your time – thanks for your understanding!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Screen -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Thank you for your interest!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            We only run demos for people who want to start using the system right away.
+                                            Let's stay in touch – we'd gladly send you a <strong>recorded walkthrough</strong>.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email address</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            I have read, understood and acknowledged the
+                                            <a href="/en/privacy-policy/" target="_blank" class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            I'm interested in content like this! Subscribe me to the newsletter.
+                                            (<a href="/en/privacy-policy/" class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject(this)"
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Send me the video
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Thank You Screen -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Got it!</h4>
+                                    <p data-thanks="plain" class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        We'll send the walkthrough video within a few minutes. Thanks for your interest!
+                                    </p>
+                                    <p data-thanks="newsletter" class="hidden text-body leading-relaxed max-w-[400px] mx-auto">
+                                        We'll send the walkthrough video within a few minutes, and we'll keep you posted
+                                        on what's new. Thanks for your interest!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Info & Privacy -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Name</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. John Smith">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Business email</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="e.g. john@company.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Phone number</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+36 30 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            I have read, understood and acknowledged the
+                                            <a href="/en/privacy-policy/" target="_blank" class="underline hover:text-primary">Privacy Policy</a>.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            I'm interested in content like this! Subscribe me to the newsletter.
+                                            (<a href="/en/privacy-policy/" class="underline hover:text-primary">Privacy Policy</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Back
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                            Continue to booking
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. The problem -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">The problem 🕳️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">AI and Google aren't skipping your webshop because your
+                    products are bad</h2>
+                <p class="text-body text-lg">It's because your copy is thin and weak. Google and ChatGPT can only work
+                    with what's readable on your webshop.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">category</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Category page copy isn't written well</h3>
+                    <p class="text-body text-sm leading-relaxed">There's usually something there – two throwaway
+                        sentences, or a paragraph from years ago. It just wasn't written for the phrase shoppers type,
+                        and it doesn't help them choose.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">content_copy</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Product copy comes from the manufacturer</h3>
+                    <p class="text-body text-sm leading-relaxed">The same few sentences sit on ten other stores too.
+                        Google has no reason to rank you higher, and the shopper has no reason to buy from you.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">event_busy</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">The blog is missing, or frozen for years</h3>
+                    <p class="text-body text-sm leading-relaxed">Most shoppers don't search for product names – they ask
+                        questions: "which one should I pick", "what should I watch out for". If you have no answer, they
+                        go to your competitor.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-light border border-primary/20 rounded-[16px] px-6 py-6 md:px-8 flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary text-[26px] shrink-0 mt-0.5">payments</span>
+                <p class="text-body leading-relaxed">
+                    <strong class="text-dark">It always ends the same way: ads are all that's left.</strong> While you
+                    pay, traffic comes; the moment you stop, it's gone. Organic traffic works the other way around – it
+                    builds slower, but then it keeps working. It just needs text on your pages.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Why all three together -->
+    <section id="miert-egyben" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Why together? 🔗</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">The three page types form one system – separately, each
+                    is worth less</h2>
+                <p class="text-body text-lg">Search engines don't score a single page, they look at the whole store. So
+                    blogging alone isn't enough, and swapping product descriptions alone isn't either. Your customer goes
+                    through all three, too:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mb-6 shadow-primary-glow">1</div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-primary block mb-2">Blog post</span>
+                    <h3 class="font-bold text-lg mb-3">"Which one should I pick?"</h3>
+                    <p class="text-body text-sm leading-relaxed">This is where they meet you first, while they still only
+                        have a question. It's also the content AI search engines quote – and it lifts how your whole
+                        store is judged.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mb-6 shadow-primary-glow">2</div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-primary block mb-2">Category page</span>
+                    <h3 class="font-bold text-lg mb-3">"Show me what you've got"</h3>
+                    <p class="text-body text-sm leading-relaxed">This is the page that ranks for the big, ready-to-buy
+                        phrases. From a throwaway paragraph, though, Google can't tell what makes your version of this
+                        category different.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mb-6 shadow-primary-glow">3</div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-primary block mb-2">Product description</span>
+                    <h3 class="font-bold text-lg mb-3">"Is this really right for me?"</h3>
+                    <p class="text-body text-sm leading-relaxed">This is where the sale is decided – and where AI learns
+                        who your product is for, what it goes with, how it differs. Two lines won't tell it that.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-card border border-primary/25 rounded-[16px] px-6 py-7 md:px-9">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary text-[26px] shrink-0 mt-0.5">hub</span>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-dark">And the system links them together</h3>
+                        <p class="text-body leading-relaxed">The article points to your category, the category points to
+                            your products. That's how Google understands your webshop genuinely covers a topic – it's
+                            called topical authority, and it's the part a standalone copywriting tool can't do.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. The solution -->
+    <section id="megoldas" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Complete search and AI optimization 🔎</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">It writes all three – and uploads them back to your
+                    store</h2>
+                <p class="text-body text-lg">One interface, one brand voice, one product catalogue. No separate keyword
+                    tool, no separate copywriter, and nobody pasting text into the admin.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">category</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Category pages, rewritten</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">The existing copy is replaced by one built around
+                        the phrase your customers type – and one that genuinely helps them choose within the
+                        category.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">edit_document</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Its own description for every product</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Yours instead of the manufacturer's: from your own
+                        product data, written to sell. Not one by one – it runs across thousands of products.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">article</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Articles on what people actually ask</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">It checks what people search for in your market and
+                        only suggests topics you have products for – then publishes the finished article to your
+                        blog.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Book a free demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SEO and GEO in plain words -->
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Search engines and AI 🔎</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Two shop windows, one set of texts</h2>
+                <p class="text-body text-lg">Part of your audience no longer starts on Google's results page – they ask
+                    ChatGPT. The two work differently, but both draw on the same thing: what can be read on your
+                    webshop.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">search</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Google's results page</h3>
+                    <p class="text-body text-sm leading-relaxed">Here your <strong>link</strong> has to show up. That
+                        takes a fitting title, a logical structure, real copy and links between your own pages – all part
+                        of the generation, not extra work.
+                        <span class="text-muted">(The trade calls this SEO.)</span></p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">psychology</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">GEO – answers from AI search</h3>
+                    <p class="text-body text-sm leading-relaxed">ChatGPT, Gemini and Google's AI Overview don't hand out
+                        links, they compose an <strong>answer</strong>. They'll only mention you if your pages hold a
+                        concrete, factual answer they can quote.</p>
+                </div>
+            </div>
+
+            <p class="text-center text-body max-w-[680px] mx-auto mt-8">
+                The good news: <strong class="text-dark">the same copy works for both.</strong> You don't have to do it
+                twice – you just have to do it well.
+            </p>
+        </div>
+    </section>
+
+    <!-- 6. Why this is different -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1100px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Why is this different? 🏆</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">There's no other system like this on the Hungarian
+                    market</h2>
+                <p class="text-body text-lg">Each task has a solution of its own. But having all three produced in one
+                    place, from your own product data, and pushed back into your Unas or Shoprenter store with one click
+                    – that's the part you won't find elsewhere.</p>
+            </div>
+
+            <div class="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+                <table class="compare-table w-full min-w-[900px] bg-light rounded-[16px] border border-border shadow-card overflow-hidden text-sm">
+                    <thead>
+                        <tr class="bg-primary/5">
+                            <th class="font-bold text-dark">If you did it another way</th>
+                            <th class="font-bold text-dark">When is it ready?</th>
+                            <th class="font-bold text-dark">What does it cost?</th>
+                            <th class="font-bold text-dark">Can you rely on it?</th>
+                            <th class="font-bold text-dark">Does it scale to thousands?</th>
+                            <th class="font-bold text-dark">Does it go back into the store?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="block font-semibold text-dark whitespace-nowrap">🏢 SEO agency</span>
+                                <span class="block text-xs text-muted mt-1 max-w-[190px]">slow, expensive, hard to find a good one</span>
+                            </td>
+                            <td><span class="cmp"><span class="cmp-icon">⚠️</span>Weeks or months before it starts</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">⚠️</span>High monthly fee, long contract</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">⚠️</span>Hard to find a good one</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">❌</span>Rarely in scope</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">⚠️</span>Only within a costly retainer</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="block font-semibold text-dark whitespace-nowrap">🤖 ChatGPT, by hand</span>
+                                <span class="block text-xs text-muted mt-1 max-w-[190px]">cheap, but the work lands on you</span>
+                            </td>
+                            <td><span class="cmp"><span class="cmp-icon">⚠️</span>Whenever you get around to it</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">⚠️</span>It costs your own time</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">❌</span>Hit-and-miss, not from real searches</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">❌</span>Copy-paste</span></td>
+                            <td><span class="cmp"><span class="cmp-icon">❌</span>Copy-paste</span></td>
+                        </tr>
+                        <tr class="cmp-win">
+                            <td>
+                                <span class="block font-bold text-primary whitespace-nowrap">🥷 Content Ninja</span>
+                                <span class="block text-xs text-muted mt-1 max-w-[190px]">fixed monthly fee, live in days</span>
+                            </td>
+                            <td><span class="cmp font-semibold text-dark"><span class="cmp-icon">✅</span>Results within days</span></td>
+                            <td><span class="cmp font-semibold text-dark"><span class="cmp-icon">✅</span>Fixed 34,990 HUF + VAT / mo</span></td>
+                            <td><span class="cmp font-semibold text-dark"><span class="cmp-icon">✅</span>The same quality, every time</span></td>
+                            <td><span class="cmp font-semibold text-dark"><span class="cmp-icon">✅</span>Runs across all of them</span></td>
+                            <td><span class="cmp font-semibold text-dark"><span class="cmp-icon">✅</span>One click</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-center text-muted text-sm mt-4">The comparison reflects typical market practice – your own
+                experience may differ.</p>
+        </div>
+    </section>
+
+    <!-- 7. How it works -->
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works 🛠️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Four steps, and it starts working</h2>
+                <p class="text-body text-lg">No SEO knowledge required – the technical part is the system's job.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
+                    <h3 class="font-bold text-lg mb-3">Connect your store</h3>
+                    <p class="text-body text-sm leading-relaxed">Unas or Shoprenter – a few clicks, and the system sees
+                        every product, category and blog post you have.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
+                    <h3 class="font-bold text-lg mb-3">See where you stand</h3>
+                    <p class="text-body text-sm leading-relaxed">It reviews the copy on your product and category pages
+                        and shows which ones are weakest – that's where it pays to start.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
+                    <h3 class="font-bold text-lg mb-3">It writes the copy</h3>
+                    <p class="text-body text-sm leading-relaxed">Category pages, product descriptions, blog posts – in
+                        your brand voice, from your own product data, linked to each other.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
+                    <h3 class="font-bold text-lg mb-3">You approve, it publishes</h3>
+                    <p class="text-body text-sm leading-relaxed">Review it, edit it, and the system uploads it back to
+                        your store. Once you trust it, you can hand over this step too.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    I need to see this
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Reuse – the strongest "why one system" argument: the content you paid for
+         doesn't stop at the blog, it moves on to every other surface by itself. -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Reuse ♻️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Written once – then it works three more times</h2>
+                <p class="text-body text-lg">You don't have to produce separate content for every surface. What gets
+                    written for your blog moves on by itself: the same piece becomes a social post, a newsletter and a
+                    video.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">article</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">The blog post gets written</h3>
+                    <p class="text-body text-sm leading-relaxed">On the question your customers actually type – and it
+                        goes live on your webshop blog.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">thumb_up</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">It goes out to Facebook and Instagram</h3>
+                    <p class="text-body text-sm leading-relaxed">The article turns into a post, image included, on a
+                        schedule – without anyone writing it separately.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">mail</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">It becomes a newsletter</h3>
+                    <p class="text-body text-sm leading-relaxed">The same content reaches your subscribers too, from your
+                        own newsletter account, to your existing lists.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">movie_filter</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">And a video for social</h3>
+                    <p class="text-body text-sm leading-relaxed">The article also turns into video content – with a
+                        narrator voice, captions and your own product images.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-light border border-primary/25 rounded-[16px] px-6 py-7 md:px-9">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary text-[26px] shrink-0 mt-0.5">groups</span>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-dark">This used to take a whole team</h3>
+                        <p class="text-body leading-relaxed">A copywriter to write it. An SEO specialist to say what
+                            about. A social media manager to post it. A designer for the images, someone else for the
+                            newsletter. Until now only a larger agency could put that together –
+                            <strong class="text-dark">now one system does it, for one monthly fee.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Pricing -->
+    <section id="arazas" class="bg-light py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Pricing</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">One transparent monthly fee</h2>
+                <p class="text-body text-lg">Category copy, product descriptions and blog posts aren't separate products:
+                    they're all in the same subscription, together with posting and newsletters.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <div class="flex items-baseline gap-1 mb-3">
+                        <span class="text-4xl font-bold text-dark">34,990</span>
+                        <span class="text-xl font-bold text-dark">HUF</span>
+                        <span class="text-muted text-sm">+VAT / month</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fixed monthly fee, no hidden costs</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">500 AI credits per month (renewing)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Every module: category and product copy, blog posts, posting, newsletters, image and video generation</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Manage several webshops in one account</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">On-brand style and tone</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Ongoing development and support</span>
+                        </li>
+                    </ul>
+                    <a href="#hero" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book a demo
+                    </a>
+                </div>
+
+                <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+                        First month only
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
+                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+                        <span class="text-4xl font-bold text-primary">17,495</span>
+                        <span class="text-xl font-bold text-dark">HUF</span>
+                        <span class="text-muted text-sm">+VAT</span>
+                        <span class="text-muted text-sm line-through">34,990 HUF</span>
+                    </div>
+                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
+                    <p class="text-body text-sm mb-4">Book a 30-minute demo and get:</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">50% off your first month</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">750 credits instead of 500 (+250 bonus)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">A content review of your own webshop</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+                            </div>
+                            <span class="text-body font-medium">Answers to all your questions</span>
+                        </li>
+                    </ul>
+                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From month 2 it's the fixed 34,990 HUF / month.</p>
+                    <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+                        Book my demo
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="/en/pricing/#kreditek" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                    Detailed credit costs
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. FAQ -->
+    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently asked questions</h2>
+            </div>
+
+            <div class="space-y-3">
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Won't Google penalise AI-written copy?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Google doesn't penalise how text was written – it penalises text that is useless. The system
+                        works from your own product data, in your brand voice, and you approve every piece, so what gets
+                        published is written for your store. The usual alternative is the manufacturer's text that ten
+                        other shops also run, and Google doesn't reward that either.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        What is GEO, and why should I care?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        GEO (Generative Engine Optimization) means optimising for AI search – ChatGPT, Gemini,
+                        Perplexity, Google AI Overviews. These don't return ten blue links, they compose an answer, and
+                        they quote factual, well-structured content to do it. If your webshop has no such text, those
+                        answers get written without you – even if you have the best price.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Can it write thousands of product descriptions?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Yes, it runs in bulk – you don't prompt it product by product. You pick which products or
+                        categories to cover, the system generates the copy in sequence, and after your approval uploads
+                        it back into your store.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Which webshop platforms does it work with?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Currently <strong>Unas</strong> and <strong>Shoprenter</strong> – these have the direct,
+                        two-way connection (reading and writing back). If you're on another platform, we'll look at the
+                        options on the demo.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        When will I see results?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Honestly: search optimisation is measured in months, not days – nobody can get around that. With
+                        product descriptions there's an immediate effect too, though: people already on your site read
+                        better copy and are more likely to buy. That's why it's worth doing both together.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Do I need SEO knowledge?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        No. Keyword research, copy structure, meta data and internal linking are part of the process. You
+                        set your brand voice and audience once, then approve what gets created.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Do the three modules cost extra?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        No. The same 34,990 HUF + VAT / month subscription covers all of them, with 500 renewing AI
+                        credits – posting and newsletters included. Generation consumes credits;
+                        <a href="/en/pricing/#kreditek" class="text-primary font-semibold underline">see the detailed
+                        credit costs here</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Closing CTA -->
+    <section class="bg-primary py-16 md:py-20">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Let's look at your own webshop</h2>
+            <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+                On a 30-minute demo we'll show you where your content stands today and what the system would write
+                instead – and your first month starts at half price, with 250 bonus credits.
+            </p>
+            <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
+                Book a demo
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>
+                    <p class="text-muted">A system that creates marketing content on behalf of your webshop, on a
+                        conveyor belt – straight from your store's products.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Information</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://app.getcontentninja.com/changelog" class="hover:text-white">What's new</a></li>
+                        <li><a href="/en/privacy-policy/" class="hover:text-white">Privacy policy</a></li>
+                        <li><a href="/en/imprint/" class="hover:text-white">Imprint</a></li>
+                        <li><a href="/en/terms/" class="hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © getcontentninja.com | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAQ script -->
+    <script is:inline>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+    </script>
+
+    <!-- Az EN oldal is a magyar `lead_forras` kulcsot küldi (a nyelvet a `nyelv` mező viszi). -->
+    <LeadFormScript locale={locale} source="webshop-seo-geo" />
+
+  </div>
+</BaseLayout>
