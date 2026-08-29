@@ -41,8 +41,24 @@ export type NewsletterSource =
  * **Ha átírod, a látogató által látott szöveg is vele változik – ez a szándék.**
  */
 export const NEWSLETTER_CONSENT_TEXT: Record<Locale, string> = {
-  hu: 'Kérem a Content Ninja hírlevelét: havonta 1 levél új funkciókról és tippekkel. Bármikor leiratkozhatok.',
-  en: 'I would like to receive the Content Ninja newsletter: 1 email a month with new features and tips. I can unsubscribe at any time.',
+  hu: 'Az e-mail címem megadásával feliratkozom a Content Ninja hírlevelére, és elfogadom az Adatkezelési tájékoztatót.',
+  en: 'By providing my email address I subscribe to the Content Ninja newsletter and accept the Privacy Policy.',
+};
+
+/**
+ * A fenti mondat azon SZÓ SZERINTI részlete, amit hivatkozásként rendereljük az
+ * adatkezelési tájékoztatóra. A `NewsletterForm` ez mentén vágja három részre a
+ * mondatot – így a látogató által látott szöveg **karakterre azonos** marad
+ * azzal, amit naplózunk (a link nem változtat a szavakon), és nem kell a
+ * mondatot kétszer leírni.
+ *
+ * Ha átírod a `NEWSLETTER_CONSENT_TEXT`-et, ügyelj rá, hogy ez a részlet
+ * továbbra is szerepeljen benne – ha nem található, a komponens a mondatot
+ * link nélkül írja ki, és külön sorban teszi ki a hivatkozást.
+ */
+export const NEWSLETTER_CONSENT_LINK_TEXT: Record<Locale, string> = {
+  hu: 'Adatkezelési tájékoztatót',
+  en: 'Privacy Policy',
 };
 
 /**

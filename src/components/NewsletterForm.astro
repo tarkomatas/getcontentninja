@@ -19,6 +19,7 @@ import HoneypotField from './HoneypotField.astro';
 import {
   NEWSLETTER_ENDPOINT,
   NEWSLETTER_CONSENT_TEXT,
+  NEWSLETTER_CONSENT_LINK_TEXT,
   NEWSLETTER_MAX_ATTEMPTS,
   NEWSLETTER_RETRY_BASE_MS,
   type NewsletterSource,
@@ -48,6 +49,22 @@ const uid = `nl-${Math.random().toString(36).slice(2, 8)}`;
 const consentText = NEWSLETTER_CONSENT_TEXT[locale];
 const privacyHref = pathFor('privacy', locale);
 
+// A hozzájárulási mondat három részre vágva, hogy az adatkezelési tájékoztatóra
+// mutató szövegrész hivatkozásként jelenjen meg. A kirakott szöveg így
+// karakterre azonos a naplózott `consent_text`-tel – nincs két külön mondat,
+// ami elcsúszhatna. Ha a részlet nem található (átírták a mondatot), a mondat
+// link nélkül megy ki, és külön sorban tesszük ki a hivatkozást.
+const consentLinkText = NEWSLETTER_CONSENT_LINK_TEXT[locale];
+const linkStart = consentText.indexOf(consentLinkText);
+const consent =
+  linkStart === -1
+    ? null
+    : {
+        before: consentText.slice(0, linkStart),
+        link: consentLinkText,
+        after: consentText.slice(linkStart + consentLinkText.length),
+      };
+
 const T = {
   hu: {
     emailLabel: 'E-mail cím',
@@ -55,9 +72,9 @@ const T = {
     submit: 'Feliratkozom',
     sending: 'Küldés…',
     retry: 'Újraküldés',
-    privacyBefore: 'Részletek az',
-    privacyLink: 'Adatkezelési tájékoztatóban',
-    privacyAfter: '.',
+    /** Csak tartalék: akkor látszik, ha a hozzájárulási mondat átírásakor
+        kikerült belőle a linkelendő szövegrész. */
+    privacyLink: 'Adatkezelési tájékoztató',
     successTitle: 'Már csak egy lépés!',
     successBody:
       'Küldtünk egy levelet a megadott címre – kattints benne a megerősítő gombra, és kész.',
@@ -72,9 +89,8 @@ const T = {
     submit: 'Subscribe',
     sending: 'Sending…',
     retry: 'Try again',
-    privacyBefore: 'Details in our',
+    /** Fallback only – shown if the linked phrase was edited out of the consent sentence. */
     privacyLink: 'Privacy Policy',
-    privacyAfter: '.',
     successTitle: 'One more step!',
     successBody:
       "We've sent an email to the address you gave – click the confirmation button in it and you're done.",
@@ -159,9 +175,13 @@ const cfg = {
       hozzájárulás, a listára pedig csak a megerősítő levél után kerül fel.
     -->
     <p class="text-xs text-muted leading-relaxed">
-      {consentText}{' '}
-      {T.privacyBefore}{' '}
-      <a href={privacyHref} target="_blank" class="underline hover:text-primary">{T.privacyLink}</a>{T.privacyAfter}
+      {/* Egy sorban, sortörés nélkül: Astro a sortörést szóköznek rendereli,
+          attól szóköz kerülne a link és az utána jövő pont közé. */}
+      {consent ? (
+        <Fragment>{consent.before}<a href={privacyHref} target="_blank" class="underline hover:text-primary">{consent.link}</a>{consent.after}</Fragment>
+      ) : (
+        <Fragment>{consentText} <a href={privacyHref} target="_blank" class="underline hover:text-primary">{T.privacyLink}</a></Fragment>
+      )}
     </p>
 
     <p data-nl="error" class="hidden text-sm text-red-600 leading-relaxed"></p>
