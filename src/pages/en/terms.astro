@@ -30,7 +30,11 @@ const termsHu = pathFor('terms', 'hu');
 
             <div class="mb-10">
                 <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Terms of Service</h1>
-                <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026</p>
+                <p class="text-sm text-muted">Version 1.1 · Published: 29 August 2026 · Effective: 15 September
+                    2026</p>
+                <p class="text-sm text-muted mt-1">Version 1.1 adds the fee, term and AI credit allowance of the
+                    annual subscription plan, the rules on cancellation and changing plans, and the exclusion of
+                    refunds (Sections 4 and 5). The previous version 1.0 was in force from 20 August 2026 to 14 September 2026.</p>
                 <p class="text-sm text-muted mt-2">
                     These Terms are drawn up in Hungarian and English. In case of any discrepancy, the
                     <a href={termsHu} class="text-primary underline">Hungarian text</a> prevails.
@@ -139,36 +143,63 @@ const termsHu = pathFor('terms', 'hu');
                 <!-- 4. -->
                 <div class="p-8 doc-section">
                     <h2>4. Subscription, fees and payment</h2>
-                    <p>4.1. The Service is offered on a monthly subscription basis in several tiers. Each subscription
-                        includes access to the system and a monthly allowance of AI credits belonging to the chosen
-                        tier.</p>
-                    <p class="mt-2">4.2. The applicable fees are shown on the pricing page and at checkout. As the
+                    <p>4.1. The Service is offered on a subscription basis in several tiers and in
+                        <strong class="text-dark">two billing cycles — as a monthly or as an annual
+                        subscription</strong>. Each subscription includes access to the system and the allowance
+                        of AI credits belonging to the chosen tier.</p>
+                    <p class="mt-2">4.2. The subscription fees are:</p>
+                    <ul>
+                        <li>a) <strong class="text-dark">monthly subscription</strong>: HUF 34,990 + VAT per month;</li>
+                        <li>b) <strong class="text-dark">annual subscription</strong>: HUF 349,900 + VAT per year
+                            (HUF 444,373 gross).</li>
+                    </ul>
+                    <p class="mt-2">4.3. The <strong class="text-dark">annual subscription covers a single,
+                        uninterrupted subscription term of 12 months</strong>, the fee for which the Provider invoices
+                        <strong class="text-dark">in one lump sum, in advance</strong>, at the start of the term and
+                        upon each renewal. The fee for the monthly subscription is likewise invoiced in advance, on a
+                        monthly basis.</p>
+                    <p class="mt-2">4.4. The applicable fees are shown on the pricing page and at checkout. As the
                         Service is available to businesses only, prices are indicated as
                         <strong class="text-dark">net amounts</strong> plus VAT at the applicable rate. The Provider
                         issues an <strong class="text-dark">electronic invoice</strong> for each payment and sends it
                         by e-mail.</p>
-                    <p class="mt-2">4.3. The subscription renews automatically at the end of each billing period until
-                        cancelled by the User.</p>
-                    <p class="mt-2">4.4. Payment is processed by the payment provider Stripe. The Provider does not
+                    <p class="mt-2">4.5. The subscription <strong class="text-dark">renews automatically</strong> at
+                        the end of each subscription term — monthly subscriptions every month, annual subscriptions
+                        every twelve months — unless the User cancels it before the end of the term (see Section 5).</p>
+                    <p class="mt-2">4.6. Payment is processed by the payment provider Stripe. The Provider does not
                         store or process card or payment data; such data is handled exclusively by Stripe.</p>
-                    <p class="mt-2">4.5. From time to time the Provider may offer coupon-code discounts under which the
+                    <p class="mt-2">4.7. From time to time the Provider may offer coupon-code discounts under which the
                         first subscription period is available at a reduced price. The conditions, amount and
                         validity of coupon codes are determined by the Provider, and a discount can only be claimed
                         by entering a valid coupon code.</p>
-                    <p class="mt-2">4.6. AI credits included in the monthly fee apply to the given billing period;
-                        unused monthly credits do not roll over to the next month unless the Provider provides
-                        otherwise.</p>
-                    <p class="mt-2">4.7. The User may purchase extra credits in addition to the monthly allowance.
-                        Extra credits are valid for 365 days from the date of purchase and expire unused thereafter.
-                        If the subscription is cancelled, unused extra credits are also forfeited at the end of the
-                        subscription period.</p>
-                    <p class="mt-2">4.8. The User can review their current credit balance, credit usage history and
-                        the expiry date of extra credits at any time in the Usage section of the Content Ninja
+                    <p class="mt-2">4.8. <strong class="text-dark">The AI credit allowance included in the
+                        subscription fee.</strong> The allowance is made available differently depending on the
+                        billing cycle:</p>
+                    <ul>
+                        <li>a) under a <strong class="text-dark">monthly subscription</strong> the allowance is
+                            <strong class="text-dark">replenished every month</strong>; unused monthly credits do not
+                            roll over to the next month unless the Provider provides otherwise;</li>
+                        <li>b) under an <strong class="text-dark">annual subscription</strong> the Provider grants
+                            <strong class="text-dark">6,000 credits in a single lump sum</strong> at the start of the
+                            subscription term. This allowance is <strong class="text-dark">valid for 12 months from
+                            the date it is granted, i.e. until the end of the subscription term</strong>, and within
+                            that term the User may use it freely, at their own pace, with no monthly cap. Credits left
+                            unused from the allowance expire at the end of the subscription term and do not roll over
+                            into the renewed term.</li>
+                    </ul>
+                    <p class="mt-2">4.9. The User may purchase extra credits in addition to the allowance included in
+                        the subscription fee. Extra credits are valid for 365 days from the date of purchase and
+                        expire unused thereafter. If the subscription is cancelled, unused extra credits are also
+                        forfeited at the end of the subscription period.</p>
+                    <p class="mt-2">4.10. The User can review their current credit balance, credit usage history and
+                        the expiry date of credits at any time in the Usage section of the Content Ninja
                         interface.</p>
-                    <p class="mt-2">4.9. If the User has used up the credits included in the monthly fee and does not
-                        purchase extra credits, the AI-based content generation features are unavailable until the
-                        start of the next billing period. Other, non-AI features of the system remain available.</p>
-                    <p class="mt-2">4.10. The Provider may change the subscription fee and the content of the
+                    <p class="mt-2">4.11. If the User has used up the allowance included in the subscription fee and
+                        does not purchase extra credits, the AI-based content generation features are unavailable
+                        until the next allowance becomes available — until the start of the next month under a monthly
+                        subscription, and until the renewal of the subscription term under an annual subscription.
+                        Other, non-AI features of the system remain available.</p>
+                    <p class="mt-2">4.12. The Provider may change the subscription fee and the content of the
                         subscription tiers. Such a change does not affect a billing period that has already started
                         and been paid for. The Provider will notify the User by e-mail
                         <strong class="text-dark">at least 30 days</strong> before the change takes effect. If the
@@ -179,14 +210,40 @@ const termsHu = pathFor('terms', 'hu');
 
                 <!-- 5. -->
                 <div class="p-8 doc-section">
-                    <h2>5. Cancellation and refunds</h2>
-                    <p>5.1. The User may cancel their subscription at any time.</p>
-                    <p class="mt-2">5.2. Upon cancellation the subscription remains active until the end of the current
-                        billing period, during which the User may continue to use the Service without restriction.</p>
-                    <p class="mt-2">5.3. Subscription fees already paid are non-refundable, except where a refund is
-                        required by mandatory law. As the User is not a consumer, the right of withdrawal and
-                        termination under Government Decree 45/2014 (II. 26.) on contracts between consumers and
-                        businesses does not apply.</p>
+                    <h2>5. Cancellation, changing plans and refunds</h2>
+                    <p>5.1. The User may <strong class="text-dark">cancel their subscription at any time</strong>,
+                        without giving reasons, from the Content Ninja interface.</p>
+                    <p class="mt-2">5.2. Cancellation <strong class="text-dark">takes effect on the last day of the
+                        subscription term already paid for</strong>. Until that date the User’s account remains active
+                        and the Service may be used in full and without restriction. In the case of an annual
+                        subscription this means that the cancellation takes effect at the end of the 12-month term
+                        paid for.</p>
+                    <p class="mt-2">5.3. <strong class="text-dark">Changing plans.</strong> The User may switch between
+                        the monthly and the annual subscription as follows:</p>
+                    <ul>
+                        <li>a) a switch <strong class="text-dark">from a monthly to an annual subscription</strong>
+                            takes effect immediately; the Provider credits the unused, pro-rata portion of the fee for
+                            the month already started against the fee of the annual subscription;</li>
+                        <li>b) a switch <strong class="text-dark">from an annual to a monthly subscription</strong>
+                            takes effect only from the next renewal date, i.e. upon expiry of the 12-month term paid
+                            for; no pro-rata portion of the annual fee is credited or refunded.</li>
+                    </ul>
+                    <p class="mt-2">5.4. <strong class="text-dark">Exclusion of refunds.</strong> Subscription fees
+                        already paid are <strong class="text-dark">non-refundable, in whole or in part</strong>. This
+                        also applies to the fee for an annual subscription paid in one lump sum in advance, including
+                        where the User cancels before the end of the subscription term or does not use, or only partly
+                        uses, the Service during that term.</p>
+                    <p class="mt-2">5.5. <strong class="text-dark">Legal basis for the exclusion of refunds.</strong>
+                        Under Section 3.2 the Service may be used for business purposes only: the User is a legal
+                        entity, sole proprietor or other organisation using the Service within its trade, business,
+                        craft or profession. The User therefore <strong class="text-dark">does not qualify as a
+                        consumer</strong> within the meaning of Section 8:1 (1) point 3 of Act V of 2013 on the Civil
+                        Code, and consequently <strong class="text-dark">is not entitled to the fourteen-day right of
+                        withdrawal and termination available to consumers</strong> under
+                        <strong class="text-dark">Government Decree 45/2014 (II. 26.)</strong> on the detailed rules of
+                        contracts between consumers and businesses. That decree does not apply to this contract.</p>
+                    <p class="mt-2">5.6. This Section 5 does not affect any rights the User has under mandatory
+                        law.</p>
                 </div>
 
                 <!-- 6. -->
