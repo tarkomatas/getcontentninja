@@ -11,14 +11,18 @@
  * nem squeeze-oldal), a hero alatt viszont nincs több szekció.
  *
  * A beküldés a `NewsletterForm` komponensen megy, saját végpontra
- * (`/api/newsletter/subscribe`) – az app naplóz, megerősítő levelet küld, és
- * csak a megerősítés után teszi a címet a MailerLite-ba. Ezért NEM írjuk ki,
- * hogy „sikeresen feliratkoztál”.
+ * (`/api/newsletter/subscribe`) – az app naplóz, és a cím azonnal felkerül a
+ * MailerLite-ba (egylépcsős feliratkozás, nincs megerősítő levél).
+ *
+ * ⚠️ **`NEWSLETTER_LIVE === false` esetén az oldal `noindex`** és nincs rajta
+ * űrlap: az app végpontja még nem létezik, tehát nincs mit indexelni sem. Az
+ * élesítés egyetlen lépés a `src/data/newsletter.ts`-ben.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import NewsletterForm from '../../components/NewsletterForm.astro';
+import { NEWSLETTER_LIVE } from '../../data/newsletter';
 
 const locale = 'hu';
 const page = 'newsletterSignup';
@@ -27,7 +31,14 @@ const description =
   'Content Ninja hírlevél hazai webáruházaknak: új funkciók, bevált gyakorlatok és a legfontosabb e-kereskedelmi hírek. Nem adjuk ki a címed, egy kattintással leiratkozhatsz.';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  noindex={!NEWSLETTER_LIVE}
+  lpEnabled
+>
   <Header locale={locale} page={page} />
 
   <main>

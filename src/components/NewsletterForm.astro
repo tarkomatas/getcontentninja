@@ -12,11 +12,19 @@
  * mezője UGYANAZ a konstans (`NEWSLETTER_CONSENT_TEXT`) – így nem tud elcsúszni
  * az, amit a látogató látott, attól, amit naplózunk.
  *
- * ⚠️ **Nincs „Sikeresen feliratkoztál" üzenet.** A feliratkozás dupla opt-inos:
- * a beküldés után még csak elindította – a megerősítő levélre kell kattintania.
+ * ⚠️ **Egylépcsős feliratkozás – nincs megerősítő levél.** A brief eredetileg
+ * dupla opt-int írt le, de az app csapata 2026-08-29-én ezt elvetette
+ * (lemorzsol, és a hozzájárulást a gomb megadja, a bizonyíthatóságot a napló).
+ * Ezért a siker-képernyő azt mondja, hogy KÉSZ – ne írd vissza „Már csak egy
+ * lépés"-re, mert olyan levelet ígérne, ami sosem érkezik meg.
+ *
+ * ⚠️ **`NEWSLETTER_LIVE`**: amíg `false`, ez a komponens csak egy rövid
+ * „hamarosan" sort rak ki – űrlapot és küldő scriptet nem. Így egyetlen oldal
+ * sem tud a semmibe küldeni, amíg az app végpontja nincs kész.
  */
 import HoneypotField from './HoneypotField.astro';
 import {
+  NEWSLETTER_LIVE,
   NEWSLETTER_ENDPOINT,
   NEWSLETTER_CONSENT_TEXT,
   NEWSLETTER_CONSENT_LINK_TEXT,
@@ -75,10 +83,11 @@ const T = {
     /** Csak tartalék: akkor látszik, ha a hozzájárulási mondat átírásakor
         kikerült belőle a linkelendő szövegrész. */
     privacyLink: 'Adatkezelési tájékoztató',
-    successTitle: 'Már csak egy lépés!',
-    successBody:
-      'Küldtünk egy levelet a megadott címre – kattints benne a megerősítő gombra, és kész.',
-    successSpam: 'Ha nem találod, nézd meg a spam mappát is.',
+    // Egylépcsős feliratkozás: a cím a beküldéssel felkerül a listára, nincs
+    // megerősítő levél. Ne ígérj levelet, ami sosem érkezik meg.
+    successTitle: 'Kész, feliratkoztál!',
+    successBody: 'Köszönjük – a következő levelünket már megkapod.',
+    offline: 'A feliratkozás hamarosan indul.',
     errorClient: 'Nem sikerült – ellenőrizd az e-mail címet, és próbáld újra.',
     errorServer:
       'Most nem sikerült elküldeni. Próbáld meg pár perc múlva, vagy írj a support@getcontentninja.com címre.',
@@ -91,10 +100,10 @@ const T = {
     retry: 'Try again',
     /** Fallback only – shown if the linked phrase was edited out of the consent sentence. */
     privacyLink: 'Privacy Policy',
-    successTitle: 'One more step!',
-    successBody:
-      "We've sent an email to the address you gave – click the confirmation button in it and you're done.",
-    successSpam: "If you can't find it, please check your spam folder too.",
+    // Single opt-in: no confirmation email – see the HU note above.
+    successTitle: "You're subscribed!",
+    successBody: "Thanks – our next email will land in your inbox.",
+    offline: 'Subscriptions are opening soon.',
     errorClient: "That didn't work – please check the email address and try again.",
     errorServer:
       "We couldn't send it right now. Please try again in a few minutes, or write to support@getcontentninja.com.",
@@ -133,6 +142,14 @@ const cfg = {
     </div>
   )}
 
+  {!NEWSLETTER_LIVE && (
+    <p class="flex items-start gap-2 text-sm text-muted leading-relaxed">
+      <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-px">schedule</span>
+      <span>{T.offline}</span>
+    </p>
+  )}
+
+  {NEWSLETTER_LIVE && (
   <form data-nl="form" class={variant === 'card' ? 'space-y-4' : 'space-y-3'}>
     <HoneypotField />
 
@@ -193,17 +210,20 @@ const cfg = {
       </button>
     )}
   </form>
+  )}
 
+  {NEWSLETTER_LIVE && (
   <div data-nl="success" class="hidden text-center py-6 space-y-3">
     <div class="w-14 h-14 bg-success/10 rounded-full flex items-center justify-center mx-auto">
-      <span class="material-symbols-outlined text-success text-3xl">mark_email_unread</span>
+      <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
     </div>
     <h3 class="text-xl font-bold text-dark">{T.successTitle}</h3>
     <p class="text-body leading-relaxed">{T.successBody}</p>
-    <p class="text-muted text-sm">{T.successSpam}</p>
   </div>
+  )}
 </div>
 
+{NEWSLETTER_LIVE && (
 <script is:inline define:vars={{ nlCfg: cfg }}>
   (function () {
     var root = document.getElementById(nlCfg.id);
@@ -313,3 +333,4 @@ const cfg = {
     });
   })();
 </script>
+)}

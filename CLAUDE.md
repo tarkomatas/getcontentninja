@@ -135,11 +135,17 @@ címke helyett.
 
 ## Hírlevél-feliratkozás – KÜLÖN út, nem a lead-intake
 
+> 🔴 **Jelenleg KI VAN KAPCSOLVA** (`NEWSLETTER_LIVE = false` a `src/data/newsletter.ts`-ben):
+> 2026-08-29-én az app csapata jelezte, hogy a végpont még nem létezik. Amíg a flag `false`, a
+> `NewsletterForm` sem űrlapot, sem küldő scriptet nem renderel (ellenőrizve a build kimenetén), a
+> `/hu/hirlevel-feliratkozas/` oldal `noindex`, és a sitemap-bejegyzése ki van kommentelve.
+> **Élesítés:** flag `true` + a sitemap-blokk visszatétele.
+
 A **saját hírlevelünkre** való feliratkozás nem a lead-űrlapok végpontjára megy, hanem a
 `POST https://app.getcontentninja.com/api/newsletter/subscribe` címre. Azért külön, mert az app itt
-mást csinál: naplóz (bizonyíthatóság) → megerősítő levelet küld → és **csak a megerősítés után**
-teszi a címet a MailerLite-ba. A MailerLite API-kulcs soha nem kerülhet ebbe a repóba (statikus
-honlap, nem tud titkot tartani) — ezért megy minden az appon keresztül.
+mást csinál: külön napló-táblába ír (bizonyíthatóság), és a címet felteszi a MailerLite-ba. A
+MailerLite API-kulcs soha nem kerülhet ebbe a repóba (statikus honlap, nem tud titkot tartani) —
+ezért megy minden az appon keresztül. A feliratkozás **nem lead**: nem jelenik meg a lead-adminban.
 
 - **`src/data/newsletter.ts`** – az igazságforrás: végpont, `source_form` kulcsok, retry-beállítás és
   a `NEWSLETTER_CONSENT_TEXT`.
@@ -149,8 +155,12 @@ honlap, nem tud titkot tartani) — ezért megy minden az appon keresztül.
 - ⚠️ **A `consent_text` mező és a gomb fölött látható mondat UGYANAZ a konstans.** Nem összefoglaló,
   hanem betűhű szöveg: ha egy év múlva megkérdezik, mire mondott igent a feliratkozó, a napló
   önmagában bizonyít. Egy helyen él, tehát a kettő nem tud elcsúszni — ha átírod, mindkettő változik.
-- ⚠️ **Sikeres beküldés után NEM azt írjuk, hogy „sikeresen feliratkoztál”**, hanem hogy „Már csak egy
-  lépés!” — a feliratkozás csak a megerősítő levélre kattintva jön létre.
+- ⚠️ **Egylépcsős feliratkozás: nincs megerősítő levél.** A brief eredetileg dupla opt-int írt le, de
+  az app csapata 2026-08-29-én elvetette (lemorzsol; a hozzájárulást a gomb megadja, a
+  bizonyíthatóságot a napló-tábla). A siker-szöveg ezért „Kész, feliratkoztál!” — **ne írd vissza
+  „Már csak egy lépés”-re**, mert olyan levelet ígérne, ami sosem érkezik meg. Emiatt a brief §5
+  indoklása is elavult: a hamis címeket ott a megerősítő levél szűrte volna, most a honlapon már
+  csak a honeypot van (a rate limit az app oldalán marad).
 - **Retry:** 3 próba növekvő várakozással, kizárólag 5xx-re és hálózati hibára (a 4xx kliens-hiba),
   mindig UGYANAZZAL a `submission_id`-vel — ez adja az idempotenciát. Ha a látogató javítja az
   e-mail címét egy hiba után, új `submission_id` generálódik. A `fetch` `keepalive`-val megy.
