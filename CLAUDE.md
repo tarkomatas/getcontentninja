@@ -28,7 +28,9 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
   - `shopgradeAudit` → `/hu/termekleiras-diagnozis` , **csak magyarul** (`en: null`) — az **opt-in (squeeze) oldal**: a csali az app ingyenes, belépés nélküli termékleírás-diagnózisa. Három dologban tér el minden más kampányoldaltól: (1) **nincs navigáció** — nem a közös `Header`-t használja, hanem saját, linkmentes fejlécet (a köszönőoldalak mintájára), mert egy opt-in oldalon minden kifelé mutató link konverziót visz; (2) **a csali azonnal jár** — sikeres beküldés után nem a köszönőoldalra megy, hanem az app diagnózis-oldalára (lásd `successUrl` lentebb); (3) `noindex`, hogy ne versenyezzen a `/hu/shopgrade/` oldallal ugyanarra a kifejezésre — de **`robots.txt` Disallow NÉLKÜL** (2026-08-19): a tiltás megakadályozta, hogy a Google egyáltalán lássa a `noindex`-et, az AI-fetchereket (ChatGPT stb.) pedig elzárta az oldal szövegétől. Ne tedd vissza. Azért csak magyarul, mert az app diagnózisa egynyelvű — egy angol opt-in magyar eredményoldalra vinne.
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
   - `privacy` → `/hu/adatkezeles` , `/en/privacy-policy`
-  - `terms` → `/hu/aszf` , `/en/terms`
+  - `terms` → `/hu/aszf` , `/en/terms` (verziózott: a befagyasztott korábbi példányok a
+    `/hu/aszf/v1-0/`, `/en/terms/v1-1/` … címeken élnek, `src/pages/hu/aszf/` és
+    `src/pages/en/terms/` alatt — **módosítás előtt olvasd el a lentebbi verzió-archívum szakaszt**)
   - `imprint` → `/hu/impresszum` , `/en/imprint`
   - `dataDeletion` → `/hu/adattorles` , `/en/data-deletion` (Meta-required data deletion instructions)
 
@@ -40,6 +42,45 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
   **azonos nyelvű** jogi oldalra mutatnak; a kereszthivatkozások (ÁSZF ↔ adatkezelési tájékoztató ↔
   adattörlés) is nyelven belül maradnak, `pathFor(..., locale)`-lel. Az átvezetés forrása a
   `C:\DEV\Content Ninja\docs\legal\jogi-doksi-frissites-brief.md` brief.
+
+  ### ⚠️ ÁSZF-módosítás = HÁROM lépés, nem egy (verzió-archívum)
+
+  **Az ÁSZF-nek verziószáma van, és minden verzió befagyasztott másolatban is megmarad.** Ha csak az
+  élő oldalt írod át, a korábbi szöveg NYOMTALANUL eltűnik — márpedig egy vitában sosem az a kérdés,
+  mi áll ma a szerződésben, hanem hogy **mit fogadott el az ügyfél a fizetés napján**. Ez nem elmélet:
+  az app a `profiles.terms_version` mezőben verziószámot tárol minden felhasználónál, és az 5.4–5.5
+  pont (a visszatérítés kizárása, éves csomagnál 444 373 Ft-ról) pontosan az a kikötés, amit valaki
+  vitatni fog.
+
+  Ezért ÁSZF-módosításkor **mindig mind a három**:
+
+  1. **Az élő oldalt** írod át (`src/pages/hu/aszf.astro` + `src/pages/en/terms.astro`), és a fejlécben
+     léptetsz: verziószám, közzététel, hatálybalépés, plusz egy soros változásnapló.
+  2. **Új archív fájlt hozol létre** — `src/pages/hu/aszf/v1-2.astro` és `src/pages/en/terms/v1-2.astro`
+     —, az élő fájl szó szerinti másolataként. **Meglévő archív fájlt SOHA ne szerkessz**: az a
+     befagyasztott múlt. Új verzió = új fájl.
+  3. **Az élő oldal fejlécében** felveszed az új verziót a „Korábbi verziók" sorba.
+
+  Az archív fájlok receptje (lásd a meglévő `v1-0` / `v1-1` fájlokat): egy szinttel mélyebb importok
+  (`../../../`), `noindex` + **önmagára** mutató `canonical`, a másik nyelv linkje az AZONOS verziójú
+  archívumra, cím végén a verziószám, és a tartalom elé egy sáv (melyik verzió, meddig volt hatályban,
+  hol az élő szöveg). A fájl tetején kommentben ott a „ne szerkeszd" figyelmeztetés — hagyd bent.
+
+  **Az archív oldalak `noindex`-esek, de a `robots.txt`-be NEM kerülnek** — ugyanaz a lecke, mint a
+  `termekleiras-diagnozis` oldalnál: a Disallow épp azt akadályozná meg, hogy a Google lássa a
+  `noindex`-et, az AI-fetchereket meg elzárná a szövegtől. A `sitemap.xml`-be sem kerülnek be.
+
+  **Hatálybalépés:** az ÁSZF 12.2 pontja **15 napos** előzetes értesítést ír elő, tehát az új verzió
+  nem léphet hatályba azonnal — a dátumot ehhez igazítsd, és az érintett üzleti folyamat (pl. új
+  csomag értékesítése) se induljon a hatálybalépés előtt.
+
+  **Amit a honlap NEM tud megoldani:** ezek az archív oldalak a saját szerverünkön vannak, tehát
+  önmagukban gyenge bizonyítékok. A valódi bizonyító erőt egy külső fél adná — érdemes a hatálybalépés
+  napján feladni az élő ÁSZF-et az Internet Archive-ba (`web.archive.org/save`). **Ez kifelé menő
+  művelet, előbb kérdezd meg a felhasználót.** (2026-08-29-i állapot: az 1.0-ról nincs és már nem is
+  lesz külső pillanatkép, az 1.1 feladása nyitott kérdés.) Szintén app-oldali teendő: a
+  `terms_version` konstans léptetése a hatálybalépés napján, és az elfogadás rögzítése
+  **csomagváltáskor** is, ne csak regisztrációkor.
 - **Section anchor ids are identical across locales** (`#funkciok`, `#hogyan-mukodik`, `#arazas`, `#velemenyek`) so the shared nav works in both languages. Do not translate these ids.
 - **Chrome strings** (nav, footer, cookie banner, language switcher) live in `src/i18n/ui.ts` keyed by locale. **Page prose** lives directly in each locale's page file (not in a dictionary) — translate by editing the `/en/` page against its `/hu/` counterpart.
 
