@@ -165,6 +165,15 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Hírlevél-feliratkozás (a MI hírlevelünk céloldala; csak magyarul) -->
+  <url>
+    <loc>https://getcontentninja.com/hu/hirlevel-feliratkozas/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel-feliratkozas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/hirlevel-feliratkozas/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Árak és kreditdíjak -->
   <url>
     <loc>https://getcontentninja.com/hu/arak/</loc>

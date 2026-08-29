@@ -23,6 +23,7 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
   - `demo` → `/hu/posztolas` , `/en/demo` (the **"Automata posztolás" solution** page, reached from the Solutions dropdown/cards; the old `/hu/bemutato` redirects here via `astro.config.mjs` `redirects`)
   - `bookDemo` → `/hu/online-bemutato` , `/en/book-demo` (the general **"Bemutatót kérek" / "Book a demo"** landing — hero + lead form covering posting **and** newsletter; every header/footer/homepage demo CTA points here, `lead_forras: 'online-bemutato'`)
   - `newsletter` → `/hu/hirlevel` , `/en/newsletter` (AI hírlevél kampányoldal — same lead-form flow, `lead_forras: 'hirlevel'`)
+  - `newsletterSignup` → `/hu/hirlevel-feliratkozas` , **csak magyarul** (`en: null`) — **a MI hírlevelünk feliratkozó céloldala**, nem keverendő a fenti `newsletter`-rel (az a *termék* hírlevél-modulját adja el). A rövid `/hu/hirlevel/` slugot az foglalja. Indexelhető, teljes navigációval (nyilvános céloldal: ide linkelünk a levelekből, a supportból, a közösségi profilokból). **Nem a lead-űrlapok útján megy** — lásd a hírlevél-feliratkozás szakaszt lentebb. Azért csak magyarul, mert maga a hírlevél és az app megerősítő levele magyar; ha megjelenik angolul, egy `/en/newsletter-signup/` fájllal bővíthető (a `NewsletterForm` már tud angolul).
   - `allInOne` → `/hu/teljes-rendszer` , `/en/all-in-one` (**all-in-one kampányoldal, csak fizetett forgalomra**: `noindex` + `robots.txt` Disallow. Az AJÁNLAT azonos a `bookDemo`-éval — ugyanaz az űrlap, ugyanazok a kiszűrő kérdések, ugyanaz a köszönőoldal —, csak a HOROG más: nem a bemutató eseménye, hanem az „egy rendszer az egész webshop-marketingedre" ígéret. Külön `lead_forras: 'teljes-rendszer'` méri, melyik szög hoz több jelentkezést; **a kiszűrő kérdéseket ezért nem szabad eltéríteni a `bookDemo`-étól**. Egy pluszkérdése van, a `module_interest` (max. 3 pipa → rejtett mezőbe fűzve), amin nincs `data-reject`, tehát a minősítést nem befolyásolja)
   - `shopgradeAudit` → `/hu/termekleiras-diagnozis` , **csak magyarul** (`en: null`) — az **opt-in (squeeze) oldal**: a csali az app ingyenes, belépés nélküli termékleírás-diagnózisa. Három dologban tér el minden más kampányoldaltól: (1) **nincs navigáció** — nem a közös `Header`-t használja, hanem saját, linkmentes fejlécet (a köszönőoldalak mintájára), mert egy opt-in oldalon minden kifelé mutató link konverziót visz; (2) **a csali azonnal jár** — sikeres beküldés után nem a köszönőoldalra megy, hanem az app diagnózis-oldalára (lásd `successUrl` lentebb); (3) `noindex`, hogy ne versenyezzen a `/hu/shopgrade/` oldallal ugyanarra a kifejezésre — de **`robots.txt` Disallow NÉLKÜL** (2026-08-19): a tiltás megakadályozta, hogy a Google egyáltalán lássa a `noindex`-et, az AI-fetchereket (ChatGPT stb.) pedig elzárta az oldal szövegétől. Ne tedd vissza. Azért csak magyarul, mert az app diagnózisa egynyelvű — egy angol opt-in magyar eredményoldalra vinne.
   - `thanks` → `/hu/koszonjuk` , `/en/thank-you`
@@ -131,6 +132,35 @@ címke helyett.
 (`cn_intake_queue_v1`), a `fetch` `keepalive`-val megy, és ami kint marad, azt a következő oldalbetöltés
 újraküldi ugyanazzal a `submission_id`-vel (az app dedupál). A felhasználót nem várakoztatjuk: a sikeres
 ág legfeljebb 2 másodpercet vár, aztán mindenképp átirányít.
+
+## Hírlevél-feliratkozás – KÜLÖN út, nem a lead-intake
+
+A **saját hírlevelünkre** való feliratkozás nem a lead-űrlapok végpontjára megy, hanem a
+`POST https://app.getcontentninja.com/api/newsletter/subscribe` címre. Azért külön, mert az app itt
+mást csinál: naplóz (bizonyíthatóság) → megerősítő levelet küld → és **csak a megerősítés után**
+teszi a címet a MailerLite-ba. A MailerLite API-kulcs soha nem kerülhet ebbe a repóba (statikus
+honlap, nem tud titkot tartani) — ezért megy minden az appon keresztül.
+
+- **`src/data/newsletter.ts`** – az igazságforrás: végpont, `source_form` kulcsok, retry-beállítás és
+  a `NEWSLETTER_CONSENT_TEXT`.
+- **`src/components/NewsletterForm.astro`** – markup + szállítás egyben. Props: `locale`, `source`,
+  `variant` (`card` | `compact`), `heading`, `note`. Egy oldalon több példány is lehet (a
+  `define:vars` IIFE-je miatt nem ütköznek), mindegyik saját gyökér-id-t kap.
+- ⚠️ **A `consent_text` mező és a gomb fölött látható mondat UGYANAZ a konstans.** Nem összefoglaló,
+  hanem betűhű szöveg: ha egy év múlva megkérdezik, mire mondott igent a feliratkozó, a napló
+  önmagában bizonyít. Egy helyen él, tehát a kettő nem tud elcsúszni — ha átírod, mindkettő változik.
+- ⚠️ **Sikeres beküldés után NEM azt írjuk, hogy „sikeresen feliratkoztál”**, hanem hogy „Már csak egy
+  lépés!” — a feliratkozás csak a megerősítő levélre kattintva jön létre.
+- **Retry:** 3 próba növekvő várakozással, kizárólag 5xx-re és hálózati hibára (a 4xx kliens-hiba),
+  mindig UGYANAZZAL a `submission_id`-vel — ez adja az idempotenciát. Ha a látogató javítja az
+  e-mail címét egy hiba után, új `submission_id` generálódik. A `fetch` `keepalive`-val megy.
+  Ez a **közös `cnIntake` retry-sorától független** — az másik végpontra van kötve.
+- **A válasz mindig `{ ok: true }`**, akkor is, ha a cím már fent volt a listán: különben az űrlapból
+  ki lehetne találni, ki szerepel rajta.
+- **A meglévő 16 lead-űrlap változatlan:** marad rajtuk a `hirlevel_feliratkozas` pipa, és továbbra is
+  az `INTAKE_ENDPOINT`-ra mennek.
+- **Még hiányzik a briefből** (§7): lábléc-űrlap minden oldalon, és doboz a blogcikkek alján. A
+  `NewsletterForm` `compact` változata pont erre való (`source: 'footer'` / `'blog_alja'`).
 
 **A minősítés-emlékezet** (`cn_qualify_v2`, 30 nap, témánként) a régi „Már elküldve" zár helyett áll: nem
 a beküldést, hanem a **minősítés kimenetelét** jegyzi meg, hogy a kiszűrt látogató ne tudja újratöltéssel,

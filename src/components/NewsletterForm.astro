@@ -1,0 +1,302 @@
+---
+/**
+ * Hírlevél-feliratkozó űrlap (a `/hu/hirlevel-feliratkozas/` oldal hero- és
+ * záró-űrlapja; ugyanez a komponens megy majd a láblécbe és a blogcikkek aljára).
+ *
+ * A szállítás SZÁNDÉKOSAN nem a közös `window.cnIntake`: az egy másik végpontra
+ * (`/api/leads/intake`) van kötve. Itt a brief saját retry-szabálya érvényes –
+ * 3 próba növekvő várakozással, kizárólag 5xx-re és hálózati hibára, mindig
+ * UGYANAZZAL a `submission_id`-vel (ez adja az idempotenciát).
+ *
+ * ⚠️ A gomb fölött látható hozzájárulási mondat és a payload `consent_text`
+ * mezője UGYANAZ a konstans (`NEWSLETTER_CONSENT_TEXT`) – így nem tud elcsúszni
+ * az, amit a látogató látott, attól, amit naplózunk.
+ *
+ * ⚠️ **Nincs „Sikeresen feliratkoztál" üzenet.** A feliratkozás dupla opt-inos:
+ * a beküldés után még csak elindította – a megerősítő levélre kell kattintania.
+ */
+import HoneypotField from './HoneypotField.astro';
+import {
+  NEWSLETTER_ENDPOINT,
+  NEWSLETTER_CONSENT_TEXT,
+  NEWSLETTER_MAX_ATTEMPTS,
+  NEWSLETTER_RETRY_BASE_MS,
+  type NewsletterSource,
+} from '../data/newsletter';
+import { pathFor, type Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  /** Melyik elhelyezésről jött – ebből látszik, melyik űrlap hoz feliratkozót. */
+  source: NewsletterSource;
+  /**
+   * `card`: teljes, dobozos űrlap (hero) – `compact`: egysoros e-mail + gomb.
+   */
+  variant?: 'card' | 'compact';
+  /** A doboz saját címsora (csak `card`). A prózát az oldal adja. */
+  heading?: string;
+  /** Egy mondat a címsor alatt (csak `card`). */
+  note?: string;
+}
+
+const { locale, source, variant = 'card', heading, note } = Astro.props;
+
+// Egy oldalon több példány is lehet (hero + záró sáv), ezért minden példány
+// saját gyökér-id-t kap – a script csak a saját dobozán belül keresgél.
+const uid = `nl-${Math.random().toString(36).slice(2, 8)}`;
+
+const consentText = NEWSLETTER_CONSENT_TEXT[locale];
+const privacyHref = pathFor('privacy', locale);
+
+const T = {
+  hu: {
+    emailLabel: 'E-mail cím',
+    emailPlaceholder: 'pl. anna@webshopom.hu',
+    submit: 'Feliratkozom',
+    sending: 'Küldés…',
+    retry: 'Újraküldés',
+    privacyBefore: 'Részletek az',
+    privacyLink: 'Adatkezelési tájékoztatóban',
+    privacyAfter: '.',
+    doubleOptIn: 'Megerősítő levelet küldünk – csak akkor kerülsz a listára, ha rákattintasz.',
+    successTitle: 'Már csak egy lépés!',
+    successBody:
+      'Küldtünk egy levelet a megadott címre – kattints benne a megerősítő gombra, és kész.',
+    successSpam: 'Ha nem találod, nézd meg a spam mappát is.',
+    errorClient: 'Nem sikerült – ellenőrizd az e-mail címet, és próbáld újra.',
+    errorServer:
+      'Most nem sikerült elküldeni. Próbáld meg pár perc múlva, vagy írj a support@getcontentninja.com címre.',
+  },
+  en: {
+    emailLabel: 'Email address',
+    emailPlaceholder: 'e.g. anna@mystore.com',
+    submit: 'Subscribe',
+    sending: 'Sending…',
+    retry: 'Try again',
+    privacyBefore: 'Details in our',
+    privacyLink: 'Privacy Policy',
+    privacyAfter: '.',
+    doubleOptIn: "We'll send a confirmation email – you only join the list once you click it.",
+    successTitle: 'One more step!',
+    successBody:
+      "We've sent an email to the address you gave – click the confirmation button in it and you're done.",
+    successSpam: "If you can't find it, please check your spam folder too.",
+    errorClient: "That didn't work – please check the email address and try again.",
+    errorServer:
+      "We couldn't send it right now. Please try again in a few minutes, or write to support@getcontentninja.com.",
+  },
+}[locale];
+
+const cfg = {
+  id: uid,
+  endpoint: NEWSLETTER_ENDPOINT,
+  consentText,
+  source,
+  locale,
+  maxAttempts: NEWSLETTER_MAX_ATTEMPTS,
+  retryBase: NEWSLETTER_RETRY_BASE_MS,
+  text: {
+    sending: T.sending,
+    retry: T.retry,
+    errorClient: T.errorClient,
+    errorServer: T.errorServer,
+  },
+};
+---
+
+<div
+  id={uid}
+  class={
+    variant === 'card'
+      ? 'bg-card rounded-[16px] border border-primary/25 p-5 sm:p-8 shadow-card-hover'
+      : ''
+  }
+>
+  {variant === 'card' && (heading || note) && (
+    <div data-nl="intro" class="mb-5">
+      {heading && <h3 class="text-2xl font-bold text-dark mb-2">{heading}</h3>}
+      {note && <p class="text-body text-sm leading-relaxed">{note}</p>}
+    </div>
+  )}
+
+  <form data-nl="form" class={variant === 'card' ? 'space-y-4' : 'space-y-3'}>
+    <HoneypotField />
+
+    {variant === 'card' ? (
+      <div>
+        <label for={`${uid}-email`} class="block text-sm font-bold text-body mb-1">{T.emailLabel}</label>
+        <input
+          type="email"
+          id={`${uid}-email`}
+          name="email"
+          required
+          autocomplete="email"
+          class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all"
+          placeholder={T.emailPlaceholder}
+        />
+      </div>
+    ) : (
+      <div class="flex flex-col sm:flex-row gap-3">
+        <label for={`${uid}-email`} class="sr-only">{T.emailLabel}</label>
+        <input
+          type="email"
+          id={`${uid}-email`}
+          name="email"
+          required
+          autocomplete="email"
+          class="flex-1 rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card transition-all"
+          placeholder={T.emailPlaceholder}
+        />
+        <button type="submit" data-nl="submit" class="cta-primary h-12 px-7 shrink-0">
+          <span class="material-symbols-outlined text-[18px]">mail</span>
+          <span data-nl="label">{T.submit}</span>
+        </button>
+      </div>
+    )}
+
+    <!--
+      A hozzájárulás szövege. Ez SZÓ SZERINT ugyanaz a konstans, ami a payload
+      `consent_text` mezőjébe kerül – ha ezt átírod, a naplózott szöveg is
+      változik, és fordítva. Nem előre bepipált jelölőnégyzet: a beküldés maga a
+      hozzájárulás, a listára pedig csak a megerősítő levél után kerül fel.
+    -->
+    <p class="text-xs text-muted leading-relaxed">
+      {consentText}{' '}
+      {T.privacyBefore}{' '}
+      <a href={privacyHref} target="_blank" class="underline hover:text-primary">{T.privacyLink}</a>{T.privacyAfter}
+    </p>
+
+    <p data-nl="error" class="hidden text-sm text-red-600 leading-relaxed"></p>
+
+    {variant === 'card' && (
+      <button type="submit" data-nl="submit" class="w-full cta-primary h-12 text-base">
+        <span class="material-symbols-outlined text-[18px]">mail</span>
+        <span data-nl="label">{T.submit}</span>
+      </button>
+    )}
+
+    <p class="flex items-start gap-2 text-xs text-muted leading-relaxed">
+      <span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-px">mark_email_read</span>
+      <span>{T.doubleOptIn}</span>
+    </p>
+  </form>
+
+  <div data-nl="success" class="hidden text-center py-6 space-y-3">
+    <div class="w-14 h-14 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+      <span class="material-symbols-outlined text-success text-3xl">mark_email_unread</span>
+    </div>
+    <h3 class="text-xl font-bold text-dark">{T.successTitle}</h3>
+    <p class="text-body leading-relaxed">{T.successBody}</p>
+    <p class="text-muted text-sm">{T.successSpam}</p>
+  </div>
+</div>
+
+<script is:inline define:vars={{ nlCfg: cfg }}>
+  (function () {
+    var root = document.getElementById(nlCfg.id);
+    if (!root) return;
+
+    var form = root.querySelector('[data-nl="form"]');
+    var btn = root.querySelector('[data-nl="submit"]');
+    var label = root.querySelector('[data-nl="label"]');
+    var errorBox = root.querySelector('[data-nl="error"]');
+    var successBox = root.querySelector('[data-nl="success"]');
+    var intro = root.querySelector('[data-nl="intro"]');
+    var emailInput = form.querySelector('input[type="email"]');
+    var honeypot = form.querySelector('input[name="website"]');
+
+    /** Az idempotencia-kulcs. Retry-nál UGYANAZ marad; javított címnél új. */
+    var submissionId = null;
+    var lastEmail = null;
+    var sending = false;
+
+    function uuid() {
+      try {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+          return window.crypto.randomUUID();
+        }
+      } catch (e) {}
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (Math.random() * 16) | 0;
+        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      });
+    }
+
+    function fail(message) {
+      sending = false;
+      btn.disabled = false;
+      label.textContent = nlCfg.text.retry;
+      errorBox.textContent = message;
+      errorBox.classList.remove('hidden');
+    }
+
+    /**
+     * Siker = "elindította a feliratkozást", NEM "feliratkozott". A címre most
+     * megy ki a megerősítő levél, a MailerLite-ba csak a kattintás után kerül.
+     */
+    function succeed() {
+      form.classList.add('hidden');
+      if (intro) intro.classList.add('hidden');
+      successBox.classList.remove('hidden');
+    }
+
+    function retry(payload, attempt) {
+      if (attempt + 1 >= nlCfg.maxAttempts) return fail(nlCfg.text.errorServer);
+      setTimeout(function () {
+        send(payload, attempt + 1);
+      }, nlCfg.retryBase * Math.pow(2, attempt));
+    }
+
+    function send(payload, attempt) {
+      fetch(nlCfg.endpoint, {
+        method: 'POST',
+        // Ha a látogató azonnal továbbkattint, a kérés akkor is elmegy.
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          // A válasz mindig `{ ok: true }`, akkor is, ha a cím már fent volt –
+          // különben az űrlapból ki lehetne találni, ki szerepel a listánkon.
+          if (res.ok) return succeed();
+          // 4xx = kliens-hiba (rossz cím, hiányzó mező): újrapróbálni értelmetlen.
+          if (res.status < 500) return fail(nlCfg.text.errorClient);
+          retry(payload, attempt);
+        })
+        .catch(function () {
+          retry(payload, attempt);
+        });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (sending) return; // dupla beküldés ellen
+      sending = true;
+
+      errorBox.classList.add('hidden');
+      btn.disabled = true;
+      label.textContent = nlCfg.text.sending;
+
+      var email = emailInput.value.trim();
+      if (!submissionId || email !== lastEmail) {
+        submissionId = uuid();
+        lastEmail = email;
+      }
+
+      send(
+        {
+          submission_id: submissionId,
+          email: email,
+          hirlevel_feliratkozas: true,
+          consent_text: nlCfg.consentText,
+          source_form: nlCfg.source,
+          // Az UTM-eket az app ebből olvassa ki – ne küldd külön mezőben.
+          source_url: window.location.href,
+          locale: nlCfg.locale,
+          website: honeypot ? honeypot.value : '',
+        },
+        0
+      );
+    });
+  })();
+</script>

@@ -14,6 +14,7 @@ export type PageKey =
   | 'blogWriter'
   | 'webshopSeoGeo'
   | 'newsletter'
+  | 'newsletterSignup'
   | 'pricing'
   | 'onlineDemo'
   | 'contact'
@@ -88,6 +89,19 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   webshopSeoGeo: { hu: '/hu/webshop-seo-geo/', en: '/en/webshop-seo-geo/' },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
+  // **A MI hírlevelünkre való feliratkozás** – nem összekeverendő a fenti
+  // `newsletter`-rel, ami a TERMÉK hírlevél-moduljának kampányoldala. A rövid
+  // `/hu/hirlevel/` slugot az foglalja, ezért lett ez `-feliratkozas`; a cím
+  // egyben pontosabb is (nem a modulról szól, hanem a feliratkozásról).
+  //
+  // Indexelhető, nyilvános céloldal: ide linkelünk a levelekből, a supportból
+  // és a közösségi profilokból, ezért kifejezetten meg kell találni.
+  //
+  // **Csak magyarul** (`en: null`): a hírlevél maga magyar nyelvű, és a
+  // megerősítő levelet is az app küldi – egy angol feliratkozó magyar levelet
+  // kapna. Ha a hírlevél megjelenik angolul, ez egy `/en/newsletter-signup/`
+  // fájllal bővíthető (a `NewsletterForm` már tud angolul).
+  newsletterSignup: { hu: '/hu/hirlevel-feliratkozas/', en: null },
   // Részletes ároldal: csomag, teljes kreditdíj-táblázat (#kreditek), extra
   // kreditvásárlás, fizetés/számlázás és árazási GYIK. A landing oldalak
   // "Részletes kreditdíjak" linkje ide mutat (korábban egy Notion doksira).

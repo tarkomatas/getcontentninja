@@ -1,0 +1,407 @@
+---
+/**
+ * A MI hírlevelünk céloldala – ide linkelünk a levelekből, a supportból és a
+ * közösségi profilokból. **Nem keverendő** a `/hu/hirlevel/` oldallal: az a
+ * TERMÉK hírlevél-moduljának kampányoldala (a webshop küld hírlevelet), ez
+ * pedig a látogató feliratkozása a mi levelünkre.
+ *
+ * Indexelhető, teljes navigációval (nem squeeze-oldal): nyilvános céloldal,
+ * amit meg kell találni.
+ *
+ * A beküldés a `NewsletterForm` komponensen megy, saját végpontra
+ * (`/api/newsletter/subscribe`) – az app naplóz, megerősítő levelet küld, és
+ * csak a megerősítés után teszi a címet a MailerLite-ba. Ezért NEM írjuk ki,
+ * hogy „sikeresen feliratkoztál”.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+import { pathFor } from '../../i18n/routes';
+
+const locale = 'hu';
+const page = 'newsletterSignup';
+const title = 'Hírlevél – havonta 1 levél AI-marketing tippekkel webshopoknak | Content Ninja';
+const description =
+  'Iratkozz fel a Content Ninja hírlevelére: havonta 1 levél, 2–3 konkrét tipp a webshopod tartalmaihoz, és mi újult meg a rendszerben. Nem adjuk ki a címed, egy kattintással leiratkozhatsz.';
+
+const bookDemo = pathFor('bookDemo', locale);
+const newsletterModule = pathFor('newsletter', locale);
+const privacy = pathFor('privacy', locale);
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
+  <Header locale={locale} page={page} />
+
+  <main>
+    <!-- ═══ 1. Hero + feliratkozó űrlap ═══ -->
+    <section id="feliratkozas" class="hero-gradient py-12 md:py-24 px-4 md:px-10">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+
+          <div class="flex flex-col gap-5 md:gap-7 max-w-[560px]">
+            <span class="inline-flex items-center gap-2 self-start bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+              <span class="material-symbols-outlined text-[16px]">mail</span>
+              Content Ninja hírlevél
+            </span>
+
+            <h1 class="text-4xl md:text-[2.6rem] lg:text-[2.85rem] font-extrabold leading-[1.1] tracking-[-0.03em] text-dark">
+              Havi egy levél <span class="text-primary">webshoptulajdonosoknak</span> arról,
+              <span class="text-primary">mi működik most az AI-marketingben</span>
+            </h1>
+
+            <p class="text-body text-[1.1rem] font-medium leading-relaxed">
+              Végignézzük, mi hozott tényleg eredményt magyar webshopoknál, és hónapról hónapra
+              leírjuk neked: 2–3 konkrét tipp, amit aznap ki tudsz próbálni – plusz mi újult meg
+              a Content Ninjában.
+            </p>
+
+            <ul class="space-y-3.5 text-body">
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                <span><strong>Kipróbálható tippek,</strong> nem „az AI a jövő” típusú általánosságok</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                <span><strong>A magyar piacra szabva:</strong> Unas, Shoprenter, Facebook, hírlevél – nem amerikai esettanulmányok</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                <span><strong>Havonta egy levél.</strong> Nem több – a postafiókod nem harcmező</span>
+              </li>
+            </ul>
+
+            <div class="flex items-center gap-3">
+              <div class="flex -space-x-2">
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+              </div>
+              <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ hazai webshop</span> dolgozik velünk</p>
+            </div>
+          </div>
+
+          <div class="w-full">
+            <NewsletterForm
+              locale={locale}
+              source="hirlevel_oldal"
+              heading="Kérem a hírlevelet"
+              note="Add meg az e-mail címed – a következő levél a hónap elején érkezik."
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2. Mit kapsz? ═══ -->
+    <section class="bg-card py-20 md:py-28 px-4 md:px-10">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="text-center max-w-[760px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mit kapsz? 📬</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Három dolog, amit máshonnan nehéz megszerezni</h2>
+          <p class="text-body text-lg">
+            Napi szinten látjuk, mi történik magyar webshopok tartalmaival – mert a rendszerünk írja
+            őket. Ez a levél az, amit ebből meg lehet tanulni.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+              <span class="material-symbols-outlined text-[22px]">bolt</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2">2–3 tipp, amit ma be tudsz vezetni</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Konkrétan: mit írj a kategóriaoldal tetejére, mit kérdezz meg a saját vevőidtől, milyen
+              poszt hoz kattintást. Ha van rá 20 perced, aznap kész.
+            </p>
+          </div>
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+              <span class="material-symbols-outlined text-[22px]">psychology</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Mi változott az AI-keresőknél</h3>
+            <p class="text-body text-sm leading-relaxed">
+              A vásárlóid egy része már nem a Google-ből indul, hanem megkérdezi a ChatGPT-t. Ez a
+              terep havonta mozdul – megírjuk, mi számít most, hogy téged említsen.
+            </p>
+          </div>
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+              <span class="material-symbols-outlined text-[22px]">new_releases</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Új funkciók, mielőtt bejelentenénk</h3>
+            <p class="text-body text-sm leading-relaxed">
+              A hírlevélolvasók tudják meg elsőként, mi készült el a rendszerben – és néha ők kapnak
+              rá először hozzáférést.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3. Egy tipikus levél – a legmeggyőzőbb érv az, ha megmutatjuk ═══ -->
+    <section class="bg-light py-20 md:py-28 px-4 md:px-10">
+      <div class="max-w-[900px] mx-auto">
+        <div class="text-center max-w-[700px] mx-auto mb-12">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Így néz ki 👀</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem kell megvenned a macskát a zsákban</h2>
+          <p class="text-body text-lg">Így épül fel egy tipikus levél. Öt perc alatt elolvasod.</p>
+        </div>
+
+        <div class="bg-card rounded-[16px] border border-border shadow-card overflow-hidden">
+          <div class="border-b border-border px-5 sm:px-8 py-4 bg-light">
+            <p class="text-xs text-muted mb-1">Feladó: Content Ninja &lt;hello@getcontentninja.com&gt;</p>
+            <p class="font-bold text-dark">Tárgy: A ChatGPT már idézi a versenytársadat – téged miért nem?</p>
+          </div>
+          <div class="p-5 sm:p-8 space-y-6">
+            <div class="flex items-start gap-4">
+              <span class="w-10 h-10 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[20px]">looks_one</span>
+              </span>
+              <div>
+                <h3 class="font-bold text-base mb-1 text-dark">Ezt próbáld ki a héten</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  Egy konkrét feladat lépésről lépésre – például hogyan írj a három legforgalmasabb
+                  kategóriaoldalad tetejére olyan bekezdést, amit a kereső is meg a vásárló is ért.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="w-10 h-10 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[20px]">looks_two</span>
+              </span>
+              <div>
+                <h3 class="font-bold text-base mb-1 text-dark">Ami máshol bevált</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  Egy rövid eset egy magyar webshoptól: mit csinált, mi lett belőle, és mi az, ami
+                  belőle a te boltodra is igaz.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="w-10 h-10 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[20px]">looks_3</span>
+              </span>
+              <div>
+                <h3 class="font-bold text-base mb-1 text-dark">Újdonság a Content Ninjában</h3>
+                <p class="text-body text-sm leading-relaxed">
+                  Mi készült el a hónapban, és mire jó – két mondatban, marketingszöveg nélkül.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-border px-5 sm:px-8 py-4 bg-light text-center">
+            <p class="text-xs text-muted">Leiratkozás egy kattintással · minden levél alján</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. Mit NEM kapsz – a feliratkozás előtti félelmek egyben ═══ -->
+    <section class="bg-card py-20 md:py-28 px-4 md:px-10">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="text-center max-w-[760px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">És amit nem kapsz 🚫</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Tudjuk, miért nem szoktál feliratkozni</h2>
+          <p class="text-body text-lg">
+            Mert a legtöbb hírlevél két hét múlva heti háromszor jön, és mindig ugyanaz az akció van
+            benne. Négy dolog, amit itt nem fogsz látni:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <span class="material-symbols-outlined text-[24px] text-muted mb-4 block">notifications_off</span>
+            <h3 class="font-bold text-base mb-2">Nem lesz belőle napi levél</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Havonta egy megy ki. Ha egy hónapban nincs mit mondanunk, inkább kihagyjuk.
+            </p>
+          </div>
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <span class="material-symbols-outlined text-[24px] text-muted mb-4 block">block</span>
+            <h3 class="font-bold text-base mb-2">Nem adjuk tovább a címed</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Nem adjuk el, nem cseréljük el, nem kerül hirdetési listákra.
+              <a href={privacy} class="underline hover:text-primary">Adatkezelési tájékoztató</a>.
+            </p>
+          </div>
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <span class="material-symbols-outlined text-[24px] text-muted mb-4 block">phone_disabled</span>
+            <h3 class="font-bold text-base mb-2">Nem hívunk fel utána</h3>
+            <p class="text-body text-sm leading-relaxed">
+              A feliratkozás nem érdeklődés. Ha bemutatót szeretnél, azt külön kell kérned.
+            </p>
+          </div>
+          <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+            <span class="material-symbols-outlined text-[24px] text-muted mb-4 block">link_off</span>
+            <h3 class="font-bold text-base mb-2">Nem kell keresgélned a leiratkozást</h3>
+            <p class="text-body text-sm leading-relaxed">
+              Minden levél alján ott van, egy kattintás, nincs kérdőív és nincs „biztos vagy benne?”.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5. Kinek szól ═══ -->
+    <section class="bg-light py-20 md:py-28 px-4 md:px-10">
+      <div class="max-w-[900px] mx-auto">
+        <div class="text-center max-w-[700px] mx-auto mb-12">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kinek szól? 🎯</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Inkább mondjuk meg előre</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-card rounded-[16px] border border-success/30 p-8 shadow-card">
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-dark">
+              <span class="material-symbols-outlined text-success text-[22px]">check_circle</span>
+              Neked való, ha…
+            </h3>
+            <ul class="space-y-3 text-body text-sm leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
+                <span>webshopod van, és te felelsz azért, mi kerül ki rá</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
+                <span>nincs marketingcsapatod, viszont látod, hogy tartalom nélkül nem megy</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
+                <span>érdekel az AI, de nincs időd minden héten utánaolvasni</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-dark">
+              <span class="material-symbols-outlined text-muted text-[22px]">cancel</span>
+              Kevésbé, ha…
+            </h3>
+            <ul class="space-y-3 text-body text-sm leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>
+                <span>mély technikai SEO-tartalmat keresel – erről nem itt írunk</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>
+                <span>nincs webshopod, és nem is tervezel indítani</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>
+                <span>most azonnal döntenél a rendszerről – akkor inkább
+                  <a href={bookDemo} class="text-primary font-semibold underline">kérj bemutatót</a>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6. GYIK ═══ -->
+    <section class="bg-card py-20 md:py-28 px-4 md:px-10">
+      <div class="max-w-[800px] mx-auto">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Gyakori kérdések</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+            <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4" onclick="toggleFaq(this)">
+              Milyen gyakran küldtök levelet?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Havonta egyet, jellemzően a hónap első felében. Ha épp nincs mit mondanunk, inkább
+              kihagyjuk a hónapot – nem küldünk levelet azért, hogy legyen levél. Ezen felül
+              legfeljebb akkor írunk, ha valami tényleg fontos történik (például egy nagyobb
+              funkció indul).
+            </div>
+          </div>
+
+          <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+            <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4" onclick="toggleFaq(this)">
+              Miért kell megerősítenem a feliratkozást?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Mert bárki beírhatná a te címedet is. A beküldés után küldünk egy levelet, és a
+              feliratkozás csak akkor lép életbe, ha abban rákattintasz a megerősítő gombra. Így
+              biztosan csak az kap tőlünk levelet, aki tényleg kérte. Ha nem érkezik meg pár percen
+              belül, nézd meg a spam mappát is.
+            </div>
+          </div>
+
+          <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+            <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4" onclick="toggleFaq(this)">
+              Hogyan tudok leiratkozni?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Minden levél alján van egy leiratkozó link – egy kattintás, és vége, nincs kérdőív és
+              nincs visszatartó kérdés. Ha a címed teljes törlését kéred, írj a
+              <a href="mailto:support@getcontentninja.com" class="text-primary font-semibold underline">support@getcontentninja.com</a>
+              címre, a részletek az
+              <a href={privacy} class="text-primary font-semibold underline">adatkezelési tájékoztatóban</a> vannak.
+            </div>
+          </div>
+
+          <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+            <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4" onclick="toggleFaq(this)">
+              Kell hozzá Content Ninja előfizetés?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Nem. A hírlevél ingyenes és független attól, hogy használod-e a rendszert. A tippek
+              nagy része kézzel is végigcsinálható – csak tovább tart.
+            </div>
+          </div>
+
+          <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+            <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4" onclick="toggleFaq(this)">
+              Ez ugyanaz, mint a hírlevél modulotok?
+              <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+            </button>
+            <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+              Nem, két különböző dolog. Ez az oldal a <strong>mi</strong> hírlevelünkről szól, amit te
+              kapsz tőlünk. Az
+              <a href={newsletterModule} class="text-primary font-semibold underline">AI hírlevél modul</a>
+              ezzel szemben a terméknek az a része, ami a <strong>te webshopod</strong> nevében ír és
+              küld hírlevelet a saját feliratkozóidnak.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 7. Záró CTA – második beküldési pont, külön `source_form`-mal ═══ -->
+    <section class="bg-primary py-16 md:py-20 px-4 md:px-10">
+      <div class="max-w-[700px] mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-[-0.02em]">
+          Havi öt perc, amiért nem kell fizetned
+        </h2>
+        <p class="text-white/80 text-lg mb-8">
+          Írd be az e-mail címed, és a következő levél már megérkezik hozzád.
+        </p>
+        <div class="bg-card rounded-[16px] p-5 sm:p-8 shadow-card-hover text-left">
+          <NewsletterForm locale={locale} source="hirlevel_oldal_alja" variant="compact" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer locale={locale} page={page} />
+
+  <!-- FAQ accordion (globális, mert onclick attribútumból hívjuk) -->
+  <script is:inline>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+</BaseLayout>
