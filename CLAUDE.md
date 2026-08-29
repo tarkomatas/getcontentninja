@@ -45,42 +45,26 @@ The product app itself lives elsewhere (`https://app.getcontentninja.com`); this
 
   ### ⚠️ ÁSZF-módosítás = HÁROM lépés, nem egy (verzió-archívum)
 
-  **Az ÁSZF-nek verziószáma van, és minden verzió befagyasztott másolatban is megmarad.** Ha csak az
-  élő oldalt írod át, a korábbi szöveg NYOMTALANUL eltűnik — márpedig egy vitában sosem az a kérdés,
-  mi áll ma a szerződésben, hanem hogy **mit fogadott el az ügyfél a fizetés napján**. Ez nem elmélet:
-  az app a `profiles.terms_version` mezőben verziószámot tárol minden felhasználónál, és az 5.4–5.5
-  pont (a visszatérítés kizárása, éves csomagnál 444 373 Ft-ról) pontosan az a kikötés, amit valaki
-  vitatni fog.
+  Az ÁSZF verziózott, és minden verzió befagyasztott másolatban is megmarad. Ha csak az élő oldalt
+  írod át, a korábbi szöveg nyomtalanul eltűnik — pedig egy vitában nem az a kérdés, mi áll ma a
+  szerződésben, hanem **mit fogadott el az ügyfél a fizetés napján** (az app a `profiles.terms_version`
+  mezőben ezt a verziószámot tárolja).
 
-  Ezért ÁSZF-módosításkor **mindig mind a három**:
+  1. **Élő oldal** (`hu/aszf.astro` + `en/terms.astro`): szöveg, majd a fejlécben verziószám,
+     hatálybalépés, egysoros változásnapló.
+  2. **Új archív fájl** — `src/pages/hu/aszf/v1-2.astro` + `src/pages/en/terms/v1-2.astro`, a `v1-1`
+     mintájára. **Meglévő archív fájlt SOHA ne szerkessz** — új verzió = új fájl.
+  3. **Link** az új verzióra az élő oldal „Korábbi verziók" sorába.
 
-  1. **Az élő oldalt** írod át (`src/pages/hu/aszf.astro` + `src/pages/en/terms.astro`), és a fejlécben
-     léptetsz: verziószám, közzététel, hatálybalépés, plusz egy soros változásnapló.
-  2. **Új archív fájlt hozol létre** — `src/pages/hu/aszf/v1-2.astro` és `src/pages/en/terms/v1-2.astro`
-     —, az élő fájl szó szerinti másolataként. **Meglévő archív fájlt SOHA ne szerkessz**: az a
-     befagyasztott múlt. Új verzió = új fájl.
-  3. **Az élő oldal fejlécében** felveszed az új verziót a „Korábbi verziók" sorba.
+  **Az archív oldalak `noindex`-esek, de `robots.txt`-be NEM kerülnek** (sitemapbe sem) — ugyanaz a
+  lecke, mint a `termekleiras-diagnozis`-nál: a Disallow épp a `noindex` meglátását akadályozná meg.
 
-  Az archív fájlok receptje (lásd a meglévő `v1-0` / `v1-1` fájlokat): egy szinttel mélyebb importok
-  (`../../../`), `noindex` + **önmagára** mutató `canonical`, a másik nyelv linkje az AZONOS verziójú
-  archívumra, cím végén a verziószám, és a tartalom elé egy sáv (melyik verzió, meddig volt hatályban,
-  hol az élő szöveg). A fájl tetején kommentben ott a „ne szerkeszd" figyelmeztetés — hagyd bent.
+  **Hatálybalépés:** a 12.2 pont **15 napos** előzetes értesítést ír elő — az új verzió nem léphet
+  hatályba azonnal, és az érintett üzleti folyamat se induljon előtte.
 
-  **Az archív oldalak `noindex`-esek, de a `robots.txt`-be NEM kerülnek** — ugyanaz a lecke, mint a
-  `termekleiras-diagnozis` oldalnál: a Disallow épp azt akadályozná meg, hogy a Google lássa a
-  `noindex`-et, az AI-fetchereket meg elzárná a szövegtől. A `sitemap.xml`-be sem kerülnek be.
-
-  **Hatálybalépés:** az ÁSZF 12.2 pontja **15 napos** előzetes értesítést ír elő, tehát az új verzió
-  nem léphet hatályba azonnal — a dátumot ehhez igazítsd, és az érintett üzleti folyamat (pl. új
-  csomag értékesítése) se induljon a hatálybalépés előtt.
-
-  **Amit a honlap NEM tud megoldani:** ezek az archív oldalak a saját szerverünkön vannak, tehát
-  önmagukban gyenge bizonyítékok. A valódi bizonyító erőt egy külső fél adná — érdemes a hatálybalépés
-  napján feladni az élő ÁSZF-et az Internet Archive-ba (`web.archive.org/save`). **Ez kifelé menő
-  művelet, előbb kérdezd meg a felhasználót.** (2026-08-29-i állapot: az 1.0-ról nincs és már nem is
-  lesz külső pillanatkép, az 1.1 feladása nyitott kérdés.) Szintén app-oldali teendő: a
-  `terms_version` konstans léptetése a hatálybalépés napján, és az elfogadás rögzítése
-  **csomagváltáskor** is, ne csak regisztrációkor.
+  Ezek az oldalak a saját szerverünkön vannak, tehát önmagukban gyenge bizonyítékok: a hatálybalépés
+  napján érdemes külső pillanatképet is csináltatni (`web.archive.org/save`) — **kifelé menő művelet,
+  előbb kérdezd meg a felhasználót.**
 - **Section anchor ids are identical across locales** (`#funkciok`, `#hogyan-mukodik`, `#arazas`, `#velemenyek`) so the shared nav works in both languages. Do not translate these ids.
 - **Chrome strings** (nav, footer, cookie banner, language switcher) live in `src/i18n/ui.ts` keyed by locale. **Page prose** lives directly in each locale's page file (not in a dictionary) — translate by editing the `/en/` page against its `/hu/` counterpart.
 
