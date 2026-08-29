@@ -33,8 +33,8 @@ const termsEn = pathFor('terms', 'en');
                 <p class="text-sm text-muted">1.1. verzió · Közzétéve: 2026. augusztus 29. · Hatályos: 2026.
                     szeptember 15-től</p>
                 <p class="text-sm text-muted mt-1">Az 1.1. verzió az éves előfizetési csomag díjával,
-                    időtartamával és AI-keretével, a felmondás és a csomagváltás rendjével, valamint a visszatérítés
-                    kizárásával egészült ki (4. és 5. pont). Az előző, 1.0. verzió 2026. augusztus 20-tól 2026. szeptember
+                    időtartamával és AI-keretével, a kuponkedvezmény és a próbaidőszak szabályával, a felmondás és a
+                    csomagváltás rendjével, valamint a visszatérítés kizárásával egészült ki (4. és 5. pont). Az előző, 1.0. verzió 2026. augusztus 20-tól 2026. szeptember
                     14-ig volt hatályban.</p>
                 <p class="text-sm text-muted mt-2">
                     A jelen ÁSZF magyar és angol nyelven készült. Eltérés esetén a magyar szöveg az irányadó; az
@@ -159,6 +159,9 @@ const termsEn = pathFor('terms', 'en');
                         <li>b) <strong class="text-dark">éves előfizetés</strong>: 349 900 Ft + ÁFA / év
                             (bruttó 444 373 Ft).</li>
                     </ul>
+                    <p class="mt-2">A fenti összegek a Szolgáltató mindenkori listaárát tükrözik. A Szolgáltató
+                        egyedi havidíjat is megállapíthat; ebben az esetben az éves előfizetés díja az egyedileg
+                        megállapított havidíj <strong class="text-dark">tízszerese</strong>.</p>
                     <p class="mt-2">4.3. Az <strong class="text-dark">éves előfizetés 12 hónapos, egybefüggő
                         előfizetési időszakra szól</strong>, amelynek díját a Szolgáltató az időszak kezdetekor —
                         és minden megújuláskor — <strong class="text-dark">egy összegben, előre számlázza</strong>.
@@ -175,24 +178,41 @@ const termsEn = pathFor('terms', 'en');
                         5. pont).</p>
                     <p class="mt-2">4.6. A fizetést a Stripe fizetési szolgáltató bonyolítja. A Szolgáltató kártya- és
                         fizetési adatot nem tárol és nem kezel; ezeket kizárólag a Stripe kezeli.</p>
-                    <p class="mt-2">4.7. A Szolgáltató időről időre kuponkódos kedvezményt kínálhat, amellyel az első
-                        előfizetési időszak kedvezményes áron vehető igénybe. A kuponkódok feltételeit, mértékét és
+                    <p class="mt-2">4.7. <strong class="text-dark">Kuponkód.</strong> A Szolgáltató időről időre
+                        kuponkódos kedvezményt kínálhat, amely az első előfizetési időszak díját csökkenti. A
+                        kuponkód <strong class="text-dark">forintban meghatározott kedvezményt</strong> ad, amelynek
+                        értékét a Szolgáltató <strong class="text-dark">a havi listaárból</strong> — egyedi ár esetén
+                        az egyedileg megállapított havidíjból — számítja ki; ez az összeg a havi és az éves
+                        előfizetésnél <strong class="text-dark">azonos</strong>. A kuponkódok feltételeit, mértékét és
                         érvényességét a Szolgáltató határozza meg, a kedvezmény kizárólag érvényes kuponkód
                         megadásával vehető igénybe.</p>
+                    <p class="mt-2"><strong class="text-dark">Próbaidőszak.</strong> A Szolgáltató próbaidőszakra
+                        jogosító kuponkódot is kiadhat. A próbaidőszak <strong class="text-dark">7 napig</strong> tart,
+                        alatta a Felhasználó <strong class="text-dark">100 kreditet</strong> használhat fel, és
+                        mindkét előfizetési ciklushoz igénybe vehető. A próbaidőszak lejártakor az előfizetés a
+                        választott ciklus szerint elindul, és a Szolgáltató a választott ciklus
+                        <strong class="text-dark">teljes díját kiszámlázza</strong> — éves előfizetés esetén tehát a
+                        teljes éves díjat —, kivéve, ha a Felhasználó az előfizetést a próbaidőszak vége előtt
+                        felmondja. Próbaidőszak kizárólag érvényes próba-kuponkóddal indul.</p>
                     <p class="mt-2">4.8. <strong class="text-dark">Az előfizetési díjban foglalt AI-keret.</strong>
                         A keret az előfizetés ciklusától függően eltérően áll rendelkezésre:</p>
                     <ul>
                         <li>a) <strong class="text-dark">havi előfizetés</strong> esetén a keret
                             <strong class="text-dark">havonta újratöltődik</strong>; a fel nem használt havi keret —
-                            eltérő szolgáltatói rendelkezés hiányában — nem vihető át a következő hónapra;</li>
-                        <li>b) <strong class="text-dark">éves előfizetés</strong> esetén a Szolgáltató
-                            <strong class="text-dark">6 000 kreditet ír jóvá egy összegben</strong>, az előfizetési
-                            időszak kezdetekor. Ez a keret <strong class="text-dark">a jóváírástól számított 12
-                            hónapig, azaz az előfizetési időszak végéig érvényes</strong>, és azon belül a Felhasználó
-                            szabadon, saját ütemezés szerint használhatja fel — havi korlát nélkül. A keretből fel nem
-                            használt kreditek az előfizetési időszak végén lejárnak, és a megújított időszakra nem
-                            vihetők át.</li>
+                            eltérő szolgáltatói rendelkezés hiányában — nem vihető át a következő hónapra. Kivétel:
+                            az éves előfizetésre való áttérés, lásd az 5.3 a) pontot;</li>
+                        <li>b) <strong class="text-dark">éves előfizetés</strong> esetén a Szolgáltató a keretet
+                            <strong class="text-dark">egy összegben írja jóvá</strong>, az előfizetési időszak
+                            kezdetekor. A jóváírt keret <strong class="text-dark">6 000 kredit</strong>, kuponkóddal
+                            indított előfizetés esetén <strong class="text-dark">6 250 kredit</strong>, amelybe a
+                            próbaidőszak alatt jóváírt 100 kredit beleszámít. Ez a keret
+                            <strong class="text-dark">a jóváírástól számított 12 hónapig, azaz az előfizetési időszak
+                            végéig érvényes</strong>, és azon belül a Felhasználó szabadon, saját ütemezés szerint
+                            használhatja fel — havi korlát nélkül. A keretből fel nem használt kreditek az
+                            előfizetési időszak végén lejárnak, és a megújított időszakra nem vihetők át.</li>
                     </ul>
+                    <p class="mt-2">Egyedileg megállapított havi keret esetén az éves keret a havi keret
+                        <strong class="text-dark">tizenkétszerese</strong>.</p>
                     <p class="mt-2">4.9. A Felhasználó az előfizetési díjban foglalt kereten felül extra kreditet
                         vásárolhat. Az extra kreditek a vásárlástól számított 365 napig érvényesek, ezt követően
                         felhasználatlanul lejárnak. Az előfizetés megszűnése esetén a fel nem használt extra kreditek
@@ -228,7 +248,10 @@ const termsEn = pathFor('terms', 'en');
                     <ul>
                         <li>a) <strong class="text-dark">havi előfizetésről éves előfizetésre</strong> a váltás
                             azonnal hatályba lép; a megkezdett hónapból fel nem használt, időarányos díjrészt a
-                            Szolgáltató az éves előfizetés díjába jóváírja;</li>
+                            Szolgáltató az éves előfizetés díjába jóváírja. A váltás időpontjában
+                            <strong class="text-dark">fel nem használt havi keret nem vész el</strong>: a Szolgáltató
+                            a lejáratát az új, éves előfizetési időszak végéig kitolja, így az a 4.8 b) pont szerinti
+                            éves kereten felül áll a Felhasználó rendelkezésére;</li>
                         <li>b) <strong class="text-dark">éves előfizetésről havi előfizetésre</strong> a váltás
                             kizárólag a következő fordulónaptól, azaz a kifizetett 12 hónapos időszak lejártával
                             lép hatályba; az éves díj időarányos része nem írható jóvá és nem téríthető vissza.</li>

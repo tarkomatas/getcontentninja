@@ -33,8 +33,8 @@ const termsHu = pathFor('terms', 'hu');
                 <p class="text-sm text-muted">Version 1.1 · Published: 29 August 2026 · Effective: 15 September
                     2026</p>
                 <p class="text-sm text-muted mt-1">Version 1.1 adds the fee, term and AI credit allowance of the
-                    annual subscription plan, the rules on cancellation and changing plans, and the exclusion of
-                    refunds (Sections 4 and 5). The previous version 1.0 was in force from 20 August 2026 to 14 September 2026.</p>
+                    annual subscription plan, the rules on coupon discounts and the trial period, the rules on
+                    cancellation and changing plans, and the exclusion of refunds (Sections 4 and 5). The previous version 1.0 was in force from 20 August 2026 to 14 September 2026.</p>
                 <p class="text-sm text-muted mt-2">
                     These Terms are drawn up in Hungarian and English. In case of any discrepancy, the
                     <a href={termsHu} class="text-primary underline">Hungarian text</a> prevails.
@@ -153,6 +153,10 @@ const termsHu = pathFor('terms', 'hu');
                         <li>b) <strong class="text-dark">annual subscription</strong>: HUF 349,900 + VAT per year
                             (HUF 444,373 gross).</li>
                     </ul>
+                    <p class="mt-2">The amounts above reflect the Provider’s list price in force from time to time.
+                        The Provider may also agree an individual monthly fee; in that case the fee for the annual
+                        subscription is <strong class="text-dark">ten times</strong> the individually agreed monthly
+                        fee.</p>
                     <p class="mt-2">4.3. The <strong class="text-dark">annual subscription covers a single,
                         uninterrupted subscription term of 12 months</strong>, the fee for which the Provider invoices
                         <strong class="text-dark">in one lump sum, in advance</strong>, at the start of the term and
@@ -168,25 +172,46 @@ const termsHu = pathFor('terms', 'hu');
                         every twelve months — unless the User cancels it before the end of the term (see Section 5).</p>
                     <p class="mt-2">4.6. Payment is processed by the payment provider Stripe. The Provider does not
                         store or process card or payment data; such data is handled exclusively by Stripe.</p>
-                    <p class="mt-2">4.7. From time to time the Provider may offer coupon-code discounts under which the
-                        first subscription period is available at a reduced price. The conditions, amount and
-                        validity of coupon codes are determined by the Provider, and a discount can only be claimed
-                        by entering a valid coupon code.</p>
+                    <p class="mt-2">4.7. <strong class="text-dark">Coupon codes.</strong> From time to time the
+                        Provider may offer coupon-code discounts that reduce the fee for the first subscription
+                        period. A coupon code grants a <strong class="text-dark">discount fixed in Hungarian
+                        forints</strong>, the value of which the Provider calculates from
+                        <strong class="text-dark">the monthly list price</strong> — or, where an individual price
+                        applies, from the individually agreed monthly fee; that amount is
+                        <strong class="text-dark">the same</strong> for a monthly and for an annual subscription. The
+                        conditions, amount and validity of coupon codes are determined by the Provider, and a discount
+                        can only be claimed by entering a valid coupon code.</p>
+                    <p class="mt-2"><strong class="text-dark">Trial period.</strong> The Provider may also issue a
+                        coupon code granting a trial period. The trial period lasts
+                        <strong class="text-dark">7 days</strong>, during which the User may use
+                        <strong class="text-dark">100 credits</strong>, and it is available for both billing cycles.
+                        At the end of the trial period the subscription starts according to the cycle chosen and the
+                        Provider <strong class="text-dark">invoices the full fee</strong> for that cycle — in the case
+                        of an annual subscription, therefore, the full annual fee — unless the User cancels the
+                        subscription before the trial period ends. A trial period starts only with a valid trial
+                        coupon code.</p>
                     <p class="mt-2">4.8. <strong class="text-dark">The AI credit allowance included in the
                         subscription fee.</strong> The allowance is made available differently depending on the
                         billing cycle:</p>
                     <ul>
                         <li>a) under a <strong class="text-dark">monthly subscription</strong> the allowance is
                             <strong class="text-dark">replenished every month</strong>; unused monthly credits do not
-                            roll over to the next month unless the Provider provides otherwise;</li>
-                        <li>b) under an <strong class="text-dark">annual subscription</strong> the Provider grants
-                            <strong class="text-dark">6,000 credits in a single lump sum</strong> at the start of the
-                            subscription term. This allowance is <strong class="text-dark">valid for 12 months from
-                            the date it is granted, i.e. until the end of the subscription term</strong>, and within
-                            that term the User may use it freely, at their own pace, with no monthly cap. Credits left
-                            unused from the allowance expire at the end of the subscription term and do not roll over
-                            into the renewed term.</li>
+                            roll over to the next month unless the Provider provides otherwise. Exception: switching
+                            to an annual subscription, see Section 5.3 a);</li>
+                        <li>b) under an <strong class="text-dark">annual subscription</strong> the Provider grants the
+                            allowance <strong class="text-dark">in a single lump sum</strong> at the start of the
+                            subscription term. The allowance granted is
+                            <strong class="text-dark">6,000 credits</strong>, or
+                            <strong class="text-dark">6,250 credits</strong> where the subscription was started with a
+                            coupon code, which figure includes the 100 credits granted during the trial period. This
+                            allowance is <strong class="text-dark">valid for 12 months from the date it is granted,
+                            i.e. until the end of the subscription term</strong>, and within that term the User may
+                            use it freely, at their own pace, with no monthly cap. Credits left unused from the
+                            allowance expire at the end of the subscription term and do not roll over into the
+                            renewed term.</li>
                     </ul>
+                    <p class="mt-2">Where an individual monthly allowance has been agreed, the annual allowance is
+                        <strong class="text-dark">twelve times</strong> that monthly allowance.</p>
                     <p class="mt-2">4.9. The User may purchase extra credits in addition to the allowance included in
                         the subscription fee. Extra credits are valid for 365 days from the date of purchase and
                         expire unused thereafter. If the subscription is cancelled, unused extra credits are also
@@ -223,7 +248,11 @@ const termsHu = pathFor('terms', 'hu');
                     <ul>
                         <li>a) a switch <strong class="text-dark">from a monthly to an annual subscription</strong>
                             takes effect immediately; the Provider credits the unused, pro-rata portion of the fee for
-                            the month already started against the fee of the annual subscription;</li>
+                            the month already started against the fee of the annual subscription. Any
+                            <strong class="text-dark">monthly credit allowance left unused</strong> at the time of the
+                            switch <strong class="text-dark">is not forfeited</strong>: the Provider extends its
+                            expiry to the end of the new annual subscription term, so that it is available to the User
+                            in addition to the annual allowance under Section 4.8 b);</li>
                         <li>b) a switch <strong class="text-dark">from an annual to a monthly subscription</strong>
                             takes effect only from the next renewal date, i.e. upon expiry of the 12-month term paid
                             for; no pro-rata portion of the annual fee is credited or refunded.</li>
