@@ -1,26 +1,45 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { pathFor } from '../../i18n/routes';
+/*
+ * ARCHÍV PÉLDÁNY — az ÁSZF 1.1. verziójának befagyasztott másolata.
+ *
+ * A <BaseLayout> alatti szöveget SOHA ne szerkeszd: ennek az a célja, hogy egy
+ * későbbi vitában megállapítható legyen, mit fogadott el a Felhasználó (az app
+ * a profiles.terms_version mezőben ezt a verziószámot tárolja).
+ * Új verzió = ÚJ fájl (v1-2.astro), nem ennek az átírása.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { pathFor } from '../../../i18n/routes';
 
 const locale = 'hu';
 const page = 'terms';
-const title = 'Általános Szerződési Feltételek (ÁSZF) – Content Ninja';
+const title = 'Általános Szerződési Feltételek (ÁSZF) – Content Ninja · 1.1';
 const description =
   'A Content Ninja AI tartalomgyártó, publikáló és hírlevél-szolgáltatás igénybevételének Általános Szerződési Feltételei, az adatfeldolgozási feltételeket tartalmazó 1. számú melléklettel.';
 
 // Kereszthivatkozások MINDIG az azonos nyelvű dokumentumra (brief §6.6).
 const privacy = pathFor('privacy', locale);
 const dataDeletion = pathFor('dataDeletion', locale);
-const termsEn = pathFor('terms', 'en');
+const termsEn = '/en/terms/v1-1/';
+const archiveCanonical = new URL('/hu/aszf/v1-1/', Astro.site!).href;
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description}
+  noindex canonical={archiveCanonical}>
   <Header locale={locale} page={page} />
 
   <main class="py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[760px] mx-auto">
+
+            <div class="rounded-[12px] border border-primary/30 bg-primary/5 px-5 py-4 mb-8">
+                <p class="text-sm text-dark font-bold">Az ÁSZF 1.1. verziójának rögzített példánya.</p>
+                <p class="text-sm text-body mt-1 leading-relaxed">Ez a szöveg
+                    <strong class="text-dark">2026. szeptember 15-től hatályos</strong>. A másolatot állandó
+                    hivatkozásként őrizzük meg, hogy egy később elfogadott verzió se írja felül. A mindenkor
+                    hatályos szöveg a <a href="/hu/aszf/" class="text-primary underline">/hu/aszf/</a> címen
+                    érhető el.</p>
+            </div>
 
             <a href="/hu/"
                 class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
@@ -36,11 +55,6 @@ const termsEn = pathFor('terms', 'en');
                     időtartamával és AI-keretével, a kuponkedvezmény és a próbaidőszak szabályával, a felmondás és a
                     csomagváltás rendjével, valamint a visszatérítés kizárásával egészült ki (4. és 5. pont). Az előző, 1.0. verzió 2026. augusztus 20-tól 2026. szeptember
                     14-ig volt hatályban.</p>
-                <p class="text-sm text-muted mt-1">
-                    Korábbi verziók változatlan formában:
-                    <a href="/hu/aszf/v1-0/" class="text-primary underline">1.0</a> ·
-                    <a href="/hu/aszf/v1-1/" class="text-primary underline">1.1</a>
-                </p>
                 <p class="text-sm text-muted mt-2">
                     A jelen ÁSZF magyar és angol nyelven készült. Eltérés esetén a magyar szöveg az irányadó; az
                     angol változat <a href={termsEn} class="text-primary underline">itt olvasható</a>.

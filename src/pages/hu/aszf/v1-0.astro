@@ -1,26 +1,46 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { pathFor } from '../../i18n/routes';
+/*
+ * ARCHÍV PÉLDÁNY — az ÁSZF 1.0. verziójának befagyasztott másolata.
+ *
+ * A <BaseLayout> alatti szöveget SOHA ne szerkeszd: ennek az a célja, hogy egy
+ * későbbi vitában megállapítható legyen, mit fogadott el a Felhasználó (az app
+ * a profiles.terms_version mezőben ezt a verziószámot tárolja).
+ * Új verzió = ÚJ fájl (v1-2.astro), nem ennek az átírása.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { pathFor } from '../../../i18n/routes';
 
 const locale = 'hu';
 const page = 'terms';
-const title = 'Általános Szerződési Feltételek (ÁSZF) – Content Ninja';
+const title = 'Általános Szerződési Feltételek (ÁSZF) – Content Ninja · 1.0';
 const description =
   'A Content Ninja AI tartalomgyártó, publikáló és hírlevél-szolgáltatás igénybevételének Általános Szerződési Feltételei, az adatfeldolgozási feltételeket tartalmazó 1. számú melléklettel.';
 
 // Kereszthivatkozások MINDIG az azonos nyelvű dokumentumra (brief §6.6).
 const privacy = pathFor('privacy', locale);
 const dataDeletion = pathFor('dataDeletion', locale);
-const termsEn = pathFor('terms', 'en');
+const termsEn = '/en/terms/v1-0/';
+const archiveCanonical = new URL('/hu/aszf/v1-0/', Astro.site!).href;
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description}
+  noindex canonical={archiveCanonical}>
   <Header locale={locale} page={page} />
 
   <main class="py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[760px] mx-auto">
+
+            <div class="rounded-[12px] border border-[#f0c36d] bg-[#fdf6e3] px-5 py-4 mb-8">
+                <p class="text-sm text-dark font-bold">Archív változat — nem ez a hatályos ÁSZF.</p>
+                <p class="text-sm text-body mt-1 leading-relaxed">Ez az ÁSZF
+                    <strong class="text-dark">1.0. verziója</strong>, amely
+                    <strong class="text-dark">2026. augusztus 20-tól 2026. szeptember 14-ig</strong> volt hatályban.
+                    Változatlan formában őrizzük meg, hogy az ebben az időszakban létrejött szerződések tartalma
+                    utólag is megállapítható legyen. A jelenleg hatályos szöveg:
+                    <a href="/hu/aszf/" class="text-primary underline">Általános Szerződési Feltételek</a>.</p>
+            </div>
 
             <a href="/hu/"
                 class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
@@ -30,17 +50,7 @@ const termsEn = pathFor('terms', 'en');
 
             <div class="mb-10">
                 <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Általános Szerződési Feltételek</h1>
-                <p class="text-sm text-muted">1.1. verzió · Közzétéve: 2026. augusztus 29. · Hatályos: 2026.
-                    szeptember 15-től</p>
-                <p class="text-sm text-muted mt-1">Az 1.1. verzió az éves előfizetési csomag díjával,
-                    időtartamával és AI-keretével, a kuponkedvezmény és a próbaidőszak szabályával, a felmondás és a
-                    csomagváltás rendjével, valamint a visszatérítés kizárásával egészült ki (4. és 5. pont). Az előző, 1.0. verzió 2026. augusztus 20-tól 2026. szeptember
-                    14-ig volt hatályban.</p>
-                <p class="text-sm text-muted mt-1">
-                    Korábbi verziók változatlan formában:
-                    <a href="/hu/aszf/v1-0/" class="text-primary underline">1.0</a> ·
-                    <a href="/hu/aszf/v1-1/" class="text-primary underline">1.1</a>
-                </p>
+                <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól</p>
                 <p class="text-sm text-muted mt-2">
                     A jelen ÁSZF magyar és angol nyelven készült. Eltérés esetén a magyar szöveg az irányadó; az
                     angol változat <a href={termsEn} class="text-primary underline">itt olvasható</a>.
@@ -154,83 +164,38 @@ const termsEn = pathFor('terms', 'en');
                 <!-- 4. -->
                 <div class="p-8 doc-section">
                     <h2>4. Előfizetés, díjak és fizetés</h2>
-                    <p>4.1. A Szolgáltatás előfizetéses konstrukcióban, több csomagban és
-                        <strong class="text-dark">két számlázási ciklusban — havi és éves előfizetésként</strong> —
-                        érhető el. Minden előfizetés tartalmazza a rendszerhez való hozzáférést és a választott
-                        csomaghoz tartozó AI-keretet (kreditet).</p>
-                    <p class="mt-2">4.2. Az előfizetési díjak:</p>
-                    <ul>
-                        <li>a) <strong class="text-dark">havi előfizetés</strong>: 34 990 Ft + ÁFA / hó;</li>
-                        <li>b) <strong class="text-dark">éves előfizetés</strong>: 349 900 Ft + ÁFA / év
-                            (bruttó 444 373 Ft).</li>
-                    </ul>
-                    <p class="mt-2">A fenti összegek a Szolgáltató mindenkori listaárát tükrözik. A Szolgáltató
-                        egyedi havidíjat is megállapíthat; ebben az esetben az éves előfizetés díja az egyedileg
-                        megállapított havidíj <strong class="text-dark">tízszerese</strong>.</p>
-                    <p class="mt-2">4.3. Az <strong class="text-dark">éves előfizetés 12 hónapos, egybefüggő
-                        előfizetési időszakra szól</strong>, amelynek díját a Szolgáltató az időszak kezdetekor —
-                        és minden megújuláskor — <strong class="text-dark">egy összegben, előre számlázza</strong>.
-                        A havi előfizetés díját a Szolgáltató havonta, ugyancsak előre számlázza.</p>
-                    <p class="mt-2">4.4. A díjak a Szolgáltató árlistáján és a fizetési felületen szerepelnek. Mivel a
+                    <p>4.1. A Szolgáltatás havi előfizetéses konstrukcióban, több csomagban érhető el. Minden
+                        előfizetés tartalmazza a rendszerhez való hozzáférést és a választott csomaghoz tartozó havi
+                        AI-keretet (kreditet).</p>
+                    <p class="mt-2">4.2. A díjak a Szolgáltató árlistáján és a fizetési felületen szerepelnek. Mivel a
                         Szolgáltatás kizárólag vállalkozások részére érhető el, a díjakat
                         <strong class="text-dark">nettó összegben</strong> tüntetjük fel, amelyet a mindenkori
                         általános forgalmi adó terhel. A befizetésről a Szolgáltató
                         <strong class="text-dark">elektronikus számlát</strong> állít ki, amelyet e-mailben küld
                         meg.</p>
-                    <p class="mt-2">4.5. Az előfizetés minden előfizetési időszak végén
-                        <strong class="text-dark">automatikusan megújul</strong> — a havi előfizetés havonta, az éves
-                        előfizetés tizenkét havonta —, kivéve, ha a Felhasználó az időszak vége előtt felmondja (lásd
-                        5. pont).</p>
-                    <p class="mt-2">4.6. A fizetést a Stripe fizetési szolgáltató bonyolítja. A Szolgáltató kártya- és
+                    <p class="mt-2">4.3. Az előfizetés minden számlázási időszak végén automatikusan megújul, amíg a
+                        Felhasználó le nem mondja.</p>
+                    <p class="mt-2">4.4. A fizetést a Stripe fizetési szolgáltató bonyolítja. A Szolgáltató kártya- és
                         fizetési adatot nem tárol és nem kezel; ezeket kizárólag a Stripe kezeli.</p>
-                    <p class="mt-2">4.7. <strong class="text-dark">Kuponkód.</strong> A Szolgáltató időről időre
-                        kuponkódos kedvezményt kínálhat, amely az első előfizetési időszak díját csökkenti. A
-                        kuponkód <strong class="text-dark">forintban meghatározott kedvezményt</strong> ad, amelynek
-                        értékét a Szolgáltató <strong class="text-dark">a havi listaárból</strong> — egyedi ár esetén
-                        az egyedileg megállapított havidíjból — számítja ki; ez az összeg a havi és az éves
-                        előfizetésnél <strong class="text-dark">azonos</strong>. A kuponkódok feltételeit, mértékét és
+                    <p class="mt-2">4.5. A Szolgáltató időről időre kuponkódos kedvezményt kínálhat, amellyel az első
+                        előfizetési időszak kedvezményes áron vehető igénybe. A kuponkódok feltételeit, mértékét és
                         érvényességét a Szolgáltató határozza meg, a kedvezmény kizárólag érvényes kuponkód
                         megadásával vehető igénybe.</p>
-                    <p class="mt-2"><strong class="text-dark">Próbaidőszak.</strong> A Szolgáltató próbaidőszakra
-                        jogosító kuponkódot is kiadhat. A próbaidőszak <strong class="text-dark">7 napig</strong> tart,
-                        alatta a Felhasználó <strong class="text-dark">100 kreditet</strong> használhat fel, és
-                        mindkét előfizetési ciklushoz igénybe vehető. A próbaidőszak lejártakor az előfizetés a
-                        választott ciklus szerint elindul, és a Szolgáltató a választott ciklus
-                        <strong class="text-dark">teljes díját kiszámlázza</strong> — éves előfizetés esetén tehát a
-                        teljes éves díjat —, kivéve, ha a Felhasználó az előfizetést a próbaidőszak vége előtt
-                        felmondja. Próbaidőszak kizárólag érvényes próba-kuponkóddal indul.</p>
-                    <p class="mt-2">4.8. <strong class="text-dark">Az előfizetési díjban foglalt AI-keret.</strong>
-                        A keret az előfizetés ciklusától függően eltérően áll rendelkezésre:</p>
-                    <ul>
-                        <li>a) <strong class="text-dark">havi előfizetés</strong> esetén a keret
-                            <strong class="text-dark">havonta újratöltődik</strong>; a fel nem használt havi keret —
-                            eltérő szolgáltatói rendelkezés hiányában — nem vihető át a következő hónapra. Kivétel:
-                            az éves előfizetésre való áttérés, lásd az 5.3 a) pontot;</li>
-                        <li>b) <strong class="text-dark">éves előfizetés</strong> esetén a Szolgáltató a keretet
-                            <strong class="text-dark">egy összegben írja jóvá</strong>, az előfizetési időszak
-                            kezdetekor. A jóváírt keret <strong class="text-dark">6 000 kredit</strong>, kuponkóddal
-                            indított előfizetés esetén <strong class="text-dark">6 250 kredit</strong>, amelybe a
-                            próbaidőszak alatt jóváírt 100 kredit beleszámít. Ez a keret
-                            <strong class="text-dark">a jóváírástól számított 12 hónapig, azaz az előfizetési időszak
-                            végéig érvényes</strong>, és azon belül a Felhasználó szabadon, saját ütemezés szerint
-                            használhatja fel — havi korlát nélkül. A keretből fel nem használt kreditek az
-                            előfizetési időszak végén lejárnak, és a megújított időszakra nem vihetők át.</li>
-                    </ul>
-                    <p class="mt-2">Egyedileg megállapított havi keret esetén az éves keret a havi keret
-                        <strong class="text-dark">tizenkétszerese</strong>.</p>
-                    <p class="mt-2">4.9. A Felhasználó az előfizetési díjban foglalt kereten felül extra kreditet
-                        vásárolhat. Az extra kreditek a vásárlástól számított 365 napig érvényesek, ezt követően
-                        felhasználatlanul lejárnak. Az előfizetés megszűnése esetén a fel nem használt extra kreditek
-                        az előfizetési időszak végén szintén elvesznek.</p>
-                    <p class="mt-2">4.10. A Felhasználó az aktuális kreditegyenlegét, a kreditfelhasználás előzményeit
-                        és a kreditek lejáratát bármikor megtekintheti a Content Ninja felületének
+                    <p class="mt-2">4.6. A havi díjban foglalt AI-kreditek az adott számlázási időszakra
+                        vonatkoznak; a fel nem használt havi kreditek — eltérő szolgáltatói rendelkezés hiányában —
+                        nem vihetők át a következő hónapra.</p>
+                    <p class="mt-2">4.7. A Felhasználó a havi kereten felül extra kreditet vásárolhat. Az extra
+                        kreditek a vásárlástól számított 365 napig érvényesek, ezt követően felhasználatlanul
+                        lejárnak. Az előfizetés megszűnése esetén a fel nem használt extra kreditek az előfizetési
+                        időszak végén szintén elvesznek.</p>
+                    <p class="mt-2">4.8. A Felhasználó az aktuális kreditegyenlegét, a kreditfelhasználás előzményeit
+                        és az extra kreditek lejáratát bármikor megtekintheti a Content Ninja felületének
                         Felhasználás menüpontjában.</p>
-                    <p class="mt-2">4.11. Ha a Felhasználó elhasználta az előfizetési díjban foglalt keretet és nem
-                        vásárol extra kreditet, az AI-alapú tartalomgenerálási funkciók a következő keret
-                        megnyílásáig nem érhetők el — havi előfizetés esetén a következő hónap kezdetéig, éves
-                        előfizetés esetén az előfizetési időszak megújulásáig. A rendszer egyéb, nem AI-alapú funkciói
-                        továbbra is használhatók.</p>
-                    <p class="mt-2">4.12. A Szolgáltató jogosult az előfizetési díjat és a csomagok tartalmát
+                    <p class="mt-2">4.9. Ha a Felhasználó elhasználta a havi díjban foglalt kreditet és nem vásárol
+                        extra kreditet, az AI-alapú tartalomgenerálási funkciók a következő számlázási időszak
+                        kezdetéig nem érhetők el. A rendszer egyéb, nem AI-alapú funkciói továbbra is
+                        használhatók.</p>
+                    <p class="mt-2">4.10. A Szolgáltató jogosult az előfizetési díjat és a csomagok tartalmát
                         megváltoztatni. A már megkezdett és kifizetett számlázási időszakot a változás nem érinti. A
                         díjváltozásról a Szolgáltató a hatálybalépés előtt
                         <strong class="text-dark">legalább 30 nappal</strong> e-mailben értesíti a Felhasználót. Ha a
@@ -241,43 +206,15 @@ const termsEn = pathFor('terms', 'en');
 
                 <!-- 5. -->
                 <div class="p-8 doc-section">
-                    <h2>5. Felmondás, csomagváltás és visszatérítés</h2>
-                    <p>5.1. A Felhasználó az előfizetését <strong class="text-dark">bármikor felmondhatja</strong>,
-                        indokolás nélkül, a Content Ninja felületén.</p>
-                    <p class="mt-2">5.2. A felmondás a <strong class="text-dark">már kifizetett előfizetési időszak
-                        utolsó napján lép hatályba</strong>. Eddig az időpontig a Felhasználó fiókja aktív marad, és a
-                        Szolgáltatás teljes egészében, korlátozás nélkül használható. Éves előfizetés esetén ez azt
-                        jelenti, hogy a felmondás a kifizetett 12 hónapos időszak végén lép hatályba.</p>
-                    <p class="mt-2">5.3. <strong class="text-dark">Csomagváltás.</strong> A Felhasználó a havi és az
-                        éves előfizetés között az alábbiak szerint válthat:</p>
-                    <ul>
-                        <li>a) <strong class="text-dark">havi előfizetésről éves előfizetésre</strong> a váltás
-                            azonnal hatályba lép; a megkezdett hónapból fel nem használt, időarányos díjrészt a
-                            Szolgáltató az éves előfizetés díjába jóváírja. A váltás időpontjában
-                            <strong class="text-dark">fel nem használt havi keret nem vész el</strong>: a Szolgáltató
-                            a lejáratát az új, éves előfizetési időszak végéig kitolja, így az a 4.8 b) pont szerinti
-                            éves kereten felül áll a Felhasználó rendelkezésére;</li>
-                        <li>b) <strong class="text-dark">éves előfizetésről havi előfizetésre</strong> a váltás
-                            kizárólag a következő fordulónaptól, azaz a kifizetett 12 hónapos időszak lejártával
-                            lép hatályba; az éves díj időarányos része nem írható jóvá és nem téríthető vissza.</li>
-                    </ul>
-                    <p class="mt-2">5.4. <strong class="text-dark">A visszatérítés kizárása.</strong> A már kifizetett
-                        előfizetési díj <strong class="text-dark">sem részben, sem egészben nem téríthető
-                        vissza</strong>. Ez az éves előfizetés egy összegben, előre megfizetett díjára is
-                        vonatkozik, akkor is, ha a Felhasználó az előfizetési időszak vége előtt felmond, illetve ha a
-                        Szolgáltatást az időszak alatt nem vagy csak részben veszi igénybe.</p>
-                    <p class="mt-2">5.5. <strong class="text-dark">A visszatérítés kizárásának jogi alapja.</strong> A
-                        Szolgáltatás a 3.2 pont szerint kizárólag vállalkozási célra vehető igénybe: a Felhasználó
-                        jogi személy, egyéni vállalkozó vagy egyéb szervezet, amely a Szolgáltatást szakmája, önálló
-                        foglalkozása vagy üzleti tevékenysége körében veszi igénybe. A Felhasználó ezért
-                        <strong class="text-dark">nem minősül fogyasztónak</strong> a Polgári Törvénykönyvről szóló
-                        2013. évi V. törvény 8:1. § (1) bekezdés 3. pontja értelmében, és így
-                        <strong class="text-dark">nem illeti meg a fogyasztókat megillető tizennégy napos elállási és
-                        felmondási jog</strong>, amelyet a fogyasztó és a vállalkozás közötti szerződések részletes
-                        szabályairól szóló <strong class="text-dark">45/2014. (II. 26.) Korm. rendelet</strong>
-                        szabályoz. A hivatkozott kormányrendelet a jelen szerződésre nem alkalmazandó.</p>
-                    <p class="mt-2">5.6. A jelen 5. pont nem érinti azokat a jogokat, amelyek a Felhasználót kógens
-                        jogszabály alapján megilletik.</p>
+                    <h2>5. Lemondás és visszatérítés</h2>
+                    <p>5.1. A Felhasználó előfizetését bármikor lemondhatja.</p>
+                    <p class="mt-2">5.2. A lemondást követően az előfizetés az aktuális számlázási időszak végéig
+                        aktív marad, ezalatt a Felhasználó korlátozás nélkül használhatja a Szolgáltatást.</p>
+                    <p class="mt-2">5.3. A már kifizetett előfizetési díj nem téríthető vissza, kivéve, ha a
+                        visszatérítést kógens jogszabály írja elő. A Felhasználó nem fogyasztó, ezért a fogyasztó és a
+                        vállalkozás közötti szerződések részletes szabályairól szóló
+                        <strong class="text-dark">45/2014. (II. 26.) Korm. rendelet szerinti elállási és felmondási
+                        jog nem illeti meg</strong>.</p>
                 </div>
 
                 <!-- 6. -->

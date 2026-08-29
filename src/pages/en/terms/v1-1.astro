@@ -1,26 +1,44 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { pathFor } from '../../i18n/routes';
+/*
+ * ARCHÍV PÉLDÁNY — az ÁSZF 1.1. verziójának befagyasztott másolata.
+ *
+ * A <BaseLayout> alatti szöveget SOHA ne szerkeszd: ennek az a célja, hogy egy
+ * későbbi vitában megállapítható legyen, mit fogadott el a Felhasználó (az app
+ * a profiles.terms_version mezőben ezt a verziószámot tárolja).
+ * Új verzió = ÚJ fájl (v1-2.astro), nem ennek az átírása.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { pathFor } from '../../../i18n/routes';
 
 const locale = 'en';
 const page = 'terms';
-const title = 'Terms of Service – Content Ninja';
+const title = 'Terms of Service – Content Ninja · 1.1';
 const description =
   'Terms of Service governing the business use of the Content Ninja AI content generation, publishing and newsletter service, including the Annex on data processing.';
 
 // Kereszthivatkozások MINDIG az azonos nyelvű dokumentumra (brief §6.6).
 const privacy = pathFor('privacy', locale);
 const dataDeletion = pathFor('dataDeletion', locale);
-const termsHu = pathFor('terms', 'hu');
+const termsHu = '/hu/aszf/v1-1/';
+const archiveCanonical = new URL('/en/terms/v1-1/', Astro.site!).href;
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description}>
+<BaseLayout locale={locale} page={page} title={title} description={description}
+  noindex canonical={archiveCanonical}>
   <Header locale={locale} page={page} />
 
   <main class="py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[760px] mx-auto">
+
+            <div class="rounded-[12px] border border-primary/30 bg-primary/5 px-5 py-4 mb-8">
+                <p class="text-sm text-dark font-bold">Permanent copy of version 1.1 of the Terms.</p>
+                <p class="text-sm text-body mt-1 leading-relaxed">This text is
+                    <strong class="text-dark">effective from 15 September 2026</strong>. The copy is preserved as a
+                    permanent reference so that a later version cannot overwrite it. The Terms currently in force
+                    are available at <a href="/en/terms/" class="text-primary underline">/en/terms/</a>.</p>
+            </div>
 
             <a href="/en/"
                 class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8">
@@ -35,11 +53,6 @@ const termsHu = pathFor('terms', 'hu');
                 <p class="text-sm text-muted mt-1">Version 1.1 adds the fee, term and AI credit allowance of the
                     annual subscription plan, the rules on coupon discounts and the trial period, the rules on
                     cancellation and changing plans, and the exclusion of refunds (Sections 4 and 5). The previous version 1.0 was in force from 20 August 2026 to 14 September 2026.</p>
-                <p class="text-sm text-muted mt-1">
-                    Earlier versions, preserved unchanged:
-                    <a href="/en/terms/v1-0/" class="text-primary underline">1.0</a> ·
-                    <a href="/en/terms/v1-1/" class="text-primary underline">1.1</a>
-                </p>
                 <p class="text-sm text-muted mt-2">
                     These Terms are drawn up in Hungarian and English. In case of any discrepancy, the
                     <a href={termsHu} class="text-primary underline">Hungarian text</a> prevails.
