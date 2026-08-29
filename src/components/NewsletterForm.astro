@@ -58,7 +58,6 @@ const T = {
     privacyBefore: 'Részletek az',
     privacyLink: 'Adatkezelési tájékoztatóban',
     privacyAfter: '.',
-    doubleOptIn: 'Megerősítő levelet küldünk – csak akkor kerülsz a listára, ha rákattintasz.',
     successTitle: 'Már csak egy lépés!',
     successBody:
       'Küldtünk egy levelet a megadott címre – kattints benne a megerősítő gombra, és kész.',
@@ -76,7 +75,6 @@ const T = {
     privacyBefore: 'Details in our',
     privacyLink: 'Privacy Policy',
     privacyAfter: '.',
-    doubleOptIn: "We'll send a confirmation email – you only join the list once you click it.",
     successTitle: 'One more step!',
     successBody:
       "We've sent an email to the address you gave – click the confirmation button in it and you're done.",
@@ -174,11 +172,6 @@ const cfg = {
         <span data-nl="label">{T.submit}</span>
       </button>
     )}
-
-    <p class="flex items-start gap-2 text-xs text-muted leading-relaxed">
-      <span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-px">mark_email_read</span>
-      <span>{T.doubleOptIn}</span>
-    </p>
   </form>
 
   <div data-nl="success" class="hidden text-center py-6 space-y-3">
