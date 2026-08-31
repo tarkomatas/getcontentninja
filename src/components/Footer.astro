@@ -3,7 +3,7 @@ import { pathFor, type Locale, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { navModulesFor } from '../data/modules';
 import MetaTechProvider from './MetaTechProvider.astro';
-import UnasExpert from './UnasExpert.astro';
+import UnasPartner from './UnasPartner.astro';
 
 interface Props {
   locale: Locale;
@@ -113,15 +113,20 @@ const solutions = navModulesFor(locale);
             {ui.cta.login}
           </a>
         </div>
-
-        <!-- Meta Tech Provider – minden oldalon látszó hitelesítés, a CTA-k alatt.
-             A jelvény sötét szövegű, ezért `theme="dark"`: fehér lapra kerül. -->
-        <MetaTechProvider locale={locale} variant="bare" theme="dark" class="mt-6" />
-
-        <!-- UNAS szakértő – az UNAS kérésére minden oldalon feltüntetve.
-             Itt a hivatalos FEHÉR kontúrlogó megy, ezért nem kell fehér lap alá. -->
-        <UnasExpert locale={locale} variant="bare" theme="dark" class="mt-5" />
       </div>
+    </div>
+
+    <!-- Bizalmi sáv: a hitelesítések EGYÜTT, saját sorban – nem a CTA-hasáb alá
+         tömve. Két okból: a hasáb a két jelvénytől aránytalanul megnyúlt, és a
+         Meta-jelvény (fehér lap) meg az UNAS-lockup egymás mellett olvas
+         hitelesítés-készletként. Az UNAS logója itt kap valódi üresjáratot is. -->
+    <div class="border-t border-white/10 pt-8 mb-8 flex flex-wrap items-center gap-x-10 gap-y-6">
+      <!-- Mindkettő fehér lapon áll, hogy egymás mellett egy készletnek látsszon
+           (a Meta-jelvénynél ez kötelező is: sötét szövegű a lockup). Az UNAS-nál
+           ezért `theme="light"` a helyes érték – a KÖZVETLEN háttere fehér, tehát
+           a hivatalos antracit logóváltozat megy rá, nem a fehér kontúros. -->
+      <MetaTechProvider locale={locale} variant="bare" theme="dark" />
+      <UnasPartner locale={locale} variant="bare" theme="light" class="bg-white rounded-[10px] px-6 py-5" />
     </div>
 
     <div class="border-t border-white/10 pt-6 text-center text-xs">

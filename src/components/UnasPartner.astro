@@ -1,7 +1,7 @@
 ---
-// „Hivatalos UNAS szakértő" jelvény – az UNAS kérésére a saját oldalunkon.
+// „UNAS partner" jelvény – az UNAS kérésére a saját oldalunkon.
 //
-// FONTOS: az UNAS-nak NINCS kész partner-/szakértő-jelvénye. Az
+// FONTOS: az UNAS-nak NINCS kész partner-jelvénye. Az
 // `unas.hu/arculati-kezikonyv` valójában csak logóletöltő oldal (antracit és
 // fehér kontúrlogó, plusz háttérrel ellátott változatok), írott szabályok
 // (védőzóna, minimális méret, tiltások) nélkül. A lockupot ezért mi rakjuk
@@ -13,10 +13,12 @@
 //   - a logó köré hagyj bőven üresjáratot (gap-4 ≈ a logó magasságának ~80%-a);
 //     hivatalos védőzóna híján inkább nagyvonalúak vagyunk.
 //
-// A státusz: az UNAS szakértői listáján (`unas.hu/szakertok`) szereplő partner.
-// Ez KEVESEBB, mint „az UNAS ajánlja" vagy „az UNAS hivatalos fejlesztője" – a
-// szövegeket ne írd át erre. Ha megvan a saját profilunk URL-je a szakértői
-// listán, érdemes rálinkelni (target="_blank" rel="noopener").
+// A szöveg szándékosan csak ennyi: „UNAS partner". Ez KEVESEBB, mint „az UNAS
+// ajánlja" vagy „az UNAS hivatalos fejlesztője" – ne írd át erre. Az „UNAS"
+// nagybetűs, mert közvetlenül a nagybetűs wordmark mellett áll (a folyó
+// szövegben a site egyébként „Unas"-t ír). Ha megvan a saját profilunk URL-je
+// az `unas.hu/szakertok` listán, érdemes rálinkelni (target="_blank"
+// rel="noopener").
 import type { Locale } from '../i18n/routes';
 
 interface Props {
@@ -35,15 +37,15 @@ const { locale, variant = 'card', theme = 'light', block = false, class: classNa
 const copy = {
   hu: {
     alt: 'UNAS',
-    strong: 'Hivatalos UNAS szakértő.',
-    text: 'Szerepelünk az UNAS szakértői listáján – az áruházad mélyintegrációval kapcsolódik.',
-    short: 'Hivatalos UNAS szakértő',
+    strong: 'UNAS partner.',
+    text: 'Az UNAS webáruházad mélyintegrációval kapcsolódik a rendszerhez.',
+    short: 'UNAS partner',
   },
   en: {
     alt: 'UNAS',
-    strong: 'Official UNAS expert.',
-    text: 'We’re on the UNAS expert list – your store connects through a deep integration.',
-    short: 'Official UNAS expert',
+    strong: 'UNAS partner.',
+    text: 'Your UNAS store connects to the system through a deep integration.',
+    short: 'UNAS partner',
   },
 }[locale];
 
@@ -58,7 +60,7 @@ const logo = theme === 'dark' ? '/assets/unas-logo-white.svg' : '/assets/unas-lo
       width="467"
       height="120"
       loading="lazy"
-      class="h-5 w-auto shrink-0"
+      class="h-6 w-auto shrink-0"
     />
     <span class={`h-6 w-px shrink-0 ${theme === 'dark' ? 'bg-white/20' : 'bg-border'}`}></span>
     <span class={`text-xs font-semibold leading-snug ${theme === 'dark' ? 'text-white/80' : 'text-muted'}`}>
