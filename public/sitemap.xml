@@ -166,10 +166,9 @@
   </url>
 
   <!-- Hírlevél-feliratkozás (a MI hírlevelünk céloldala; csak magyarul).
-       KIVÉVE, amíg az app végpontja nincs kész: az oldalon nincs űrlap, és
-       `noindex` (lásd `NEWSLETTER_LIVE` a src/data/newsletter.ts-ben). Az
-       élesítéskor ezt a blokkot vissza kell tenni:
-
+       Ha a `NEWSLETTER_LIVE` (src/data/newsletter.ts) valaha `false`-ra megy,
+       ezt a blokkot is ki kell kommentelni: az oldal olyankor `noindex` és
+       nincs rajta űrlap. -->
   <url>
     <loc>https://getcontentninja.com/hu/hirlevel-feliratkozas/</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/hirlevel-feliratkozas/" />
@@ -177,7 +176,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  -->
 
   <!-- Árak és kreditdíjak -->
   <url>

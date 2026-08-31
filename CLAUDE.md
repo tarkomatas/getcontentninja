@@ -160,11 +160,9 @@ címke helyett.
 
 ## Hírlevél-feliratkozás – KÜLÖN út, nem a lead-intake
 
-> 🔴 **Jelenleg KI VAN KAPCSOLVA** (`NEWSLETTER_LIVE = false` a `src/data/newsletter.ts`-ben):
-> 2026-08-29-én az app csapata jelezte, hogy a végpont még nem létezik. Amíg a flag `false`, a
-> `NewsletterForm` sem űrlapot, sem küldő scriptet nem renderel (ellenőrizve a build kimenetén), a
-> `/hu/hirlevel-feliratkozas/` oldal `noindex`, és a sitemap-bejegyzése ki van kommentelve.
-> **Élesítés:** flag `true` + a sitemap-blokk visszatétele.
+> 🟢 **Él** (`NEWSLETTER_LIVE = true` a `src/data/newsletter.ts`-ben). A kapcsoló megmaradt: ha
+> `false`, a `NewsletterForm` sem űrlapot, sem küldő scriptet nem renderel, az oldal `noindex`, és
+> ilyenkor a **sitemap-bejegyzést is ki kell kommentelni** — a kettő együtt mozog.
 
 A **saját hírlevelünkre** való feliratkozás nem a lead-űrlapok végpontjára megy, hanem a
 `POST https://app.getcontentninja.com/api/newsletter/subscribe` címre. Azért külön, mert az app itt

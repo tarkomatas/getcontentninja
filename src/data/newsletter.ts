@@ -16,20 +16,21 @@ export const NEWSLETTER_ENDPOINT =
   'https://app.getcontentninja.com/api/newsletter/subscribe';
 
 /**
- * 🔴 **KIKAPCSOLÓ – jelenleg `false`, mert az app-oldali végpont még nem létezik.**
+ * 🟢 **KIKAPCSOLÓ – jelenleg `true`: a feliratkozás él.**
  *
- * 2026-08-29: az app csapata jelezte, hogy a `POST /api/newsletter/subscribe`
- * még nincs kész, tehát minden beküldés 404-re futna, és a feliratkozás
- * elveszne. Amíg `false`:
+ * Előzmény: 2026-08-29-én az app csapata jelezte, hogy a
+ * `POST /api/newsletter/subscribe` még nem létezik, ezért az űrlapot
+ * kikapcsoltuk (minden beküldés 404-re futott volna). A végpont azóta él.
+ *
+ * Amíg `false`:
  *   - a `NewsletterForm` NEM rendereli ki sem az űrlapot, sem a küldő scriptet
  *     (nem lehet olyan oldalt csinálni, ami véletlenül a semmibe küld),
  *   - a `/hu/hirlevel-feliratkozas/` oldal `noindex`,
- *   - és nincs benne a `public/sitemap.xml`-ben.
+ *   - és a `public/sitemap.xml`-ben ki kell kommentelni a bejegyzését.
  *
- * **Élesítés (egyetlen lépés):** állítsd `true`-ra, ha az app szólt, hogy él a
- * végpont – majd vedd vissza a sitemap-bejegyzést (lásd az ottani kommentet).
+ * A kettőt **együtt** kell mozgatni: a flag és a sitemap-blokk.
  */
-export const NEWSLETTER_LIVE = false;
+export const NEWSLETTER_LIVE = true;
 
 /**
  * Melyik űrlapról jött a feliratkozás. Ebből látszik, melyik elhelyezés hoz
