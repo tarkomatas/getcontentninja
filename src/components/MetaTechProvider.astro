@@ -8,7 +8,9 @@
 // A kártya függőleges paddingja szándékosan szűk: a jelvény PNG-je maga hozza a
 // Meta által előírt körbefutó üresjáratot (a lockup a fájl magasságának kb. fele),
 // a kártyáé ehhez hozzáadódna. Ezért is kell a képnek nagyobb `h-*`, mint amilyen
-// nagynak látszik.
+// nagynak látszik. Ugyanezért NEM vágjuk le az üresjáratot, ha vékonyabb sávot
+// akarunk – csak kisebbre méretezzük a képet (a `bare` változat h-16-ja ≈ 109px
+// széles jelvény, a lábléc alsó csíkjának ez szabja meg a magasságát).
 //
 // FONTOS: a jelvényt a Meta márkairányelvei szerint módosítatlanul kell
 // használni, és NEM állítható vele „Meta partner" / „a Meta ajánlja" – a
@@ -54,7 +56,7 @@ const badgeClass = theme === 'dark'
       width="650"
       height="383"
       loading="lazy"
-      class="h-20 w-auto"
+      class="h-16 w-auto"
     />
   </span>
 ) : (
