@@ -8,9 +8,9 @@ const page = 'pricing';
 
 const title = 'Pricing and credit costs – Content Ninja';
 const description =
-  'Content Ninja pricing: HUF 34,990 + VAT per month with 500 renewing AI credits and no lock-in. See the detailed per-operation credit costs, the extra credit pack prices and how payment works.';
+  'Content Ninja pricing: HUF 34,990 + VAT per month with 500 renewing AI credits, or HUF 349,900 + VAT per year — 12 months for the price of 10, with 6,000 credits up front. See the detailed per-operation credit costs, the extra credit pack prices and how payment works.';
 const keywords =
-  'Content Ninja pricing, Content Ninja price, AI credits, credit costs, credit consumption, extra credits, subscription, AI content generation cost';
+  'Content Ninja pricing, Content Ninja price, annual plan, AI credits, credit costs, credit consumption, extra credits, subscription, AI content generation cost';
 
 // Buying credits and managing the subscription both start in the app (rather
 // than via a direct Stripe link), so the user signs in to their account first.
@@ -19,23 +19,35 @@ const APP_URL = 'https://app.getcontentninja.com';
 const faqs = [
   {
     q: 'How much does Content Ninja cost?',
-    a: 'Content Ninja comes in a single plan: HUF 34,990 + VAT per month (HUF 44,437 gross), including every module and 500 renewing AI credits each month. If you book a demo, your first month is HUF 17,495 + VAT with a 750-credit allowance (500 monthly credits + 250 bonus credits); from the second month the fixed HUF 34,990 + VAT per month price applies.',
+    a: 'There is a single plan with two billing cycles. Monthly: HUF 34,990 + VAT per month (HUF 44,437 gross) with 500 renewing AI credits every month. Annual: HUF 349,900 + VAT per year (HUF 444,373 gross) — 12 months for the price of 10, with 6,000 credits granted in one go. Both include every module. If you book a demo you get HUF 17,495 + VAT off your first subscription term plus 250 bonus credits: that makes the first month HUF 17,495 + VAT (750 credits) on the monthly plan, or the first year HUF 332,405 + VAT (6,250 credits) on the annual plan.',
+  },
+  {
+    q: 'How is the annual plan different from the monthly one?',
+    a: 'In two ways. First, it is cheaper: you get 12 months for the price of 10, saving HUF 69,980 + VAT (HUF 88,871 gross) over a year. Second — and for many this matters more — there is no monthly ceiling: the 6,000 credits (exactly the same as 12×500) arrive in one go at the start of the term, and you spend them at your own pace within the 12 months. That means you can rewrite a 3,000-product catalogue in the first few weeks instead of spreading it over six months.',
   },
   {
     q: 'Is there a lock-in period or a fixed-term contract?',
-    a: 'No. The subscription runs for an indefinite term and can be cancelled at any time. After cancelling you can keep using the system without restriction until the end of the current billing period, after which it simply does not renew. There is no cancellation fee and no minimum term.',
+    a: 'The monthly plan has no lock-in: it runs for an indefinite term, can be cancelled at any time, and stays usable until your renewal date. The annual plan, by contrast, covers a single, continuous 12-month term paid up front in one instalment: you can cancel at any time, but the cancellation takes effect at the end of the 12 months you paid for, and no pro-rata part of the annual fee is refundable. Neither cycle has a cancellation fee.',
   },
   {
-    q: 'Is there an annual plan or a smaller, cheaper tier?',
-    a: 'Neither at the moment. We offer a single monthly plan with a 500 credits/month allowance — there is no smaller, cheaper tier and no annual prepayment option.',
+    q: 'What happens to the 6,000 annual credits at the end of the year?',
+    a: 'Unused credits expire at the end of the subscription term and do not carry over into the renewed term — a fresh 6,000 credits arrive on renewal. Separately purchased extra credits are independent of this: they stay valid for 365 days from the date of purchase.',
+  },
+  {
+    q: 'Can I switch from the monthly plan to the annual one?',
+    a: 'Yes, at any time, and the switch takes effect immediately. We credit the pro-rata remainder of your paid monthly term towards the annual fee, and any monthly credits you still have are not lost: their expiry is pushed out to the end of the annual term, on top of the 6,000-credit annual allowance. Switching the other way — annual to monthly — only takes effect once the paid 12 months are up.',
+  },
+  {
+    q: 'Is there a smaller, cheaper tier?',
+    a: 'No. There is no smaller tier with fewer credits: we offer a single plan that includes every module — you only choose the billing cycle, monthly or annual.',
   },
   {
     q: 'What is an AI credit, and what can 500 of them do?',
     a: 'Credits are the unit we bill AI operations in: every generation (post copy, image, video, newsletter) consumes a set number of credits. One post copy is 1 credit and one Nano Banana image is 2 credits, so a post with an image costs 3 credits — 500 credits a month is roughly 166 posts with images. A blog article costs 3 credits for the copy (plus 2 credits per image in the article), and rewriting a product description is 1 credit per product page (2 credits for a category page). Publishing and scheduling are not AI operations, so they never consume credits.',
   },
   {
-    q: 'What happens when I run out of my monthly allowance?',
-    a: 'AI-based content generation pauses until your next renewal date, while the rest of the system (calendar, scheduling, publishing, statistics) keeps working as usual. If you do not want to wait, you can buy extra credits at any time.',
+    q: 'What happens when I run out of my allowance?',
+    a: 'AI-based content generation pauses until your next allowance opens — your next monthly renewal on the monthly plan, or your annual renewal on the annual plan — while the rest of the system (calendar, scheduling, publishing, statistics) keeps working as usual. If you do not want to wait, you can buy extra credits at any time.',
   },
   {
     q: 'How much do extra credits cost, and how long are they valid?',
@@ -43,11 +55,11 @@ const faqs = [
   },
   {
     q: 'Do unused monthly credits roll over to the next month?',
-    a: 'No. The 500 credits included in the monthly fee apply to that billing period only; they reset and are topped up again on each renewal date. Separately purchased extra credits are different — they stay valid for 365 days. If you cancel your subscription, unused extra credits are also forfeited at the end of the period.',
+    a: 'No. The 500 credits included in the monthly fee apply to that billing period only; they reset and are topped up again on each renewal date. There is one exception: if you switch to the annual plan, your remaining monthly credits have their expiry pushed out to the end of the annual term. The annual plan\'s 6,000 credits are never reset monthly — they cover the whole 12 months. Separately purchased extra credits stay valid for 365 days regardless. If you cancel your subscription, unused extra credits are also forfeited at the end of the period.',
   },
   {
     q: 'How does payment work?',
-    a: 'Payment is made by bank card through Stripe, monthly in advance. Card details are handled by Stripe, under their own security standards. Invoices are issued to the billing details you provided at registration, so you do not need to enter them again.',
+    a: 'Payment is made by bank card through Stripe, always in advance: monthly subscriptions are billed every month, annual subscriptions in one instalment at the start of the term. Card details are handled by Stripe, under their own security standards. Invoices are issued to the billing details you provided at registration, so you do not need to enter them again.',
   },
   {
     q: 'How do I change my card or cancel my subscription?',
@@ -59,7 +71,7 @@ const faqs = [
   },
   {
     q: 'Do you refund fees already paid?',
-    a: 'Subscription fees already paid are non-refundable. If you cancel, the service stays active until the end of the period you paid for, so you do not lose what you have already paid.',
+    a: 'Subscription fees already paid are non-refundable — this also applies to the annual fee paid up front in one instalment, of which no pro-rata part can be credited back. If you cancel, the service stays active until the end of the period you paid for, so you do not lose what you have already paid.',
   },
   {
     q: 'How can I track my own usage?',
@@ -149,20 +161,22 @@ const freeOps = [
             Every module is included — posting, blog articles, Shopgrade, newsletters, image and
             video generation — with
             500 renewing AI credits a month, spent according to the tables below.
+            <strong class="text-dark">On the annual plan you get 12 months for the price of 10</strong>,
+            with all 6,000 credits yours from day one.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-3 mt-1">
             <span class="inline-flex items-center gap-2 bg-success/10 border border-success/30 text-success rounded-[10px] px-4 py-2 text-sm font-bold">
-              <span class="material-symbols-outlined text-[18px]">lock_open</span>
-              No lock-in
+              <span class="material-symbols-outlined text-[18px]">savings</span>
+              Annual plan: 2 months free
+            </span>
+            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
+              <span class="material-symbols-outlined text-primary text-[18px]">lock_open</span>
+              No lock-in on the monthly plan
             </span>
             <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
               <span class="material-symbols-outlined text-primary text-[18px]">credit_card</span>
               Paid via Stripe
-            </span>
-            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
-              <span class="material-symbols-outlined text-primary text-[18px]">event_repeat</span>
-              Cancel anytime
             </span>
           </div>
 
@@ -186,14 +200,17 @@ const freeOps = [
       <div class="max-w-[900px] mx-auto px-4 md:px-10">
         <div class="text-center mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">THE PLAN</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, fixed monthly fee</h2>
-          <p class="text-body text-lg">A single tier with every feature — no surcharges, no hidden costs.</p>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">One plan, two billing cycles</h2>
+          <p class="text-body text-lg">
+            The same system and the same modules either way — you only choose whether you pay
+            monthly or yearly. No surcharges, no hidden costs.
+          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          <!-- Standard subscription -->
-          <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-            <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+          <!-- Monthly subscription -->
+          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
+            <h3 class="text-xl font-bold mb-4 text-dark">Monthly subscription</h3>
             <div class="flex items-baseline gap-1 mb-3">
               <span class="text-4xl font-bold text-dark">34,990</span>
               <span class="text-xl font-bold text-dark">HUF</span>
@@ -201,11 +218,11 @@ const freeOps = [
             </div>
             <p class="text-muted text-sm mb-1">44,437 HUF gross — the amount charged to your card</p>
             <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">
-              Fixed monthly fee, no hidden costs
+              Fixed monthly fee, no lock-in — cancel any time
             </p>
             <ul class="space-y-4 mb-8">
               {[
-                '500 AI credits per month (renewing)',
+                '500 AI credits a month, renewed on every billing date',
                 'All modules: post writing, blog articles, Shopgrade, newsletters, image and video generation',
                 'Manage multiple brands (webshops) in one account',
                 'Unlimited social media accounts',
@@ -227,26 +244,28 @@ const freeOps = [
             </a>
           </div>
 
-          <!-- Demo bonus -->
-          <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
+          <!-- Annual subscription -->
+          <div class="bg-card rounded-[16px] border-2 border-primary/40 p-5 sm:p-8 shadow-card relative flex flex-col h-full hover:shadow-card-hover transition-all">
             <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
-              First month only
+              2 months free
             </div>
-            <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
-            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
-              <span class="text-4xl font-bold text-primary">17,495</span>
+            <h3 class="text-xl font-bold mb-4 text-dark">Annual subscription</h3>
+            <div class="flex items-baseline gap-1 mb-3">
+              <span class="text-4xl font-bold text-primary">349,900</span>
               <span class="text-xl font-bold text-dark">HUF</span>
-              <span class="text-muted text-sm">+VAT</span>
-              <span class="text-muted text-sm line-through">34,990 HUF</span>
+              <span class="text-muted text-sm">+VAT / year</span>
             </div>
-            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
-            <p class="text-body text-sm mb-4">Book a 30-minute demo and get:</p>
+            <p class="text-muted text-sm mb-1">444,373 HUF gross — charged up front, in one go</p>
+            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">
+              12 months for the price of 10 — 29,158 HUF + VAT / month
+            </p>
             <ul class="space-y-4 mb-8">
               {[
-                '50% off your first month',
-                '750 credits instead of 500 (+250 bonus)',
-                'A personalised walkthrough',
-                'Answers to all of your questions',
+                '6,000 AI credits in one go, from day one',
+                'No monthly ceiling: spend them at your own pace within 12 months',
+                'Everything else is identical to the monthly plan',
+                'Saves 69,980 HUF + VAT over a year (88,871 HUF gross)',
+                'A single, continuous 12-month subscription term',
               ].map((item) => (
                 <li class="flex items-center gap-3">
                   <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -256,25 +275,75 @@ const freeOps = [
                 </li>
               ))}
             </ul>
-            <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">
-              From the 2nd month on, the fixed 34,990 HUF / month.
+            <p class="text-body text-sm mb-6">
+              You can switch over from the monthly plan at any time: we credit the remainder of
+              your term, and your leftover credits are not lost.
             </p>
             <a href="/en/book-demo/" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
-              Book my demo
+              Book a demo
               <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
           </div>
+        </div>
+
+        <!-- Demo bonus – applies to BOTH cycles (Terms 4.7: the coupon discount is a
+             forint amount computed from the monthly list price, identical for both) -->
+        <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
+          <div class="flex flex-col md:flex-row md:items-start gap-6">
+            <div class="md:max-w-[300px] shrink-0">
+              <span class="inline-flex items-center bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide mb-3">
+                Demo bonus
+              </span>
+              <h3 class="text-xl font-bold text-dark mb-2">17,495 HUF off, +250 bonus credits</h3>
+              <p class="text-body text-sm leading-relaxed">
+                Book a 30-minute demo and we take the discount off your first subscription term —
+                <strong class="text-dark">whichever cycle you pick</strong>.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 w-full">
+              <div class="bg-card rounded-[12px] border border-border p-5">
+                <p class="text-muted text-xs font-bold uppercase tracking-wide mb-2">On the monthly plan</p>
+                <div class="flex flex-wrap items-baseline gap-x-2 mb-1">
+                  <span class="text-2xl font-bold text-primary">17,495 HUF</span>
+                  <span class="text-muted text-sm line-through">34,990 HUF</span>
+                </div>
+                <p class="text-body text-sm">for month 1, with <strong class="text-dark">750 credits</strong></p>
+                <p class="text-muted text-sm mt-2">From month 2, the fixed 34,990 HUF + VAT / month.</p>
+              </div>
+              <div class="bg-card rounded-[12px] border border-border p-5">
+                <p class="text-muted text-xs font-bold uppercase tracking-wide mb-2">On the annual plan</p>
+                <div class="flex flex-wrap items-baseline gap-x-2 mb-1">
+                  <span class="text-2xl font-bold text-primary">332,405 HUF</span>
+                  <span class="text-muted text-sm line-through">349,900 HUF</span>
+                </div>
+                <p class="text-body text-sm">for year 1, with <strong class="text-dark">6,250 credits</strong></p>
+                <p class="text-muted text-sm mt-2">From year 2, the fixed 349,900 HUF + VAT / year.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/book-demo/" class="cta-primary flex items-center justify-center w-full sm:w-auto sm:inline-flex px-6 h-12 text-sm mt-6">
+            Book my demo
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
         </div>
 
         <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
           <div class="flex items-start gap-4">
             <span class="material-symbols-outlined text-primary text-[24px] shrink-0">info</span>
             <div>
-              <h3 class="text-base font-bold text-dark mb-2">No annual plan and no smaller tier</h3>
+              <h3 class="text-base font-bold text-dark mb-2">Which one should you pick?</h3>
               <p class="text-body text-sm leading-relaxed">
-                We currently offer a single monthly plan with a 500 credits/month allowance.
-                Annual prepayment and a cheaper tier with fewer credits are not available for
-                now. If the allowance runs short, you can buy
+                The number of credits is the same either way: 12×500 = 6,000. What differs is the
+                price and the pacing. If you work at a steady rate — a few dozen posts and
+                articles a month — the <strong class="text-dark">monthly plan</strong> is the
+                right pick: no lock-in, cancel any time. If you have a big opening push ahead of
+                you (rewriting a whole catalogue, building out a blog cluster, opening up new
+                languages), go for the <strong class="text-dark">annual plan</strong>: all 6,000
+                credits are available on day one with no monthly cap — and you pay two months'
+                fees less. There is no smaller tier with fewer credits; if the allowance runs
+                out, you can buy
                 <a href="#extra-credits" class="text-primary font-semibold underline">extra credits</a> at any time.
               </p>
             </div>
@@ -369,6 +438,51 @@ const freeOps = [
             Publishing all of this is unlimited and free on top. The Usage section in the app
             shows your balance in real time.
           </p>
+        </div>
+
+        <!-- The annual allowance: the same number of credits, but no monthly ceiling -->
+        <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
+          <h3 class="text-xl font-bold text-dark mb-2">And what do the 6,000 annual credits buy?</h3>
+          <p class="text-body text-sm leading-relaxed mb-5">
+            Exactly as much as 12 months of the monthly allowance — the difference is that
+            <strong class="text-dark">there is no monthly ceiling</strong>: the whole allowance
+            lands on day one and you spread it over the 12 months however you like. That is what
+            makes room for a big opening push you would otherwise have to ration over six months:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_document</span>
+              <span>3,000 product descriptions at launch <strong class="text-dark">3,000</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">category</span>
+              <span>200 category pages <strong class="text-dark">400</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">article</span>
+              <span>40 blog articles, with images <strong class="text-dark">280</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+              <span>180 posts with images (3–4 a week, all year) <strong class="text-dark">540</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+              <span>48 newsletters (one a week) <strong class="text-dark">240</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
+              <span>24 narrated videos (two a month) <strong class="text-dark">480</strong></span>
+            </div>
+            <div class="flex items-center gap-2 text-body">
+              <span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+              <span>reserve for seasonal campaigns <strong class="text-dark">1,060</strong></span>
+            </div>
+            <div class="flex items-center gap-2 font-bold text-dark">
+              <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+              <span>6,000 credits in total</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -647,7 +761,7 @@ const freeOps = [
             {
               icon: 'credit_card',
               title: 'Card payment',
-              body: 'Payment is processed by Stripe, monthly in advance. The subscription renews automatically for the next period until you cancel it.',
+              body: 'Payment is processed by Stripe, always in advance: monthly subscriptions every month, annual ones in a single instalment at the start of the term. The subscription renews automatically for the next period until you cancel it.',
             },
             {
               icon: 'shield_lock',
@@ -680,10 +794,12 @@ const freeOps = [
             <div>
               <h3 class="text-xl font-bold text-dark mb-2">Managing and cancelling your subscription</h3>
               <p class="text-body text-sm leading-relaxed max-w-[620px]">
-                There is no lock-in: you can cancel any time once you are signed in to the app.
-                After cancelling you can keep using the system without restriction until your
-                renewal date, after which it simply does not renew. Fees already paid are not
-                refunded, but everything stays yours until the end of the period you paid for.
+                You can cancel at any time once you are signed in to the app, and you keep using
+                the system without restriction until the end of the period you paid for — your
+                next renewal date on the monthly plan, the end of the paid 12 months on the
+                annual one. The monthly plan has no lock-in; the annual plan covers a single,
+                continuous 12-month term. Fees already paid are not refunded on either cycle,
+                including any pro-rata part of the annual fee.
               </p>
             </div>
             <a
@@ -740,7 +856,8 @@ const freeOps = [
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">See it live before you pay</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
           In a 30-minute demo we show you the system running on your own webshop's products —
-          and your first month starts at half price with +250 bonus credits.
+          after which you start with 17,495 HUF off and +250 bonus credits, on the monthly or
+          the annual plan alike.
         </p>
         <a href="/en/book-demo/" class="cta-on-primary px-8 h-14 text-base inline-flex">
           Book a demo

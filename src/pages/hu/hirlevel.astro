@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
@@ -961,9 +961,9 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-                <!-- Standard előfizetés -->
+                <!-- Havi előfizetés -->
                 <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-                    <h3 class="text-xl font-bold mb-4 text-dark">Standard előfizetés</h3>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Havi előfizetés</h3>
                     <div class="flex items-baseline gap-1 mb-3">
                         <span class="text-4xl font-bold text-dark">34.990</span>
                         <span class="text-xl font-bold text-dark">Ft</span>
@@ -1062,6 +1062,27 @@ const description =
                     <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">A 2. hónaptól a fix 34.990 Ft / hó.</p>
                     <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Lefoglalom a bemutatót
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Éves előfizetés – a teljes kifejtés az ároldalon -->
+            <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">savings</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Éves előfizetéssel 12 hónap 10 havi díjért</h3>
+                            <p class="text-body text-sm leading-relaxed max-w-[620px]">
+                                349.900 Ft + ÁFA / év, és a teljes 6.000 kredit már az első napon a tiéd —
+                                havi plafon nélkül, 12 hónapon belül szabadon beosztva. A bemutató
+                                17.495 Ft-os kedvezménye erre is jár.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="/hu/arak/#csomag" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                        Éves csomag részletei
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
                 </div>

@@ -47,7 +47,7 @@ const faqLd = {
       name: 'How much does a Content Ninja subscription cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The standard subscription is 34,990 HUF + VAT per month (44,437 HUF gross), which includes 500 renewing AI credits each month. The 17,495 HUF + VAT demo bonus applies only to the first month; after that the fixed price of 34,990 HUF + VAT / month applies.',
+        text: 'The monthly subscription is 34,990 HUF + VAT per month (44,437 HUF gross), which includes 500 renewing AI credits each month. On the annual plan you get 12 months for the price of 10: 349,900 HUF + VAT a year (444,373 HUF gross) with 6,000 credits granted in one go at the start of the term. The 17,495 HUF + VAT demo discount and the +250 bonus credits apply to your first subscription term on either cycle.',
       },
     },
     {
@@ -737,10 +737,10 @@ const faqLd = {
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
 
-                <!-- Standard előfizetés -->
+                <!-- Havi előfizetés -->
                 <div
                     class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Monthly subscription</h3>
                     <div class="flex items-baseline gap-1 mb-3">
                         <span class="text-4xl font-bold text-dark">34,990</span>
                         <span class="text-xl font-bold text-dark">Ft</span>
@@ -847,6 +847,27 @@ const faqLd = {
                     </a>
                 </div>
 
+            </div>
+
+            <!-- Annual subscription – the full story lives on the pricing page -->
+            <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">savings</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-dark mb-2">On the annual plan: 12 months for the price of 10</h3>
+                            <p class="text-body text-sm leading-relaxed max-w-[620px]">
+                                349,900 HUF + VAT a year, with all 6,000 credits yours from day one — no
+                                monthly ceiling, spent at your own pace across the 12 months. The 17,495 HUF
+                                demo discount applies here too.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="/en/pricing/#plan" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                        See the annual plan
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
             </div>
 
             <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
@@ -996,9 +1017,12 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        The standard subscription is 34,990 HUF + VAT per month (44,437 HUF gross), which includes every feature and 500 renewing
-                        AI credits per month. The 17,495 HUF + VAT demo bonus applies only to the first month; after that the fixed 34,990 HUF
-                        + VAT / month price stays in effect within the current tier.
+                        The monthly subscription is 34,990 HUF + VAT per month (44,437 HUF gross), which includes every
+                        feature and 500 renewing AI credits per month. On the annual plan you get 12 months for the
+                        price of 10: 349,900 HUF + VAT a year (444,373 HUF gross) with 6,000 credits granted in one go
+                        at the start of the term. The 17,495 HUF + VAT demo discount and the +250 bonus credits apply to
+                        your first subscription term on either cycle. Full details on the
+                        <a href="/en/pricing/" class="text-primary font-semibold underline">pricing page</a>.
                     </div>
                 </div>
 

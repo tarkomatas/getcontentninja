@@ -49,7 +49,7 @@ const faqLd = {
       name: 'Mennyibe kerül a Content Ninja előfizetés?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A standard előfizetés havi 34.990 Ft + ÁFA (bruttó 44.437 Ft), amely havi 500 megújuló AI kreditet tartalmaz. A 17.495 Ft + ÁFA bemutató bónusz csak az első hónapra szól, utána a fix 34.990 Ft + ÁFA / hó ár érvényes.',
+        text: 'A havi előfizetés 34.990 Ft + ÁFA / hó (bruttó 44.437 Ft), amely havi 500 megújuló AI kreditet tartalmaz. Éves előfizetéssel 12 hónapot kapsz 10 havi díjért: 349.900 Ft + ÁFA / év (bruttó 444.373 Ft), 6.000 kredittel, amit egy összegben, az időszak elején írunk jóvá. A bemutatóért járó 17.495 Ft + ÁFA kedvezmény és a +250 bónusz kredit az első előfizetési időszakra szól, mindkét ciklusnál.',
       },
     },
     {
@@ -742,10 +742,10 @@ const faqLd = {
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
 
-                <!-- Standard előfizetés -->
+                <!-- Havi előfizetés -->
                 <div
                     class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-                    <h3 class="text-xl font-bold mb-4 text-dark">Standard előfizetés</h3>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Havi előfizetés</h3>
                     <div class="flex items-baseline gap-1 mb-3">
                         <span class="text-4xl font-bold text-dark">34.990</span>
                         <span class="text-xl font-bold text-dark">Ft</span>
@@ -852,6 +852,27 @@ const faqLd = {
                     </a>
                 </div>
 
+            </div>
+
+            <!-- Éves előfizetés – a teljes kifejtés az ároldalon -->
+            <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">savings</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Éves előfizetéssel 12 hónap 10 havi díjért</h3>
+                            <p class="text-body text-sm leading-relaxed max-w-[620px]">
+                                349.900 Ft + ÁFA / év, és a teljes 6.000 kredit már az első napon a tiéd —
+                                havi plafon nélkül, 12 hónapon belül szabadon beosztva. A bemutató
+                                17.495 Ft-os kedvezménye erre is jár.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="/hu/arak/#csomag" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                        Éves csomag részletei
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
             </div>
 
             <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
@@ -1000,9 +1021,12 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A standard előfizetés havi 34.990 Ft + ÁFA (bruttó 44.437 Ft), ami tartalmaz minden funkciót és havi 500 megújuló
-                        AI kreditet. A 17.495 Ft + ÁFA bemutató bónusz csak az első hónapra szól, utána a fix 34.990 Ft
-                        + ÁFA / hó ár marad érvényben a jelenlegi sávban.
+                        A havi előfizetés 34.990 Ft + ÁFA (bruttó 44.437 Ft), ami tartalmaz minden funkciót és havi 500
+                        megújuló AI kreditet. Éves előfizetéssel 12 hónapot kapsz 10 havi díjért: 349.900 Ft + ÁFA / év
+                        (bruttó 444.373 Ft), 6.000 kredittel, amit egy összegben, az időszak elején írunk jóvá. A
+                        bemutatóért járó 17.495 Ft + ÁFA kedvezmény és a +250 bónusz kredit az első előfizetési
+                        időszakra szól, mindkét ciklusnál. A részletek az
+                        <a href="/hu/arak/" class="text-primary font-semibold underline">ároldalon</a>.
                     </div>
                 </div>
 

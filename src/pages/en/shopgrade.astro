@@ -939,9 +939,9 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-                <!-- Standard subscription -->
+                <!-- Monthly subscription -->
                 <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Monthly subscription</h3>
                     <div class="flex items-baseline gap-1 mb-3">
                         <span class="text-4xl font-bold text-dark">34,990</span>
                         <span class="text-xl font-bold text-dark">HUF</span>
@@ -1028,6 +1028,28 @@ const description =
                     <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From month 2, the fixed 34,990 HUF / month.</p>
                     <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
                         Book my demo
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Annual subscription – here the missing monthly ceiling is the argument (bulk rewriting) -->
+            <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">savings</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-dark mb-2">For a big catalogue: the annual plan</h3>
+                            <p class="text-body text-sm leading-relaxed max-w-[620px]">
+                                349,900 HUF + VAT a year — 12 months for the price of 10 — with all 6,000
+                                credits yours from day one, no monthly ceiling. That lets you rewrite a
+                                3,000-product catalogue in one run instead of rationing it over six months.
+                                The 17,495 HUF demo discount applies here too.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="/en/pricing/#plan" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                        See the annual plan
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
                 </div>
@@ -1169,8 +1191,10 @@ const description =
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        There's no minimum term: the subscription runs for an indefinite period and you can cancel it at
-                        any time. On termination any unused credits are lost – the details are in sections 5 and 10 of
+                        The monthly plan has no minimum term: it runs for an indefinite period and you can cancel it at
+                        any time. The annual plan covers a single, continuous 12-month term – you can cancel there too,
+                        but the cancellation takes effect at the end of the 12 months you paid for. On termination any
+                        unused credits are lost either way – the details are in sections 5 and 10 of
                         the <a href="/en/terms/" class="text-primary font-semibold underline">Terms</a>.
                     </div>
                 </div>

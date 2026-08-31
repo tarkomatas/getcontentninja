@@ -804,7 +804,7 @@ const description =
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                 <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-                    <h3 class="text-xl font-bold mb-4 text-dark">Standard subscription</h3>
+                    <h3 class="text-xl font-bold mb-4 text-dark">Monthly subscription</h3>
                     <div class="flex items-baseline gap-1 mb-3">
                         <span class="text-4xl font-bold text-dark">34,990</span>
                         <span class="text-xl font-bold text-dark">HUF</span>
@@ -895,8 +895,31 @@ const description =
                 </div>
             </div>
 
+            <!-- Annual subscription – here the missing monthly ceiling is the argument (whole cluster at once) -->
+            <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">savings</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-dark mb-2">For the whole cluster: the annual plan</h3>
+                            <p class="text-body text-sm leading-relaxed max-w-[620px]">
+                                349,900 HUF + VAT a year — 12 months for the price of 10 — with all 6,000
+                                credits yours from day one, no monthly ceiling. Product descriptions,
+                                category pages and the blog cluster can all start at once instead of being
+                                rationed over six months — and search engines see the whole of it sooner.
+                                The 17,495 HUF demo discount applies here too.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="/en/pricing/#plan" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                        See the annual plan
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
             <div class="text-center mt-8">
-                <a href="/en/pricing/#kreditek" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                <a href="/en/pricing/#credits" class="text-primary font-bold text-sm inline-flex items-center gap-1">
                     Detailed credit costs
                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
