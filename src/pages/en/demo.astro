@@ -4,7 +4,6 @@ import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
-import MetaTechProvider from '../../components/MetaTechProvider.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 
@@ -222,7 +221,7 @@ const description =
     <Header locale={locale} page={page} />
 
         <!-- 1. Hero + Application form -->
-        <section id="hero" class="hero-gradient py-12 md:py-24 px-4 md:px-10 overflow-hidden">
+        <section id="hero" class="hero-gradient py-12 md:py-16 px-4 md:px-10 overflow-hidden">
             <div class="max-w-[1200px] mx-auto w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
 
@@ -295,9 +294,6 @@ const description =
                             <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ local webshops</span> already use it</p>
                         </div>
 
-                        <!-- Meta Tech Provider – closes the hero trust block: a direct answer to
-                             the "is it safe to hand over my Facebook page access?" objection -->
-                        <MetaTechProvider locale={locale} class="mt-1" />
 
                     </div>
 
@@ -518,8 +514,8 @@ const description =
             </div>
         </section>
 
-        <!-- Hitelesitesek: csak az UNAS - a Meta-jelveny mar ott van a hero urlapja mellett -->
-        <TrustBadges locale={locale} meta={false} />
+        <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
+        <TrustBadges locale={locale} />
 
         <!-- Testimonials -->
         <section class="bg-card py-20 md:py-28 text-dark">

@@ -14,7 +14,8 @@ Ez a fájl a **használati konvenciókat** rögzíti (mit mikor használj), nem 
 |---|---|
 | Tartalmi szekció | `py-20 md:py-28` |
 | Konténer | `max-w-[1200px] mx-auto px-4 md:px-10` |
-| Hero szekció | `py-12 md:py-24` |
+| Hero szekció | `py-12 md:py-16` (asztali nézetben szándékosan kompakt: a hero alatti hitelesítés-csík így feljebb kerül) |
+| Hitelesítés-csík (`TrustBadges`, a hero alatt) | `bg-card border-y border-border py-3` |
 | Záró `bg-primary` CTA-sáv | `py-16 md:py-20` (szándékos accent) |
 | Videós bemutató-sáv | `bg-dark py-20 md:py-28`, konténer `max-w-[900px]` (szándékos accent) |
 

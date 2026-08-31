@@ -6,6 +6,12 @@
 // onnan kikerült: a bizonyíték ott ér valamit, ahol a látogató még dönt, nem az
 // oldal alján.
 //
+// A csík MINDENHOL azonos: mindkét jelvény, ugyanabban a sorrendben. Ezért került
+// ki a `MetaTechProvider` kártyája a kampányoldalak herójából (posztolás,
+// online-bemutató, teljes-rendszer + EN párjaik): ott a védjegy kétszer szerepelt
+// volna pár száz pixelen belül. Ha új oldalon kísértést éreznél külön Meta-kártyát
+// tenni a hero űrlapja mellé – ne tedd, ez a csík a helye.
+//
 // Miért VILÁGOS a sáv: a Meta-jelvény lockupja sötét szövegű, tehát kötelezően
 // világos felületet kíván. Ezért áll mindkét jelvény `theme="light"`-tal – az
 // UNAS is a hivatalos ANTRACIT logóváltozattal, nem a fehér kontúrossal.
@@ -19,21 +25,15 @@ import UnasPartner from './UnasPartner.astro';
 
 interface Props {
   locale: Locale;
-  /**
-   * `false`: a Meta-jelvény kimarad a csíkból. Azokon az oldalakon kell, ahol a
-   * heróban MÁR ott a `MetaTechProvider` kártyája (a lead-űrlap mellett) – enélkül
-   * ugyanaz a védjegy kétszer szerepelne pár száz pixelen belül, ami inflálja.
-   */
-  meta?: boolean;
   class?: string;
 }
 
-const { locale, meta = true, class: className = '' } = Astro.props;
+const { locale, class: className = '' } = Astro.props;
 ---
 
 <div class={`bg-card border-y border-border py-3 px-4 md:px-10 ${className}`}>
   <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-    {meta && <MetaTechProvider locale={locale} variant="bare" theme="light" />}
+    <MetaTechProvider locale={locale} variant="bare" theme="light" />
     <UnasPartner locale={locale} variant="bare" theme="light" />
   </div>
 </div>
