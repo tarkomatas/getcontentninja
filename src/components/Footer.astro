@@ -37,8 +37,22 @@ const legal = {
 const solutions = navModulesFor(locale);
 ---
 
-<footer class="bg-dark text-muted py-14 px-4 md:px-10">
-  <div class="max-w-[1200px] mx-auto">
+<footer class="bg-dark text-muted">
+  <!-- Bizalmi sáv: VILÁGOS, teljes szélességű sáv a sötét lábléc fölött.
+       Miért nem a sötét láblécen belül: a Meta-jelvény lockupja sötét szövegű,
+       tehát kötelezően világos felületet kíván – a sötéten ez két fehér
+       „matricát" adott. Így viszont mindkét jelvény a natív, világos felületén
+       áll (az UNAS is a hivatalos antracit logóváltozattal), és a hitelesítések
+       egy készletként olvasnak. Ezért `theme="light"` mindkettőnél. -->
+  <div class="bg-card border-t border-border py-8 px-4 md:px-10">
+    <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+      <MetaTechProvider locale={locale} variant="bare" theme="light" />
+      <UnasPartner locale={locale} variant="bare" theme="light" />
+    </div>
+  </div>
+
+  <div class="py-14 px-4 md:px-10">
+   <div class="max-w-[1200px] mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
       <!-- Brand -->
       <div>
@@ -116,21 +130,9 @@ const solutions = navModulesFor(locale);
       </div>
     </div>
 
-    <!-- Bizalmi sáv: a hitelesítések EGYÜTT, saját sorban – nem a CTA-hasáb alá
-         tömve. Két okból: a hasáb a két jelvénytől aránytalanul megnyúlt, és a
-         Meta-jelvény (fehér lap) meg az UNAS-lockup egymás mellett olvas
-         hitelesítés-készletként. Az UNAS logója itt kap valódi üresjáratot is. -->
-    <div class="border-t border-white/10 pt-8 mb-8 flex flex-wrap items-center gap-x-10 gap-y-6">
-      <!-- Mindkettő fehér lapon áll, hogy egymás mellett egy készletnek látsszon
-           (a Meta-jelvénynél ez kötelező is: sötét szövegű a lockup). Az UNAS-nál
-           ezért `theme="light"` a helyes érték – a KÖZVETLEN háttere fehér, tehát
-           a hivatalos antracit logóváltozat megy rá, nem a fehér kontúros. -->
-      <MetaTechProvider locale={locale} variant="bare" theme="dark" />
-      <UnasPartner locale={locale} variant="bare" theme="light" class="bg-white rounded-[10px] px-6 py-5" />
-    </div>
-
     <div class="border-t border-white/10 pt-6 text-center text-xs">
       <p>{ui.footer.copyright}</p>
     </div>
+   </div>
   </div>
 </footer>
