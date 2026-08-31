@@ -64,6 +64,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
 import { AUDIT_HANDOFF_ENDPOINT, AUDIT_START_URL } from '../../data/forms';
 
 const locale = 'hu';
@@ -454,6 +455,9 @@ const description =
         </div>
       </div>
     </section>
+
+    <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
+    <TrustBadges locale={locale} />
 
     <!-- 2. BLOKK — Mit kapsz (a csali megmutatása: egy lead magnetnél ez a legfontosabb szekció) -->
     <section class="bg-card py-20 md:py-28">

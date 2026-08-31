@@ -4,6 +4,8 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Carousel from '../../components/Carousel.astro';
 import MetaTechProvider from '../../components/MetaTechProvider.astro';
+import PricingCards from '../../components/PricingCards.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'en';
 const page = 'home';
@@ -153,6 +155,9 @@ const faqLd = {
             </div>
         </div>
     </section>
+
+    <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
+    <TrustBadges locale={locale} />
 
 
     <!-- ═══════════════════════════════════════
@@ -735,140 +740,7 @@ const faqLd = {
                 <p class="text-body text-lg">Join the early registrants and keep the discounted price long term.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-
-                <!-- Havi előfizetés -->
-                <div
-                    class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-                    <h3 class="text-xl font-bold mb-4 text-dark">Monthly subscription</h3>
-                    <div class="flex items-baseline gap-1 mb-3">
-                        <span class="text-4xl font-bold text-dark">34,990</span>
-                        <span class="text-xl font-bold text-dark">Ft</span>
-                        <span class="text-muted text-sm">+VAT / month</span>
-                    </div>
-                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fixed monthly fee, no hidden costs</p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">500 AI credits per month (renewing)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">All modules: post writing, blog articles, Shopgrade, newsletters, image and video generation</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Manage multiple brands (webshops) within one account</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Unlimited social media accounts</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">On-brand style and tone of voice</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Marketing calendar and scheduling</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Continuous development and support</span>
-                        </li>
-                    </ul>
-                    <a href="/en/book-demo/"
-                        class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
-                        Request a demo
-                    </a>
-                </div>
-
-                <!-- Bemutató bónusz -->
-                <div
-                    class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
-                    <div
-                        class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
-                        1st month only
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-dark">Start at half price</h3>
-                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
-                        <span class="text-4xl font-bold text-primary">17,495</span>
-                        <span class="text-xl font-bold text-dark">Ft</span>
-                        <span class="text-muted text-sm">+VAT</span>
-                        <span class="text-muted text-sm line-through">34,990 HUF</span>
-                    </div>
-                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">for the first month</p>
-                    <p class="text-body text-sm mb-4">Book a 30-minute demo, and:</p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">50% discount for the 1st month</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">750 credits instead of 500 (+250 bonus)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Personalized demo</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">We answer all your questions</span>
-                        </li>
-                    </ul>
-                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">From the 2nd month, the fixed 34,990 HUF / month.</p>
-                    <a href="/en/book-demo/"
-                        class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
-                        Book the demo
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- Annual subscription – the full story lives on the pricing page -->
-            <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
-                    <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">savings</span>
-                        <div>
-                            <h3 class="text-xl font-bold text-dark mb-2">On the annual plan: 12 months for the price of 10</h3>
-                            <p class="text-body text-sm leading-relaxed max-w-[620px]">
-                                349,900 HUF + VAT a year, with all 6,000 credits yours from day one — no
-                                monthly ceiling, spent at your own pace across the 12 months. The 17,495 HUF
-                                demo discount applies here too.
-                            </p>
-                        </div>
-                    </div>
-                    <a href="/en/pricing/#plan" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
-                        See the annual plan
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
+            <PricingCards locale={locale} />
 
             <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">

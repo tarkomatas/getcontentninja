@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import PricingCards from '../../components/PricingCards.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'hu';
 const page = 'pricing';
@@ -152,16 +154,15 @@ const freeOps = [
       <div class="max-w-[1200px] mx-auto px-4 md:px-10">
         <div class="max-w-[760px] mx-auto text-center flex flex-col gap-5 animate-fade-up">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">ÁRAZÁS</span>
+          <!-- A „-tól" nem stílus, hanem pontosság: a 29.158 Ft éves előfizetéssel
+               érhető el, havi ciklusban 34.990 Ft. -->
           <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
             Egy csomag <span class="text-primary">webshopoknak</span>, havi
-            <span class="text-primary">34.990 Ft + ÁFA</span>
+            <span class="text-primary">29.158 Ft + ÁFA</span>-tól
           </h1>
           <p class="text-body text-lg leading-relaxed">
             Minden modul benne van — posztolás, blogcikk, Shopgrade, hírlevél, kép- és
-            videógenerálás —, havi 500
-            megújuló AI kredittel, amit az alábbi táblázatok szerint használsz fel.
-            <strong class="text-dark">Éves előfizetéssel 12 hónapot kapsz 10 havi díjért</strong>,
-            és a teljes 6.000 kredit már az első napon a tiéd.
+            videógenerálás.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-3 mt-1">
@@ -192,161 +193,25 @@ const freeOps = [
       </div>
     </section>
 
+    <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
+    <TrustBadges locale={locale} />
+
     <!-- ═══════════════════════════════════════
      CSOMAG
 ═══════════════════════════════════════ -->
     <section id="csomag" class="bg-light py-20 md:py-28">
       <div class="max-w-[900px] mx-auto px-4 md:px-10">
-        <div class="text-center mb-14">
+        <div class="text-center mb-10">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">A CSOMAG</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Egy csomag, két számlázási ciklus</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Próbáld ki kedvezményes áron!</h2>
+          <!-- A „havi előfizetés esetén" nem szőrszálhasogatás: az éves 12 hónapos,
+               egybefüggő időszak, időarányos visszatérítés nélkül (ÁSZF 4.3, 5.2). -->
           <p class="text-body text-lg">
-            Ugyanaz a rendszer, ugyanazok a modulok — csak azt választod meg, havonta vagy évente
-            fizetsz. Nincs felár, nincs rejtett költség.
+            Ha nem tetszik, havi előfizetés esetén bármikor lemondhatod. Nincs kockázat.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          <!-- Havi előfizetés -->
-          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-            <h3 class="text-xl font-bold mb-4 text-dark">Havi előfizetés</h3>
-            <div class="flex items-baseline gap-1 mb-3">
-              <span class="text-4xl font-bold text-dark">34.990</span>
-              <span class="text-xl font-bold text-dark">Ft</span>
-              <span class="text-muted text-sm">+ÁFA / hó</span>
-            </div>
-            <p class="text-muted text-sm mb-1">Bruttó 44.437 Ft — ennyit von le a kártyáról</p>
-            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">
-              Fix havidíj, hűségidő nélkül — bármikor lemondható
-            </p>
-            <ul class="space-y-4 mb-8">
-              {[
-                '500 AI kredit havonta, minden hónapfordulón megújul',
-                'Az összes modul: posztírás, blogcikk, Shopgrade, hírlevél, kép- és videógenerálás',
-                'Több brand (webshop) kezelése egy fiókon belül',
-                'Korlátlan közösségi média fiók',
-                'Korlátlan publikálás és időzítés (nem fogyaszt kreditet)',
-                'Márkahű stílus és hangnem',
-                'Marketing naptár és időzítés',
-                'Folyamatos fejlesztés és support',
-              ].map((item) => (
-                <li class="flex items-center gap-3">
-                  <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                    <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                  </div>
-                  <span class="text-body font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <a href="/hu/online-bemutato/" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
-              Bemutatót kérek
-            </a>
-          </div>
-
-          <!-- Éves előfizetés -->
-          <div class="bg-card rounded-[16px] border-2 border-primary/40 p-5 sm:p-8 shadow-card relative flex flex-col h-full hover:shadow-card-hover transition-all">
-            <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
-              2 hónap ingyen
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-dark">Éves előfizetés</h3>
-            <div class="flex items-baseline gap-1 mb-3">
-              <span class="text-4xl font-bold text-primary">349.900</span>
-              <span class="text-xl font-bold text-dark">Ft</span>
-              <span class="text-muted text-sm">+ÁFA / év</span>
-            </div>
-            <p class="text-muted text-sm mb-1">Bruttó 444.373 Ft — egy összegben, előre</p>
-            <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">
-              12 hónap 10 havi díjért — 29.158 Ft + ÁFA / hó
-            </p>
-            <ul class="space-y-4 mb-8">
-              {[
-                '6.000 AI kredit egy összegben, már az első napon',
-                'Nincs havi plafon: 12 hónapon belül szabadon osztod be',
-                'Minden más ugyanaz, mint a havi csomagban',
-                '69.980 Ft + ÁFA megtakarítás egy éven (bruttó 88.871 Ft)',
-                '12 hónapos, egybefüggő előfizetési időszak',
-              ].map((item) => (
-                <li class="flex items-center gap-3">
-                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                  </div>
-                  <span class="text-body font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p class="text-body text-sm mb-6">
-              Havi előfizetésről bármikor átválthatsz: a hátralévő időszakot jóváírjuk, a
-              megmaradt kreditjeid pedig nem vesznek el.
-            </p>
-            <a href="/hu/online-bemutato/" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
-              Bemutatót kérek
-              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Bemutató bónusz – MINDKÉT ciklusra jár (ÁSZF 4.7: a kuponkedvezmény
-             forintban, a havi listaárból számolódik, és a két ciklusnál azonos) -->
-        <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
-          <div class="flex flex-col md:flex-row md:items-start gap-6">
-            <div class="md:max-w-[300px] shrink-0">
-              <span class="inline-flex items-center bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide mb-3">
-                Bemutató bónusz
-              </span>
-              <h3 class="text-xl font-bold text-dark mb-2">17.495 Ft kedvezmény, +250 bónusz kredit</h3>
-              <p class="text-body text-sm leading-relaxed">
-                Foglalj egy 30 perces bemutatót, és a kedvezményt az első előfizetési időszakod
-                díjából vonjuk le — <strong class="text-dark">mindegy, melyik ciklust választod</strong>.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 w-full">
-              <div class="bg-card rounded-[12px] border border-border p-5">
-                <p class="text-muted text-xs font-bold uppercase tracking-wide mb-2">Havi csomaggal</p>
-                <div class="flex flex-wrap items-baseline gap-x-2 mb-1">
-                  <span class="text-2xl font-bold text-primary">17.495 Ft</span>
-                  <span class="text-muted text-sm line-through">34.990 Ft</span>
-                </div>
-                <p class="text-body text-sm">az 1. hónapra, <strong class="text-dark">750 kredittel</strong></p>
-                <p class="text-muted text-sm mt-2">A 2. hónaptól a fix 34.990 Ft + ÁFA / hó.</p>
-              </div>
-              <div class="bg-card rounded-[12px] border border-border p-5">
-                <p class="text-muted text-xs font-bold uppercase tracking-wide mb-2">Éves csomaggal</p>
-                <div class="flex flex-wrap items-baseline gap-x-2 mb-1">
-                  <span class="text-2xl font-bold text-primary">332.405 Ft</span>
-                  <span class="text-muted text-sm line-through">349.900 Ft</span>
-                </div>
-                <p class="text-body text-sm">az 1. évre, <strong class="text-dark">6.250 kredittel</strong></p>
-                <p class="text-muted text-sm mt-2">A 2. évtől a fix 349.900 Ft + ÁFA / év.</p>
-              </div>
-            </div>
-          </div>
-
-          <a href="/hu/online-bemutato/" class="cta-primary flex items-center justify-center w-full sm:w-auto sm:inline-flex px-6 h-12 text-sm mt-6">
-            Lefoglalom a bemutatót
-            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-          </a>
-        </div>
-
-        <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
-          <div class="flex items-start gap-4">
-            <span class="material-symbols-outlined text-primary text-[24px] shrink-0">info</span>
-            <div>
-              <h3 class="text-base font-bold text-dark mb-2">Melyiket válaszd?</h3>
-              <p class="text-body text-sm leading-relaxed">
-                A kredit mennyisége ugyanannyi: 12×500 = 6.000. A különbség az ár és az ütemezés.
-                Ha egyenletesen, havi néhány tucat poszttal és cikkel dolgozol, a
-                <strong class="text-dark">havi csomag</strong> a jó választás — nincs hűségidő,
-                bármikor lemondható. Ha viszont nagy indulórohamod lesz (egy teljes katalógus
-                újraírása, egy blogklaszter felépítése, több nyelvre nyitás), akkor az
-                <strong class="text-dark">éves csomag</strong>: a 6.000 kredit az első napon
-                rendelkezésre áll, havi korlát nélkül — és 2 havi díjjal kevesebbet fizetsz.
-                Kisebb, kevesebb kreditet tartalmazó szint nincs; ha a keret elfogy, bármikor
-                vásárolhatsz <a href="#extra-kredit" class="text-primary font-semibold underline">extra kreditet</a>.
-              </p>
-            </div>
-          </div>
-        </div>
+        <PricingCards locale={locale} />
       </div>
     </section>
 

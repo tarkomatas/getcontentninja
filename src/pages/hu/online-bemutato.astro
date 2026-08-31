@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import MetaTechProvider from '../../components/MetaTechProvider.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'hu';
 const page = 'bookDemo';
@@ -421,6 +422,9 @@ const description =
             </div>
         </div>
     </section>
+
+    <!-- Hitelesitesek: csak az UNAS - a Meta-jelveny mar ott van a hero urlapja mellett -->
+    <TrustBadges locale={locale} meta={false} />
 
     <!-- 2. Mit mutatunk meg a bemutatón? -->
     <section class="bg-card py-20 md:py-28 px-4 md:px-10">

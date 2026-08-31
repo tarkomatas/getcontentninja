@@ -38,22 +38,9 @@ const solutions = navModulesFor(locale);
 ---
 
 <footer class="bg-dark text-muted">
-  <!-- Bizalmi sáv: VILÁGOS, vékony csík közvetlenül a sötét lábléc FÖLÖTT.
-       Miért nem a sötéten belül: a Meta-jelvény lockupja sötét szövegű, tehát
-       kötelezően világos felületet kíván; a sötét háttéren ez két fehér
-       „matricát" adott. Így mindkét jelvény a natív felületén áll (az UNAS a
-       hivatalos antracit változattal) – ezért `theme="light"` mindkettőnél.
-       A `border-t` azért kell, mert a legtöbb oldalon egy világos (vagy lila)
-       szekció van fölötte, amivel egybefolyna. A csík magasságát a Meta-PNG
-       szabja meg: a fájl maga hozza a Meta által előírt körbefutó üresjáratot,
-       ezt NEM vágjuk le, csak kisebbre méretezzük. -->
-  <div class="bg-card border-t border-border py-3 px-4 md:px-10">
-    <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-      <MetaTechProvider locale={locale} variant="bare" theme="light" />
-      <UnasPartner locale={locale} variant="bare" theme="light" />
-    </div>
-  </div>
-
+  <!-- A hitelesítés-csík (Meta + UNAS) innen KIKERÜLT a hero alá – lásd
+       `TrustBadges.astro`. Ne tedd vissza ide anélkül, hogy onnan kivennéd:
+       kétszer ugyanaz a jelvénypár egy oldalon inflálja a bizonyítékot. -->
   <div class="py-14 px-4 md:px-10">
    <div class="max-w-[1200px] mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">

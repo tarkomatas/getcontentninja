@@ -221,6 +221,60 @@
             display: none;
         }
 
+        /* Számlázási ciklus váltó az ároldalakon (hu/arak, en/pricing).
+           MINDKÉT állapot szövege benne marad a HTML-ben, csak CSS rejti a
+           nem aktívat: így a kereső és az AI-fetcherek mindkét árat látják,
+           és nincs villanás betöltéskor (nem JS rajzolja ki). Az alapállapot
+           az éves – a markup adja a `data-cycle="annual"`-lal a szekción. */
+        [data-cycle="annual"] .cycle-monthly,
+        [data-cycle="monthly"] .cycle-annual {
+            display: none !important;
+        }
+
+        /* Maga a csúszka: sín + gomb. Az állapotot ugyanaz a data-cycle vezérli. */
+        .cycle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            border-radius: 9999px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background-color 0.2s ease;
+        }
+
+        .cycle-switch-knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            border-radius: 9999px;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(30, 30, 47, 0.25);
+            transition: transform 0.2s ease;
+        }
+
+        [data-cycle="monthly"] .cycle-switch {
+            background-color: #d7d7e2;
+        }
+
+        [data-cycle="annual"] .cycle-switch {
+            background-color: #6c5ce7;
+        }
+
+        [data-cycle="annual"] .cycle-switch-knob {
+            transform: translateX(20px);
+        }
+
+        /* A csúszka két oldalán álló felirat közül az aktív sötét és félkövér. */
+        [data-cycle="monthly"] .cycle-label-monthly,
+        [data-cycle="annual"] .cycle-label-annual {
+            color: #1e1e2f;
+            font-weight: 700;
+        }
+
         /* Honeypot (HoneypotField.astro): valódi input, csak a képernyőn kívül.
            Szándékosan NEM display:none és NEM type="hidden" – a botok azt
            kiszűrik, márpedig pont az kell, hogy kitöltsék. */

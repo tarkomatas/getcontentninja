@@ -1,0 +1,246 @@
+---
+/**
+ * Az ároldali/kampányoldali árblokk: számlázási ciklus csúszka + két kártya
+ * (előfizetés · bemutató bónusz).
+ *
+ * EGY forrás: korábban ez a blokk 18 oldalfájlban volt kézzel másolva, ezért
+ * csúszott el egymástól (lásd a ModuleGrid tanulságát a CLAUDE.md-ben). Ha az
+ * ár vagy a kredit változik, CSAK ezt a fájlt kell átírni.
+ *
+ * A ciklusváltó úgy működik, hogy MINDKÉT állapot markupja benne marad a
+ * HTML-ben, és csak CSS rejti a nem aktívat (`.cycle-monthly` / `.cycle-annual`
+ * a global.css-ben). Két haszna van:
+ *   1. a kereső és az AI-fetcherek mindkét árat látják (nem JS rajzolja ki),
+ *   2. nincs villanás betöltéskor – az alapállapotot a `data-cycle="annual"`
+ *      adja már szerveroldalon, a script csak billent.
+ *
+ * A bemutató bónusz kártya SZÁNDÉKOSAN statikus: mindig a havi bevezető árat
+ * mutatja, nem követi a csúszkát. A címe ezért ciklus-semleges.
+ *
+ * Props:
+ *   locale  – 'hu' | 'en'
+ *   ctaHref – hova visz mindkét gomb (kampányoldalakon '#hero', egyébként a
+ *             bemutató-kérő oldal)
+ *   cardBg  – a kártyák háttere. Alap: 'bg-card' (világosszürke `bg-light`
+ *             szekcióban). Ahol a SZEKCIÓ maga fehér (`bg-card`) – ilyen a
+ *             teljes-rendszer és az all-in-one –, ott 'bg-light' kell, különben
+ *             a kártya beleolvad a háttérbe.
+ */
+import type { Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  ctaHref?: string;
+  cardBg?: string;
+}
+
+const { locale, ctaHref, cardBg = 'bg-card' } = Astro.props;
+
+const href = ctaHref ?? (locale === 'hu' ? '/hu/online-bemutato/' : '/en/book-demo/');
+
+const t = {
+  hu: {
+    switchLabel: 'Éves számlázás',
+    monthly: 'Havi',
+    annual: 'Éves',
+    saveBadge: '−2 hónap',
+
+    planTitle: 'Havi előfizetés',
+    priceMonthly: '34.990',
+    priceAnnual: '29.158',
+    currency: 'Ft',
+    perMonth: '+ÁFA / hó',
+    strike: '34.990 Ft',
+    annualTotal: '349.900 Ft + ÁFA / év, egy összegben',
+    creditMonthly: '500 AI kredit havonta (megújul)',
+    creditAnnual: '6.000 AI kredit egy évre (egyben)',
+    features: [
+      'Az összes modul: posztírás, blogcikk, Shopgrade, hírlevél, kép- és videógenerálás',
+      'Több brand (webshop) kezelése egy fiókon belül',
+      'Korlátlan közösségi média fiók',
+      'Márkahű stílus és hangnem',
+      'Marketing naptár és időzítés',
+      'Folyamatos fejlesztés és support',
+    ],
+    planCta: 'Bemutatót kérek',
+
+    bonusRibbon: 'Csak az 1. hónap',
+    bonusTitle: 'Próbáld ki olcsóbban',
+    bonusPrice: '17.495',
+    bonusVat: '+ÁFA',
+    bonusStrike: '34.990 Ft',
+    bonusPeriod: 'az első hónapra',
+    bonusLead: 'Foglalj egy 30 perces bemutatót, és:',
+    bonusFeatures: [
+      '50% kedvezmény az 1. hónapra',
+      '750 kredit 500 helyett (+250 bónusz)',
+      'Személyre szabott bemutató',
+      'Válaszolunk minden kérdésedre',
+    ],
+    bonusNote: 'A 2. hónaptól normál havidíj.',
+    bonusCta: 'Lefoglalom a bemutatót',
+  },
+  en: {
+    switchLabel: 'Annual billing',
+    monthly: 'Monthly',
+    annual: 'Annual',
+    saveBadge: '−2 months',
+
+    planTitle: 'Monthly subscription',
+    priceMonthly: '34,990',
+    priceAnnual: '29,158',
+    currency: 'HUF',
+    perMonth: '+VAT / month',
+    strike: '34,990 HUF',
+    annualTotal: '349,900 HUF + VAT / year, in one instalment',
+    creditMonthly: '500 AI credits per month (renewing)',
+    creditAnnual: '6,000 AI credits for the year (in one go)',
+    features: [
+      'All modules: post writing, blog articles, Shopgrade, newsletters, image and video generation',
+      'Manage multiple brands (webshops) in one account',
+      'Unlimited social media accounts',
+      'On-brand style and tone of voice',
+      'Marketing calendar and scheduling',
+      'Continuous development and support',
+    ],
+    planCta: 'Book a demo',
+
+    bonusRibbon: 'First month only',
+    bonusTitle: 'Try it for less',
+    bonusPrice: '17,495',
+    bonusVat: '+VAT',
+    bonusStrike: '34,990 HUF',
+    bonusPeriod: 'for the first month',
+    bonusLead: 'Book a 30-minute demo and get:',
+    bonusFeatures: [
+      '50% off your first month',
+      '750 credits instead of 500 (+250 bonus)',
+      'A personalised walkthrough',
+      'Answers to all of your questions',
+    ],
+    bonusNote: 'From month 2, the normal monthly fee.',
+    bonusCta: 'Book my demo',
+  },
+}[locale];
+---
+
+<div data-cycle="annual">
+  <!-- Számlázási ciklus csúszka – alapból az ÉVES (a kedvezőbb) áll -->
+  <div class="flex justify-center sm:justify-end items-center gap-3 mb-6">
+    <span class="cycle-label-monthly text-sm text-muted transition-colors">{t.monthly}</span>
+    <button type="button" class="cycle-switch" role="switch" aria-checked="true" aria-label={t.switchLabel}>
+      <span class="cycle-switch-knob"></span>
+    </button>
+    <span class="cycle-label-annual text-sm text-muted transition-colors">{t.annual}</span>
+    <span class="inline-flex items-center bg-success/10 text-success text-xs font-bold px-2.5 py-1 rounded-full">
+      {t.saveBadge}
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+    <!-- Előfizetés – a csúszka CSAK az árat és a kredit sorát váltja -->
+    <div class={`${cardBg} rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all`}>
+      <h3 class="text-xl font-bold mb-4 text-dark">{t.planTitle}</h3>
+
+      <div class="mb-6 pb-6 border-b border-border">
+        <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span class="text-4xl font-bold text-dark cycle-monthly">{t.priceMonthly}</span>
+          <span class="text-4xl font-bold text-dark cycle-annual">{t.priceAnnual}</span>
+          <span class="text-xl font-bold text-dark">{t.currency}</span>
+          <span class="text-muted text-sm">{t.perMonth}</span>
+          <span class="text-muted text-sm line-through cycle-annual">{t.strike}</span>
+        </div>
+        <!-- Az éves díj egy összegben megy le: enélkül a havi bontás azt ígérné,
+             hogy havonta terheljük a kártyát. -->
+        <p class="text-muted text-sm mt-2 cycle-annual">{t.annualTotal}</p>
+      </div>
+
+      <ul class="space-y-4 mb-8">
+        <li class="flex items-center gap-3 cycle-monthly">
+          <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-success text-[14px]">check</span>
+          </div>
+          <span class="text-body font-medium">{t.creditMonthly}</span>
+        </li>
+        <li class="flex items-center gap-3 cycle-annual">
+          <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-success text-[14px]">check</span>
+          </div>
+          <span class="text-body font-medium">{t.creditAnnual}</span>
+        </li>
+        {t.features.map((item) => (
+          <li class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-success text-[14px]">check</span>
+            </div>
+            <span class="text-body font-medium">{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <a href={href} class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+        {t.planCta}
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+      </a>
+    </div>
+
+    <!-- Bemutató bónusz – statikus, mindig a havi bevezető ár -->
+    <div class={`${cardBg} rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full`}>
+      <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
+        {t.bonusRibbon}
+      </div>
+      <h3 class="text-xl font-bold mb-4 text-dark">{t.bonusTitle}</h3>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+        <span class="text-4xl font-bold text-primary">{t.bonusPrice}</span>
+        <span class="text-xl font-bold text-dark">{t.currency}</span>
+        <span class="text-muted text-sm">{t.bonusVat}</span>
+        <span class="text-muted text-sm line-through">{t.bonusStrike}</span>
+      </div>
+      <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">{t.bonusPeriod}</p>
+      <p class="text-body text-sm mb-4">{t.bonusLead}</p>
+      <ul class="space-y-4 mb-8">
+        {t.bonusFeatures.map((item) => (
+          <li class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-primary text-[14px]">check</span>
+            </div>
+            <span class="text-body font-medium">{item}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">{t.bonusNote}</p>
+      <a href={href} class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
+        {t.bonusCta}
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- A csúszka logikája. `is:inline`, mert azonnal futó IIFE (lásd CLAUDE.md).
+     Minden [data-cycle] gyökeret külön beköt, így egy oldalon több példány is
+     lehetne belőle. Csak az attribútumot billenti – a megjelenítést a CSS adja. -->
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-cycle]').forEach(function (root) {
+      var sw = root.querySelector('.cycle-switch');
+      if (!sw) return;
+
+      function setCycle(cycle) {
+        root.setAttribute('data-cycle', cycle);
+        sw.setAttribute('aria-checked', String(cycle === 'annual'));
+      }
+
+      sw.addEventListener('click', function () {
+        setCycle(root.getAttribute('data-cycle') === 'annual' ? 'monthly' : 'annual');
+      });
+
+      [['.cycle-label-monthly', 'monthly'], ['.cycle-label-annual', 'annual']].forEach(function (pair) {
+        var el = root.querySelector(pair[0]);
+        if (!el) return;
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', function () { setCycle(pair[1]); });
+      });
+    });
+  })();
+</script>

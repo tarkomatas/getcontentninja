@@ -1,0 +1,39 @@
+---
+// Hitelesítés-csík: Meta Tech Provider + UNAS partner, egy vékony sávban.
+//
+// Helye: közvetlenül a HERO ALATT, minden hero-val rendelkező oldalon (a jogi és
+// köszönőoldalakon nincs hero, ott nincs csík sem). Korábban a láblécben ült –
+// onnan kikerült: a bizonyíték ott ér valamit, ahol a látogató még dönt, nem az
+// oldal alján.
+//
+// Miért VILÁGOS a sáv: a Meta-jelvény lockupja sötét szövegű, tehát kötelezően
+// világos felületet kíván. Ezért áll mindkét jelvény `theme="light"`-tal – az
+// UNAS is a hivatalos ANTRACIT logóváltozattal, nem a fehér kontúrossal.
+//
+// A csík magasságát a Meta-PNG szabja meg: a fájl maga hozza a Meta által előírt
+// körbefutó üresjáratot (a lockup a képmagasság kb. fele). Ezt NEM vágjuk le, ha
+// vékonyabb sáv kell – csak kisebbre méretezzük a képet.
+import type { Locale } from '../i18n/routes';
+import MetaTechProvider from './MetaTechProvider.astro';
+import UnasPartner from './UnasPartner.astro';
+
+interface Props {
+  locale: Locale;
+  /**
+   * `false`: a Meta-jelvény kimarad a csíkból. Azokon az oldalakon kell, ahol a
+   * heróban MÁR ott a `MetaTechProvider` kártyája (a lead-űrlap mellett) – enélkül
+   * ugyanaz a védjegy kétszer szerepelne pár száz pixelen belül, ami inflálja.
+   */
+  meta?: boolean;
+  class?: string;
+}
+
+const { locale, meta = true, class: className = '' } = Astro.props;
+---
+
+<div class={`bg-card border-y border-border py-3 px-4 md:px-10 ${className}`}>
+  <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+    {meta && <MetaTechProvider locale={locale} variant="bare" theme="light" />}
+    <UnasPartner locale={locale} variant="bare" theme="light" />
+  </div>
+</div>

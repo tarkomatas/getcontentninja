@@ -16,6 +16,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import PricingCards from '../../components/PricingCards.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'hu';
 const page = 'webshopSeoGeo';
@@ -459,6 +461,9 @@ const description =
         </div>
     </section>
 
+    <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
+    <TrustBadges locale={locale} />
+
     <!-- 2. A probléma -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
@@ -832,123 +837,7 @@ const description =
                     ugyanabban az előfizetésben van, a posztolással és a hírlevéllel együtt.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-                <!-- Havi előfizetés -->
-                <div class="bg-card rounded-[16px] border-2 border-success/40 p-5 sm:p-8 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all">
-                    <h3 class="text-xl font-bold mb-4 text-dark">Havi előfizetés</h3>
-                    <div class="flex items-baseline gap-1 mb-3">
-                        <span class="text-4xl font-bold text-dark">34.990</span>
-                        <span class="text-xl font-bold text-dark">Ft</span>
-                        <span class="text-muted text-sm">+ÁFA / hó</span>
-                    </div>
-                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">Fix havidíj, rejtett költségek nélkül</p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">500 AI kredit havonta (megújul)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Az összes modul: kategória- és termékleírás-írás, blogcikk, posztolás, hírlevél, kép- és videógenerálás</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Több webáruház kezelése egy fiókon belül</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Márkahű stílus és hangnem</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-success text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Folyamatos fejlesztés és support</span>
-                        </li>
-                    </ul>
-                    <a href="#hero" class="cta-secondary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
-                        Bemutatót kérek
-                    </a>
-                </div>
-
-                <!-- Bemutató bónusz -->
-                <div class="bg-card rounded-[16px] border border-primary/40 p-5 sm:p-8 relative flex flex-col h-full">
-                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-[16px] uppercase tracking-wide">
-                        Csak az 1. hónap
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-dark">Indulj fél áron</h3>
-                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
-                        <span class="text-4xl font-bold text-primary">17.495</span>
-                        <span class="text-xl font-bold text-dark">Ft</span>
-                        <span class="text-muted text-sm">+ÁFA</span>
-                        <span class="text-muted text-sm line-through">34.990 Ft</span>
-                    </div>
-                    <p class="text-body font-medium text-sm mb-6 pb-6 border-b border-border">az első hónapra</p>
-                    <p class="text-body text-sm mb-4">Foglalj egy 30 perces bemutatót, és:</p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">50% kedvezmény az 1. hónapra</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">750 kredit 500 helyett (+250 bónusz)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Átvilágítás a saját webshopod tartalmáról</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[14px]">check</span>
-                            </div>
-                            <span class="text-body font-medium">Válaszolunk minden kérdésedre</span>
-                        </li>
-                    </ul>
-                    <p class="text-dark font-bold text-sm mb-6 bg-primary/10 rounded-[10px] px-4 py-3">A 2. hónaptól a fix 34.990 Ft / hó.</p>
-                    <a href="#hero" class="cta-primary flex items-center justify-center w-full h-12 text-sm text-center mt-auto">
-                        Lefoglalom a bemutatót
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Éves előfizetés – itt a havi plafon eltűnése a fő érv (klaszterépítés egyben) -->
-            <div class="bg-primary/5 rounded-[16px] border border-primary/20 p-5 sm:p-8 mt-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
-                    <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">savings</span>
-                        <div>
-                            <h3 class="text-xl font-bold text-dark mb-2">A teljes klaszterhez: éves előfizetés</h3>
-                            <p class="text-body text-sm leading-relaxed max-w-[620px]">
-                                349.900 Ft + ÁFA / év — 12 hónap 10 havi díjért —, és a teljes 6.000 kredit
-                                már az első napon a tiéd, havi plafon nélkül. A termékleírásokat, a
-                                kategóriaoldalakat és a blogklasztert így egyszerre indíthatod, nem fél éven
-                                át adagolva — a kereső pedig hamarabb látja meg az egészet. A bemutató
-                                17.495 Ft-os kedvezménye erre is jár.
-                            </p>
-                        </div>
-                    </div>
-                    <a href="/hu/arak/#csomag" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
-                        Éves csomag részletei
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
+            <PricingCards locale={locale} ctaHref="#hero" />
 
             <div class="text-center mt-8">
                 <a href="/hu/arak/#kreditek" class="text-primary font-bold text-sm inline-flex items-center gap-1">
