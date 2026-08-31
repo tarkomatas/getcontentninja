@@ -1,0 +1,84 @@
+---
+// „Hivatalos UNAS szakértő" jelvény – az UNAS kérésére a saját oldalunkon.
+//
+// FONTOS: az UNAS-nak NINCS kész partner-/szakértő-jelvénye. Az
+// `unas.hu/arculati-kezikonyv` valójában csak logóletöltő oldal (antracit és
+// fehér kontúrlogó, plusz háttérrel ellátott változatok), írott szabályok
+// (védőzóna, minimális méret, tiltások) nélkül. A lockupot ezért mi rakjuk
+// össze: ÉRINTETLEN hivatalos logó + a saját szövegünk. Ebből következik:
+//   - a logót soha ne színezd át (a régi `unas_logo.png` át volt színezve
+//     ~#556080-ra, a hivatalos antracit #31363E),
+//   - sötét háttérre a hivatalos FEHÉR kontúrlogó megy, nem fehér lap alá tett
+//     antracit (ezért nem kell a MetaTechProvider `theme="dark"` fehér lapja),
+//   - a logó köré hagyj bőven üresjáratot (gap-4 ≈ a logó magasságának ~80%-a);
+//     hivatalos védőzóna híján inkább nagyvonalúak vagyunk.
+//
+// A státusz: az UNAS szakértői listáján (`unas.hu/szakertok`) szereplő partner.
+// Ez KEVESEBB, mint „az UNAS ajánlja" vagy „az UNAS hivatalos fejlesztője" – a
+// szövegeket ne írd át erre. Ha megvan a saját profilunk URL-je a szakértői
+// listán, érdemes rálinkelni (target="_blank" rel="noopener").
+import type { Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  /** `card`: fehér kártya + magyarázó szöveg (alap). `bare`: egysoros lockup, keret nélkül (lábléc). */
+  variant?: 'card' | 'bare';
+  /** A háttér, amire kerül – ez választja ki a hivatalos logóváltozatot. */
+  theme?: 'light' | 'dark';
+  /** `card` esetén teljes oszlopszélesség, hogy a fölötte lévő elemekkel egy vonalban álljon. */
+  block?: boolean;
+  class?: string;
+}
+
+const { locale, variant = 'card', theme = 'light', block = false, class: className = '' } = Astro.props;
+
+const copy = {
+  hu: {
+    alt: 'UNAS',
+    strong: 'Hivatalos UNAS szakértő.',
+    text: 'Szerepelünk az UNAS szakértői listáján – az áruházad mélyintegrációval kapcsolódik.',
+    short: 'Hivatalos UNAS szakértő',
+  },
+  en: {
+    alt: 'UNAS',
+    strong: 'Official UNAS expert.',
+    text: 'We’re on the UNAS expert list – your store connects through a deep integration.',
+    short: 'Official UNAS expert',
+  },
+}[locale];
+
+const logo = theme === 'dark' ? '/assets/unas-logo-white.svg' : '/assets/unas-logo-antracit.svg';
+---
+
+{variant === 'bare' ? (
+  <div class={`inline-flex items-center gap-4 ${className}`}>
+    <img
+      src={logo}
+      alt={copy.alt}
+      width="467"
+      height="120"
+      loading="lazy"
+      class="h-5 w-auto shrink-0"
+    />
+    <span class={`h-6 w-px shrink-0 ${theme === 'dark' ? 'bg-white/20' : 'bg-border'}`}></span>
+    <span class={`text-xs font-semibold leading-snug ${theme === 'dark' ? 'text-white/80' : 'text-muted'}`}>
+      {copy.short}
+    </span>
+  </div>
+) : (
+  <div
+    class={`flex items-center gap-4 bg-card border border-border rounded-[12px] px-5 py-4 shadow-card ${block ? 'w-full' : 'w-fit max-w-[520px]'} ${className}`}
+  >
+    <img
+      src={logo}
+      alt={copy.alt}
+      width="467"
+      height="120"
+      loading="lazy"
+      class="h-6 w-auto shrink-0"
+    />
+    <p class="text-[0.8rem] leading-snug text-muted">
+      <strong class="text-dark font-semibold">{copy.strong}</strong>{' '}{copy.text}
+    </p>
+  </div>
+)}

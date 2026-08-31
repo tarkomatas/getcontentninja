@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import UnasExpert from '../../components/UnasExpert.astro';
 
 const locale = 'en';
 const page = 'webshopIntegration';
@@ -548,6 +549,10 @@ const description =
                                 automatically – always current data</span>
                         </li>
                     </ul>
+
+                    <!-- The UNAS expert status lands hardest where the integration is the topic. -->
+                    <UnasExpert locale={locale} block class="mb-8" />
+
                     <div>
                         <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Connect my store!
