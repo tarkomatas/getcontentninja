@@ -72,6 +72,21 @@ const ui = t(locale);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!--
+      Favicon. A fájlok a `public/` gyökerében vannak (a logó „CN” jeléből
+      generálva: `npm run gen:favicon`), tehát a build után a domain gyökeréről
+      szolgálódnak ki. A `/favicon.ico` böngésző nélkül is megtalálható – több
+      ellenőrző (pl. hirdetési márkaellenőrzés) csak ezt az egy címet nézi –,
+      de a `rel="icon"` sorok is kellenek, mert az automata ellenőrzők egy
+      része a HTML-ben keresi a hivatkozást.
+    -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#6c5ce7" />
+
     <!-- Landing (hirdetési) mód: a script még az első kirajzolás előtt fut, így nincs villanás -->
     {lpEnabled && (
       <script is:inline>
