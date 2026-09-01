@@ -29,7 +29,7 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 1. · Hatályos: 2026. szeptember 16-tól · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           A tájékoztató magyar és angol nyelven érhető el; eltérés esetén a magyar szöveg az irányadó. Az angol
           változat <a href={privacyEn} class="text-primary underline">itt olvasható</a>.
@@ -337,6 +337,11 @@ const privacyEn = pathFor('privacy', 'en');
                   <td class="px-4 py-3 text-body border-r border-border">AI szöveg-, kép- és videógenerálás</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google Ireland Limited</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Írország, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Google Search Console API — a bekötött webhelyed keresési adatainak lekérése (csak olvasás)</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">xAI Corp.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
                   <td class="px-4 py-3 text-body border-r border-border">AI videógenerálás</td>
@@ -402,6 +407,18 @@ const privacyEn = pathFor('privacy', 'en');
             Cél: hibajavítás és üzembiztonság; jogalap: jogos érdekünk; megőrzés: legfeljebb 90 nap.
           </p>
           <p class="mt-3">
+            <strong class="text-dark">Megjegyzés a Google Search Console-ról:</strong> ha a kifejezett
+            hozzájárulásoddal (Google-belépéssel) bekötöd a webhelyedet, a Google Search Console API-n keresztül
+            lekérjük a <strong class="text-dark">saját webshopod keresési adatait</strong> — keresőkifejezések,
+            megjelenések, kattintások, átlagos pozíció és céloldal-URL-ek —, és megjelenítjük neked az alkalmazás
+            Analitika felületén. A hozzáférés <strong class="text-dark">kizárólag olvasható</strong>: a Search
+            Console-fiókodban semmit nem írunk, nem módosítunk és nem törlünk. Az adattovábbítás az Európai Unión
+            belül marad (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Írország), a Google
+            adatkezelési feltételei szerint. Megőrzés: legfeljebb 16 hónap — ennyit ad vissza maga a Google is —,
+            azt követően automatikusan törlődnek. A bekötést az alkalmazásban
+            <strong class="text-dark">bármikor lekapcsolhatod</strong>; ekkor a hozzáférés azonnal megszűnik.
+          </p>
+          <p class="mt-3">
             <strong class="text-dark">Megjegyzés a Meta Platformsról:</strong> amikor a Szolgáltatás tartalmat tesz
             közzé a Facebook-oldaladon vagy Instagram-fiókodban, illetve a nevedben statisztikát és hozzászólásokat
             olvas, a Meta Platforms ezeket az adatokat
@@ -426,7 +443,7 @@ const privacyEn = pathFor('privacy', 'en');
             <li>
               <strong class="text-dark">Harmadik országba történő továbbítás:</strong> egyes adatfeldolgozóink az
               Európai Unión kívül működnek. Az Egyesült Államokba történő továbbítás (Stripe, Meta, OpenAI,
-              Anthropic, Google, xAI, Replicate, GitHub, Cloudflare, Fillout) az
+              Anthropic, Google LLC, xAI, Replicate, GitHub, Cloudflare, Fillout) az
               <strong class="text-dark">EU–USA adatvédelmi keret</strong> szerinti megfelelőségi határozaton és/vagy
               az Európai Bizottság <strong class="text-dark">általános szerződési feltételein (SCC)</strong> alapul.
               A <strong class="text-dark">Szingapúrba</strong> (MiniMax),
@@ -448,6 +465,7 @@ const privacyEn = pathFor('privacy', 'en');
             <li><strong class="text-dark">Fiók- és tartalom-adatok:</strong> a fiók fennállásáig, majd a fiók törlését követő 30 napon belül törölve.</li>
             <li><strong class="text-dark">Meta hozzáférési tokenek és bekötött fiókok adatai:</strong> azonnal törölve, amikor lekötöd a fiókot az appban, visszavonod a hozzáférést a Facebook-beállításokban, vagy törlöd a fiókodat.</li>
             <li><strong class="text-dark">Bekötött webáruház- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal.</li>
+            <li><strong class="text-dark">Google Search Console keresési adatok:</strong> legfeljebb 16 hónap, azt követően automatikus törlés; a bekötés lekapcsolásakor a hozzáférés azonnal megszűnik.</li>
             <li><strong class="text-dark">Számlázási adatok:</strong> 8 év (a számvitelről szóló 2000. évi C. törvény alapján).</li>
             <li><strong class="text-dark">Műveleti napló:</strong> a fiók fennállásáig, illetve ameddig a hibakereséshez, a kreditfelhasználás elszámolásához és a visszaélés-megelőzéshez szükséges; ezt követően törölve.</li>
             <li><strong class="text-dark">Adat-audit napló:</strong> legfeljebb 90 nap (automatikus törlés).</li>
@@ -568,10 +586,25 @@ const privacyEn = pathFor('privacy', 'en');
           <h2>12. A tájékoztató módosítása</h2>
           <p>
             A jelen tájékoztatót időről időre frissítjük. A lényeges változásokról a regisztrált felhasználókat
-            e-mailben értesítjük, és a frissített változatot ezen az oldalon közzétesszük. Ez a változat
-            <strong class="text-dark">2026. augusztus 20-tól</strong> hatályos. A tájékoztató magyar és angol nyelven
-            érhető el; eltérés esetén a <strong class="text-dark">magyar szöveg az irányadó</strong>.
+            e-mailben értesítjük, és a frissített változatot ezen az oldalon közzétesszük. A módosításokat a
+            hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük. Ez a változat
+            <strong class="text-dark">2026. szeptember 16-tól</strong> hatályos (közzététel: 2026. szeptember 1.). A
+            tájékoztató magyar és angol nyelven érhető el; eltérés esetén a
+            <strong class="text-dark">magyar szöveg az irányadó</strong>.
           </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Változásnapló</p>
+          <ul>
+            <li>
+              <strong class="text-dark">2026. szeptember 16.</strong> — Új adatfeldolgozó az 5. pontban:
+              <strong class="text-dark">Google Ireland Limited</strong> (Google Search Console API). A bekötött
+              webhelyed keresési adatait (keresőkifejezések, megjelenések, kattintások, átlagos pozíció,
+              céloldal-URL-ek) csak olvasható hozzáféréssel kérjük le, és az alkalmazás Analitika felületén
+              jelenítjük meg. Ehhez kapcsolódóan a 7. pont új megőrzési sorral bővült (legfeljebb 16 hónap).
+              Közzétéve: 2026. szeptember 1.
+            </li>
+            <li><strong class="text-dark">2026. augusztus 20.</strong> — A tájékoztató első hatályos változata (közzétéve: 2026. augusztus 3.).</li>
+          </ul>
         </div>
 
       </div>

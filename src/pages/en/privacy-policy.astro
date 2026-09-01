@@ -29,7 +29,7 @@ const privacyHu = pathFor('privacy', 'hu');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-        <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted">Published: 1 September 2026 · Effective: 16 September 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           This policy is available in Hungarian and English. In case of any discrepancy, the
           <a href={privacyHu} class="text-primary underline">Hungarian text</a> prevails.
@@ -336,6 +336,11 @@ const privacyHu = pathFor('privacy', 'hu');
                   <td class="px-4 py-3 text-body border-r border-border">AI text, image and video generation</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google Ireland Limited</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Ireland, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Google Search Console API — retrieving the search data of the website you connect (read-only)</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">xAI Corp.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
                   <td class="px-4 py-3 text-body border-r border-border">AI video generation</td>
@@ -402,6 +407,19 @@ const privacyHu = pathFor('privacy', 'hu');
             legitimate interest; retention: 90 days at most.
           </p>
           <p class="mt-3">
+            <strong class="text-dark">Note on Google Search Console:</strong> if you connect your website with your
+            explicit consent (via Google Sign-in), we retrieve the
+            <strong class="text-dark">search data of your own webshop</strong> through the Google Search Console API
+            — search queries, impressions, clicks, average position and landing page URLs — and display it to you on
+            the Analytics screen of the application. This access is
+            <strong class="text-dark">read-only</strong>: we do not write, modify or delete anything in your Search
+            Console account. The transfer stays within the European Union (Google Ireland Limited, Gordon House,
+            Barrow Street, Dublin 4, Ireland), under Google's data processing terms. Retention: 16 months at most —
+            the period Google itself returns — after which the data is deleted automatically. You can
+            <strong class="text-dark">disconnect this integration at any time</strong> in the application; access
+            ceases immediately.
+          </p>
+          <p class="mt-3">
             <strong class="text-dark">Note on Meta Platforms:</strong> when the Service publishes content to your
             Facebook Page or Instagram account, or reads insights and comments on your behalf, Meta Platforms
             processes that data as an <strong class="text-dark">independent data controller</strong> under its own
@@ -424,7 +442,7 @@ const privacyHu = pathFor('privacy', 'hu');
             <li><strong class="text-dark">Storage in the EU:</strong> your data is stored within the European Union (Supabase EU region, Vercel Frankfurt).</li>
             <li>
               <strong class="text-dark">Third-country transfers:</strong> some of our processors operate outside the
-              European Union. Transfers to the United States (Stripe, Meta, OpenAI, Anthropic, Google, xAI,
+              European Union. Transfers to the United States (Stripe, Meta, OpenAI, Anthropic, Google LLC, xAI,
               Replicate, GitHub, Cloudflare, Fillout) rely on the adequacy decision under the
               <strong class="text-dark">EU–US Data Privacy Framework</strong> and/or on the European Commission's
               <strong class="text-dark">Standard Contractual Clauses (SCC)</strong>. Transfers to
@@ -446,6 +464,7 @@ const privacyHu = pathFor('privacy', 'hu');
             <li><strong class="text-dark">Account and content data:</strong> retained while your account exists, then deleted within 30 days after account deletion.</li>
             <li><strong class="text-dark">Meta access tokens and connected-account data:</strong> deleted immediately when you disconnect the account in the app, revoke the app's access in your Facebook settings, or delete your account.</li>
             <li><strong class="text-dark">Connected webshop and newsletter keys:</strong> deleted immediately when the connection is removed.</li>
+            <li><strong class="text-dark">Google Search Console search data:</strong> 16 months at most, deleted automatically thereafter; access ceases immediately when you disconnect the integration.</li>
             <li><strong class="text-dark">Invoicing data:</strong> retained for 8 years, as required by the Hungarian Accounting Act (Act C of 2000).</li>
             <li><strong class="text-dark">Usage logs:</strong> retained while your account exists and for as long as they are necessary for troubleshooting, accounting for credit usage and preventing abuse; they are deleted thereafter.</li>
             <li><strong class="text-dark">Data audit log:</strong> retained for up to 90 days (deleted automatically).</li>
@@ -564,10 +583,24 @@ const privacyHu = pathFor('privacy', 'hu');
           <h2>12. Changes to this policy</h2>
           <p>
             We may update this Privacy Policy from time to time. We will notify registered users of material changes
-            by e-mail and publish the updated policy on this page. This version is effective from
-            <strong class="text-dark">20 August 2026</strong>. The policy is available in Hungarian and English; in
-            case of any discrepancy, the <a href={privacyHu}>Hungarian text</a> prevails.
+            by e-mail and publish the updated policy on this page. Changes are published at least
+            <strong class="text-dark">15 days</strong> before they take effect. This version is effective from
+            <strong class="text-dark">16 September 2026</strong> (published on 1 September 2026). The policy is
+            available in Hungarian and English; in case of any discrepancy, the
+            <a href={privacyHu}>Hungarian text</a> prevails.
           </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Change log</p>
+          <ul>
+            <li>
+              <strong class="text-dark">16 September 2026</strong> — New processor added to Section 5:
+              <strong class="text-dark">Google Ireland Limited</strong> (Google Search Console API). We retrieve the
+              search data of the website you connect (search queries, impressions, clicks, average position, landing
+              page URLs) with read-only access and display it on the Analytics screen of the application. A related
+              retention entry was added to Section 7 (16 months at most). Published: 1 September 2026.
+            </li>
+            <li><strong class="text-dark">20 August 2026</strong> — First effective version of this policy (published on 3 August 2026).</li>
+          </ul>
         </div>
 
       </div>
