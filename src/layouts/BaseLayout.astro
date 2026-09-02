@@ -17,6 +17,14 @@ interface Props {
   canonical?: string;
   /** Ne indexelje a kereső (pl. köszönő oldal). */
   noindex?: boolean;
+  /**
+   * Ne adjon ki canonicalt és hreflang alternatívákat. Egyetlen oldalnak kell:
+   * a 404-nek, aminek nincs saját címe (bármelyik nem létező URL-en megjelenik),
+   * így se kanonikus párja, se nyelvi változata nem értelmezhető. A `page` propot
+   * ott is meg kell adni (a fejléc nyelvváltója kéri) – ez a kapcsoló mondja meg,
+   * hogy abból SEO-állítás ne szülessen.
+   */
+  suppressCanonical?: boolean;
   /** A <body> osztályai (alapból a marketing oldalak beállítása). */
   bodyClass?: string;
   /**
@@ -40,6 +48,7 @@ const {
   ogImage = '/assets/og-fooldal.jpg',
   canonical,
   noindex = false,
+  suppressCanonical = false,
   bodyClass = 'bg-card text-dark font-display antialiased',
   lpEnabled = false,
 } = Astro.props;
@@ -103,10 +112,10 @@ const ui = t(locale);
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="canonical" href={canonicalUrl} />
+    {!suppressCanonical && <link rel="canonical" href={canonicalUrl} />}
 
     <!-- hreflang alternatívák -->
-    {alternates.map((a) => (
+    {!suppressCanonical && alternates.map((a) => (
       <link rel="alternate" hreflang={a.hreflang} href={a.href} />
     ))}
 
