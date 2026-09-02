@@ -23,6 +23,21 @@ import type { Locale } from '../i18n/routes';
 import MetaTechProvider from './MetaTechProvider.astro';
 import UnasPartner from './UnasPartner.astro';
 
+/**
+ * IDEIGLENESEN KIKAPCSOLVA (2026-09-02).
+ *
+ * A csík mind a ~20 hero-s oldalon meg van hívva; a hívásokat SZÁNDÉKOSAN nem
+ * szedtük ki, mert a visszakapcsolás így egyetlen sor: állítsd `true`-ra.
+ * (Ha kiszedtük volna, 20 fájlt kellene újra megtalálni és pontosan a jó
+ * helyre visszatenni.) Kikapcsolva a komponens semmit nem renderel – a hero
+ * alatti következő szekció csúszik fel a helyére.
+ *
+ * Külön él ettől két jelvény-KÁRTYA, amiket ez a kapcsoló NEM érint:
+ *   - `MetaTechProvider` a főoldalak posztolás-blokkjában (hu/index, en/index),
+ *   - `UnasPartner` a webshop-integráció oldalpáron.
+ */
+const SHOW_TRUST_BADGES = false;
+
 interface Props {
   locale: Locale;
   class?: string;
@@ -31,9 +46,11 @@ interface Props {
 const { locale, class: className = '' } = Astro.props;
 ---
 
-<div class={`bg-card border-y border-border py-3 px-4 md:px-10 ${className}`}>
-  <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-    <MetaTechProvider locale={locale} variant="bare" theme="light" />
-    <UnasPartner locale={locale} variant="bare" theme="light" />
+{SHOW_TRUST_BADGES && (
+  <div class={`bg-card border-y border-border py-3 px-4 md:px-10 ${className}`}>
+    <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+      <MetaTechProvider locale={locale} variant="bare" theme="light" />
+      <UnasPartner locale={locale} variant="bare" theme="light" />
+    </div>
   </div>
-</div>
+)}
