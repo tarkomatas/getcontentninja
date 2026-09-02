@@ -1,7 +1,17 @@
 ---
 // Gyökér (/) – nyelv-detektáló átirányító.
 // Böngésző nyelve alapján /hu/ vagy /en/, alapértelmezett fallback: /hu/.
-// Nincs saját tartalma, ne is indexelje a kereső.
+//
+// A látható tartalom NEM dekoráció: a valódi látogató sosem látja (a fejlécben
+// futó `location.replace` előbb elviszi), viszont minden JS-t nem futtató
+// lekérés – kereső- és AI-crawlerek, hirdetési márkaellenőrzők – pontosan EZT
+// az oldalt kapja a domain gyökeréről. Korábban egy `noindex, nofollow`-os,
+// két linkből álló üres lap volt itt, ami kívülről parkolt domainnek látszott.
+// Ezért van rajta logó, márkanév, egy mondat leírás és a jogi lábléc.
+//
+// `canonical` a /hu/-ra a korábbi `noindex, nofollow` helyett: így nem lesz
+// duplikált gyökér a keresőben, de semmi nem tiltja ki az ellenőrzőket, és a
+// crawler tovább tud menni a tényleges tartalomra.
 ---
 
 <!doctype html>
@@ -9,14 +19,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Content Ninja</title>
+    <title>Content Ninja – AI tartalomgyártás webshopoknak</title>
+    <meta
+      name="description"
+      content="A Content Ninja AI-alapú tartalomgyártó rendszer webshopoknak: közösségi posztok, blogcikkek, hírlevelek és termékleírások automatikusan, a saját termékkínálatodból."
+    />
+    <link rel="canonical" href="https://getcontentninja.com/hu/" />
     <!-- Favicon: ez a gyökér-URL, amit a márkaellenőrzők először meghívnak – itt is kell. -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#6c5ce7" />
     <link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/" />
     <link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/" />
     <link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/" />
@@ -30,10 +45,93 @@
     <noscript>
       <meta http-equiv="refresh" content="0; url=/hu/" />
     </noscript>
+    <style>
+      :root {
+        --primary: #6c5ce7;
+        --dark: #1e1e2f;
+        --body: #4a4a68;
+        --muted: #9090a7;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        color: var(--body);
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2.5rem 1.5rem;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      img {
+        width: 260px;
+        max-width: 80%;
+        height: auto;
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin: 1.75rem 0 0.75rem;
+      }
+      p {
+        max-width: 34rem;
+        line-height: 1.6;
+        margin: 0 0 0.5rem;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        margin-top: 1.75rem;
+      }
+      .links a {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.625rem;
+        background: var(--primary);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .links a + a {
+        background: #fff;
+        color: var(--primary);
+        box-shadow: inset 0 0 0 1px #e8e8ef;
+      }
+      footer {
+        margin-top: 2.5rem;
+        font-size: 0.8125rem;
+        color: var(--muted);
+      }
+      footer a {
+        color: var(--muted);
+      }
+    </style>
   </head>
   <body>
-    <p style="font-family: sans-serif; text-align: center; margin-top: 3rem;">
-      <a href="/hu/">Tovább magyarul →</a> &nbsp;·&nbsp; <a href="/en/">Continue in English →</a>
+    <img src="/assets/logo.webp" alt="Content Ninja" width="260" height="78" />
+    <h1>AI tartalomgyártás webshopoknak</h1>
+    <p>
+      A Content Ninja a webshopod terméklistájából készít közösségi posztokat, blogcikkeket,
+      hírleveleket és termékleírásokat – automatikusan, ütemezve.
     </p>
+    <p>
+      Content Ninja turns your webshop's product catalogue into social posts, blog articles,
+      newsletters and product descriptions – automatically, on a schedule.
+    </p>
+    <div class="links">
+      <a href="/hu/">Tovább magyarul →</a>
+      <a href="/en/">Continue in English →</a>
+    </div>
+    <footer>
+      Content Ninja · <a href="/hu/impresszum/">Impresszum</a> ·
+      <a href="/hu/adatkezeles/">Adatkezelési tájékoztató</a> ·
+      <a href="/hu/aszf/">ÁSZF</a>
+    </footer>
   </body>
 </html>
