@@ -76,7 +76,12 @@ const navItems = [
                     <a href={item.href} class="flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-light transition-colors group/item">
                       <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">{item.icon}</span>
                       <span class="min-w-0">
-                        <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
+                        <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">
+                          {item.label}
+                          {item.badge && (
+                            <span class="ml-1.5 align-middle bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full">{item.badge}</span>
+                          )}
+                        </span>
                         <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
                       </span>
                     </a>
@@ -148,7 +153,12 @@ const navItems = [
           {group.items.map((item) => (
             <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
               <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
-              <span class="font-medium text-dark">{item.label}</span>
+              <span class="font-medium text-dark">
+                {item.label}
+                {item.badge && (
+                  <span class="ml-1.5 align-middle bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full">{item.badge}</span>
+                )}
+              </span>
             </a>
           ))}
         </>

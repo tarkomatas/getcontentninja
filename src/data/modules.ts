@@ -193,6 +193,8 @@ export interface NavModule {
   href: string;
   label: string;
   desc: string;
+  /** Rövid állapotjelző a címke mellett (pl. „Hamarosan”). Üres/hiányzó = nincs. */
+  badge?: string;
 }
 
 export interface NavGroup {
@@ -205,8 +207,8 @@ export interface NavGroup {
 interface NavItemDef {
   page: PageKey;
   icon: string;
-  hu: { label: string; desc: string };
-  en: { label: string; desc: string };
+  hu: { label: string; desc: string; badge?: string };
+  en: { label: string; desc: string; badge?: string };
 }
 
 interface NavGroupDef {
@@ -288,6 +290,29 @@ export const NAV_GROUPS: NavGroupDef[] = [
       },
     ],
   },
+  {
+    hu: 'Hirdetés',
+    en: 'Advertising',
+    items: [
+      {
+        // A modul még nem éles – ezért a `badge`. A cél-oldal csak magyarul van
+        // (`chatgptAds` → `en: null`), az EN menüből a `navGroupsFor` szűrője
+        // veszi ki; a csoport ilyenkor elem nélkül marad, és ki sem kerül.
+        page: 'chatgptAds',
+        icon: 'ads_click',
+        hu: {
+          label: 'ChatGPT hirdetéskezelő',
+          desc: 'Kampány a ChatGPT-ben, a termékeidből',
+          badge: 'Hamarosan',
+        },
+        en: {
+          label: 'ChatGPT ad manager',
+          desc: 'Campaigns in ChatGPT, from your products',
+          badge: 'Coming soon',
+        },
+      },
+    ],
+  },
 ];
 
 /**
@@ -307,18 +332,28 @@ export const NAV_INTEGRATION = {
   en: { label: 'Deep store integration' },
 } as const;
 
-/** A "Megoldások" menü csoportjai egy adott nyelven. */
+/**
+ * A "Megoldások" menü csoportjai egy adott nyelven.
+ *
+ * ⚠️ **Az adott nyelven nem létező oldalak kiesnek** (`pathFor` üres stringet ad,
+ * ha a `routes.ts`-ben `null` az érték – ilyen a csak magyarul élő ChatGPT
+ * hirdetéskezelő). Enélkül az angol menübe egy `href=""` kerülne, ami a saját
+ * oldalára navigál vissza. Ha egy csoport így kiürül, maga a csoport is kimarad.
+ */
 export function navGroupsFor(locale: Locale): NavGroup[] {
   return NAV_GROUPS.map((g) => ({
     label: g[locale],
     href: g.page ? pathFor(g.page, locale) : undefined,
-    items: g.items.map((i) => ({
-      icon: i.icon,
-      href: pathFor(i.page, locale),
-      label: i[locale].label,
-      desc: i[locale].desc,
-    })),
-  }));
+    items: g.items
+      .map((i) => ({
+        icon: i.icon,
+        href: pathFor(i.page, locale),
+        label: i[locale].label,
+        desc: i[locale].desc,
+        badge: i[locale].badge,
+      }))
+      .filter((i) => i.href !== ''),
+  })).filter((g) => g.items.length > 0);
 }
 
 /**
