@@ -193,11 +193,33 @@ const faqLd = {
             <div class="text-center max-w-[700px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Megoldások</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Mire használják a Content Ninját?</h2>
-                <p class="text-body text-lg">Hat modul, ugyanabból a termékkatalógusból – válaszd ki, mi a te
-                    helyzeted, és megmutatjuk, hogyan segít a rendszer.</p>
+                <p class="text-body text-lg">Minden modul ugyanabból a termékkatalógusból dolgozik – válaszd ki, mi
+                    a te helyzeted, és megmutatjuk, hogyan segít a rendszer.</p>
             </div>
 
             <Carousel label="Megoldások" prevLabel="Előző megoldások" nextLabel="További megoldások">
+
+                <!-- ChatGPT hirdetéskezelő – ELSŐ helyen, mert ez az újdonság: a sáv is erre
+                     hívja fel a figyelmet, és a lapozó desktopon négy kártyát mutat egyszerre.
+                     A „Hamarosan" pill a KÁRTYÁN marad (a menüből kikerült): egy megoldás-rács
+                     különben azt ígérné, hogy ez ma is használható. -->
+                <a href="/hu/chatgpt-ads/"
+                    class="group snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                    <div class="flex items-start justify-between gap-3 mb-5">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">ads_click</span>
+                        </div>
+                        <span class="bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full">Hamarosan</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 text-dark">ChatGPT hirdetéskezelő</h3>
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">A webshopod termékeiből automata
+                        kampányt indít a ChatGPT-ben. Naponta kielemzi a számokat, és segít optimalizálni a
+                        kampányokat.</p>
+                    <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                        Kérek értesítést
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                    </span>
+                </a>
 
                 <!-- Automata posztolás -->
                 <a href="/hu/posztolas/"

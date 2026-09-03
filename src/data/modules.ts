@@ -193,8 +193,6 @@ export interface NavModule {
   href: string;
   label: string;
   desc: string;
-  /** Rövid állapotjelző a címke mellett (pl. „Hamarosan”). Üres/hiányzó = nincs. */
-  badge?: string;
 }
 
 export interface NavGroup {
@@ -207,8 +205,8 @@ export interface NavGroup {
 interface NavItemDef {
   page: PageKey;
   icon: string;
-  hu: { label: string; desc: string; badge?: string };
-  en: { label: string; desc: string; badge?: string };
+  hu: { label: string; desc: string };
+  en: { label: string; desc: string };
 }
 
 interface NavGroupDef {
@@ -291,25 +289,18 @@ export const NAV_GROUPS: NavGroupDef[] = [
     ],
   },
   {
-    hu: 'Hirdetés',
-    en: 'Advertising',
+    hu: 'Hirdetéskezelés',
+    en: 'Ad management',
     items: [
       {
-        // A modul még nem éles – ezért a `badge`. A cél-oldal csak magyarul van
-        // (`chatgptAds` → `en: null`), az EN menüből a `navGroupsFor` szűrője
-        // veszi ki; a csoport ilyenkor elem nélkül marad, és ki sem kerül.
+        // A cél-oldal csak magyarul van (`chatgptAds` → `en: null`), az EN menüből
+        // a `navGroupsFor` szűrője veszi ki; a csoport ilyenkor elem nélkül marad,
+        // és ki sem kerül. A „hamarosan" állapotot maga a céloldal mondja ki
+        // (jelvény + űrlap), a menüben nem ismételjük.
         page: 'chatgptAds',
         icon: 'ads_click',
-        hu: {
-          label: 'ChatGPT hirdetéskezelő',
-          desc: 'Kampány a ChatGPT-ben, a termékeidből',
-          badge: 'Hamarosan',
-        },
-        en: {
-          label: 'ChatGPT ad manager',
-          desc: 'Campaigns in ChatGPT, from your products',
-          badge: 'Coming soon',
-        },
+        hu: { label: 'ChatGPT hirdetéskezelő', desc: 'Kampány a ChatGPT-ben, a termékeidből' },
+        en: { label: 'ChatGPT ad manager', desc: 'Campaigns in ChatGPT, from your products' },
       },
     ],
   },
@@ -350,7 +341,6 @@ export function navGroupsFor(locale: Locale): NavGroup[] {
         href: pathFor(i.page, locale),
         label: i[locale].label,
         desc: i[locale].desc,
-        badge: i[locale].badge,
       }))
       .filter((i) => i.href !== ''),
   })).filter((g) => g.items.length > 0);

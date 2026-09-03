@@ -26,6 +26,20 @@ const APP_URL = 'https://app.getcontentninja.com';
 // leggyakoribb néma kérdést („az én rendszeremmel működik?").
 // A fejléc elsődleges "Bemutatót kérek" CTA-ja ezzel szemben a bookDemo oldalra visz.
 const solutionGroups = navGroupsFor(locale);
+/**
+ * A lenyíló két hasábja **kézzel** van szétosztva, cikcakkban (páros index balra,
+ * páratlan jobbra). Két korábbi megoldás nem volt jó:
+ *  - `grid grid-cols-2`: sorokba rendez, ezért a rövidebb csoport alatt akkora
+ *    lyuk maradt, amekkora a mellette lévő magasabb csoport,
+ *  - `columns-2`: a böngésző MAGASSÁG szerint egyensúlyoz, így a harmadik csoport
+ *    a jobb hasáb aljára került – nem oda, ahova szántuk.
+ * Három csoportnál ez ad: balra a kereső-optimalizálás + a hirdetéskezelés,
+ * jobbra a tartalommarketing.
+ */
+const solutionColumns = [
+  solutionGroups.filter((_, i) => i % 2 === 0),
+  solutionGroups.filter((_, i) => i % 2 === 1),
+];
 const integration = {
   href: pathFor(NAV_INTEGRATION.page, locale),
   label: NAV_INTEGRATION[locale].label,
@@ -61,8 +75,13 @@ const navItems = [
         </button>
         <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150 z-50">
           <div class="w-[600px] max-w-[calc(100vw-3rem)] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
-            <div class="grid grid-cols-2 gap-x-1 gap-y-2 items-start">
-              {solutionGroups.map((group) => (
+            <!-- Két önálló hasáb (a szétosztás a fenti `solutionColumns`-ban). Mindegyik
+                 saját függőleges verem, ezért nincsenek közös sormagasságok – a csoportok
+                 szorosan követik egymást. -->
+            <div class="grid grid-cols-2 gap-x-1 items-start">
+              {solutionColumns.map((column) => (
+                <div class="flex flex-col gap-2">
+                  {column.map((group) => (
                 <div>
                   {group.href ? (
                     <a href={group.href} class="flex items-center gap-1 px-3 pt-1 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-body/60 hover:text-primary transition-colors">
@@ -76,15 +95,12 @@ const navItems = [
                     <a href={item.href} class="flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-light transition-colors group/item">
                       <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">{item.icon}</span>
                       <span class="min-w-0">
-                        <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">
-                          {item.label}
-                          {item.badge && (
-                            <span class="ml-1.5 align-middle bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full">{item.badge}</span>
-                          )}
-                        </span>
+                        <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
                         <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
                       </span>
                     </a>
+                  ))}
+                    </div>
                   ))}
                 </div>
               ))}
@@ -153,12 +169,7 @@ const navItems = [
           {group.items.map((item) => (
             <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
               <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
-              <span class="font-medium text-dark">
-                {item.label}
-                {item.badge && (
-                  <span class="ml-1.5 align-middle bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full">{item.badge}</span>
-                )}
-              </span>
+              <span class="font-medium text-dark">{item.label}</span>
             </a>
           ))}
         </>
