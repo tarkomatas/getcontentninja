@@ -42,6 +42,13 @@ export type NewsletterSource =
   | 'hirlevel_oldal'
   /** Ugyanannak az oldalnak a záró CTA-sávja. */
   | 'hirlevel_oldal_alja'
+  /**
+   * A `/hu/chatgpt-ads/` kampányoldal hero-űrlapja. A modul még nem éles, ezért
+   * ott nem bemutatóra jelentkezik a látogató, hanem a hírlevelünkre iratkozik
+   * fel – azon megy majd ki az indulás híre. Külön kulcs, hogy mérhető legyen,
+   * hoz-e feliratkozót a „hamarosan" kampányoldal.
+   */
+  | 'chatgpt_ads'
   /** Lábléc-űrlap (minden oldalon) – még nincs kitéve. */
   | 'footer'
   /** Blogcikkek alja – még nincs kitéve. */

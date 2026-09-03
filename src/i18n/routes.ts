@@ -13,6 +13,7 @@ export type PageKey =
   | 'shopgradeAudit'
   | 'blogWriter'
   | 'webshopSeoGeo'
+  | 'chatgptAds'
   | 'newsletter'
   | 'newsletterSignup'
   | 'pricing'
@@ -87,6 +88,30 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // („webshop SEO + GEO"), mint a modul-oldalak („termékleírás író", „blogcikk
   // író"), ezért nem kannibalizál. Hirdetési forgalmat is ide terelünk (`?type=ld`).
   webshopSeoGeo: { hu: '/hu/webshop-seo-geo/', en: '/en/webshop-seo-geo/' },
+  // **ChatGPT hirdetések modul – VÁRÓLISTA-oldal, a modul még nem éles.**
+  // A modul a webshop termékeiből feedet épít, abból kampányt indít az OpenAI
+  // hirdetési rendszerében, naponta behúzza a számokat, és az AI egy kattintással
+  // jóváhagyható javaslatokat készít elő (app: `docs/features/chatgpt-ads.md`).
+  //
+  // ⚠️ Az élesítés a GDPR-bejelentéstől számított 30 naphoz kötött, ezért az oldal
+  // **jelen időben semmit nem ígérhet**: „Hamarosan" jelvény + értesítéskérő űrlap.
+  //
+  // Az űrlap NEM a lead-intake-re megy, hanem a hírlevél-végpontra
+  // (`src/data/newsletter.ts`, `source_form: 'chatgpt_ads'`) — a feliratkozó az
+  // indulás hírét várja, nem bemutatót kér. Az app-oldali teendők (MailerLite
+  // csoportok, `consent_text: null` kezelése): `docs/chatgpt-ads-hirlevel-teendok.md`.
+  // Amikor a modul élesedik, a hero űrlapja a szokásos minősítő lead-űrlapra
+  // cserélhető (`LeadFormScript`) — akkor kell majd `lead_forras` kulcs a
+  // `forms.ts`-be is.
+  //
+  // A slug SZÁNDÉKOSAN az OpenAI terméknevét viszi (`chatgpt-ads`), nem a magyar
+  // fordítást: ez a felület hivatalos neve, és a keresés is így stabil marad, ha
+  // később megjön az EN változat.
+  //
+  // **Csak magyarul** (`en: null`): a modul UI-ja és az AI-elemzése magyar, a
+  // várólista-levél is az lesz. Ha megjelenik angolul, egy `/en/chatgpt-ads/`
+  // fájllal bővíthető.
+  chatgptAds: { hu: '/hu/chatgpt-ads/', en: null },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // **A MI hírlevelünkre való feliratkozás** – nem összekeverendő a fenti

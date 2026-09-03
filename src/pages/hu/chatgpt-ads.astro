@@ -1,0 +1,526 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
+import {
+  NEWSLETTER_ENDPOINT,
+  NEWSLETTER_CONSENT_TEXT,
+  NEWSLETTER_CONSENT_LINK_TEXT,
+  NEWSLETTER_MAX_ATTEMPTS,
+  NEWSLETTER_RETRY_BASE_MS,
+} from '../../data/newsletter';
+
+/**
+ * ChatGPT hirdetések modul – kampányoldal, **első kör: csak a hero**.
+ *
+ * A modul még NEM éles (az app `docs/features/chatgpt-ads.md` szerint az
+ * élesítés a GDPR-bejelentéstől számított 30 naphoz kötött), ezért az oldal
+ * jelen időben semmit nem ígér: „Hamarosan" jelvény + VÁRÓLISTA-űrlap.
+ * A hero jobb oszlopa a szokásos `hero-form-card`, de a tartalma rövid
+ * előjegyzés – nincs minősítés, nincs kiszűrés, nincs köszönőoldal-átirányítás
+ * (a siker helyben, a kártyán belül jelenik meg).
+ *
+ * Élesítéskor ez az űrlap a `LeadFormScript` minősítő űrlapjára cserélhető;
+ * a `lead_forras` akkor is `chatgpt-ads` marad, hogy a két szakasz egy
+ * szűrővel összenézhető legyen.
+ */
+const locale = 'hu';
+const page = 'chatgptAds';
+const title = 'ChatGPT hirdetés webshopoknak – AI hirdetéskezelő | Content Ninja';
+const description =
+  'Hirdesd a webshopod termékeit a ChatGPT-ben. A Content Ninja termékfeedet épít a boltodból, elindítja a kampányt, naponta behúzza a számokat, és megmondja, min érdemes állítani. Hamarosan indul – kérj értesítést.';
+
+/**
+ * A hozzájárulási mondat — SZÓ SZERINT ugyanaz a konstans, ami a pipa címkéjeként
+ * látszik és a payload `consent_text` mezőjébe kerül (`NewsletterForm.astro`
+ * mintája). A mondatot az adatkezelési tájékoztatóra mutató szövegrész mentén
+ * vágjuk három részre, hogy a link ne változtasson a szavakon.
+ */
+const consentText = NEWSLETTER_CONSENT_TEXT[locale];
+const consentLinkText = NEWSLETTER_CONSENT_LINK_TEXT[locale];
+const linkStart = consentText.indexOf(consentLinkText);
+const consent =
+  linkStart === -1
+    ? null
+    : {
+        before: consentText.slice(0, linkStart),
+        link: consentLinkText,
+        after: consentText.slice(linkStart + consentLinkText.length),
+      };
+
+/**
+ * A KÖTELEZŐ adatkezelési pipa mondata. Ugyanaz az elv, mint fent: a látogató
+ * ezt látja, és karakterre ez megy a naplóba – az indulási értesítés jogalapja
+ * ez a pipa, nem a hírlevél-hozzájárulás.
+ */
+const privacyConsentText =
+  'Az Adatkezelési Tájékoztatóban foglaltakat elolvastam, megértettem és tudomásul vettem.';
+const privacyLinkText = 'Adatkezelési Tájékoztatóban';
+const pStart = privacyConsentText.indexOf(privacyLinkText);
+const privacyConsent = {
+  before: privacyConsentText.slice(0, pStart),
+  link: privacyLinkText,
+  after: privacyConsentText.slice(pStart + privacyLinkText.length),
+};
+
+/** A küldő script konfigja (`define:vars`) – a végpont-URL sehol nincs kézzel leírva. */
+const nlCfg = {
+  endpoint: NEWSLETTER_ENDPOINT,
+  consentText,
+  privacyConsentText,
+  source: 'chatgpt_ads',
+  locale,
+  maxAttempts: NEWSLETTER_MAX_ATTEMPTS,
+  retryBase: NEWSLETTER_RETRY_BASE_MS,
+};
+---
+
+<BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
+  <Fragment slot="head">
+    <style is:inline>
+        /* Csak ami nincs a global.css-ben: a hero jobb oszlopának kiemelt kártyája. */
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Közös fejléc – ?type=ld (lp-mode) esetén minimálra vált (logó + nyelvváltó) -->
+    <Header locale={locale} page={page} />
+
+    <!-- 1. Hero + várólista-űrlap -->
+    <section id="hero" class="hero-gradient py-12 md:py-16 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <!-- Content -->
+                <div class="flex flex-col gap-4 md:gap-7 text-left">
+
+                    <span class="inline-flex items-center gap-2 self-start bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                        <span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+                        Hamarosan indul
+                    </span>
+
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
+                        Automata ChatGPT hirdetéskezelő szoftver <span class="text-primary">webshopoknak</span>
+                    </h1>
+
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                        A webshopod termékeiből <span class="font-bold text-primary">automata kampányt indít a
+                        ChatGPT-ben</span>. Naponta kielemzi a számokat, és <span class="font-bold text-primary">segít
+                        optimalizálni a kampányokat</span>.
+                    </p>
+
+                    <ul class="space-y-3.5 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Új, innovatív hirdetési felület</strong>, olcsó kattintások. Előzd meg a konkurenseket</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Pár perc alatt beállít neked mindent</strong> és indítja a kampányokat</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Az AI javasol, te döntesz</strong> – jóváhagyás nélkül nem fogy pénz</span>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- Várólista-űrlap -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="waitIntro">
+                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Szólunk, amikor élesedik</h3>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-5">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">A modul még
+                                    fejlesztés alatt van.</strong> 1-2 héten belül élesedik, addig is exkluzív
+                                    kedvezményt adunk az előregisztrálóknak.</p>
+                            </div>
+                        </div>
+
+                        <form id="waitlistForm" class="space-y-4">
+                            <HoneypotField />
+
+                            <!--
+                                A kiszűrés szabályát az `<option data-reject="hard">` attribútum mondja meg –
+                                ugyanaz a konvenció, mint a lead-űrlapokon (`LeadFormScript`). Így ha valaki
+                                átfogalmaz egy választ, a szabály vele együtt mozog.
+
+                                Az „Egyéb" is hard reject: a feed a `src/lib/webshop` adapteren át épül, az
+                                pedig CSAK UNAS-t és Shoprentert ismer – más boltmotorral a modul nem tud
+                                mit kezdeni, tehát az indulási levél is hamis ígéret lenne.
+                            -->
+                            <div>
+                                <label for="waitShop" class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
+                                <select id="waitShop" required
+                                    class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                    <option value="" disabled selected>Válassz...</option>
+                                    <option value="UNAS">UNAS</option>
+                                    <option value="Shoprenter">Shoprenter</option>
+                                    <option value="Egyéb" data-reject="hard">Egyéb</option>
+                                    <option value="Még nincs webshopom" data-reject="hard">Még nincs webshopom</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="waitTiming" class="block text-sm font-bold text-body mb-1">Mikor akarsz ChatGPT kampányokat futtatni?</label>
+                                <select id="waitTiming" required
+                                    class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                    <option value="" disabled selected>Válassz...</option>
+                                    <option value="Azonnal">Azonnal</option>
+                                    <option value="1 hónapon belül">1 hónapon belül</option>
+                                    <option value="2-3 hónapon belül" data-reject="hard">2-3 hónapon belül</option>
+                                    <option value="Még csak érdeklődöm" data-reject="hard">Még csak érdeklődöm</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="waitEmail" class="block text-sm font-bold text-body mb-1">E-mail cím</label>
+                                <input type="email" id="waitEmail" required autocomplete="email"
+                                    class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                    placeholder="pl. anna@webshopom.hu">
+                            </div>
+
+                            <!--
+                                KÉT külön pipa, mert két külön dologról szól:
+
+                                1. Adatkezelés – KÖTELEZŐ. Enélkül nincs beküldés. (A többi űrlapunk
+                                   szövegével azonos.)
+                                2. Hírlevél – OPCIONÁLIS. Ennek a címkéje SZÓ SZERINT a
+                                   `NEWSLETTER_CONSENT_TEXT` konstans, és ugyanez megy a payload
+                                   `consent_text` mezőjébe: ha egy év múlva megkérdezik, mire mondott
+                                   igent, a napló önmagában bizonyít. A kettő ezért nem tud elcsúszni.
+
+                                Az indulási értesítést maga a gomb kéri – arra a kötelező pipa ad
+                                jogalapot, nem a hírlevél-hozzájárulás.
+                            -->
+                            <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                <input type="checkbox" id="waitPrivacy" class="mt-1 rounded text-primary focus:ring-primary">
+                                <label for="waitPrivacy">
+                                    <Fragment>{privacyConsent.before}<a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">{privacyConsent.link}</a>{privacyConsent.after}</Fragment>
+                                </label>
+                            </div>
+
+                            <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                <input type="checkbox" id="waitNewsletter" class="mt-1 rounded text-primary focus:ring-primary">
+                                <label for="waitNewsletter">
+                                    {consent ? (
+                                        <Fragment>{consent.before}<a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">{consent.link}</a>{consent.after}</Fragment>
+                                    ) : (
+                                        <Fragment>{consentText} <a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">Adatkezelési tájékoztató</a></Fragment>
+                                    )}
+                                </label>
+                            </div>
+
+                            <div id="waitError" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-[10px] px-4 py-3"></div>
+
+                            <button type="submit" id="waitSubmit"
+                                class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                <span id="waitSubmitLabel">Értesítést kérek az indulásról</span>
+                            </button>
+                        </form>
+
+                        <!--
+                            Kiszűrés (hard reject): nem támogatott boltmotor, vagy nem most akar
+                            hirdetni. Ilyenkor NEM küldünk semmit – se feliratkozás, se e-mail-tárolás:
+                            akit ma nem tudunk kiszolgálni, azt ne is szólítsuk meg az indulásról.
+                        -->
+                        <div id="waitRejected" class="hidden text-center py-6 space-y-4">
+                            <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                            <p class="text-body leading-relaxed max-w-[400px] mx-auto text-sm">
+                                A megadott adatok alapján úgy látjuk, hogy a ChatGPT hirdetéskezelő most nem lenne
+                                megfelelő számodra. Így nem is szeretnénk az idődet húzni – megértésed köszönjük!
+                            </p>
+                        </div>
+
+                        <!-- Siker: helyben, a kártyán belül – nincs köszönőoldal-átirányítás. -->
+                        <div id="waitSuccess" class="hidden text-center py-6 space-y-4">
+                            <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-dark">Kész, feliratkoztál!</h4>
+                            <p class="text-body leading-relaxed max-w-[400px] mx-auto text-sm">
+                                Szólunk e-mailben, amint a ChatGPT hirdetéskezelő élesedik. Addig is: a rendszer többi
+                                modulját már most meg tudod nézni élőben.
+                            </p>
+                            <a href="/hu/online-bemutato/" class="cta-primary inline-flex text-sm">
+                                Kérek egy online bemutatót
+                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Hogyan működik -->
+    <section id="hogyan-mukodik" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Négy lépés, és a termékeid ott vannak a ChatGPT válaszaiban</h2>
+                <p class="text-body text-lg">Beállít neked mindent, megírja a szöveget és kielemzi az adatokat.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">1</div>
+                    <h3 class="text-lg font-bold text-dark mb-2">Bekötöd a webshopod</h3>
+                    <p class="text-body text-sm leading-relaxed">A rendszer az UNAS vagy Shoprenter boltodból
+                        kiolvassa a termékeidet, és összerakja belőlük a hirdetéshez szükséges termékfeedet –
+                        ami aztán naponta magától frissül.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">2</div>
+                    <h3 class="text-lg font-bold text-dark mb-2">Beállítja a kampányt</h3>
+                    <p class="text-body text-sm leading-relaxed">Kiválasztod, mely termékek kerüljenek ki és mennyi
+                        keretet szánsz rá – a kampányt a rendszer rakja össze. Mindig <strong>szüneteltetve</strong>
+                        jön létre: elindítani csak te tudod.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">3</div>
+                    <h3 class="text-lg font-bold text-dark mb-2">Megírja a hirdetési szövegeket</h3>
+                    <p class="text-body text-sm leading-relaxed">Az AI a termékadataidból megírja a hirdetések
+                        szövegét, és azt is, milyen vásárlói helyzetekben jelenjenek meg. Mielőtt bármi kimegy,
+                        átírhatod.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">4</div>
+                    <h3 class="text-lg font-bold text-dark mb-2">Napi jelentést küld javaslatokkal</h3>
+                    <p class="text-body text-sm leading-relaxed">Reggelente behúzza a számokat, és konkrét
+                        javaslatokat ír: mit érdemes szüneteltetni, hol emelj keretet. Egy kattintással jóváhagyod –
+                        nélküle semmi nem történik.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#hero" class="cta-primary px-8 h-14 text-base inline-flex">
+                    Értesítést kérek az indulásról
+                    <span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. A teljes rendszer (közös modulrács) -->
+    <ModuleGrid
+        locale={locale}
+        sectionId="modulok"
+        sectionClass="bg-light py-20 md:py-28"
+        cardClass="bg-card"
+        eyebrow="A teljes rendszer 🧩"
+        heading="Egy nagyobb AI marketing rendszer része"
+        lead="A ChatGPT hirdetéskezelő egy komplex AI marketing szoftver része: ugyanaz a rendszer írja a posztjaidat, a hírleveleidet és a blogcikkeidet is – mind ugyanabból a termékkatalógusból. Egy fiók, egy márkahang, egy előfizetés."
+        compact
+    />
+
+    <!-- 4. Záró CTA -->
+    <section class="bg-primary py-16 md:py-20">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Legyél ott az elsők között</h2>
+            <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+                Szólunk e-mailben, amint a modul élesedik – az előregisztrálóknak pedig exkluzív kedvezményt adunk.
+            </p>
+            <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
+                Értesítést kérek az indulásról
+                <span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Logo" class="h-8 md:h-10"></div>
+                    <p class="text-muted">Egy rendszer, ami a webshopod nevében készít marketing tartalmakat
+                        futószalagon – közvetlenül a webáruházad termékeiből.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Információk</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://app.getcontentninja.com/changelog" class="hover:text-white">Újdonságok</a></li>
+                        <li><a href="/hu/adatkezeles/" class="hover:text-white">Adatkezelési tájékoztató</a></li>
+                        <li><a href="/hu/impresszum/" class="hover:text-white">Impresszum</a></li>
+                        <li><a href="/hu/aszf/" class="hover:text-white">ÁSZF</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © getcontentninja.com | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!--
+        Az űrlap a HÍRLEVÉL-végpontra megy (`newsletter.ts`), NEM a lead-intake-re: a
+        látogató itt a hírlevelünkre iratkozik fel, azon megy majd ki az indulás híre.
+        A MailerLite-ra kizárólag ez az út tesz fel valakit.
+
+        A `NewsletterForm.astro` komponens helyett saját markup kell, mert ez az
+        űrlap két extra kérdést is feltesz — a szállítás szabályai viszont onnan
+        öröklődnek: 3 próba növekvő várakozással, KIZÁRÓLAG 5xx-re és hálózati
+        hibára (a 4xx kliens-hiba), mindig UGYANAZZAL a `submission_id`-vel. Ez a
+        közös `cnIntake` retry-sorától független — az másik végpontra van kötve.
+    -->
+    <script is:inline define:vars={{ nlCfg }}>
+        (function () {
+            var form = document.getElementById('waitlistForm');
+            if (!form) return;
+
+            var btn = document.getElementById('waitSubmit');
+            var label = document.getElementById('waitSubmitLabel');
+            var errorBox = document.getElementById('waitError');
+            var intro = document.getElementById('waitIntro');
+            var successBox = document.getElementById('waitSuccess');
+            var rejectedBox = document.getElementById('waitRejected');
+            var shopSelect = document.getElementById('waitShop');
+            var timingSelect = document.getElementById('waitTiming');
+
+            /** A kiválasztott válasz kiszűrő-e. A szabályt a MARKUP hordozza (`data-reject`). */
+            function isHardReject(select) {
+                var opt = select.options[select.selectedIndex];
+                return !!(opt && opt.getAttribute('data-reject') === 'hard');
+            }
+
+            /** Az idempotencia-kulcs. Retry-nál UGYANAZ marad; javított címnél új. */
+            var submissionId = null;
+            var lastEmail = null;
+            var sending = false;
+
+            function uuid() {
+                try {
+                    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                        return window.crypto.randomUUID();
+                    }
+                } catch (e) {}
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = (Math.random() * 16) | 0;
+                    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+                });
+            }
+
+            function fail(message) {
+                sending = false;
+                btn.disabled = false;
+                label.textContent = 'Újraküldés';
+                errorBox.textContent = message;
+                errorBox.classList.remove('hidden');
+            }
+
+            function succeed() {
+                form.classList.add('hidden');
+                intro.classList.add('hidden');
+                successBox.classList.remove('hidden');
+            }
+
+            function retry(payload, attempt) {
+                if (attempt + 1 >= nlCfg.maxAttempts) {
+                    return fail(
+                        'Most nem sikerült elküldeni. Próbáld meg pár perc múlva, vagy írj a support@getcontentninja.com címre.'
+                    );
+                }
+                setTimeout(function () {
+                    send(payload, attempt + 1);
+                }, nlCfg.retryBase * Math.pow(2, attempt));
+            }
+
+            function send(payload, attempt) {
+                fetch(nlCfg.endpoint, {
+                    method: 'POST',
+                    // Ha a látogató azonnal továbbkattint, a kérés akkor is elmegy.
+                    keepalive: true,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                })
+                    .then(function (res) {
+                        // A válasz mindig `{ ok: true }`, akkor is, ha a cím már fent volt –
+                        // különben az űrlapból ki lehetne találni, ki szerepel a listánkon.
+                        if (res.ok) return succeed();
+                        // 4xx = kliens-hiba (rossz cím, hiányzó mező): újrapróbálni értelmetlen.
+                        if (res.status < 500) {
+                            return fail('Nem sikerült – ellenőrizd az e-mail címet, és próbáld újra.');
+                        }
+                        retry(payload, attempt);
+                    })
+                    .catch(function () {
+                        retry(payload, attempt);
+                    });
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (sending) return; // dupla beküldés ellen
+
+                var privacy = document.getElementById('waitPrivacy');
+                if (!privacy.checked) {
+                    alert('Kérlek fogadd el az adatkezelési tájékoztatót!');
+                    return;
+                }
+
+                // Kiszűrés a válaszok alapján – ilyenkor semmit nem küldünk el.
+                if (isHardReject(shopSelect) || isHardReject(timingSelect)) {
+                    form.classList.add('hidden');
+                    intro.classList.add('hidden');
+                    rejectedBox.classList.remove('hidden');
+                    return;
+                }
+
+                var newsletter = document.getElementById('waitNewsletter');
+                sending = true;
+                errorBox.classList.add('hidden');
+                btn.disabled = true;
+                label.textContent = 'Küldés…';
+
+                var honeypot = form.querySelector('[name="website"]');
+                var email = document.getElementById('waitEmail').value.trim();
+                if (!submissionId || email !== lastEmail) {
+                    submissionId = uuid();
+                    lastEmail = email;
+                }
+
+                send(
+                    {
+                        submission_id: submissionId,
+                        email: email,
+                        source_form: nlCfg.source,
+                        // Az UTM-eket az app ebből olvassa ki – ne küldd külön mezőben.
+                        source_url: window.location.href,
+                        locale: nlCfg.locale,
+                        website: honeypot ? honeypot.value : '',
+                        // A KÖTELEZŐ pipa: erre hivatkozva küldjük ki az indulási értesítést.
+                        adatkezeles: true,
+                        adatkezeles_consent_text: nlCfg.privacyConsentText,
+                        // Az OPCIONÁLIS pipa. Ha nincs bepipálva, `consent_text` sincs –
+                        // hírlevélre csak az kerül fel, aki kifejezetten kérte.
+                        hirlevel_feliratkozas: !!(newsletter && newsletter.checked),
+                        consent_text:
+                            newsletter && newsletter.checked ? nlCfg.consentText : null,
+                        // ⚠️ A két szűrőkérdés válasza. A feliratkozó-végpont ma NEM ismeri
+                        // ezeket a mezőket – lásd `docs/chatgpt-ads-hirlevel-teendok.md`.
+                        has_webshop: shopSelect.value,
+                        timing: timingSelect.value,
+                    },
+                    0
+                );
+            });
+        })();
+    </script>
+
+  </div>
+</BaseLayout>

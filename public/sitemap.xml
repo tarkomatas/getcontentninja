@@ -177,6 +177,16 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- ChatGPT hirdetéskezelő modul (csak magyarul). A modul még nem éles: az oldal
+       „hamarosan" jelvénnyel fut, és az űrlap az indulásról kér értesítést. -->
+  <url>
+    <loc>https://getcontentninja.com/hu/chatgpt-ads/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/chatgpt-ads/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/chatgpt-ads/" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Árak és kreditdíjak -->
   <url>
     <loc>https://getcontentninja.com/hu/arak/</loc>
