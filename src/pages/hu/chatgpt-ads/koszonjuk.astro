@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ThanksPixel from '../../../components/ThanksPixel.astro';
-import { pathFor } from '../../../i18n/routes';
 
 /**
  * A `/hu/chatgpt-ads/` várólista-űrlap köszönőoldala.
@@ -15,9 +14,9 @@ import { pathFor } from '../../../i18n/routes';
  * **A konverziós esemény ugyanaz, mint a termékleírás-diagnózison**
  * (`CompleteRegistration`) – lásd a `ThanksPixel` hívását a lap alján.
  *
- * A kampányoldal fejléc nélküli, fókuszált lezárását követjük (a `koszonjuk`
- * mintájára): csak logó és lábléc, hogy a lap egyetlen kifelé vezető útja a
- * bemutató-CTA legyen.
+ * A fókuszált lezárást követjük (a `koszonjuk` mintájára): csak logó és lábléc,
+ * navigáció nélkül. **CTA sincs rajta** – a lap egyetlen dolga a visszaigazolás:
+ * aki egy még nem élő modulra iratkozott fel, azt itt nem terelgetjük tovább.
  */
 const locale = 'hu';
 const page = 'chatgptAdsThanks';
@@ -66,7 +65,7 @@ const description =
         </div>
 
         <!-- Mi történik ezután -->
-        <div class="px-6 md:px-12 py-8 border-b border-border">
+        <div class="px-6 md:px-12 py-8">
           <p class="text-primary font-bold text-sm uppercase tracking-widest mb-5">Mi történik ezután?</p>
           <ol class="space-y-4">
             <li class="flex items-start gap-3.5">
@@ -89,20 +88,6 @@ const description =
               </p>
             </li>
           </ol>
-        </div>
-
-        <!-- Következő lépés: a rendszer TÖBBI modulja már ma él -->
-        <div class="px-6 md:px-12 py-8 text-center">
-          <h2 class="text-lg md:text-xl font-bold text-dark mb-2">Addig sem kell várnod</h2>
-          <p class="text-body text-[0.95rem] leading-relaxed max-w-[460px] mx-auto mb-6">
-            A rendszer többi modulja – posztolás, blogcikk, hírlevél, termékleírás – már most él.
-            Megmutatjuk élőben, a saját webshopodon.
-          </p>
-          <a href={pathFor('bookDemo', locale)} class="cta-primary inline-flex">
-            Kérek egy online bemutatót
-            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-          </a>
-          <p class="text-muted text-xs mt-4">Díjmentes, kb. 20 perc</p>
         </div>
 
       </div>
