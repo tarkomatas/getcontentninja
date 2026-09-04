@@ -138,11 +138,14 @@ const navItems = [
         <span class="material-symbols-outlined text-[16px]">login</span>
         {ui.cta.login}
       </a>
-      <!-- A demo-CTA landing módban IS látszik (lp-show), mobilon is: a főoldali hero
-           CTA-gombok helyére az integrációs logósor került, így hirdetési forgalomnál
-           ez az első kattintható konverziós pont. Mobilon rövid felirattal, hogy a
-           logó + nyelvváltó mellett elférjen. (A nav és a login továbbra is lp-hide.) -->
-      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-show">
+      <!-- A demo-CTA landing módban NEM látszik (user-döntés, 2026-09-04 – felülírja a
+           korábbi `lp-show`-t). Miért: a kampányoldalaknak saját hero-űrlapjuk van, és a
+           fejléc gombja egy MÁSIK ajánlatra (bemutató) viszi el a látogatót az űrlap elől.
+           A `?type=ld` fejléc így tényleg csak logó + nyelvváltó.
+           ⚠️ Ára: a FŐOLDAL hirdetési módban elveszti az első kattintható konverziós
+           pontját (ott a hero CTA-gombok helyén az integrációs logósor áll). Ha az kell,
+           ne ezt írd vissza `lp-show`-ra, hanem a főoldal heroját egészítsd ki. -->
+      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-hide">
         <span class="material-symbols-outlined text-[16px]">calendar_month</span>
         <span class="hidden md:inline">{ui.cta.demo}</span>
         <span class="md:hidden">{ui.cta.demoShort}</span>
