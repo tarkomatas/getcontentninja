@@ -98,8 +98,8 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   //
   // Az űrlap NEM a lead-intake-re megy, hanem a hírlevél-végpontra
   // (`src/data/newsletter.ts`, `source_form: 'chatgpt_ads'`) — a feliratkozó az
-  // indulás hírét várja, nem bemutatót kér. Az app-oldali teendők (MailerLite
-  // csoportok, `consent_text: null` kezelése): `docs/chatgpt-ads-hirlevel-teendok.md`.
+  // indulás hírét várja, nem bemutatót kér. A teljes szerződés (MailerLite-csoportok,
+  // hozzájárulás-szabály): `docs/chatgpt-ads-hirlevel-feliratkozas.md`.
   // Amikor a modul élesedik, a hero űrlapja a szokásos minősítő lead-űrlapra
   // cserélhető (`LeadFormScript`) — akkor kell majd `lead_forras` kulcs a
   // `forms.ts`-be is.

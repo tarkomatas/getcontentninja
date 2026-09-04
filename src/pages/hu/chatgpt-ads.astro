@@ -12,18 +12,24 @@ import {
 } from '../../data/newsletter';
 
 /**
- * ChatGPT hirdetések modul – kampányoldal, **első kör: csak a hero**.
+ * ChatGPT hirdetéskezelő – kampányoldal.
  *
  * A modul még NEM éles (az app `docs/features/chatgpt-ads.md` szerint az
  * élesítés a GDPR-bejelentéstől számított 30 naphoz kötött), ezért az oldal
- * jelen időben semmit nem ígér: „Hamarosan" jelvény + VÁRÓLISTA-űrlap.
- * A hero jobb oszlopa a szokásos `hero-form-card`, de a tartalma rövid
- * előjegyzés – nincs minősítés, nincs kiszűrés, nincs köszönőoldal-átirányítás
- * (a siker helyben, a kártyán belül jelenik meg).
+ * jelen időben semmit nem ígér: „Hamarosan" jelvény, és az űrlap az indulásról
+ * kér ÉRTESÍTÉST – nem bemutatóra jelentkeztet.
+ *
+ * ⚠️ **A beküldés a HÍRLEVÉL-végpontra megy** (`src/data/newsletter.ts`,
+ * `source_form: 'chatgpt_ads'`), nem a lead-intake-re: az app innen teszi a
+ * címet a „CN ChatGPT Ads érdeklődők" MailerLite-csoportba. A teljes szerződés
+ * (csoportok, hozzájárulás-szabály, tárolt mezők):
+ * `docs/chatgpt-ads-hirlevel-feliratkozas.md`.
+ *
+ * A siker és a kiszűrés is HELYBEN, a kártyán belül jelenik meg – nincs
+ * köszönőoldal-átirányítás.
  *
  * Élesítéskor ez az űrlap a `LeadFormScript` minősítő űrlapjára cserélhető;
- * a `lead_forras` akkor is `chatgpt-ads` marad, hogy a két szakasz egy
- * szűrővel összenézhető legyen.
+ * akkor kell majd `lead_forras` kulcs a `forms.ts`-be is.
  */
 const locale = 'hu';
 const page = 'chatgptAds';
@@ -97,7 +103,7 @@ const nlCfg = {
     <!-- Közös fejléc – ?type=ld (lp-mode) esetén minimálra vált (logó + nyelvváltó) -->
     <Header locale={locale} page={page} />
 
-    <!-- 1. Hero + várólista-űrlap -->
+    <!-- 1. Hero + értesítéskérő űrlap -->
     <section id="hero" class="hero-gradient py-12 md:py-16 px-4 md:px-10 overflow-hidden">
         <div class="max-w-[1200px] mx-auto w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
@@ -137,7 +143,7 @@ const nlCfg = {
 
                 </div>
 
-                <!-- Várólista-űrlap -->
+                <!-- Értesítéskérő űrlap (a hírlevél-végpontra megy) -->
                 <div class="w-full relative">
                     <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
                         <div id="waitIntro">
@@ -511,8 +517,9 @@ const nlCfg = {
                         hirlevel_feliratkozas: !!(newsletter && newsletter.checked),
                         consent_text:
                             newsletter && newsletter.checked ? nlCfg.consentText : null,
-                        // ⚠️ A két szűrőkérdés válasza. A feliratkozó-végpont ma NEM ismeri
-                        // ezeket a mezőket – lásd `docs/chatgpt-ads-hirlevel-teendok.md`.
+                        // A két szűrőkérdés válasza. Az app MINDKETTŐT eltárolja, ezért az
+                        // indulási levél szegmentálható boltmotor és időzítés szerint.
+                        // Bővíthető válaszlista: az új értékeket is elfogadja.
                         has_webshop: shopSelect.value,
                         timing: timingSelect.value,
                     },
