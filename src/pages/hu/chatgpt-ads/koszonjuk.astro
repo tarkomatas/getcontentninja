@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
 import ThanksPixel from '../../../components/ThanksPixel.astro';
 import { homeFor } from '../../../i18n/routes';
 
@@ -15,10 +17,11 @@ import { homeFor } from '../../../i18n/routes';
  * **A konverziós esemény ugyanaz, mint a termékleírás-diagnózison**
  * (`CompleteRegistration`) – lásd a `ThanksPixel` hívását a lap alján.
  *
- * A fókuszált lezárást követjük (a `koszonjuk` mintájára): csak logó és lábléc,
- * navigáció nélkül. Egyetlen kifelé vezető út van, a főoldalra – bemutató-CTA
- * SZÁNDÉKOSAN nincs: aki egy még nem élő modulra iratkozott fel, azt itt nem
- * beszéljük rá rögtön egy másik ajánlatra.
+ * A KÖZÖS fejléc és lábléc van rajta (a `koszonjuk`/`thank-you` fókuszált,
+ * csak-logós lezárása helyett): itt már nincs mit elrontani egy kifelé mutató
+ * linkkel – a beküldés megtörtént, a látogató nyugodtan nézzen körül.
+ * Bemutató-CTA viszont SZÁNDÉKOSAN nincs a kártyán: aki egy még nem élő modulra
+ * iratkozott fel, azt ne beszéljük rá azonnal egy másik ajánlatra.
  */
 const locale = 'hu';
 const page = 'chatgptAdsThanks';
@@ -33,21 +36,11 @@ const description =
   title={title}
   description={description}
   noindex={true}
-  bodyClass="bg-light text-dark font-display antialiased min-h-screen flex flex-col"
 >
-  <!-- Fejléc (fókuszált – csak logó, kifelé mutató linkek nélkül) -->
-  <header class="border-b border-solid border-b-border bg-card sticky top-0 z-50 transition-all">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-4 flex items-center justify-between whitespace-nowrap">
-      <div class="flex items-center gap-3 text-dark">
-        <a href="/hu/">
-          <img src="/assets/logo.webp" alt="Content Ninja logó" class="h-14 md:h-16 w-auto object-contain" />
-        </a>
-      </div>
-    </div>
-  </header>
+  <Header locale={locale} page={page} />
 
-  <main class="flex-1 flex flex-col items-center justify-center py-12 md:py-16 px-4">
-    <div class="w-full max-w-[720px]">
+  <section class="hero-gradient py-14 md:py-20 px-4 md:px-10">
+    <div class="w-full max-w-[720px] mx-auto">
       <div class="bg-card rounded-[16px] border border-border shadow-card overflow-hidden">
 
         <!-- Visszaigazolás -->
@@ -97,7 +90,7 @@ const description =
             annak, aki most kapott egy „szólunk majd" választ.
         -->
         <div class="px-6 md:px-12 pb-8 text-center">
-          <a href={homeFor(locale)} class="cta-secondary">
+          <a href={homeFor(locale)} class="cta-secondary px-6 py-3 text-sm">
             Megnézem addig a többi modult
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </a>
@@ -105,15 +98,9 @@ const description =
 
       </div>
     </div>
-  </main>
+  </section>
 
-  <!-- Lábléc (fókuszált) -->
-  <footer class="py-8 text-center text-muted text-sm border-t border-border bg-card">
-    <p>Copyright © getcontentninja.com | 2026</p>
-    <p class="mt-1">
-      <a href="https://app.getcontentninja.com/changelog" class="hover:text-primary transition-colors">Újdonságok</a>
-    </p>
-  </footer>
+  <Footer locale={locale} page={page} />
 
   <!--
       Konverziómérés. UGYANAZ az esemény, mint a `termekleiras-diagnozis` oldalon
