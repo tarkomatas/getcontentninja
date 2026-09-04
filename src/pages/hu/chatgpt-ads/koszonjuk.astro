@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ThanksPixel from '../../../components/ThanksPixel.astro';
+import { homeFor } from '../../../i18n/routes';
 
 /**
  * A `/hu/chatgpt-ads/` várólista-űrlap köszönőoldala.
@@ -15,8 +16,9 @@ import ThanksPixel from '../../../components/ThanksPixel.astro';
  * (`CompleteRegistration`) – lásd a `ThanksPixel` hívását a lap alján.
  *
  * A fókuszált lezárást követjük (a `koszonjuk` mintájára): csak logó és lábléc,
- * navigáció nélkül. **CTA sincs rajta** – a lap egyetlen dolga a visszaigazolás:
- * aki egy még nem élő modulra iratkozott fel, azt itt nem terelgetjük tovább.
+ * navigáció nélkül. Egyetlen kifelé vezető út van, a főoldalra – bemutató-CTA
+ * SZÁNDÉKOSAN nincs: aki egy még nem élő modulra iratkozott fel, azt itt nem
+ * beszéljük rá rögtön egy másik ajánlatra.
  */
 const locale = 'hu';
 const page = 'chatgptAdsThanks';
@@ -88,6 +90,17 @@ const description =
               </p>
             </li>
           </ol>
+        </div>
+
+        <!--
+            Az egyetlen kifelé vezető út: a főoldal. Nem ajánlat, csak elfoglaltság
+            annak, aki most kapott egy „szólunk majd" választ.
+        -->
+        <div class="px-6 md:px-12 pb-8 text-center">
+          <a href={homeFor(locale)} class="cta-secondary">
+            Megnézem addig a többi modult
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
         </div>
 
       </div>
