@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ThanksPixel from '../../../components/ThanksPixel.astro';
+import { pathFor } from '../../../i18n/routes';
+
+/**
+ * A `/hu/chatgpt-ads/` várólista-űrlap köszönőoldala.
+ *
+ * ⚠️ **Miért nem a közös `/hu/koszonjuk/`?** Az egy Fillout időpontfoglalót
+ * ágyaz be („Válassz egy szabad időpontot") – ott az űrlap kitöltése után a
+ * bemutató lefoglalása a következő lépés. Itt viszont nincs mit foglalni: a
+ * látogató egy még nem élő modul INDULÁSÁRÓL kért értesítést, a következő lépés
+ * a mi levelünk. Egy naptár ezen az oldalon üres ígéret lenne.
+ *
+ * **A konverziós esemény ugyanaz, mint a termékleírás-diagnózison**
+ * (`CompleteRegistration`) – lásd a `ThanksPixel` hívását a lap alján.
+ *
+ * A kampányoldal fejléc nélküli, fókuszált lezárását követjük (a `koszonjuk`
+ * mintájára): csak logó és lábléc, hogy a lap egyetlen kifelé vezető útja a
+ * bemutató-CTA legyen.
+ */
+const locale = 'hu';
+const page = 'chatgptAdsThanks';
+const title = 'Felkerültél a várólistára – ChatGPT hirdetéskezelő | Content Ninja';
+const description =
+  'Köszönjük! Szólunk e-mailben, amint a Content Ninja ChatGPT hirdetéskezelője élesedik.';
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  noindex={true}
+  bodyClass="bg-light text-dark font-display antialiased min-h-screen flex flex-col"
+>
+  <!-- Fejléc (fókuszált – csak logó, kifelé mutató linkek nélkül) -->
+  <header class="border-b border-solid border-b-border bg-card sticky top-0 z-50 transition-all">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-10 py-4 flex items-center justify-between whitespace-nowrap">
+      <div class="flex items-center gap-3 text-dark">
+        <a href="/hu/">
+          <img src="/assets/logo.webp" alt="Content Ninja logó" class="h-14 md:h-16 w-auto object-contain" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col items-center justify-center py-12 md:py-16 px-4">
+    <div class="w-full max-w-[720px]">
+      <div class="bg-card rounded-[16px] border border-border shadow-card overflow-hidden">
+
+        <!-- Visszaigazolás -->
+        <div class="px-6 md:px-12 pt-10 pb-8 text-center border-b border-border">
+          <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-5">
+            <span
+              class="material-symbols-outlined text-success text-3xl"
+              style="font-variation-settings:'FILL' 1">check_circle</span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-bold text-dark tracking-[-0.02em] leading-tight mb-3">
+            Felkerültél a várólistára
+          </h1>
+          <p class="text-body leading-relaxed max-w-[460px] mx-auto">
+            Szólunk e-mailben, amint a <strong class="text-dark">ChatGPT hirdetéskezelő</strong>
+            élesedik – és akkor küldjük az előregisztrálóknak járó kedvezményt is.
+          </p>
+        </div>
+
+        <!-- Mi történik ezután -->
+        <div class="px-6 md:px-12 py-8 border-b border-border">
+          <p class="text-primary font-bold text-sm uppercase tracking-widest mb-5">Mi történik ezután?</p>
+          <ol class="space-y-4">
+            <li class="flex items-start gap-3.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-bold flex items-center justify-center shrink-0">1</span>
+              <p class="text-body text-[0.95rem] leading-relaxed">
+                Élesítjük a modult – az OpenAI hirdetési rendszerének bejelentési határideje miatt
+                <strong class="text-dark">1-2 hét</strong>.
+              </p>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-bold flex items-center justify-center shrink-0">2</span>
+              <p class="text-body text-[0.95rem] leading-relaxed">
+                Kapsz egy e-mailt a kedvezménnyel és a belépési linkkel.
+              </p>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-bold flex items-center justify-center shrink-0">3</span>
+              <p class="text-body text-[0.95rem] leading-relaxed">
+                Bekötöd a webshopod, és a rendszer felépíti a termékfeedet – a kampány pár perc alatt indul.
+              </p>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Következő lépés: a rendszer TÖBBI modulja már ma él -->
+        <div class="px-6 md:px-12 py-8 text-center">
+          <h2 class="text-lg md:text-xl font-bold text-dark mb-2">Addig sem kell várnod</h2>
+          <p class="text-body text-[0.95rem] leading-relaxed max-w-[460px] mx-auto mb-6">
+            A rendszer többi modulja – posztolás, blogcikk, hírlevél, termékleírás – már most él.
+            Megmutatjuk élőben, a saját webshopodon.
+          </p>
+          <a href={pathFor('bookDemo', locale)} class="cta-primary inline-flex">
+            Kérek egy online bemutatót
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+          <p class="text-muted text-xs mt-4">Díjmentes, kb. 20 perc</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Lábléc (fókuszált) -->
+  <footer class="py-8 text-center text-muted text-sm border-t border-border bg-card">
+    <p>Copyright © getcontentninja.com | 2026</p>
+    <p class="mt-1">
+      <a href="https://app.getcontentninja.com/changelog" class="hover:text-primary transition-colors">Újdonságok</a>
+    </p>
+  </footer>
+
+  <!--
+      Konverziómérés. UGYANAZ az esemény, mint a `termekleiras-diagnozis` oldalon
+      (`CompleteRegistration`) – ott a `LeadFormScript` `pixelEvents` propja lövi
+      el, mert az opt-in oldal kihagyja a köszönőoldalt; itt van köszönőoldal,
+      ezért az méri (`?lead=1`).
+
+      A `content_name` viszont SZÁNDÉKOSAN más: az esemény azonos, hogy a
+      hirdetési optimalizálás egy konverzióra fusson, a paraméter meg
+      szétválasztja a jelentésben, melyik oldal hozta.
+  -->
+  <ThanksPixel event="CompleteRegistration" params={{ content_name: 'chatgpt_ads' }} />
+</BaseLayout>

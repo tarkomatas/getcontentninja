@@ -14,6 +14,7 @@ export type PageKey =
   | 'blogWriter'
   | 'webshopSeoGeo'
   | 'chatgptAds'
+  | 'chatgptAdsThanks'
   | 'newsletter'
   | 'newsletterSignup'
   | 'pricing'
@@ -112,6 +113,19 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // várólista-levél is az lesz. Ha megjelenik angolul, egy `/en/chatgpt-ads/`
   // fájllal bővíthető.
   chatgptAds: { hu: '/hu/chatgpt-ads/', en: null },
+  // A ChatGPT-hirdetés várólista SAJÁT köszönőoldala. Azért nem a közös
+  // `thanks` (`/hu/koszonjuk/`), mert az egy Fillout időpontfoglalót ágyaz be
+  // („Válassz egy szabad időpontot") – itt viszont nincs mit foglalni: a
+  // látogató egy még nem élő modul indulásáról kért értesítést.
+  //
+  // Az útvonal szándékosan a kampányoldal ALÁ kerül (`chatgpt-ads.astro` +
+  // `chatgpt-ads/koszonjuk.astro` – ugyanaz a minta, mint az `aszf.astro` +
+  // `aszf/v1-1.astro` verzió-archívumnál), így a slugból látszik, melyik
+  // űrlaphoz tartozik.
+  //
+  // `noindex` + robots.txt Disallow, a többi köszönőoldal módjára; a sitemapbe
+  // nem kerül be.
+  chatgptAdsThanks: { hu: '/hu/chatgpt-ads/koszonjuk/', en: null },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // **A MI hírlevelünkre való feliratkozás** – nem összekeverendő a fenti

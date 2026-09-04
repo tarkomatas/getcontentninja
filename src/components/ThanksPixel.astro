@@ -1,0 +1,72 @@
+---
+/**
+ * A köszönőoldalak Meta-pixel eseménye – **EGY forrás** mind a három oldalra
+ * (`hu/koszonjuk`, `en/thank-you`, `hu/chatgpt-ads/koszonjuk`). Korábban ez a
+ * ~30 soros blokk oldalanként kézzel másolva élt.
+ *
+ * **Csak `?lead=1` esetén tüzel.** A köszönőoldal önmagában is megnyitható
+ * (frissítés, könyvjelző, visszalépés), az viszont nem konverzió – a paramétert
+ * az űrlap átirányítása teszi ki, tehát az jelzi a tényleges beküldést.
+ *
+ * ⚠️ **A `fbq` a hozzájárulásig NEM létezik**: a pixelt a `cookie.js` csak a
+ * süti-banner elfogadása után tölti be. Ezért nem elég egyszer megnézni – 20
+ * másodpercig várunk rá. Ez nem a banner megkerülése, hanem a bevárása: aki nem
+ * fogad el, arról nem megy ki esemény.
+ *
+ * Ha az oldal átirányítás NÉLKÜL méri a konverziót (opt-in oldalak, ahol a
+ * köszönőoldal kimarad), ne ezt használd: ott a `LeadFormScript` `pixelEvents`
+ * propja lövi el az eseményt még a küldés előtt.
+ */
+interface Props {
+  /**
+   * A Meta-esemény neve. Alap: `Lead` – ez a bemutatót kérő űrlapok konverziója.
+   *
+   * ⚠️ Oldalanként EGY esemény legyen: a hirdetési optimalizálást egyre kell
+   * állítani, két eseménnyel ugyanaz a konverzió kétszer számítana.
+   */
+  event?: string;
+  /**
+   * Opcionális esemény-paraméterek (jellemzően `content_name`), hogy a Meta
+   * jelentésében szétváljon, melyik oldalról jött ugyanaz az esemény.
+   */
+  params?: Record<string, unknown>;
+}
+
+const { event = 'Lead', params } = Astro.props;
+
+/** A küldő script konfigja (`define:vars`) – lásd a fájl végén. */
+const pixel = { event, params: params ?? null };
+---
+
+<script is:inline define:vars={{ pixel }}>
+  (function () {
+    if (new URLSearchParams(window.location.search).get('lead') !== '1') return;
+
+    var tracked = false;
+    var attempts = 0;
+    var maxAttempts = 40; // 40 × 500 ms = legfeljebb 20 mp várakozás a hozzájárulásra
+
+    function track() {
+      if (tracked) return true;
+      attempts++;
+      if (typeof fbq === 'function') {
+        try {
+          if (pixel.params) fbq('track', pixel.event, pixel.params);
+          else fbq('track', pixel.event);
+          tracked = true;
+          return true;
+        } catch (e) {
+          console.error('Pixel tracking hiba:', e);
+        }
+      }
+      // Lejárt az idő: feladjuk, különben a timer örökre futna.
+      return attempts >= maxAttempts;
+    }
+
+    if (!track()) {
+      var timer = setInterval(function () {
+        if (track()) clearInterval(timer);
+      }, 500);
+    }
+  })();
+</script>

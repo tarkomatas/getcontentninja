@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ThanksPixel from '../../components/ThanksPixel.astro';
 
 const locale = 'en';
 const page = 'thanks';
@@ -81,37 +82,5 @@ const description = 'Thank you for your submission! The next step is to book a f
   </footer>
 
   <!-- Lead tracking: the Facebook 'Lead' event fires only when ?lead=1 is present -->
-  <script is:inline>
-    (function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const isLead = urlParams.get("lead") === "1";
-      if (!isLead) return;
-
-      let leadTracked = false;
-      let attempts = 0;
-      const maxAttempts = 40; // 40 * 500ms = max 20s wait
-
-      function trackLead() {
-        if (leadTracked) return true;
-        attempts++;
-        if (typeof fbq === 'function') {
-          try {
-            fbq('track', 'Lead');
-            leadTracked = true;
-            return true;
-          } catch (e) {
-            console.error("Pixel tracking error:", e);
-          }
-        }
-        if (attempts >= maxAttempts) return true;
-        return false;
-      }
-
-      if (!trackLead()) {
-        const checkInterval = setInterval(() => {
-          if (trackLead()) clearInterval(checkInterval);
-        }, 500);
-      }
-    })();
-  </script>
+  <ThanksPixel />
 </BaseLayout>

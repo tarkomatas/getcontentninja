@@ -10,6 +10,7 @@ import {
   NEWSLETTER_MAX_ATTEMPTS,
   NEWSLETTER_RETRY_BASE_MS,
 } from '../../data/newsletter';
+import { pathFor } from '../../i18n/routes';
 
 /**
  * ChatGPT hirdetéskezelő – kampányoldal.
@@ -25,8 +26,9 @@ import {
  * (csoportok, hozzájárulás-szabály, tárolt mezők):
  * `docs/chatgpt-ads-hirlevel-feliratkozas.md`.
  *
- * A siker és a kiszűrés is HELYBEN, a kártyán belül jelenik meg – nincs
- * köszönőoldal-átirányítás.
+ * Siker után a saját köszönőoldalára megyünk (`chatgptAdsThanks`), `?lead=1`-gyel
+ * – az méri a `CompleteRegistration` konverziót. A KISZŰRÉS ezzel szemben helyben,
+ * a kártyán belül jelenik meg: az nem konverzió, és nem is küldünk el semmit.
  *
  * Élesítéskor ez az űrlap a `LeadFormScript` minősítő űrlapjára cserélhető;
  * akkor kell majd `lead_forras` kulcs a `forms.ts`-be is.
@@ -79,6 +81,9 @@ const nlCfg = {
   locale,
   maxAttempts: NEWSLETTER_MAX_ATTEMPTS,
   retryBase: NEWSLETTER_RETRY_BASE_MS,
+  // Siker után ide megyünk. A `?lead=1` a konverzió jelzése: enélkül a
+  // köszönőoldal nem lő eseményt (frissítésre, könyvjelzőre sem).
+  thanksUrl: `${pathFor('chatgptAdsThanks', locale)}?lead=1`,
 };
 ---
 
@@ -251,21 +256,11 @@ const nlCfg = {
                             </p>
                         </div>
 
-                        <!-- Siker: helyben, a kártyán belül – nincs köszönőoldal-átirányítás. -->
-                        <div id="waitSuccess" class="hidden text-center py-6 space-y-4">
-                            <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
-                                <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-dark">Kész, feliratkoztál!</h4>
-                            <p class="text-body leading-relaxed max-w-[400px] mx-auto text-sm">
-                                Szólunk e-mailben, amint a ChatGPT hirdetéskezelő élesedik. Addig is: a rendszer többi
-                                modulját már most meg tudod nézni élőben.
-                            </p>
-                            <a href="/hu/online-bemutato/" class="cta-primary inline-flex text-sm">
-                                Kérek egy online bemutatót
-                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                            </a>
-                        </div>
+                        <!--
+                            Sikeres beküldésnél NINCS helyben megjelenő siker-doboz: a
+                            `chatgptAdsThanks` köszönőoldalra megyünk (`?lead=1`), az mondja el a
+                            folytatást és az méri a konverziót.
+                        -->
                     </div>
                 </div>
 
@@ -393,7 +388,6 @@ const nlCfg = {
             var label = document.getElementById('waitSubmitLabel');
             var errorBox = document.getElementById('waitError');
             var intro = document.getElementById('waitIntro');
-            var successBox = document.getElementById('waitSuccess');
             var rejectedBox = document.getElementById('waitRejected');
             var shopSelect = document.getElementById('waitShop');
             var timingSelect = document.getElementById('waitTiming');
@@ -429,10 +423,14 @@ const nlCfg = {
                 errorBox.classList.remove('hidden');
             }
 
+            /**
+             * A köszönőoldal veszi át a szót – ő méri a `CompleteRegistration`
+             * konverziót is (`?lead=1`), ezért itt NEM mutatunk siker-üzenetet.
+             * A kérés ekkor már lefutott (a `res.ok` ágból jövünk), tehát az
+             * átirányítás nem vághatja el.
+             */
             function succeed() {
-                form.classList.add('hidden');
-                intro.classList.add('hidden');
-                successBox.classList.remove('hidden');
+                window.location.href = nlCfg.thanksUrl;
             }
 
             function retry(payload, attempt) {

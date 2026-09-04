@@ -5,6 +5,8 @@
 User-agent: *
 Disallow: /hu/koszonjuk
 Disallow: /en/thank-you
+# Csak a köszönőoldal – a /hu/chatgpt-ads/ kampányoldal maga indexelhető marad.
+Disallow: /hu/chatgpt-ads/koszonjuk
 Disallow: /hu/teljes-rendszer
 Disallow: /en/all-in-one
 
