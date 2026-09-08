@@ -15,6 +15,7 @@ export type PageKey =
   | 'webshopSeoGeo'
   | 'chatgptAds'
   | 'chatgptAdsThanks'
+  | 'ninjaAi'
   | 'newsletter'
   | 'newsletterSignup'
   | 'pricing'
@@ -126,6 +127,24 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // `noindex` + robots.txt Disallow, a többi köszönőoldal módjára; a sitemapbe
   // nem kerül be.
   chatgptAdsThanks: { hu: '/hu/chatgpt-ads/koszonjuk/', en: null },
+  // **A beépített AI asszisztens (Ninja AI) saját oldala.** Nem modul a
+  // `modules.ts` értelmében: nem egy tartalomtípust gyárt, hanem a rendszer
+  // KEZELŐFELÜLETE — kérdezel tőle, ő megnézi a valós adataidat, beállít,
+  // generáltat, elemez, és jóváhagyás után élesít is.
+  //
+  // A slug SZÁNDÉKOSAN a termék saját nevét viszi (`ninja-ai`), mert az oldal
+  // erre a kifejezésre megy: aki a „Ninja AI"-ra keres (vagy egy AI-keresőtől
+  // kérdezi, mi az), pontosan ezt az oldalt kapja. Ezért kell indexelhetőnek is
+  // maradnia — nem kampány-landing, hanem a fogalom definíciós oldala.
+  //
+  // **Csak magyarul** (`en: null`): maga az asszisztens magyarul beszél (a
+  // system promptja ezt köti ki), a súgó-cikkek is magyarok — egy angol oldal
+  // olyan felületet ígérne, amit a látogató nem az ő nyelvén kapna meg. Ha az
+  // asszisztens megszólal angolul, egy `/en/ninja-ai/` fájllal bővíthető.
+  //
+  // A fejlécbe/láblécbe SZÁNDÉKOSAN nincs belinkelve (user-kérés, 2026-09-08):
+  // előbb a keresőforgalom mérése jön, a menübe emelés utána eldönthető.
+  ninjaAi: { hu: '/hu/ninja-ai/', en: null },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // **A MI hírlevelünkre való feliratkozás** – nem összekeverendő a fenti

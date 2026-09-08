@@ -1,0 +1,1103 @@
+---
+/**
+ * **Ninja AI — a beépített AI asszisztens oldala.**
+ *
+ * Nem modul-oldal a `modules.ts` értelmében: a többi oldal egy-egy TARTALOMTÍPUST
+ * ad el (poszt, blogcikk, hírlevél, termékleírás), ez viszont a rendszer
+ * KEZELŐFELÜLETÉT — azt, hogy a webshopos nem kattintgat, hanem elmondja, mit
+ * szeretne, és a Ninja AI a saját munkatere valós adatain elvégzi.
+ *
+ * A kulcsszó, amire megy: **„Ninja AI"**. Ezért:
+ *  - a kifejezés ott van a H1-ben, a `<title>`-ben, az első bekezdésben és a GYIK
+ *    első kérdésében is („Mi az a Ninja AI?"),
+ *  - a lap **indexelhető** (nem `noindex`, mint a tisztán fizetett landingek): ez a
+ *    fogalom definíciós oldala, nem kampány-csali,
+ *  - a GYIK **FAQPage JSON-LD**-vel is kimegy, és a szekciók szándékosan
+ *    tényszerű, önmagában idézhető bekezdésekkel dolgoznak (GEO): az AI-kereső
+ *    egy-egy bekezdést emel ki, nem az egész oldalt.
+ *
+ * ⚠️ **A tartalom az app tényleges működését írja le**, nem marketing-fantáziát —
+ * a forrás az app repó `docs/copilot-mukodes.md`-je, az agentek és a
+ * szabálykönyvük a `src/lib/chat/agents.ts`-ben, az eszközlista a
+ * `src/lib/chat/registry/`-ben. A számok (12 asszisztens, 160+ művelet) ONNAN
+ * jönnek, nem kerekített becslések — ha az app bővül, itt is frissíteni kell.
+ * Ami itt „nem tud" szekcióként szerepel, az az app SZÁNDÉKOS korlátja: ezt
+ * kimondani hitelesebb, mint elhallgatni, és az AI-keresők is ezt idézik szívesen.
+ *
+ * A fejlécbe/láblécbe SZÁNDÉKOSAN nincs belinkelve (user-kérés): előbb a
+ * keresőforgalom mérése jön. A `routes.ts` `ninjaAi` bejegyzése és a sitemap
+ * viszont már él, tehát a kereső és az AI-fetcherek megtalálják.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
+import LeadFormScript from '../../components/LeadFormScript.astro';
+import PricingCards from '../../components/PricingCards.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
+
+const locale = 'hu';
+const page = 'ninjaAi';
+const title = 'Ninja AI – a Content Ninja beépített AI asszisztense webshopoknak | Content Ninja';
+const description =
+  'A Ninja AI a Content Ninja beépített AI asszisztense: chatben kezeli helyetted a rendszert, megválaszolja a kérdéseid, beállítja a bonyolultabb dolgokat (automatizmus, sablon, ütemezés), elemzi a webshopod adatait és javaslatokkal áll elő – minden módosítást te hagysz jóvá.';
+const keywords =
+  'Ninja AI, Content Ninja AI asszisztens, beépített AI asszisztens webshop, AI copilot marketing, chatből kezelhető marketing rendszer, AI marketing asszisztens magyarul, webshop AI adatelemzés';
+
+/**
+ * A 12 szakosodott asszisztens — az app `src/lib/chat/agents.ts` `AGENT_KEYS`
+ * sorrendjében, a KÓDBAN lévő névvel és tagline-nal (rövidítve). Új asszisztens
+ * felvételekor ezt a tömböt kell bővíteni.
+ */
+const agents = [
+  { icon: 'smart_toy', name: 'Általános', desc: 'Bármiben segít a tartalomkészítéstől az ütemezésig.' },
+  { icon: 'menu_book', name: 'Posztolás alapok', desc: 'Végigvezet a beállítástól az első működő automatizmusig.' },
+  { icon: 'auto_awesome', name: 'Posztolás haladó', desc: 'A már futó automatizmusaidat emeli minőségben.' },
+  { icon: 'mail', name: 'Hírlevél alapok', desc: 'Az első hírleveledtől odáig, hogy magától megy hetente.' },
+  { icon: 'article', name: 'Blog alapok', desc: 'Az első cikkedtől odáig, hogy hetente magától megy.' },
+  { icon: 'edit_document', name: 'Shopgrade alapok', desc: 'Az első átírt termékadatlaptól a teljes bolt rendbetételéig.' },
+  { icon: 'category', name: 'Kategóriaoldal alapok', desc: 'Olyan kategóriaszöveget írat, ami tényleg segít választani.' },
+  { icon: 'public', name: 'Nemzetközi terjeszkedés', desc: 'Több nyelv, ország-brandek, automata fordítás.' },
+  { icon: 'insights', name: 'Adatelemző', desc: 'Megnézi, mi működik — és át is állítja, ami nem.' },
+  { icon: 'edit_note', name: 'Prompt-készítő', desc: 'Jó mentett promptot választ vagy ír — szöveghez, képhez, videóhoz.' },
+  { icon: 'build', name: 'Hibakereső', desc: 'Megnézi, mi hasalt el és miért — és megmondja, mit tegyél.' },
+  { icon: 'move_down', name: 'Költözés utáni indulás', desc: 'Másik rendszerből jöttél át? Újraindítja a gépezetedet.' },
+];
+
+/**
+ * FAQPage strukturált adat. **A válaszok szándékosan önmagukban is teljesek** —
+ * egy AI-kereső egy-egy `acceptedAnswer`-t emel ki, kontextus nélkül; egy „lásd
+ * fentebb" típusú válasz ott értelmezhetetlen lenne.
+ */
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Mi az a Ninja AI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A Ninja AI a Content Ninja beépített AI asszisztense – egy magyar nyelvű chat az appon belül, ami a webshop marketingrendszerét kezeli a tulajdonos helyett. A saját szavaiddal kérheted, ő pedig a te munkatered valós adataival dolgozik: megnézi a posztjaidat, brandjeidet, automatizmusaidat, analitikádat és a hibanaplódat, válaszol a kérdéseidre a súgó alapján, beállítja a bonyolultabb dolgokat (tudásforrás, sablon, automatizmus, ütemezés), elindítja a tartalomgenerálást, sőt publikál is – minden módosítást egy jóváhagyó kártyán te erősítesz meg. Ma 12 szakosodott asszisztens és több mint 160 művelet áll mögötte.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Mit tud elvégezni a Ninja AI a webshopom helyett?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nagyjából mindent, amit a felületen kattintva megtennél. Olvas: posztok, média, brandek és social fiókok, tudásforrások, mentett promptok, sablonok, automatizmusok, integrációk, analitika, kredit-egyenleg, hibanapló és a súgó-cikkek. Létrehoz és szerkeszt: posztot a teljes életciklusán át, brandet, social fiókot, tudásforrást, sablont, hirdetés-vázlatot, és felépít egy automatizmust a triggerektől a lépéseken át a bekapcsolásig. Háttérmunkát indít: poszt-szöveg generálása és átírása, képgenerálás, hírlevél- és hirdetés-szöveg, weboldal-elemzés, publikálás és hírlevél-kiküldés. A tartalmat mindig a beépített generáló motor gyártja – ugyanazzal a mentett prompttal, márkahanggal és tudásforrással, mint a felületen.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Mit NEM tud a Ninja AI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Szándékosan nem tud videót generálni (ezt a felületen indítod, mert ott állíthatók be pontosan a vizuál paraméterei), nem tud integrációt bekötni (Unas, Shoprenter, Meta-belépés – ez biztonsági okból kézi), nem nyúl a fizetéshez, az előfizetéshez és a keretekhez (a kreditet csak olvassa), nem tölt fel médiát, nem küld ki hirdetést a Metára, és soha nem lát más munkatér vagy admin adatot. Ha valamihez nincs eszköze, nem ígéri meg – felajánlja azt az asszisztenst, akinek van.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Honnan tudom, hogy a Ninja AI nem talál ki adatokat?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Amit tényként állít, azt eszközzel kérte le a te munkateredből – nem emlékezetből válaszol. Az adatelérést az adatbázis szintjén garantáljuk (sorszintű jogosultság), nem csak kérésre: más webshop adata elérhetetlen. A „hogyan csináljak valamit” típusú kérdéseknél előbb a saját súgó-cikkeinkben keres, és aszerint válaszol – menüneveket és gombokat nem talál ki. A beolvasott szöveget (termékoldal, tudásforrás, RSS) adatként kezeli, nem utasításként: ha egy ilyen tartalom próbálná eltéríteni, figyelmen kívül hagyja és szól neked.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Elemzi a Ninja AI a webshopom adatait?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Igen, erre külön Adatelemző asszisztens van. Megnézi a posztjaid teljesítményét, a hírleveleid megnyitási és kattintási számait, valamint a Google Search Console adataidat (mire keresnek rád, mely oldalaid javíthatók a legolcsóbban), és megmondja, mit állíts át – majd fel is ajánlja, hogy megcsinálja. A statisztikát a rendszer számolja, nem a chat-modell, és az asszisztens kimondja a mérési korlátokat is: a Facebookon nem látunk megtekintést, a vásárlást nem mérjük, kevés adatból pedig nem csinál szabályt. Helyezés-javulást soha nem ígér.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kerül extra pénzbe a Ninja AI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nem, a Ninja AI a 34.990 Ft + ÁFA / hó előfizetés része, nincs külön díja. A beszélgetésre munkaterenként havi keret jár, ami az első számlázási ciklusban dupla – ezt a chat-ablak folyamatosan mutatja. Ami a beszélgetés nyomán ténylegesen elkészül (poszt-szöveg, kép, blogcikk, hírlevél), az a szokásos kreditárak szerint fogyaszt a havi 500 megújuló AI kreditedből – ugyanannyit, mintha a felületen indítottad volna.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Emlékszik a Ninja AI arra, amit korábban mondtam neki?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Igen. A beszélgetéseken átívelően megjegyzi a tartós működési preferenciáidat („mindig tegezz”, „ne használj emojit”), és te is kérheted, hogy jegyezzen meg valamit. Az elmentett emlékeket a Ninja AI emlékei panelen bármikor megnézheted és törölheted. Titkot – jelszót, API-kulcsot, bankkártya-adatot – soha nem ment el. Egy hosszú beszélgetés régebbi részét magától összefoglalja, így nem esik ki a lényeg.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Magyarul beszél a Ninja AI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Igen, a Ninja AI magyarul, tegező, közvetlen hangon beszél – nem fejlesztőnek, hanem a webshop gazdájának. A súgó-cikkek, amikből a válaszait építi, szintén magyarul készültek. Ettől függetlenül a rendszer több nyelven gyárt tartalmat: külön asszisztens segít a nemzetközi terjeszkedésben, ország-brandekkel és automata fordítással.',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogImage="/assets/og-fooldal.jpg"
+  lpEnabled
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
+  <Fragment slot="head">
+    <style is:inline>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #4a4a68;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #1e1e2f;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .cta-primary:hover {
+            background-color: #5a4bd6;
+        }
+
+        .cta-primary .material-symbols-outlined {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+
+        /* Chat-buborékok a „példa-kérések” szekcióban. Nem képernyőkép: sima HTML,
+           így a kereső és az AI-fetcher is OLVASSA a példa-mondatokat – pont azokat
+           a kifejezéseket, amikre a látogató is keresne. */
+        .chat-ask {
+            background-color: #6c5ce7;
+            color: #ffffff;
+            border-radius: 14px 14px 4px 14px;
+        }
+
+        .chat-reply {
+            background-color: #ffffff;
+            border: 1px solid #e8e8ef;
+            border-radius: 14px 14px 14px 4px;
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Közös fejléc – ?type=ld (lp-mode) esetén minimálra vált (logó + nyelvváltó) -->
+    <Header locale={locale} page={page} />
+
+    <!-- 1. Hero + jelentkezési űrlap -->
+    <section id="hero" class="hero-gradient py-12 md:py-16 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <!-- Content -->
+                <div class="flex flex-col gap-4 md:gap-7 text-left">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest">Ninja AI · beépített asszisztens</span>
+
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
+                        A <span class="text-primary">Ninja AI</span> a Content Ninja beépített asszisztense, ami
+                        <span class="text-primary">helyetted kezeli a rendszert</span>
+                    </h1>
+
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
+                        Írd le a saját szavaiddal, mit szeretnél – a Ninja AI megnézi a webshopod valós adatait,
+                        elkészíti, amit kértél, és a <strong class="text-dark">jóváhagyásod után</strong> élesíti is.
+                    </p>
+
+                    <ul class="space-y-3.5 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Megválaszolja a kérdéseid</strong> – a saját súgónkból és a te adataidból, nem találgat</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Beállítja a bonyolultabb dolgokat</strong> – sablon, tudásforrás, automatizmus, ütemezés</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Elemzi az adataid</strong> – megmondja, mit állíts át, és át is állítja helyetted</span>
+                        </li>
+                    </ul>
+
+                    <!-- Social proof mini -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ hazai webshop</span> már használja</p>
+                    </div>
+                </div>
+
+                <!-- Form Container -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="formIntro">
+                            <h3 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online bemutatóra</h3>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">Közvetlen kipróbálásra
+                                    nincs lehetőség</strong> – de egy online megbeszélésen élőben megmutatjuk, mit
+                                    kérdezünk a Ninja AI-tól, és mit csinál meg magától.</p>
+                            </div>
+                        </div>
+
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                            <HoneypotField />
+
+                            <!-- Step 1: minősítő kérdések -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="UNAS">UNAS</option>
+                                            <option value="Shoprenter">Shoprenter</option>
+                                            <option value="Egyéb" data-reject="hard">Egyéb</option>
+                                            <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
+                                                indítani</option>
+                                            <option value="Más típusú vállalkozásom van" data-reject="hard">Más típusú vállalkozásom
+                                                van</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Hány terméked van a
+                                            webshopban?</label>
+                                        <select name="product_count" id="productCount"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="100 alatt">100 alatt</option>
+                                            <option value="100-1.000">100–1.000</option>
+                                            <option value="1.000-10.000">1.000–10.000</option>
+                                            <option value="10.000 felett">10.000 felett</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ki kezeli most a webshopod
+                                            marketingjét?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Én, cégvezetőként">Én, cégvezetőként</option>
+                                            <option value="Belsős marketing csapat">Belsős marketing csapat</option>
+                                            <option value="Külsős ügynökség">Külsős ügynökség</option>
+                                            <option value="Senki – jelenleg nincs rá kapacitás">Senki – jelenleg nincs rá
+                                                kapacitás</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ha a bemutató alapján
+                                            tetszik, mikor tudnád elkezdeni használni a szoftvert?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Azonnal">Azonnal</option>
+                                            <option value="1 hónapon belül">1 hónapon belül</option>
+                                            <option value="2-3 hónapon belül" data-reject="soft">2-3 hónapon belül</option>
+                                            <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Tovább
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Hard reject -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        A megadott adatok alapján úgy látjuk, hogy nem lenne a platformunk megfelelő
+                                        számodra. Így nem is szeretnénk az idődet húzni, megértésed köszönjük!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Soft reject -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            A bemutatót csak olyanoknak tudjuk vállalni, akik azonnal használni szeretnék
+                                            a rendszert. Maradjunk kapcsolatban addig is – szívesen elküldenénk egy
+                                            <strong>videós bemutatót</strong> neked.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email cím</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles/"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject(this)"
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Kérem a videót
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Soft reject thanks -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Megkaptuk!</h4>
+                                    <p data-thanks="plain" class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Néhány percen belül elküldjük a bemutató videót. Köszönjük az érdeklődésedet!
+                                    </p>
+                                    <p data-thanks="newsletter" class="hidden text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Néhány percen belül elküldjük a bemutató videót, és ezentúl az aktuális újdonságokról is hírt adunk. Köszönjük az érdeklődésedet!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: kapcsolati adatok -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Név</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. Kovács János">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Céges email cím</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Telefonszám</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+36 30 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles/"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Vissza
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                            Tovább az időpontfoglaláshoz!
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hitelesítések: Meta Tech Provider + UNAS partner -->
+    <TrustBadges locale={locale} />
+
+    <!-- 2. Mi az a Ninja AI? – definíciós blokk.
+         Ez a szekció szándékosan ELŐL van és tényszerű: a keresőből és az
+         AI-keresőkből érkező látogató nagy része erre a kérdésre jött. -->
+    <section id="mi-ez" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mi ez? 🥷</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mi az a Ninja AI?</h2>
+                <p class="text-body text-lg">
+                    A <strong class="text-dark">Ninja AI</strong> a Content Ninja beépített AI asszisztense: egy magyar
+                    nyelvű chat az appon belül, ami a webshopod marketingrendszerét kezeli helyetted. A saját szavaiddal
+                    kérheted, ő pedig a <strong class="text-dark">te munkatered valós adataival</strong> dolgozik – nem
+                    találgat, hanem megnézi, és ha kell, meg is teszi.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mb-6 shadow-primary-glow">12</div>
+                    <h3 class="font-bold text-lg mb-2">szakosodott asszisztens</h3>
+                    <p class="text-body text-sm leading-relaxed">Új beszélgetésnél te választasz: van, aki a posztolás
+                        alapjaitól vezet végig, és van, aki csak a számaidat elemzi. Kevesebb, fókuszáltabb eszköz =
+                        pontosabb munka.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-xl font-extrabold mb-6 shadow-primary-glow">160+</div>
+                    <h3 class="font-bold text-lg mb-2">művelet, amit el tud végezni</h3>
+                    <p class="text-body text-sm leading-relaxed">Nagyjából mindent, amit a felületen kattintva
+                        megtennél, chatből is elvégeztethetsz vele – néhány szándékos kivétellel, amiket lentebb
+                        felsorolunk.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white mb-6 shadow-primary-glow">
+                        <span class="material-symbols-outlined text-[26px]">verified_user</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Minden módosítást te hagysz jóvá</h3>
+                    <p class="text-body text-sm leading-relaxed">Ami az adataidhoz nyúl vagy kifelé megy, arra jóváhagyó
+                        kártya jön: látod, mit készül csinálni, és te nyomsz rá. Semmi nem történik némán.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-light border border-primary/20 rounded-[16px] px-6 py-6 md:px-8 flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary text-[26px] shrink-0 mt-0.5">chat</span>
+                <p class="text-body leading-relaxed">
+                    <strong class="text-dark">Hol éred el?</strong> Egy lebegő gombbal az app minden oldaláról, vagy
+                    teljes képernyőn a saját chat-oldalán. A beszélgetéseid elmentődnek: később folytathatod,
+                    átnevezheted vagy törölheted őket.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Mit csinál – a négy fő képesség -->
+    <section id="mit-tud" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mit tud? ⚡</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Négy dolog, amit átvesz tőled</h2>
+                <p class="text-body text-lg">Egy marketing rendszer attól nem lesz könnyű, hogy sok funkciója van –
+                    hanem attól, ha nem neked kell megtalálni bennük a helyes gombot.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">settings_suggest</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Kezeli helyetted a rendszert</h3>
+                    <p class="text-body text-sm leading-relaxed">Posztot hoz létre, megíratja hozzá a szöveget és a
+                        képet, cél-fiókot választ, ütemez, publikál. Brandet és social fiókot állít be, tudásforrást,
+                        mentett promptot és sablont készít. Amit kérsz, azt megcsinálja – nem elmagyarázza, hol
+                        találod.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">help_center</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Megválaszolja a kérdéseid</h3>
+                    <p class="text-body text-sm leading-relaxed">„Hogyan csináljak X-et?", „mennyit posztoljak?",
+                        „melyik forrás a jobb?" – ilyenkor előbb megkeresi a saját súgó-cikkünket, és aszerint válaszol.
+                        Nem a kútfejéből tanácsol, és nem talál ki menüneveket: ha valamiről nincs anyagunk, azt
+                        megmondja.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">tune</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Beállítja a bonyolultabb dolgokat</h3>
+                    <p class="text-body text-sm leading-relaxed">Egy automatizmust végig felépít: tudásforrás → sablon a
+                        beállításaival → trigger és feltételek → szárazpróba → bekapcsolás. Ez az a pont, ahol a
+                        legtöbben elakadnak – és pont ezt tudja átvenni, vagy végigvezetni téged rajta, ha inkább
+                        tanulnád.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">insights</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Elemzi az adataid, és javít rajtuk</h3>
+                    <p class="text-body text-sm leading-relaxed">Megnézi, mi működik a posztjaidnál, a hírleveleidnél és
+                        a Google-keresésben – aztán nem statisztikát olvas fel, hanem megmondja, mit állíts át, és
+                        felajánlja, hogy meg is csinálja. A tanács a te számaidból jön, nem általánosságokból.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Példa-kérések. SZÁNDÉKOSAN sima HTML (nem képernyőkép): így a kereső és
+         az AI-fetcher is olvassa azokat a mondatokat, amikre a látogató keresne. -->
+    <section class="bg-card py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Így néz ki 💬</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem parancsokat tanulsz, hanem elmondod, mit szeretnél</h2>
+                <p class="text-body text-lg">Néhány valódi kérés, amit be lehet írni neki:</p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="space-y-2.5">
+                    <div class="flex justify-end">
+                        <p class="chat-ask px-4 py-3 max-w-[80%] text-sm font-medium">Készíts egy posztot erről a
+                            termékről: [terméklink]</p>
+                    </div>
+                    <div class="flex justify-start">
+                        <p class="chat-reply px-4 py-3 max-w-[85%] text-sm text-body shadow-card">Létrehozta a posztot a
+                            brandedhez, a beépített motorral megíratta a szöveget, és megmondja, melyik mentett promptot
+                            használta. Kérhetsz hozzá képet is – ugyanarra a posztra, nem újat gyárt.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <div class="flex justify-end">
+                        <p class="chat-ask px-4 py-3 max-w-[80%] text-sm font-medium">Állíts be egy automatizmust, ami
+                            hetente kétszer posztol a legnépszerűbb termékeimből</p>
+                    </div>
+                    <div class="flex justify-start">
+                        <p class="chat-reply px-4 py-3 max-w-[85%] text-sm text-body shadow-card">Végigmegy a láncon:
+                            tudásforrás, sablon a beállításaival, trigger és ütemezés – aztán szárazpróbát futtat, és
+                            csak utána kapcsolja be. A bekapcsolás előtt jóváhagyó kártyát kapsz.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <div class="flex justify-end">
+                        <p class="chat-ask px-4 py-3 max-w-[80%] text-sm font-medium">Mire keresnek rám a Google-ben, és
+                            melyik oldalamon érdemes javítani?</p>
+                    </div>
+                    <div class="flex justify-start">
+                        <p class="chat-reply px-4 py-3 max-w-[85%] text-sm text-body shadow-card">A Search Console
+                            adataidból megmutatja, hol vagy már ott a második oldalon – ezekre a legolcsóbb a javítás,
+                            mert nem új tartalom kell, hanem a meglévő oldal rendbetétele.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <div class="flex justify-end">
+                        <p class="chat-ask px-4 py-3 max-w-[80%] text-sm font-medium">Miért nem ment ki tegnap a
+                            posztom?</p>
+                    </div>
+                    <div class="flex justify-start">
+                        <p class="chat-reply px-4 py-3 max-w-[85%] text-sm text-body shadow-card">Megnézi a munkatered
+                            hibanaplóját, és emberi nyelven megmondja, mi történt és mit tegyél. Ha nem lát semmit, azt
+                            mondja meg – okot nem talál ki.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">
+                    Mutassátok meg élőben
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. A 12 asszisztens -->
+    <section id="asszisztensek" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Az asszisztensek 🧭</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem egy mindentudó chat – 12 szakosodott asszisztens</h2>
+                <p class="text-body text-lg">Új beszélgetés indításakor választasz. Mindegyik ugyanazt a közös
+                    házirendet kapja, plusz egy saját szerepet és a saját eszközkészletét – így nem szórja szét a
+                    figyelmét, hanem a te feladatodra megy rá.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {
+                  agents.map((a) => (
+                    <div class="bg-card rounded-[12px] border border-border p-5 shadow-card flex items-start gap-4">
+                      <div class="w-10 h-10 shrink-0 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-[20px]">{a.icon}</span>
+                      </div>
+                      <div>
+                        <h3 class="font-bold text-base mb-1">{a.name}</h3>
+                        <p class="text-body text-sm leading-relaxed">{a.desc}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+            </div>
+
+            <p class="text-center text-muted text-sm mt-6">Beszélgetés közben át is adhatják egymásnak a szót: ha a
+                kérdésedre másiknak van eszköze, felajánlja – egy kattintás, és ugyanez a beszélgetés megy tovább.</p>
+        </div>
+    </section>
+
+    <!-- 6. Miben biztos lehetsz – a bizalmi szekció.
+         Az AI-asszisztens legnagyobb ellenvetése nem az, hogy „nem tudja”, hanem
+         hogy „mi van, ha elrontja”. Ezért kapja ezt a helyet, és ezért ilyen konkrét. -->
+    <section id="biztonsag" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Miben biztos lehetsz? 🛡️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">A jó AI-asszisztens nem attól jó, hogy sokat mond</h2>
+                <p class="text-body text-lg">Hanem attól, hogy amit mond, az igaz – és amit tesz, az visszakövethető.
+                    Öt szabály, amit a Ninja AI nem tud átlépni:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">lock</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Csak a te adataid</h3>
+                    <p class="text-body text-sm leading-relaxed">Minden lekérés a te belépett munkameneteddel fut, és
+                        ezt az <strong>adatbázis szintjén</strong> garantáljuk, nem csak kérésre. Más webshop adata
+                        elérhetetlen.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">fact_check</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Nem talál ki adatot</h3>
+                    <p class="text-body text-sm leading-relaxed">Amit tényként állít, azt lekérte – nem emlékezetből
+                        válaszol. Ha egy lekérés hibára fut, azt megmondja, nem tippel helyette.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">menu_book</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A súgóból válaszol</h3>
+                    <p class="text-body text-sm leading-relaxed">Tanács- és „hogyan csináljam" kérdésnél előbb a saját
+                        súgó-cikkünkben keres. Gombot és menünevet nem talál ki – a leggyakoribb AI-hiba nálunk el van
+                        zárva.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">precision_manufacturing</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A tartalmat a motor gyártja</h3>
+                    <p class="text-body text-sm leading-relaxed">Poszt-szöveget, képet, hírlevelet nem a chat-modell ír,
+                        hanem a beépített generátor – ugyanazzal a mentett prompttal, márkahanggal és tudásforrással,
+                        mint a felületen. Így a chatben készült poszt <strong>ugyanolyan márkahű</strong>.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">shield_person</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">A beolvasott szöveg adat, nem parancs</h3>
+                    <p class="text-body text-sm leading-relaxed">Ha egy termékoldal vagy tudásforrás szövege próbálná
+                        „utasítani", hogy lépjen ki a szabályaiból, figyelmen kívül hagyja – és szól neked, hogy ilyet
+                        talált.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">psychology</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Emlékszik rád – de nem titkokra</h3>
+                    <p class="text-body text-sm leading-relaxed">Megjegyzi a tartós preferenciáidat („ne használj
+                        emojit"), és az emlékeit egy külön panelen bármikor megnézheted és törölheted. Jelszót,
+                        API-kulcsot, bankkártya-adatot soha nem ment el.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Mit NEM tud – őszinteség-szekció.
+         Ez nem gyengeség-lista: a szándékos korlátok kimondása a leghitelesebb
+         állítás egy AI-asszisztensről, és az AI-keresők is szívesen idézik. -->
+    <section class="bg-light py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Az őszinte rész 🙅</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit nem tud a Ninja AI – szándékosan</h2>
+                <p class="text-body text-lg">Van, amit nem azért nem tud, mert nem fért bele, hanem mert nem is
+                    akarjuk, hogy tudja.</p>
+            </div>
+
+            <div class="bg-card rounded-[16px] border border-border shadow-card divide-y divide-border">
+                <div class="flex items-start gap-4 p-6">
+                    <span class="material-symbols-outlined text-muted text-[22px] shrink-0 mt-0.5">movie_filter</span>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Videót nem generál.</strong>
+                        A mozgókép beállításai (képarány, mód, modell) a felületen állíthatók pontosan – a szöveget és a
+                        posztot elkészíti, a videót te indítod.</p>
+                </div>
+                <div class="flex items-start gap-4 p-6">
+                    <span class="material-symbols-outlined text-muted text-[22px] shrink-0 mt-0.5">link_off</span>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Integrációt nem köt be.</strong>
+                        Az Unas- és Shoprenter-kapcsolat, valamint a Meta-belépés kézi marad – biztonsági okból. API-kulcsot
+                        a chatben soha nem kér tőled.</p>
+                </div>
+                <div class="flex items-start gap-4 p-6">
+                    <span class="material-symbols-outlined text-muted text-[22px] shrink-0 mt-0.5">credit_card_off</span>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Pénzhez nem nyúl.</strong>
+                        Fizetést, előfizetést, keretet nem módosít – a kredit-egyenleget csak olvassa, hogy meg tudja
+                        mondani, belefér-e, amit terveztek.</p>
+                </div>
+                <div class="flex items-start gap-4 p-6">
+                    <span class="material-symbols-outlined text-muted text-[22px] shrink-0 mt-0.5">upload_file</span>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Médiát nem tölt fel.</strong>
+                        A már feltöltött képeidet oda tudja kötni a posztokhoz, de a feltöltés a tiéd marad.</p>
+                </div>
+                <div class="flex items-start gap-4 p-6">
+                    <span class="material-symbols-outlined text-muted text-[22px] shrink-0 mt-0.5">block</span>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Más munkatér adatát soha nem
+                        látja</strong> – és nem árulja el a saját belső működését sem, akkor sem, ha ügyesen kérdezik.</p>
+                </div>
+            </div>
+
+            <p class="text-center text-body mt-8 max-w-[680px] mx-auto">
+                És ha valamihez épp <strong class="text-dark">nincs eszköze, nem ígéri meg</strong>: felajánlja azt az
+                asszisztenst, akinek van – vagy elmondja, hol tudod a felületen elvégezni.
+            </p>
+        </div>
+    </section>
+
+    <!-- 8. Mit tud a rendszer (közös modulrács). A Ninja AI nem modul, ezért itt a
+         teljes kínálat kimegy (`exclude` nélkül), sűrű `compact` rácsban. -->
+    <ModuleGrid
+      locale={locale}
+      eyebrow="A rendszer 🧩"
+      heading="Ezeket kezeli a Ninja AI"
+      lead="A Ninja AI nem külön termék, hanem a Content Ninja kezelőfelülete: <strong>ugyanazokat a modulokat</strong> vezényli, amiket kattintva is használhatnál."
+      sectionClass="bg-card py-20 md:py-28"
+      cardClass="bg-light"
+      compact
+    />
+
+    <!-- 9. Árazás -->
+    <section id="arazas" class="bg-light py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">A Ninja AI az előfizetés része</h2>
+                <p class="text-body text-lg">Nincs külön díja, és nem is külön csomag: ugyanabban az előfizetésben van,
+                    mint az összes modul.</p>
+            </div>
+
+            <PricingCards locale={locale} ctaHref="#hero" />
+
+            <div class="text-center mt-8">
+                <a href="/hu/arak/#kreditek" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                    Részletes kreditdíjak
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. GYIK – a FAQPage JSON-LD-vel AZONOS kérdések (a strukturált adat és a
+         látható tartalom nem térhet el egymástól). -->
+    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Gyakran ismételt kérdések a Ninja AI-ról</h2>
+            </div>
+
+            <div class="space-y-3">
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Mi az a Ninja AI?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        A Ninja AI a Content Ninja beépített AI asszisztense – egy magyar nyelvű chat az appon belül,
+                        ami a webshop marketingrendszerét kezeli a tulajdonos helyett. A saját szavaiddal kérheted, ő
+                        pedig a te munkatered valós adataival dolgozik: megnézi a posztjaidat, brandjeidet,
+                        automatizmusaidat, analitikádat és a hibanaplódat, válaszol a kérdéseidre a súgó alapján,
+                        beállítja a bonyolultabb dolgokat, elindítja a tartalomgenerálást, sőt publikál is – minden
+                        módosítást egy jóváhagyó kártyán te erősítesz meg. Ma 12 szakosodott asszisztens és több mint
+                        160 művelet áll mögötte.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Mit tud elvégezni a Ninja AI a webshopom helyett?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Nagyjából mindent, amit a felületen kattintva megtennél. <strong>Olvas:</strong> posztok, média,
+                        brandek és social fiókok, tudásforrások, mentett promptok, sablonok, automatizmusok,
+                        integrációk, analitika, kredit-egyenleg, hibanapló és a súgó-cikkek.
+                        <strong>Létrehoz és szerkeszt:</strong> posztot a teljes életciklusán át, brandet, social
+                        fiókot, tudásforrást, sablont, hirdetés-vázlatot, és felépít egy automatizmust a triggerektől a
+                        lépéseken át a bekapcsolásig. <strong>Háttérmunkát indít:</strong> poszt-szöveg generálása és
+                        átírása, képgenerálás, hírlevél- és hirdetés-szöveg, weboldal-elemzés, publikálás és
+                        hírlevél-kiküldés.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Mit NEM tud a Ninja AI?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Szándékosan nem tud videót generálni (ezt a felületen indítod, mert ott állíthatók be pontosan a
+                        vizuál paraméterei), nem tud integrációt bekötni (Unas, Shoprenter, Meta-belépés – ez biztonsági
+                        okból kézi), nem nyúl a fizetéshez, az előfizetéshez és a keretekhez (a kreditet csak olvassa),
+                        nem tölt fel médiát, nem küld ki hirdetést a Metára, és soha nem lát más munkatér vagy admin
+                        adatot. Ha valamihez nincs eszköze, nem ígéri meg – felajánlja azt az asszisztenst, akinek van.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Honnan tudom, hogy a Ninja AI nem talál ki adatokat?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Amit tényként állít, azt eszközzel kérte le a te munkateredből – nem emlékezetből válaszol. Az
+                        adatelérést az adatbázis szintjén garantáljuk (sorszintű jogosultság), nem csak kérésre: más
+                        webshop adata elérhetetlen. A „hogyan csináljak valamit" típusú kérdéseknél előbb a saját
+                        súgó-cikkeinkben keres, és aszerint válaszol – menüneveket és gombokat nem talál ki. A beolvasott
+                        szöveget (termékoldal, tudásforrás, RSS) adatként kezeli, nem utasításként: ha egy ilyen tartalom
+                        próbálná eltéríteni, figyelmen kívül hagyja és szól neked.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Elemzi a Ninja AI a webshopom adatait?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Igen, erre külön <strong>Adatelemző</strong> asszisztens van. Megnézi a posztjaid teljesítményét,
+                        a hírleveleid megnyitási és kattintási számait, valamint a Google Search Console adataidat (mire
+                        keresnek rád, mely oldalaid javíthatók a legolcsóbban), és megmondja, mit állíts át – majd fel is
+                        ajánlja, hogy megcsinálja. A statisztikát a rendszer számolja, nem a chat-modell, és az
+                        asszisztens kimondja a mérési korlátokat is: a Facebookon nem látunk megtekintést, a vásárlást
+                        nem mérjük, kevés adatból pedig nem csinál szabályt. Helyezés-javulást soha nem ígér.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Kerül extra pénzbe a Ninja AI?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Nem, a Ninja AI a 34.990 Ft + ÁFA / hó előfizetés része, nincs külön díja. A beszélgetésre
+                        munkaterenként havi keret jár, ami az első számlázási ciklusban dupla – ezt a chat-ablak
+                        folyamatosan mutatja. Ami a beszélgetés nyomán ténylegesen elkészül (poszt-szöveg, kép,
+                        blogcikk, hírlevél), az a szokásos kreditárak szerint fogyaszt a havi 500 megújuló AI
+                        kreditedből – ugyanannyit, mintha a felületen indítottad volna. A
+                        <a href="/hu/arak/#kreditek" class="text-primary font-semibold underline">részletes kreditdíjakat
+                        itt találod</a>.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Emlékszik a Ninja AI arra, amit korábban mondtam neki?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Igen. A beszélgetéseken átívelően megjegyzi a tartós működési preferenciáidat („mindig tegezz",
+                        „ne használj emojit"), és te is kérheted, hogy jegyezzen meg valamit. Az elmentett emlékeket a
+                        Ninja AI emlékei panelen bármikor megnézheted és törölheted. Titkot – jelszót, API-kulcsot,
+                        bankkártya-adatot – soha nem ment el. Egy hosszú beszélgetés régebbi részét magától
+                        összefoglalja, így nem esik ki a lényeg.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Magyarul beszél a Ninja AI?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Igen, a Ninja AI magyarul, tegező, közvetlen hangon beszél – nem fejlesztőnek, hanem a webshop
+                        gazdájának. A súgó-cikkek, amikből a válaszait építi, szintén magyarul készültek. Ettől
+                        függetlenül a rendszer több nyelven gyárt tartalmat: külön asszisztens segít a
+                        <a href="/hu/nemzetkozi/" class="text-primary font-semibold underline">nemzetközi
+                        terjeszkedésben</a>, ország-brandekkel és automata fordítással.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Záró CTA -->
+    <section class="bg-primary py-16 md:py-20">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg élőben, mit kérdeznél tőle</h2>
+            <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+                Egy 30 perces bemutatón megmutatjuk, hogyan kezeli a Ninja AI a rendszert – a te webshopod példáján. Az
+                első hónapod pedig fél áron, +250 bónusz kredittel indul.
+            </p>
+            <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
+                Bemutatót kérek
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Lábléc (kampányoldali, minimál – a közös Footer helyett) -->
+    <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Content Ninja logó" class="h-8 md:h-10"></div>
+                    <p class="text-muted">Egy rendszer, ami a webshopod nevében készít marketing tartalmakat
+                        futószalagon – közvetlenül a webáruházad termékeiből.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Információk</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://app.getcontentninja.com/changelog" class="hover:text-white">Újdonságok</a></li>
+                        <li><a href="/hu/adatkezeles/" class="hover:text-white">Adatkezelési tájékoztató</a></li>
+                        <li><a href="/hu/impresszum/" class="hover:text-white">Impresszum</a></li>
+                        <li><a href="/hu/aszf/" class="hover:text-white">ÁSZF</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © getcontentninja.com | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GYIK script -->
+    <script is:inline>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+    </script>
+
+    <LeadFormScript locale={locale} source="ninja-ai" />
+
+  </div>
+</BaseLayout>

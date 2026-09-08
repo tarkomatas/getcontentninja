@@ -62,6 +62,7 @@ export type FormSource =
   | 'blogcikk-iro'
   | 'webshop-seo-geo'
   | 'webshop-integracio'
+  | 'ninja-ai'
   | 'kapcsolat';
 
 /**
@@ -95,6 +96,10 @@ export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
   // hoz-e több bemutatót, mint a két modul-oldal külön-külön.
   'webshop-seo-geo': { hu: '🔍 Webshop SEO + GEO jelentkezés', en: '🔍 Webshop SEO + GEO lead' },
   'webshop-integracio': { hu: '🛒 Webshop integráció jelentkezés', en: '🛒 Store integration lead' },
+  // A beépített AI asszisztens (Ninja AI) oldala. Külön kulcs, mert ez másfajta
+  // érdeklődő: nem egy tartalomtípusra jött (poszt, blog, hírlevél), hanem arra,
+  // hogy valaki HELYETTE kezelje a rendszert — ez a bemutatón is más hangsúly.
+  'ninja-ai': { hu: '🥷 Ninja AI jelentkezés', en: '🥷 Ninja AI lead' },
   kapcsolat: { hu: '✉️ Kapcsolat űrlap', en: '✉️ Contact form' },
 };
 
