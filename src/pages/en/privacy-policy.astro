@@ -333,7 +333,7 @@ const privacyHu = pathFor('privacy', 'hu');
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google LLC</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
-                  <td class="px-4 py-3 text-body border-r border-border">AI text, image and video generation</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI text, image and video generation; retrieving search performance data from Google Search Console</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google Ireland Limited</td>
@@ -407,17 +407,20 @@ const privacyHu = pathFor('privacy', 'hu');
             legitimate interest; retention: 90 days at most.
           </p>
           <p class="mt-3">
-            <strong class="text-dark">Note on Google Search Console:</strong> if you connect your website with your
-            explicit consent (via Google Sign-in), we retrieve the
-            <strong class="text-dark">search data of your own webshop</strong> through the Google Search Console API
-            — search queries, impressions, clicks, average position and landing page URLs — and display it to you on
-            the Analytics screen of the application. This access is
+            <strong class="text-dark">Note on Google Search Console:</strong> if you connect your website via Google
+            Sign-in, we retrieve the <strong class="text-dark">search data of your own webshop</strong> through the
+            Google Search Console API — search queries, impressions, clicks, average position and landing page URLs —
+            and display it to you on the Analytics screen of the application. This access is
             <strong class="text-dark">read-only</strong>: we do not write, modify or delete anything in your Search
             Console account. The transfer stays within the European Union (Google Ireland Limited, Gordon House,
-            Barrow Street, Dublin 4, Ireland), under Google's data processing terms. Retention: 16 months at most —
-            the period Google itself returns — after which the data is deleted automatically. You can
-            <strong class="text-dark">disconnect this integration at any time</strong> in the application; access
-            ceases immediately.
+            Barrow Street, Dublin 4, Ireland), under Google's data processing terms. Connecting requires the
+            <strong class="text-dark">authorisation of your own Google account</strong>, which you can withdraw at any
+            time — either by disconnecting the integration in the application, or in your Google account settings. We
+            store the access token <strong class="text-dark">encrypted</strong> and delete it immediately when the
+            connection is removed; access ceases at the same moment. We retain the search data collected for
+            <strong class="text-dark">16 months at most</strong> — the period Google itself returns — after which it
+            is deleted automatically. Purpose: measuring and reporting the search performance of your webshop; legal
+            basis: <strong class="text-dark">performance of a contract</strong> (you requested the connection).
           </p>
           <p class="mt-3">
             <strong class="text-dark">Note on Meta Platforms:</strong> when the Service publishes content to your
