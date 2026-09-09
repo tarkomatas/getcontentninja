@@ -29,7 +29,7 @@ const privacyHu = pathFor('privacy', 'hu');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-        <p class="text-sm text-muted">Published: 1 September 2026 · Effective: 16 September 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted">Published: 9 September 2026 · Effective: 9 October 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           This policy is available in Hungarian and English. In case of any discrepancy, the
           <a href={privacyHu} class="text-primary underline">Hungarian text</a> prevails.
@@ -346,6 +346,11 @@ const privacyHu = pathFor('privacy', 'hu');
                   <td class="px-4 py-3 text-body border-r border-border">AI video generation</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Alibaba Cloud (Singapore) Private Limited</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">EU (Frankfurt)</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI video generation</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Replicate, Inc.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
                   <td class="px-4 py-3 text-body border-r border-border">Image-to-animation generation</td>
@@ -587,14 +592,25 @@ const privacyHu = pathFor('privacy', 'hu');
           <p>
             We may update this Privacy Policy from time to time. We will notify registered users of material changes
             by e-mail and publish the updated policy on this page. Changes are published at least
-            <strong class="text-dark">15 days</strong> before they take effect. This version is effective from
-            <strong class="text-dark">16 September 2026</strong> (published on 1 September 2026). The policy is
+            <strong class="text-dark">15 days</strong> before they take effect; where a new processor is engaged, we
+            publish notice at least <strong class="text-dark">30 days</strong> in advance, in line with Section 9 of
+            <a href={`${terms}#annex-1`}>Annex 1</a> to our Terms. This version is effective from
+            <strong class="text-dark">9 October 2026</strong> (published on 9 September 2026). The policy is
             available in Hungarian and English; in case of any discrepancy, the
             <a href={privacyHu}>Hungarian text</a> prevails.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Change log</p>
           <ul>
+            <li>
+              <strong class="text-dark">9 October 2026</strong> — New processor added to Section 5:
+              <strong class="text-dark">Alibaba Cloud (Singapore) Private Limited</strong> (Alibaba Cloud Model
+              Studio) — <strong class="text-dark">AI video generation</strong>. We use the service through an
+              endpoint running in the European Union (Frankfurt region), so
+              <strong class="text-dark">no third-country transfer takes place</strong>. Only the prompt text and the
+              reference images are sent for generation — never account identifiers, access tokens or customer lists.
+              Published: 9 September 2026.
+            </li>
             <li>
               <strong class="text-dark">16 September 2026</strong> — New processor added to Section 5:
               <strong class="text-dark">Google Ireland Limited</strong> (Google Search Console API). We retrieve the

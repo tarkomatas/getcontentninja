@@ -29,7 +29,7 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 1. · Hatályos: 2026. szeptember 16-tól · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Hatályos: 2026. október 9-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           A tájékoztató magyar és angol nyelven érhető el; eltérés esetén a magyar szöveg az irányadó. Az angol
           változat <a href={privacyEn} class="text-primary underline">itt olvasható</a>.
@@ -347,6 +347,11 @@ const privacyEn = pathFor('privacy', 'en');
                   <td class="px-4 py-3 text-body border-r border-border">AI videógenerálás</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Alibaba Cloud (Singapore) Private Limited</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">EU (Frankfurt)</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI videógenerálás</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Replicate, Inc.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
                   <td class="px-4 py-3 text-body border-r border-border">képből animáció készítése</td>
@@ -591,14 +596,25 @@ const privacyEn = pathFor('privacy', 'en');
           <p>
             A jelen tájékoztatót időről időre frissítjük. A lényeges változásokról a regisztrált felhasználókat
             e-mailben értesítjük, és a frissített változatot ezen az oldalon közzétesszük. A módosításokat a
-            hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük. Ez a változat
-            <strong class="text-dark">2026. szeptember 16-tól</strong> hatályos (közzététel: 2026. szeptember 1.). A
+            hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük; új adatfeldolgozó
+            bekötéséről az ÁSZF <a href={`${terms}#melleklet-1`}>1. számú mellékletének</a> 9. pontja szerint legalább
+            <strong class="text-dark">30 nappal</strong> előre értesítést teszünk közzé. Ez a változat
+            <strong class="text-dark">2026. október 9-től</strong> hatályos (közzététel: 2026. szeptember 9.). A
             tájékoztató magyar és angol nyelven érhető el; eltérés esetén a
             <strong class="text-dark">magyar szöveg az irányadó</strong>.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Változásnapló</p>
           <ul>
+            <li>
+              <strong class="text-dark">2026. október 9.</strong> — Új adatfeldolgozó az 5. pontban:
+              <strong class="text-dark">Alibaba Cloud (Singapore) Private Limited</strong> (Alibaba Cloud Model
+              Studio) — <strong class="text-dark">AI videógenerálás</strong>. A szolgáltatást az Európai Unióban,
+              a frankfurti régióban futó végponton keresztül vesszük igénybe, ezért
+              <strong class="text-dark">harmadik országba történő továbbítás nem történik</strong>. A generáláshoz
+              kizárólag a prompt szövege és a referenciaképek kerülnek át; fiók-azonosító, hozzáférési token és
+              ügyféllista soha. Közzétéve: 2026. szeptember 9.
+            </li>
             <li>
               <strong class="text-dark">2026. szeptember 16.</strong> — Új adatfeldolgozó az 5. pontban:
               <strong class="text-dark">Google Ireland Limited</strong> (Google Search Console API). A bekötött
