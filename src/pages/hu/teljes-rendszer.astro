@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
+import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 
@@ -28,6 +29,17 @@ const page = 'allInOne';
 const title = 'All-in-one AI marketing rendszer webshopoknak | Content Ninja';
 const description =
   'Posztolás, blogcikk, hírlevél és termékleírás egy rendszerben: bekötöd a webshopod, és az AI a saját termékadataidból írja, tervezi és publikálja a tartalmat. Kérj díjmentes online bemutatót.';
+
+/** A `value`-k szándékosan változatlanok: az app egy oszlopban szűri őket, és egy
+ *  átnevezés kettévágná a régi és az új leadeket. Csak a látható címke tér el. */
+const moduleOptions = [
+  { value: 'Automata posztolás', label: 'Automata posztolás' },
+  { value: 'Blogcikk író', label: 'Blogcikk író' },
+  { value: 'Termékleírás írás (Shopgrade)', label: 'Termékleírás- és kategóriaoldal-írás' },
+  { value: 'AI hírlevél', label: 'AI hírlevél' },
+  { value: 'Kép- és videógenerálás', label: 'Kép- és videógenerálás' },
+  { value: 'Nemzetközi terjeszkedés', label: 'Nemzetközi terjeszkedés' },
+];
 ---
 
 <BaseLayout
@@ -318,51 +330,12 @@ const description =
                                             <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
                                         </select>
                                     </div>
-                                    <!-- Modul-érdeklődés: több is választható. A gyűjtő mezőnként EGY
-                                         értéket olvas, ezért a pipák egy rejtett `module_interest` mezőbe
-                                         fűződnek össze – így a `LeadFormScript` szerződése változatlan.
-                                         A rejtett mező üresen marad, amíg nincs pipa, tehát a „válaszolj
-                                         minden kérdésre" ellenőrzés magától kötelezővé teszi. -->
-                                    <div>
-                                        <label class="block text-sm font-bold text-body mb-1">Melyik modul érdekel a
-                                            leginkább? <span class="font-normal text-muted">(legfeljebb 3)</span></label>
-                                        <div id="moduleInterest"
-                                            class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 rounded-[10px] border border-border bg-light p-3 shadow-card">
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Automata posztolás"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Automata posztolás</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Blogcikk író"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Blogcikk író</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <!-- A `value` szándékosan változatlan: az app egy oszlopban szűri, és
-                                                     egy átnevezés kettévágná a régi és az új leadeket. -->
-                                                <input type="checkbox" value="Termékleírás írás (Shopgrade)"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Termékleírás- és kategóriaoldal-írás</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="AI hírlevél"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>AI hírlevél</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Kép- és videógenerálás"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Kép- és videógenerálás</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Nemzetközi terjeszkedés"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Nemzetközi terjeszkedés</span>
-                                            </label>
-                                        </div>
-                                        <input type="hidden" name="module_interest" id="moduleInterestValue">
-                                    </div>
+                                    <ModuleInterestField
+                                        label="Melyik modul érdekel a leginkább?"
+                                        hint="(legfeljebb 3)"
+                                        max={3}
+                                        options={moduleOptions}
+                                    />
 
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
@@ -1002,39 +975,6 @@ const description =
             document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
             if (!isOpen) item.classList.add('open');
         }
-    </script>
-
-    <!-- A modul-pipákat egyetlen rejtett mezőbe fűzi össze, hogy a `LeadFormScript`
-         mezőnként-egy-érték gyűjtője változatlanul működjön. Három pipa fölött a
-         maradék jelölőnégyzet letiltódik – így nem lehet „mindent bejelölni", és a
-         válasz tényleg prioritást mond az értékesítésnek. -->
-    <script is:inline>
-        (function () {
-            var MAX = 3;
-            var box = document.getElementById('moduleInterest');
-            var field = document.getElementById('moduleInterestValue');
-            if (!box || !field) return;
-
-            var boxes = Array.prototype.slice.call(box.querySelectorAll('input[type="checkbox"]'));
-
-            box.addEventListener('change', function () {
-                var picked = boxes.filter(function (cb) {
-                    return cb.checked;
-                });
-                field.value = picked
-                    .map(function (cb) {
-                        return cb.value;
-                    })
-                    .join(', ');
-
-                var full = picked.length >= MAX;
-                boxes.forEach(function (cb) {
-                    cb.disabled = full && !cb.checked;
-                    var row = cb.closest('label');
-                    if (row) row.classList.toggle('opacity-40', cb.disabled);
-                });
-            });
-        })();
     </script>
 
     <LeadFormScript locale={locale} source="teljes-rendszer" />

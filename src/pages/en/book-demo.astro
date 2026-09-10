@@ -3,10 +3,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'en';
 const page = 'bookDemo';
+
+/**
+ * Module interest: NOT a disqualifying question (no `data-reject`) – it only
+ * tells sales what to focus the demo on. The `value`s stay Hungarian and match
+ * the wording of the other pages: the app filters them in one column, so the
+ * same module cannot be named differently per page. Up to 2 ticks: the question
+ * asks for a priority, not a full wish list.
+ */
+const moduleOptions = [
+  { value: 'Automata posztolás', label: 'Posting' },
+  { value: 'AI hírlevél', label: 'Newsletters' },
+  { value: 'Blogcikk író', label: 'Blog writing' },
+  { value: 'Termékleírás írás (Shopgrade)', label: 'Product & category page rewriting' },
+  { value: 'Egyéb', label: 'Other' },
+];
 const title = 'Book a Demo – AI marketing for webshops | Content Ninja';
 const description =
   'Request a free, ~20-minute online demo of Content Ninja and see live how the AI posts for you, writes SEO blog articles into your webshop blog, sends your newsletters and rewrites your product descriptions and category pages – all from your own products.';
@@ -224,7 +240,11 @@ const description =
                             </div>
                         </div>
 
-                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                        <!-- The other campaign pages cap the form with `max-h-[500px] overflow-hidden`,
+                             because four questions fit in step 1 there. Here the module checkboxes come on
+                             top, and the cap cut off the "Continue" button – hence NO height limit: the
+                             card follows its content. -->
+                        <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
                             <!-- Step 1: Qualifying Questions -->
@@ -280,6 +300,12 @@ const description =
                                             <option value="Just exploring for now" data-reject="soft">Just exploring for now</option>
                                         </select>
                                     </div>
+                                    <ModuleInterestField
+                                        label="Which feature interests you most?"
+                                        hint="(up to 2)"
+                                        max={2}
+                                        options={moduleOptions}
+                                    />
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                         Continue

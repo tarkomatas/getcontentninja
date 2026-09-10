@@ -1,0 +1,90 @@
+---
+/**
+ * „Melyik funkció érdekel a leginkább?" – többválasztós kérdés a lead-űrlapok
+ * 1. lépésében. NEM kiszűrő kérdés: nincs rajta `data-reject`, tehát a minősítés
+ * kimenetelét nem befolyásolja – csak elmondja az értékesítésnek, mire hegyezze
+ * a bemutatót.
+ *
+ * Miért komponens: a `LeadFormScript` gyűjtője **mezőnként EGY értéket** olvas
+ * (`el.value`), ezért a jelölőnégyzetek NEM kaphatnak `name`-et – helyettük egy
+ * rejtett `module_interest` mezőbe fűzzük össze a kipipáltakat. Ez a trükk
+ * korábban két oldalfájlban volt kimásolva; a harmadik-negyedik példány előtt
+ * ide került. A rejtett mező üresen marad, amíg nincs pipa, tehát a „válaszolj
+ * minden kérdésre" ellenőrzés magától kötelezővé teszi.
+ *
+ * ⚠️ **A `value`-k mindig magyarok, oldaltól és nyelvtől függetlenül** – az app
+ * egy oszlopban szűri őket (`module_interest`), és egy fordítás vagy átnevezés
+ * kettévágná a régi és az új leadeket. Csak a látható címke fordul.
+ *
+ * Oldalanként EGY példány (fix id-kre épül).
+ */
+interface Option {
+  /** Ami az apphoz megy – magyarul, változatlanul. */
+  value: string;
+  /** Ami a látogatónak látszik – az oldal nyelvén. */
+  label: string;
+}
+
+interface Props {
+  /** A kérdés szövege. */
+  label: string;
+  /** Zárójeles korlát-felirat a kérdés mellett (pl. „(legfeljebb 2)"). */
+  hint: string;
+  /** Legfeljebb ennyi pipa; fölötte a többi jelölőnégyzet letiltódik. */
+  max: number;
+  options: Option[];
+}
+
+const { label, hint, max, options } = Astro.props;
+---
+
+<div>
+  <label class="block text-sm font-bold text-body mb-1">
+    {label} <span class="font-normal text-muted">{hint}</span>
+  </label>
+  <div
+    id="moduleInterest"
+    class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 rounded-[10px] border border-border bg-light p-3 shadow-card"
+  >
+    {
+      options.map((opt) => (
+        <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
+          <input type="checkbox" value={opt.value} class="mt-0.5 rounded text-primary focus:ring-primary" />
+          <span>{opt.label}</span>
+        </label>
+      ))
+    }
+  </div>
+  <input type="hidden" name="module_interest" id="moduleInterestValue" />
+</div>
+
+<!-- A pipákat egyetlen rejtett mezőbe fűzi össze. A maximum fölött a maradék
+     jelölőnégyzet letiltódik – így nem lehet „mindent bejelölni", és a válasz
+     tényleg prioritást mond az értékesítésnek. -->
+<script is:inline define:vars={{ max }}>
+  (function () {
+    var box = document.getElementById('moduleInterest');
+    var field = document.getElementById('moduleInterestValue');
+    if (!box || !field) return;
+
+    var boxes = Array.prototype.slice.call(box.querySelectorAll('input[type="checkbox"]'));
+
+    box.addEventListener('change', function () {
+      var picked = boxes.filter(function (cb) {
+        return cb.checked;
+      });
+      field.value = picked
+        .map(function (cb) {
+          return cb.value;
+        })
+        .join(', ');
+
+      var full = picked.length >= max;
+      boxes.forEach(function (cb) {
+        cb.disabled = full && !cb.checked;
+        var row = cb.closest('label');
+        if (row) row.classList.toggle('opacity-40', cb.disabled);
+      });
+    });
+  })();
+</script>

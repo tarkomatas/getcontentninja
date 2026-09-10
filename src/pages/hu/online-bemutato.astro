@@ -3,10 +3,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'hu';
 const page = 'bookDemo';
+
+/**
+ * Modul-érdeklődés: NEM kiszűrő kérdés (nincs `data-reject`), csak az
+ * értékesítésnek mondja meg, mire hegyezze a bemutatót. A `value`-k magyarul és
+ * a `/hu/teljes-rendszer/` oldal szóhasználatával mennek – az app egy oszlopban
+ * szűri őket, ezért nem lehet oldalanként más nevet adni ugyanannak a modulnak.
+ * Legfeljebb 2 pipa: itt a prioritás a kérdés, nem a teljes kívánságlista.
+ */
+const moduleOptions = [
+  { value: 'Automata posztolás', label: 'Posztolás' },
+  { value: 'AI hírlevél', label: 'Hírlevelezés' },
+  { value: 'Blogcikk író', label: 'Blogcikk írás' },
+  { value: 'Termékleírás írás (Shopgrade)', label: 'Termék és kategóriaoldal átírás' },
+  { value: 'Egyéb', label: 'Egyéb' },
+];
 const title = 'Online bemutatót kérek – AI marketing webshopoknak | Content Ninja';
 const description =
   'Kérj egy díjmentes, kb. 20 perces online bemutatót a Content Ninjáról, és nézd meg élesben, hogyan posztol az AI helyetted, hogyan ír SEO-blogcikket a webshopod blogjába, hogyan küldi ki a hírleveleidet, és hogyan írja át a termékleírásaidat és kategóriaoldalaidat – a te termékeidből.';
@@ -224,7 +240,10 @@ const description =
                             </div>
                         </div>
 
-                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                        <!-- A többi kampányoldalon `max-h-[500px] overflow-hidden` van a formon, mert ott
+                             négy kérdés fér a step 1-be. Itt a modul-pipák is jönnek, és a plafon levágta a
+                             „Tovább" gombot – ezért NINCS magasságkorlát: a kártya a tartalmához igazodik. -->
+                        <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
                             <!-- Step 1: Qualifying Questions -->
@@ -279,6 +298,12 @@ const description =
                                             <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
                                         </select>
                                     </div>
+                                    <ModuleInterestField
+                                        label="Melyik funkció érdekel a leginkább?"
+                                        hint="(legfeljebb 2)"
+                                        max={2}
+                                        options={moduleOptions}
+                                    />
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
                                         Tovább

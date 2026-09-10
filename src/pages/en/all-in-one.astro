@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
+import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 
@@ -29,6 +30,18 @@ const page = 'allInOne';
 const title = 'All-in-one AI marketing system for webshops | Content Ninja';
 const description =
   'Posts, blog articles, newsletters and product descriptions in one system: connect your webshop and the AI writes, designs and publishes the content from your own store data. Book a free online demo.';
+
+/** The VALUES are Hungarian on purpose: they land in the same admin column as the
+ *  /hu/ page's answers, so both languages can be filtered as one. Only the label
+ *  is translated – renaming a value would split old and new leads apart. */
+const moduleOptions = [
+  { value: 'Automata posztolás', label: 'Automated posting' },
+  { value: 'Blogcikk író', label: 'Blog writer' },
+  { value: 'Termékleírás írás (Shopgrade)', label: 'Product & category pages' },
+  { value: 'AI hírlevél', label: 'AI newsletter' },
+  { value: 'Kép- és videógenerálás', label: 'Image and video generation' },
+  { value: 'Nemzetközi terjeszkedés', label: 'International expansion' },
+];
 ---
 
 <BaseLayout
@@ -321,53 +334,12 @@ const description =
                                             <option value="Just exploring for now" data-reject="soft">Just exploring for now</option>
                                         </select>
                                     </div>
-                                    <!-- Module interest: multiple choice. The collector reads ONE value per
-                                         field, so the checkboxes are joined into a hidden `module_interest`
-                                         field – that keeps the `LeadFormScript` contract untouched. The
-                                         hidden field stays empty until something is ticked, so the
-                                         "answer every question" check makes it mandatory by itself.
-                                         The VALUES are Hungarian on purpose: they land in the same admin
-                                         column as the /hu/ page's answers, so both can be filtered as one. -->
-                                    <div>
-                                        <label class="block text-sm font-bold text-body mb-1">Which module interests you
-                                            most? <span class="font-normal text-muted">(up to 3)</span></label>
-                                        <div id="moduleInterest"
-                                            class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 rounded-[10px] border border-border bg-light p-3 shadow-card">
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Automata posztolás"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Automated posting</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Blogcikk író"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Blog writer</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <!-- The `value` stays Hungarian AND unchanged: the app filters this in
-                                                     one column, and a rename would split old and new leads apart. -->
-                                                <input type="checkbox" value="Termékleírás írás (Shopgrade)"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Product & category pages</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="AI hírlevél"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>AI newsletter</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Kép- és videógenerálás"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>Image and video generation</span>
-                                            </label>
-                                            <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-                                                <input type="checkbox" value="Nemzetközi terjeszkedés"
-                                                    class="mt-0.5 rounded text-primary focus:ring-primary">
-                                                <span>International expansion</span>
-                                            </label>
-                                        </div>
-                                        <input type="hidden" name="module_interest" id="moduleInterestValue">
-                                    </div>
+                                    <ModuleInterestField
+                                        label="Which module interests you most?"
+                                        hint="(up to 3)"
+                                        max={3}
+                                        options={moduleOptions}
+                                    />
 
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
@@ -1005,39 +977,6 @@ const description =
             document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
             if (!isOpen) item.classList.add('open');
         }
-    </script>
-
-    <!-- Joins the module checkboxes into a single hidden field so the one-value-per-field
-         collector in `LeadFormScript` keeps working unchanged. Above three ticks the
-         remaining checkboxes are disabled – so "select everything" isn't an option and the
-         answer really states a priority. -->
-    <script is:inline>
-        (function () {
-            var MAX = 3;
-            var box = document.getElementById('moduleInterest');
-            var field = document.getElementById('moduleInterestValue');
-            if (!box || !field) return;
-
-            var boxes = Array.prototype.slice.call(box.querySelectorAll('input[type="checkbox"]'));
-
-            box.addEventListener('change', function () {
-                var picked = boxes.filter(function (cb) {
-                    return cb.checked;
-                });
-                field.value = picked
-                    .map(function (cb) {
-                        return cb.value;
-                    })
-                    .join(', ');
-
-                var full = picked.length >= MAX;
-                boxes.forEach(function (cb) {
-                    cb.disabled = full && !cb.checked;
-                    var row = cb.closest('label');
-                    if (row) row.classList.toggle('opacity-40', cb.disabled);
-                });
-            });
-        })();
     </script>
 
     <LeadFormScript locale={locale} source="teljes-rendszer" />
