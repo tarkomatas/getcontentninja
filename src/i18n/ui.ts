@@ -22,6 +22,8 @@ export const UI = {
     cta: {
       login: 'Belépek',
       loginApp: 'Belépek az appba',
+      /** Az app regisztrációja fizetéssel indul (kártya a fiók előtt), ezért nem „Regisztráció". */
+      subscribe: 'Előfizetek',
       demo: 'Bemutatót kérek',
       /** Rövid változat a mobil fejlécbe (landing módban ott is látszik a CTA). */
       demoShort: 'Bemutató',
@@ -64,6 +66,8 @@ export const UI = {
     cta: {
       login: 'Log in',
       loginApp: 'Log in to the app',
+      /** Not rendered yet: the app's sign-up is Hungarian-only (see Header.astro). */
+      subscribe: 'Subscribe',
       demo: 'Book a demo',
       /** Short variant for the mobile header (in landing mode the CTA shows there too). */
       demoShort: 'Demo',

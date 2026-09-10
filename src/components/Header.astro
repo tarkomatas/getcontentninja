@@ -14,6 +14,12 @@ const ui = t(locale);
 const home = homeFor(locale);
 const bookDemo = pathFor('bookDemo', locale);
 const APP_URL = 'https://app.getcontentninja.com';
+// Előfizetés: az app regisztrációja fizetéssel indul (számlázás → kártya → fiók).
+// Csak magyarul kínáljuk, mert a regisztrációs varázsló egynyelvű (magyar) –
+// egy angol látogató magyar űrlapra érkezne. Ha az app angolul is megjelenik,
+// elég a `showSubscribe` feltételt feloldani (az `en` felirat már megvan a ui.ts-ben).
+const REGISTER_URL = `${APP_URL}/register`;
+const showSubscribe = locale === 'hu';
 
 // Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
 // (#funkciok) nav-elemet elhagytuk – csak létező horgonyokra mutatunk.
@@ -49,7 +55,9 @@ const integration = {
 const moduleUi = MODULE_UI[locale];
 const navItems = [
   { href: `${home}#velemenyek`, label: ui.nav.testimonials },
-  { href: `${home}#arazas`, label: ui.nav.pricing },
+  // A részletes ároldalra visz (nem a főoldal #arazas szekciójára): ott lehet
+  // dönteni az előfizetésről – csomag, kreditdíjak, számlázás, GYIK.
+  { href: pathFor('pricing', locale), label: ui.nav.pricing },
   { href: pathFor('contact', locale), label: ui.nav.contact },
 ];
 ---
@@ -133,11 +141,20 @@ const navItems = [
 
     <!-- CTAs + language + hamburger -->
     <div class="flex items-center gap-3 shrink-0">
-      <LanguageSwitcher locale={locale} page={page} class="!hidden md:!inline-flex lp-show" />
-      <a href={APP_URL} target="_blank" class="cta-secondary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-hide">
-        <span class="material-symbols-outlined text-[16px]">login</span>
+      <!-- Belépés: sima link (a meglévő ügyfél úgyis keresi), hogy a két gomb –
+           Előfizetek + Bemutatót kérek – ne kapjon mellé egy harmadik, azonos súlyú társat.
+           ⚠️ A jobb oldali sávban NINCS ikon egyik elemen sem (2026-09-10): négy elem mellett
+           az ikonok adták a zsúfoltság érzetét, a feliratok maguktól is egyértelműek. -->
+      <a href={APP_URL} target="_blank" class="nav-link text-sm !hidden md:!inline-flex items-center lp-hide">
         {ui.cta.login}
       </a>
+      <!-- Csak xl-től (1280px): 1024px-en már kitolná a jobb szélről a demo-gombot.
+           Alatta a mobil menüben érhető el. -->
+      {showSubscribe && (
+        <a href={REGISTER_URL} target="_blank" class="cta-secondary !hidden xl:!inline-flex items-center px-4 py-2 text-sm lp-hide">
+          {ui.cta.subscribe}
+        </a>
+      )}
       <!-- A demo-CTA landing módban NEM látszik (user-döntés, 2026-09-04 – felülírja a
            korábbi `lp-show`-t). Miért: a kampányoldalaknak saját hero-űrlapjuk van, és a
            fejléc gombja egy MÁSIK ajánlatra (bemutató) viszi el a látogatót az űrlap elől.
@@ -145,11 +162,15 @@ const navItems = [
            ⚠️ Ára: a FŐOLDAL hirdetési módban elveszti az első kattintható konverziós
            pontját (ott a hero CTA-gombok helyén az integrációs logósor áll). Ha az kell,
            ne ezt írd vissza `lp-show`-ra, hanem a főoldal heroját egészítsd ki. -->
-      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center gap-2 px-4 py-2 text-sm lp-hide">
-        <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+      <a href={bookDemo} class="cta-primary !hidden md:!inline-flex items-center px-4 py-2 text-sm lp-hide">
         <span class="hidden md:inline">{ui.cta.demo}</span>
         <span class="md:hidden">{ui.cta.demoShort}</span>
       </a>
+      <!-- A nyelvváltó a sor JOBB SZÉLÉN, a gomboktól vékony függőleges vonallal elválasztva
+           (user-döntés, 2026-09-10): nem CTA, ne a gombsor tagjának látsszon. A vonal
+           `lp-hide`, mert hirdetési módban csak a logó + a zászló marad. -->
+      <span class="!hidden md:!block w-px h-5 bg-border lp-hide" aria-hidden="true"></span>
+      <LanguageSwitcher locale={locale} page={page} class="!hidden md:!inline-flex lp-show" />
       <!-- Hamburger (mobile only) -->
       <button
         id="mobile-menu-btn"
@@ -164,47 +185,63 @@ const navItems = [
   <!-- Mobile nav dropdown -->
   <div id="mobile-menu" class="hidden md:hidden lp-hide border-t border-border bg-card px-4 pb-4">
     <nav class="flex flex-col gap-1 pt-3" aria-label={ui.nav.mobileAria}>
-      <!-- Megoldások szekció – ugyanazokkal a csoportokkal, mint a desktop panel -->
-      <span class="px-3 pt-1 pb-1 text-xs font-semibold uppercase tracking-wide text-body/70">{ui.nav.solutions}</span>
-      {solutionGroups.map((group) => (
-        <>
-          <span class="px-3 pt-2 pb-0.5 text-[11px] font-bold uppercase tracking-wider text-body/50">{group.label}</span>
-          {group.items.map((item) => (
-            <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
-              <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
-              <span class="font-medium text-dark">{item.label}</span>
-            </a>
+      <!-- Megoldások: mobilon LENYITHATÓ, alapból csukva (2026-09-10). A 3 csoportcím +
+           7 modul + integrációs sáv kinyitva olyan hosszú listát adott, hogy a menü alján
+           lévő gombokig görgetni kellett. `<details>` – nem kell hozzá JS, és a menü
+           bezárásakor sem kell külön visszaállítani. -->
+      <details class="group">
+        <summary class="flex items-center justify-between text-sm px-3 py-2.5 rounded-[8px] hover:bg-light cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          <span class="font-medium text-dark">{ui.nav.solutions}</span>
+          <span class="material-symbols-outlined text-[20px] text-body transition-transform duration-150 group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="flex flex-col gap-1 pb-1">
+          {solutionGroups.map((group) => (
+            <>
+              <span class="px-3 pt-2 pb-0.5 text-[11px] font-bold uppercase tracking-wider text-body/50">{group.label}</span>
+              {group.items.map((item) => (
+                <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm pl-5 pr-3 py-2.5 rounded-[8px] hover:bg-light">
+                  <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
+                  <span class="font-medium text-dark">{item.label}</span>
+                </a>
+              ))}
+            </>
           ))}
-        </>
-      ))}
-      <!-- Az integráció mobilon is külön sáv: elválasztó vonal, nehogy a
-           tartalommarketing csoport negyedik elemének látsszon. -->
-      <div class="border-t border-border mt-3 mb-2"></div>
-      <a href={integration.href} class="mobile-nav-link flex items-center gap-3 text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
-        <span class="material-symbols-outlined text-primary text-[20px]">{integration.icon}</span>
-        <span class="font-medium text-dark">{integration.label}</span>
-        <span class="flex items-center gap-2.5 ml-auto">
-          {integration.logos.map((logo) => (
-            <img src={logo.src} alt={logo.alt} class="h-[18px] w-auto opacity-80" loading="lazy" />
-          ))}
-        </span>
-      </a>
-      <div class="border-t border-border my-2"></div>
+          <!-- Az integráció a lenyíló ALJÁN, elválasztó vonallal: nem megoldás, hanem
+               feltétel – nehogy a tartalommarketing csoport negyedik elemének látsszon. -->
+          <div class="border-t border-border mt-2 mb-1"></div>
+          <a href={integration.href} class="mobile-nav-link flex items-center gap-3 text-sm pl-5 pr-3 py-2.5 rounded-[8px] hover:bg-light">
+            <span class="material-symbols-outlined text-primary text-[20px]">{integration.icon}</span>
+            <span class="font-medium text-dark">{integration.label}</span>
+            <span class="flex items-center gap-2.5 ml-auto">
+              {integration.logos.map((logo) => (
+                <img src={logo.src} alt={logo.alt} class="h-[18px] w-auto opacity-80" loading="lazy" />
+              ))}
+            </span>
+          </a>
+        </div>
+      </details>
       {navItems.map((item) => (
         <a href={item.href} class="mobile-nav-link nav-link text-sm px-3 py-2.5 rounded-[8px] hover:bg-light">
           {item.label}
         </a>
       ))}
+      <!-- A nyelvváltó a NAVIGÁCIÓHOZ tartozik, nem a gombokhoz: ezért a menüsorok végén áll,
+           a gombsávot elválasztó vonal FÖLÖTT (2026-09-10). -->
+      <LanguageSwitcher locale={locale} page={page} showLabel class="justify-start px-3 py-2.5 rounded-[8px] hover:bg-light" />
     </nav>
+    <!-- Alsó gombsáv: három gomb egymás alatt, teljes szélességben (user-döntés, 2026-09-10).
+         A fő CTA áll elöl; a nyelvváltó NEM ide tartozik, az a menüsorok végén van. -->
     <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-border">
-      <LanguageSwitcher locale={locale} page={page} class="justify-center px-4 py-2.5 rounded-[8px] hover:bg-light" />
-      <a href={APP_URL} target="_blank" class="cta-secondary flex items-center justify-center gap-2 px-4 py-2.5 text-sm">
-        <span class="material-symbols-outlined text-[16px]">login</span>
-        {ui.cta.loginApp}
-      </a>
-      <a href={bookDemo} class="cta-primary flex items-center justify-center gap-2 px-4 py-2.5 text-sm">
-        <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+      <a href={bookDemo} class="cta-primary flex items-center justify-center px-4 py-2.5 text-sm">
         {ui.cta.demo}
+      </a>
+      {showSubscribe && (
+        <a href={REGISTER_URL} target="_blank" class="cta-secondary flex items-center justify-center px-4 py-2.5 text-sm">
+          {ui.cta.subscribe}
+        </a>
+      )}
+      <a href={APP_URL} target="_blank" class="cta-secondary flex items-center justify-center px-4 py-2.5 text-sm">
+        {ui.cta.loginApp}
       </a>
     </div>
   </div>

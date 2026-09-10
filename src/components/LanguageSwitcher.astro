@@ -7,9 +7,14 @@ interface Props {
   page: PageKey;
   /** Extra osztályok az anchor elemen. */
   class?: string;
+  /**
+   * Kiírja a nyelv nevét a zászló mellé. A mobil menü kéri: ott a választó a szöveges
+   * menüsorok között áll, és egy magányos zászló nem olvasódna menüpontként.
+   */
+  showLabel?: boolean;
 }
 
-const { locale, page, class: className = '' } = Astro.props;
+const { locale, page, class: className = '', showLabel = false } = Astro.props;
 const target = switchTarget(page, locale);
 const ui = t(locale);
 ---
@@ -31,4 +36,5 @@ const ui = t(locale);
     height="18"
     class="h-[18px] w-auto rounded-[3px] ring-1 ring-black/10 shadow-sm"
   />
+  {showLabel && <span class="ml-3 text-sm font-medium text-dark">{ui.langSwitch.label}</span>}
 </a>
