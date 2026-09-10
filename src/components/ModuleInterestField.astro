@@ -12,6 +12,11 @@
  * ide került. A rejtett mező üresen marad, amíg nincs pipa, tehát a „válaszolj
  * minden kérdésre" ellenőrzés magától kötelezővé teszi.
  *
+ * ⚠️ **A kötelezőség SZÁNDÉKOS** (2026-09-10-i döntés). Ez a kérdés nem kiszűrő
+ * (nincs `data-reject`), ezért elsőre hibának látszhat, hogy egy pipa hiánya
+ * megakasztja a kitöltőt – nem az: az értékesítés minden leaden látni akarja,
+ * melyik modullal kezdje. Ne tedd opcionálissá.
+ *
  * ⚠️ **A `value`-k mindig magyarok, oldaltól és nyelvtől függetlenül** – az app
  * egy oszlopban szűri őket (`module_interest`), és egy fordítás vagy átnevezés
  * kettévágná a régi és az új leadeket. Csak a látható címke fordul.
