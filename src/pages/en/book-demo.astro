@@ -240,15 +240,33 @@ const description =
                             </div>
                         </div>
 
+                        <!-- Progress indicator: `LeadFormScript` updates it from the active step's
+                             `data-progress` number, and hides it on the screens that have none
+                             (the reject screens). -->
+                        <div id="formProgress" data-form-progress="3" class="mb-4">
+                            <div class="flex items-center justify-between text-xs font-semibold text-muted mb-1.5">
+                                <span data-progress-label>1 / 3</span>
+                                <span>About 30 seconds</span>
+                            </div>
+                            <div class="h-1.5 rounded-full bg-border overflow-hidden">
+                                <div data-progress-bar class="h-full bg-primary rounded-full transition-all duration-300"
+                                    style="width:33.3333%"></div>
+                            </div>
+                        </div>
+
                         <!-- The other campaign pages cap the form with `max-h-[500px] overflow-hidden`,
-                             because four questions fit in step 1 there. Here the module checkboxes come on
-                             top, and the cap cut off the "Continue" button – hence NO height limit: the
-                             card follows its content. -->
+                             because all four questions sit on one screen there. Here the questions are
+                             split across three steps, hence NO height limit: the card follows whichever
+                             step is visible. -->
                         <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
-                            <!-- Step 1: Qualifying Questions -->
-                            <div class="form-step active" data-step="1">
+                            <!-- Step 1: qualifying questions, screen 1/2 – about the company.
+                                 QUALIFICATION is not evaluated here: `qualifyStep` only checks that
+                                 this step's fields are filled. The `data-reject` options are weighed
+                                 in one go on the last qualifying screen – so a rejected visitor still
+                                 produces exactly the same data as before. -->
+                            <div class="form-step active" data-step="1" data-progress="1">
                                 <div class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Do you have a webshop /
@@ -277,6 +295,18 @@ const description =
                                             <option value="Pro">Pro</option>
                                         </select>
                                     </div>
+                                    <button type="button" onclick="qualifyStep('1b')"
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Continue
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 1b: qualifying questions, screen 2/2 – about the marketing.
+                                 `data-qualify` tells the collector this is a qualifying screen too:
+                                 its answers go into the payload just like step 1's. -->
+                            <div class="form-step" data-step="1b" data-qualify data-progress="2">
+                                <div class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Who currently handles your
                                             marketing?</label>
@@ -306,10 +336,17 @@ const description =
                                         max={2}
                                         options={moduleOptions}
                                     />
-                                    <button type="button" onclick="qualifyAndNext()"
-                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95 transition-all">
-                                        Continue
-                                    </button>
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Back
+                                        </button>
+                                        <button type="button" onclick="qualifyAndNext()"
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                            Continue
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -386,7 +423,7 @@ const description =
                             </div>
 
                             <!-- Step 2: Contact Info & Privacy -->
-                            <div class="form-step" data-step="2">
+                            <div class="form-step" data-step="2" data-progress="3">
                                 <div class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Name</label>
@@ -428,7 +465,7 @@ const description =
                                     </div>
 
                                     <div class="flex gap-3 mt-4">
-                                        <button type="button" onclick="nextStep(1)"
+                                        <button type="button" onclick="nextStep('1b')"
                                             class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
                                             <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
                                             Back

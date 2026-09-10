@@ -14,9 +14,22 @@ import { pathFor, type Locale } from '../i18n/routes';
  *    mozog – korábban ez JS-ben, kézzel másolt szövegkonstansokban élt, és
  *    némán elromlott.
  *
- * A `nextStep()` / `qualifyAndNext()` / `submitSoftReject()` függvényeket az
- * `onclick` attribútumok hívják, ezért GLOBÁLISNAK kell maradniuk – a script
- * emiatt `is:inline` (a `define:vars` amúgy is azzá teszi).
+ * **Több minősítő képernyő** (2026-09-10): egy oldal szétoszthatja a kérdéseit
+ * több lépésre. A további lépések `data-qualify` attribútumot kapnak – a gyűjtő
+ * MINDET beolvassa, a kiszűrést tehát továbbra is EGYSZER, az utolsó képernyő
+ * `qualifyAndNext()`-jén értékeljük (így nem változik, milyen adatot kapunk egy
+ * kiszűrt látogatóról). A köztes képernyők gombja `qualifyStep('<következő>')`,
+ * ami csak az ÉPP LÁTHATÓ lépés mezőit kéri számon. Egy `data-qualify` nélküli
+ * oldal viselkedése bitre azonos a korábbival.
+ *
+ * **Előrehaladás-jelző** (opcionális): ha az oldalon van `#formProgress`
+ * (`data-form-progress="<összes lépés>"`), a `nextStep()` frissíti a feliratot és
+ * a sávot az aktív lépés `data-progress` sorszámából. Aminek nincs sorszáma
+ * (kiszűrő képernyők), ott elrejtjük.
+ *
+ * A `nextStep()` / `qualifyStep()` / `qualifyAndNext()` / `submitSoftReject()`
+ * függvényeket az `onclick` attribútumok hívják, ezért GLOBÁLISNAK kell
+ * maradniuk – a script emiatt `is:inline` (a `define:vars` amúgy is azzá teszi).
  */
 interface Props {
   locale: Locale;
@@ -87,6 +100,59 @@ const cfg = {
 
     var activeStep = document.querySelector('.form-step[data-step="' + step + '"]');
     if (activeStep) activeStep.classList.add('active');
+    cnUpdateProgress(activeStep);
+  }
+
+  /**
+   * Az előrehaladás-jelző az aktív lépés `data-progress` sorszámából. Csak akkor
+   * csinál bármit, ha az oldal kirakta a `#formProgress` blokkot – a többi űrlap
+   * így változatlan.
+   */
+  function cnUpdateProgress(activeStep) {
+    var progress = document.getElementById('formProgress');
+    if (!progress) return;
+
+    var index = activeStep ? activeStep.getAttribute('data-progress') : null;
+    progress.classList.toggle('hidden', !index);
+    if (!index) return;
+
+    var total = progress.getAttribute('data-form-progress') || '1';
+    var label = progress.querySelector('[data-progress-label]');
+    var bar = progress.querySelector('[data-progress-bar]');
+    if (label) label.textContent = index + ' / ' + total;
+    if (bar) bar.style.width = (Number(index) / Number(total)) * 100 + '%';
+  }
+
+  /** A minősítő képernyők, dokumentum-sorrendben (lásd a fejlécet). */
+  function cnQualifierSteps() {
+    return Array.prototype.slice.call(
+      document.querySelectorAll(
+        '#leadForm .form-step[data-step="1"], #leadForm .form-step[data-qualify]'
+      )
+    );
+  }
+
+  /** Van-e kitöltetlen `name`-es mező ebben a lépésben. */
+  function cnStepMissing(step) {
+    var missing = false;
+    step.querySelectorAll('select[name], input[name], textarea[name]').forEach(function (el) {
+      if (!(el.value || '').trim()) missing = true;
+    });
+    return missing;
+  }
+
+  /**
+   * Köztes minősítő képernyő „Tovább" gombja: CSAK az épp látható lépést kéri
+   * számon, a kiszűrést nem értékeli – az az utolsó képernyő dolga
+   * (`qualifyAndNext`).
+   */
+  function qualifyStep(next) {
+    var active = document.querySelector('#leadForm .form-step.active');
+    if (active && cnStepMissing(active)) {
+      alert(CFG.texts.fillAll);
+      return;
+    }
+    nextStep(next);
   }
 
   /** A közös mezők minden ágban (a részleteket lásd az app repó feladat-doksijában). */
@@ -138,26 +204,32 @@ const cfg = {
     } catch (e) {}
   }
 
-  /** A minősítő válaszok + a kiszűrés eredménye, a markupból (lásd a fejlécet). */
+  /**
+   * A minősítő válaszok + a kiszűrés eredménye, a markupból (lásd a fejlécet).
+   * MINDEN minősítő képernyőt beolvas, tehát a több lépésre bontott űrlap
+   * ugyanazt a payloadot állítja elő, mint az egyképernyős.
+   */
   function cnCollectQualifiers() {
-    var step = document.querySelector('#leadForm .form-step[data-step="1"]');
+    var steps = cnQualifierSteps();
     var result = { values: {}, missing: false, outcome: null };
-    if (!step) {
+    if (!steps.length) {
       result.missing = true;
       return result;
     }
 
-    step.querySelectorAll('select[name], input[name], textarea[name]').forEach(function (el) {
-      var value = (el.value || '').trim();
-      if (!value) result.missing = true;
-      result.values[el.name] = value;
+    steps.forEach(function (step) {
+      step.querySelectorAll('select[name], input[name], textarea[name]').forEach(function (el) {
+        var value = (el.value || '').trim();
+        if (!value) result.missing = true;
+        result.values[el.name] = value;
 
-      if (el.tagName === 'SELECT') {
-        var option = el.options[el.selectedIndex];
-        var reject = option ? option.getAttribute('data-reject') : null;
-        if (reject === 'hard') result.outcome = 'hard';
-        else if (reject === 'soft' && result.outcome !== 'hard') result.outcome = 'soft';
-      }
+        if (el.tagName === 'SELECT') {
+          var option = el.options[el.selectedIndex];
+          var reject = option ? option.getAttribute('data-reject') : null;
+          if (reject === 'hard') result.outcome = 'hard';
+          else if (reject === 'soft' && result.outcome !== 'hard') result.outcome = 'soft';
+        }
+      });
     });
 
     return result;
@@ -239,8 +311,9 @@ const cfg = {
 
   // FIGYELEM: a `define:vars` a teljes scriptet egy IIFE-be csomagolja, ezért a
   // fenti függvények NEM lennének globálisak – az `onclick` attribútumok pedig
-  // pont onnan hívják őket. Kézzel tesszük ki mindhármat.
+  // pont onnan hívják őket. Kézzel tesszük ki mind a négyet.
   window.nextStep = nextStep;
+  window.qualifyStep = qualifyStep;
   window.qualifyAndNext = qualifyAndNext;
   window.submitSoftReject = submitSoftReject;
 

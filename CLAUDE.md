@@ -115,6 +115,20 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
   süti → hozzájárulás nélkül is működnie kell.
 - **`src/components/LeadFormScript.astro`** – a többlépcsős lead-űrlap teljes logikája (korábban 14
   oldalfájlban másolva). Props: `locale`, `source`. Az oldal csak a markupot adja.
+  - **Több minősítő képernyő** (2026-09-10): egy oldal szétoszthatja a kérdéseit több lépésre. Az
+    ELSŐ minősítő lépés marad `data-step="1"`, a továbbiak `data-qualify`-t kapnak — a gyűjtő
+    mindet beolvassa, tehát a payload azonos az egyképernyősével. **A kiszűrést továbbra is EGYSZER,
+    az utolsó képernyő `qualifyAndNext()`-jén értékeljük** (különben egy hard reject fél adattal
+    zárná le a beküldést); a köztes képernyők gombja `qualifyStep('<következő lépés>')`, ami csak az
+    épp látható lépés mezőit kéri számon. `data-qualify` nélkül a viselkedés bitre a régi.
+  - **Előrehaladás-jelző** (opcionális): `#formProgress` blokk `data-form-progress="<összes>"`-szal,
+    benne `[data-progress-label]` és `[data-progress-bar]`; a lépések `data-progress="<sorszám>"`-ot
+    kapnak. A `nextStep()` frissíti, és elrejti azokon a képernyőkön, amiknek nincs sorszáma (kiszűrő
+    és köszönő ágak). Enélkül a blokk nélküli oldalak változatlanok.
+  - **Ma a `bookDemo` oldalpár (`online-bemutato`/`book-demo`) használja mindkettőt**: 3 képernyő —
+    (1) webshop + marketing-szint, (2) ki csinálja + mikor kezdene + `module_interest`,
+    (3) kapcsolati adatok. A többi 14 űrlap egyképernyős maradt. Aki bontani akar egy űrlapot, a
+    `max-h-[500px] overflow-hidden` plafont is vegye le a formról.
 - **`src/components/HoneypotField.astro`** – a rejtett `website` mező (`.hp-field` a `global.css`-ben).
 - **Opt-in oldalak: `successUrl` + `cnResolveSuccessUrl`.** A `LeadFormScript` opcionális `successUrl`
   propja felülírja a köszönőoldalra mutató átirányítást — ezt használja a `termekleiras-diagnozis`
