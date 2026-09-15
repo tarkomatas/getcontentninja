@@ -8,6 +8,7 @@ import MetaTechProvider from '../../components/MetaTechProvider.astro';
 import { videos, hasVideo } from '../../data/videos';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'home';
@@ -118,12 +119,7 @@ const faqLd = {
                     <!-- Webshop mélyintegráció – a hero CTA-gombok helyett a támogatott rendszerek -->
                     <div class="flex items-center gap-2.5 flex-wrap pt-1">
                         <span class="text-sm font-semibold text-muted">Webshop mélyintegráció:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" />
-                        </span>
+                        <PlatformLogos variant="pill" lazy={false} />
                     </div>
 
                     <!-- Social proof (balra helyezve) -->
@@ -226,11 +222,10 @@ const faqLd = {
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">Blogcikk író</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">Kikutatja, mire keresnek a vásárlóid, megírja
-                        rá a SEO- és GEO-barát cikket, majd publikálja is a webshopod blogjában – forgalom a Google-ből és
-                        az AI-keresőkből.</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                        rá a SEO- és GEO-barát cikket, majd publikálja is a webshopod blogjában vagy a WordPress-oldaladon
+                        – forgalom a Google-ből és az AI-keresőkből.</p>
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <PlatformLogos cap="blog" />
                     </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Részletek
@@ -248,9 +243,8 @@ const faqLd = {
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">A <strong class="text-dark">Shopgrade</strong>
                         modul a meglévő termékleírásaidat és kategóriaoldalaid szövegét írja át SEO- és GEO-barát,
                         eladósabb szöveggé, majd vissza is tölti a webshopodba – tömegesen, a te jóváhagyásoddal.</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <PlatformLogos cap="writeBack" />
                     </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Részletek
@@ -307,11 +301,11 @@ const faqLd = {
                         <span class="material-symbols-outlined text-[22px]">storefront</span>
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">Webshop mélyintegráció</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Kösd be az Unas vagy Shoprenter webshopod pár
-                        kattintással – az AI onnantól látja az összes terméked, és valós termékadatokból gyárt posztokat.</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Kösd be az Unas, Shoprenter vagy WooCommerce
+                        webshopod pár kattintással – az AI onnantól látja az összes terméked, és valós termékadatokból
+                        gyárt posztokat.</p>
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <PlatformLogos />
                     </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Részletek
@@ -424,9 +418,19 @@ const faqLd = {
                             <div>
                                 <p class="font-semibold text-dark text-[15px] leading-tight">Webáruház</p>
                                 <div class="flex items-center gap-2.5 mt-1 flex-wrap">
-                                    <img src="/assets/unas_logo.png" alt="Unas" class="h-4 w-auto" loading="lazy" />
-                                    <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-4 w-auto" loading="lazy" />
+                                    <PlatformLogos size="sm" />
                                     <span class="text-body text-sm">+ Sitemap <span class="text-muted">(bármely webshop)</span></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">article</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Blog</p>
+                                <div class="flex items-center gap-2.5 mt-1 flex-wrap">
+                                    <PlatformLogos cap="blog" size="sm" />
                                 </div>
                             </div>
                         </li>
@@ -473,8 +477,8 @@ const faqLd = {
                 <!-- Szemléltető kép: integrációs hub -->
                 <div class="order-1 lg:order-2 relative">
                     <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                    <img src="/assets/integraciok-hub-portrait.webp" width="896" height="1200"
-                        alt="Content Ninja integrációs hub: felül az Unas, Shoprenter, Sitemap és RSS források bekötve, alul publikálás Facebookra, Instagramra, SalesAutopilotba, MailerLite-ba, a webshop blogjába és a termékleírásokba (Shopgrade)"
+                    <img src="/assets/integraciok-hub-portrait-v2.webp" width="896" height="1200"
+                        alt="Content Ninja integrációs hub: felül az Unas, Shoprenter, WooCommerce, WordPress, Sitemap és RSS források bekötve, alul publikálás Facebookra, Instagramra, SalesAutopilotba, MailerLite-ba, a webshop blogjába és a termékleírásokba (Shopgrade)"
                         loading="lazy" class="w-full h-auto block">
                 </div>
 
@@ -866,7 +870,7 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A rendszer közvetlenül a webshopodhoz kapcsolódik (Unas vagy Shoprenter integrációval, vagy
+                        A rendszer közvetlenül a webshopodhoz kapcsolódik (Unas, Shoprenter vagy WooCommerce integrációval, vagy
                         bármely webshophoz sitemap-on keresztül), és
                         automatikusan lekéri a termékadatokat – leírást, képeket, árakat. Ezekből az AI szöveget ír,
                         brandazonos képet és videót szerkeszt, majd az általad jóváhagyott ütemezés szerint publikálja a

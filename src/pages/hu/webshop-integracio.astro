@@ -7,12 +7,13 @@ import LeadFormScript from '../../components/LeadFormScript.astro';
 import UnasPartner from '../../components/UnasPartner.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'webshopIntegration';
-const title = 'Webshop mélyintegráció – Kösd be a webáruházad, az AI látja az összes terméked | Content Ninja';
+const title = 'Webshop mélyintegráció Unas, Shoprenter és WooCommerce boltokhoz – az AI látja az összes terméked | Content Ninja';
 const description =
-  'Kösd össze az Unas vagy Shoprenter webáruházad pár kattintással. Utána az AI látja az összes terméked és blogcikked, magától vagy szabály alapján kiválasztja a legjobbakat – csak a top, raktáron lévő termékekből gyárt posztokat és hírleveleket, akár több áruházból egyszerre.';
+  'Kösd össze az Unas, Shoprenter vagy WooCommerce webáruházad pár kattintással. Utána az AI látja az összes terméked és blogcikked, magától vagy szabály alapján kiválasztja a legjobbakat – csak a top, raktáron lévő termékekből gyárt posztokat és hírleveleket, akár több áruházból egyszerre.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-webshop-integracio.jpg" lpEnabled>
@@ -235,12 +236,7 @@ const description =
                     <!-- Támogatott rendszerek -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Támogatott rendszerek:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos variant="pill" />
                     </div>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
                         Kösd be egyszer, pár kattintással – az AI onnantól a <span class="font-bold text-primary">friss
@@ -318,6 +314,7 @@ const description =
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
                                             <option value="Egyéb">Egyéb</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
                                                 indítani</option>
@@ -510,7 +507,7 @@ const description =
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/webshop-integracio-osszekotes.webp"
-                        alt="Az Unas vagy Shoprenter webáruház egy kattintással összekötve a Content Ninja AI-motorjával, automatikus termékszinkronnal"
+                        alt="Az Unas, Shoprenter vagy WooCommerce webáruház pár kattintással összekötve a Content Ninja AI-motorjával, automatikus termékszinkronnal"
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
@@ -518,7 +515,7 @@ const description =
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Kösd össze egyszer – az AI
                         látja az összes terméked</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        Pár kattintással bekötöd az Unas vagy Shoprenter webáruházad, és <strong>ennyi</strong>. A rendszer onnantól látja
+                        Pár kattintással bekötöd az Unas, Shoprenter vagy WooCommerce webáruházad, és <strong>ennyi</strong>. A rendszer onnantól látja
                         a teljes termékkatalógusodat és a kategóriafádat – nevekkel, árakkal, képekkel, leírásokkal –, és
                         mindig a <strong>friss adataidból</strong> dolgozik.
                     </p>
@@ -532,6 +529,14 @@ const description =
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">extension</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">WooCommerce-nél a saját
+                                <strong>Content Ninja bővítményünkkel</strong>: telepíted, majd a WordPress-adminban
+                                egy „Jóváhagyás” kattintással engedélyezed – jelszót nem kell másolgatnod</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">Az egész termékkatalógusod
@@ -542,7 +547,8 @@ const description =
                                 <span class="material-symbols-outlined text-primary text-[20px]">swap_vert</span>
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">Kétirányú kapcsolat: a
-                                jóváhagyott termékleírások és kategóriaoldal-szövegek vissza is kerülnek a boltba</span>
+                                jóváhagyott termékleírások és kategóriaoldal-szövegek vissza is kerülnek a boltba –
+                                WooCommerce-nél a Yoast / Rank Math SEO-mezőkkel együtt</span>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -556,9 +562,13 @@ const description =
                     <!-- Az UNAS-partnerség ott a legerősebb, ahol az integrációról van szó. -->
                     <UnasPartner locale={locale} block class="mb-8" />
 
-                    <div>
+                    <div class="flex items-center gap-4 flex-wrap">
                         <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
                             Bekötöm a webshopom!
+                        </a>
+                        <a href="/hu/woocommerce/" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                            Minden a WooCommerce-bekötésről
+                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                         </a>
                     </div>
                 </div>
@@ -623,7 +633,7 @@ const description =
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/unas-blog-posztok.webp"
-                        alt="Egy webshop blogcikkéből több örökzöld, edukatív közösségi média poszt készül"
+                        alt="Egy webshop- vagy WordPress-blogcikkből több örökzöld, edukatív közösségi média poszt készül"
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
@@ -631,7 +641,8 @@ const description =
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">A blogcikkeidből örökzöld,
                         edukatív posztok</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        Az AI nemcsak a termékeidet látja, hanem a <strong>webshopod blogját is</strong>. A meglévő
+                        Az AI nemcsak a termékeidet látja, hanem a <strong>webshopod blogját is</strong> – és ha
+                        WordPress oldalad van, annak cikkeit és oldalait is. A meglévő
                         cikkeidből automatikusan gyárt <strong>örökzöld, edukatív</strong> posztokat – így nem csak
                         eladni akarsz folyton, hanem értéket is adsz a követőidnek.
                     </p>
@@ -656,6 +667,14 @@ const description =
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">Egészséges arány: nem csak
                                 eladás, hanem hasznos tartalom is</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">publish</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Új cikket is írhat: a Blogcikk
+                                író közvetlenül a webshopod blogjába vagy <strong>bármely saját tárhelyes WordPress oldaladra</strong>
+                                publikál – WordPressnél kiemelt képpel, kategóriával és Yoast / Rank Math mezőkkel</span>
                         </li>
                     </ul>
                     <div>
@@ -775,7 +794,7 @@ const description =
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/webshop-integracio-tobb-aruhaz.webp"
-                        alt="Több webáruház – Unas és Shoprenter – egyetlen fiókból, közös vezérlőpultból kezelve"
+                        alt="Több webáruház – Unas, Shoprenter és WooCommerce – egyetlen fiókból, közös vezérlőpultból kezelve"
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
@@ -783,7 +802,7 @@ const description =
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Több webáruház, több
                         platform – egy fiókból</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        Nem csak egy webshopod van? Nincs gond. <strong>Több webáruházat</strong> is hozzáadhatsz – akár Unas és Shoprenter vegyesen –, és
+                        Nem csak egy webshopod van? Nincs gond. <strong>Több webáruházat</strong> is hozzáadhatsz – akár Unas, Shoprenter és WooCommerce vegyesen –, és
                         mindet egyetlen fiókból, átláthatóan kezeled – külön termékkatalógussal, külön márkahanggal.
                     </p>
                     <ul class="space-y-5 mb-8">
@@ -792,7 +811,7 @@ const description =
                                 <span class="material-symbols-outlined text-primary text-[20px]">add_business</span>
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">Több webáruház egy fiókon
-                                belül – Unas és Shoprenter vegyesen is</span>
+                                belül – Unas, Shoprenter és WooCommerce vegyesen is</span>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -890,7 +909,7 @@ const description =
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas vagy Shoprenter – pár kattintás, és az AI látja az összes terméked,
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter vagy WooCommerce (a bővítményünkkel) – pár kattintás, és az AI látja az összes terméked,
                         kategóriád és blogcikked, mindig friss adatokkal.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">

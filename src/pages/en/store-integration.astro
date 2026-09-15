@@ -7,12 +7,13 @@ import LeadFormScript from '../../components/LeadFormScript.astro';
 import UnasPartner from '../../components/UnasPartner.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'en';
 const page = 'webshopIntegration';
-const title = 'Deep store integration – Connect your store, the AI sees every product | Content Ninja';
+const title = 'Deep store integration for Unas, Shoprenter and WooCommerce – the AI sees every product | Content Ninja';
 const description =
-  'Connect your Unas or Shoprenter store in a few clicks. The AI then sees all your products and blog articles, picks the best ones automatically or by rules – creating posts and newsletters only from top, in-stock products, from several stores at once.';
+  'Connect your Unas, Shoprenter or WooCommerce store in a few clicks. The AI then sees all your products and blog articles, picks the best ones automatically or by rules – creating posts and newsletters only from top, in-stock products, from several stores at once.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-webshop-integracio.jpg" lpEnabled>
@@ -234,12 +235,7 @@ const description =
                     <!-- Supported systems -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Supported systems:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos variant="pill" />
                     </div>
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
                         Connect it once in a few clicks – from then on the AI works from your <span class="font-bold text-primary">up-to-date
@@ -318,6 +314,7 @@ const description =
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
                                             <option value="Other">Other</option>
                                             <option value="I'm only planning to launch a store" data-reject="soft">I'm only planning to
                                                 launch a store</option>
@@ -512,7 +509,7 @@ const description =
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/webshop-integracio-osszekotes.webp"
-                        alt="Your Unas or Shoprenter store connected to the Content Ninja AI engine in one click, with automatic product sync"
+                        alt="Your Unas, Shoprenter or WooCommerce store connected to the Content Ninja AI engine in a few clicks, with automatic product sync"
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
@@ -520,7 +517,7 @@ const description =
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Connect once – the AI sees all
                         your products</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        Connect your Unas or Shoprenter store in a few clicks, and <strong>that's it</strong>. From then
+                        Connect your Unas, Shoprenter or WooCommerce store in a few clicks, and <strong>that's it</strong>. From then
                         on the system sees your entire product catalog and your category tree – names, prices, images,
                         descriptions – and always works from your <strong>latest data</strong>.
                     </p>
@@ -534,6 +531,14 @@ const description =
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">extension</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">For WooCommerce, with our own
+                                <strong>Content Ninja plugin</strong>: install it, then allow the connection with one
+                                “Approve” click in your WordPress admin – no passwords to copy</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">Your whole product catalog is
@@ -544,7 +549,8 @@ const description =
                                 <span class="material-symbols-outlined text-primary text-[20px]">swap_vert</span>
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">Two-way connection: approved
-                                product descriptions and category page copy are written back to the store</span>
+                                product descriptions and category page copy are written back to the store – for
+                                WooCommerce, together with the Yoast / Rank Math SEO fields</span>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -625,7 +631,7 @@ const description =
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/unas-blog-posztok.webp"
-                        alt="One blog article turned into several evergreen, educational social media posts"
+                        alt="One store or WordPress blog article turned into several evergreen, educational social media posts"
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
@@ -633,7 +639,8 @@ const description =
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Evergreen, educational posts
                         from your blog</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        The AI doesn't just see your products – it sees your <strong>blog</strong> too. From your existing
+                        The AI doesn't just see your products – it sees your <strong>store's blog</strong> too, and if
+                        you run a WordPress site, its posts and pages as well. From your existing
                         articles it automatically produces <strong>evergreen, educational</strong> posts – so you're not
                         always selling, you're adding value to your followers.
                     </p>
@@ -658,6 +665,14 @@ const description =
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">A healthy mix: not just selling,
                                 but useful content too</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">publish</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">It can write new articles too:
+                                the Blog writer publishes straight to your store's blog or <strong>any self-hosted WordPress
+                                site</strong> – on WordPress with featured image, category and Yoast / Rank Math fields</span>
                         </li>
                     </ul>
                     <div>
@@ -777,7 +792,7 @@ const description =
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
                     <img src="/assets/webshop-integracio-tobb-aruhaz.webp"
-                        alt="Multiple stores – Unas and Shoprenter – managed from a single account and dashboard"
+                        alt="Multiple stores – Unas, Shoprenter and WooCommerce – managed from a single account and dashboard"
                         loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
@@ -785,7 +800,7 @@ const description =
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Multiple stores, multiple
                         platforms – from one account</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        More than one store? No problem. You can add <strong>multiple stores</strong> – Unas and Shoprenter mixed too – and manage them
+                        More than one store? No problem. You can add <strong>multiple stores</strong> – Unas, Shoprenter and WooCommerce mixed too – and manage them
                         all from a single account, clearly – each with its own catalog and its own brand voice.
                     </p>
                     <ul class="space-y-5 mb-8">
@@ -794,7 +809,7 @@ const description =
                                 <span class="material-symbols-outlined text-primary text-[20px]">add_business</span>
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">Multiple stores within one
-                                account – Unas and Shoprenter mixed</span>
+                                account – Unas, Shoprenter and WooCommerce mixed</span>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -892,7 +907,7 @@ const description =
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Connect your store</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas or Shoprenter – a few clicks, and the AI sees all your products,
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter or WooCommerce (via our plugin) – a few clicks, and the AI sees all your products,
                         categories and blog articles, always with fresh data.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">

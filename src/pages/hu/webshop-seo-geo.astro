@@ -18,12 +18,13 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'webshopSeoGeo';
 const title = 'Webshop SEO és GEO egy rendszerben – kategória, termékleírás, blog | Content Ninja';
 const description =
-  'A Content Ninja megírja a webshopod kategóriaoldalait, termékleírásait és blogcikkeit – SEO- és GEO-barát szöveggel –, majd vissza is tölti a webáruházadba. Unas és Shoprenter integrációval.';
+  'A Content Ninja megírja a webshopod kategóriaoldalait, termékleírásait és blogcikkeit – SEO- és GEO-barát szöveggel –, majd vissza is tölti a webáruházadba. Unas, Shoprenter és WooCommerce integrációval.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-webshop-seo-geo.jpg" lpEnabled>
@@ -208,12 +209,7 @@ const description =
                     <!-- Támogatott rendszerek -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Támogatott rendszerek:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos cap="writeBack" variant="pill" />
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -279,6 +275,7 @@ const description =
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
                                             <option value="Egyéb" data-reject="hard">Egyéb</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
                                                 indítani</option>
@@ -603,7 +600,8 @@ const description =
                     </div>
                     <h3 class="font-bold text-lg mb-2">Cikkek arra, amit tényleg kérdeznek</h3>
                     <p class="text-body text-sm leading-relaxed mb-4">Megnézi, mire keresnek a te piacodon, és csak
-                        olyan témát javasol, amihez van terméked – a kész cikket pedig kiteszi a blogodba.</p>
+                        olyan témát javasol, amihez van terméked – a kész cikket pedig kiteszi a webshopod blogjába vagy
+                        bármely WordPress oldaladra.</p>
                 </div>
             </div>
 
@@ -664,7 +662,7 @@ const description =
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Ilyen rendszert ma Magyarországon nem kapsz máshol</h2>
                 <p class="text-body text-lg">Külön-külön mindegyik feladatra van megoldás. De hogy mind a három egy
                     felületen készüljön el, magyarul, a saját termékadataidból, és egy kattintással vissza is kerüljön az
-                    Unas vagy Shoprenter webshopodba – ez az, amit máshol nem találsz meg.</p>
+                    Unas, Shoprenter vagy WooCommerce webshopodba – ez az, amit máshol nem találsz meg.</p>
             </div>
 
             <div class="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
@@ -735,8 +733,8 @@ const description =
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas vagy Shoprenter – pár kattintás, és a rendszer
-                        látja az összes termékedet, kategóriádat és a blogodat.</p>
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter vagy WooCommerce – pár kattintás, és a
+                        rendszer látja az összes termékedet, kategóriádat és a blogodat.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -784,7 +782,7 @@ const description =
                     </div>
                     <h3 class="font-bold text-lg mb-2">Elkészül a blogcikk</h3>
                     <p class="text-body text-sm leading-relaxed">Arra a kérdésre, amit a vásárlóid tényleg beírnak – és
-                        kikerül a webshopod blogjába.</p>
+                        kikerül a webshopod blogjába vagy a WordPress oldaladra.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -906,8 +904,12 @@ const description =
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Jelenleg <strong>Unas</strong> és <strong>Shoprenter</strong> webáruházakkal – ezeknél működik a
-                        közvetlen, kétirányú kapcsolat (beolvasás és visszatöltés). Ha más rendszert használsz, a
+                        <strong>Unas</strong>, <strong>Shoprenter</strong> és <strong>WooCommerce</strong>
+                        webáruházakkal – mindháromnál működik a közvetlen, kétirányú kapcsolat (beolvasás és
+                        visszatöltés). A WooCommerce-t a saját <strong>Content Ninja WordPress-bővítményünk</strong> köti
+                        be pár kattintással, jelszómásolás nélkül, és a <strong>Yoast</strong> vagy a
+                        <strong>Rank Math</strong> SEO-címét és -leírását is kitölti. A blogcikkeket webshop nélkül is
+                        ki tudja tenni bármely saját tárhelyes WordPress oldalra. Ha más rendszert használsz, a
                         bemutatón megnézzük, mi a lehetőség.
                     </div>
                 </div>

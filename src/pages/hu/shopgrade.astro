@@ -6,12 +6,13 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'shopgrade';
-const title = 'Shopgrade – AI tartalomoptimalizálás Unas és Shoprenter webshopoknak | Content Ninja';
+const title = 'Shopgrade – AI tartalomoptimalizálás Unas, Shoprenter és WooCommerce webshopoknak | Content Ninja';
 const description =
-  'A Shopgrade letölti a webáruházad meglévő termékleírásait és kategóriaoldalait, az AI SEO- és értékesítés-fókuszú szöveggé írja át őket, majd vissza is tölti a webshopodba – akár több ezer terméket egyszerre. Unas és Shoprenter integrációval.';
+  'A Shopgrade letölti a webáruházad meglévő termékleírásait és kategóriaoldalait, az AI SEO- és értékesítés-fókuszú szöveggé írja át őket, majd vissza is tölti a webshopodba – akár több ezer terméket egyszerre. Unas, Shoprenter és WooCommerce integrációval.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-shopgrade.jpg" lpEnabled>
@@ -170,18 +171,13 @@ const description =
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
                         AI termék- és kategóriaoldal-író
-                        <span class="text-primary">Unas és Shoprenter webshopoknak</span>
+                        <span class="text-primary">Unas, Shoprenter és WooCommerce webshopoknak</span>
                     </h1>
 
                     <!-- Támogatott rendszerek -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Támogatott rendszerek:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos cap="writeBack" variant="pill" />
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -257,6 +253,7 @@ const description =
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
                                             <option value="Egyéb" data-reject="hard">Egyéb</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
                                                 indítani</option>
@@ -586,8 +583,8 @@ const description =
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas vagy Shoprenter – pár kattintás, és a Shopgrade
-                        letölti a meglévő termékleírásaidat és a kategóriafádat.</p>
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter vagy WooCommerce – pár kattintás, és a
+                        Shopgrade letölti a meglévő termékleírásaidat és a kategóriafádat.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -770,7 +767,7 @@ const description =
                             <span class="material-symbols-outlined text-primary text-[20px]">add_business</span>
                         </div>
                         <span class="text-body font-medium text-lg leading-snug pt-1">Több webáruház is kezelhető egy
-                            fiókból – Unas és Shoprenter vegyesen is</span>
+                            fiókból – Unas, Shoprenter és WooCommerce vegyesen is</span>
                     </li>
                 </ul>
 
@@ -994,8 +991,12 @@ const description =
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Jelenleg <strong>Unas</strong> és <strong>Shoprenter</strong> webáruházakkal – ezeknél működik a
-                        kétirányú kapcsolat, vagyis a letöltés és a visszatöltés is. Ha más rendszert használsz, a
+                        <strong>Unas</strong>, <strong>Shoprenter</strong> és <strong>WooCommerce</strong>
+                        webáruházakkal – mindháromnál működik a kétirányú kapcsolat, vagyis a letöltés és a visszatöltés
+                        is. A WooCommerce-t a saját <strong>Content Ninja WordPress-bővítményünk</strong> köti be:
+                        telepíted, a WordPress-adminban jóváhagyod, és kész – jelszót nem kell másolnod. WooCommerce-nél
+                        a termékleírás, a rövid leírás és a kategórialeírás mellett a <strong>Yoast</strong> és a
+                        <strong>Rank Math</strong> SEO-címét és -leírását is kitölti. Ha más rendszert használsz, a
                         bemutatón megnézzük, mi a lehetőség.
                         <a href="/hu/webshop-integracio/" class="text-primary font-semibold underline">Részletek a webshop
                         mélyintegrációról.</a>

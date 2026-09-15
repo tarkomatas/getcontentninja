@@ -63,6 +63,7 @@ export type FormSource =
   | 'webshop-seo-geo'
   | 'webshop-integracio'
   | 'ninja-ai'
+  | 'woocommerce'
   | 'kapcsolat';
 
 /**
@@ -100,6 +101,11 @@ export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
   // érdeklődő: nem egy tartalomtípusra jött (poszt, blog, hírlevél), hanem arra,
   // hogy valaki HELYETTE kezelje a rendszert — ez a bemutatón is más hangsúly.
   'ninja-ai': { hu: '🥷 Ninja AI jelentkezés', en: '🥷 Ninja AI lead' },
+  // A WooCommerce SEO/GEO céloldal (`/hu/woocommerce/`, csak magyarul). Külön
+  // kulcs, hogy a „WooCommerce" keresésekből jött érdeklődő elkülönüljön a
+  // `webshop-integracio` gyűjtőoldal forgalmától. Az app oldalán érdemes a
+  // `FORM_LABELS`/`PATH_TO_FORRAS` táblákba is felvenni.
+  woocommerce: { hu: '🛒 WooCommerce jelentkezés', en: '🛒 WooCommerce lead' },
   kapcsolat: { hu: '✉️ Kapcsolat űrlap', en: '✉️ Contact form' },
 };
 
@@ -125,6 +131,8 @@ export const QUEUE_MAX_ATTEMPTS = 5;
  * A kulcs VERZIÓSZÁMÁT akkor emeljük, ha a kiszűrés szabálya lazul: a régi
  * kimenetel különben 30 napig kizárva tartaná azt is, akit már átengednénk.
  * (v1 → v2: a „Külsős ügynökség" már nem hard reject.)
+ * (v2 → v3: új `WooCommerce` és „WordPress (webshop nélkül)" opció – aki eddig
+ *  ezekkel az „Egyéb"-et választotta, hard rejectet kapott.)
  */
-export const QUALIFY_KEY = 'cn_qualify_v2';
+export const QUALIFY_KEY = 'cn_qualify_v3';
 export const QUALIFY_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;

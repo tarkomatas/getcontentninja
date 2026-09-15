@@ -170,8 +170,8 @@ const nlCfg = {
                                 átfogalmaz egy választ, a szabály vele együtt mozog.
 
                                 Az „Egyéb" is hard reject: a feed a `src/lib/webshop` adapteren át épül, az
-                                pedig CSAK UNAS-t és Shoprentert ismer – más boltmotorral a modul nem tud
-                                mit kezdeni, tehát az indulási levél is hamis ígéret lenne.
+                                pedig CSAK UNAS-t, Shoprentert és WooCommerce-t ismer – más boltmotorral a
+                                modul nem tud mit kezdeni, tehát az indulási levél is hamis ígéret lenne.
                             -->
                             <div>
                                 <label for="waitShop" class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
@@ -180,6 +180,7 @@ const nlCfg = {
                                     <option value="" disabled selected>Válassz...</option>
                                     <option value="UNAS">UNAS</option>
                                     <option value="Shoprenter">Shoprenter</option>
+                                    <option value="WooCommerce">WooCommerce</option>
                                     <option value="Egyéb" data-reject="hard">Egyéb</option>
                                     <option value="Még nincs webshopom" data-reject="hard">Még nincs webshopom</option>
                                 </select>
@@ -281,7 +282,7 @@ const nlCfg = {
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">1</div>
                     <h3 class="text-lg font-bold text-dark mb-2">Bekötöd a webshopod</h3>
-                    <p class="text-body text-sm leading-relaxed">A rendszer az UNAS vagy Shoprenter boltodból
+                    <p class="text-body text-sm leading-relaxed">A rendszer az UNAS, Shoprenter vagy WooCommerce boltodból
                         kiolvassa a termékeidet, és összerakja belőlük a hirdetéshez szükséges termékfeedet –
                         ami aztán naponta magától frissül.</p>
                 </div>

@@ -7,6 +7,7 @@ import ModuleGrid from '../../components/ModuleGrid.astro';
 import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 /**
  * The "all-in-one" campaign landing – English counterpart of /hu/teljes-rendszer/.
@@ -236,12 +237,7 @@ const moduleOptions = [
                          is the proof that every module works from the same data. -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Deep store integration:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" />
-                        </span>
+                        <PlatformLogos variant="pill" lazy={false} />
                     </div>
 
                     <!-- Social proof mini -->
@@ -874,13 +870,13 @@ const moduleOptions = [
                 <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
-                        My store isn't Unas or Shoprenter. Does it still work?
+                        Which store platforms does it work with? What if mine is different?
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Yes. Unas and Shoprenter have a deep integration (the AI sees all your products and blog
-                        posts, and can write back to them), and any other webshop can be connected via its sitemap.
-                        In the demo we'll look at yours and tell you exactly what can be automated in your case.
+                        Unas, Shoprenter and WooCommerce have a deep integration: the AI sees all your products and blog
+                        posts, and can write back to them. Any other webshop can be connected via its sitemap or product
+                        links. In the demo we'll look at yours and tell you exactly what can be automated in your case.
                     </div>
                 </div>
 

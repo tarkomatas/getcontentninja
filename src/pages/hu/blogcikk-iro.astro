@@ -6,12 +6,13 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'blogWriter';
 const title = 'AI blogcikk író webshopoknak – kulcsszókutatás, cikkírás, publikálás | Content Ninja';
 const description =
-  'A Content Ninja Blogcikk író modulja kikutatja, mire keresnek a vásárlóid, megírja rá a SEO- és GEO-barát blogcikket, majd publikálja is a webshopod blogjában. Unas és Shoprenter integrációval.';
+  'A Content Ninja Blogcikk író modulja kikutatja, mire keresnek a vásárlóid, megírja rá a SEO- és GEO-barát blogcikket, majd publikálja is a webshopod blogjában vagy a WordPress oldaladon. Unas, Shoprenter, WooCommerce és WordPress integrációval.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-blogcikk.jpg" lpEnabled>
@@ -153,12 +154,7 @@ const description =
                     <!-- Támogatott rendszerek -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Támogatott rendszerek:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos cap="blog" variant="pill" />
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -217,12 +213,14 @@ const description =
                             <div class="form-step active" data-step="1">
                                 <div class="space-y-4">
                                     <div>
-                                        <label class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
+                                        <label class="block text-sm font-bold text-body mb-1">Milyen webshopod vagy weboldalad van?</label>
                                         <select name="has_webshop" id="hasWebshop"
                                             class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
+                                            <option value="WordPress (webshop nélkül)">WordPress (webshop nélkül)</option>
                                             <option value="Egyéb" data-reject="hard">Egyéb</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
                                                 indítani</option>
@@ -231,8 +229,8 @@ const description =
                                         </select>
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-bold text-body mb-1">Jelenik meg blogcikk a
-                                            webáruházadban?</label>
+                                        <label class="block text-sm font-bold text-body mb-1">Jelenik meg blogcikk az
+                                            oldaladon?</label>
                                         <select name="blog_frequency" id="blogFrequency"
                                             class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Válassz...</option>
@@ -465,9 +463,10 @@ const description =
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas vagy Shoprenter – pár kattintás, és a rendszer
-                        látja a termékeidet, a kategóriáidat és a meglévő blogodat.</p>
+                    <h3 class="font-bold text-lg mb-3">Bekötöd az oldaladat</h3>
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter, WooCommerce vagy egy sima WordPress
+                        oldal – pár kattintás, és a rendszer látja a meglévő blogodat, webshopnál a termékeidet és a
+                        kategóriáidat is.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -485,7 +484,7 @@ const description =
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
                     <h3 class="font-bold text-lg mb-3">Publikálás</h3>
                     <p class="text-body text-sm leading-relaxed">Átnézed, jóváhagyod – és a cikk kimegy a webshopod
-                        blogjába. Kézi bemásolás nélkül.</p>
+                        blogjába vagy a WordPress oldaladra. Kézi bemásolás nélkül.</p>
                 </div>
             </div>
 
@@ -596,7 +595,7 @@ const description =
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Publikálás 🚀</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">A kész cikk nem egy dokumentumban landol</h2>
                 <p class="text-body text-lg">A legtöbb AI-szövegíró eszköznél a munka nagyja a másolás-beillesztés. Itt
-                    a cikk oda kerül, ahol dolgoznia kell: a webshopod blogjába.</p>
+                    a cikk oda kerül, ahol dolgoznia kell: a webshopod blogjába vagy a WordPress oldaladra.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
@@ -605,8 +604,8 @@ const description =
                         <span class="material-symbols-outlined text-[22px]">publish</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Közvetlenül a blogodba</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas és Shoprenter webáruházba egy kattintással, formázva
-                        – nem kell az adminba bemásolni.</p>
+                    <p class="text-body text-sm leading-relaxed">Unas és Shoprenter webáruház blogjába vagy bármely
+                        WordPress oldalra egy kattintással, formázva – nem kell az adminba bemásolni.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -631,6 +630,55 @@ const description =
                     <h3 class="font-bold text-lg mb-2">Továbbmegy a többi csatornára</h3>
                     <p class="text-body text-sm leading-relaxed">Ugyanabból a rendszerből mehet közösségi poszt és
                         hírlevél is – a cikk nem áll meg a blogon.</p>
+                </div>
+            </div>
+
+            <!-- WordPress-publikálás: egy kapcsolat a saját „Content Ninja" bővítménnyel
+                 (WooCommerce-boltnál ugyanez hozza a termékeket is). NE ígérj ide címkét,
+                 szerzőválasztást, WPML/Polylangot vagy WordPress.com-ot – az app nem tudja. -->
+            <div id="wordpress" class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card max-w-[900px] mx-auto mt-6">
+                <div class="flex flex-col md:flex-row gap-6 md:gap-10">
+                    <div class="md:w-[38%] shrink-0">
+                        <span class="inline-flex items-center gap-2 mb-4">
+                            <img src="/assets/wordpress-logo.svg" alt="" aria-hidden="true" class="h-8 w-auto" loading="lazy" />
+                            <span class="font-bold text-dark text-lg leading-none">WordPress</span>
+                        </span>
+                        <h3 class="font-bold text-xl mb-2">Webshop nélkül is: bármely WordPress oldalra publikál</h3>
+                        <p class="text-body text-sm leading-relaxed">Szolgáltató céged van, vagy WooCommerce-en fut a
+                            boltod? A cikk kész bejegyzésként érkezik a saját tárhelyes WordPress oldaladra.</p>
+                    </div>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm text-body leading-relaxed">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Kiemelt kép:</strong> a képek a médiatárba kerülnek, a
+                                borítókép lesz a bejegyzés kiemelt képe</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Kategória:</strong> beállítasz egy alapot, és cikkenként
+                                felülírhatod</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Yoast / Rank Math:</strong> az SEO-cím és a meta leírás is
+                                kitöltve érkezik</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Azonnal, időzítve vagy piszkozatként</strong> – ha a
+                                WordPressben szeretnéd még átnézni</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Mindig friss:</strong> ha utólag szerkeszted a cikket, a
+                                bejegyzés is frissül</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Bekötés pár kattintással:</strong> Content Ninja bővítmény →
+                                „Csatlakozás" → jóváhagyás a WordPress-adminban. Jelszót nem kell másolni.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -701,12 +749,16 @@ const description =
                 <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
-                        Milyen webshoprendszerekbe tud publikálni?
+                        Milyen rendszerekbe tud publikálni? Működik WordPresszel?
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Jelenleg <strong>Unas</strong> és <strong>Shoprenter</strong> webáruházakba – ezeknél működik a
-                        közvetlen kapcsolat. Ha más rendszert használsz, a bemutatón megnézzük, mi a lehetőség.
+                        Közvetlenül publikál az <strong>Unas</strong> és a <strong>Shoprenter</strong> webáruházak
+                        blogjába, valamint bármely <strong>saját tárhelyes WordPress</strong> oldalra – akkor is, ha nincs
+                        rajta webshop, és akkor is, ha <strong>WooCommerce</strong> fut rajta. A WordPresst a Content Ninja
+                        bővítmény köti be: telepíted, rákattintasz a „Csatlakozás" gombra, majd a WordPress-adminban
+                        jóváhagyod – jelszót nem kell másolni. A WordPress.com-on futó oldalak nem köthetők be. Ha más
+                        rendszert használsz, a bemutatón megnézzük, mi a lehetőség.
                         <a href="/hu/webshop-integracio/" class="text-primary font-semibold underline">Részletek a webshop
                         mélyintegrációról.</a>
                     </div>

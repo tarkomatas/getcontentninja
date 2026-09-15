@@ -46,7 +46,7 @@
  * tehát minden extra mező tiszta veszteség; a termékszámot amúgy is bekéri az app.
  *
  * **A kiszűrés szabálya (`data-reject`, a markupban):** „Egyéb" és „Más típusú
- * vállalkozás" → **hard** (a visszatöltés csak UNAS/Shoprenteren megy, ne mérjünk
+ * vállalkozás" → **hard** (a visszatöltés csak UNAS/Shoprenter/WooCommerce boltban megy, ne mérjünk
  * olyat, amin utána nem tudunk segíteni). „Csak tervezek webshopot" → **soft**: neki
  * nincs élő terméklapja, tehát nincs mit megmérni, de a videós bemutató még értelmes.
  *
@@ -243,6 +243,7 @@ const description =
                         <option value="" disabled selected>Válassz...</option>
                         <option value="UNAS">UNAS</option>
                         <option value="Shoprenter">Shoprenter</option>
+                        <option value="WooCommerce">WooCommerce</option>
                         <option value="Egyéb" data-reject="hard">Egyéb</option>
                         <option value="Csak tervezek webshopot indítani" data-reject="soft"
                           >Csak tervezek webshopot indítani</option
@@ -269,7 +270,7 @@ const description =
                     <h3 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h3>
                     <p class="text-body leading-relaxed max-w-[400px] mx-auto">
                       Az elemzés arra épül, hogy a javított szövegeket vissza is tudjuk tölteni a
-                      boltodba – ezt ma UNAS és Shoprenter webáruházaknál tudjuk. A megadott adatok
+                      boltodba – ezt ma UNAS, Shoprenter és WooCommerce webáruházaknál tudjuk. A megadott adatok
                       alapján a rendszerünk most nem lenne megfelelő számodra, és nem szeretnénk az
                       idődet húzni. Megértésed köszönjük!
                     </p>
@@ -706,13 +707,13 @@ const description =
               class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
               onclick="toggleFaq(this)"
             >
-              Nem UNAS vagy Shoprenter a boltom – akkor mi van?
+              Nem UNAS, Shoprenter vagy WooCommerce a boltom – akkor mi van?
               <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]"
                 >add</span
               >
             </button>
             <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-              A javított szövegek visszatöltése ma UNAS és Shoprenter webáruházaknál működik, ezért
+              A javított szövegek visszatöltése ma UNAS, Shoprenter és WooCommerce webáruházaknál működik, ezért
               az elemzést is ezekre a rendszerekre tartjuk fenn – nem szeretnénk olyat mérni, amin
               utána nem tudunk segíteni. Ha más rendszert használsz, írj nekünk a
               <a href="/hu/kapcsolat/" class="text-primary font-semibold underline"
@@ -801,7 +802,7 @@ const description =
       // A boltmotor a mi címkéinkről az app allowlistjére. Ami nincs a táblában,
       // az `null` marad – az app a kiértékelést amúgy sem ebből végzi, csak a
       // záró gombot igazítja vele. (A többi válasz hard reject, ide sem jut el.)
-      var CN_ENGINES = { UNAS: 'unas', Shoprenter: 'shoprenter' };
+      var CN_ENGINES = { UNAS: 'unas', Shoprenter: 'shoprenter', WooCommerce: 'woocommerce' };
 
       function cnCampaignSource() {
         var out = {};

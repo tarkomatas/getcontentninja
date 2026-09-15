@@ -6,6 +6,7 @@ import Carousel from '../../components/Carousel.astro';
 import MetaTechProvider from '../../components/MetaTechProvider.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'en';
 const page = 'home';
@@ -116,12 +117,7 @@ const faqLd = {
                     <!-- Deep store integration – instead of the hero CTA buttons, the supported systems -->
                     <div class="flex items-center gap-2.5 flex-wrap pt-1">
                         <span class="text-sm font-semibold text-muted">Deep store integration:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" />
-                        </span>
+                        <PlatformLogos variant="pill" lazy={false} />
                     </div>
 
                     <!-- Social proof (moved to the left) -->
@@ -202,11 +198,10 @@ const faqLd = {
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">Blog writer</h3>
                     <p class="text-body text-sm leading-relaxed mb-5 flex-1">It researches what your customers search for,
-                        writes the SEO- and GEO-friendly article, then publishes it straight to your webshop blog – traffic
-                        from Google and the AI search engines.</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                        writes the SEO- and GEO-friendly article, then publishes it straight to your webshop blog or
+                        WordPress site – traffic from Google and the AI search engines.</p>
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <PlatformLogos cap="blog" />
                     </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Details
@@ -225,9 +220,8 @@ const faqLd = {
                         module rewrites your existing product descriptions and category page copy into SEO- and
                         GEO-friendly, better-selling text, then uploads it back to your store – in bulk, with your
                         approval.</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <PlatformLogos cap="writeBack" />
                     </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Details
@@ -284,11 +278,11 @@ const faqLd = {
                         <span class="material-symbols-outlined text-[22px]">storefront</span>
                     </div>
                     <h3 class="font-bold text-xl mb-2 text-dark">Deep store integration</h3>
-                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Connect your Unas or Shoprenter store in a few
-                        clicks – from then on the AI sees all your products and creates posts from real product data.</p>
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
+                    <p class="text-body text-sm leading-relaxed mb-5 flex-1">Connect your Unas, Shoprenter or WooCommerce
+                        store in a few clicks – from then on the AI sees all your products and creates posts from real
+                        product data.</p>
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <PlatformLogos />
                     </div>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Learn more
@@ -387,9 +381,19 @@ const faqLd = {
                             <div>
                                 <p class="font-semibold text-dark text-[15px] leading-tight">Webshop</p>
                                 <div class="flex items-center gap-2.5 mt-1 flex-wrap">
-                                    <img src="/assets/unas_logo.png" alt="Unas" class="h-4 w-auto" loading="lazy" />
-                                    <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-4 w-auto" loading="lazy" />
+                                    <PlatformLogos size="sm" />
                                     <span class="text-body text-sm">+ Sitemap <span class="text-muted">(any store)</span></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">article</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-dark text-[15px] leading-tight">Blog</p>
+                                <div class="flex items-center gap-2.5 mt-1 flex-wrap">
+                                    <PlatformLogos cap="blog" size="sm" />
                                 </div>
                             </div>
                         </li>
@@ -435,8 +439,8 @@ const faqLd = {
                 <!-- Illustration: integration hub -->
                 <div class="order-1 lg:order-2 relative">
                     <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                    <img src="/assets/integraciok-hub-portrait.webp" width="896" height="1200"
-                        alt="Content Ninja integration hub: Unas, Shoprenter, Sitemap and RSS sources connected at the top, publishing to Facebook, Instagram, SalesAutopilot, MailerLite, the webshop blog and product descriptions (Shopgrade) at the bottom"
+                    <img src="/assets/integraciok-hub-portrait-v2.webp" width="896" height="1200"
+                        alt="Content Ninja integration hub: Unas, Shoprenter, WooCommerce, WordPress, Sitemap and RSS sources connected at the top, publishing to Facebook, Instagram, SalesAutopilot, MailerLite, the webshop blog and product descriptions (Shopgrade) at the bottom"
                         loading="lazy" class="w-full h-auto block">
                 </div>
 
@@ -830,7 +834,7 @@ const faqLd = {
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        The system connects directly to your store (via Unas or Shoprenter integration, or to any store
+                        The system connects directly to your store (via Unas, Shoprenter or WooCommerce integration, or to any store
                         through a sitemap), and
                         automatically retrieves the product data – descriptions, images, prices. From these the AI writes copy,
                         edits on-brand images and video, and then publishes the

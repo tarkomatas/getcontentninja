@@ -94,7 +94,7 @@ const faqLd = {
       name: 'Mit NEM tud a Ninja AI?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Szándékosan nem tud videót generálni (ezt a felületen indítod, mert ott állíthatók be pontosan a vizuál paraméterei), nem tud integrációt bekötni (Unas, Shoprenter, Meta-belépés – ez biztonsági okból kézi), nem nyúl a fizetéshez, az előfizetéshez és a keretekhez (a kreditet csak olvassa), nem tölt fel médiát, nem küld ki hirdetést a Metára, és soha nem lát más munkatér vagy admin adatot. Ha valamihez nincs eszköze, nem ígéri meg – felajánlja azt az asszisztenst, akinek van.',
+        text: 'Szándékosan nem tud videót generálni (ezt a felületen indítod, mert ott állíthatók be pontosan a vizuál paraméterei), nem tud integrációt bekötni (Unas, Shoprenter, WordPress / WooCommerce, Meta-belépés – ez biztonsági okból kézi), nem nyúl a fizetéshez, az előfizetéshez és a keretekhez (a kreditet csak olvassa), nem tölt fel médiát, nem küld ki hirdetést a Metára, és soha nem lát más munkatér vagy admin adatot. Ha valamihez nincs eszköze, nem ígéri meg – felajánlja azt az asszisztenst, akinek van.',
       },
     },
     {
@@ -361,6 +361,7 @@ const faqLd = {
                                             <option value="" disabled selected>Válassz...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
                                             <option value="Egyéb" data-reject="hard">Egyéb</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
                                                 indítani</option>
@@ -844,8 +845,9 @@ const faqLd = {
                 <div class="flex items-start gap-4 p-6">
                     <span class="material-symbols-outlined text-muted text-[22px] shrink-0 mt-0.5">link_off</span>
                     <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Integrációt nem köt be.</strong>
-                        Az Unas- és Shoprenter-kapcsolat, valamint a Meta-belépés kézi marad – biztonsági okból. API-kulcsot
-                        a chatben soha nem kér tőled.</p>
+                        Az Unas-, a Shoprenter- és a WordPress / WooCommerce-kapcsolat, valamint a Meta-belépés kézi marad
+                        – biztonsági okból. A bekötésen végigvezet, de API-kulcsot vagy jelszót a chatben soha nem kér
+                        tőled.</p>
                 </div>
                 <div class="flex items-start gap-4 p-6">
                     <span class="material-symbols-outlined text-muted text-[22px] shrink-0 mt-0.5">credit_card_off</span>
@@ -958,8 +960,8 @@ const faqLd = {
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Szándékosan nem tud videót generálni (ezt a felületen indítod, mert ott állíthatók be pontosan a
-                        vizuál paraméterei), nem tud integrációt bekötni (Unas, Shoprenter, Meta-belépés – ez biztonsági
-                        okból kézi), nem nyúl a fizetéshez, az előfizetéshez és a keretekhez (a kreditet csak olvassa),
+                        vizuál paraméterei), nem tud integrációt bekötni (Unas, Shoprenter, WordPress / WooCommerce,
+                        Meta-belépés – ez biztonsági okból kézi), nem nyúl a fizetéshez, az előfizetéshez és a keretekhez (a kreditet csak olvassa),
                         nem tölt fel médiát, nem küld ki hirdetést a Metára, és soha nem lát más munkatér vagy admin
                         adatot. Ha valamihez nincs eszköze, nem ígéri meg – felajánlja azt az asszisztenst, akinek van.
                     </div>

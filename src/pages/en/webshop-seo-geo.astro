@@ -13,12 +13,13 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'en';
 const page = 'webshopSeoGeo';
 const title = 'Webshop SEO and GEO in one system – category, product copy, blog | Content Ninja';
 const description =
-  'Content Ninja writes your category pages, product descriptions and blog posts – SEO- and GEO-friendly – then uploads them back to your webshop. With Unas and Shoprenter integration.';
+  'Content Ninja writes your category pages, product descriptions and blog posts – SEO- and GEO-friendly – then uploads them back to your webshop. With Unas, Shoprenter and WooCommerce integration.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-webshop-seo-geo.jpg" lpEnabled>
@@ -188,12 +189,7 @@ const description =
 
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Supported platforms:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos cap="writeBack" variant="pill" />
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -258,6 +254,7 @@ const description =
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
                                             <option value="Egyéb" data-reject="hard">Other</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">I'm only planning to start one</option>
                                             <option value="Más típusú vállalkozásom van" data-reject="hard">I run a different kind of business</option>
@@ -572,7 +569,7 @@ const description =
                     <h3 class="font-bold text-lg mb-2">Articles on what people actually ask</h3>
                     <p class="text-body text-sm leading-relaxed mb-4">It checks what people search for in your market and
                         only suggests topics you have products for – then publishes the finished article to your
-                        blog.</p>
+                        webshop blog or any WordPress site of yours.</p>
                 </div>
             </div>
 
@@ -632,7 +629,8 @@ const description =
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">There's no other system like this on the Hungarian
                     market</h2>
                 <p class="text-body text-lg">Each task has a solution of its own. But having all three produced in one
-                    place, from your own product data, and pushed back into your Unas or Shoprenter store with one click
+                    place, from your own product data, and pushed back into your Unas, Shoprenter or WooCommerce store
+                    with one click
                     – that's the part you won't find elsewhere.</p>
             </div>
 
@@ -704,8 +702,8 @@ const description =
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Connect your store</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas or Shoprenter – a few clicks, and the system sees
-                        every product, category and blog post you have.</p>
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter or WooCommerce – a few clicks, and the
+                        system sees every product, category and blog post you have.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -754,7 +752,7 @@ const description =
                     </div>
                     <h3 class="font-bold text-lg mb-2">The blog post gets written</h3>
                     <p class="text-body text-sm leading-relaxed">On the question your customers actually type – and it
-                        goes live on your webshop blog.</p>
+                        goes live on your webshop blog or your WordPress site.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -875,9 +873,12 @@ const description =
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Currently <strong>Unas</strong> and <strong>Shoprenter</strong> – these have the direct,
-                        two-way connection (reading and writing back). If you're on another platform, we'll look at the
-                        options on the demo.
+                        <strong>Unas</strong>, <strong>Shoprenter</strong> and <strong>WooCommerce</strong> – all three
+                        have the direct, two-way connection (reading and writing back). WooCommerce connects through our
+                        own <strong>Content Ninja WordPress plugin</strong> in a few clicks, with no passwords to copy,
+                        and it also fills in the <strong>Yoast</strong> or <strong>Rank Math</strong> SEO title and
+                        description. Blog posts can go to any self-hosted WordPress site too, even without a webshop.
+                        If you're on another platform, we'll look at the options on the demo.
                     </div>
                 </div>
 

@@ -6,12 +6,13 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'en';
 const page = 'blogWriter';
 const title = 'AI blog writer for webshops – keyword research, writing, publishing | Content Ninja';
 const description =
-  "Content Ninja's Blog writer module researches what your customers search for, writes the SEO- and GEO-friendly article, and publishes it straight to your webshop blog. With Unas and Shoprenter integration.";
+  "Content Ninja's Blog writer module researches what your customers search for, writes the SEO- and GEO-friendly article, and publishes it straight to your webshop blog or WordPress site. With Unas, Shoprenter, WooCommerce and WordPress integration.";
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-blogcikk.jpg" lpEnabled>
@@ -153,12 +154,7 @@ const description =
                     <!-- Supported platforms -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Supported platforms:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos cap="blog" variant="pill" />
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -217,12 +213,14 @@ const description =
                             <div class="form-step active" data-step="1">
                                 <div class="space-y-4">
                                     <div>
-                                        <label class="block text-sm font-bold text-body mb-1">What webshop do you have?</label>
+                                        <label class="block text-sm font-bold text-body mb-1">What webshop or website do you have?</label>
                                         <select name="has_webshop" id="hasWebshop"
                                             class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
+                                            <option value="WordPress (webshop nélkül)">WordPress site (no webshop)</option>
                                             <option value="Egyéb" data-reject="hard">Other</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">I'm only planning to launch
                                                 a webshop</option>
@@ -466,9 +464,10 @@ const description =
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Connect your webshop</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas or Shoprenter – a few clicks, and the system sees
-                        your products, categories and existing blog.</p>
+                    <h3 class="font-bold text-lg mb-3">Connect your site</h3>
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter, WooCommerce or a plain WordPress site
+                        – a few clicks, and the system sees your existing blog, plus your products and categories if you
+                        run a webshop.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -486,7 +485,7 @@ const description =
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
                     <h3 class="font-bold text-lg mb-3">Publishing</h3>
                     <p class="text-body text-sm leading-relaxed">You review, you approve – and the article goes live on
-                        your webshop blog. No manual copy-paste.</p>
+                        your webshop blog or WordPress site. No manual copy-paste.</p>
                 </div>
             </div>
 
@@ -598,7 +597,7 @@ const description =
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Publishing 🚀</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">The finished article doesn't land in a document</h2>
                 <p class="text-body text-lg">With most AI writing tools the real work is the copy-pasting. Here the
-                    article ends up where it has to do its job: on your webshop blog.</p>
+                    article ends up where it has to do its job: on your webshop blog or WordPress site.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
@@ -607,8 +606,8 @@ const description =
                         <span class="material-symbols-outlined text-[22px]">publish</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Straight to your blog</h3>
-                    <p class="text-body text-sm leading-relaxed">One click into your Unas or Shoprenter store, fully
-                        formatted – no pasting into the admin.</p>
+                    <p class="text-body text-sm leading-relaxed">One click into your Unas or Shoprenter store blog, or
+                        any WordPress site, fully formatted – no pasting into the admin.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
@@ -633,6 +632,55 @@ const description =
                     <h3 class="font-bold text-lg mb-2">It travels to your other channels</h3>
                     <p class="text-body text-sm leading-relaxed">The same system can turn it into social posts and
                         newsletters – the article doesn't stop at the blog.</p>
+                </div>
+            </div>
+
+            <!-- WordPress publishing: one connection via our own "Content Ninja" plugin
+                 (on a WooCommerce store the same connection brings the products too). Do NOT
+                 promise tags, author selection, WPML/Polylang or WordPress.com here – the app can't. -->
+            <div id="wordpress" class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card max-w-[900px] mx-auto mt-6">
+                <div class="flex flex-col md:flex-row gap-6 md:gap-10">
+                    <div class="md:w-[38%] shrink-0">
+                        <span class="inline-flex items-center gap-2 mb-4">
+                            <img src="/assets/wordpress-logo.svg" alt="" aria-hidden="true" class="h-8 w-auto" loading="lazy" />
+                            <span class="font-bold text-dark text-lg leading-none">WordPress</span>
+                        </span>
+                        <h3 class="font-bold text-xl mb-2">No webshop needed: it publishes to any WordPress site</h3>
+                        <p class="text-body text-sm leading-relaxed">Running a service business, or a store on
+                            WooCommerce? The article arrives as a finished post on your self-hosted WordPress site.</p>
+                    </div>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm text-body leading-relaxed">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Featured image:</strong> images go to your media library,
+                                and the cover becomes the post's featured image</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Category:</strong> set a default, and override it per
+                                article</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Yoast / Rank Math:</strong> the SEO title and meta
+                                description arrive filled in</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Now, scheduled or as a draft</strong> – if you'd rather
+                                review it in WordPress first</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Always in sync:</strong> edit the article later and the
+                                post updates too</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Connected in a few clicks:</strong> Content Ninja plugin →
+                                "Connect" → approve in your WordPress admin. No passwords to copy.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -703,12 +751,16 @@ const description =
                 <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
-                        Which webshop platforms can it publish to?
+                        Which platforms can it publish to? Does it work with WordPress?
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Currently <strong>Unas</strong> and <strong>Shoprenter</strong> stores – these have the direct
-                        connection. If you use another platform, we'll look at the options on the demo.
+                        It publishes directly to <strong>Unas</strong> and <strong>Shoprenter</strong> store blogs, and to
+                        any <strong>self-hosted WordPress</strong> site – with or without a webshop, including sites
+                        running <strong>WooCommerce</strong>. WordPress is connected with the Content Ninja plugin: you
+                        install it, click "Connect", then approve in your WordPress admin – no passwords to copy. Sites
+                        hosted on WordPress.com can't be connected. If you use another platform, we'll look at the
+                        options on the demo.
                         <a href="/en/store-integration/" class="text-primary font-semibold underline">More on deep store
                         integration.</a>
                     </div>

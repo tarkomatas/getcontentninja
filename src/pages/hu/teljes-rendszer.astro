@@ -7,6 +7,7 @@ import ModuleGrid from '../../components/ModuleGrid.astro';
 import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 /**
  * „Teljes rendszer" kampányoldal – az all-in-one szög fizetett landingje.
@@ -234,12 +235,7 @@ const moduleOptions = [
                          bizonyíték arra, hogy a modulok ugyanabból az adatból dolgoznak. -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Webshop mélyintegráció:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" />
-                        </span>
+                        <PlatformLogos variant="pill" lazy={false} />
                     </div>
 
                     <!-- Social proof mini -->
@@ -872,13 +868,14 @@ const moduleOptions = [
                 <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
-                        Nem Unas vagy Shoprenter webshopom van. Akkor is működik?
+                        Milyen webshoprendszerrel működik? És ha nálam más fut?
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Igen. Az Unas és a Shoprenter esetén van mélyintegráció (az AI látja az összes terméked és
-                        blogcikked, és vissza is tud írni), minden más webshop sitemapen keresztül köthető be. A
-                        bemutatón megnézzük a tiédet, és megmondjuk, mi az, ami nálad automatizálható.
+                        Az Unas, a Shoprenter és a WooCommerce esetén mélyintegráció van: az AI látja az összes terméked
+                        és blogcikked, és vissza is tud írni. Minden más webshop sitemapen vagy termékhivatkozásokon
+                        keresztül köthető be. A bemutatón megnézzük a tiédet, és megmondjuk, mi az, ami nálad
+                        automatizálható.
                     </div>
                 </div>
 

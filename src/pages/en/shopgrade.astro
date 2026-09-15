@@ -6,12 +6,13 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'en';
 const page = 'shopgrade';
-const title = 'Shopgrade – AI content optimization for Unas & Shoprenter stores | Content Ninja';
+const title = 'Shopgrade – AI content optimization for Unas, Shoprenter & WooCommerce stores | Content Ninja';
 const description =
-  'Shopgrade pulls your existing product descriptions and category pages, rewrites them with AI into SEO-friendly, sales-focused copy, then uploads them back to your store – thousands of products at once. Works with Unas and Shoprenter.';
+  'Shopgrade pulls your existing product descriptions and category pages, rewrites them with AI into SEO-friendly, sales-focused copy, then uploads them back to your store – thousands of products at once. Works with Unas, Shoprenter and WooCommerce.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-shopgrade.jpg" lpEnabled>
@@ -170,18 +171,13 @@ const description =
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
                         AI product and category page writer
-                        <span class="text-primary">for Unas and Shoprenter stores</span>
+                        <span class="text-primary">for Unas, Shoprenter and WooCommerce stores</span>
                     </h1>
 
                     <!-- Supported platforms -->
                     <div class="flex items-center gap-2.5 flex-wrap">
                         <span class="text-sm font-semibold text-muted">Supported platforms:</span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/unas_logo.png" alt="Unas" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/shoprenter-logo.png" alt="Shoprenter" class="h-[18px] w-auto" loading="lazy" />
-                        </span>
+                        <PlatformLogos cap="writeBack" variant="pill" />
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
@@ -258,6 +254,7 @@ const description =
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="UNAS">UNAS</option>
                                             <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
                                             <option value="Other" data-reject="hard">Other</option>
                                             <option value="I'm only planning to launch a store" data-reject="soft">I'm only planning to
                                                 launch a store</option>
@@ -590,8 +587,8 @@ const description =
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
                     <h3 class="font-bold text-lg mb-3">Connect your store</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas or Shoprenter – a few clicks, and Shopgrade pulls
-                        your existing product descriptions and your category tree.</p>
+                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter or WooCommerce – a few clicks, and
+                        Shopgrade pulls your existing product descriptions and your category tree.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
@@ -775,7 +772,7 @@ const description =
                             <span class="material-symbols-outlined text-primary text-[20px]">add_business</span>
                         </div>
                         <span class="text-body font-medium text-lg leading-snug pt-1">Run several stores from one
-                            account – Unas and Shoprenter side by side</span>
+                            account – Unas, Shoprenter and WooCommerce side by side</span>
                     </li>
                 </ul>
 
@@ -1000,9 +997,13 @@ const description =
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Currently <strong>Unas</strong> and <strong>Shoprenter</strong> – these support the two-way
-                        connection, meaning both the download and the upload. If you use a different platform, we'll
-                        look at the options during the demo.
+                        <strong>Unas</strong>, <strong>Shoprenter</strong> and <strong>WooCommerce</strong> – all three
+                        support the two-way connection, meaning both the download and the upload. WooCommerce connects
+                        through our own <strong>Content Ninja WordPress plugin</strong>: install it, approve the
+                        connection in your WordPress admin, and you're done – no passwords to copy. On WooCommerce,
+                        alongside the product description, short description and category description, it also fills in
+                        the <strong>Yoast</strong> and <strong>Rank Math</strong> SEO title and description. If you use a
+                        different platform, we'll look at the options during the demo.
                         <a href="/en/store-integration/" class="text-primary font-semibold underline">More about the deep
                         store integration.</a>
                     </div>
