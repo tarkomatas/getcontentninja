@@ -45,7 +45,7 @@ const privacyHu = pathFor('privacy', 'hu');
             Content Ninja (the "Service") is an AI-powered content marketing tool for online stores. The Service
             creates social media content (text, images, video) and publishes it on the user's behalf to the user's
             own Facebook Pages and Instagram business accounts; composes and sends newsletters through the user's own
-            newsletter provider account; publishes blog articles to the user's webshop; rewrites product
+            newsletter provider account; publishes blog articles to the user's webshop or own website (e.g. a WordPress site); rewrites product
             descriptions and category page copy; creates advertising creatives; and performs keyword and topic
             research. The Service is
             available to businesses only. It is operated by:
@@ -115,7 +115,7 @@ const privacyHu = pathFor('privacy', 'hu');
             <div>
               <p class="font-semibold text-dark text-sm mb-2">2.3. Content data</p>
               <div class="bg-light rounded-[10px] p-4">
-                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">brands and brand-identity settings you create, prompts, generated content (text, images, video, narrated video), uploaded media files, knowledge-base entries, product data imported from your webshop (product names, descriptions, images, prices, categories), your newsletter, blog and advertising content, and the access keys of the external systems you connect, <strong class="text-dark">stored in encrypted form</strong> (webshop, newsletter and social platform keys)</span></div>
+                <div class="meta-row"><span class="meta-label">Data</span><span class="meta-value">brands and brand-identity settings you create, prompts, generated content (text, images, video, narrated video), uploaded media files, knowledge-base entries, product data imported from your webshop (product names, descriptions, images, prices, categories), your newsletter, blog and advertising content, and the access keys of the external systems you connect, <strong class="text-dark">stored in encrypted form</strong> (webshop, WordPress, newsletter and social platform keys)</span></div>
                 <div class="meta-row"><span class="meta-label">Purpose</span><span class="meta-value">AI-based content generation and scheduled publishing in your brand's style</span></div>
                 <div class="meta-row"><span class="meta-label">Legal basis</span><span class="meta-value">performance of a contract (Art. 6(1)(b) GDPR)</span></div>
               </div>
@@ -450,10 +450,23 @@ const privacyHu = pathFor('privacy', 'hu');
             marketing website (see Section 10).
           </p>
           <p class="mt-3">
-            <strong class="text-dark">Note on your webshop and newsletter provider:</strong> UNAS, Shoprenter and
-            your newsletter provider are <strong class="text-dark">your own systems</strong>. The Service reads from
-            and writes to them using your access key, on your instruction. Their operators act as independent
-            controllers under their own privacy policies.
+            <strong class="text-dark">Note on your webshop, your website and your newsletter provider:</strong> UNAS,
+            Shoprenter, your WooCommerce store, your WordPress site and your newsletter provider are
+            <strong class="text-dark">your own systems</strong> — your WooCommerce store and WordPress site run on
+            <strong class="text-dark">your own hosting</strong>. The Service reads from and writes to them using your
+            access key, on your instruction. Their operators act as independent controllers under their own privacy
+            policies; for a WordPress site and WooCommerce store running on your own hosting, you yourself are the
+            controller of that data.
+          </p>
+          <p class="mt-3">
+            <strong class="text-dark">Note on the WordPress application password:</strong> you connect your WordPress
+            site (and the WooCommerce store running on it) with the Content Ninja WordPress plugin. On
+            <strong class="text-dark">your approval</strong> in your WordPress admin, the plugin creates an
+            <strong class="text-dark">application password</strong> for the WordPress user making the connection and
+            passes it to us directly, server to server; without the plugin, you can also paste in an application
+            password yourself. We store the application password <strong class="text-dark">encrypted
+            (AES-256-GCM)</strong>, and revoke and delete it when you disconnect the site; when the plugin is
+            uninstalled, the plugin itself also revokes the application passwords it created.
           </p>
         </div>
 
@@ -475,7 +488,7 @@ const privacyHu = pathFor('privacy', 'hu');
               never account identifiers or access tokens.
             </li>
             <li><strong class="text-dark">Isolation:</strong> data is separated per user / workspace at the database level (row-level security, RLS).</li>
-            <li><strong class="text-dark">Encryption:</strong> all platform access tokens (Meta user and Page tokens, webshop and newsletter API keys) are stored encrypted using AES-256-GCM; data in transit is protected by TLS.</li>
+            <li><strong class="text-dark">Encryption:</strong> all platform access tokens (Meta user and Page tokens, webshop and newsletter API keys, WordPress application passwords) are stored encrypted using AES-256-GCM; data in transit is protected by TLS.</li>
           </ul>
         </div>
 
@@ -485,7 +498,7 @@ const privacyHu = pathFor('privacy', 'hu');
           <ul>
             <li><strong class="text-dark">Account and content data:</strong> retained while your account exists, then deleted within 30 days after account deletion.</li>
             <li><strong class="text-dark">Meta access tokens and connected-account data:</strong> deleted immediately when you disconnect the account in the app, revoke the app's access in your Facebook settings, or delete your account.</li>
-            <li><strong class="text-dark">Connected webshop and newsletter keys:</strong> deleted immediately when the connection is removed.</li>
+            <li><strong class="text-dark">Connected webshop, WordPress and newsletter keys:</strong> deleted immediately when the connection is removed; the WordPress application password is also revoked on your WordPress site at that point.</li>
             <li><strong class="text-dark">Google Search Console search data:</strong> 16 months at most, deleted automatically thereafter; access ceases immediately when you disconnect the integration.</li>
             <li><strong class="text-dark">Invoicing data:</strong> retained for 8 years, as required by the Hungarian Accounting Act (Act C of 2000).</li>
             <li><strong class="text-dark">Usage logs:</strong> retained while your account exists and for as long as they are necessary for troubleshooting, accounting for credit usage and preventing abuse; they are deleted thereafter.</li>
@@ -640,6 +653,14 @@ const privacyHu = pathFor('privacy', 'hu');
               search data of the website you connect (search queries, impressions, clicks, average position, landing
               page URLs) with read-only access and display it on the Analytics screen of the application. A related
               retention entry was added to Section 7 (16 months at most). Published: 1 September 2026.
+            </li>
+            <li>
+              <strong class="text-dark">15 September 2026</strong> — The note on webshops in Section 5 was extended with
+              <strong class="text-dark">your WooCommerce store and WordPress site</strong> (your own systems, on your own
+              hosting), and a new note was added on the <strong class="text-dark">WordPress application
+              password</strong> (created by the plugin on your approval, stored encrypted, revoked on disconnection);
+              Sections 1, 2.3, 6 and 7 were aligned accordingly. No new processor. Published and effective:
+              15 September 2026.
             </li>
             <li>
               <strong class="text-dark">10 September 2026</strong> — The activity of OpenAI, Inc. in Section 5 was

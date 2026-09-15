@@ -46,7 +46,7 @@ const privacyEn = pathFor('privacy', 'en');
             számára. A Szolgáltatás közösségi média tartalmat (szöveg, kép, videó) készít és tesz közzé a felhasználó
             nevében a felhasználó saját Facebook-oldalain és Instagram üzleti fiókjaiban, továbbá hírlevelet állít
             össze és küld ki a felhasználó saját hírlevél-szolgáltatói fiókján keresztül, blogcikket tesz közzé a
-            felhasználó webáruházában, termékleírásokat és kategóriaoldal-szövegeket ír újra, hirdetési kreatívokat
+            felhasználó webáruházában vagy saját weboldalán (például WordPress-oldalán), termékleírásokat és kategóriaoldal-szövegeket ír újra, hirdetési kreatívokat
             készít, valamint kulcsszó- és
             témakutatást végez. A Szolgáltatás kizárólag vállalkozások részére érhető el. A Szolgáltatás üzemeltetője:
           </p>
@@ -116,7 +116,7 @@ const privacyEn = pathFor('privacy', 'en');
             <div>
               <p class="font-semibold text-dark text-sm mb-2">2.3. Tartalom-adatok</p>
               <div class="bg-light rounded-[10px] p-4">
-                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">az általad létrehozott márkák és arculati beállítások, promptok, generált tartalom (szöveg, kép, videó, narrátorvideó), feltöltött médiafájlok, tudásforrás-bejegyzések, a webáruházadból importált termékadatok (terméknév, leírás, kép, ár, kategória), a hírlevél-, blog- és hirdetés-tartalmaid, valamint a bekötött külső rendszerek <strong class="text-dark">hozzáférési kulcsai titkosított formában</strong> (webáruház-, hírlevél- és közösségi platform-kulcsok)</span></div>
+                <div class="meta-row"><span class="meta-label">Adatok</span><span class="meta-value">az általad létrehozott márkák és arculati beállítások, promptok, generált tartalom (szöveg, kép, videó, narrátorvideó), feltöltött médiafájlok, tudásforrás-bejegyzések, a webáruházadból importált termékadatok (terméknév, leírás, kép, ár, kategória), a hírlevél-, blog- és hirdetés-tartalmaid, valamint a bekötött külső rendszerek <strong class="text-dark">hozzáférési kulcsai titkosított formában</strong> (webáruház-, WordPress-, hírlevél- és közösségi platform-kulcsok)</span></div>
                 <div class="meta-row"><span class="meta-label">Cél</span><span class="meta-value">AI-alapú tartalomgenerálás és ütemezett közzététel a márkád stílusában</span></div>
                 <div class="meta-row"><span class="meta-label">Jogalap</span><span class="meta-value">szerződés teljesítése (GDPR 6. cikk (1) b))</span></div>
               </div>
@@ -451,10 +451,23 @@ const privacyEn = pathFor('privacy', 'en');
             marketing-honlapon használt Meta Pixel tekintetében jár el adatfeldolgozóként (lásd 10. pont).
           </p>
           <p class="mt-3">
-            <strong class="text-dark">Megjegyzés a webáruházadról és a hírlevél-szolgáltatódról:</strong> az UNAS, a
-            Shoprenter és a hírlevél-szolgáltatód a <strong class="text-dark">te saját rendszereid</strong>. A
-            Szolgáltatás a te hozzáférési kulcsoddal, a te utasításodra olvas belőlük és ír beléjük. Ezek
-            üzemeltetői a saját adatkezelési tájékoztatójuk szerint, önálló adatkezelőként járnak el.
+            <strong class="text-dark">Megjegyzés a webáruházadról, a weboldaladról és a hírlevél-szolgáltatódról:</strong>
+            az UNAS, a Shoprenter, a WooCommerce boltod, a WordPress-oldalad és a hírlevél-szolgáltatód a
+            <strong class="text-dark">te saját rendszereid</strong> — a WooCommerce bolt és a WordPress-oldal a
+            <strong class="text-dark">te tárhelyeden</strong> fut. A Szolgáltatás a te hozzáférési kulcsoddal, a te
+            utasításodra olvas belőlük és ír beléjük. Ezek üzemeltetői a saját adatkezelési tájékoztatójuk szerint,
+            önálló adatkezelőként járnak el; a saját tárhelyeden futó WordPress-oldal és WooCommerce bolt adatainak
+            adatkezelője te magad vagy.
+          </p>
+          <p class="mt-3">
+            <strong class="text-dark">Megjegyzés a WordPress-alkalmazásjelszóról:</strong> a WordPress-oldaladat (és a
+            rajta futó WooCommerce boltot) a Content Ninja WordPress-bővítményével kötöd be. A bővítmény
+            <strong class="text-dark">a te jóváhagyásodra</strong>, a WordPress-adminban, a bekötést végző
+            WordPress-felhasználód nevére <strong class="text-dark">alkalmazásjelszót</strong> hoz létre, és azt
+            közvetlenül, szerverek között adja át nekünk; bővítmény nélkül magad is beilleszthetsz egy
+            alkalmazásjelszót. Az alkalmazásjelszót <strong class="text-dark">titkosítva (AES-256-GCM)
+            tároljuk</strong>, a kapcsolat leválasztásakor visszavonjuk és töröljük, a bővítmény eltávolításakor
+            pedig a bővítmény maga is visszavonja az általa létrehozott alkalmazásjelszavakat.
           </p>
         </div>
 
@@ -477,7 +490,7 @@ const privacyEn = pathFor('privacy', 'en');
               hang-szöveg), fiók-azonosító és hozzáférési token soha.
             </li>
             <li><strong class="text-dark">Elkülönítés:</strong> az adatok felhasználónként / munkatérenként, adatbázis-szinten elkülönülnek (sor-szintű biztonság, RLS).</li>
-            <li><strong class="text-dark">Titkosítás:</strong> minden platform-hozzáférési token (Meta felhasználói és oldal-tokenek, webáruház- és hírlevél API-kulcsok) AES-256-GCM titkosítással tárolódik; az átvitelt TLS védi.</li>
+            <li><strong class="text-dark">Titkosítás:</strong> minden platform-hozzáférési token (Meta felhasználói és oldal-tokenek, webáruház- és hírlevél API-kulcsok, WordPress-alkalmazásjelszavak) AES-256-GCM titkosítással tárolódik; az átvitelt TLS védi.</li>
           </ul>
         </div>
 
@@ -487,7 +500,7 @@ const privacyEn = pathFor('privacy', 'en');
           <ul>
             <li><strong class="text-dark">Fiók- és tartalom-adatok:</strong> a fiók fennállásáig, majd a fiók törlését követő 30 napon belül törölve.</li>
             <li><strong class="text-dark">Meta hozzáférési tokenek és bekötött fiókok adatai:</strong> azonnal törölve, amikor lekötöd a fiókot az appban, visszavonod a hozzáférést a Facebook-beállításokban, vagy törlöd a fiókodat.</li>
-            <li><strong class="text-dark">Bekötött webáruház- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal.</li>
+            <li><strong class="text-dark">Bekötött webáruház-, WordPress- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal; a WordPress-alkalmazásjelszót ekkor a WordPress-oldaladon is visszavonjuk.</li>
             <li><strong class="text-dark">Google Search Console keresési adatok:</strong> legfeljebb 16 hónap, azt követően automatikus törlés; a bekötés lekapcsolásakor a hozzáférés azonnal megszűnik.</li>
             <li><strong class="text-dark">Számlázási adatok:</strong> 8 év (a számvitelről szóló 2000. évi C. törvény alapján).</li>
             <li><strong class="text-dark">Műveleti napló:</strong> a fiók fennállásáig, illetve ameddig a hibakereséshez, a kreditfelhasználás elszámolásához és a visszaélés-megelőzéshez szükséges; ezt követően törölve.</li>
@@ -645,6 +658,14 @@ const privacyEn = pathFor('privacy', 'en');
               céloldal-URL-ek) csak olvasható hozzáféréssel kérjük le, és az alkalmazás Analitika felületén
               jelenítjük meg. Ehhez kapcsolódóan a 7. pont új megőrzési sorral bővült (legfeljebb 16 hónap).
               Közzétéve: 2026. szeptember 1.
+            </li>
+            <li>
+              <strong class="text-dark">2026. szeptember 15.</strong> — Az 5. pont webáruházakról szóló megjegyzése
+              kiegészült a <strong class="text-dark">WooCommerce bolttal és a WordPress-oldallal</strong> (a te saját
+              rendszereid, a te tárhelyeden), és új megjegyzés került be a
+              <strong class="text-dark">WordPress-alkalmazásjelszóról</strong> (a bővítmény a jóváhagyásodra hozza
+              létre, titkosítva tároljuk, leválasztáskor visszavonjuk); ehhez igazodott az 1., a 2.3., a 6. és a 7.
+              pont. Új adatfeldolgozó nincs. Közzétéve és hatályos: 2026. szeptember 15.
             </li>
             <li>
               <strong class="text-dark">2026. szeptember 10.</strong> — Az 5. pontban az OpenAI, Inc. tevékenysége
