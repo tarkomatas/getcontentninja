@@ -1,0 +1,40 @@
+---
+// A támogatott platformok logósora – a `src/data/platforms.ts`-ből, képesség
+// szerint szűrve. Csak az elemeket rendereli, a sor burkolóját (flex, gap,
+// esetleg egy „Támogatott rendszerek:" címke) a hívó oldal adja – így minden
+// meglévő elrendezésbe változtatás nélkül beilleszthető.
+//
+//   <div class="flex items-center gap-3"><PlatformLogos cap="writeBack" /></div>
+//
+// A szóvédjegy nélküli logó (WordPress) mellé a komponens kiírja a nevet.
+import { platformsWith, type PlatformCapability } from '../data/platforms';
+
+interface Props {
+  /** Melyik képességű platformok kellenek. Alap: `products` (a webshop-motorok). */
+  cap?: PlatformCapability;
+  /** `sm` = h-4 (sűrű listák), `md` = h-[18px] (kártyák, hero). */
+  size?: 'sm' | 'md';
+  /** `pill` = minden logó saját kis kártyán (a hero „Támogatott rendszerek" sora). */
+  variant?: 'plain' | 'pill';
+  lazy?: boolean;
+}
+
+const { cap = 'products', size = 'md', variant = 'plain', lazy = true } = Astro.props;
+const items = platformsWith(cap);
+const h = size === 'sm' ? 'h-4' : 'h-[18px]';
+const text = size === 'sm' ? 'text-[13px]' : 'text-sm';
+const loading = lazy ? 'lazy' : undefined;
+const pill = 'inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card';
+---
+
+{items.map((p) => {
+  const logo = p.wordmark ? (
+    <img src={p.logo} alt={p.name} class={`${h} w-auto`} loading={loading} />
+  ) : (
+    <span class="inline-flex items-center gap-1.5">
+      <img src={p.logo} alt="" aria-hidden="true" class={`${h} w-auto`} loading={loading} />
+      <span class={`${text} font-semibold text-dark leading-none`}>{p.name}</span>
+    </span>
+  );
+  return variant === 'pill' ? <span class={pill}>{logo}</span> : logo;
+})}

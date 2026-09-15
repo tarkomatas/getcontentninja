@@ -1,5 +1,6 @@
 ﻿import type { Locale, PageKey } from '../i18n/routes';
 import { pathFor } from '../i18n/routes';
+import { platformsWith } from './platforms';
 
 /**
  * A Content Ninja moduljainak EGYETLEN forrása.
@@ -98,11 +99,11 @@ export const MODULES: ModuleDef[] = [
     page: 'webshopIntegration',
     hu: {
       title: 'Webshop mélyintegráció',
-      desc: 'Az Unas vagy Shoprenter áruházad bekötve: az AI látja az összes terméked és blogcikked, és mindig friss adatokból dolgozik.',
+      desc: 'Az Unas, Shoprenter vagy WooCommerce áruházad bekötve: az AI látja az összes terméked és blogcikked, és mindig friss adatokból dolgozik.',
     },
     en: {
       title: 'Deep store integration',
-      desc: 'With your Unas or Shoprenter store connected, the AI sees all your products and blog posts, and always works from fresh data.',
+      desc: 'With your Unas, Shoprenter or WooCommerce store connected, the AI sees all your products and blog posts, and always works from fresh data.',
     },
   },
   {
@@ -315,10 +316,8 @@ export const NAV_GROUPS: NavGroupDef[] = [
 export const NAV_INTEGRATION = {
   page: 'webshopIntegration' as PageKey,
   icon: 'storefront',
-  logos: [
-    { src: '/assets/unas_logo.png', alt: 'Unas' },
-    { src: '/assets/shoprenter-logo.png', alt: 'Shoprenter' },
-  ],
+  // A webshop-motorok a közös platformlistából (mind szóvédjegy, ezért elég a kép).
+  logos: platformsWith('products').map((p) => ({ src: p.logo, alt: p.name })),
   hu: { label: 'Webshop mélyintegráció' },
   en: { label: 'Deep store integration' },
 } as const;
