@@ -69,29 +69,6 @@ const faqLd = {
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-fooldal.jpg" keywords={keywords} lpEnabled>
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
 
-  <!--
-    Bejelentő sáv az új ChatGPT hirdetéskezelő modulhoz. A fejléc FÖLÖTT áll, ezért
-    a `sticky` fejléc alól görgetéskor kicsúszik – szándékosan: a bejelentés
-    egyszer látszik, nem lopja el a helyet végig.
-
-    `lp-hide`: hirdetési módban (`?type=ld`) eltűnik, mint a fejléc navigációja –
-    egy fizetett landingen minden kifelé mutató link kiszökés.
-
-    Csak a MAGYAR főoldalon: a cél-oldal (`/hu/chatgpt-ads/`) egynyelvű, egy angol
-    sáv magyar oldalra vinne.
-  -->
-  <a
-    href="/hu/chatgpt-ads/"
-    class="lp-hide block bg-primary text-white text-center text-sm px-4 py-2.5 hover:brightness-110 transition-all"
-  >
-    <span class="inline-flex items-center justify-center gap-2 flex-wrap">
-      <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
-      <span><strong class="font-bold">Új modul:</strong> automata ChatGPT hirdetéskezelő – hamarosan indul.</span>
-      <span class="font-semibold underline underline-offset-2">Kérek értesítést</span>
-      <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-    </span>
-  </a>
-
   <Header locale={locale} page={page} />
 
   <main>
@@ -199,8 +176,8 @@ const faqLd = {
 
             <Carousel label="Megoldások" prevLabel="Előző megoldások" nextLabel="További megoldások">
 
-                <!-- ChatGPT hirdetéskezelő – ELSŐ helyen, mert ez az újdonság: a sáv is erre
-                     hívja fel a figyelmet, és a lapozó desktopon négy kártyát mutat egyszerre.
+                <!-- ChatGPT hirdetéskezelő – ELSŐ helyen, mert ez az újdonság, és a lapozó
+                     desktopon négy kártyát mutat egyszerre.
                      A „Hamarosan" pill a KÁRTYÁN marad (a menüből kikerült): egy megoldás-rács
                      különben azt ígérné, hogy ez ma is használható. -->
                 <a href="/hu/chatgpt-ads/"
