@@ -13,15 +13,19 @@
  *    tehát nem tudnak elcsúszni egymástól,
  *  - a szekciók tényszerű, önmagukban idézhető bekezdésekkel dolgoznak (GEO).
  *
+ * **Szerkezet (2026-09-15, a page-copy skill és a mintaoldalak szerint):** előbb az
+ * érték (mit csinál a boltodból: termékleírás → marketing → blog), csak utána a
+ * bekötés (`#hogyan-mukodik`) és az átláthatóság (mit olvas / ír / mihez nem nyúl) —
+ * az utóbbi kettő ellenvetés-kezelés, a döntés után jön. H1 a rövid, integrációs
+ * formában („kategória + célcsoport"); a funkciót az alcím első tagmondata mondja ki.
+ *
  * ⚠️ **A tartalom az app tényleges tudását írja le** (app repó:
  * `docs/features/woocommerce.md`, `wordpress.md`; honlap-oldali összefoglaló:
  * `docs/woocommerce-wordpress-terv.md`). Amit a honlap NEM ígérhet: WordPress.com-os
  * oldal, ár- vagy készlet-visszaírás, rendelés-/vásárlóadat, WPML/Polylang, címkék
  * — és wordpress.org bővítménytár-link, amíg a beadás el nem készül (addig a
- * bővítmény a súgóközpontból tölthető le).
- *
- * A ChatGPT hirdetéskezelő még NEM éles (`chatgpt-ads` oldal: „Hamarosan") — itt is
- * csak jövő időben szerepelhet.
+ * bővítmény a súgóközpontból tölthető le). A ChatGPT hirdetéskezelő még „Hamarosan"
+ * állapotú, ezért ez az oldal nem hirdeti.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
@@ -30,12 +34,13 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'woocommerce';
-const title = 'AI marketing rendszer WooCommerce webshopoknak – termékleírás, poszt, hírlevél | Content Ninja';
+const title = 'AI marketing rendszer WooCommerce webshopoknak | Content Ninja';
 const description =
-  'A Content Ninja WordPress-bővítménnyel pár kattintással bekötöd a WooCommerce webshopod: az AI a termékeidből posztol, hírlevelet és Meta hirdetést készít, a termékleírásokat és a Yoast / Rank Math SEO-mezőket pedig újraírja és visszaírja a boltba.';
+  'WooCommerce webshopoknak: az AI a termékeidből posztol, hírlevelet és hirdetést készít, a termékleírásokat és a Yoast / Rank Math mezőket pedig visszaírja a boltba.';
 const keywords =
   'WooCommerce AI, WooCommerce termékleírás AI, WooCommerce AI bővítmény, WooCommerce marketing automatizálás, WooCommerce Yoast Rank Math AI, WooCommerce hírlevél, WooCommerce Facebook poszt, WordPress AI blogcikk';
 
@@ -48,6 +53,10 @@ const faqs = [
   {
     q: 'Hogyan kötöm be a WooCommerce webshopomat a Content Ninjához?',
     a: 'A saját, „Content Ninja" nevű WordPress-bővítményünkkel, pár kattintással. Az appban megadod a webáruházad címét, és a rendszer felismeri, hogy WordPress és WooCommerce fut rajta. Telepíted a bővítményt (a súgóközpontunkból tölthető le), az appban a „Csatlakozás a WordPresshez" gombra kattintasz, majd a WordPress-adminban a „Jóváhagyás" gombra – és kész. A bővítmény maga hoz létre alkalmazásjelszót, és azt közvetlenül, szerverek között adja át, így jelszót sem látnod, sem másolnod nem kell. Ugyanez az egy kapcsolat hozza a WooCommerce-termékeket és a WordPress-blogot is.',
+  },
+  {
+    q: 'Kerül külön pénzbe a WooCommerce-integráció?',
+    a: 'Nem. A WooCommerce-integráció – ahogy az Unas- és a Shoprenter-bekötés is – a Content Ninja előfizetés része, nincs modulonkénti felár. A havidíjat és a benne foglalt kreditkeretet az oldal árazási részében és az Árak oldalon találod.',
   },
   {
     q: 'Milyen WordPress-jogosultság kell a bekötéshez?',
@@ -88,6 +97,36 @@ const faqLd = {
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+
+/** A „Mit csinál a boltodból?" kártyái – mindegyik a saját részletező szekciójára visz. */
+const values = [
+  {
+    icon: 'edit_document',
+    href: '#termekleiras',
+    title: 'Termékleírás, ami elad',
+    desc: 'Átírja a gyenge WooCommerce-termékleírásokat és kategóriaszövegeket, majd a Yoast / Rank Math mezőkkel együtt visszaírja őket a boltba.',
+  },
+  {
+    icon: 'campaign',
+    href: '#marketing',
+    title: 'Poszt, hírlevél, hirdetés',
+    desc: 'A termékeidből Facebook- és Instagram-posztot, hírlevelet és Meta hirdetést készít – csak a készleten lévőkből.',
+  },
+  {
+    icon: 'article',
+    href: '#blog',
+    title: 'Blogcikk a WordPressedre',
+    desc: 'Megírja a keresőbarát cikket, és kiemelt képpel, kategóriával publikálja ugyanarra az oldalra, ahol a boltod fut.',
+  },
+];
+
+/** A bekötés négy lépése (`#hogyan-mukodik`). */
+const steps = [
+  { title: 'Megadod a webcímed', desc: 'Az appban beírod a webáruházad címét – a rendszer felismeri, hogy WordPress és WooCommerce fut rajta.' },
+  { title: 'Telepíted a bővítményt', desc: 'A Content Ninja bővítményt a súgóközpontunkból töltöd le, és a szokásos módon telepíted a WordPress-adminban.' },
+  { title: '„Csatlakozás a WordPresshez"', desc: 'Az appban egy gombbal elindítod a csatlakozást – a rendszer átvisz a saját WordPress-adminodba.' },
+  { title: '„Jóváhagyás" – és kész', desc: 'A WordPress-adminban jóváhagyod a kapcsolatot. Az AI onnantól látja a termékeidet, a kategóriáidat és a blogodat.' },
+];
 ---
 
 <BaseLayout
@@ -102,68 +141,9 @@ const faqLd = {
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
 
   <Fragment slot="head">
+    <!-- Csak az űrlap saját stílusai: a reset, a címsorok, a `.cta-*` és a
+         `.hero-gradient` a közös `global.css`-ből jön. -->
     <style is:inline>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-        html {
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-        }
-
-        body {
-            margin: 0;
-            background-color: #f8f9fb;
-            color: #4a4a68;
-            letter-spacing: -0.01em;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            color: #1e1e2f;
-            letter-spacing: -0.02em;
-            font-weight: 700;
-        }
-
-        .cta-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: #6c5ce7;
-            color: white;
-            font-weight: 600;
-            padding: 14px 28px;
-            border-radius: 10px;
-            border: none;
-            transition: background 0.2s ease;
-            text-decoration: none;
-            white-space: nowrap;
-            line-height: 1.2;
-        }
-
-        .cta-primary:hover {
-            background-color: #5a4bd6;
-        }
-
-        .cta-primary .material-symbols-outlined {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1em;
-            height: 1em;
-            line-height: 1;
-            flex-shrink: 0;
-        }
-
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
@@ -203,10 +183,6 @@ const faqLd = {
             }
         }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, #f0eeff 0%, #f8f9fb 60%, #eef6ff 100%);
-        }
-
         .hero-form-card {
             background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
             border: 1.5px solid rgba(108, 92, 231, 0.24);
@@ -232,25 +208,21 @@ const faqLd = {
                 <!-- Content -->
                 <div class="flex flex-col gap-4 md:gap-6 text-left">
 
-                    <div class="flex items-center gap-2.5 flex-wrap">
-                        <span class="inline-flex items-center gap-2 self-start bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
-                            <span class="material-symbols-outlined text-[16px]">extension</span>
-                            WooCommerce integráció
-                        </span>
-                        <span class="inline-flex items-center bg-card border border-border rounded-[10px] px-3 py-2 shadow-card">
-                            <img src="/assets/woocommerce-logo.svg" alt="WooCommerce" class="h-[18px] w-auto" />
-                        </span>
-                    </div>
+                    <!-- Eyebrow: a WooCommerce-logó maga a felirat – a WooCommerce-es látogató
+                         elsőre a saját boltmotorja jelét keresi. -->
+                    <span class="inline-flex items-center gap-2 self-start bg-card border border-border rounded-full px-3.5 py-1.5 shadow-card">
+                        <img src="/assets/woocommerce-logo.svg" alt="WooCommerce" class="h-[15px] w-auto" />
+                        <span class="text-primary text-xs font-bold uppercase tracking-widest">integráció</span>
+                    </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        AI marketing rendszer <span class="text-primary">WooCommerce webshopoknak</span>, ami
-                        <span class="text-primary">termékleírást ír, posztol és hírlevelez</span>
+                        AI marketing rendszer <span class="text-primary">WooCommerce webshopoknak</span>
                     </h1>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[540px]">
-                        Telepíted a Content Ninja WordPress-bővítményt és jóváhagyod a kapcsolatot – az AI onnantól a
-                        <span class="font-bold text-primary">WooCommerce-termékeidből</span> posztol, hírlevelet küld, és
-                        az átírt termékleírásokat <span class="font-bold text-primary">vissza is írja a boltba</span>.
+                        A WooCommerce-termékeidből <span class="font-bold text-primary">posztol, hírlevelet és hirdetést
+                        készít</span>, a termékleírásokat pedig átírja és <span class="font-bold text-primary">visszaírja a
+                        boltba</span> – egy WordPress-bővítménnyel, pár kattintással bekötve.
                     </p>
 
                     <ul class="space-y-3 text-body">
@@ -284,7 +256,7 @@ const faqLd = {
                             Hírlevél
                         </span>
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
-                            <span class="material-symbols-outlined text-primary text-[18px]">article</span>
+                            <img src="/assets/wordpress-logo.svg" alt="" aria-hidden="true" class="h-[18px] w-auto" />
                             Blog
                         </span>
                     </div>
@@ -514,139 +486,39 @@ const faqLd = {
     <!-- Hitelesítések: Meta Tech Provider + UNAS partner (közös komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 2. Bekötés a Content Ninja WordPress-bővítménnyel (számozott lépések) -->
-    <section id="bekotes" class="bg-card py-20 md:py-28">
+    <!-- 2. Mit csinál a boltodból? – az érték ELŐBB, a bekötés csak utána (#hogyan-mukodik).
+         A kártyák a lenti részletező szekciókra visznek (a főoldali megoldás-kártyák mintájára). -->
+    <section id="funkciok" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Bekötés pár kattintással 🔌</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">WooCommerce bekötés a Content Ninja bővítménnyel</h2>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Egy bekötés, három feladat 🧩</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit csinál a Content Ninja a WooCommerce-boltodból?</h2>
                 <p class="text-body text-lg leading-relaxed">
-                    A WooCommerce-boltodat a saját <strong>„Content Ninja" WordPress-bővítményünk</strong> köti össze az
-                    appal. <strong>Jelszót sem látnod, sem másolnod nem kell:</strong> a bővítmény a jóváhagyáskor maga hoz
-                    létre alkalmazásjelszót, és közvetlenül, szerverek között adja át. Ugyanez az egy kapcsolat hozza a
-                    termékeket és a WordPress-blogot is.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Megadod a webcímed</h3>
-                    <p class="text-body text-sm leading-relaxed">Az appban beírod a webáruházad címét – a rendszer
-                        felismeri, hogy WordPress és WooCommerce fut rajta.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Telepíted a bővítményt</h3>
-                    <p class="text-body text-sm leading-relaxed">A Content Ninja bővítményt a súgóközpontunkból
-                        töltöd le, és a szokásos módon telepíted a WordPress-adminban.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">„Csatlakozás a WordPresshez"</h3>
-                    <p class="text-body text-sm leading-relaxed">Az appban egy gombbal elindítod a csatlakozást – a
-                        rendszer átvisz a saját WordPress-adminodba.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">„Jóváhagyás" – és kész</h3>
-                    <p class="text-body text-sm leading-relaxed">A WordPress-adminban jóváhagyod a kapcsolatot. Az AI
-                        onnantól látja a termékeidet, kategóriáidat és a blogodat.</p>
-                </div>
-            </div>
-
-            <!-- Jó tudni: jogosultság, Elementor, WordPress.com, kézi bekötés -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
-                <div class="flex items-start gap-4 bg-light rounded-[16px] border border-border p-5 sm:p-8">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-primary text-[20px]">admin_panel_settings</span>
-                    </div>
-                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Szükséges jogosultság:</strong>
-                        a blogpublikáláshoz Szerkesztő (Editor), a termékekhez és a leírások visszaírásához Boltkezelő
-                        (Shop manager) vagy Adminisztrátor.</p>
-                </div>
-                <div class="flex items-start gap-4 bg-light rounded-[16px] border border-border p-5 sm:p-8">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-primary text-[20px]">web</span>
-                    </div>
-                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Elementor Pro-val is
-                        működik:</strong> az Elementor Pro mellett előforduló bejelentkezési problémát a bővítmény
-                        megoldja.</p>
-                </div>
-                <div class="flex items-start gap-4 bg-light rounded-[16px] border border-border p-5 sm:p-8">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-primary text-[20px]">key</span>
-                    </div>
-                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Nem telepíthetsz
-                        bővítményt?</strong> Kézi bekötés is van alkalmazásjelszóval – ilyenkor a Yoast / Rank Math
-                        SEO-mezők írása nélkül.</p>
-                </div>
-                <div class="flex items-start gap-4 bg-light rounded-[16px] border border-border p-5 sm:p-8">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-primary text-[20px]">dns</span>
-                    </div>
-                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Saját tárhelyes
-                        WordPress kell:</strong> a WordPress.com szolgáltatáson futó oldalak nem köthetők be.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Mit lát az AI, mit ír vissza, mihez nem nyúl -->
-    <section id="adatok" class="bg-light py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[760px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Átlátható kapcsolat 🔍</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit lát az AI a WooCommerce-boltodból – és mit ír vissza?</h2>
-                <p class="text-body text-lg leading-relaxed">
-                    A Content Ninja a termékadatokat <strong>minden használatkor élőben</strong> kéri le a boltból, így
-                    mindig friss adatokból dolgozik. Visszaírni csak szöveget ír – az árhoz és a készlethez nem nyúl.
+                    Ugyanabból a termékkatalógusból dolgozik mindhárom feladatnál – a boltodból, élőben, mindig friss adatokkal.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="material-symbols-outlined text-primary text-[26px]">visibility</span>
-                        <h3 class="font-bold text-xl">Olvassa</h3>
-                    </div>
-                    <ul class="space-y-3 text-body text-sm leading-relaxed">
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Termékek: név, ár, készlet, képek, leírások</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Kategóriák és alkategóriák</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>A WordPress-blogcikkeid és -oldalaid</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Mindig frissen, minden használatkor</li>
-                    </ul>
-                </div>
-                <div class="bg-card rounded-[16px] border border-primary/30 p-8 shadow-card">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="material-symbols-outlined text-primary text-[26px]">sync_alt</span>
-                        <h3 class="font-bold text-xl">Visszaírja</h3>
-                    </div>
-                    <ul class="space-y-3 text-body text-sm leading-relaxed">
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Termékleírás és rövid leírás</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Kategória-leírás</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>SEO cím és meta leírás (Yoast / Rank Math)</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Blogcikk – ugyanarra a WordPressre</li>
-                    </ul>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="material-symbols-outlined text-muted text-[26px]">block</span>
-                        <h3 class="font-bold text-xl">Nem nyúl hozzá</h3>
-                    </div>
-                    <ul class="space-y-3 text-body text-sm leading-relaxed">
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>Árak és készlet (csak olvassa)</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>Rendelések és vásárlói adatok</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>Termékcímkék (tags)</li>
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>WPML / Polylang többnyelvű beállítások</li>
-                    </ul>
-                </div>
+                {values.map((v) => (
+                    <a href={v.href}
+                        class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                            <span class="material-symbols-outlined text-[22px]">{v.icon}</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 text-dark">{v.title}</h3>
+                        <p class="text-body text-sm leading-relaxed mb-5 flex-1">{v.desc}</p>
+                        <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                            Részletek
+                            <span class="material-symbols-outlined text-[18px] group-hover:translate-y-0.5 transition-transform">arrow_downward</span>
+                        </span>
+                    </a>
+                ))}
             </div>
         </div>
     </section>
 
-    <!-- 4. Shopgrade: AI termékleírás, visszaírva a WooCommerce-be -->
-    <section class="bg-card py-20 md:py-28">
+    <!-- 3. Termékleírás: Shopgrade, visszaírva a WooCommerce-be (+ a keresőtartalom forrásai) -->
+    <section id="termekleiras" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
@@ -661,7 +533,7 @@ const faqLd = {
                     <p class="text-lg text-body mb-8 leading-relaxed">
                         A <strong>Shopgrade</strong> modul beolvassa a WooCommerce-termékeidet és -kategóriáidat, újraírja a
                         gyenge szövegeket, és a jóváhagyott változatot <strong>vissza is írja a boltba</strong> – a SEO-mezőkkel
-                        együtt. Nem kell semmit kézzel bemásolnod a WordPress-adminba.
+                        együtt. Semmit nem kell kézzel bemásolnod a WordPress-adminba.
                     </p>
                     <ul class="space-y-5 mb-8">
                         <li class="flex items-start gap-4">
@@ -676,21 +548,21 @@ const faqLd = {
                                 <span class="material-symbols-outlined text-primary text-[20px]">travel_explore</span>
                             </div>
                             <span class="text-body font-medium text-lg leading-snug pt-1">SEO cím és meta leírás a
-                                <strong>Yoast SEO</strong> vagy a <strong>Rank Math</strong> mezőibe, a bővítményen át</span>
+                                <strong>Yoast SEO</strong> vagy a <strong>Rank Math</strong> mezőibe</span>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-primary text-[20px]">stacks</span>
                             </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1">Tömegesen, 100-as
-                                adagokban – nem termékenként kattintgatva</span>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Tömegesen, 100-as adagokban – a
+                                korábbi szöveg <strong>14 napig visszaállítható</strong></span>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">restore</span>
+                                <span class="material-symbols-outlined text-primary text-[20px]">query_stats</span>
                             </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1">A korábbi szöveg
-                                <strong>14 napig visszaállítható</strong></span>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Kulcsszókutatás és Search
+                                Console-adatok a saját katalógusodból</span>
                         </li>
                     </ul>
                     <div class="flex items-center gap-4 flex-wrap">
@@ -702,13 +574,18 @@ const faqLd = {
                             <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                         </a>
                     </div>
+                    <p class="text-sm text-muted mt-6">
+                        Kíváncsi vagy, hol állnak most a leírásaid?
+                        <a href="/hu/termekleiras-diagnozis/" class="text-primary font-semibold underline">Ingyenes
+                        termékleírás-diagnózis</a>
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. Tartalom a termékekből: poszt, hírlevél, kép, Meta hirdetés -->
-    <section class="bg-light py-20 md:py-28">
+    <!-- 4. Tartalom a termékekből: poszt, hírlevél, kép, Meta hirdetés -->
+    <section id="marketing" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="flex flex-col justify-center order-2 md:order-1">
@@ -716,10 +593,9 @@ const faqLd = {
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Poszt, hírlevél és hirdetés
                         a WooCommerce-termékeidből</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        A termékeid tudásforrásként szolgálnak: az AI belőlük készít <strong>Facebook- és
-                        Instagram-posztot</strong>, <strong>hírlevelet</strong> (MailerLite vagy Salesautopilot),
-                        <strong>termékképet</strong> és <strong>Meta hirdetést</strong>. Te döntöd el, mely termékekből –
-                        szabállyal vagy kézzel.
+                        Az AI a termékeidből készít <strong>Facebook- és Instagram-posztot</strong>,
+                        <strong>hírlevelet</strong> (MailerLite vagy Salesautopilot), <strong>termékképet</strong> és
+                        <strong>Meta hirdetést</strong>. Te döntöd el, mely termékekből – szabállyal vagy kézzel.
                     </p>
                     <ul class="space-y-5 mb-8">
                         <li class="flex items-start gap-4">
@@ -770,15 +646,15 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 6. Blogcikk ugyanarra a WordPressre -->
-    <section class="bg-card py-20 md:py-28">
+    <!-- 5. Blogcikk ugyanarra a WordPressre -->
+    <section id="blog" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Blog is 📝</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">A blogcikk is oda kerül, ahol a boltod van</h2>
                 <p class="text-body text-lg leading-relaxed">
                     A WooCommerce-boltod blogja maga a WordPress – ezért ugyanaz a kapcsolat viszi. A
-                    <strong>Blogcikk író</strong> a kész, SEO-barát cikket közvetlenül a WordPressedre publikálja, a
+                    <strong>Blogcikk író</strong> a kész, keresőbarát cikket közvetlenül a WordPressedre publikálja, a
                     meglévő blogcikkeidből és oldalaidból pedig posztok készülnek.
                 </p>
             </div>
@@ -817,105 +693,132 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 7. SEO + GEO a boltod adataiból -->
-    <section class="bg-light py-20 md:py-28">
+    <!-- 6. Hogyan működik: bekötés a Content Ninja WordPress-bővítménnyel -->
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kereső és AI-kereső 📈</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">A WooCommerce-boltod adataiból dolgozik a keresőtartalom is</h2>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🔌</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">4 lépés, és a WooCommerce-boltod be van kötve</h2>
                 <p class="text-body text-lg leading-relaxed">
-                    Nem általános szövegeket gyárt: a kulcsszavakat, az elemzést és a hirdetési feedet is a saját
-                    katalógusodra építi.
+                    A boltodat a saját <strong>„Content Ninja" WordPress-bővítményünk</strong> köti össze az appal.
+                    Jelszót sem látnod, sem másolnod nem kell: a bővítmény a jóváhagyáskor maga hoz létre
+                    alkalmazásjelszót, és közvetlenül, szerverek között adja át.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">key_visualizer</span>
-                    <h3 class="font-bold text-lg mb-2">Kulcsszókutatás</h3>
-                    <p class="text-body text-sm leading-relaxed">A katalógusod népszerűség szerinti mintájából és a
-                        kategóriáidból indul, a kategória-linkekkel együtt.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">query_stats</span>
-                    <h3 class="font-bold text-lg mb-2">Search Console</h3>
-                    <p class="text-body text-sm leading-relaxed">A Google Search Console adatai a termék- és
-                        kategóriaoldalaid címeihez kapcsolódnak.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">troubleshoot</span>
-                    <h3 class="font-bold text-lg mb-2">Ingyenes diagnózis</h3>
-                    <p class="text-body text-sm leading-relaxed">Megnézheted, hol gyengék a termékleírásaid –
-                        <a href="/hu/termekleiras-diagnozis/" class="text-primary font-semibold underline">ingyenes
-                        termékleírás-diagnózis</a>.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">campaign</span>
-                    <h3 class="font-bold text-lg mb-2">ChatGPT hirdetések</h3>
-                    <p class="text-body text-sm leading-relaxed">A hamarosan induló
-                        <a href="/hu/chatgpt-ads/" class="text-primary font-semibold underline">ChatGPT
-                        hirdetéskezelő</a> is a WooCommerce-boltodból épít majd termékfeedet.</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="/hu/webshop-seo-geo/" class="text-primary font-bold text-sm inline-flex items-center gap-1">
-                    Webshop SEO + GEO egyben
-                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Több webáruház egy fiókból -->
-    <section class="bg-card py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div class="order-1 md:order-1">
-                    <img src="/assets/webshop-integracio-tobb-aruhaz.webp"
-                        alt="Több webáruház – WooCommerce, Unas és Shoprenter – egyetlen Content Ninja fiókból kezelve"
-                        loading="lazy" class="w-full aspect-square rounded-[16px] shadow-card hover:shadow-card-hover transition-all object-cover">
-                </div>
-                <div class="flex flex-col justify-center order-2 md:order-2">
-                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Skálázható 🏬</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Több webáruház egy fiókból –
-                        vegyesen is</h2>
-                    <p class="text-lg text-body mb-8 leading-relaxed">
-                        Nem csak egy boltod van? Egy fiókba <strong>több webáruház</strong> is beköthető, akár vegyesen:
-                        <strong>WooCommerce, Unas és Shoprenter</strong> egymás mellett – mindegyik a saját
-                        termékkatalógusával és márkahangjával.
-                    </p>
-                    <ul class="space-y-5 mb-8">
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">add_business</span>
-                            </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1">Több bolt egy fiókon belül,
-                                különböző webshopmotorokkal</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">palette</span>
-                            </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1">Minden áruháznak saját
-                                márkahang, beállítások és közösségi fiókok</span>
-                        </li>
-                    </ul>
-                    <div class="flex items-center gap-4 flex-wrap">
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
-                            Több boltom van!
-                        </a>
-                        <a href="/hu/webshop-integracio/" class="text-primary font-bold text-sm inline-flex items-center gap-1">
-                            Minden webshop-integráció
-                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                        </a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {steps.map((s, i) => (
+                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">{i + 1}</div>
+                        <h3 class="font-bold text-lg mb-3">{s.title}</h3>
+                        <p class="text-body text-sm leading-relaxed">{s.desc}</p>
                     </div>
+                ))}
+            </div>
+
+            <!-- Jó tudni: jogosultság, Elementor, kézi bekötés, WordPress.com -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+                <div class="flex items-start gap-4 bg-card rounded-[16px] border border-border p-5 sm:p-8">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-[20px]">admin_panel_settings</span>
+                    </div>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Szükséges jogosultság:</strong>
+                        a blogpublikáláshoz Szerkesztő (Editor), a termékekhez és a leírások visszaírásához Boltkezelő
+                        (Shop manager) vagy Adminisztrátor.</p>
+                </div>
+                <div class="flex items-start gap-4 bg-card rounded-[16px] border border-border p-5 sm:p-8">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-[20px]">web</span>
+                    </div>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Elementor Pro-val is
+                        működik:</strong> az Elementor Pro mellett előforduló bejelentkezési problémát a bővítmény
+                        megoldja.</p>
+                </div>
+                <div class="flex items-start gap-4 bg-card rounded-[16px] border border-border p-5 sm:p-8">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-[20px]">key</span>
+                    </div>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Nem telepíthetsz
+                        bővítményt?</strong> Kézi bekötés is van alkalmazásjelszóval – ilyenkor a Yoast / Rank Math
+                        SEO-mezők írása nélkül.</p>
+                </div>
+                <div class="flex items-start gap-4 bg-card rounded-[16px] border border-border p-5 sm:p-8">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-[20px]">dns</span>
+                    </div>
+                    <p class="text-body text-sm leading-relaxed"><strong class="text-dark">Saját tárhelyes
+                        WordPress kell:</strong> a WordPress.com szolgáltatáson futó oldalak nem köthetők be.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 9. És amit a rendszer amúgy is tud (közös modulrács) -->
+    <!-- 7. Átlátható kapcsolat: mit olvas, mit ír vissza, mihez nem nyúl + több bolt -->
+    <section id="adatok" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Átlátható kapcsolat 🔍</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit lát az AI a WooCommerce-boltodból – és mit ír vissza?</h2>
+                <p class="text-body text-lg leading-relaxed">
+                    A termékadatokat <strong>minden használatkor élőben</strong> kéri le a boltból. Visszaírni csak
+                    szöveget ír – az árhoz és a készlethez nem nyúl.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="material-symbols-outlined text-primary text-[26px]">visibility</span>
+                        <h3 class="font-bold text-xl">Olvassa</h3>
+                    </div>
+                    <ul class="space-y-3 text-body text-sm leading-relaxed">
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Termékek: név, ár, készlet, képek, leírások</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Kategóriák és alkategóriák</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>A WordPress-blogcikkeid és -oldalaid</li>
+                    </ul>
+                </div>
+                <div class="bg-light rounded-[16px] border border-primary/30 p-8 shadow-card">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="material-symbols-outlined text-primary text-[26px]">sync_alt</span>
+                        <h3 class="font-bold text-xl">Visszaírja</h3>
+                    </div>
+                    <ul class="space-y-3 text-body text-sm leading-relaxed">
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Termékleírás és rövid leírás</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Kategória-leírás</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>SEO cím és meta leírás (Yoast / Rank Math)</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check</span>Blogcikk – ugyanarra a WordPressre</li>
+                    </ul>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="material-symbols-outlined text-muted text-[26px]">block</span>
+                        <h3 class="font-bold text-xl">Nem nyúl hozzá</h3>
+                    </div>
+                    <ul class="space-y-3 text-body text-sm leading-relaxed">
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>Árak és készlet (csak olvassa)</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>Rendelések és vásárlói adatok</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>Termékcímkék (tags)</li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-muted text-[18px] mt-0.5">remove</span>WPML / Polylang többnyelvű beállítások</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Több bolt – egy sáv, nem külön szekció: a WooCommerce-es látogatónak ez mellékszál. -->
+            <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">add_business</span>
+                </div>
+                <p class="text-body leading-relaxed flex-1"><strong class="text-dark">Több boltod van?</strong> Egy
+                    fiókba több webáruház is beköthető, akár vegyesen – mindegyik a saját termékkatalógusával,
+                    márkahangjával és közösségi fiókjaival.</p>
+                <div class="flex items-center gap-3 flex-wrap shrink-0">
+                    <PlatformLogos />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. És amit a rendszer amúgy is tud (közös modulrács) -->
     <ModuleGrid
         locale={locale}
         exclude="storeIntegration"
@@ -926,11 +829,11 @@ const faqLd = {
         lead="A WooCommerce-integráció mellett a Content Ninja egy teljes AI marketing platform – minden, ami egy webshop tartalomgyártásához kell."
     />
 
-    <!-- 10. Árazás -->
-    <section id="pricing" class="bg-card py-20 md:py-28">
+    <!-- 9. Árazás -->
+    <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">ÁRAZÁS</span>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
                 <p class="text-body text-lg">Csatlakozz a korai regisztrálók közé és tartsd meg a kedvezményes árat hosszú távon.</p>
             </div>
@@ -965,7 +868,7 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 11. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
+    <!-- 10. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
     <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
@@ -990,7 +893,7 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 12. Záró CTA -->
+    <!-- 11. Záró CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg a te WooCommerce-boltodon</h2>
