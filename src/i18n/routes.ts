@@ -16,6 +16,7 @@ export type PageKey =
   | 'chatgptAds'
   | 'chatgptAdsThanks'
   | 'ninjaAi'
+  | 'woocommerce'
   | 'newsletter'
   | 'newsletterSignup'
   | 'pricing'
@@ -145,6 +146,19 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // A fejlécbe/láblécbe SZÁNDÉKOSAN nincs belinkelve (user-kérés, 2026-09-08):
   // előbb a keresőforgalom mérése jön, a menübe emelés utána eldönthető.
   ninjaAi: { hu: '/hu/ninja-ai/', en: null },
+  // **WooCommerce integráció – SEO/GEO céloldal.** A `webshopIntegration`
+  // gyűjtőoldal („webshop mélyintegráció") nem rangsorol a WooCommerce-es
+  // keresésekre („WooCommerce termékleírás AI", „WooCommerce AI bővítmény",
+  // „WooCommerce marketing automatizálás"), és az AI-keresők is olyan oldalból
+  // válaszolnak a „működik-e a Content Ninja WooCommerce-szel?" kérdésre, ami ezt
+  // a címében kimondja. Saját tartalom: a bővítményes bekötés lépései, mi
+  // olvasódik és mi íródik vissza (Yoast / Rank Math), GYIK FAQPage JSON-LD-vel.
+  //
+  // Indexelhető (a `ninjaAi` mintájára), saját `lead_forras`: 'woocommerce'.
+  //
+  // **Csak magyarul** (`en: null`): a spec a Woo-t magyar opcióként pozicionálja,
+  // és az app felülete sem angol (`docs/woocommerce-wordpress-terv.md`, 8. pont).
+  woocommerce: { hu: '/hu/woocommerce/', en: null },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // **A MI hírlevelünkre való feliratkozás** – nem összekeverendő a fenti

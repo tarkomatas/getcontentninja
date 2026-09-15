@@ -197,6 +197,17 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- WooCommerce integráció – SEO/GEO céloldal (csak magyarul: a Woo-t a spec
+       magyar opcióként pozicionálja, az app felülete sem angol). Indexelhető,
+       FAQPage JSON-LD-vel; a gyűjtőoldal a /hu/webshop-integracio/. -->
+  <url>
+    <loc>https://getcontentninja.com/hu/woocommerce/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/woocommerce/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/woocommerce/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Árak és kreditdíjak -->
   <url>
     <loc>https://getcontentninja.com/hu/arak/</loc>
