@@ -14,9 +14,57 @@ const page = 'webshopIntegration';
 const title = 'Deep store integration for Unas, Shoprenter and WooCommerce – the AI sees every product | Content Ninja';
 const description =
   'Connect your Unas, Shoprenter or WooCommerce store in a few clicks. The AI then sees all your products and blog articles, picks the best ones automatically or by rules – creating posts and newsletters only from top, in-stock products, from several stores at once.';
+
+/**
+ * FAQ – ONE source for the visible list and the FAQPage JSON-LD.
+ *
+ * The questions name the platforms (Unas, Shoprenter, WooCommerce): on this hub
+ * page that is what catches the "does it work with my store engine?" search and
+ * the same question asked of AI search engines — without a separate page per
+ * engine. The `more` link is rendered only in the visible answer, so the JSON-LD
+ * text stays clean. Keep in sync with the HU page.
+ */
+const faqs = [
+  {
+    q: 'Does Content Ninja work with an Unas store?',
+    a: 'Yes. You connect the Unas store with your own access key, in a few clicks, on the Integrations page. The AI then sees your full product catalogue, your category tree and the store blog, and it writes approved product descriptions and category copy back into the store. Content Ninja is an official Unas partner.',
+  },
+  {
+    q: 'Does Content Ninja work with a Shoprenter store?',
+    a: 'Yes. A Shoprenter store is connected with your own access key as well, and it does the same as the Unas connection: reading products, categories and blog articles, and writing product descriptions and category copy back into the store.',
+  },
+  {
+    q: 'Does Content Ninja work with a WooCommerce store?',
+    a: 'Yes. A WooCommerce store is connected through our own "Content Ninja" WordPress plugin: you enter the site address, install the plugin and approve the connection in your WordPress admin – with no password to copy. The same single connection brings both the WooCommerce products and the WordPress blog, and it also fills the Yoast SEO or Rank Math fields.',
+  },
+  {
+    q: 'My store is not Unas, Shoprenter or WooCommerce. Does it still work?',
+    a: 'Partly. Deep integration – reading the full product catalogue and writing copy back – is available today for Unas, Shoprenter and WooCommerce stores. For any other platform the system collects product data from your store link (sitemap) or from individual product links, and builds posts, newsletters and ads from that.',
+  },
+  {
+    q: 'Can I connect several stores to one account?',
+    a: 'Yes. One Content Ninja account can hold several stores, mixed as well: Unas, Shoprenter and WooCommerce side by side. Each works with its own product catalogue, settings and brand voice, and you switch between them in one interface.',
+  },
+  {
+    q: 'Does the system touch my prices, stock or orders?',
+    a: 'No. Content Ninja only reads prices and stock – that is how it skips out-of-stock products – but never writes them back. The only thing it writes back is text: product descriptions, short descriptions, category copy and SEO title / description, with your approval. It does not use order or customer data.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-webshop-integracio.jpg" lpEnabled>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -988,6 +1036,31 @@ const description =
         </div>
     </section>
 
+    <!-- 11. FAQ – from the same `faqs` array as the FAQPage JSON-LD -->
+    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Which store platforms does it work with?</h2>
+            </div>
+
+            <div class="space-y-3">
+                {faqs.map((f) => (
+                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                        <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                            onclick="toggleFaq(this)">
+                            {f.q}
+                            <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                            {f.a}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
@@ -1012,6 +1085,16 @@ const description =
             </div>
         </div>
     </footer>
+
+    <!-- FAQ script -->
+    <script is:inline>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+    </script>
 
     <!-- Lead form script -->
     <LeadFormScript locale={locale} source="webshop-integracio" />

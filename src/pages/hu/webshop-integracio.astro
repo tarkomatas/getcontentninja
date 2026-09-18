@@ -14,9 +14,58 @@ const page = 'webshopIntegration';
 const title = 'Webshop mélyintegráció Unas, Shoprenter és WooCommerce boltokhoz – az AI látja az összes terméked | Content Ninja';
 const description =
   'Kösd össze az Unas, Shoprenter vagy WooCommerce webáruházad pár kattintással. Utána az AI látja az összes terméked és blogcikked, magától vagy szabály alapján kiválasztja a legjobbakat – csak a top, raktáron lévő termékekből gyárt posztokat és hírleveleket, akár több áruházból egyszerre.';
+
+/**
+ * GYIK – EGY forrás a látható listának és a FAQPage JSON-LD-nek.
+ *
+ * A kérdések **platformnevesek** (Unas, Shoprenter, WooCommerce): erre a
+ * gyűjtőoldalra ez fogja meg a „működik-e a saját boltmotorommal?" keresést és az
+ * AI-keresők ugyanilyen kérdéseit — anélkül, hogy minden motorhoz külön oldal
+ * kellene (a `/hu/unas/` 2026-07-23-án épp ezért olvadt be ide). A `more` link
+ * csak a látható válaszban jelenik meg, a JSON-LD szövege tiszta marad.
+ */
+const faqs = [
+  {
+    q: 'Működik a Content Ninja Unas webshoppal?',
+    a: 'Igen. Az Unas-áruházat a saját hozzáférési kulcsoddal, pár kattintással kötöd be az Integrációk oldalon. Utána az AI látja a teljes termékkatalógusodat, a kategóriafádat és a webshop blogcikkeit, a jóváhagyott termékleírásokat és kategóriaszövegeket pedig vissza is írja a boltba. A Content Ninja hivatalos Unas-partner.',
+  },
+  {
+    q: 'Működik a Content Ninja Shoprenter webshoppal?',
+    a: 'Igen. A Shoprenter-áruház bekötése ugyanúgy a saját hozzáférési kulcsoddal történik, és ugyanazt tudja, mint az Unas-kapcsolat: terméklista, kategóriák és blogcikkek olvasása, valamint a termékleírások és kategóriaszövegek visszaírása a boltba.',
+  },
+  {
+    q: 'Működik a Content Ninja WooCommerce webshoppal?',
+    a: 'Igen. A WooCommerce-boltot a saját „Content Ninja" WordPress-bővítményünk köti be: megadod a webcímet, telepíted a bővítményt, és a WordPress-adminban jóváhagyod a kapcsolatot – jelszót nem kell másolnod. Ugyanez az egy kapcsolat hozza a WooCommerce-termékeket és a WordPress-blogot is, és a Yoast SEO vagy Rank Math mezőibe is ír.',
+    more: { href: '/hu/woocommerce/', label: 'Minden a WooCommerce-integrációról' },
+  },
+  {
+    q: 'Nem Unas, Shoprenter vagy WooCommerce a webshopom. Akkor is működik?',
+    a: 'Részben. Mélyintegráció – vagyis a teljes termékkatalógus olvasása és a szövegek visszaírása – ma az Unas, a Shoprenter és a WooCommerce boltoknál van. Bármely más webshopnál a rendszer a bolt linkje (sitemap) vagy egy-egy terméklink alapján gyűjt termékadatokat, és abból készít posztot, hírlevelet és hirdetést.',
+  },
+  {
+    q: 'Több webáruházat is bekötök egy fiókba?',
+    a: 'Igen. Egy Content Ninja fiókba több webáruház is beköthető, akár vegyesen: Unas, Shoprenter és WooCommerce boltok egymás mellett. Mindegyik a saját termékkatalógusával, beállításaival és márkahangjával dolgozik, és egy felületről váltasz köztük.',
+  },
+  {
+    q: 'Hozzányúl a rendszer az áraimhoz, a készletemhez vagy a rendeléseimhez?',
+    a: 'Nem. Az árat és a készletet a Content Ninja csak olvassa – így tudja kihagyni a készlethiányos termékeket –, de soha nem írja vissza. Visszaírni csak szöveget ír: termékleírást, rövid leírást, kategóriaszöveget és SEO címet / leírást, a te jóváhagyásoddal. A rendelések és a vásárlók adatait nem használja.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-webshop-integracio.jpg" lpEnabled>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -990,6 +1039,34 @@ const description =
         </div>
     </section>
 
+    <!-- 11. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
+    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Melyik webshoprendszerrel működik?</h2>
+            </div>
+
+            <div class="space-y-3">
+                {faqs.map((f) => (
+                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                        <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                            onclick="toggleFaq(this)">
+                            {f.q}
+                            <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                            {f.a}
+                            {f.more && (
+                                <a href={f.more.href} class="text-primary font-semibold underline ml-1">{f.more.label}</a>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
@@ -1014,6 +1091,16 @@ const description =
             </div>
         </div>
     </footer>
+
+    <!-- GYIK script -->
+    <script is:inline>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+    </script>
 
     <!-- Lead form script -->
     <LeadFormScript locale={locale} source="webshop-integracio" />
