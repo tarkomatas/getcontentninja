@@ -29,7 +29,7 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. szeptember 15. · Hatályos: 2026. október 9-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. szeptember 19. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           A tájékoztató magyar és angol nyelven érhető el; eltérés esetén a magyar szöveg az irányadó. Az angol
           változat <a href={privacyEn} class="text-primary underline">itt olvasható</a>.
@@ -44,7 +44,8 @@ const privacyEn = pathFor('privacy', 'en');
           <p>
             A Content Ninja („Szolgáltatás”) mesterséges intelligenciára épülő tartalommarketing-eszköz webáruházak
             számára. A Szolgáltatás közösségi média tartalmat (szöveg, kép, videó) készít és tesz közzé a felhasználó
-            nevében a felhasználó saját Facebook-oldalain és Instagram üzleti fiókjaiban, továbbá hírlevelet állít
+            nevében a felhasználó saját Facebook-oldalain, Instagram üzleti fiókjaiban, TikTok-fiókjában és
+            YouTube-csatornáján, továbbá hírlevelet állít
             össze és küld ki a felhasználó saját hírlevél-szolgáltatói fiókján keresztül, blogcikket tesz közzé a
             felhasználó webáruházában vagy saját weboldalán (például WordPress-oldalán), termékleírásokat és kategóriaoldal-szövegeket ír újra, hirdetési kreatívokat
             készít, valamint kulcsszó- és
@@ -225,6 +226,107 @@ const privacyEn = pathFor('privacy', 'en');
                 Jogalap: szerződés teljesítése és jogos érdek a támogatás minőségéhez (GDPR 6. cikk (1) b) és f)).
               </p>
             </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.13. TikTok-fiók adatai</p>
+              <p>
+                Amikor a <strong class="text-dark">TikTok bejelentkezéssel</strong> beköti a fiókját, a TikTok
+                API-n keresztül az alábbi adatokhoz férünk hozzá és azokat tároljuk:
+              </p>
+              <ul>
+                <li>a TikTok-fiók azonosítója, megjelenített neve és profilképe;</li>
+                <li>a hozzáférési és a megújítási kulcs (titkosítva tárolva);</li>
+                <li>a Szolgáltatáson keresztül kiküldött posztok adatai (azonosító, link, a közzétételkor általad választott beállítások);</li>
+                <li>a fiók követőszáma, valamint a videóid megtekintés-, kedvelés-, hozzászólás- és megosztásszáma.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">Cél:</strong> a fiók bekötése és azonosítása (hogy lásd, melyik fiókot
+                kötötted be), a posztok közzététele a nevedben, valamint a teljesítmény-adatok megjelenítése a
+                Szolgáltatás Analitika felületén. <strong class="text-dark">Jogalap:</strong> szerződés teljesítése
+                (GDPR 6. cikk (1) b)).
+              </p>
+              <p>
+                <strong class="text-dark">Ehhez az alábbi engedélyeket kérjük:</strong>
+                <code>user.info.basic</code> (a fiók neve és profilképe),
+                <code>user.info.stats</code> (követőszám),
+                <code>video.list</code> (a videóid statisztikái),
+                <code>video.publish</code> (közzététel a nevedben). Ennél többet nem kérünk.
+              </p>
+              <p>
+                <strong class="text-dark">Megőrzés:</strong> ameddig a fiók be van kötve. Leválasztáskor a tárolt
+                kulcsot és a tárolt statisztikát <strong class="text-dark">azonnal töröljük</strong>, és a
+                hozzáférést a TikToknál is visszavonjuk.
+              </p>
+              <p>
+                <strong class="text-dark">Visszavonás:</strong> bármikor, az alkalmazásban
+                (<em>Integrációk → a TikTok-sor → Törlés</em>), illetve a TikTok-fiókod beállításaiban
+                (<em>Beállítások és adatvédelem → Biztonság és engedélyek → Alkalmazás-engedélyek</em>).
+              </p>
+              <p>
+                A TikTok az így közzétett tartalmat és a platformon keletkező adatokat
+                <strong class="text-dark">önálló adatkezelőként</strong>, a saját
+                <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en" target="_blank" rel="noopener">adatvédelmi
+                szabályzata</a> szerint kezeli.
+              </p>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.14. YouTube-csatorna adatai</p>
+              <p>
+                <strong class="text-dark">A Content Ninja a YouTube API-szolgáltatásait használja.</strong> Amikor
+                <strong class="text-dark">Google-fiókkal</strong> beköti a YouTube-csatornáját, a YouTube Data API-n
+                keresztül az alábbi adatokhoz férünk hozzá és azokat tároljuk:
+              </p>
+              <ul>
+                <li>a csatorna azonosítója, neve és képe;</li>
+                <li>a hozzáférési és a megújítási kulcs (titkosítva tárolva);</li>
+                <li>a Szolgáltatáson keresztül feltöltött videók azonosítója és linkje;</li>
+                <li>a csatorna feliratkozó-száma, valamint a videóid megtekintés-, kedvelés- és hozzászólásszáma.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">Cél:</strong> a csatorna bekötése és azonosítása, a videó feltöltése a
+                csatornádra az általad megadott beállításokkal, valamint a teljesítmény-adatok megjelenítése a
+                Szolgáltatás Analitika felületén. <strong class="text-dark">Jogalap:</strong> szerződés teljesítése
+                (GDPR 6. cikk (1) b)).
+              </p>
+              <p>
+                <strong class="text-dark">Ehhez pontosan két engedélyt kérünk:</strong>
+                <code>youtube.upload</code> (videó feltöltése a csatornádra) és
+                <code>youtube.readonly</code> (a csatorna neve és képe a bekötéskor, valamint a nyilvános
+                megtekintés-, kedvelés- és hozzászólásszámok az Analitikához). Ennél többet nem kérünk.
+              </p>
+              <p>
+                <strong class="text-dark">Megőrzés:</strong> ameddig a csatorna be van kötve. Két esetben
+                <strong class="text-dark">azonnal törlünk</strong> minden tárolt kulcsot és YouTube-statisztikát:
+                amikor leválasztod a csatornát az alkalmazásban, és amikor észleljük, hogy a hozzáférést a
+                Google-fiókodban visszavonták. A YouTube API-szolgáltatásokra vonatkozó szabályzat erre 7, illetve
+                30 napos határidőt enged — <strong class="text-dark">mi nem várjuk meg ezeket a határidőket</strong>.
+              </p>
+              <p>
+                <strong class="text-dark">Visszavonás:</strong> bármikor, az alkalmazásban
+                (<em>Integrációk → a YouTube-sor → Törlés</em>), illetve a Google biztonsági oldalán:
+                <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>.
+              </p>
+              <p>
+                A Google a feltöltött videót és a csatornán keletkező adatokat
+                <strong class="text-dark">önálló adatkezelőként</strong>, a
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google adatvédelmi
+                szabályzata</a> szerint kezeli.
+              </p>
+              <p>
+                ⚠️ <strong class="text-dark">Ha ugyanazzal a Google-fiókkal kötötted be a YouTube-csatornádat és a
+                Google Search Console-t</strong> (lásd az 5. pontot), a YouTube-kapcsolat leválasztása a Search
+                Console-hozzáférést is visszavonja — a két integráció ugyanazt a Google-engedélyt használja.
+              </p>
+              <p class="mt-2">
+                <strong class="text-dark">Limited Use vállalás.</strong> A YouTube API-szolgáltatásokból, illetve a
+                Google API-kból származó adatokat kizárólag a neked nyújtott szolgáltatáshoz használjuk fel.
+                <strong class="text-dark">Nem adjuk tovább, nem használjuk hirdetésre, és nem használjuk
+                mesterséges intelligencia modellek tanítására</strong> — a
+                <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google
+                API Services User Data Policy</a> Limited Use követelményeinek megfelelően.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -244,6 +346,13 @@ const privacyEn = pathFor('privacy', 'en');
             Szolgáltatásban létrehozott tartalom közzétételére és kezelésére használjuk.</strong> Ezeket nem adjuk
             el, az 5. pontban felsorolt adatfeldolgozókon túl harmadik féllel nem osztjuk meg, és nem használjuk
             hirdetésre, profilalkotásra vagy bármely, a Szolgáltatástól független célra.
+          </p>
+          <p>
+            <strong class="text-dark">Ugyanez érvényes a TikTok- és a YouTube-kapcsolatra is:</strong> az onnan
+            származó hozzáférési kulcsokat és platform-adatokat kizárólag a tartalmad közzétételére és a
+            teljesítmény-adataid megjelenítésére használjuk. A YouTube API-szolgáltatásokból és a Google
+            API-kból kapott adatokra ezen felül a <strong class="text-dark">Limited Use</strong> vállalásunk is
+            vonatkozik (lásd a 2.14. és a 11.3. pontot).
           </p>
         </div>
 
@@ -322,6 +431,11 @@ const privacyEn = pathFor('privacy', 'en');
                   <td class="px-4 py-3 text-body border-r border-border">közzététel Facebookra és Instagramra; honlapi marketing (Pixel)</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">TikTok Technology Limited</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Írország, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">közösségi posztok közzététele, csatorna-statisztika</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">OpenAI, Inc.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
                   <td class="px-4 py-3 text-body border-r border-border">AI szöveg- és képgenerálás, elemzés, kutatás; hangdiktálás szöveggé alakítása</td>
@@ -339,7 +453,7 @@ const privacyEn = pathFor('privacy', 'en');
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google Ireland Limited</td>
                   <td class="px-4 py-3 text-muted border-r border-border">Írország, EU</td>
-                  <td class="px-4 py-3 text-body border-r border-border">Google Search Console API — a bekötött webhelyed keresési adatainak lekérése (csak olvasás)</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Google Search Console API — a bekötött webhelyed keresési adatainak lekérése (csak olvasás); YouTube-csatorna: videó feltöltése, csatorna- és videó-statisztika</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">xAI Corp.</td>
@@ -451,6 +565,22 @@ const privacyEn = pathFor('privacy', 'en');
             marketing-honlapon használt Meta Pixel tekintetében jár el adatfeldolgozóként (lásd 10. pont).
           </p>
           <p class="mt-3">
+            <strong class="text-dark">Megjegyzés a TikTokról és a YouTube-ról:</strong> ugyanez a helyzet a másik két
+            közösségi platformmal. Amikor a Szolgáltatás a nevedben posztot tesz közzé a TikTok-fiókodban vagy videót
+            tölt fel a YouTube-csatornádra, illetve onnan statisztikát olvas, a
+            <strong class="text-dark">TikTok Technology Limited</strong>, illetve a
+            <strong class="text-dark">Google Ireland Limited</strong> a platformon keletkező adatokat
+            <strong class="text-dark">önálló adatkezelőként</strong> kezeli, a saját
+            <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en" target="_blank" rel="noopener">TikTok
+            adatvédelmi szabályzat</a>, illetve a
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google adatvédelmi
+            szabályzat</a> szerint — nem a mi adatfeldolgozónkként. Mindkét kapcsolat a
+            <strong class="text-dark">te saját fiókod engedélyén</strong> alapul, és bármikor visszavonható (lásd a
+            2.13. és a 2.14. pontot). Az adattovábbítás mindkét esetben az Európai Unión belülre, az ír
+            székhelyű szerződő félhez irányul; e platformok saját, további adattovábbításaiért önálló
+            adatkezelőként ők felelnek.
+          </p>
+          <p class="mt-3">
             <strong class="text-dark">Megjegyzés a webáruházadról, a weboldaladról és a hírlevél-szolgáltatódról:</strong>
             az UNAS, a Shoprenter, a WooCommerce boltod, a WordPress-oldalad és a hírlevél-szolgáltatód a
             <strong class="text-dark">te saját rendszereid</strong> — a WooCommerce bolt és a WordPress-oldal a
@@ -490,7 +620,7 @@ const privacyEn = pathFor('privacy', 'en');
               hang-szöveg), fiók-azonosító és hozzáférési token soha.
             </li>
             <li><strong class="text-dark">Elkülönítés:</strong> az adatok felhasználónként / munkatérenként, adatbázis-szinten elkülönülnek (sor-szintű biztonság, RLS).</li>
-            <li><strong class="text-dark">Titkosítás:</strong> minden platform-hozzáférési token (Meta felhasználói és oldal-tokenek, webáruház- és hírlevél API-kulcsok, WordPress-alkalmazásjelszavak) AES-256-GCM titkosítással tárolódik; az átvitelt TLS védi.</li>
+            <li><strong class="text-dark">Titkosítás:</strong> minden platform-hozzáférési token (Meta felhasználói és oldal-tokenek, TikTok- és YouTube-hozzáférési és -megújítási kulcsok, webáruház- és hírlevél API-kulcsok, WordPress-alkalmazásjelszavak) AES-256-GCM titkosítással tárolódik; az átvitelt TLS védi.</li>
           </ul>
         </div>
 
@@ -500,6 +630,8 @@ const privacyEn = pathFor('privacy', 'en');
           <ul>
             <li><strong class="text-dark">Fiók- és tartalom-adatok:</strong> a fiók fennállásáig, majd a fiók törlését követő 30 napon belül törölve.</li>
             <li><strong class="text-dark">Meta hozzáférési tokenek és bekötött fiókok adatai:</strong> azonnal törölve, amikor lekötöd a fiókot az appban, visszavonod a hozzáférést a Facebook-beállításokban, vagy törlöd a fiókodat.</li>
+            <li><strong class="text-dark">TikTok hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a fiókot az appban, vagy amikor észleljük, hogy a hozzáférést a TikTok-beállításaidban visszavontad; leválasztáskor a hozzáférést a TikToknál is visszavonjuk.</li>
+            <li><strong class="text-dark">YouTube hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a csatornát az appban, vagy amikor észleljük, hogy a hozzáférést a Google-fiókodban visszavonták — a 7, illetve 30 napos szabályzati határidőt nem várjuk meg.</li>
             <li><strong class="text-dark">Bekötött webáruház-, WordPress- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal; a WordPress-alkalmazásjelszót ekkor a WordPress-oldaladon is visszavonjuk.</li>
             <li><strong class="text-dark">Google Search Console keresési adatok:</strong> legfeljebb 16 hónap, azt követően automatikus törlés; a bekötés lekapcsolásakor a hozzáférés azonnal megszűnik.</li>
             <li><strong class="text-dark">Számlázási adatok:</strong> 8 év (a számvitelről szóló 2000. évi C. törvény alapján).</li>
@@ -515,7 +647,9 @@ const privacyEn = pathFor('privacy', 'en');
           <ul>
             <li>töröld a fiókodat a Content Ninja alkalmazásban;</li>
             <li>küldj törlési kérelmet a <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a> címre;</li>
-            <li>vond vissza az alkalmazás hozzáférését a Facebook-beállításaidban (<em>Beállítások és adatvédelem → Beállítások → Üzleti integrációk</em>) — ez azonnal érvényteleníti a tárolt tokeneket.</li>
+            <li>vond vissza az alkalmazás hozzáférését a Facebook-beállításaidban (<em>Beállítások és adatvédelem → Beállítások → Üzleti integrációk</em>) — ez azonnal érvényteleníti a tárolt tokeneket;</li>
+            <li>vond vissza a hozzáférést a TikTok-fiókod beállításaiban (<em>Beállítások és adatvédelem → Biztonság és engedélyek → Alkalmazás-engedélyek</em>);</li>
+            <li>vond vissza a hozzáférést a Google biztonsági oldalán (<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>) — ez a YouTube-csatorna és a Google Search Console kapcsolatra egyaránt vonatkozik.</li>
           </ul>
           <p>
             A törlési kérelmeket legkésőbb 30 napon belül teljesítjük, kivéve azokat az adatokat, amelyek megőrzésére
@@ -604,7 +738,9 @@ const privacyEn = pathFor('privacy', 'en');
 
         <!-- 11. -->
         <div class="p-8 doc-section">
-          <h2>11. Facebook / Meta platform-záradék</h2>
+          <h2>11. Platform-záradékok</h2>
+
+          <p class="font-semibold text-dark text-sm mb-1">11.1. Facebook / Meta</p>
           <p>
             Az alkalmazás a Meta Platformon keresztül (Facebook bejelentkezés, Facebook Graph API, Instagram Graph
             API) <strong class="text-dark">kizárólag a felhasználó által létrehozott tartalom közzététele és
@@ -614,6 +750,46 @@ const privacyEn = pathFor('privacy', 'en');
             API-któl kapott információk felhasználása és továbbítása megfelel a
             <a href="https://developers.facebook.com/terms/" target="_blank" rel="noopener">Meta platformfeltételeknek</a>
             és a vonatkozó Meta fejlesztői szabályzatoknak.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">11.2. TikTok</p>
+          <p>
+            Az alkalmazás a TikTok API-jain keresztül (TikTok bejelentkezés, Content Posting API, Display API)
+            <strong class="text-dark">kizárólag a felhasználó által létrehozott tartalom közzététele, valamint a
+            fiók és a videók teljesítmény-adatainak a felhasználó részére történő megjelenítése céljából</strong>
+            fér hozzá a felhasználó TikTok-fiókjához. Minden közzététel a felhasználó kifejezett, előzetes
+            jóváhagyásán alapul. Ez a hozzáférés bármikor visszavonható az alkalmazáson belül és a felhasználó
+            TikTok-beállításaiban. A TikTok API-któl kapott információk felhasználása és továbbítása megfelel a
+            <a href="https://developers.tiktok.com/terms" target="_blank" rel="noopener">TikTok fejlesztői
+            feltételeknek</a> és a vonatkozó TikTok platform-szabályzatoknak.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">11.3. YouTube / Google API-szolgáltatások</p>
+          <p>
+            <strong class="text-dark">A Content Ninja a YouTube API-szolgáltatásait használja.</strong> A
+            YouTube-csatorna bekötésével a felhasználó elfogadja a
+            <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube felhasználási
+            feltételeit</a>, a Google általi adatkezelésre pedig a
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google adatvédelmi
+            szabályzata</a> vonatkozik.
+          </p>
+          <p>
+            <strong class="text-dark">Limited Use.</strong> A YouTube API-szolgáltatásokból, illetve bármely más
+            Google API-ból származó felhasználói adatokat kizárólag a felhasználónak nyújtott szolgáltatáshoz —
+            a videó feltöltéséhez a saját csatornájára és a saját teljesítmény-adatainak megjelenítéséhez —
+            használjuk fel. <strong class="text-dark">Ezeket az adatokat nem adjuk tovább, nem értékesítjük, nem
+            használjuk hirdetési célra, és nem használjuk mesterséges intelligencia modellek tanítására</strong>,
+            összhangban a
+            <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google
+            API Services User Data Policy</a> — ezen belül a <strong class="text-dark">Limited Use</strong>
+            követelmények — rendelkezéseivel. Emberi munkatárs ezekhez az adatokhoz nem fér hozzá, kivéve a
+            felhasználó kifejezett kérésére (támogatás, lásd a 2.12. pontot), biztonsági okból, illetve ha azt
+            jogszabály írja elő.
+          </p>
+          <p>
+            A felhasználó a hozzáférést bármikor visszavonhatja az alkalmazáson belül, illetve a Google biztonsági
+            oldalán (<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>);
+            a tárolt kulcsot és YouTube-adatot ekkor azonnal töröljük (lásd a 2.14. és a 7. pontot).
           </p>
         </div>
 
@@ -626,13 +802,26 @@ const privacyEn = pathFor('privacy', 'en');
             hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük; új adatfeldolgozó
             bekötéséről az ÁSZF <a href={`${terms}#melleklet-1`}>1. számú mellékletének</a> 9. pontja szerint legalább
             <strong class="text-dark">30 nappal</strong> előre értesítést teszünk közzé. Ez a változat
-            <strong class="text-dark">2026. október 9-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. szeptember 15.). A
+            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. szeptember 19.). A
             tájékoztató magyar és angol nyelven érhető el; eltérés esetén a
             <strong class="text-dark">magyar szöveg az irányadó</strong>.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Változásnapló</p>
           <ul>
+            <li>
+              <strong class="text-dark">2026. október 19.</strong> — <strong class="text-dark">TikTok- és
+              YouTube-integráció.</strong> Új adatfeldolgozó az 5. pontban:
+              <strong class="text-dark">TikTok Technology Limited</strong> (Írország, EU) — közösségi posztok
+              közzététele, csatorna-statisztika; a <strong class="text-dark">Google Ireland Limited</strong> sorának
+              tevékenysége kiegészült a <strong class="text-dark">YouTube-csatornára történő videó-feltöltéssel és a
+              csatorna-statisztikával</strong> (új sor nem került be). Új pont a 2.13. (TikTok-fiók adatai) és a
+              2.14. (YouTube-csatorna adatai) — mindkettő megadja a kért engedélyeket, a megőrzési időt és a
+              visszavonás módját. A 11. pont „Platform-záradékok" címre változott, és a meglévő Meta-záradék (11.1.)
+              mellé bekerült a TikTok- (11.2.) és a YouTube/Google API-záradék (11.3.), benne a
+              <strong class="text-dark">Limited Use vállalás</strong>. Ehhez igazodott az 1., a 3., a 6. és a 7.
+              pont. Közzétéve: 2026. szeptember 19.
+            </li>
             <li>
               <strong class="text-dark">2026. október 15.</strong> — Új adatfeldolgozó az 5. pontban:
               <strong class="text-dark">Eleven Labs Inc.</strong> (ElevenLabs, USA) —

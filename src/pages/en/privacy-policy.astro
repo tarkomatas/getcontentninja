@@ -29,7 +29,7 @@ const privacyHu = pathFor('privacy', 'hu');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-        <p class="text-sm text-muted">Published: 9 September 2026 · Last updated: 15 September 2026 · Effective: 9 October 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted">Published: 9 September 2026 · Last updated: 19 September 2026 · Effective: 19 October 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           This policy is available in Hungarian and English. In case of any discrepancy, the
           <a href={privacyHu} class="text-primary underline">Hungarian text</a> prevails.
@@ -44,7 +44,8 @@ const privacyHu = pathFor('privacy', 'hu');
           <p>
             Content Ninja (the "Service") is an AI-powered content marketing tool for online stores. The Service
             creates social media content (text, images, video) and publishes it on the user's behalf to the user's
-            own Facebook Pages and Instagram business accounts; composes and sends newsletters through the user's own
+            own Facebook Pages, Instagram business accounts, TikTok account and YouTube channel; composes and sends
+            newsletters through the user's own
             newsletter provider account; publishes blog articles to the user's webshop or own website (e.g. a WordPress site); rewrites product
             descriptions and category page copy; creates advertising creatives; and performs keyword and topic
             research. The Service is
@@ -224,6 +225,107 @@ const privacyHu = pathFor('privacy', 'hu');
                 (Art. 6(1)(b) and (f) GDPR).
               </p>
             </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.13. TikTok account data</p>
+              <p>
+                When you connect your account with <strong class="text-dark">TikTok Login</strong>, we access and
+                store the following data through the TikTok API:
+              </p>
+              <ul>
+                <li>the identifier, display name and profile picture of your TikTok account;</li>
+                <li>the access token and the refresh token (stored encrypted);</li>
+                <li>data of the posts published through the Service (identifier, link, and the settings you chose when publishing);</li>
+                <li>your follower count and the view, like, comment and share counts of your videos.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">Purpose:</strong> connecting and identifying the account (so you can see
+                which account you connected), publishing posts on your behalf, and displaying the performance data
+                on the Analytics screen of the Service. <strong class="text-dark">Legal basis:</strong> performance
+                of a contract (Art. 6(1)(b) GDPR).
+              </p>
+              <p>
+                <strong class="text-dark">We request the following scopes:</strong>
+                <code>user.info.basic</code> (account name and profile picture),
+                <code>user.info.stats</code> (follower count),
+                <code>video.list</code> (statistics of your videos),
+                <code>video.publish</code> (publishing on your behalf). We request nothing beyond these.
+              </p>
+              <p>
+                <strong class="text-dark">Retention:</strong> for as long as the account is connected. When you
+                disconnect it, we <strong class="text-dark">immediately delete</strong> the stored token and the
+                stored statistics, and we also revoke the access at TikTok.
+              </p>
+              <p>
+                <strong class="text-dark">Withdrawal:</strong> at any time in the application
+                (<em>Integrations → the TikTok row → Delete</em>), or in your TikTok account settings
+                (<em>Settings and privacy → Security and permissions → App permissions</em>).
+              </p>
+              <p>
+                TikTok processes the content published this way and the data generated on the platform as an
+                <strong class="text-dark">independent data controller</strong>, under its own
+                <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en" target="_blank" rel="noopener">privacy
+                policy</a>.
+              </p>
+            </div>
+
+            <div>
+              <p class="font-semibold text-dark text-sm mb-2">2.14. YouTube channel data</p>
+              <p>
+                <strong class="text-dark">Content Ninja uses YouTube API Services.</strong> When you connect your
+                YouTube channel with your <strong class="text-dark">Google account</strong>, we access and store the
+                following data through the YouTube Data API:
+              </p>
+              <ul>
+                <li>the identifier, name and picture of the channel;</li>
+                <li>the access token and the refresh token (stored encrypted);</li>
+                <li>the identifiers and links of the videos uploaded through the Service;</li>
+                <li>the subscriber count of the channel and the view, like and comment counts of your videos.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">Purpose:</strong> connecting and identifying the channel, uploading the
+                video to your channel with the settings you provide, and displaying the performance data on the
+                Analytics screen of the Service. <strong class="text-dark">Legal basis:</strong> performance of a
+                contract (Art. 6(1)(b) GDPR).
+              </p>
+              <p>
+                <strong class="text-dark">We request exactly two scopes:</strong>
+                <code>youtube.upload</code> (uploading a video to your channel) and
+                <code>youtube.readonly</code> (the channel name and picture when connecting, and the public view,
+                like and comment counts for Analytics). We request nothing beyond these.
+              </p>
+              <p>
+                <strong class="text-dark">Retention:</strong> for as long as the channel is connected. In two cases
+                we <strong class="text-dark">delete immediately</strong> every stored token and all stored YouTube
+                statistics: when you disconnect the channel in the application, and when we detect that the access
+                has been revoked in your Google account. The YouTube API Services policies would allow 7 and 30 days
+                respectively for this — <strong class="text-dark">we do not wait for those deadlines</strong>.
+              </p>
+              <p>
+                <strong class="text-dark">Withdrawal:</strong> at any time in the application
+                (<em>Integrations → the YouTube row → Delete</em>), or on the Google security settings page:
+                <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>.
+              </p>
+              <p>
+                Google processes the uploaded video and the data generated on the channel as an
+                <strong class="text-dark">independent data controller</strong>, under the
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy
+                Policy</a>.
+              </p>
+              <p>
+                ⚠️ <strong class="text-dark">If you connected your YouTube channel and Google Search Console with the
+                same Google account</strong> (see Section 5), disconnecting the YouTube integration also revokes the
+                Search Console access — both integrations use the same Google authorisation.
+              </p>
+              <p class="mt-2">
+                <strong class="text-dark">Limited Use commitment.</strong> We use the data obtained from YouTube API
+                Services and from Google APIs solely to provide the service to you.
+                <strong class="text-dark">We do not pass it on, do not use it for advertising, and do not use it to
+                train artificial intelligence models</strong> — in accordance with the Limited Use requirements of
+                the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google
+                API Services User Data Policy</a>.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -243,6 +345,12 @@ const privacyHu = pathFor('privacy', 'hu');
             manage the content you create in the Service.</strong> We do not sell them, do not share them with any
             third party beyond the processors listed in Section 5, and do not use them for advertising, profiling,
             or any purpose unrelated to the Service.
+          </p>
+          <p>
+            <strong class="text-dark">The same applies to the TikTok and YouTube connections:</strong> we use the
+            access tokens and platform data obtained from them exclusively to publish your content and to display
+            your performance data. Data received from YouTube API Services and other Google APIs is additionally
+            covered by our <strong class="text-dark">Limited Use</strong> commitment (see Sections 2.14 and 11.3).
           </p>
         </div>
 
@@ -321,6 +429,11 @@ const privacyHu = pathFor('privacy', 'hu');
                   <td class="px-4 py-3 text-body border-r border-border">Publishing to Facebook / Instagram; website marketing (Pixel)</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
+                  <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">TikTok Technology Limited</td>
+                  <td class="px-4 py-3 text-muted border-r border-border">Ireland, EU</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Publishing social posts, channel statistics</td>
+                </tr>
+                <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">OpenAI, Inc.</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
                   <td class="px-4 py-3 text-body border-r border-border">AI text and image generation, analysis, research; converting voice dictation to text</td>
@@ -338,7 +451,7 @@ const privacyHu = pathFor('privacy', 'hu');
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google Ireland Limited</td>
                   <td class="px-4 py-3 text-muted border-r border-border">Ireland, EU</td>
-                  <td class="px-4 py-3 text-body border-r border-border">Google Search Console API — retrieving the search data of the website you connect (read-only)</td>
+                  <td class="px-4 py-3 text-body border-r border-border">Google Search Console API — retrieving the search data of the website you connect (read-only); YouTube channel: uploading videos, channel and video statistics</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">xAI Corp.</td>
@@ -450,6 +563,22 @@ const privacyHu = pathFor('privacy', 'hu');
             marketing website (see Section 10).
           </p>
           <p class="mt-3">
+            <strong class="text-dark">Note on TikTok and YouTube:</strong> the same applies to the other two social
+            platforms. When the Service publishes a post to your TikTok account or uploads a video to your YouTube
+            channel on your behalf, or reads statistics from them,
+            <strong class="text-dark">TikTok Technology Limited</strong> and
+            <strong class="text-dark">Google Ireland Limited</strong> respectively process the data generated on the
+            platform as <strong class="text-dark">independent data controllers</strong>, under the
+            <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en" target="_blank" rel="noopener">TikTok
+            Privacy Policy</a> and the
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a> —
+            not as our processors. Both connections are based on the
+            <strong class="text-dark">authorisation of your own account</strong> and can be withdrawn at any time
+            (see Sections 2.13 and 2.14). In both cases the transfer goes to a contracting party established in
+            Ireland, within the European Union; these platforms are responsible as independent controllers for
+            their own onward transfers.
+          </p>
+          <p class="mt-3">
             <strong class="text-dark">Note on your webshop, your website and your newsletter provider:</strong> UNAS,
             Shoprenter, your WooCommerce store, your WordPress site and your newsletter provider are
             <strong class="text-dark">your own systems</strong> — your WooCommerce store and WordPress site run on
@@ -488,7 +617,7 @@ const privacyHu = pathFor('privacy', 'hu');
               never account identifiers or access tokens.
             </li>
             <li><strong class="text-dark">Isolation:</strong> data is separated per user / workspace at the database level (row-level security, RLS).</li>
-            <li><strong class="text-dark">Encryption:</strong> all platform access tokens (Meta user and Page tokens, webshop and newsletter API keys, WordPress application passwords) are stored encrypted using AES-256-GCM; data in transit is protected by TLS.</li>
+            <li><strong class="text-dark">Encryption:</strong> all platform access tokens (Meta user and Page tokens, TikTok and YouTube access and refresh tokens, webshop and newsletter API keys, WordPress application passwords) are stored encrypted using AES-256-GCM; data in transit is protected by TLS.</li>
           </ul>
         </div>
 
@@ -498,6 +627,8 @@ const privacyHu = pathFor('privacy', 'hu');
           <ul>
             <li><strong class="text-dark">Account and content data:</strong> retained while your account exists, then deleted within 30 days after account deletion.</li>
             <li><strong class="text-dark">Meta access tokens and connected-account data:</strong> deleted immediately when you disconnect the account in the app, revoke the app's access in your Facebook settings, or delete your account.</li>
+            <li><strong class="text-dark">TikTok access tokens and channel statistics:</strong> deleted immediately when you disconnect the account in the app, or when we detect that you revoked the access in your TikTok settings; on disconnection we also revoke the access at TikTok.</li>
+            <li><strong class="text-dark">YouTube access tokens and channel statistics:</strong> deleted immediately when you disconnect the channel in the app, or when we detect that the access has been revoked in your Google account — we do not wait for the 7-day and 30-day deadlines allowed by the policies.</li>
             <li><strong class="text-dark">Connected webshop, WordPress and newsletter keys:</strong> deleted immediately when the connection is removed; the WordPress application password is also revoked on your WordPress site at that point.</li>
             <li><strong class="text-dark">Google Search Console search data:</strong> 16 months at most, deleted automatically thereafter; access ceases immediately when you disconnect the integration.</li>
             <li><strong class="text-dark">Invoicing data:</strong> retained for 8 years, as required by the Hungarian Accounting Act (Act C of 2000).</li>
@@ -513,7 +644,9 @@ const privacyHu = pathFor('privacy', 'hu');
           <ul>
             <li>delete your account inside the Content Ninja application;</li>
             <li>send a deletion request to <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>;</li>
-            <li>remove the app's access in your Facebook settings (<em>Settings &amp; privacy → Settings → Business integrations</em>) — this immediately invalidates the stored tokens.</li>
+            <li>remove the app's access in your Facebook settings (<em>Settings &amp; privacy → Settings → Business integrations</em>) — this immediately invalidates the stored tokens;</li>
+            <li>revoke the access in your TikTok account settings (<em>Settings and privacy → Security and permissions → App permissions</em>);</li>
+            <li>revoke the access on the Google security settings page (<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>) — this covers both the YouTube channel and the Google Search Console connection.</li>
           </ul>
           <p>
             Deletion requests are completed within 30 days at the latest, except for data we are legally required to
@@ -601,7 +734,9 @@ const privacyHu = pathFor('privacy', 'hu');
 
         <!-- 11. -->
         <div class="p-8 doc-section">
-          <h2>11. Facebook / Meta platform clause</h2>
+          <h2>11. Platform clauses</h2>
+
+          <p class="font-semibold text-dark text-sm mb-1">11.1. Facebook / Meta</p>
           <p>
             The application accesses the user's Pages and accounts through the Meta Platform (Facebook Login,
             Facebook Graph API, Instagram Graph API) <strong class="text-dark">solely for the purpose of publishing
@@ -610,6 +745,44 @@ const privacyHu = pathFor('privacy', 'hu');
             Facebook settings and within the application. The use and transfer of information received from Meta
             APIs adheres to the <a href="https://developers.facebook.com/terms/" target="_blank" rel="noopener">Meta Platform Terms</a>
             and the applicable Meta Developer Policies.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">11.2. TikTok</p>
+          <p>
+            The application accesses the user's TikTok account through the TikTok APIs (TikTok Login, Content
+            Posting API, Display API) <strong class="text-dark">solely for the purpose of publishing content
+            created by the user and displaying the performance data of the account and its videos to the
+            user</strong>. Every publication is based on the user's explicit, prior approval. This access can be
+            revoked at any time within the application and in the user's TikTok settings. The use and transfer of
+            information received from TikTok APIs adheres to the
+            <a href="https://developers.tiktok.com/terms" target="_blank" rel="noopener">TikTok Developer Terms of
+            Service</a> and the applicable TikTok platform policies.
+          </p>
+
+          <p class="font-semibold text-dark text-sm mt-6 mb-1">11.3. YouTube / Google API Services</p>
+          <p>
+            <strong class="text-dark">Content Ninja uses YouTube API Services.</strong> By connecting a YouTube
+            channel, the user agrees to the
+            <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube Terms of Service</a>,
+            and Google's processing of data is governed by the
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
+          </p>
+          <p>
+            <strong class="text-dark">Limited Use.</strong> We use user data obtained from YouTube API Services, or
+            from any other Google API, solely to provide the service to the user — to upload the video to their own
+            channel and to display their own performance data.
+            <strong class="text-dark">We do not transfer or sell this data, do not use it for advertising purposes,
+            and do not use it to train artificial intelligence models</strong>, in accordance with the
+            <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google
+            API Services User Data Policy</a>, including the
+            <strong class="text-dark">Limited Use</strong> requirements. Humans do not read this data, except at
+            the user's explicit request (support, see Section 2.12), for security purposes, or where required by
+            law.
+          </p>
+          <p>
+            The user can withdraw access at any time within the application or on the Google security settings page
+            (<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>);
+            the stored token and YouTube data are deleted immediately at that point (see Sections 2.14 and 7).
           </p>
         </div>
 
@@ -622,13 +795,26 @@ const privacyHu = pathFor('privacy', 'hu');
             <strong class="text-dark">15 days</strong> before they take effect; where a new processor is engaged, we
             publish notice at least <strong class="text-dark">30 days</strong> in advance, in line with Section 9 of
             <a href={`${terms}#annex-1`}>Annex 1</a> to our Terms. This version is effective from
-            <strong class="text-dark">9 October 2026</strong> (published on 9 September 2026, last updated on 15 September 2026). The policy is
+            <strong class="text-dark">19 October 2026</strong> (published on 9 September 2026, last updated on 19 September 2026). The policy is
             available in Hungarian and English; in case of any discrepancy, the
             <a href={privacyHu}>Hungarian text</a> prevails.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Change log</p>
           <ul>
+            <li>
+              <strong class="text-dark">19 October 2026</strong> — <strong class="text-dark">TikTok and YouTube
+              integration.</strong> New processor added to Section 5:
+              <strong class="text-dark">TikTok Technology Limited</strong> (Ireland, EU) — publishing social posts,
+              channel statistics; the activity of <strong class="text-dark">Google Ireland Limited</strong> was
+              extended with <strong class="text-dark">uploading videos to your YouTube channel and channel
+              statistics</strong> (no new row was added). New Sections 2.13 (TikTok account data) and 2.14 (YouTube
+              channel data), each stating the scopes we request, the retention period and how to withdraw access.
+              Section 11 was retitled "Platform clauses", and alongside the existing Meta clause (11.1) it now also
+              contains the TikTok clause (11.2) and the YouTube / Google API clause (11.3), including our
+              <strong class="text-dark">Limited Use commitment</strong>. Sections 1, 3, 6 and 7 were aligned
+              accordingly. Published: 19 September 2026.
+            </li>
             <li>
               <strong class="text-dark">15 October 2026</strong> — New processor added to Section 5:
               <strong class="text-dark">Eleven Labs Inc.</strong> (ElevenLabs, USA) —

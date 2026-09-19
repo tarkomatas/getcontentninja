@@ -8,7 +8,7 @@ const locale = 'hu';
 const page = 'dataDeletion';
 const title = 'Adattörlési útmutató – Content Ninja';
 const description =
-  'Hogyan töröltetheted a személyes adataidat a Content Ninjából: fióktörlés az alkalmazásban, törlési kérelem e-mailben, vagy a Facebook/Instagram kapcsolat visszavonása.';
+  'Hogyan töröltetheted a személyes adataidat a Content Ninjából: fióktörlés az alkalmazásban, törlési kérelem e-mailben, vagy a Facebook/Instagram, TikTok és YouTube kapcsolat visszavonása.';
 
 const privacy = pathFor('privacy', locale);
 const dataDeletionEn = pathFor('dataDeletion', 'en');
@@ -27,7 +27,7 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adattörlési útmutató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól · Utoljára frissítve: 2026. szeptember 15.</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól · Utoljára frissítve: 2026. szeptember 19.</p>
         <p class="text-sm text-muted mt-2">
           Az útmutató magyar és angol nyelven érhető el; eltérés esetén a magyar szöveg az irányadó. Az angol
           változat <a href={dataDeletionEn} class="text-primary underline">itt olvasható</a>.
@@ -68,8 +68,8 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
           <p class="text-sm text-body mt-5 leading-relaxed">
             A Content Ninját a Digitallwork.hu Kft., magyarországi (Európai Unió) bejegyzésű társaság üzemelteti. A
             személyes adatokat az (EU) 2016/679 rendeletnek (GDPR) megfelelően kezeljük. Ez az oldal azt írja le,
-            hogyan töröltetheted a személyes adataidat a rendszereinkből — ideértve a bekötött Facebook / Instagram
-            adatokat és a tárolt hozzáférési tokeneket is.
+            hogyan töröltetheted a személyes adataidat a rendszereinkből — ideértve a bekötött Facebook, Instagram,
+            TikTok és YouTube adatokat és a tárolt hozzáférési tokeneket is.
           </p>
         </div>
 
@@ -86,8 +86,8 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
           </ol>
           <p class="text-sm text-body leading-relaxed mt-3">
             A fiók törlésével a személyes adataid eltűnnek a rendszereinkből, ideértve a bekötött Facebook /
-            Instagram integrációkat és a nevedben tárolt Meta hozzáférési tokeneket is (a részleteket és a
-            határidőket lásd a 4. pontban).
+            Instagram, TikTok és YouTube integrációkat és a nevedben tárolt hozzáférési tokeneket is (a részleteket
+            és a határidőket lásd a 4. pontban).
           </p>
         </div>
 
@@ -109,20 +109,47 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
 
         <!-- 3. -->
         <div class="p-8">
-          <h2 class="text-base font-bold text-dark mb-3">3. Vond vissza a Facebook / Instagram kapcsolatot</h2>
+          <h2 class="text-base font-bold text-dark mb-3">3. Vond vissza a közösségi platform-kapcsolatokat</h2>
           <p class="text-sm text-body leading-relaxed mb-3">
-            A Content Ninja hozzáférését közvetlenül a Facebookon is megszüntetheted, anélkül hogy minket kellene
-            megkeresned:
+            A Content Ninja hozzáférését a platformnál magánál is megszüntetheted, anélkül hogy minket kellene
+            megkeresned. A leggyorsabb út azonban mindig az alkalmazás: <strong class="text-dark">Integrációk → az
+            adott sor → Törlés</strong>. Ez a kapcsolatot a platformnál is visszavonja, és a nálunk tárolt kulcsot
+            és statisztikát azonnal törli.
           </p>
+
+          <p class="text-sm font-semibold text-dark mt-5 mb-2">Facebook / Instagram</p>
           <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
             <li>Nyisd meg a <strong class="text-dark">Facebook → Beállítások és adatvédelem → Beállítások</strong> menüt.</li>
             <li>Lépj az <strong class="text-dark">Üzleti integrációk</strong> (vagy <strong class="text-dark">Alkalmazások és webhelyek</strong>) pontra.</li>
             <li>Keresd meg a <strong class="text-dark">Content Ninja</strong> bejegyzést, és kattints az <strong class="text-dark">Eltávolítás</strong> gombra.</li>
           </ol>
+
+          <p class="text-sm font-semibold text-dark mt-5 mb-2">TikTok</p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>Nyisd meg a TikTok-appban a <strong class="text-dark">Profil → Menü → Beállítások és adatvédelem</strong> menüt.</li>
+            <li>Lépj a <strong class="text-dark">Biztonság és engedélyek → Alkalmazás-engedélyek</strong> pontra.</li>
+            <li>Keresd meg a <strong class="text-dark">Content Ninja</strong> bejegyzést, és vond vissza a hozzáférést.</li>
+          </ol>
+
+          <p class="text-sm font-semibold text-dark mt-5 mb-2">YouTube (Google-fiók)</p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>Nyisd meg a <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">myaccount.google.com/permissions</a> oldalt.</li>
+            <li>Keresd meg a <strong class="text-dark">Content Ninja</strong> bejegyzést.</li>
+            <li>Kattints a <strong class="text-dark">Hozzáférés visszavonása</strong> gombra.</li>
+          </ol>
           <p class="text-sm text-body leading-relaxed mt-3">
-            Az integráció eltávolítása érvényteleníti a nálunk tárolt hozzáférési tokeneket. Ha azt is szeretnéd,
-            hogy a rendszereinkben már tárolt adatok törlődjenek, ezen felül töröld a fiókodat (1. pont), vagy írj
-            nekünk (2. pont).
+            ⚠️ Ha ugyanazzal a Google-fiókkal kötötted be a YouTube-csatornádat és a Google Search Console-t, a
+            visszavonás <strong class="text-dark">mindkét kapcsolatra</strong> vonatkozik — a két integráció
+            ugyanazt az engedélyt használja.
+          </p>
+
+          <p class="text-sm text-body leading-relaxed mt-5">
+            A hozzáférés visszavonása érvényteleníti a nálunk tárolt hozzáférési kulcsokat.
+            <strong class="text-dark">A TikTok- és a YouTube-kapcsolatnál ennél többet teszünk:</strong> amint a
+            visszavonást észleljük — és leválasztáskor is —, a tárolt kulcsot és a platformról gyűjtött
+            statisztikát <strong class="text-dark">azonnal töröljük</strong>, nem várjuk meg a 30 napos
+            határidőt. Ha azt szeretnéd, hogy a rendszereinkben tárolt <em>összes</em> adatod törlődjön, ezen
+            felül töröld a fiókodat (1. pont), vagy írj nekünk (2. pont).
           </p>
         </div>
 
@@ -137,6 +164,7 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
             <li>a fiókadataidat (név, e-mail cím, cégnév);</li>
             <li>a webáruházadból importált termékadatokat (név, leírás, kép, ár, kategória);</li>
             <li>a Facebook és Instagram hozzáférési adatokat, ideértve minden tárolt Meta hozzáférési tokent;</li>
+            <li>a TikTok- és a YouTube-kapcsolat adatait: a hozzáférési és megújítási kulcsokat, a fiók, illetve a csatorna azonosítóját, nevét és képét, valamint a róluk gyűjtött követő-/feliratkozó- és videó-statisztikákat — ezeket a kapcsolat leválasztásakor, illetve a platformnál történt visszavonás észlelésekor <strong class="text-dark">azonnal</strong> töröljük, nem várjuk meg a 30 napos határidőt;</li>
             <li>a webáruház-, weboldal- és hírlevél-szolgáltatói hozzáférési kulcsaidat (MailerLite, SalesAutopilot, UNAS, Shoprenter, valamint a WordPress-oldaladhoz és WooCommerce boltodhoz tartozó alkalmazásjelszót) és az azokon keresztül elért adatokat; a WordPress-alkalmazásjelszót a nálunk tárolt példány törlésén túl a WordPress-oldaladon is visszavonjuk (a WordPress-adminban magad is bármikor visszavonhatod, vagy eltávolíthatod a Content Ninja bővítményt, amely ekkor a saját alkalmazásjelszavait visszavonja);</li>
             <li>a Ninja AI asszisztens beszélgetéseit és a munkatérhez mentett „emlékeket”;</li>
             <li>a honlapi űrlapjainkon megadott adataidat.</li>

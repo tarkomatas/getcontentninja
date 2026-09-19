@@ -8,7 +8,7 @@ const locale = 'en';
 const page = 'dataDeletion';
 const title = 'Data Deletion Instructions – Content Ninja';
 const description =
-  'How to delete your personal data from Content Ninja: delete your account in the app, request deletion by email, or revoke the Facebook/Instagram connection.';
+  'How to delete your personal data from Content Ninja: delete your account in the app, request deletion by email, or revoke the Facebook/Instagram, TikTok and YouTube connections.';
 
 const privacyEn = pathFor('privacy', 'en');
 const dataDeletionHu = pathFor('dataDeletion', 'hu');
@@ -27,7 +27,7 @@ const dataDeletionHu = pathFor('dataDeletion', 'hu');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Data Deletion Instructions</h1>
-        <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026 · Last updated: 15 September 2026</p>
+        <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026 · Last updated: 19 September 2026</p>
         <p class="text-sm text-muted mt-2">
           These instructions are available in Hungarian and English. In case of any discrepancy, the
           <a href={dataDeletionHu} class="text-primary underline">Hungarian text</a> prevails.
@@ -68,8 +68,8 @@ const dataDeletionHu = pathFor('dataDeletion', 'hu');
           <p class="text-sm text-body mt-5 leading-relaxed">
             Content Ninja is operated by Digitallwork.hu Kft., a company registered in Hungary (European Union).
             We process personal data in accordance with Regulation (EU) 2016/679 (GDPR). This page explains how you
-            can have your personal data — including any connected Facebook / Instagram data and stored access
-            tokens — deleted from our systems.
+            can have your personal data — including any connected Facebook, Instagram, TikTok and YouTube data and
+            stored access tokens — deleted from our systems.
           </p>
         </div>
 
@@ -86,7 +86,7 @@ const dataDeletionHu = pathFor('dataDeletion', 'hu');
           </ol>
           <p class="text-sm text-body leading-relaxed mt-3">
             Deleting your account removes your personal data from our systems, including your connected
-            Facebook / Instagram integrations and any Meta access tokens we stored on your behalf
+            Facebook, Instagram, TikTok and YouTube integrations and any access tokens we stored on your behalf
             (see section 4 for details and timelines).
           </p>
         </div>
@@ -108,18 +108,47 @@ const dataDeletionHu = pathFor('dataDeletion', 'hu');
 
         <!-- Option 3: revoke on Facebook -->
         <div class="p-8">
-          <h2 class="text-base font-bold text-dark mb-3">3. Revoke the Facebook / Instagram connection</h2>
+          <h2 class="text-base font-bold text-dark mb-3">3. Revoke the social platform connections</h2>
           <p class="text-sm text-body leading-relaxed mb-3">
-            You can also cut off Content Ninja’s access directly on Facebook, without contacting us:
+            You can also cut off Content Ninja’s access at the platform itself, without contacting us. The fastest
+            route, however, is always the application: <strong class="text-dark">Integrations → the relevant row →
+            Delete</strong>. That revokes the connection at the platform too, and immediately deletes the token and
+            statistics we hold.
           </p>
+
+          <p class="text-sm font-semibold text-dark mt-5 mb-2">Facebook / Instagram</p>
           <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
             <li>Open <strong class="text-dark">Facebook → Settings &amp; privacy → Settings</strong>.</li>
             <li>Go to <strong class="text-dark">Business integrations</strong> (or <strong class="text-dark">Apps and websites</strong>).</li>
             <li>Find <strong class="text-dark">Content Ninja</strong> and click <strong class="text-dark">Remove</strong>.</li>
           </ol>
+
+          <p class="text-sm font-semibold text-dark mt-5 mb-2">TikTok</p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>In the TikTok app, open <strong class="text-dark">Profile → Menu → Settings and privacy</strong>.</li>
+            <li>Go to <strong class="text-dark">Security and permissions → App permissions</strong>.</li>
+            <li>Find <strong class="text-dark">Content Ninja</strong> and revoke its access.</li>
+          </ol>
+
+          <p class="text-sm font-semibold text-dark mt-5 mb-2">YouTube (Google account)</p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-body leading-relaxed">
+            <li>Open <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">myaccount.google.com/permissions</a>.</li>
+            <li>Find <strong class="text-dark">Content Ninja</strong>.</li>
+            <li>Click <strong class="text-dark">Remove access</strong>.</li>
+          </ol>
           <p class="text-sm text-body leading-relaxed mt-3">
-            Removing the integration invalidates the access tokens we hold. If you also want the data already
-            stored in our systems to be erased, additionally delete your account (section 1) or email us (section 2).
+            ⚠️ If you connected your YouTube channel and Google Search Console with the same Google account, the
+            revocation applies to <strong class="text-dark">both connections</strong> — the two integrations use
+            the same authorisation.
+          </p>
+
+          <p class="text-sm text-body leading-relaxed mt-5">
+            Revoking access invalidates the access tokens we hold.
+            <strong class="text-dark">For the TikTok and YouTube connections we go further:</strong> as soon as we
+            detect the revocation — and also when you disconnect them — we
+            <strong class="text-dark">immediately delete</strong> the stored token and the statistics collected
+            from the platform; we do not wait for the 30-day deadline. If you want <em>all</em> of your data stored
+            in our systems to be erased, additionally delete your account (section 1) or email us (section 2).
           </p>
         </div>
 
@@ -134,6 +163,7 @@ const dataDeletionHu = pathFor('dataDeletion', 'hu');
             <li>your account data (name, email address, company name);</li>
             <li>product data imported from your webshop (names, descriptions, images, prices, categories);</li>
             <li>Facebook and Instagram access data, including all stored Meta access tokens;</li>
+            <li>the data of the TikTok and YouTube connections: the access and refresh tokens, the identifier, name and picture of the account or channel, and the follower/subscriber and video statistics collected about them — these are deleted <strong class="text-dark">immediately</strong> when you disconnect the connection or when we detect a revocation at the platform; we do not wait for the 30-day deadline;</li>
             <li>your webshop, website and newsletter provider access keys (MailerLite, SalesAutopilot, UNAS, Shoprenter, and the application password for your WordPress site and WooCommerce store) and any data accessed through them; besides deleting the copy we hold, we also revoke the WordPress application password on your WordPress site (you can also revoke it yourself at any time in your WordPress admin, or uninstall the Content Ninja plugin, which then revokes its own application passwords);</li>
             <li>your Ninja AI assistant conversations and the “memories” saved to your workspace;</li>
             <li>data you provided via our website forms.</li>
