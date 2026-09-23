@@ -29,7 +29,7 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. szeptember 19. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. szeptember 23. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           <strong class="text-dark">A TikTok- és a YouTube-integrációról szóló pontok (2.13., 2.14., 11.2., 11.3.) a
           közzététel napjától, az adott csatorna bekötésének pillanatától alkalmazandók</strong> — a tájékoztatásnak
@@ -276,48 +276,71 @@ const privacyEn = pathFor('privacy', 'en');
               </p>
             </div>
 
-            <div>
-              <p class="font-semibold text-dark text-sm mb-2">2.14. YouTube-csatorna adatai</p>
+            <!-- A YouTube-átvizsgálás (Developer Policies III.A.2d) erre a blokkra mutat: #youtube.
+                 A tartalmát az app docs/features/youtube-shorts.md-je és a youtube-review-submission.md adja. -->
+            <div id="youtube" class="yt-section scroll-mt-24 rounded-[12px] border-2 border-primary/30 bg-light p-5 md:p-6">
+              <h3 class="text-lg font-extrabold text-dark mb-3">2.14. YouTube</h3>
+
+              <p class="yt-sub">YouTube API-szolgáltatások</p>
               <p>
-                <strong class="text-dark">A Content Ninja a YouTube API-szolgáltatásait használja.</strong> Amikor
-                <strong class="text-dark">Google-fiókkal</strong> beköti a YouTube-csatornáját, a YouTube Data API-n
-                keresztül az alábbi adatokhoz férünk hozzá és azokat tároljuk:
-              </p>
-              <ul>
-                <li>a csatorna azonosítója, neve és képe;</li>
-                <li>a hozzáférési és a megújítási kulcs (titkosítva tárolva);</li>
-                <li>a Szolgáltatáson keresztül feltöltött videók azonosítója és linkje;</li>
-                <li>a csatorna feliratkozó-száma, valamint a videóid megtekintés-, kedvelés- és hozzászólásszáma.</li>
-              </ul>
-              <p>
-                <strong class="text-dark">Cél:</strong> a csatorna bekötése és azonosítása, a videó feltöltése a
-                csatornádra az általad megadott beállításokkal, valamint a teljesítmény-adatok megjelenítése a
-                Szolgáltatás Analitika felületén. <strong class="text-dark">Jogalap:</strong> szerződés teljesítése
-                (GDPR 6. cikk (1) b)).
-              </p>
-              <p>
-                <strong class="text-dark">Ehhez pontosan két engedélyt kérünk:</strong>
-                <code>youtube.upload</code> (videó feltöltése a csatornádra) és
-                <code>youtube.readonly</code> (a csatorna neve és képe a bekötéskor, valamint a nyilvános
-                megtekintés-, kedvelés- és hozzászólásszámok az Analitikához). Ennél többet nem kérünk.
-              </p>
-              <p>
-                <strong class="text-dark">Megőrzés:</strong> ameddig a csatorna be van kötve. Két esetben
-                <strong class="text-dark">azonnal törlünk</strong> minden tárolt kulcsot és YouTube-statisztikát:
-                amikor leválasztod a csatornát az alkalmazásban, és amikor észleljük, hogy a hozzáférést a
-                Google-fiókodban visszavonták. A YouTube API-szolgáltatásokra vonatkozó szabályzat erre 7, illetve
-                30 napos határidőt enged — <strong class="text-dark">mi nem várjuk meg ezeket a határidőket</strong>.
-              </p>
-              <p>
-                <strong class="text-dark">Visszavonás:</strong> bármikor, az alkalmazásban
-                (<em>Integrációk → a YouTube-sor → Törlés</em>), illetve a Google biztonsági oldalán:
-                <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>.
-              </p>
-              <p>
-                A Google a feltöltött videót és a csatornán keletkező adatokat
+                <strong class="text-dark">A Content Ninja a YouTube API-szolgáltatásait használja.</strong> A
+                YouTube-csatorna bekötésével elfogadod a
+                <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube felhasználási
+                feltételeit</a>. A Google a feltöltött videót és a csatornán keletkező adatokat
                 <strong class="text-dark">önálló adatkezelőként</strong>, a
                 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google adatvédelmi
                 szabályzata</a> szerint kezeli.
+              </p>
+
+              <p class="yt-sub">Mihez kérünk hozzáférést</p>
+              <p>Pontosan két engedélyt kérünk, ennél többet nem:</p>
+              <ul>
+                <li><code>youtube.upload</code> — videó feltöltése a saját YouTube-csatornádra;</li>
+                <li><code>youtube.readonly</code> — a csatornád adatainak és statisztikáinak olvasása.</li>
+              </ul>
+
+              <p class="yt-sub">Milyen adatot érünk el és tárolunk</p>
+              <ul>
+                <li>a csatorna azonosítója, neve és profilképe;</li>
+                <li>a csatorna feliratkozó-, videó- és megtekintésszáma;</li>
+                <li>a saját videóid azonosítója, címe és bélyegképe, valamint a videók megtekintés-, like- és kommentszáma;</li>
+                <li>a Google hozzáférési kulcsai (access és refresh token), <strong class="text-dark">titkosítva (AES-256-GCM)</strong>;</li>
+                <li>amit a feltöltéshez megadsz: a videó címe, leírása, láthatósága, a „gyerekeknek készült?” nyilatkozat és az AI-jelölés.</li>
+              </ul>
+
+              <p class="yt-sub">Mire használjuk</p>
+              <ul>
+                <li>az általad <strong class="text-dark">kifejezetten jóváhagyott</strong> videók feltöltésére a saját csatornádra, azonnal vagy ütemezve;</li>
+                <li>arra, hogy bekötéskor megmutassuk a csatornát, így ellenőrizheted, hogy a jót kötötted-e be;</li>
+                <li>a csatornád saját számainak megjelenítésére az Analitika oldalon, naponta frissítve.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">Mást nem csinálunk vele.</strong> Nem adjuk el, nem adjuk át harmadik félnek,
+                és nem használjuk hirdetésre. Jogalap: szerződés teljesítése (GDPR 6. cikk (1) b)).
+              </p>
+
+              <p class="yt-sub">Hol tároljuk</p>
+              <p>
+                Az Európai Unióban (Supabase, frankfurti régió). Az adatokhoz csak a te munkatered fér hozzá
+                (adatbázis-szintű elkülönítés, lásd a 6. pontot).
+              </p>
+
+              <p class="yt-sub">Meddig tároljuk</p>
+              <p>
+                Ameddig a csatorna be van kötve. A statisztikák legfeljebb <strong class="text-dark">36 hónapig</strong>
+                maradnak meg.
+              </p>
+
+              <p class="yt-sub">Visszavonás és törlés</p>
+              <ul>
+                <li>az alkalmazásban: <em>Integrációk → YouTube → Törlés</em>;</li>
+                <li>a Google-fiókodban: <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">https://myaccount.google.com/permissions</a>.</li>
+              </ul>
+              <p>
+                Mindkét esetben <strong class="text-dark">azonnal töröljük</strong> a kulcsokat és a tárolt
+                YouTube-adatot — a YouTube API-szolgáltatásokra vonatkozó szabályzat által engedett 7, illetve 30 napos
+                határidőt nem várjuk meg. Adattörlést a
+                <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a> címen is kérhetsz.
               </p>
               <p>
                 ⚠️ <strong class="text-dark">Ha ugyanazzal a Google-fiókkal kötötted be a YouTube-csatornádat és a
@@ -331,6 +354,11 @@ const privacyEn = pathFor('privacy', 'en');
                 mesterséges intelligencia modellek tanítására</strong> — a
                 <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google
                 API Services User Data Policy</a> Limited Use követelményeinek megfelelően.
+              </p>
+
+              <p class="yt-sub">Kapcsolat</p>
+              <p>
+                Digitallwork.hu Kft., <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a>.
               </p>
             </div>
           </div>
@@ -637,7 +665,7 @@ const privacyEn = pathFor('privacy', 'en');
             <li><strong class="text-dark">Fiók- és tartalom-adatok:</strong> a fiók fennállásáig, majd a fiók törlését követő 30 napon belül törölve.</li>
             <li><strong class="text-dark">Meta hozzáférési tokenek és bekötött fiókok adatai:</strong> azonnal törölve, amikor lekötöd a fiókot az appban, visszavonod a hozzáférést a Facebook-beállításokban, vagy törlöd a fiókodat.</li>
             <li><strong class="text-dark">TikTok hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a fiókot az appban, vagy amikor észleljük, hogy a hozzáférést a TikTok-beállításaidban visszavontad; leválasztáskor a hozzáférést a TikToknál is visszavonjuk.</li>
-            <li><strong class="text-dark">YouTube hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a csatornát az appban, vagy amikor észleljük, hogy a hozzáférést a Google-fiókodban visszavonták — a 7, illetve 30 napos szabályzati határidőt nem várjuk meg.</li>
+            <li><strong class="text-dark">YouTube hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a csatornát az appban, vagy amikor észleljük, hogy a hozzáférést a Google-fiókodban visszavonták — a 7, illetve 30 napos szabályzati határidőt nem várjuk meg; bekötött csatornánál a statisztikák legfeljebb 36 hónapig maradnak meg.</li>
             <li><strong class="text-dark">Bekötött webáruház-, WordPress- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal; a WordPress-alkalmazásjelszót ekkor a WordPress-oldaladon is visszavonjuk.</li>
             <li><strong class="text-dark">Google Search Console keresési adatok:</strong> legfeljebb 16 hónap, azt követően automatikus törlés; a bekötés lekapcsolásakor a hozzáférés azonnal megszűnik.</li>
             <li><strong class="text-dark">Számlázási adatok:</strong> 8 év (a számvitelről szóló 2000. évi C. törvény alapján).</li>
@@ -811,13 +839,23 @@ const privacyEn = pathFor('privacy', 'en');
             hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük; új adatfeldolgozó
             bekötéséről az ÁSZF <a href={`${terms}#melleklet-1`}>1. számú mellékletének</a> 9. pontja szerint legalább
             <strong class="text-dark">30 nappal</strong> előre értesítést teszünk közzé. Ez a változat
-            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. szeptember 19.). A
+            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. szeptember 23.). A
             tájékoztató magyar és angol nyelven érhető el; eltérés esetén a
             <strong class="text-dark">magyar szöveg az irányadó</strong>.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Változásnapló</p>
           <ul>
+            <li>
+              <strong class="text-dark">2026. szeptember 23.</strong> — A 2.14. pont önálló, kiemelt
+              <strong class="text-dark">„YouTube”</strong> szakasszá bővült: a YouTube API-szolgáltatások és a
+              felhasználási feltételek, a kért két engedély, az elért és tárolt adatok teljes köre (kiegészült a
+              csatorna videó- és megtekintésszámával, a videók címével és bélyegképével, valamint a feltöltéshez
+              megadott adatokkal), a felhasználás célja, a tárolás helye, a statisztikák legfeljebb
+              <strong class="text-dark">36 hónapos</strong> megőrzése, a visszavonás és a törlés módja; ehhez
+              igazodott a 7. pont. Új adatkezelési cél és új adatfeldolgozó nincs. Közzétéve és hatályos:
+              2026. szeptember 23.
+            </li>
             <li>
               <strong class="text-dark">2026. október 19.</strong> — <strong class="text-dark">TikTok- és
               YouTube-integráció.</strong> Új adatfeldolgozó az 5. pontban:
@@ -895,4 +933,6 @@ const privacyEn = pathFor('privacy', 'en');
   .meta-label { color: #9090a7; font-weight: 500; }
   .meta-value { color: #1e1e2f; }
   .meta-value a { color: #6c5ce7; text-decoration: underline; }
+  .doc-section .yt-sub { font-size: 0.875rem; font-weight: 700; color: #1e1e2f; margin-top: 1.25rem; }
+  .yt-section h3 + .yt-sub { margin-top: 0; }
 </style>
