@@ -9,12 +9,14 @@ import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'hu';
 const page = 'demo';
-const title = 'Bemutatót kérek – AI Tartalomgyártás Webshopoknak | Content Ninja';
+const title = 'AI közösségi média posztolás webshopoknak – Facebook, Instagram, TikTok | Content Ninja';
 const description =
-  'Kérj egy díjmentes, kb. 20 perces online bemutatót a Content Ninjáról, és nézd meg élesben, hogyan gyártja az AI a webshopod social media tartalmait.';
+  'Az AI a webshopod termékeiből posztszöveget ír, képet és videót készít, majd ütemezve vagy automatizmusból publikálja Facebookra, Instagramra és TikTokra. Kérj díjmentes, kb. 20 perces online bemutatót!';
+const keywords =
+  'AI posztolás, közösségi média automatizálás webshop, social media automatizálás, Facebook posztolás, Instagram posztolás, TikTok posztolás, TikTok ütemezés, TikTok automatizálás, AI termékvideó, narrátorvideó, tartalomnaptár, Content Ninja';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-posztolas.jpg" lpEnabled>
+<BaseLayout locale={locale} page={page} title={title} description={description} keywords={keywords} ogImage="/assets/og-posztolas.jpg" lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -932,8 +934,8 @@ const description =
                                     <span
                                         class="material-symbols-outlined text-primary text-[20px]">smart_display</span>
                                 </div>
-                                <span class="text-body font-medium text-lg leading-snug pt-1">Figyelemfelkeltő tartalom
-                                    Instára, TikTokra és Storyba</span>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Figyelemfelkeltő videó a hírfolyamba,
+                                    Storyba és TikTokra</span>
                             </li>
                         </ul>
                         <div>
@@ -1010,6 +1012,14 @@ const description =
                                 </div>
                                 <span class="text-body font-medium text-lg leading-snug pt-1">A te konkrét termékeidet
                                     jeleníti meg a videóban.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">send</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">A kész videót ütemezve kiposztolja
+                                    TikTokra, Facebookra és Instagramra.</span>
                             </li>
                         </ul>
                         <div>
@@ -1325,6 +1335,8 @@ const description =
                                     <span>kb. 166 képes poszt havonta</span>
                                 </div>
                             </div>
+                            <p class="text-sm text-body mt-3">A publikálás Facebookra, Instagramra és TikTokra
+                                ingyenes – nem fogyaszt kreditet.</p>
                         </div>
                         <a href="/hu/arak/#kreditek" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
                             Részletes kreditdíjak

@@ -9,12 +9,14 @@ import TrustBadges from '../../components/TrustBadges.astro';
 
 const locale = 'en';
 const page = 'demo';
-const title = 'Book a Demo – AI Content Creation for Webshops | Content Ninja';
+const title = 'AI Social Media Posting for Webshops – Facebook, Instagram, TikTok | Content Ninja';
 const description =
-  'Request a free, ~20-minute online demo of Content Ninja and see live how AI creates your webshop\'s social media content.';
+  'The AI turns your webshop\'s products into post copy, images and videos, then publishes them to Facebook, Instagram and TikTok – on a schedule or from an automation. Book a free, ~20-minute online demo!';
+const keywords =
+  'AI social media posting, social media automation for webshops, ecommerce social media automation, Facebook posting, Instagram posting, TikTok posting, TikTok scheduling, TikTok automation, AI product video, narrated video, content calendar, Content Ninja';
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-posztolas.jpg" lpEnabled>
+<BaseLayout locale={locale} page={page} title={title} description={description} keywords={keywords} ogImage="/assets/og-posztolas.jpg" lpEnabled>
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -933,8 +935,8 @@ const description =
                                     <span
                                         class="material-symbols-outlined text-primary text-[20px]">smart_display</span>
                                 </div>
-                                <span class="text-body font-medium text-lg leading-snug pt-1">Attention-grabbing content
-                                    for Instagram, TikTok and Stories</span>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Attention-grabbing video for the feed,
+                                    Stories and TikTok</span>
                             </li>
                         </ul>
                         <div>
@@ -1011,6 +1013,14 @@ const description =
                                 </div>
                                 <span class="text-body font-medium text-lg leading-snug pt-1">Shows your actual products
                                     in the video.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">send</span>
+                                </div>
+                                <span class="text-body font-medium text-lg leading-snug pt-1">Publishes the finished video on a schedule
+                                    to TikTok, Facebook and Instagram.</span>
                             </li>
                         </ul>
                         <div>
@@ -1314,6 +1324,8 @@ const description =
                                     <span>approx. 166 image posts per month</span>
                                 </div>
                             </div>
+                            <p class="text-sm text-body mt-3">Publishing to Facebook, Instagram and TikTok is free –
+                                it uses no credits.</p>
                         </div>
                         <a href="/en/pricing/#credits" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
                             Detailed credit pricing
