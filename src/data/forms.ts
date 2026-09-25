@@ -64,6 +64,7 @@ export type FormSource =
   | 'webshop-integracio'
   | 'ninja-ai'
   | 'woocommerce'
+  | 'tiktok'
   | 'kapcsolat';
 
 /**
@@ -106,6 +107,11 @@ export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
   // `webshop-integracio` gyűjtőoldal forgalmától. Az app oldalán érdemes a
   // `FORM_LABELS`/`PATH_TO_FORRAS` táblákba is felvenni.
   woocommerce: { hu: '🛒 WooCommerce jelentkezés', en: '🛒 WooCommerce lead' },
+  // A TikTok-posztolás SEO/GEO céloldal (`/hu/tiktok-posztolas/`, csak magyarul).
+  // Külön kulcs, hogy a TikTok-os keresésekből jött érdeklődő elkülönüljön a
+  // `posztolas` forgalomtól. Az app oldalán érdemes a `FORM_LABELS`/`PATH_TO_FORRAS`
+  // táblákba is felvenni.
+  tiktok: { hu: '🎵 TikTok-posztolás jelentkezés', en: '🎵 TikTok posting lead' },
   kapcsolat: { hu: '✉️ Kapcsolat űrlap', en: '✉️ Contact form' },
 };
 

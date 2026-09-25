@@ -208,6 +208,16 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- TikTok-posztolás – SEO/GEO céloldal (csak magyarul, 2026-09-25), FAQPage JSON-LD-vel;
+       a posztolás megoldás-oldal a /hu/posztolas/. -->
+  <url>
+    <loc>https://getcontentninja.com/hu/tiktok-posztolas/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/tiktok-posztolas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/tiktok-posztolas/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Árak és kreditdíjak -->
   <url>
     <loc>https://getcontentninja.com/hu/arak/</loc>

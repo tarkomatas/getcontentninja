@@ -17,6 +17,7 @@ export type PageKey =
   | 'chatgptAdsThanks'
   | 'ninjaAi'
   | 'woocommerce'
+  | 'tiktok'
   | 'newsletter'
   | 'newsletterSignup'
   | 'pricing'
@@ -159,6 +160,17 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // **Csak magyarul** (`en: null`): a spec a Woo-t magyar opcióként pozicionálja,
   // és az app felülete sem angol (`docs/woocommerce-wordpress-terv.md`, 8. pont).
   woocommerce: { hu: '/hu/woocommerce/', en: null },
+  // **TikTok-posztolás – SEO/GEO céloldal** (2026-09-25, a TikTok jóváhagyásának
+  // napján). Ugyanaz az érv, mint a `woocommerce`-nél: a `demo` (posztolás)
+  // megoldás-oldal nem rangsorol a TikTok-os keresésekre („TikTok posztolás
+  // automatikusan", „TikTok ütemezés"), és az AI-keresők olyan oldalból
+  // válaszolnak a „tud-e TikTokra posztolni?" kérdésre, ami ezt a címében kimondja.
+  // Indexelhető, FAQPage JSON-LD-vel, saját `lead_forras`: 'tiktok'. Nem modul
+  // (nincs a `modules.ts`-ben): a posztolás modul egyik csatornája.
+  // Tények: az app `docs/features/tiktok.md`-je.
+  //
+  // **Csak magyarul** (`en: null`): a súgócikk és az app felülete magyar.
+  tiktok: { hu: '/hu/tiktok-posztolas/', en: null },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // **A MI hírlevelünkre való feliratkozás** – nem összekeverendő a fenti

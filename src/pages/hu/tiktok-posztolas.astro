@@ -1,0 +1,895 @@
+---
+/**
+ * **TikTok-posztolás – SEO/GEO céloldal** (`/hu/tiktok-posztolas/`, csak magyarul).
+ *
+ * A `posztolas` megoldás-oldal („AI közösségi média posztolás") nem rangsorol a
+ * TikTok-os keresésekre („TikTok posztolás automatikusan", „TikTok ütemezés",
+ * „TikTok automatizálás webshop"), és az AI-keresők is olyan oldalból válaszolnak a
+ * „tud-e a Content Ninja TikTokra posztolni?" kérdésre, ami ezt a címében kimondja.
+ * Ugyanaz a minta, mint a `woocommerce` oldalnál:
+ *  - a „TikTok" ott van a `<title>`-ben, a H1-ben és a GYIK kérdéseiben,
+ *  - a lap **indexelhető**, a GYIK **FAQPage JSON-LD**-vel is kimegy — a látható GYIK
+ *    és a JSON-LD ugyanabból a `faqs` tömbből épül,
+ *  - a szekciók tényszerű, önmagukban idézhető bekezdésekkel dolgoznak (GEO).
+ *
+ * ⚠️ **A tartalom az app tényleges tudását írja le** (app repó: `docs/features/tiktok.md`,
+ * a TikTok 2026-09-25-én hagyta jóvá). Amit a honlap NEM ígérhet (v1-ben nincs benne):
+ * zene / TikTok-hang, utólagos szerkesztés vagy törlés, TikTok Shop, első hozzászólás,
+ * piszkozat a TikTok-appba, Story TikTokra, külön AI-val írt TikTok-szöveg, TikTok-hirdetés.
+ * A TikTok-beállításokat (láthatóság, reklám-jelölés) az AI NEM töltheti ki — a TikTok
+ * a felhasználó kifejezett választásaként írja elő.
+ *
+ * ⚠️ **Márkahasználat:** a TikTok-logó csak eredeti, módosítatlan formában (fekete jel),
+ * és semmi nem utalhat partnerségre („hivatalos TikTok-partner" stb.) — az app-átvizsgálás
+ * nem partner-státusz. A YouTube (Shorts) még átvizsgálás alatt áll, itt nem szerepel.
+ *
+ * **Csak magyarul** (`en: null`): a súgócikk és az app felülete magyar.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
+import LeadFormScript from '../../components/LeadFormScript.astro';
+import PricingCards from '../../components/PricingCards.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
+
+const locale = 'hu';
+const page = 'tiktok';
+const title = 'Automata TikTok-posztolás webshopoknak – AI poszt és ütemezés | Content Ninja';
+const description =
+  'Kösd be a webshopod TikTok-fiókját: az AI a termékeidből lapozós képsort vagy videót készít, és azonnal, ütemezve vagy automatizmusból kiposztolja TikTokra – a Facebookkal és az Instagrammal együtt, egy naptárból.';
+const keywords =
+  'TikTok posztolás, automatikus TikTok posztolás, TikTok ütemezés, TikTok poszt ütemező, TikTok automatizálás, TikTok webshop marketing, TikTok körhinta, TikTok termékvideó, AI TikTok videó, Content Ninja TikTok';
+
+/** A TikTok-bekötés súgócikke az appban (lépésről lépésre, képernyőképekkel). */
+const HELP_URL = 'https://app.getcontentninja.com/help/tiktok-bekotese-es-posztolas';
+
+/**
+ * GYIK – EGY forrás a látható listának és a FAQPage JSON-LD-nek. A válaszok
+ * szándékosan önmagukban is teljesek: egy AI-kereső egy-egy `acceptedAnswer`-t
+ * emel ki, kontextus nélkül.
+ */
+const faqs = [
+  {
+    q: 'Tud a Content Ninja automatikusan posztolni TikTokra?',
+    a: 'Igen. Bekötöd a webshopod saját TikTok-fiókját, és a Content Ninja a posztjaid képét (lapozós képsorként, legfeljebb 35 képpel) vagy videóját közvetlenül kiposztolja rá: azonnal, ütemezve, automatizmusból vagy tömeges generálásból. Ugyanaz a poszt egyszerre Facebookra és Instagramra is kimehet, és mindhármat egy naptárban látod.',
+  },
+  {
+    q: 'Hogyan kötöm be a TikTok-fiókomat?',
+    a: 'Az appban az Integrációk között a TikTok csempén a „Bejelentkezés TikTokkal" gombra kattintasz. A TikTok saját ablakában látod, mihez kér hozzáférést a Content Ninja (profil, statisztika, videólista, posztolás), és ott engedélyezed. Visszatérve kiválasztod, melyik márkádhoz tartozzon a fiók – ennyi. A jelszavadat nem adod meg nekünk. A részletes, képernyőképes útmutató a súgóközpontunkban van.',
+  },
+  {
+    q: 'Milyen tartalmat tud TikTokra posztolni?',
+    a: 'Képes posztot lapozós képsorként (legfeljebb 35 kép) és videót – például az AI által készített termékvideót vagy narrátorvideót. Képes posztnál a TikTok-cím a poszt szövegének első sora (90 karakterig), a leírás a teljes szöveg; videónál a leírás legfeljebb 2200 karakter. Kép vagy videó nélküli, csak szöveges poszt nem mehet ki TikTokra. Az AI-val készült képek és videók automatikusan „AI-generált" jelölést kapnak.',
+  },
+  {
+    q: 'Miért kell minden posztnál kiválasztanom, ki láthatja, és hogy reklámot tartalmaz-e?',
+    a: 'Mert a TikTok így írja elő: a láthatóságot (például mindenki vagy csak a követőid), a hozzászólás, a Duett és a Stitch engedélyezését, valamint a reklám-jelölést a fiók tulajdonosának kell kifejezetten kiválasztania – előre semmi sincs bejelölve, és az AI sem töltheti ki helyetted. Automatizmusnál és sablonnál ezt egyszer, mentéskor hagyod jóvá, onnantól a létrejövő posztok ezt öröklik.',
+  },
+  {
+    q: 'Posztolhatok ugyanazzal a poszttal egyszerre Facebookra, Instagramra és TikTokra?',
+    a: 'Igen. Egy posztnál több fiókot is kiválaszthatsz, így ugyanaz a tartalom mindhárom platformra kimegy. A Story formátum csak a Facebookra és az Instagramra vonatkozik – TikTokra ilyenkor normál poszt megy.',
+  },
+  {
+    q: 'Kerül külön pénzbe a TikTok-posztolás?',
+    a: 'Nem. A TikTok-integráció a Content Ninja előfizetés része, és maga a publikálás – TikTokra, Facebookra és Instagramra is – nem fogyaszt kreditet. Kreditbe csak a tartalom elkészítése kerül (szöveg, kép, videó), ugyanannyiba, mint bármelyik másik posztnál.',
+  },
+  {
+    q: 'Több TikTok-fiókot is beköthetek?',
+    a: 'Igen. Egy márkához több TikTok-fiók is tartozhat, és egy Content Ninja fiókban több márkát is kezelhetsz. Ha egy posztnál több TikTok-fiókot választasz, a beállításokat fiókonként adod meg.',
+  },
+  {
+    q: 'Hol látom, hogyan teljesítenek a TikTok-videóim?',
+    a: 'Az Analitikán, a Facebook és az Instagram mellett, platform-szűrővel. A TikTok-fiókod nyilvános videóinál látszik a megtekintés, a kedvelés, a hozzászólás és a megosztás, a követőszámod pedig napi görbén. A számokat naponta frissítjük, így egy frissen bekötött fiók adatai másnap reggelre jelennek meg.',
+  },
+  {
+    q: 'Mit nem tud a TikTok-integráció?',
+    a: 'Zenét vagy TikTok-hangot nem tesz a posztra, a már kiküldött TikTok-posztot nem szerkeszti és nem törli (ezt a TikTok nem engedi), a TikTok Shopot nem kezeli, és első hozzászólást sem ír TikTokon. TikTokra jelenleg ugyanaz a posztszöveg megy ki, mint a többi platformra.',
+  },
+  {
+    q: 'Mi történik, ha visszavonom az engedélyt a TikTok-appban?',
+    a: 'A kapcsolat azonnal leáll, az app ezt jelzi, és a Content Ninja onnantól nem posztol a fiókodra. Ha újra szeretnéd, a „Kapcsolat frissítése" gombbal bármikor visszakötheted.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+/** A „Mit csinál a TikTok-fiókoddal?" kártyái – mindegyik a saját részletező szekciójára visz. */
+const values = [
+  {
+    icon: 'auto_awesome',
+    href: '#tartalom',
+    title: 'Elkészíti a tartalmat',
+    desc: 'Az AI a webshopod termékeiből szöveget ír, lapozós képsort vagy videót készít.',
+  },
+  {
+    icon: 'schedule_send',
+    href: '#automatizmus',
+    title: 'Kiposztolja helyetted',
+    desc: 'Azonnal, ütemezve vagy automatizmusból – ugyanabból a naptárból, mint a Facebookot és az Instagramot.',
+  },
+  {
+    icon: 'monitoring',
+    href: '#analitika',
+    title: 'Megmutatja, mi működik',
+    desc: 'Megtekintés, kedvelés és követőszám az Analitikán, a többi platform mellett.',
+  },
+];
+
+/** A bekötés három lépése (`#hogyan-mukodik`). */
+const steps = [
+  { title: '„Bejelentkezés TikTokkal"', desc: 'Az appban, az Integrációk között a TikTok csempén.' },
+  { title: 'Engedélyezed a TikTokon', desc: 'A TikTok saját ablakában látod, mihez kér hozzáférést a Content Ninja.' },
+  { title: 'Márkához rendeled – és kész', desc: 'Kiválasztod, melyik márkádhoz tartozzon a fiók. A jelszavadat nem adod meg nekünk.' },
+];
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogImage="/assets/og-posztolas.jpg"
+  lpEnabled
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
+  <Fragment slot="head">
+    <!-- Csak az űrlap saját stílusai: a reset, a címsorok, a `.cta-*` és a
+         `.hero-gradient` a közös `global.css`-ből jön. -->
+    <style is:inline>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-form-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+            border: 1.5px solid rgba(108, 92, 231, 0.24);
+            box-shadow: 0 18px 55px rgba(30, 30, 47, 0.12), 0 0 0 6px rgba(108, 92, 231, 0.06);
+        }
+
+        .hero-form-card:hover {
+            border-color: rgba(108, 92, 231, 0.36);
+            box-shadow: 0 22px 65px rgba(30, 30, 47, 0.15), 0 0 0 6px rgba(108, 92, 231, 0.08);
+        }
+    </style>
+  </Fragment>
+
+  <div class="relative flex min-h-screen w-full flex-col">
+    <!-- Közös fejléc – ?type=ld (lp-mode) esetén minimálra vált (logó + nyelvváltó) -->
+    <Header locale={locale} page={page} />
+
+    <!-- 1. Hero + Jelentkezési űrlap -->
+    <section id="hero" class="hero-gradient py-12 md:py-16 px-4 md:px-10 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
+
+                <!-- Content -->
+                <div class="flex flex-col gap-4 md:gap-6 text-left">
+
+                    <!-- Eyebrow: a TikTok-jel maga a felirat (a woocommerce oldal mintájára).
+                         EREDETI, MÓDOSÍTATLAN márkajel – átszínezni/torzítani tilos. -->
+                    <span class="inline-flex items-center gap-2 self-start bg-card border border-border rounded-full px-3.5 py-1.5 shadow-card">
+                        <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="#000000" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                        <span class="text-dark text-xs font-bold">TikTok</span>
+                        <span class="text-primary text-xs font-bold uppercase tracking-widest">integráció</span>
+                    </span>
+
+                    <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
+                        Automata TikTok-posztolás <span class="text-primary">webshopoknak</span>
+                    </h1>
+
+                    <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[540px]">
+                        Az AI a termékeidből <span class="font-bold text-primary">lapozós képsort vagy videót
+                        készít</span>, és <span class="font-bold text-primary">ütemezve vagy automatizmusból</span>
+                        kiposztolja a TikTok-fiókodra – a Facebookkal és az Instagrammal együtt, egy naptárból.
+                    </p>
+
+                    <ul class="space-y-3 text-body">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Bekötés <strong>„Bejelentkezés TikTokkal"</strong> gombbal – jelszót nem adsz meg</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Lapozós képsor</strong> (max. 35 kép) vagy <strong>videó</strong>, akár narrátorvideó</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>A publikálás <strong>nem fogyaszt kreditet</strong> – egyik platformon sem</span>
+                        </li>
+                    </ul>
+
+                    <!-- Csatornák (kis kártyák) – a TikTok elöl: erről szól az oldal -->
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <span class="text-sm font-semibold text-muted">Csatornák:</span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#000000" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                            TikTok
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
+                            Facebook
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGradTt" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#igGradTt)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="16.2" cy="7.8" r="1" fill="#fff"/></svg>
+                            Instagram
+                        </span>
+                    </div>
+
+                    <!-- Social proof mini (a woocommerce oldalról átvéve) -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">Sz</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center text-white text-xs font-bold border-2 border-white">L</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">ÁK</div>
+                        </div>
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ hazai webshop</span> már használja</p>
+                    </div>
+
+                </div>
+
+                <!-- Form Container -->
+                <div class="w-full relative">
+                    <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
+                        <div id="formIntro">
+                            <h2 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online bemutatóra</h2>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
+                                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">Közvetlen kipróbálásra
+                                    nincs lehetőség</strong> – de egy online megbeszélés keretében bemutatjuk neked a
+                                    rendszert részletesen, akár a te saját webáruházad termékeivel.</p>
+                            </div>
+                        </div>
+
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                            <HoneypotField />
+
+                            <!-- Step 1: Qualifying Questions -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="UNAS">UNAS</option>
+                                            <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
+                                            <option value="Egyéb">Egyéb</option>
+                                            <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
+                                                indítani</option>
+                                            <option value="Más típusú vállalkozásom van" data-reject="hard">Más típusú vállalkozásom
+                                                van</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Milyen szinten van a céged
+                                            a marketingben?</label>
+                                        <select name="marketing_level" id="marketingLevel"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Egyáltalán nem értünk semmit a témához" data-reject="hard">Egyáltalán nem értünk
+                                                semmit a témához</option>
+                                            <option value="Kezdő, minimális tudással">Kezdő, minimális tudással</option>
+                                            <option value="Haladó">Haladó</option>
+                                            <option value="Profi">Profi</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ki csinálja jelenleg a
+                                            posztolást?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Én, cégvezetőként">Én, cégvezetőként</option>
+                                            <option value="Belsős marketing csapat">Belsős marketing csapat</option>
+                                            <option value="Külsős ügynökség">Külsős ügynökség</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ha a bemutató alapján
+                                            tetszik, mikor tudnád elkezdeni használni a szoftvert?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Azonnal">Azonnal</option>
+                                            <option value="1 hónapon belül">1 hónapon belül</option>
+                                            <option value="2-3 hónapon belül" data-reject="soft">2-3 hónapon belül</option>
+                                            <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Tovább
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Disqualification Screen (hard reject) -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        A megadott adatok alapján úgy látjuk, hogy nem lenne a platformunk megfelelő
+                                        számodra. Így nem is szeretnénk az idődet húzni, megértésed köszönjük!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Screen (timing not ideal) -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            A bemutatót csak olyanoknak tudjuk vállalni, akik azonnal használni szeretnék
+                                            a rendszert. Maradjunk kapcsolatban addig is – szívesen elküldenénk egy
+                                            <strong>videós bemutatót</strong> neked.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email cím</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles/"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject(this)"
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Kérem a videót
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Soft Reject Thank You Screen -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Megkaptuk!</h4>
+                                    <!-- Két változat: az „újdonságok" csak akkor igaz, ha a hírlevelet is kérte.
+                                         A videó minden esetben megy – a script választ közülük. -->
+                                    <p data-thanks="plain" class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Néhány percen belül elküldjük a bemutató videót. Köszönjük az érdeklődésedet!
+                                    </p>
+                                    <p data-thanks="newsletter" class="hidden text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Néhány percen belül elküldjük a bemutató videót, és ezentúl az aktuális újdonságokról is hírt adunk. Köszönjük az érdeklődésedet!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Info & Privacy -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Név</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. Kovács János">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Céges email cím</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Telefonszám</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+36 30 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles/"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Vissza
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                            Tovább az időpontfoglaláshoz!
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hitelesítések: Meta Tech Provider + UNAS partner (közös komponens) -->
+    <TrustBadges locale={locale} />
+
+    <!-- 2. Mit csinál a TikTok-fiókoddal? – a kártyák a lenti részletező szekciókra visznek -->
+    <section id="funkciok" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Egy bekötés, három feladat 🧩</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit csinál a Content Ninja a TikTok-fiókoddal?</h2>
+                <p class="text-body text-lg leading-relaxed">
+                    Mindhárom ugyanabból a termékkatalógusból és ugyanabból a naptárból dolgozik, mint a Facebook és
+                    az Instagram.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {values.map((v) => (
+                    <a href={v.href}
+                        class="group bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex flex-col">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                            <span class="material-symbols-outlined text-[22px]">{v.icon}</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 text-dark">{v.title}</h3>
+                        <p class="text-body text-sm leading-relaxed mb-5 flex-1">{v.desc}</p>
+                        <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                            Részletek
+                            <span class="material-symbols-outlined text-[18px] group-hover:translate-y-0.5 transition-transform">arrow_downward</span>
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Mi megy ki TikTokra? – képsor és videó -->
+    <section id="tartalom" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="order-1 md:order-1">
+                    <div class="relative w-full aspect-square rounded-[16px] overflow-hidden shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
+                        <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
+                            <source src="/assets/narrator-demo.mp4" type="video/mp4">
+                            A böngésződ nem támogatja a videó lejátszást.
+                        </video>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center order-2 md:order-2">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Tartalom a termékeidből 🎬</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Lapozós képsor vagy
+                        videó – a TikTokra szabva</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        Az AI a webshopod termékeiből megírja a szöveget, és <strong>képet vagy videót</strong> készít
+                        hozzá. TikTokra az megy ki, amit a poszt tartalmaz.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">view_carousel</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Lapozós képsor</strong>
+                                a termékképekből – legfeljebb 35 kép</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">movie</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Termékvideó vagy
+                                narrátorvideó</strong> AI hanggal és felirattal</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">stay_current_portrait</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Álló (9:16)
+                                előnézet</strong> – kiküldés előtt látod, hogyan jelenik meg</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Az AI-val készült média
+                                automatikusan <strong>„AI-generált"</strong> jelölést kap</span>
+                        </li>
+                    </ul>
+                    <div class="flex items-center gap-4 flex-wrap">
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
+                            Ezt látnom kell!
+                        </a>
+                        <a href="/hu/posztolas/" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                            Az automata posztolásról
+                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Ütemezés és automatizmus – ugyanaz a naptár, mint a FB/IG-é -->
+    <section id="automatizmus" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="flex flex-col justify-center order-2 md:order-1">
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Automatizálás 🤖</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Egyszer beállítod,
+                        utána a TikTok is magától megy</h2>
+                    <p class="text-lg text-body mb-8 leading-relaxed">
+                        A TikTok-poszt <strong>ugyanabba a naptárba</strong> kerül, mint a Facebook és az Instagram –
+                        nem kell külön eszköz, külön felület.
+                    </p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Azonnal vagy
+                                <strong>ütemezve</strong>, a tartalomnaptárból</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">autorenew</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Automatizmusból</strong> –
+                                a kiválasztott termékekből magától készít és posztol</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">stacks</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Tömeges
+                                generálás</strong> – egyszerre több posztot készít és ütemez</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">group</span>
+                            </div>
+                            <span class="text-body font-medium text-lg leading-snug pt-1">Egy márkához
+                                <strong>több TikTok-fiók</strong> is beköthető</span>
+                        </li>
+                    </ul>
+
+                    <!-- Szövegközi hivatkozás a Ninja AI oldalra – ugyanaz a néma ellenvetés,
+                         mint a posztolás oldalon („bonyolult beállítani"). A TikTok-beállítást az
+                         AI NEM töltheti ki (a TikTok előírása), ezt itt ki is mondjuk. -->
+                    <p class="text-body mb-8 leading-relaxed">
+                        Az automatizmust a beépített
+                        <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>
+                        chatből is összerakja neked. A TikTok-beállításokat viszont te választod ki – ezt a TikTok
+                        így írja elő.
+                    </p>
+
+                    <div>
+                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
+                            Automatizálni akarom!
+                        </a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="/assets/naptar-latvanykep.webp"
+                        alt="Content Ninja tartalomnaptár: az ütemezett posztok egy naptárban"
+                        loading="lazy" class="w-full h-auto rounded-[16px] shadow-card hover:shadow-card-hover transition-all">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Minden posztnál te döntesz – a TikTok kötelező elemei (bizalom + ellenvetés-kezelés) -->
+    <section id="beallitasok" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Te irányítasz 🎛️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Minden posztnál te döntesz – ahogy a TikTok előírja</h2>
+                <p class="text-body text-lg leading-relaxed">
+                    Előre semmi nincs bejelölve. Automatizmusnál a beállításokat <strong>egyszer, mentéskor</strong>
+                    hagyod jóvá, onnantól a posztok ezt öröklik.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">visibility</span>
+                    <h3 class="font-bold text-lg mb-2">Ki láthatja?</h3>
+                    <p class="text-body text-sm leading-relaxed">Mindenki, a követőid, a kölcsönös követők vagy csak
+                        te – a fiókod által engedett lehetőségek közül választasz.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">sell</span>
+                    <h3 class="font-bold text-lg mb-2">Reklámot tartalmaz?</h3>
+                    <p class="text-body text-sm leading-relaxed">Ha a poszt a saját márkádat népszerűsíti, vagy fizetett
+                        együttműködés, bejelölöd – a TikTok ennek megfelelően címkézi.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">forum</span>
+                    <h3 class="font-bold text-lg mb-2">Hozzászólás, Duett, Stitch</h3>
+                    <p class="text-body text-sm leading-relaxed">Te engedélyezed, mit tehetnek mások a posztoddal.</p>
+                </div>
+            </div>
+
+            <!-- Amit NEM tud – egy sáv, hogy a látogató ne a bemutatón csalódjon. -->
+            <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">info</span>
+                </div>
+                <p class="text-body leading-relaxed flex-1"><strong class="text-dark">Amit nem csinál:</strong> zenét vagy
+                    TikTok-hangot nem tesz a posztra, a kiküldött posztot nem szerkeszti és nem törli (ezt a TikTok nem
+                    engedi), és a TikTok Shopot sem kezeli.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Hogyan működik: bekötés „Bejelentkezés TikTokkal" gombbal -->
+    <section id="hogyan-mukodik" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🔌</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">3 lépés, és a TikTok-fiókod be van kötve</h2>
+                <p class="text-body text-lg leading-relaxed">
+                    A saját TikTok-fiókodat kötöd be, a TikTok hivatalos bejelentkezésével. Az engedélyt a TikTok-appban
+                    bármikor visszavonhatod.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {steps.map((s, i) => (
+                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
+                        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">{i + 1}</div>
+                        <h3 class="font-bold text-lg mb-3">{s.title}</h3>
+                        <p class="text-body text-sm leading-relaxed">{s.desc}</p>
+                    </div>
+                ))}
+            </div>
+
+            <p class="text-center text-body text-sm mt-10">
+                Lépésről lépésre, képernyőképekkel:
+                <a href={HELP_URL} target="_blank" rel="noopener" class="text-primary font-semibold underline">a TikTok
+                    bekötése és a posztolás a súgóban</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- 7. Analitika -->
+    <section id="analitika" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Analitika 📊</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">A TikTok-számaid ott, ahol a többi</h2>
+                <p class="text-body text-lg leading-relaxed">
+                    Az Analitikán a TikTok a Facebook és az Instagram mellé kerül – egy nézetben látod, melyik platform
+                    és melyik poszt hozza a legtöbbet.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">play_circle</span>
+                    <h3 class="font-bold text-lg mb-2">Videónként</h3>
+                    <p class="text-body text-sm leading-relaxed">Megtekintés, kedvelés, hozzászólás és megosztás a
+                        nyilvános videóidra.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">trending_up</span>
+                    <h3 class="font-bold text-lg mb-2">Követők</h3>
+                    <p class="text-body text-sm leading-relaxed">A követőszámod napi görbén.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">emoji_events</span>
+                    <h3 class="font-bold text-lg mb-2">Top posztok</h3>
+                    <p class="text-body text-sm leading-relaxed">A legjobb posztok közt a TikTok-videók is – az appból
+                        küldöttek jelölve.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">filter_alt</span>
+                    <h3 class="font-bold text-lg mb-2">Platform-szűrő</h3>
+                    <p class="text-body text-sm leading-relaxed">Együtt vagy külön: TikTok, Facebook, Instagram.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. És amit a rendszer amúgy is tud (közös modulrács) – a posztolás maga ennek az
+         oldalnak a témája, ezért az marad ki: 9 kártya = tiszta 3×3 rács. -->
+    <ModuleGrid
+        locale={locale}
+        exclude="posting"
+        sectionId="features-cards"
+        sectionClass="bg-light py-20 md:py-28"
+        cardClass="bg-card"
+        heading="És amit a rendszer amúgy is tud"
+        lead="A Content Ninja egy teljes AI marketing platform – minden, ami egy webshop tartalomgyártásához kell."
+    />
+
+    <!-- 9. Árazás -->
+    <section id="arazas" class="bg-card py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
+                <p class="text-body text-lg">Csatlakozz a korai regisztrálók közé és tartsd meg a kedvezményes árat hosszú távon.</p>
+            </div>
+
+            <PricingCards locale={locale} ctaHref="#hero" />
+
+            <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Mire elég 500 kredit?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-body">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+                                <span>1 posztszöveg = 1 kredit</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">image</span>
+                                <span>1 képgenerálás (Nano Banana) = 2 kredit</span>
+                            </div>
+                            <div class="flex items-center gap-2 font-bold text-dark">
+                                <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                                <span>kb. 166 képes poszt havonta</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-body mt-3">A publikálás TikTokra, Facebookra és Instagramra ingyenes – nem
+                            fogyaszt kreditet.</p>
+                    </div>
+                    <a href="/hu/arak/#kreditek" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                        Részletes kreditdíjak
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
+    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[800px] mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Gyakran ismételt kérdések a TikTok-posztolásról</h2>
+            </div>
+
+            <div class="space-y-3">
+                {faqs.map((f) => (
+                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                        <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                            onclick="toggleFaq(this)">
+                            {f.q}
+                            <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                            {f.a}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Záró CTA -->
+    <section class="bg-primary py-16 md:py-20">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg, mi menne ki a te TikTokodra</h2>
+            <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
+                Egy online bemutatón végigmegyünk a rendszeren – akár a te saját webáruházad termékeivel.
+            </p>
+            <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
+                Bemutatót kérek
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer (kampányoldali, minimál – a woocommerce oldal mintájára) -->
+    <footer id="contact" class="py-12 bg-dark text-muted text-sm border-t border-dark/90">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="bg-white p-3 rounded-xl inline-block mb-4"><img src="/assets/logo.webp" alt="Content Ninja logó" class="h-8 md:h-10"></div>
+                    <p class="text-muted">Egy rendszer, ami a webshopod nevében készít marketing tartalmakat
+                        futószalagon – közvetlenül a webáruházad termékeiből.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Információk</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://app.getcontentninja.com/changelog" class="hover:text-white">Újdonságok</a></li>
+                        <li><a href="/hu/adatkezeles/" class="hover:text-white">Adatkezelési tájékoztató</a></li>
+                        <li><a href="/hu/impresszum/" class="hover:text-white">Impresszum</a></li>
+                        <li><a href="/hu/aszf/" class="hover:text-white">ÁSZF</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>Copyright © getcontentninja.com | 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GYIK script -->
+    <script is:inline>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+    </script>
+
+    <!-- Lead form script -->
+    <LeadFormScript locale={locale} source="tiktok" />
+  </div>
+</BaseLayout>
