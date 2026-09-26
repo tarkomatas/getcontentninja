@@ -12,8 +12,15 @@
  *    és a JSON-LD ugyanabból a `faqs` tömbből épül,
  *  - a szekciók tényszerű, önmagukban idézhető bekezdésekkel dolgoznak (GEO).
  *
- * ⚠️ **A tartalom az app tényleges tudását írja le** (app repó: `docs/features/tiktok.md`,
- * a TikTok 2026-09-25-én hagyta jóvá). Amit a honlap NEM ígérhet (v1-ben nincs benne):
+ * ⚠️ **HAMAROSAN-oldal (2026-09-26 óta):** a TikTok-integráció elkészült, de az előfizetők
+ * még nem használhatják — az oldal ezért mindent jövő időben ír le, a hero és a GYIK első
+ * válasza kimondja, hogy „hamarosan", és nincs rajta súgólink. Az állapot forrása a
+ * `src/data/socialPlatforms.ts`. Élesedéskor: ott `live`, itt a szöveg vissza jelen időbe,
+ * és a súgócikk linkje (`https://app.getcontentninja.com/help/tiktok-bekotese-es-posztolas`)
+ * visszakerülhet a „Hogyan működik" szekció alá és a bekötés GYIK-válaszába.
+ *
+ * ⚠️ **A tartalom az app tényleges tudását írja le** (app repó: `docs/features/tiktok.md`).
+ * Amit a honlap NEM ígérhet (v1-ben nincs benne):
  * zene / TikTok-hang, utólagos szerkesztés vagy törlés, TikTok Shop, első hozzászólás,
  * piszkozat a TikTok-appba, Story TikTokra, külön AI-val írt TikTok-szöveg, TikTok-hirdetés.
  * A TikTok-beállításokat (láthatóság, reklám-jelölés) az AI NEM töltheti ki — a TikTok
@@ -32,17 +39,15 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import SoonBadge from '../../components/SoonBadge.astro';
 
 const locale = 'hu';
 const page = 'tiktok';
-const title = 'Automata TikTok-posztolás webshopoknak – AI poszt és ütemezés | Content Ninja';
+const title = 'Automata TikTok-posztolás webshopoknak – hamarosan | Content Ninja';
 const description =
-  'Kösd be a webshopod TikTok-fiókját: az AI a termékeidből lapozós képsort vagy videót készít, és azonnal, ütemezve vagy automatizmusból kiposztolja TikTokra – a Facebookkal és az Instagrammal együtt, egy naptárból.';
+  'Hamarosan érkezik: a Content Ninja a webshopod termékeiből lapozós képsort vagy videót készít, és azonnal, ütemezve vagy automatizmusból kiposztolja TikTokra – a Facebookkal és az Instagrammal együtt, egy naptárból. Az integráció elkészült.';
 const keywords =
   'TikTok posztolás, automatikus TikTok posztolás, TikTok ütemezés, TikTok poszt ütemező, TikTok automatizálás, TikTok webshop marketing, TikTok körhinta, TikTok termékvideó, AI TikTok videó, Content Ninja TikTok';
-
-/** A TikTok-bekötés súgócikke az appban (lépésről lépésre, képernyőképekkel). */
-const HELP_URL = 'https://app.getcontentninja.com/help/tiktok-bekotese-es-posztolas';
 
 /**
  * GYIK – EGY forrás a látható listának és a FAQPage JSON-LD-nek. A válaszok
@@ -52,43 +57,31 @@ const HELP_URL = 'https://app.getcontentninja.com/help/tiktok-bekotese-es-poszto
 const faqs = [
   {
     q: 'Tud a Content Ninja automatikusan posztolni TikTokra?',
-    a: 'Igen. Bekötöd a webshopod saját TikTok-fiókját, és a Content Ninja a posztjaid képét (lapozós képsorként, legfeljebb 35 képpel) vagy videóját közvetlenül kiposztolja rá: azonnal, ütemezve, automatizmusból vagy tömeges generálásból. Ugyanaz a poszt egyszerre Facebookra és Instagramra is kimehet, és mindhármat egy naptárban látod.',
+    a: 'Hamarosan. A TikTok-integráció elkészült, és hamarosan minden előfizetőnek elérhetővé válik – addig a Content Ninja Facebookra és Instagramra posztol. Élesítés után bekötheted a webshopod saját TikTok-fiókját, és a Content Ninja a posztjaid képét (lapozós képsorként) vagy videóját közvetlenül kiposztolja rá: azonnal, ütemezve, automatizmusból vagy tömeges generálásból, a Facebookkal és az Instagrammal együtt, egy naptárból.',
   },
   {
-    q: 'Hogyan kötöm be a TikTok-fiókomat?',
-    a: 'Az appban az Integrációk között a TikTok csempén a „Bejelentkezés TikTokkal" gombra kattintasz. A TikTok saját ablakában látod, mihez kér hozzáférést a Content Ninja (profil, statisztika, videólista, posztolás), és ott engedélyezed. Visszatérve kiválasztod, melyik márkádhoz tartozzon a fiók – ennyi. A jelszavadat nem adod meg nekünk. A részletes, képernyőképes útmutató a súgóközpontunkban van.',
+    q: 'Mikor lesz elérhető a TikTok-posztolás?',
+    a: 'Hamarosan: az integráció elkészült, és a bekapcsolás után minden előfizetőnek elérhető lesz, külön díj nélkül. Ha kérsz egy online bemutatót, azon megmutatjuk azt is, hogyan fog működni a TikTok-posztolás a saját termékeiddel.',
   },
   {
-    q: 'Milyen tartalmat tud TikTokra posztolni?',
-    a: 'Képes posztot lapozós képsorként (legfeljebb 35 kép) és videót – például az AI által készített termékvideót vagy narrátorvideót. Képes posztnál a TikTok-cím a poszt szövegének első sora (90 karakterig), a leírás a teljes szöveg; videónál a leírás legfeljebb 2200 karakter. Kép vagy videó nélküli, csak szöveges poszt nem mehet ki TikTokra. Az AI-val készült képek és videók automatikusan „AI-generált" jelölést kapnak.',
+    q: 'Hogyan kötöm majd be a TikTok-fiókomat?',
+    a: 'Az appban az Integrációk között a TikTok csempén a „Bejelentkezés TikTokkal" gombra kattintasz. A TikTok saját ablakában látod, mihez kér hozzáférést a Content Ninja (profil, statisztika, videólista, posztolás), és ott engedélyezed. Visszatérve kiválasztod, melyik márkádhoz tartozzon a fiók – ennyi. A jelszavadat nem adod meg nekünk.',
   },
   {
-    q: 'Miért kell minden posztnál kiválasztanom, ki láthatja, és hogy reklámot tartalmaz-e?',
+    q: 'Milyen tartalmat tud majd TikTokra posztolni?',
+    a: 'Képes posztot lapozós képsorként (legfeljebb 35 kép) és videót – például az AI által készített termékvideót vagy narrátorvideót. Kép vagy videó nélküli, csak szöveges poszt nem mehet ki TikTokra. Az AI-val készült képek és videók automatikusan „AI-generált" jelölést kapnak.',
+  },
+  {
+    q: 'Miért kell majd minden posztnál kiválasztanom, ki láthatja, és hogy reklámot tartalmaz-e?',
     a: 'Mert a TikTok így írja elő: a láthatóságot (például mindenki vagy csak a követőid), a hozzászólás, a Duett és a Stitch engedélyezését, valamint a reklám-jelölést a fiók tulajdonosának kell kifejezetten kiválasztania – előre semmi sincs bejelölve, és az AI sem töltheti ki helyetted. Automatizmusnál és sablonnál ezt egyszer, mentéskor hagyod jóvá, onnantól a létrejövő posztok ezt öröklik.',
   },
   {
-    q: 'Posztolhatok ugyanazzal a poszttal egyszerre Facebookra, Instagramra és TikTokra?',
-    a: 'Igen. Egy posztnál több fiókot is kiválaszthatsz, így ugyanaz a tartalom mindhárom platformra kimegy. A Story formátum csak a Facebookra és az Instagramra vonatkozik – TikTokra ilyenkor normál poszt megy.',
+    q: 'Kerül majd külön pénzbe a TikTok-posztolás?',
+    a: 'Nem. A TikTok-integráció a Content Ninja előfizetés része lesz, és maga a publikálás nem fogyaszt kreditet – ahogy ma a Facebookra és Instagramra sem. Kreditbe csak a tartalom elkészítése kerül (szöveg, kép, videó), ugyanannyiba, mint bármelyik másik posztnál.',
   },
   {
-    q: 'Kerül külön pénzbe a TikTok-posztolás?',
-    a: 'Nem. A TikTok-integráció a Content Ninja előfizetés része, és maga a publikálás – TikTokra, Facebookra és Instagramra is – nem fogyaszt kreditet. Kreditbe csak a tartalom elkészítése kerül (szöveg, kép, videó), ugyanannyiba, mint bármelyik másik posztnál.',
-  },
-  {
-    q: 'Több TikTok-fiókot is beköthetek?',
-    a: 'Igen. Egy márkához több TikTok-fiók is tartozhat, és egy Content Ninja fiókban több márkát is kezelhetsz. Ha egy posztnál több TikTok-fiókot választasz, a beállításokat fiókonként adod meg.',
-  },
-  {
-    q: 'Hol látom, hogyan teljesítenek a TikTok-videóim?',
-    a: 'Az Analitikán, a Facebook és az Instagram mellett, platform-szűrővel. A TikTok-fiókod nyilvános videóinál látszik a megtekintés, a kedvelés, a hozzászólás és a megosztás, a követőszámod pedig napi görbén. A számokat naponta frissítjük, így egy frissen bekötött fiók adatai másnap reggelre jelennek meg.',
-  },
-  {
-    q: 'Mit nem tud a TikTok-integráció?',
-    a: 'Zenét vagy TikTok-hangot nem tesz a posztra, a már kiküldött TikTok-posztot nem szerkeszti és nem törli (ezt a TikTok nem engedi), a TikTok Shopot nem kezeli, és első hozzászólást sem ír TikTokon. TikTokra jelenleg ugyanaz a posztszöveg megy ki, mint a többi platformra.',
-  },
-  {
-    q: 'Mi történik, ha visszavonom az engedélyt a TikTok-appban?',
-    a: 'A kapcsolat azonnal leáll, az app ezt jelzi, és a Content Ninja onnantól nem posztol a fiókodra. Ha újra szeretnéd, a „Kapcsolat frissítése" gombbal bármikor visszakötheted.',
+    q: 'Mit nem fog tudni a TikTok-integráció?',
+    a: 'Zenét vagy TikTok-hangot nem tesz a posztra, a már kiküldött TikTok-posztot nem szerkeszti és nem törli (ezt a TikTok nem engedi), a TikTok Shopot nem kezeli, és első hozzászólást sem ír TikTokon. TikTokra ugyanaz a posztszöveg megy ki, mint a többi platformra.',
   },
 ];
 
@@ -217,6 +210,7 @@ const steps = [
                         <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="#000000" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                         <span class="text-dark text-xs font-bold">TikTok</span>
                         <span class="text-primary text-xs font-bold uppercase tracking-widest">integráció</span>
+                        <SoonBadge locale={locale} />
                     </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
@@ -224,11 +218,20 @@ const steps = [
                     </h1>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[540px]">
-                        Az AI a termékeidből <span class="font-bold text-primary">lapozós képsort vagy videót
+                        Hamarosan: az AI a termékeidből <span class="font-bold text-primary">lapozós képsort vagy videót
                         készít</span>, és <span class="font-bold text-primary">ütemezve vagy automatizmusból</span>
                         kiposztolja a TikTok-fiókodra – a Facebookkal és az Instagrammal együtt, egy naptárból.
                     </p>
 
+                    <!-- Állapotjelzés: a TikTok még nem él (src/data/socialPlatforms.ts). -->
+                    <div class="flex items-start gap-2.5 bg-card border border-primary/15 rounded-[10px] px-4 py-3 max-w-[540px]">
+                        <span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">schedule</span>
+                        <p class="text-sm text-body"><strong class="font-bold text-dark">Hamarosan elérhető.</strong>
+                            Az integráció elkészült, és hamarosan minden előfizetőnek bekapcsoljuk. Addig a Content Ninja
+                            Facebookra és Instagramra posztol.</p>
+                    </div>
+
+                    <p class="text-sm font-semibold text-muted -mb-1">Amit a TikTok-integráció tudni fog:</p>
                     <ul class="space-y-3 text-body">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
@@ -250,6 +253,7 @@ const steps = [
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#000000" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                             TikTok
+                            <SoonBadge locale={locale} />
                         </span>
                         <span class="inline-flex items-center gap-1.5 bg-card border border-border rounded-[10px] px-2.5 py-1.5 text-sm font-semibold text-dark shadow-card">
                             <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M14.9 12.5l.35-2.3h-2.2V8.7c0-.63.31-1.24 1.3-1.24h1V5.5s-.9-.15-1.77-.15c-1.8 0-2.98 1.1-2.98 3.07v1.78H8.6v2.3h1.99V18h2.45v-5.5h1.86z" fill="#fff"/></svg>
@@ -491,7 +495,7 @@ const steps = [
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Egy bekötés, három feladat 🧩</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit csinál a Content Ninja a TikTok-fiókoddal?</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit csinál majd a Content Ninja a TikTok-fiókoddal?</h2>
                 <p class="text-body text-lg leading-relaxed">
                     Mindhárom ugyanabból a termékkatalógusból és ugyanabból a naptárból dolgozik, mint a Facebook és
                     az Instagram.
@@ -535,7 +539,7 @@ const steps = [
                         videó – a TikTokra szabva</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
                         Az AI a webshopod termékeiből megírja a szöveget, és <strong>képet vagy videót</strong> készít
-                        hozzá. TikTokra az megy ki, amit a poszt tartalmaz.
+                        hozzá. TikTokra az megy majd ki, amit a poszt tartalmaz.
                     </p>
                     <ul class="space-y-5 mb-8">
                         <li class="flex items-start gap-4">
@@ -588,9 +592,9 @@ const steps = [
                 <div class="flex flex-col justify-center order-2 md:order-1">
                     <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Automatizálás 🤖</span>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Egyszer beállítod,
-                        utána a TikTok is magától megy</h2>
+                        utána a TikTok is magától megy majd</h2>
                     <p class="text-lg text-body mb-8 leading-relaxed">
-                        A TikTok-poszt <strong>ugyanabba a naptárba</strong> kerül, mint a Facebook és az Instagram –
+                        A TikTok-poszt <strong>ugyanabba a naptárba</strong> kerül majd, mint a Facebook és az Instagram –
                         nem kell külön eszköz, külön felület.
                     </p>
                     <ul class="space-y-5 mb-8">
@@ -630,7 +634,7 @@ const steps = [
                     <p class="text-body mb-8 leading-relaxed">
                         Az automatizmust a beépített
                         <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>
-                        chatből is összerakja neked. A TikTok-beállításokat viszont te választod ki – ezt a TikTok
+                        chatből is összerakja neked. A TikTok-beállításokat viszont te választod majd ki – ezt a TikTok
                         így írja elő.
                     </p>
 
@@ -686,7 +690,7 @@ const steps = [
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">info</span>
                 </div>
-                <p class="text-body leading-relaxed flex-1"><strong class="text-dark">Amit nem csinál:</strong> zenét vagy
+                <p class="text-body leading-relaxed flex-1"><strong class="text-dark">Amit nem fog csinálni:</strong> zenét vagy
                     TikTok-hangot nem tesz a posztra, a kiküldött posztot nem szerkeszti és nem törli (ezt a TikTok nem
                     engedi), és a TikTok Shopot sem kezeli.</p>
             </div>
@@ -698,10 +702,10 @@ const steps = [
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🔌</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">3 lépés, és a TikTok-fiókod be van kötve</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">3 lépés lesz, és a TikTok-fiókod be van kötve</h2>
                 <p class="text-body text-lg leading-relaxed">
-                    A saját TikTok-fiókodat kötöd be, a TikTok hivatalos bejelentkezésével. Az engedélyt a TikTok-appban
-                    bármikor visszavonhatod.
+                    Élesítés után a saját TikTok-fiókodat kötöd be, a TikTok hivatalos bejelentkezésével. Az engedélyt
+                    a TikTok-appban bármikor visszavonhatod.
                 </p>
             </div>
 
@@ -714,12 +718,6 @@ const steps = [
                     </div>
                 ))}
             </div>
-
-            <p class="text-center text-body text-sm mt-10">
-                Lépésről lépésre, képernyőképekkel:
-                <a href={HELP_URL} target="_blank" rel="noopener" class="text-primary font-semibold underline">a TikTok
-                    bekötése és a posztolás a súgóban</a>.
-            </p>
         </div>
     </section>
 
@@ -730,8 +728,8 @@ const steps = [
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Analitika 📊</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">A TikTok-számaid ott, ahol a többi</h2>
                 <p class="text-body text-lg leading-relaxed">
-                    Az Analitikán a TikTok a Facebook és az Instagram mellé kerül – egy nézetben látod, melyik platform
-                    és melyik poszt hozza a legtöbbet.
+                    Az Analitikán a TikTok a Facebook és az Instagram mellé kerül majd – egy nézetben látod, melyik
+                    platform és melyik poszt hozza a legtöbbet.
                 </p>
             </div>
 
@@ -803,8 +801,8 @@ const steps = [
                                 <span>kb. 166 képes poszt havonta</span>
                             </div>
                         </div>
-                        <p class="text-sm text-body mt-3">A publikálás TikTokra, Facebookra és Instagramra ingyenes – nem
-                            fogyaszt kreditet.</p>
+                        <p class="text-sm text-body mt-3">A publikálás Facebookra és Instagramra ingyenes – nem fogyaszt
+                            kreditet, és a TikTokra sem fog.</p>
                     </div>
                     <a href="/hu/arak/#kreditek" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
                         Részletes kreditdíjak
@@ -845,7 +843,8 @@ const steps = [
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg, mi menne ki a te TikTokodra</h2>
             <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
-                Egy online bemutatón végigmegyünk a rendszeren – akár a te saját webáruházad termékeivel.
+                Egy online bemutatón végigmegyünk a rendszeren – akár a te saját webáruházad termékeivel –, és
+                megmutatjuk azt is, hogyan posztol majd TikTokra.
             </p>
             <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
                 Bemutatót kérek

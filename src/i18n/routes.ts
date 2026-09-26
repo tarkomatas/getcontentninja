@@ -160,8 +160,9 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // **Csak magyarul** (`en: null`): a spec a Woo-t magyar opcióként pozicionálja,
   // és az app felülete sem angol (`docs/woocommerce-wordpress-terv.md`, 8. pont).
   woocommerce: { hu: '/hu/woocommerce/', en: null },
-  // **TikTok-posztolás – SEO/GEO céloldal** (2026-09-25, a TikTok jóváhagyásának
-  // napján). Ugyanaz az érv, mint a `woocommerce`-nél: a `demo` (posztolás)
+  // **TikTok-posztolás – SEO/GEO céloldal** (2026-09-25). 2026-09-26 óta
+  // „hamarosan"-oldal: a TikTok még nem él az előfizetőknek (állapot:
+  // `src/data/socialPlatforms.ts`). Ugyanaz az érv, mint a `woocommerce`-nél: a `demo` (posztolás)
   // megoldás-oldal nem rangsorol a TikTok-os keresésekre („TikTok posztolás
   // automatikusan", „TikTok ütemezés"), és az AI-keresők olyan oldalból
   // válaszolnak a „tud-e TikTokra posztolni?" kérdésre, ami ezt a címében kimondja.

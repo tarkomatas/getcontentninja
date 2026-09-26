@@ -1,0 +1,22 @@
+---
+/**
+ * „Hamarosan" jelvény egy még nem élő posztolási csatorna mellé
+ * (lásd `src/data/socialPlatforms.ts`).
+ */
+import type { Locale } from '../i18n/routes';
+import { SOON_LABEL } from '../data/socialPlatforms';
+
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+
+const { locale, class: className = '' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wide px-1.5 py-[3px] leading-none whitespace-nowrap',
+    className,
+  ]}
+>{SOON_LABEL[locale]}</span>
