@@ -21,13 +21,8 @@ export const videos = {
     newsletter: 'hgL6ho7idN4',
     /** Shopgrade – `/hu/shopgrade/`. */
     shopgrade: 'xy_byJtOwYo',
-    /**
-     * Blogcikk író – `/hu/blogcikk-iro/`.
-     * ⚠️ 2026-09-29: a videó még privát / nem beágyazható (az oEmbed 403-at ad,
-     * thumbnail nincs) – a `TODO_` előtag addig kiveszi az oldalról. Ha a
-     * YouTube-on nyilvános vagy „nem listázott" lett, töröld az előtagot.
-     */
-    blogWriter: 'TODO_k4iSUFKfzl4',
+    /** Blogcikk író – `/hu/blogcikk-iro/`. */
+    blogWriter: 'k4iSUFKfzl4',
 } as const;
 
 /**
