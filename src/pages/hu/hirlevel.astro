@@ -1,8 +1,8 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
-import VideoEmbed from '../../components/VideoEmbed.astro';
 import { videos, hasVideo } from '../../data/videos';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
@@ -515,22 +515,6 @@ const description =
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 1.5 Videós bemutató -->
-    {hasVideo(videos.newsletter) && (
-    <section id="bemutato-video" class="bg-dark py-20 md:py-28">
-        <div class="max-w-[900px] mx-auto px-4 md:px-10">
-            <div class="text-center mb-10">
-                <span class="text-white/60 font-bold text-sm uppercase tracking-widest block mb-3">Működés közben</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white leading-tight">Így készül a hírleveled</h2>
-                <p class="text-white/70 leading-relaxed max-w-[640px] mx-auto">Végignézheted, hogyan lesz a webshopod
-                    termékeiből kiküldött hírlevél – a szövegtől a dizájnon át a kiküldésig.</p>
-            </div>
-
-            <VideoEmbed id={videos.newsletter} label="AI hírlevél bemutató videó lejátszása" />
-        </div>
-    </section>
-    )}
-
     <!-- 2. Feature: MailerLite + Salesautopilot integráció -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
@@ -910,30 +894,43 @@ const description =
                 <p class="text-body text-lg">Egyszer bekötöd a hírlevélküldőd, a rendszer a többit magától intézi.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Összekötöd a küldőd</h3>
-                    <p class="text-body text-sm leading-relaxed">Pár kattintás – rácsatlakozol a MailerLite vagy
-                        Salesautopilot fiókodra, a meglévő listáiddal.</p>
+            <!-- Széles videó a cím és a lépések között (videos.ts) -->
+            {hasVideo(videos.newsletter) && (
+                <HowItWorksVideo id={videos.newsletter} label="AI hírlevél bemutató videó lejátszása" />
+            )}
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">1</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Összekötöd a küldőd</h3>
+                        <p class="text-body text-sm leading-relaxed">Pár kattintás – rácsatlakozol a MailerLite vagy
+                            Salesautopilot fiókodra, a meglévő listáiddal.</p>
+                    </div>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Beállítod a ritmust</h3>
-                    <p class="text-body text-sm leading-relaxed">Megadod a márkahangot és az automatizmusokat (heti, havi
-                        vagy szezon eleji) – vagy csak ad-hoc generálsz.</p>
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">2</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Beállítod a ritmust</h3>
+                        <p class="text-body text-sm leading-relaxed">Megadod a márkahangot és az automatizmusokat (heti, havi
+                            vagy szezon eleji) – vagy csak ad-hoc generálsz.</p>
+                    </div>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">Az AI legyártja a levelet</h3>
-                    <p class="text-body text-sm leading-relaxed">Szöveget, dizájnt és képeket készít – akár egyetlen
-                        hírlevelet, akár egy egész kampánysorozatot.</p>
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">3</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Az AI legyártja a levelet</h3>
+                        <p class="text-body text-sm leading-relaxed">Szöveget, dizájnt és képeket készít – akár egyetlen
+                            hírlevelet, akár egy egész kampánysorozatot.</p>
+                    </div>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Jóváhagyod és kimegy</h3>
-                    <p class="text-body text-sm leading-relaxed">A kész levél a küldődbe kerül. Jóváhagyod – vagy hagyod,
-                        hogy az automatizmus magától kiküldje.</p>
+                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">4</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Jóváhagyod és kimegy</h3>
+                        <p class="text-body text-sm leading-relaxed">A kész levél a küldődbe kerül. Jóváhagyod – vagy hagyod,
+                            hogy az automatizmus magától kiküldje.</p>
+                    </div>
                 </div>
             </div>
 

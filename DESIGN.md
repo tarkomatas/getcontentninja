@@ -17,11 +17,11 @@ Ez a fájl a **használati konvenciókat** rögzíti (mit mikor használj), nem 
 | Hero szekció | `py-12 md:py-16` (asztali nézetben szándékosan kompakt: a hero alatti hitelesítés-csík így feljebb kerül) |
 | Hitelesítés-csík (`TrustBadges`, a hero alatt) | `bg-card border-y border-border py-3` |
 | Záró `bg-primary` CTA-sáv | `py-16 md:py-20` (szándékos accent) |
-| Videós bemutató-sáv | `bg-dark py-20 md:py-28`, konténer `max-w-[900px]` (szándékos accent) |
+| Videós bemutató | **Nem külön sáv**: a „Hogyan működik?" blokkban ül, a cím és a lépéskártyák között — `HowItWorksVideo` komponens (max. `960px`, világos keret + lila glow). A lépéskártyák mobilon vízszintesek (szám a cím mellett, `p-5`), `sm`-től a megszokott kártyák |
 
 A `px-4 md:px-10` a **konténer `div`-re** kerül akkor is, ha a külső `<section>` elhagyja — így a tartalom bal/jobb éle minden szekcióban illeszkedik.
 
-A szekciók háttere **`bg-light` ↔ `bg-card` váltakozik**. A két accent-sáv (`bg-primary` CTA, `bg-dark` videó) szándékosan töri meg a ritmust — új szekció beszúrásakor vagy tartsd a váltakozást, vagy legyen accent.
+A szekciók háttere **`bg-light` ↔ `bg-card` váltakozik**. Az accent-sáv (`bg-primary` CTA) szándékosan töri meg a ritmust — új szekció beszúrásakor vagy tartsd a váltakozást, vagy legyen accent.
 
 Sötét sávon: eyebrow `text-white/60`, címsor `text-white`, body `text-white/70`.
 

@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import VideoEmbed from '../../components/VideoEmbed.astro';
+import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
 import Carousel from '../../components/Carousel.astro';
 import MetaTechProvider from '../../components/MetaTechProvider.astro';
 import { videos, hasVideo } from '../../data/videos';
@@ -327,61 +327,69 @@ const faqLd = {
 ═══════════════════════════════════════ -->
     <section id="hogyan-mukodik" class="bg-card py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-                <!-- Bal: videós bemutató (ha nincs videó, marad az illusztráció) -->
-                <div class="relative order-1">
-                    <div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"></div>
-                    {hasVideo(videos.overview) ? (
-                        <VideoEmbed id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
-                    ) : (
-                        <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
-                            alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
-                            loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto" />
-                    )}
-                </div>
-
-                <!-- Jobb: rövid szöveg -->
-                <div class="order-2">
-                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik?</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">4 lépés a teljes automatizálásig</h2>
-                    <p class="text-body mb-8 leading-relaxed">Egyszer beállítod, az AI a többit magától intézi.</p>
-
-                    <ul class="space-y-5 mb-8">
-                        <li class="flex items-start gap-4">
-                            <div class="w-9 h-9 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 shadow-primary-glow">1</div>
-                            <p class="text-body pt-1"><strong class="text-dark">Alapbeállítás.</strong> Megadod a webshopod linkjét és a logódat.</p>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-9 h-9 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 shadow-primary-glow">2</div>
-                            <p class="text-body pt-1"><strong class="text-dark">Ötletet vadászik.</strong> Átnézi a webshopod, termékeket és témákat választ.</p>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-9 h-9 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 shadow-primary-glow">3</div>
-                            <p class="text-body pt-1"><strong class="text-dark">Tartalmat generál.</strong> Poszt, blogcikk, hírlevél vagy termékleírás – képpel, videóval, márkahűen.</p>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-9 h-9 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 shadow-primary-glow">4</div>
-                            <p class="text-body pt-1"><strong class="text-dark">Publikál és küld.</strong> Az AI <span class="text-primary font-semibold">kiposztolja, blogba felteszi, hírlevélben kiküldi</span> helyetted.</p>
-                        </li>
-                    </ul>
-
-                    <!-- Szövegközi hivatkozás a Ninja AI oldalra. SZÁNDÉKOSAN itt: ez a
-                         négy lépés a „beállítás" ígérete, és a leggyakoribb néma kérdés
-                         épp az, hogy mi van, ha elakad benne. A `ninjaAi` oldal nincs a
-                         menüben (user-döntés), ezért ez adja a belső bejárási utat. -->
-                    <p class="text-body mb-8 leading-relaxed">
-                        És ha elakadnál a beállításban, ott a beépített
-                        <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>:
-                        elmondod neki, mit szeretnél, ő pedig megnézi az adataidat és beállítja helyetted.
-                    </p>
-
-                    <a href="/hu/online-bemutato/" class="cta-primary px-8 py-4 text-base">
-                        Bemutatót kérek – díjmentes
-                    </a>
-                </div>
-
+            <div class="text-center max-w-[720px] mx-auto mb-12">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik?</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">4 lépés a teljes automatizálásig</h2>
+                <p class="text-body text-lg leading-relaxed">Egyszer beállítod, az AI a többit magától intézi.</p>
             </div>
+
+            <!-- Széles videó a cím és a lépések között (ha nincs videó, marad az illusztráció) -->
+            {hasVideo(videos.overview) ? (
+                <HowItWorksVideo id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
+            ) : (
+                <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
+                    alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
+                    loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto mb-14" />
+            )}
+
+            <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">1</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Alapbeállítás</h3>
+                        <p class="text-body text-sm leading-relaxed">Megadod a webshopod linkjét és a logódat.</p>
+                    </div>
+                </li>
+                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">2</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Ötletet vadászik</h3>
+                        <p class="text-body text-sm leading-relaxed">Átnézi a webshopod, termékeket és témákat választ.</p>
+                    </div>
+                </li>
+                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">3</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Tartalmat generál</h3>
+                        <p class="text-body text-sm leading-relaxed">Poszt, blogcikk, hírlevél vagy termékleírás – képpel, videóval, márkahűen.</p>
+                    </div>
+                </li>
+                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">4</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Publikál és küld</h3>
+                        <p class="text-body text-sm leading-relaxed">Az AI <span class="text-primary font-semibold">kiposztolja, blogba felteszi, hírlevélben kiküldi</span> helyetted.</p>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="text-center max-w-[720px] mx-auto">
+                <!-- Szövegközi hivatkozás a Ninja AI oldalra. SZÁNDÉKOSAN itt: ez a
+                     négy lépés a „beállítás" ígérete, és a leggyakoribb néma kérdés
+                     épp az, hogy mi van, ha elakad benne. A `ninjaAi` oldal nincs a
+                     menüben (user-döntés), ezért ez adja a belső bejárási utat. -->
+                <p class="text-body mb-8 leading-relaxed">
+                    És ha elakadnál a beállításban, ott a beépített
+                    <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>:
+                    elmondod neki, mit szeretnél, ő pedig megnézi az adataidat és beállítja helyetted.
+                </p>
+
+                <a href="/hu/online-bemutato/" class="cta-primary px-8 py-4 text-base">
+                    Bemutatót kérek – díjmentes
+                </a>
+            </div>
+
         </div>
     </section>
 

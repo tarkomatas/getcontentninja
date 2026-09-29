@@ -16,9 +16,12 @@ interface Props {
     poster?: string;
     /** Az iframe `title` attribútuma; alapból a `label`. */
     title?: string;
+    /** Szegély és árnyék nélkül, kisebb radiusszal – ha a keretet a szülő adja (`HowItWorksVideo`). */
+    bare?: boolean;
 }
 
-const { id, label, poster, title } = Astro.props;
+const { id, label, poster, title, bare = false } = Astro.props;
+const frameClass = bare ? 'rounded-[10px]' : 'rounded-[16px] border border-border shadow-card';
 // A `maxresdefault` csak akkor létezik, ha a videó legalább 720p-ben lett
 // feltöltve – ha nincs, a `hqdefault`-ra esünk vissza (lásd az onerror-t).
 const posterSrc = poster ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
@@ -26,7 +29,7 @@ const posterFallback = poster ? undefined : `https://i.ytimg.com/vi/${id}/hqdefa
 ---
 
 <div
-    class="relative w-full aspect-video rounded-[16px] overflow-hidden border border-border shadow-card bg-dark"
+    class:list={['relative w-full aspect-video overflow-hidden bg-dark', frameClass]}
     data-yt-facade
     data-yt-id={id}
     data-yt-title={title ?? label}

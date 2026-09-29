@@ -1,0 +1,37 @@
+---
+/**
+ * Széles (16:9) YouTube-bemutató a „Hogyan működik?" blokkok tetején.
+ *
+ * A szekciócím és a lépéskártyák KÖZÉ kerül, teljes tartalomszélességben
+ * (max. 960px) – a korábbi fél hasábos elhelyezésben a vízszintes videó
+ * kicsi volt, és a mellette álló lépéslista magasabb lett nála. A keret
+ * (halvány lila glow + világos „paszpartu") választja le a lépéskártyáktól.
+ *
+ * Maga a lejátszó a consent-barát `VideoEmbed` – iframe csak kattintásra.
+ */
+import VideoEmbed from './VideoEmbed.astro';
+
+interface Props {
+    /** YouTube-azonosító (`src/data/videos.ts`). */
+    id: string;
+    /** Kisegítő címke a lejátszó gombra – lokalizált. */
+    label: string;
+    /** Rövid felirat a videó alatt, pl. a hossza vagy „Nézd meg működés közben". */
+    caption?: string;
+}
+
+const { id, label, caption } = Astro.props;
+---
+
+<figure class="relative max-w-[960px] mx-auto mb-14 md:mb-16">
+    <div class="absolute -inset-6 md:-inset-10 bg-primary/15 blur-3xl rounded-full -z-10" aria-hidden="true"></div>
+    <div class="rounded-[16px] bg-card border border-border shadow-card-hover p-1.5 md:p-2">
+        <VideoEmbed id={id} label={label} bare />
+    </div>
+    {caption && (
+        <figcaption class="flex items-center justify-center gap-2 text-sm text-muted mt-4">
+            <span class="material-symbols-outlined text-[18px] text-primary">play_circle</span>
+            {caption}
+        </figcaption>
+    )}
+</figure>
