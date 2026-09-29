@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -838,52 +839,12 @@ const keywords =
                         the AI handles the rest on its own.</p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-
-                    <!-- Step 1 -->
-                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                        <div
-                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
-                            1</div>
-                        <h3 class="font-bold text-lg mb-3">Basic setup</h3>
-                        <p class="text-body text-sm leading-relaxed">You connect your webshop – with a deep integration
-                            for <strong>Unas, Shoprenter and WooCommerce</strong>, or via its link (sitemap) for any other platform
-                            –, connect your <strong>Facebook</strong> and <strong>Instagram</strong> accounts (TikTok coming soon) and upload
-                            your logo. That's it.</p>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                        <div
-                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
-                            2</div>
-                        <h3 class="font-bold text-lg mb-3">Hunts for ideas</h3>
-                        <p class="text-body text-sm leading-relaxed">The system reviews your webshop on its own,
-                            picks the
-                            most relevant products, and comes up with topic ideas – you have nothing to do with it.</p>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                        <div
-                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
-                            3</div>
-                        <h3 class="font-bold text-lg mb-3">Generates posts</h3>
-                        <p class="text-body text-sm leading-relaxed">The AI writes the post copy and creates on-brand
-                            creative images, moving animations or videos – in your brand's style, complete with your
-                            logo.</p>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                        <div
-                            class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">
-                            4</div>
-                        <h3 class="font-bold text-lg mb-3">Publishes on its own</h3>
-                        <p class="text-body text-sm leading-relaxed">The system schedules and publishes the content on
-                            Facebook and Instagram – and soon on TikTok too. All you have to do is approve it – if you want to.</p>
-                    </div>
-                </div>
+                <HowItWorksSteps steps={[
+                    { title: 'Setup', desc: 'Connect your store, Facebook and Instagram, and upload your logo.' },
+                    { title: 'Idea hunting', desc: 'It picks your best products and topics on its own.' },
+                    { title: 'Post creation', desc: 'Copy, branded image, animation or video – with your logo.' },
+                    { title: 'Publishing', desc: 'It schedules and posts – you just approve, if you want to.' },
+                ]} />
 
                 <div class="text-center mt-10">
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">

@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -981,33 +982,12 @@ const description =
                     országtól függetlenül.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Csatlakoztatod a fiókjaidat</h3>
-                    <p class="text-body text-sm leading-relaxed">Webshopod (Unas, Shoprenter, WooCommerce vagy bármely webshop
-                        sitemap alapján), minden ország közösségi fiókja és a hírlevélküldőd (MailerLite / Salesautopilot) egy
-                        helyre – néhány kattintással.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Beállítod a piacokat</h3>
-                    <p class="text-body text-sm leading-relaxed">Nyelvek, országok és a márkahang. Egyszer megadod, és
-                        onnantól a rendszer ezt követi.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">Létrehozod a tartalmat</h3>
-                    <p class="text-body text-sm leading-relaxed">Egy nyelven megírod (vagy az AI-ra bízod) – a rendszer
-                        legyártja az összes nyelvi verziót, poszthoz és hírlevélhez egyaránt.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Jóváhagyod és publikál</h3>
-                    <p class="text-body text-sm leading-relaxed">Egy naptárból élesíted minden ország fiókjába. Neked
-                        csak jóvá kell hagynod – ha szeretnéd.</p>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Bekötés', desc: 'Webshop, minden ország közösségi fiókja és a hírlevélküldőd egy helyen.' },
+                { title: 'Piacok', desc: 'Nyelvek, országok, márkahang – egyszer adod meg.' },
+                { title: 'Tartalom', desc: 'Egy nyelven írod (vagy az AI), a többi nyelv magától elkészül.' },
+                { title: 'Publikálás', desc: 'Egy naptárból minden ország fiókjába – jóváhagyással, ha kéred.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

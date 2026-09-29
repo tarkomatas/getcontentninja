@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
@@ -343,36 +344,14 @@ const faqLd = {
                     loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto mb-14" />
             )}
 
-            <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">1</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2">Alapbeállítás</h3>
-                        <p class="text-body text-sm leading-relaxed">Megadod a webshopod linkjét és a logódat.</p>
-                    </div>
-                </li>
-                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">2</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2">Ötletet vadászik</h3>
-                        <p class="text-body text-sm leading-relaxed">Átnézi a webshopod, termékeket és témákat választ.</p>
-                    </div>
-                </li>
-                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">3</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2">Tartalmat generál</h3>
-                        <p class="text-body text-sm leading-relaxed">Poszt, blogcikk, hírlevél vagy termékleírás – képpel, videóval, márkahűen.</p>
-                    </div>
-                </li>
-                <li class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold flex items-center justify-center shrink-0 sm:mb-4 shadow-primary-glow">4</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2">Publikál és küld</h3>
-                        <p class="text-body text-sm leading-relaxed">Az AI <span class="text-primary font-semibold">kiposztolja, blogba felteszi, hírlevélben kiküldi</span> helyetted.</p>
-                    </div>
-                </li>
-            </ol>
+            <div class="mb-12">
+                <HowItWorksSteps cardClass="bg-light" steps={[
+                    { title: 'Alapbeállítás', desc: 'Megadod a webshopod linkjét és a logódat.' },
+                    { title: 'Ötletvadászat', desc: 'Átnézi a webshopod, termékeket és témákat választ.' },
+                    { title: 'Tartalomgyártás', desc: 'Poszt, blogcikk, hírlevél vagy termékleírás – márkahűen.' },
+                    { title: 'Publikálás', desc: 'Az AI <span class="text-primary font-semibold">kiposztolja, blogba teszi, kiküldi</span> helyetted.' },
+                ]} />
+            </div>
 
             <div class="text-center max-w-[720px] mx-auto">
                 <!-- Szövegközi hivatkozás a Ninja AI oldalra. SZÁNDÉKOSAN itt: ez a

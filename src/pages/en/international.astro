@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -969,33 +970,12 @@ const description =
                     regardless of language and country.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Connect your accounts</h3>
-                    <p class="text-body text-sm leading-relaxed">Your store (Unas, Shoprenter, WooCommerce or any store via sitemap), every
-                        country's social accounts and your newsletter sender (MailerLite / Salesautopilot) in one place –
-                        in a few clicks.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Set up your markets</h3>
-                    <p class="text-body text-sm leading-relaxed">Languages, countries and the brand voice. Set once, and
-                        the system follows it from then on.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">Create the content</h3>
-                    <p class="text-body text-sm leading-relaxed">Write it in one language (or leave it to the AI) – the
-                        system produces every language version, for posts and newsletters alike.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Approve and it publishes</h3>
-                    <p class="text-body text-sm leading-relaxed">Go live to every country's accounts from one calendar.
-                        You just have to approve – if you want to.</p>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Connect', desc: "Your store, every country's social accounts and your email sender." },
+                { title: 'Markets', desc: 'Languages, countries, brand voice – set once.' },
+                { title: 'Content', desc: 'Write it in one language (or let the AI) – the rest follows.' },
+                { title: 'Publishing', desc: "One calendar for every country's accounts – approve if you like." },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

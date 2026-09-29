@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -958,32 +959,12 @@ const faqLd = {
                 <p class="text-body text-lg">Connect your store once, and the system handles the rest on its own.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Connect your store</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter or WooCommerce (via our plugin) – a few clicks, and the AI sees all your products,
-                        categories and blog articles, always with fresh data.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Set the rules</h3>
-                    <p class="text-body text-sm leading-relaxed">Define your brand voice and rules (e.g. only top,
-                        in-stock products) – or leave the selection to the AI.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">The AI generates the content</h3>
-                    <p class="text-body text-sm leading-relaxed">It creates text, images and video from products and blog
-                        articles – for posts and newsletters alike.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Approve and it goes out</h3>
-                    <p class="text-body text-sm leading-relaxed">Go live to Facebook, Instagram and your email lists (TikTok coming soon) from
-                        one calendar. All you have to do is approve – if you want to.</p>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Connect', desc: 'Unas, Shoprenter or WooCommerce – the AI always sees fresh data.' },
+                { title: 'Rules', desc: 'Brand voice and selection, e.g. only in-stock top products.' },
+                { title: 'Content creation', desc: 'Text, images and video from your products and blog posts.' },
+                { title: 'Publishing', desc: 'One calendar for Facebook, Instagram and your email lists.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

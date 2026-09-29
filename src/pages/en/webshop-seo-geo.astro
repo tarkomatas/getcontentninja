@@ -8,6 +8,7 @@
  * pair and the English nav stay complete.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
@@ -698,32 +699,12 @@ const description =
                 <p class="text-body text-lg">No SEO knowledge required – the technical part is the system's job.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Connect your store</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter or WooCommerce – a few clicks, and the
-                        system sees every product, category and blog post you have.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">See where you stand</h3>
-                    <p class="text-body text-sm leading-relaxed">It reviews the copy on your product and category pages
-                        and shows which ones are weakest – that's where it pays to start.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">It writes the copy</h3>
-                    <p class="text-body text-sm leading-relaxed">Category pages, product descriptions, blog posts – in
-                        your brand voice, from your own product data, linked to each other.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">You approve, it publishes</h3>
-                    <p class="text-body text-sm leading-relaxed">Review it, edit it, and the system uploads it back to
-                        your store. Once you trust it, you can hand over this step too.</p>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Connect', desc: 'Unas, Shoprenter or WooCommerce – it sees your whole range.' },
+                { title: 'Audit', desc: 'It shows which of your pages have the weakest copy.' },
+                { title: 'Writing', desc: 'Category pages, product copy, blog posts – linked together.' },
+                { title: 'Upload back', desc: 'You approve, and it goes back into your store.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

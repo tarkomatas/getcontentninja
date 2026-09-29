@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
 import { videos, hasVideo } from '../../data/videos';
 import Header from '../../components/Header.astro';
@@ -844,52 +845,12 @@ const keywords =
                     <HowItWorksVideo id={videos.posting} label="Automata posztolás bemutató videó lejátszása" />
                 )}
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
-
-                    <!-- Step 1 -->
-                    <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                        <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">1</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2 sm:mb-3">Alapbeállítás</h3>
-                            <p class="text-body text-sm leading-relaxed">Bekötöd a webshopodat – <strong>Unas,
-                                Shoprenter és WooCommerce</strong> esetén mélyintegrációval, bármely más rendszernél a linkje
-                                (sitemap) alapján –, összekötöd a <strong>Facebook</strong>- és <strong>Instagram</strong>-fiókodat
-                                (hamarosan a TikTokot is), és feltöltöd a logódat. Ennyi.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                        <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">2</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2 sm:mb-3">Ötletet vadászik</h3>
-                            <p class="text-body text-sm leading-relaxed">A rendszer magától átnézi a webshopodat,
-                                kiválasztja a
-                                legrelevánsabb termékeket, és témaötleteket talál ki – neked ezzel semmi dolgod.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                        <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">3</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2 sm:mb-3">Posztot generál</h3>
-                            <p class="text-body text-sm leading-relaxed">Az AI megírja a posztszöveget, elkészíti a
-                                brandazonos
-                                kreatív képet, mozgó animációt vagy videót – a márkád stílusában, logóval ellátva.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                        <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">4</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2 sm:mb-3">Önállóan publikál</h3>
-                            <p class="text-body text-sm leading-relaxed">A rendszer beütemezi és közzéteszi a tartalmakat
-                                Facebookon és Instagramon – hamarosan TikTokon is. Neked csak jóvá kell hagynod – ha szeretnéd.</p>
-                        </div>
-                    </div>
-                </div>
+                <HowItWorksSteps steps={[
+                    { title: 'Alapbeállítás', desc: 'Bekötöd a webshopod, a Facebook- és Instagram-fiókod, és feltöltöd a logód.' },
+                    { title: 'Ötletvadászat', desc: 'Magától kiválasztja a legjobb termékeket és a témákat.' },
+                    { title: 'Posztgyártás', desc: 'Szöveg, márkázott kép, animáció vagy videó – logóval.' },
+                    { title: 'Publikálás', desc: 'Beütemezi és kiposztolja – te csak jóváhagyod, ha szeretnéd.' },
+                ]} />
 
                 <div class="text-center mt-10">
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">

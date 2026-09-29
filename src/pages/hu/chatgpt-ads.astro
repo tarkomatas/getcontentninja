@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
@@ -278,36 +279,12 @@ const nlCfg = {
                 <p class="text-body text-lg">Beállít neked mindent, megírja a szöveget és kielemzi az adatokat.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">1</div>
-                    <h3 class="text-lg font-bold text-dark mb-2">Bekötöd a webshopod</h3>
-                    <p class="text-body text-sm leading-relaxed">A rendszer az UNAS, Shoprenter vagy WooCommerce boltodból
-                        kiolvassa a termékeidet, és összerakja belőlük a hirdetéshez szükséges termékfeedet –
-                        ami aztán naponta magától frissül.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">2</div>
-                    <h3 class="text-lg font-bold text-dark mb-2">Beállítja a kampányt</h3>
-                    <p class="text-body text-sm leading-relaxed">Kiválasztod, mely termékek kerüljenek ki és mennyi
-                        keretet szánsz rá – a kampányt a rendszer rakja össze. Mindig <strong>szüneteltetve</strong>
-                        jön létre: elindítani csak te tudod.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">3</div>
-                    <h3 class="text-lg font-bold text-dark mb-2">Megírja a hirdetési szövegeket</h3>
-                    <p class="text-body text-sm leading-relaxed">Az AI a termékadataidból megírja a hirdetések
-                        szövegét, és azt is, milyen vásárlói helyzetekben jelenjenek meg. Mielőtt bármi kimegy,
-                        átírhatod.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-5">4</div>
-                    <h3 class="text-lg font-bold text-dark mb-2">Napi jelentést küld javaslatokkal</h3>
-                    <p class="text-body text-sm leading-relaxed">Reggelente behúzza a számokat, és konkrét
-                        javaslatokat ír: mit érdemes szüneteltetni, hol emelj keretet. Egy kattintással jóváhagyod –
-                        nélküle semmi nem történik.</p>
-                </div>
-            </div>
+            <HowItWorksSteps cardClass="bg-light" steps={[
+                { title: 'Bekötés', desc: 'Unas, Shoprenter vagy WooCommerce – a termékfeed naponta frissül.' },
+                { title: 'Kampány', desc: 'Kiválasztod a termékeket és a keretet; szüneteltetve jön létre.' },
+                { title: 'Hirdetésszöveg', desc: 'Az AI a termékadataidból írja – kimenet előtt átírhatod.' },
+                { title: 'Napi jelentés', desc: 'Javaslatokat küld; a jóváhagyásod nélkül semmi nem történik.' },
+            ]} />
 
             <div class="text-center mt-12">
                 <a href="#hero" class="cta-primary px-8 h-14 text-base inline-flex">

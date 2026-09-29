@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
 import { videos, hasVideo } from '../../data/videos';
 import Header from '../../components/Header.astro';
@@ -586,40 +587,12 @@ const description =
                 <HowItWorksVideo id={videos.shopgrade} label="Shopgrade bemutató videó lejátszása" />
             )}
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">1</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Bekötöd a webáruházad</h3>
-                        <p class="text-body text-sm leading-relaxed">Unas, Shoprenter vagy WooCommerce – pár kattintás, és a
-                            Shopgrade letölti a meglévő termékleírásaidat és a kategóriafádat.</p>
-                    </div>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">2</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Kiválasztod, mit írjon át</h3>
-                        <p class="text-body text-sm leading-relaxed">Termékoldalak vagy kategóriaoldalak: a teljes katalógus,
-                            egy kategória vagy csak néhány kiemelt lap – te döntöd el, mi kerüljön sorra.</p>
-                    </div>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">3</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Az AI újraírja őket</h3>
-                        <p class="text-body text-sm leading-relaxed">Márkahangon, SEO- és GEO-szempontok szerint, értékesítési
-                            fókusszal – terméktulajdonságokból vásárlói előnyök lesznek.</p>
-                    </div>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">4</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Visszatöltöd a webshopba</h3>
-                        <p class="text-body text-sm leading-relaxed">A kész leírások visszakerülnek a webáruházadba – kézi
-                            másolgatás nélkül, akár több ezer terméknél is.</p>
-                    </div>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Bekötés', desc: 'Unas, Shoprenter vagy WooCommerce – a leírásaid pár kattintással bejönnek.' },
+                { title: 'Kiválasztás', desc: 'Az egész katalógus, egy kategória vagy csak pár kiemelt oldal.' },
+                { title: 'AI-újraírás', desc: 'Márkahangon, SEO- és GEO-barátan, vásárlói előnyökre fordítva.' },
+                { title: 'Visszatöltés', desc: 'Kézi másolás nélkül vissza a webshopba – ezer terméknél is.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

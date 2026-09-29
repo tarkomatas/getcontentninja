@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -961,32 +962,12 @@ const faqLd = {
                 <p class="text-body text-lg">Egyszer bekötöd a webáruházad, a rendszer a többit magától intézi.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter vagy WooCommerce (a bővítményünkkel) – pár kattintás, és az AI látja az összes terméked,
-                        kategóriád és blogcikked, mindig friss adatokkal.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Beállítod a szabályokat</h3>
-                    <p class="text-body text-sm leading-relaxed">Megadod a márkahangot és a szabályokat (pl. csak top,
-                        raktáron lévő termékek) – vagy az AI-ra bízod a válogatást.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center relative">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">Az AI legyártja a tartalmat</h3>
-                    <p class="text-body text-sm leading-relaxed">Termékekből és blogcikkekből szöveget, képet és videót
-                        készít – posztokhoz és hírlevelekhez egyaránt.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Jóváhagyod és kimegy</h3>
-                    <p class="text-body text-sm leading-relaxed">Egy naptárból élesíted Facebookra, Instagramra
-                        és hírlevélben a listáidra (a TikTok hamarosan érkezik). Neked csak jóvá kell hagynod – ha szeretnéd.</p>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Bekötés', desc: 'Unas, Shoprenter vagy WooCommerce – az AI mindig friss termékadatot lát.' },
+                { title: 'Szabályok', desc: 'Márkahang és válogatás, pl. csak raktáron lévő top termékek.' },
+                { title: 'Tartalomgyártás', desc: 'Szöveg, kép és videó a termékeidből és a blogcikkeidből.' },
+                { title: 'Publikálás', desc: 'Egy naptárból Facebookra, Instagramra és hírlevélbe.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

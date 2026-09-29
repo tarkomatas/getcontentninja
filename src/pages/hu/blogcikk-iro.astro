@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
 import { videos, hasVideo } from '../../data/videos';
 import Header from '../../components/Header.astro';
@@ -467,41 +468,12 @@ const description =
                 <HowItWorksVideo id={videos.blogWriter} label="Blogcikk író bemutató videó lejátszása" />
             )}
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">1</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Bekötöd az oldaladat</h3>
-                        <p class="text-body text-sm leading-relaxed">Unas, Shoprenter, WooCommerce vagy egy sima WordPress
-                            oldal – pár kattintás, és a rendszer látja a meglévő blogodat, webshopnál a termékeidet és a
-                            kategóriáidat is.</p>
-                    </div>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">2</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Kulcsszókutatás</h3>
-                        <p class="text-body text-sm leading-relaxed">Az AI megnézi, mire keresnek a te piacodon, és
-                            cikktémákat javasol – olyanokat, amikhez van is terméked.</p>
-                    </div>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">3</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Megírja a cikket</h3>
-                        <p class="text-body text-sm leading-relaxed">Kifejtett, SEO- és GEO-barát szerkezetű blogcikk a
-                            márkahangodon, a saját termékeidre hivatkozva.</p>
-                    </div>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card flex gap-4 sm:block sm:text-center">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-2xl font-extrabold shrink-0 sm:mx-auto sm:mb-6 shadow-primary-glow">4</div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 sm:mb-3">Publikálás</h3>
-                        <p class="text-body text-sm leading-relaxed">Átnézed, jóváhagyod – és a cikk kimegy a webshopod
-                            blogjába vagy a WordPress oldaladra. Kézi bemásolás nélkül.</p>
-                    </div>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Bekötés', desc: 'Unas, Shoprenter, WooCommerce vagy WordPress – pár kattintás.' },
+                { title: 'Kulcsszókutatás', desc: 'Olyan témákat javasol, amikre keresnek, és amikhez van terméked.' },
+                { title: 'Cikkírás', desc: 'SEO- és GEO-barát cikk a márkahangodon, a termékeidre linkelve.' },
+                { title: 'Publikálás', desc: 'Jóváhagyod, és kimegy a blogodba – bemásolás nélkül.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

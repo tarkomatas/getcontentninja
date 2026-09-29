@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -461,33 +462,12 @@ const description =
                     admin.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Connect your site</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter, WooCommerce or a plain WordPress site
-                        – a few clicks, and the system sees your existing blog, plus your products and categories if you
-                        run a webshop.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Keyword research</h3>
-                    <p class="text-body text-sm leading-relaxed">The AI looks at what people search for in your market
-                        and suggests topics – ones you actually have products for.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">It writes the article</h3>
-                    <p class="text-body text-sm leading-relaxed">A detailed, SEO- and GEO-friendly article in your brand
-                        voice, linking to your own products.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Publishing</h3>
-                    <p class="text-body text-sm leading-relaxed">You review, you approve – and the article goes live on
-                        your webshop blog or WordPress site. No manual copy-paste.</p>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Connect', desc: 'Unas, Shoprenter, WooCommerce or WordPress – a few clicks.' },
+                { title: 'Keyword research', desc: 'Topics people search for – and that you have products for.' },
+                { title: 'Writing', desc: 'An SEO- and GEO-ready article in your voice, linking your products.' },
+                { title: 'Publishing', desc: 'You approve, and it goes live on your blog – no copy-paste.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">

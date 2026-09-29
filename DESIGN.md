@@ -17,7 +17,8 @@ Ez a fájl a **használati konvenciókat** rögzíti (mit mikor használj), nem 
 | Hero szekció | `py-12 md:py-16` (asztali nézetben szándékosan kompakt: a hero alatti hitelesítés-csík így feljebb kerül) |
 | Hitelesítés-csík (`TrustBadges`, a hero alatt) | `bg-card border-y border-border py-3` |
 | Záró `bg-primary` CTA-sáv | `py-16 md:py-20` (szándékos accent) |
-| Videós bemutató | **Nem külön sáv**: a „Hogyan működik?" blokkban ül, a cím és a lépéskártyák között — `HowItWorksVideo` komponens (max. `960px`, világos keret + lila glow). A lépéskártyák mobilon vízszintesek (szám a cím mellett, `p-5`), `sm`-től a megszokott kártyák |
+| Videós bemutató | **Nem külön sáv**: a „Hogyan működik?" blokkban ül, a cím és a lépéskártyák között — `HowItWorksVideo` komponens (max. `960px`, világos keret + lila glow) |
+| „Hogyan működik?" lépéskártyák | **Mindenhol** a `HowItWorksSteps` komponens: sorszám + cím egy sorban, alatta egy mondat, balra zárva. Cím 1–2 szó (~15 karakter), leírás EGY mondat |
 
 A `px-4 md:px-10` a **konténer `div`-re** kerül akkor is, ha a külső `<section>` elhagyja — így a tartalom bal/jobb éle minden szekcióban illeszkedik.
 

@@ -13,6 +13,7 @@
  * oldal indexelhető: más kifejezésre megy, mint a két modul-oldal.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
@@ -729,32 +730,12 @@ const description =
                 <p class="text-body text-lg">SEO-tudás nem kell hozzá – a szakmai része a rendszer dolga.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">1</div>
-                    <h3 class="font-bold text-lg mb-3">Bekötöd a webáruházad</h3>
-                    <p class="text-body text-sm leading-relaxed">Unas, Shoprenter vagy WooCommerce – pár kattintás, és a
-                        rendszer látja az összes termékedet, kategóriádat és a blogodat.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">2</div>
-                    <h3 class="font-bold text-lg mb-3">Megnézi, hol állsz</h3>
-                    <p class="text-body text-sm leading-relaxed">Végigméri a termék- és kategóriaoldalaid szövegeit, és
-                        megmutatja, melyek a leggyengébbek – itt éri meg kezdeni.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">3</div>
-                    <h3 class="font-bold text-lg mb-3">Legyártja a szövegeket</h3>
-                    <p class="text-body text-sm leading-relaxed">Kategóriaoldal, termékleírás, blogcikk – a te
-                        márkahangodon, a saját termékadataidból, egymásra hivatkozva.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card text-center">
-                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-primary-glow">4</div>
-                    <h3 class="font-bold text-lg mb-3">Jóváhagyod, és kimegy</h3>
-                    <p class="text-body text-sm leading-relaxed">Átnézed, szerkeszted, és a rendszer visszatölti a
-                        webshopodba. Ha megbízol benne, ezt a lépést is rábízhatod.</p>
-                </div>
-            </div>
+            <HowItWorksSteps steps={[
+                { title: 'Bekötés', desc: 'Unas, Shoprenter vagy WooCommerce – látja a teljes kínálatodat.' },
+                { title: 'Felmérés', desc: 'Megmutatja, melyik oldalad szövege a leggyengébb.' },
+                { title: 'Szövegírás', desc: 'Kategóriaoldal, termékleírás, blogcikk – egymásra hivatkozva.' },
+                { title: 'Visszatöltés', desc: 'Jóváhagyod, és visszakerül a webshopodba.' },
+            ]} />
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">
