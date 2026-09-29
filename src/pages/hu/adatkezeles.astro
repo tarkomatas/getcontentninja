@@ -29,7 +29,7 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. szeptember 23. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. szeptember 29. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           <strong class="text-dark">A TikTok- és a YouTube-integrációról szóló pontok (2.13., 2.14., 11.2., 11.3.) a
           közzététel napjától, az adott csatorna bekötésének pillanatától alkalmazandók</strong> — a tájékoztatásnak
@@ -764,8 +764,19 @@ const privacyEn = pathFor('privacy', 'en');
             bemutató-felületeken a beszélgetés folytathatóságát biztosító böngésző-azonosító. Ezekhez nem kérünk
             hozzájárulást.
           </p>
-          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.2. Marketing sütik (Meta Pixel)</p>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.2. Marketing sütik (Meta Pixel, kampányforrás-mérés)</p>
           <p>A Meta Pixel remarketing és hirdetési célból helyez el sütiket a látogató böngészőjében. Ezek kizárólag a süti-sávban adott kifejezett hozzájárulásoddal aktiválódnak.</p>
+          <p>
+            <strong class="text-dark"><code>cn_attr</code></strong> (saját, első féltől származó süti) — ha egy
+            kampánylinkről (például hírlevélből vagy hirdetésből) érkezel, megjegyzi az érkezés kampányazonosítóit
+            (UTM-paraméterek, <code>gclid</code>, <code>fbclid</code>), az érkezési oldal címét, a hivatkozó oldalt és
+            az érkezés időpontját — az első és a legutóbbi ilyen érkezésedet. <strong class="text-dark">Cél:</strong> a
+            kampányok eredményességének mérése; ha kitöltesz egy űrlapot, a tartalmát a beküldéssel együtt megkapjuk
+            (lásd 2.9. pont). <strong class="text-dark">Tárolás:</strong> 30 nap, minden új kampánylinkes érkezés
+            újraindítja. Személyes adatot (nevet, e-mail címet) nem tartalmaz. A <code>getcontentninja.com</code> teljes
+            domainjére szól, így az alkalmazás (<code>app.getcontentninja.com</code>) is kiolvashatja, ha
+            regisztrálsz. Kizárólag a süti-sávban adott hozzájárulásoddal jön létre; elutasításkor töröljük.
+          </p>
           <p class="font-semibold text-dark text-sm mt-4 mb-1">10.3. A sütik kezelése</p>
           <p>A süti-hozzájárulásodat bármikor módosíthatod vagy visszavonhatod a süti-sávon keresztül, a sütik pedig a böngésződ beállításaiban egyenként is törölhetők vagy letilthatók.</p>
         </div>
@@ -839,13 +850,21 @@ const privacyEn = pathFor('privacy', 'en');
             hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük; új adatfeldolgozó
             bekötéséről az ÁSZF <a href={`${terms}#melleklet-1`}>1. számú mellékletének</a> 9. pontja szerint legalább
             <strong class="text-dark">30 nappal</strong> előre értesítést teszünk közzé. Ez a változat
-            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. szeptember 23.). A
+            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. szeptember 29.). A
             tájékoztató magyar és angol nyelven érhető el; eltérés esetén a
             <strong class="text-dark">magyar szöveg az irányadó</strong>.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Változásnapló</p>
           <ul>
+            <li>
+              <strong class="text-dark">2026. szeptember 29.</strong> — A 10.2. pont kiegészült a
+              <strong class="text-dark"><code>cn_attr</code> sütivel</strong> (kampányforrás-mérés): kampánylinkes
+              érkezéskor megjegyzi a kampányazonosítókat, hogy a honlapi űrlapok beküldése akkor is a kampányhoz
+              legyen köthető, ha a látogató közben másik oldalra lépett. Hozzájárulás-köteles, 30 napig él, személyes
+              adatot nem tartalmaz. Új adatkezelési cél és új adatfeldolgozó nincs (a 2.8. pont hirdetés-mérési és a
+              2.9. pont UTM-adatai szerint). Közzétéve és hatályos: 2026. szeptember 29.
+            </li>
             <li>
               <strong class="text-dark">2026. szeptember 23.</strong> — A 2.14. pont önálló, kiemelt
               <strong class="text-dark">„YouTube”</strong> szakasszá bővült: a YouTube API-szolgáltatások és a

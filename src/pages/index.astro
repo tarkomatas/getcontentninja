@@ -12,6 +12,7 @@
 // `canonical` a /hu/-ra a korábbi `noindex, nofollow` helyett: így nem lesz
 // duplikált gyökér a keresőben, de semmi nem tiltja ki az ellenőrzőket, és a
 // crawler tovább tud menni a tényleges tartalomra.
+import AttributionScript from '../components/AttributionScript.astro';
 ---
 
 <!doctype html>
@@ -35,11 +36,15 @@
     <link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/" />
     <link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/" />
     <link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/" />
+    <!-- Kampány-forrás: MÉG az átirányítás előtt, mert csak itt látszik a valódi (külső) referrer. -->
+    <AttributionScript />
     <script is:inline>
       (function () {
         var lang = (navigator.language || navigator.userLanguage || 'hu').toLowerCase();
         var target = lang.indexOf('hu') === 0 ? '/hu/' : '/en/';
-        window.location.replace(target);
+        // A query (utm_*, gclid, fbclid, ?type=ld) és a hash megy tovább: enélkül
+        // a gyökérre mutató kampánylink a nyelvi főoldalon már forrás nélkül érkezne.
+        window.location.replace(target + window.location.search + window.location.hash);
       })();
     </script>
     <noscript>

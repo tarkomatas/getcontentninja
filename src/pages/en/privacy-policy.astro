@@ -29,7 +29,7 @@ const privacyHu = pathFor('privacy', 'hu');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-        <p class="text-sm text-muted">Published: 9 September 2026 · Last updated: 23 September 2026 · Effective: 19 October 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted">Published: 9 September 2026 · Last updated: 29 September 2026 · Effective: 19 October 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           <strong class="text-dark">The sections on the TikTok and YouTube integration (2.13, 2.14, 11.2, 11.3) apply
           from the date of publication, as of the moment the given channel is connected</strong> — the notice must
@@ -760,8 +760,21 @@ const privacyHu = pathFor('privacy', 'hu');
             (Supabase session cookie), the security (CSRF) cookie of the connection flow, and the browser identifier
             that allows a conversation on the public demo surfaces to be continued. These do not require consent.
           </p>
-          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.2. Marketing cookies (Meta Pixel)</p>
+          <p class="font-semibold text-dark text-sm mt-4 mb-1">10.2. Marketing cookies (Meta Pixel, campaign source tracking)</p>
           <p>The Meta Pixel places cookies in the visitor's browser for remarketing and advertising purposes. These are activated only with your explicit consent given in the cookie banner.</p>
+          <p>
+            <strong class="text-dark"><code>cn_attr</code></strong> (our own first-party cookie) — when you arrive via
+            a campaign link (for example from a newsletter or an ad), it records the campaign identifiers of that
+            arrival (UTM parameters, <code>gclid</code>, <code>fbclid</code>), the landing page address, the referring
+            page and the time of arrival — for your first and your most recent such arrival.
+            <strong class="text-dark">Purpose:</strong> measuring the effectiveness of our campaigns; if you submit a
+            form, we receive its contents together with the submission (see Section 2.9).
+            <strong class="text-dark">Retention:</strong> 30 days, restarted by every new arrival via a campaign link.
+            It contains no personal data (such as your name or e-mail address). It is set for the whole
+            <code>getcontentninja.com</code> domain, so the application (<code>app.getcontentninja.com</code>) can also
+            read it if you sign up. It is created only with your consent given in the cookie banner, and deleted if
+            you decline.
+          </p>
           <p class="font-semibold text-dark text-sm mt-4 mb-1">10.3. Managing cookies</p>
           <p>You may modify or withdraw your cookie consent at any time via the cookie banner, and cookies can also be deleted or blocked individually in your browser settings.</p>
         </div>
@@ -831,13 +844,22 @@ const privacyHu = pathFor('privacy', 'hu');
             <strong class="text-dark">15 days</strong> before they take effect; where a new processor is engaged, we
             publish notice at least <strong class="text-dark">30 days</strong> in advance, in line with Section 9 of
             <a href={`${terms}#annex-1`}>Annex 1</a> to our Terms. This version is effective from
-            <strong class="text-dark">19 October 2026</strong> (published on 9 September 2026, last updated on 23 September 2026). The policy is
+            <strong class="text-dark">19 October 2026</strong> (published on 9 September 2026, last updated on 29 September 2026). The policy is
             available in Hungarian and English; in case of any discrepancy, the
             <a href={privacyHu}>Hungarian text</a> prevails.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Change log</p>
           <ul>
+            <li>
+              <strong class="text-dark">29 September 2026</strong> — Section 10.2 now lists the
+              <strong class="text-dark"><code>cn_attr</code> cookie</strong> (campaign source tracking): on arrival
+              via a campaign link it records the campaign identifiers, so that website form submissions can be
+              attributed to the campaign even if the visitor moved on to another page in the meantime. Consent-based,
+              kept for 30 days, contains no personal data. No new purpose and no new processor (in line with the
+              ad-measurement purpose in Section 2.8 and the UTM data in Section 2.9). Published and effective:
+              29 September 2026.
+            </li>
             <li>
               <strong class="text-dark">23 September 2026</strong> — Section 2.14 was expanded into a standalone,
               highlighted <strong class="text-dark">"YouTube"</strong> section: YouTube API Services and the YouTube

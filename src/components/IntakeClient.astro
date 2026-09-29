@@ -129,6 +129,13 @@ const cfg = {
     function send(payload, options) {
       var opts = options || {};
       if (!payload.submission_id) payload.submission_id = uuid();
+      // Érkezéskori kampány-forrás MINDEN űrlapon és ágon (`AttributionScript`).
+      // A sorba is ezzel kerül, tehát az újraküldés ugyanazt viszi.
+      if (!payload.attribution) {
+        payload.attribution = window.cnAttribution
+          ? window.cnAttribution.read()
+          : { first: null, last: null };
+      }
       enqueue(payload);
       var pending = post(payload);
       if (!opts.waitMs) return pending;

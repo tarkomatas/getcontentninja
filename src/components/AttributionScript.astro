@@ -1,0 +1,176 @@
+---
+import {
+  ATTR_COOKIE,
+  ATTR_COOKIE_DOMAIN,
+  ATTR_MAX_AGE_S,
+  ATTR_PARAMS,
+  ATTR_FIELD_MAX,
+  ATTR_MAX_ENCODED,
+  CONSENT_KEY,
+} from '../data/attribution';
+
+/**
+ * Érkezéskori kampány-forrás a `cn_attr` sütiben – a szabályok a
+ * `src/data/attribution.ts`-ben. Kiteszi a `window.cnAttribution`-t:
+ *   - `read()`    – `{ first, last }` a beküldéshez (hozzájárulás nélkül mindkettő `null`),
+ *   - `capture()` – az aktuális URL kiértékelése érkezésként (a `cookie.js` is hívja
+ *                   az „Elfogadom" után, hogy a már megnyitott oldal se vesszen el),
+ *   - `clear()`   – a süti törlése (elutasításkor).
+ *
+ * A `<head>`-ben fut, két helyen: a `BaseLayout`-ban és a gyökér-átirányítóban
+ * (`src/pages/index.astro`) – ott MÉG az átirányítás előtt, mert csak ott látszik
+ * az eredeti (külső) referrer.
+ */
+const cfg = {
+  name: ATTR_COOKIE,
+  domain: ATTR_COOKIE_DOMAIN,
+  maxAge: ATTR_MAX_AGE_S,
+  params: ATTR_PARAMS,
+  fieldMax: ATTR_FIELD_MAX,
+  maxEncoded: ATTR_MAX_ENCODED,
+  consentKey: CONSENT_KEY,
+};
+---
+
+<script is:inline define:vars={{ cnAttrConfig: cfg }}>
+  (function () {
+    var C = cnAttrConfig;
+    if (window.cnAttribution) return;
+
+    function consent() {
+      try {
+        return localStorage.getItem(C.consentKey);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function cut(value) {
+      if (value === null || value === undefined || value === '') return null;
+      value = String(value);
+      return value.length > C.fieldMax ? value.slice(0, C.fieldMax) : value;
+    }
+
+    /** Élesben `.getcontentninja.com` (www + csupasz + app), dev-ben host-only. */
+    function attrs() {
+      var host = location.hostname;
+      var onSite = host === C.domain || host.slice(-(C.domain.length + 1)) === '.' + C.domain;
+      return (
+        '; Path=/' +
+        (onSite ? '; Domain=.' + C.domain : '') +
+        '; SameSite=Lax' +
+        (location.protocol === 'https:' ? '; Secure' : '')
+      );
+    }
+
+    function readCookie() {
+      var parts = document.cookie ? document.cookie.split('; ') : [];
+      for (var i = 0; i < parts.length; i++) {
+        var eq = parts[i].indexOf('=');
+        if (parts[i].slice(0, eq) !== C.name) continue;
+        try {
+          var value = JSON.parse(decodeURIComponent(parts[i].slice(eq + 1)));
+          return { first: (value && value.first) || null, last: (value && value.last) || null };
+        } catch (e) {
+          return null;
+        }
+      }
+      return null;
+    }
+
+    function encode(value) {
+      return encodeURIComponent(JSON.stringify(value));
+    }
+
+    /** A túl nagy sütit a böngésző némán eldobná – előbb a hosszú mezőket ürítjük. */
+    function fit(value) {
+      var trims = [
+        ['first', 'referrer'],
+        ['first', 'landing_url'],
+        ['last', 'referrer'],
+        ['last', 'landing_url'],
+      ];
+      for (var i = 0; i < trims.length && encode(value).length > C.maxEncoded; i++) {
+        var entry = value[trims[i][0]];
+        if (entry) entry[trims[i][1]] = null;
+      }
+      return value;
+    }
+
+    function clear() {
+      document.cookie = C.name + '=; Max-Age=0' + attrs();
+    }
+
+    /** Belső navigáció (pl. a gyökér-átirányító) – a referrer ilyenkor nem forrás. */
+    function isInternal(url) {
+      if (!url) return false;
+      try {
+        var host = new URL(url).hostname;
+        return (
+          host === location.hostname ||
+          host === C.domain ||
+          host.slice(-(C.domain.length + 1)) === '.' + C.domain
+        );
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function sameParams(a, b) {
+      for (var i = 0; i < C.params.length; i++) {
+        if ((a[C.params[i]] || null) !== (b[C.params[i]] || null)) return false;
+      }
+      return true;
+    }
+
+    function arrival() {
+      var query;
+      try {
+        query = new URLSearchParams(location.search);
+      } catch (e) {
+        return null;
+      }
+      var entry = {};
+      var any = false;
+      C.params.forEach(function (key) {
+        entry[key] = cut(query.get(key));
+        if (entry[key]) any = true;
+      });
+      if (!any) return null;
+      entry.landing_url = cut(location.href);
+      entry.referrer = cut(document.referrer);
+      entry.ts = new Date().toISOString();
+      return entry;
+    }
+
+    function capture() {
+      if (consent() !== 'true') return;
+      var entry = arrival();
+      if (!entry) return;
+      var saved = readCookie() || { first: null, last: null };
+      if (isInternal(entry.referrer)) {
+        // A gyökér-átirányító ugyanezt az érkezést már felírta, a valódi referrerrel.
+        if (saved.last && sameParams(saved.last, entry)) return;
+        entry.referrer = null;
+      }
+      saved.last = entry;
+      // Másolat: a `fit()` a `first`-öt a `last` érintése nélkül is vághassa.
+      if (!saved.first) saved.first = JSON.parse(JSON.stringify(entry));
+      document.cookie = C.name + '=' + encode(fit(saved)) + '; Max-Age=' + C.maxAge + attrs();
+    }
+
+    function read() {
+      if (consent() !== 'true') return { first: null, last: null };
+      return readCookie() || { first: null, last: null };
+    }
+
+    window.cnAttribution = { read: read, capture: capture, clear: clear };
+
+    if (consent() === 'true') {
+      capture();
+    } else if (readCookie()) {
+      // Visszavont (vagy elveszett) hozzájárulás mellett nem marad kint mérő süti.
+      clear();
+    }
+  })();
+</script>

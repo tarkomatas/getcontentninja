@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Ugyanez a literál a src/data/attribution.ts CONSENT_KEY-je – együtt mozognak.
     const COOKIE_NAME = "contentninja_cookie_consent_v1";
     const PIXEL_ID = "3857575907663677";
     const ADS_ID = "AW-10918594401";
@@ -10,14 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const STRINGS = {
         hu: {
             title: "Sütiket (cookie-kat) használunk",
-            body: "a legjobb felhasználói élmény és analitikai mérések biztosításához (Meta Pixel, Google Ads).",
+            body: "a legjobb felhasználói élmény és analitikai mérések biztosításához (Meta Pixel, Google Ads, kampányforrás-mérés).",
             link: "Adatkezelési tájékoztató",
             accept: "Elfogadom",
             reject: "Elutasítom",
         },
         en: {
             title: "We use cookies",
-            body: "to ensure the best user experience and analytics measurement (Meta Pixel, Google Ads).",
+            body: "to ensure the best user experience and analytics measurement (Meta Pixel, Google Ads, campaign source tracking).",
             link: "Privacy policy",
             accept: "Accept",
             reject: "Decline",
@@ -166,11 +167,14 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("cookie-accept").addEventListener("click", function () {
             localStorage.setItem(COOKIE_NAME, "true");
             loadTrackers();
+            // Az épp megnyitott (pl. UTM-es) oldal is számítson érkezésnek – src/data/attribution.ts.
+            if (window.cnAttribution) window.cnAttribution.capture();
             banner.remove();
         });
 
         document.getElementById("cookie-reject").addEventListener("click", function () {
             localStorage.setItem(COOKIE_NAME, "false");
+            if (window.cnAttribution) window.cnAttribution.clear();
             banner.remove();
         });
     }

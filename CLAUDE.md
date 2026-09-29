@@ -187,6 +187,28 @@ címke helyett.
 újraküldi ugyanazzal a `submission_id`-vel (az app dedupál). A felhasználót nem várakoztatjuk: a sikeres
 ág legfeljebb 2 másodpercet vár, aztán mindenképp átirányít.
 
+## Kampány-forrás (UTM) oldalváltáson át – `cn_attr` süti
+
+Az app a lead forrását a `source_url`-ből olvassa, az viszont a *beküldés* oldala — aki UTM-mel a
+főoldalra érkezik és máshol tölt ki űrlapot, forrás nélkül jönne be. Ezért az **érkezéskori** forrást a
+`cn_attr` süti tartja (`{ first, last }`, URL-kódolt JSON, `Domain=.getcontentninja.com`, 30 nap), és a
+**`cnIntake.send()` minden beküldéshez `attribution` mezőként fűzi hozzá** — minden intake-űrlapon és
+ágon, a retry-sorba is ezzel kerül. A `source_url` jelentése változatlan (beküldési oldal).
+
+- **Szabályok és konstansok:** `src/data/attribution.ts`; a logika: `src/components/AttributionScript.astro`
+  (`window.cnAttribution.read/capture/clear`), a `BaseLayout` `<head>`-jében **és** a gyökér-átirányítóban.
+- **Érkezés** = legalább egy `utm_*`/`gclid`/`fbclid` az URL-ben. `last` minden érkezésnél felülíródik,
+  `first` soha. UTM nélküli betöltés semmit nem ír. Mezőnként max. 200 karakter.
+- **A gyökér (`/`) átirányítója továbbviszi a query-t és a hash-t** (`/hu/?utm_…`) — korábban eldobta,
+  így a gyökérre mutató kampánylink forrása (és a `gclid`) elveszett. A gyökér még az átirányítás előtt
+  felírja az érkezést (csak ott látszik a külső referrer); a nyelvi főoldal ezt belső referrer + azonos
+  paraméterek alapján felismeri, és nem írja felül.
+- **Hozzájárulás-köteles** (a `cookie.js` egyetlen kategóriája): nélküle nincs süti, és
+  `{ first: null, last: null }` megy. Az „Elfogadom" `capture()`-t hív (a nyitott oldal is érkezés), az
+  „Elutasítom" `clear()`-t. Az adatkezelési tájékoztató 10.2. pontja sorolja fel — ha a süti változik, az is.
+- **Nem kapja meg:** a hírlevél-végpontra menő űrlapok (`NewsletterForm`, `chatgpt-ads` várólista) — azok
+  nem a `cnIntake`-en mennek.
+
 ## Hírlevél-feliratkozás – KÜLÖN út, nem a lead-intake
 
 > 🟢 **Él** (`NEWSLETTER_LIVE = true` a `src/data/newsletter.ts`-ben). A kapcsoló megmaradt: ha

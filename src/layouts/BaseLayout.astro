@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { pathFor, alternatesFor, type Locale, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import IntakeClient from '../components/IntakeClient.astro';
+import AttributionScript from '../components/AttributionScript.astro';
 
 interface Props {
   locale: Locale;
@@ -77,6 +78,9 @@ const ui = t(locale);
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
     </script>
+
+    <!-- Érkezéskori kampány-forrás (`cn_attr` süti, csak hozzájárulással) – lásd `src/data/attribution.ts`. -->
+    <AttributionScript />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
