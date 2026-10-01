@@ -4,15 +4,16 @@ import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'en';
 const page = 'blogWriter';
-const title = 'AI blog writer for webshops – topics from real search data, article refresh | Content Ninja';
+const title = 'AI blog writer for webshops – buyers from Google and ChatGPT | Content Ninja';
 const description =
-  "It writes about topics people actually search for. Content Ninja picks topics from real Google search data, writes the article optimized for Google and AI search engines (ChatGPT, Gemini), linking your products, publishes it to your webshop blog, and refreshes your weakening older articles too. Unas, Shoprenter, WooCommerce and WordPress.";
+  "No time to write a blog? Content Ninja writes about topics people actually search for, and every article leads readers to your products. Free traffic from Google and AI search (ChatGPT, Gemini). Unas, Shoprenter, WooCommerce and WordPress.";
 
 // Positioning, sources and do-not-promise list: see the header comment in src/pages/hu/blogcikk-iro.astro.
 const faqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
@@ -214,8 +215,8 @@ const faqLd = {
                 <div class="flex flex-col gap-4 md:gap-7 text-left">
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        An AI blog writer <span class="text-primary">for webshops</span> that picks topics from
-                        <span class="text-primary">real search data</span>
+                        An AI blog writer <span class="text-primary">for webshops</span> that <span class="text-primary">brings buyers</span>
+                        from Google and ChatGPT
                     </h1>
 
                     <!-- Supported platforms -->
@@ -225,26 +226,27 @@ const faqLd = {
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        It writes about topics people <span class="font-bold text-primary">actually search for</span>. It optimizes the
-                        article for Google and <span class="font-bold text-primary">AI search engines</span> alike, and publishes it to your webshop blog in one click.
+                        You don't have to figure out what to write about, or write it. It writes about topics people
+                        <span class="font-bold text-primary">actually search for</span> and publishes them to your blog. All you
+                        do is <span class="font-bold text-primary">approve</span>.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Measured data, not AI guesses:</strong> volume, trend, difficulty</span>
+                            <span><strong>Free traffic:</strong> customers find you without ads</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Brings buyers:</strong> the article links your own products</span>
+                            <span><strong>Readers become buyers:</strong> every article leads to your products</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Brings old articles back up:</strong> refreshed on the same URL</span>
+                            <span><strong>No work for you:</strong> you just approve the article</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>One subscription:</strong> posting and newsletters included</span>
+                            <span><strong>One fee, all your marketing:</strong> posts and newsletters included</span>
                         </li>
                     </ul>
 
@@ -477,71 +479,64 @@ const faqLd = {
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 2. Quality over quantity – contrast with the "article a day" model. Intentionally UNNAMED.
-         Visitors don't know the competitors: the intro therefore STATES what they promise, not just negates it.
-         Short sentences that make sense on their own. -->
+    <!-- 2. Today vs. with Content Ninja – pain point → desired future. The "article a day" AI blog
+         writers are intentionally UNNAMED. Short sentences that make sense on their own. -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Quality over quantity 🧭</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">It's not the number of articles that brings traffic</h2>
-                <p class="text-body text-lg">Many AI blog writers write an article every day. That alone won't
-                    bring you more traffic. An article brings buyers when people search for it and it leads to your products.</p>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Sound familiar? 🤔</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">You write and write – and still no buyers</h2>
+                <p class="text-body text-lg">Most webshop blogs bring no traffic because nobody searches for their topics. AI tools that promise an article a day don't fix that. More articles don't mean more buyers.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
                 <div class="bg-light rounded-[16px] border border-border p-6 md:p-8">
-                    <h3 class="font-bold text-lg mb-5 text-muted">The typical AI blog writer</h3>
+                    <h3 class="font-bold text-lg mb-5 text-muted">Today</h3>
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Writes an article every day. After a while, it repeats the same topics.</span>
+                            <span>You have no time to write, so the blog has been idle for months</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>The AI makes up the topic – you don't know if anyone searches for it</span>
+                            <span>When you do write, you guess the topic – and nobody reads it</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>It only produces new articles; the old ones quietly slide down in Google</span>
+                            <span>An AI content mill writes daily, but repeats itself and brings no buyers</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>You can't see which article brings traffic</span>
+                            <span>Your old articles slowly vanish from Google</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Yet another subscription – just for the blog</span>
+                            <span>You don't know if it's worth it at all</span>
                         </li>
                     </ul>
                 </div>
                 <div class="bg-card rounded-[16px] border-[1.5px] border-primary/30 p-6 md:p-8 shadow-card-hover">
-                    <h3 class="font-bold text-lg mb-5 text-primary">Content Ninja</h3>
+                    <h3 class="font-bold text-lg mb-5 text-primary">With Content Ninja</h3>
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">As many articles as there are searches</strong> – two a week
-                                by default, skipping what you've already covered</span>
+                            <span><strong class="text-dark">Your blog stays fresh without you</strong> – two articles a week, you just approve</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Measured search data</strong> – monthly volume, trend and
-                                difficulty from Google</span>
+                            <span><strong class="text-dark">Topics people really search for</strong> – based on real search data</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">It refreshes your old articles too</strong> – finds what's
-                                weakening and rewrites it on the same URL</span>
+                            <span><strong class="text-dark">Every article leads to your products</strong> – readers turn into buyers</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">You see what works</strong> – clicks, positions and queries
-                                from your Search Console</span>
+                            <span><strong class="text-dark">Old articles get a second life</strong> – it finds and refreshes the weakening ones</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">One system</strong> – the same fee covers posting,
-                                newsletters and product description audits</span>
+                            <span><strong class="text-dark">You see what works</strong> – which article brings traffic</span>
                         </li>
                     </ul>
                 </div>
@@ -554,16 +549,15 @@ const faqLd = {
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">How it works 🛠️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">From keyword research to publishing – in one place</h2>
-                <p class="text-body text-lg">No separate keyword tool, no Google Doc, no copy-pasting into your webshop
-                    admin.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">You approve – the system does the rest</h2>
+                <p class="text-body text-lg">No keyword tool, copywriter or agency needed. Nothing to paste into your webshop admin.</p>
             </div>
 
             <HowItWorksSteps steps={[
-                { title: 'Connect', desc: 'Unas, Shoprenter, WooCommerce or WordPress – a few clicks.' },
-                { title: 'Keyword research', desc: 'Topics picked by measured search volume – that you have products for.' },
-                { title: 'Writing', desc: 'An SEO- and GEO-ready article in your voice, linking your products.' },
-                { title: 'Publishing', desc: 'You approve, and it goes live on your blog – no copy-paste.' },
+                { title: 'Connect', desc: 'A few clicks, and it knows your products.' },
+                { title: 'Topics', desc: 'It shows what your customers search for.' },
+                { title: 'Article', desc: 'A finished article in your voice, linking your products.' },
+                { title: 'Publish', desc: 'You approve, and it appears on your blog.' },
             ]} />
 
             <div class="text-center mt-10">
@@ -574,159 +568,100 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 4. Keyword research -->
-    <section class="bg-card py-20 md:py-28">
+    <!-- 4. Refreshing old articles (app: docs/features/blog-refresh.md, src/lib/blog/refresh/config.ts) -->
+    <section id="frissites" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Keyword research 🎯</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Writing isn't the hard part – deciding what to write
-                    about is</h2>
-                <p class="text-body text-lg">Most webshop blogs bring no traffic because they cover topics nobody
-                    searches for. That's why the system starts with topic selection.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">query_stats</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">You know how many people search</h3>
-                    <p class="text-body text-sm leading-relaxed">Monthly search volume, a 12-month trend and difficulty
-                        from Google searches in your market – measured, not AI-estimated. With Search Console connected,
-                        your own store's searches count too.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">filter_alt</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">No paying for pointless articles</h3>
-                    <p class="text-body text-sm leading-relaxed">Topics under 10 monthly searches aren't even suggested;
-                        the rest are ranked by demand and difficulty – and it skips what you've already covered.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">forum</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">It answers what people ask</h3>
-                    <p class="text-body text-sm leading-relaxed">The article is built on Google's "People also ask"
-                        questions – exactly the question-shaped searches AI search engines answer from.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">inventory_2</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Readers turn into buyers</h3>
-                    <p class="text-body text-sm leading-relaxed">Topics start from your own products. The article links
-                        your real product and category pages. Made-up links can't get in.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Refreshing old articles (app: docs/features/blog-refresh.md, thresholds: src/lib/blog/refresh/config.ts) -->
-    <section id="frissites" class="bg-light py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Refreshing old articles ♻️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">It doesn't just write new articles – it brings old ones back up</h2>
-                <p class="text-body text-lg">The cheapest traffic is in the articles you've already written: one sitting
-                    on Google's second page is often just one refresh away. The system finds these and writes a new
-                    version.</p>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Old articles ♻️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Don't let your old articles go to waste</h2>
+                <p class="text-body text-lg">Your old articles slowly slide down in Google. Often a single refresh is all it takes to bring traffic again. The system finds them and rewrites them.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">vertical_align_top</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Almost on page one</h3>
-                    <p class="text-body text-sm leading-relaxed">Articles in Google's positions 8–20 that many people see
-                        – a refresh can move them up.</p>
+                    <p class="text-body text-sm leading-relaxed">Many people see it on page two. A refresh can move it up.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">ads_click</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Seen by many, clicked by few</h3>
-                    <p class="text-body text-sm leading-relaxed">It's on page one, but the click-through rate is low – it
-                        needs a better title and description.</p>
+                    <p class="text-body text-sm leading-relaxed">It needs a better title and description to get the click.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">trending_down</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Losing traffic</h3>
-                    <p class="text-body text-sm leading-relaxed">Clicks falling over recent months, or two of your
-                        articles competing for the same search.</p>
+                    <p class="text-body text-sm leading-relaxed">Fewer and fewer people find it. Or two of your articles compete with each other.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">history</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Outdated</h3>
-                    <p class="text-body text-sm leading-relaxed">An old year in the title, content older than a year –
-                        Google and readers both prefer fresh.</p>
+                    <p class="text-body text-sm leading-relaxed">An old year in the title. Google and readers both prefer fresh.</p>
                 </div>
             </div>
 
             <p class="text-center text-body max-w-[720px] mx-auto mt-8">
-                The refreshed article <strong class="text-dark">stays on the same URL</strong>, so it doesn't start from
-                scratch, and the previous version can be restored. On Unas, Shoprenter and WordPress blogs; most signals
-                need Google Search Console connected.
+                The refreshed article <strong class="text-dark">stays on the same URL</strong>, so you don't lose what it has
+                already achieved. The previous version can be restored. Works on Unas, Shoprenter and WordPress blogs. Most
+                signals need Google Search Console connected.
             </p>
         </div>
     </section>
 
-    <!-- 6. Measurement + Ninja AI. Analytics = from Search Console (Analytics → Search view, app:
-         docs/features/gsc-connect.md). Do NOT promise a per-article traffic dashboard, rank tracking
-         or AI-citation tracking – the app can't. No link to /hu/ninja-ai/: that page is Hungarian-only. -->
-    <section id="meres" class="bg-card py-20 md:py-28">
+    <!-- 5. Measurement + Ninja AI. No link to /hu/ninja-ai/: that page is Hungarian-only. Analitika = Search Console (Analitika → Keresés nézet, app: docs/features/gsc-connect.md).
+         NE ígérj cikkenkénti forgalom-dashboardot, pozíciókövetést vagy AI-idézettség-mérést – az app nem tudja. -->
+    <section id="meres" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Measurement and Ninja AI 📊</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">See which article brings traffic – and ask about it in chat</h2>
-                <p class="text-body text-lg">You don't need to be an SEO expert to know what works: the numbers are in
-                    the system, and the built-in AI assistant explains them.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Finally, you know what works</h2>
+                <p class="text-body text-lg">You don't need to be an SEO expert. You see which article brings traffic. If you have a question, the built-in AI assistant answers.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">monitoring</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Search analytics from Search Console</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Connect your Google Search Console and see in
-                        Content Ninja what Google finds you for – your blog articles included.</p>
+                    <h3 class="font-bold text-lg mb-2">See what brings traffic</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Connect your Google Search Console. In Content Ninja you see what Google finds you for.</p>
                     <ul class="space-y-2.5 text-sm text-body">
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Clicks, impressions, click-through rate and average position</span>
+                            <span>Which article brings clicks</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Top queries and top pages – which article brings clicks</span>
+                            <span>What people find you for most</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>An "almost on page one" list – what's worth working on now</span>
+                            <span>What's close to page one</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Uses no credits</span>
+                            <span>Free – uses no credits</span>
                         </li>
                     </ul>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">chat</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Ninja AI: run your blog from a chat</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">The built-in AI assistant researches keywords, writes,
-                        edits and publishes articles – just type what you want.</p>
+                    <h3 class="font-bold text-lg mb-2">Just ask</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Ninja AI runs your blog from a chat. It finds topics, writes articles and tells you what's worth refreshing.</p>
                     <div class="space-y-2.5">
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Find article topics for coffee machines."</p>
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Which old article is worth refreshing?"</p>
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Write the article from the best topic."</p>
+                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Find article topics for coffee machines."</p>
+                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Which old article is worth refreshing?"</p>
+                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Write the article from the best topic."</p>
                     </div>
                     <p class="text-sm text-muted mt-4">It asks for your approval before it writes or publishes anything.</p>
                 </div>
@@ -734,25 +669,35 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 7. Pricing – also carries the "full system" message (no module grid on this page since 2026-10-01) -->
+    <!-- 6. Module grid – how much extra the same monthly fee includes (modules.ts, 9 cards without the Blog writer) -->
+    <ModuleGrid
+        locale={locale}
+        exclude="blogWriter"
+        sectionId="modulok"
+        sectionClass="bg-card py-20 md:py-28"
+        cardClass="bg-light"
+        eyebrow="On top of that 🎁"
+        heading="For the same monthly fee, you get 9 more modules"
+        lead="It's not just a blog writer. All your webshop marketing in one place, from the same product catalogue."
+        homeCta
+    />
+
+    <!-- 7. Pricing – also carries the "full system" message (no module grid on this page) -->
     <section id="arazas" class="bg-light py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Pricing</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">One subscription, every module</h2>
-                <p class="text-body text-lg">The Blog writer isn't a separate product. The same subscription includes
-                    posting, newsletters, Shopgrade and image/video generation too.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">All of this for one monthly fee</h2>
+                <p class="text-body text-lg">No per-module surcharge. One subscription includes all 10 modules.</p>
             </div>
 
-            <!-- Value math: 1 keyword + 3 text + 3×2 images = 10 credits (app: docs/credit-pricing.md) -->
+            <!-- 1 kulcsszó + 3 szöveg + 3×2 kép = 10 kredit (app: docs/credit-pricing.md) -->
             <div class="bg-card rounded-[16px] border border-border p-6 md:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">calculate</span>
                 </div>
-                <p class="text-body leading-relaxed">An average article – keyword research, text, three images – is about
-                    <strong class="text-dark">10 credits</strong>. Two articles a week come to roughly
-                    <strong class="text-dark">90 credits out of the monthly 500</strong>: the rest is left for posts,
-                    newsletters and product descriptions.</p>
+                <p class="text-body leading-relaxed">An average article is about <strong class="text-dark">10 credits</strong>. Two articles a week come to roughly
+                    <strong class="text-dark">90 credits out of the monthly 500</strong>. The rest is left for posts, newsletters and product descriptions.</p>
             </div>
 
             <PricingCards locale={locale} ctaHref="#hero" />
@@ -799,11 +744,10 @@ const faqLd = {
     <!-- 9. Closing CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Let's look at your own webshop</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Let's see what your blog could bring in</h2>
             <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
-                On a 30-minute demo we'll show you which topics the system would write about for you – with real search
-                volumes – and which of your old articles it would bring back up. Your first month starts at half price,
-                with 250 bonus credits.
+                On a 30-minute demo we'll show you what your customers search for. And which of your old articles could
+                bring more traffic. Your first month starts at half price, with 250 bonus credits.
             </p>
             <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
                 Book a demo

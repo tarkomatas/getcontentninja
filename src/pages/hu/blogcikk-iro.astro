@@ -25,15 +25,16 @@ import { videos, hasVideo } from '../../data/videos';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'blogWriter';
-const title = 'AI blogcikk író webshopoknak – valós keresési adatból, cikkfrissítéssel | Content Ninja';
+const title = 'AI blogcikk író webshopoknak – vásárló a Google-ből és a ChatGPT-ből | Content Ninja';
 const description =
-  'Olyan témákról ír, amikre tényleg keresnek. A Content Ninja valós magyar keresési adatból választ témát, megírja a cikket a Google-re és az AI-keresőkre (ChatGPT, Gemini) is optimalizálva, a termékeidre linkelve, publikálja a webshopod blogjába, és a gyengülő régi cikkeidet is frissíti. Unas, Shoprenter, WooCommerce és WordPress.';
+  'Nincs időd blogot írni? A Content Ninja olyan témákról ír, amikre tényleg keresnek, és minden cikkel a termékeidhez viszi az olvasót. Ingyenes forgalom a Google-ből és az AI-keresőkből (ChatGPT, Gemini). Unas, Shoprenter, WooCommerce és WordPress.';
 
 const faqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
   {
@@ -235,8 +236,8 @@ const faqLd = {
                 <div class="flex flex-col gap-4 md:gap-7 text-left">
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        AI blogcikk-író <span class="text-primary">webshopoknak</span>, ami
-                        <span class="text-primary">valós keresési adatból</span> választ témát
+                        AI blogcikk-író <span class="text-primary">webshopoknak</span>, ami <span class="text-primary">vásárlót hoz</span>
+                        a Google-ből és a ChatGPT-ből
                     </h1>
 
                     <!-- Támogatott rendszerek -->
@@ -246,26 +247,27 @@ const faqLd = {
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Olyan témákról ír, amikre <span class="font-bold text-primary">tényleg keresnek</span>. A cikket a Google-re
-                        és az <span class="font-bold text-primary">AI-keresőkre</span> is optimalizálja, és egy kattintással kiteszi a webshopod blogjába.
+                        Nem kell kitalálnod, miről írj, és megírnod sem. A rendszer olyan témákról ír, amikre
+                        <span class="font-bold text-primary">tényleg keresnek</span>, és kiteszi a blogodba. Neked csak
+                        <span class="font-bold text-primary">jóvá kell hagynod</span>.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Mért adat, nem AI-tipp:</strong> havi keresésszám, trend és nehézség</span>
+                            <span><strong>Ingyenes forgalom:</strong> hirdetés nélkül is rád találnak</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Vásárlót hoz:</strong> a cikk a saját termékeidre linkel</span>
+                            <span><strong>Olvasóból vásárló:</strong> minden cikk a termékeidhez visz</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>A régi cikkeidet is felhozza:</strong> ugyanazon a címen frissíti</span>
+                            <span><strong>Nincs vele munkád:</strong> te csak jóváhagyod a cikket</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Egy előfizetés:</strong> a posztolás és a hírlevél is benne van</span>
+                            <span><strong>Egy díj, teljes marketing:</strong> posztolás és hírlevél is jár</span>
                         </li>
                     </ul>
 
@@ -497,71 +499,64 @@ const faqLd = {
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 2. Minőség a mennyiség helyett – szembeállítás a „napi egy cikk" modellel. Szándékosan NÉV NÉLKÜL.
-         A látogató nem ismeri a versenytársakat: a bevezető ezért KIMONDJA, mit ígérnek, nem csak tagadja.
-         Rövid, önmagukban is érthető mondatok. -->
+    <!-- 2. Ma vs. Content Ninjával – fájdalompont → vágyott jövő. A „napi egy cikk" AI-blogírók
+         szándékosan NÉV NÉLKÜL szerepelnek. Rövid, önmagukban is érthető mondatok. -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Minőség a mennyiség helyett 🧭</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem a cikkek száma hoz forgalmat</h2>
-                <p class="text-body text-lg">Sok AI-blogíró minden nap ír egy cikket. Ettől még nem lesz több
-                    forgalmad. Az a cikk hoz vásárlót, amire keresnek, és ami a termékeidhez visz.</p>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Ismerős? 🤔</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Írsz, írsz, és mégsem jön belőle vásárló</h2>
+                <p class="text-body text-lg">A legtöbb webshopblog azért nem hoz forgalmat, mert senki nem keres rá a témáira. A napi egy cikket ígérő AI-blogírók ezen nem segítenek. Több cikk nem jelent több vásárlót.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
                 <div class="bg-light rounded-[16px] border border-border p-6 md:p-8">
-                    <h3 class="font-bold text-lg mb-5 text-muted">A tipikus AI-blogíró</h3>
+                    <h3 class="font-bold text-lg mb-5 text-muted">Most</h3>
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Minden nap ír egy cikket. Egy idő után ugyanarról ír újra.</span>
+                            <span>Nincs időd blogot írni, ezért a blog hónapok óta áll</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>A témát az AI találja ki – nem tudod, keres-e rá bárki</span>
+                            <span>Ha írsz is, tippre választasz témát, és senki nem olvassa</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Csak új cikket gyárt, a régiek csendben lecsúsznak a Google-ben</span>
+                            <span>Egy AI-cikkgyár naponta ír, de ismétli magát, és nem hoz vásárlót</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Nem látod, melyik cikk hoz forgalmat</span>
+                            <span>A régi cikkeid lassan eltűnnek a Google-ből</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Egy újabb előfizetés – csak a blogra</span>
+                            <span>Nem tudod, megéri-e egyáltalán</span>
                         </li>
                     </ul>
                 </div>
                 <div class="bg-card rounded-[16px] border-[1.5px] border-primary/30 p-6 md:p-8 shadow-card-hover">
-                    <h3 class="font-bold text-lg mb-5 text-primary">A Content Ninja</h3>
+                    <h3 class="font-bold text-lg mb-5 text-primary">A Content Ninjával</h3>
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Annyi cikk, amennyire van keresés</strong> – alapból heti
-                                kettő, és kihagyja, amiről már van cikked</span>
+                            <span><strong class="text-dark">A blogod frissül, nélküled</strong> – heti két cikk, te csak jóváhagyod</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Mért keresési adat</strong> – havi keresésszám, trend és
-                                nehézség a magyar Google-ből</span>
+                            <span><strong class="text-dark">Olyan témák, amikre tényleg keresnek</strong> – valós keresési adat alapján</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">A régi cikkeidet is frissíti</strong> – ami gyengül, azt
-                                megtalálja, és ugyanazon a címen újraírja</span>
+                            <span><strong class="text-dark">Minden cikk a termékeidhez visz</strong> – az olvasóból vásárló lesz</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Látod, mi működik</strong> – kattintás, helyezés és
-                                keresőszavak a Search Console-odból</span>
+                            <span><strong class="text-dark">A régi cikkeid új életet kapnak</strong> – a gyengülőket megtalálja és frissíti</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Egy rendszer</strong> – ugyanazért a díjért posztol,
-                                hírlevelez és termékleírást elemez</span>
+                            <span><strong class="text-dark">Látod, mi működik</strong> – melyik cikk hoz forgalmat</span>
                         </li>
                     </ul>
                 </div>
@@ -574,9 +569,8 @@ const faqLd = {
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🛠️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Kulcsszókutatástól a publikálásig – egy felületen</h2>
-                <p class="text-body text-lg">Nincs külön kulcsszókutató eszköz, nincs Google Doc, nincs másolgatás a
-                    webshop adminba.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Te jóváhagysz, a többit a rendszer csinálja</h2>
+                <p class="text-body text-lg">Nem kell kulcsszókutató eszköz, szövegíró vagy ügynökség. Nem kell bemásolnod semmit a webshop adminba.</p>
             </div>
 
             <!-- Széles videó a cím és a lépések között (videos.ts) -->
@@ -585,10 +579,10 @@ const faqLd = {
             )}
 
             <HowItWorksSteps steps={[
-                { title: 'Bekötés', desc: 'Unas, Shoprenter, WooCommerce vagy WordPress – pár kattintás.' },
-                { title: 'Kulcsszókutatás', desc: 'Mért keresésszám alapján javasol témát, amihez van terméked.' },
-                { title: 'Cikkírás', desc: 'SEO- és GEO-barát cikk a márkahangodon, a termékeidre linkelve.' },
-                { title: 'Publikálás', desc: 'Jóváhagyod, és kimegy a blogodba – bemásolás nélkül.' },
+                { title: 'Bekötés', desc: 'Pár kattintás, és a rendszer ismeri a termékeidet.' },
+                { title: 'Témák', desc: 'Megmutatja, mire keresnek a vásárlóid.' },
+                { title: 'Cikk', desc: 'Kész cikk a márkahangodon, a termékeidre linkelve.' },
+                { title: 'Publikálás', desc: 'Jóváhagyod, és megjelenik a blogodban.' },
             ]} />
 
             <div class="text-center mt-10">
@@ -599,158 +593,100 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 4. Kulcsszókutatás -->
-    <section class="bg-card py-20 md:py-28">
+    <!-- 4. Régi cikkek frissítése (app: docs/features/blog-refresh.md, src/lib/blog/refresh/config.ts) -->
+    <section id="frissites" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kulcsszókutatás 🎯</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem az írás a nehéz, hanem eldönteni, miről írj</h2>
-                <p class="text-body text-lg">A legtöbb webshopblog azért nem hoz forgalmat, mert olyan témákról szól,
-                    amikre senki nem keres. A rendszer ezért a témaválasztással kezdi.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">query_stats</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Tudod, hányan keresnek rá</h3>
-                    <p class="text-body text-sm leading-relaxed">Havi keresésszám, 12 havi trend és nehézség a magyar
-                        Google-keresésekből – mért adat, nem AI-becslés. Bekötött Search Console-lal a saját boltod
-                        keresései is számítanak.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">filter_alt</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Nem fizetsz felesleges cikkért</h3>
-                    <p class="text-body text-sm leading-relaxed">A havi 10 keresés alatti témákat ki sem javasolja, a
-                        többit kereslet és nehézség szerint rangsorolja – és kihagyja, amiről már van cikked.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">forum</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Arra válaszol, amit kérdeznek</h3>
-                    <p class="text-body text-sm leading-relaxed">A Google „Mások ezt is kérdezik" kérdéseiből épül a
-                        cikk – pont azokból a kérdő keresésekből, amikből az AI-keresők is válaszolnak.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">inventory_2</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">A cikkből vásárló lesz</h3>
-                    <p class="text-body text-sm leading-relaxed">A témák a saját termékeidből indulnak. A cikk a valódi
-                        termék- és kategóriaoldalaidra linkel. Kitalált link nem kerülhet bele.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Régi cikkek frissítése (app: docs/features/blog-refresh.md, küszöbök: src/lib/blog/refresh/config.ts) -->
-    <section id="frissites" class="bg-light py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Régi cikkek frissítése ♻️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem csak új cikket ír – a régieket is felhozza</h2>
-                <p class="text-body text-lg">A legolcsóbb forgalom a már megírt cikkeidben van: ami a Google második
-                    oldalán áll, annak sokszor csak egy frissítés hiányzik. A rendszer megkeresi ezeket, és új változatot
-                    ír belőlük.</p>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Régi cikkek ♻️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ne hagyd elveszni a régi cikkeidet</h2>
+                <p class="text-body text-lg">A régi cikkeid lassan lecsúsznak a Google-ben. Pedig sokszor csak egy frissítés kell, hogy újra forgalmat hozzanak. A rendszer megtalálja őket, és újraírja.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">vertical_align_top</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Majdnem az első oldalon</h3>
-                    <p class="text-body text-sm leading-relaxed">A Google 8–20. helyén álló cikkek, amiket sokan látnak –
-                        egy frissítéssel feljebb jöhetnek.</p>
+                    <p class="text-body text-sm leading-relaxed">Sokan látják a második oldalon. Egy frissítéssel feljebb jöhet.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">ads_click</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Sokan látják, kevesen kattintanak</h3>
-                    <p class="text-body text-sm leading-relaxed">Az első oldalon van, de alacsony az átkattintás – jobb
-                        cím és leírás kell.</p>
+                    <p class="text-body text-sm leading-relaxed">Jobb cím és leírás kell, hogy rákattintsanak.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">trending_down</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Csökken a forgalma</h3>
-                    <p class="text-body text-sm leading-relaxed">Aminek a kattintásai az elmúlt hónapokban esnek, vagy
-                        két cikked ugyanarra a keresésre versenyez.</p>
+                    <p class="text-body text-sm leading-relaxed">Egyre kevesebben találják meg. Vagy két cikked egymással versenyez.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">history</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Elavult</h3>
-                    <p class="text-body text-sm leading-relaxed">Régi évszám a címben, egy évnél régebbi tartalom – a
-                        Google és az olvasó is a frisset szereti.</p>
+                    <p class="text-body text-sm leading-relaxed">Régi évszám áll a címében. A Google és az olvasó is a frisset szereti.</p>
                 </div>
             </div>
 
             <p class="text-center text-body max-w-[720px] mx-auto mt-8">
-                A frissített cikk <strong class="text-dark">ugyanazon a címen (URL-en) marad</strong>, tehát nem kezdi
-                elölről, és a korábbi változat visszaállítható. Unas, Shoprenter és WordPress blogon; a legtöbb jelhez a
-                Google Search Console bekötése kell.
+                A frissített cikk <strong class="text-dark">ugyanazon a címen (URL-en) marad</strong>, így nem veszíted el, amit már
+                elért. A korábbi változat visszaállítható. Unas, Shoprenter és WordPress blogon működik. A legtöbb jelzéshez
+                a Google Search Console bekötése kell.
             </p>
         </div>
     </section>
 
-    <!-- 6. Mérés + Ninja AI. Analitika = a Search Console-ból (Analitika → Keresés nézet, app:
-         docs/features/gsc-connect.md). NE ígérj cikkenkénti forgalom-dashboardot, pozíciókövetést
-         vagy AI-idézettség-mérést – az app nem tudja. -->
-    <section id="meres" class="bg-card py-20 md:py-28">
+    <!-- 5. Mérés + Ninja AI. Analitika = Search Console (Analitika → Keresés nézet, app: docs/features/gsc-connect.md).
+         NE ígérj cikkenkénti forgalom-dashboardot, pozíciókövetést vagy AI-idézettség-mérést – az app nem tudja. -->
+    <section id="meres" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mérés és Ninja AI 📊</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Látod, melyik cikk hoz forgalmat – és chatben rá is kérdezhetsz</h2>
-                <p class="text-body text-lg">Nem kell SEO-szakértőnek lenned ahhoz, hogy tudd, mi működik: a számok a
-                    rendszerben vannak, és a beépített AI asszisztens el is magyarázza őket.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Végre tudod, mi működik</h2>
+                <p class="text-body text-lg">Nem kell SEO-szakértőnek lenned. Látod, melyik cikk hoz forgalmat. Ha kérdésed van, a beépített AI asszisztens válaszol.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">monitoring</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Keresés-analitika a Search Console-ból</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Kösd be a Google Search Console-odat, és a
-                        Content Ninjában látod, mire talál rád a Google – a blogcikkeiddel együtt.</p>
+                    <h3 class="font-bold text-lg mb-2">Látod, mi hoz forgalmat</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Kösd be a Google Search Console-odat. A Content Ninjában látod, mire talál rád a Google.</p>
                     <ul class="space-y-2.5 text-sm text-body">
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Kattintás, megjelenés, átkattintás és átlagos helyezés</span>
+                            <span>Melyik cikked hoz kattintást</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Top keresőszavak és top oldalak – melyik cikked hoz kattintást</span>
+                            <span>Mire keresnek rád a legtöbben</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>„Majdnem az első oldalon" lista – mivel érdemes most foglalkozni</span>
+                            <span>Mi áll az első oldal közelében</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Nem fogyaszt kreditet</span>
+                            <span>Ingyenes, nem fogyaszt kreditet</span>
                         </li>
                     </ul>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">chat</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Ninja AI: chatből kezeled a blogot</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">A beépített AI asszisztens kulcsszót kutat, cikket ír,
-                        szerkeszt és publikál – elég megírnod, mit szeretnél.</p>
+                    <h3 class="font-bold text-lg mb-2">Elég megkérdezned</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">A Ninja AI chatből kezeli a blogodat. Témát keres, cikket ír, és megmondja, mit érdemes frissíteni.</p>
                     <div class="space-y-2.5">
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Keress cikktémákat a kávéfőzőkhöz."</p>
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Melyik régi cikkemet érdemes frissíteni?"</p>
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Írd meg a cikket a legjobb témából."</p>
+                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Keress cikktémákat a kávéfőzőkhöz."</p>
+                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Melyik régi cikkemet érdemes frissíteni?"</p>
+                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Írd meg a cikket a legjobb témából."</p>
                     </div>
                     <p class="text-sm text-muted mt-4">Mielőtt bármit megír vagy publikál, jóváhagyást kér.
                         <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">A Ninja AI-ról →</a></p>
@@ -759,25 +695,35 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 7. Árazás – a „teljes rendszer" üzenetet is ez viszi (a modulrács 2026-10-01 óta nincs az oldalon) -->
+    <!-- 6. Modulrács – mennyi extra jár ugyanazért a havidíjért (modules.ts, a Blogcikk író nélkül 9 kártya) -->
+    <ModuleGrid
+        locale={locale}
+        exclude="blogWriter"
+        sectionId="modulok"
+        sectionClass="bg-card py-20 md:py-28"
+        cardClass="bg-light"
+        eyebrow="Ráadásul 🎁"
+        heading="Ugyanezért a havidíjért még 9 modult kapsz"
+        lead="Nem csak blogot írsz vele. A teljes webshop-marketinged egy helyen van, ugyanabból a termékkatalógusból."
+        homeCta
+    />
+
+    <!-- 7. Árazás – a „teljes rendszer" üzenetet is ez viszi (modulrács nincs az oldalon) -->
     <section id="arazas" class="bg-light py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Egy előfizetés, minden modul</h2>
-                <p class="text-body text-lg">A Blogcikk író nem külön termék. Ugyanaz az előfizetés tartalmazza a
-                    posztolást, a hírlevelet, a Shopgrade-et és a kép-videó generálást is.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mindez egy havidíjért</h2>
+                <p class="text-body text-lg">Nincs modulonkénti felár. Egy előfizetés tartalmazza mind a 10 modult.</p>
             </div>
 
-            <!-- Értékszámítás: 1 kulcsszó + 3 szöveg + 3×2 kép = 10 kredit (app: docs/credit-pricing.md) -->
+            <!-- 1 kulcsszó + 3 szöveg + 3×2 kép = 10 kredit (app: docs/credit-pricing.md) -->
             <div class="bg-card rounded-[16px] border border-border p-6 md:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">calculate</span>
                 </div>
-                <p class="text-body leading-relaxed">Egy átlagos cikk – kulcsszókutatás, szöveg, három kép – körülbelül
-                    <strong class="text-dark">10 kredit</strong>. Heti két cikk így nagyjából
-                    <strong class="text-dark">90 kredit a havi 500-ból</strong>: a többi posztra, hírlevélre és
-                    termékleírásra marad.</p>
+                <p class="text-body leading-relaxed">Egy átlagos cikk körülbelül <strong class="text-dark">10 kredit</strong>. Heti két cikk így nagyjából
+                    <strong class="text-dark">90 kredit a havi 500-ból</strong>. A többi posztra, hírlevélre és termékleírásra marad.</p>
             </div>
 
             <PricingCards locale={locale} ctaHref="#hero" />
@@ -824,10 +770,10 @@ const faqLd = {
     <!-- 9. Záró CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg a saját webshopodon</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg, mit hozhat a blogod</h2>
             <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
-                Egy 30 perces bemutatón megmutatjuk, milyen témákról írna a rendszer neked – valós keresésszámmal –,
-                és mely régi cikkeidet hozná fel. Az első hónapod fél áron, +250 bónusz kredittel indul.
+                Egy 30 perces bemutatón megmutatjuk, mire keresnek a vásárlóid. Azt is, mely régi cikkeid hozhatnának
+                több forgalmat. Az első hónapod fél áron indul, +250 bónusz kredittel.
             </p>
             <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
                 Bemutatót kérek
