@@ -1,4 +1,23 @@
 ﻿---
+/**
+ * **Blogcikk író** (`/hu/blogcikk-iro/`).
+ *
+ * **Pozíció (2026-10-01):** a versenytársak (RankEngine, Soro, AutoSEO, Publicator…) a
+ * mennyiséggel versenyeznek: „napi egy cikk", „beállítod, és magától megy". Mi nem erre a
+ * pályára lépünk, hanem a forgalomépítőre: kevesebb, de bizonyíthatóan keresett és eladó
+ * cikk, a régiek frissítése, mérés, és mindez a teljes rendszer részeként. A szembeállítás
+ * („cikkgyár") szándékosan NÉV NÉLKÜLI — ne írj be versenytársat.
+ *
+ * Az üzenetek TÉH szerint épülnek (tulajdonság → előny → haszon): a kártyacím a haszon,
+ * a leírás a tulajdonság és az előny.
+ *
+ * ⚠️ **Tények az app repóból** (`C:\DEV\Content Ninja`): kulcsszó-adat `docs/features/blog-keywords.md`
+ * (DataForSEO, HU piac, havi 10 keresés alatt nincs javaslat), cikkfrissítés `blog-refresh.md`,
+ * keresés-analitika `gsc-connect.md`, kredit `docs/credit-pricing.md` (cikk ≈ 1 + 3 + 3×2 = 10 kredit).
+ * Amit NEM ígérhet: cikkenkénti forgalom-dashboard, pozíciókövetés, AI-idézettség mérése,
+ * FAQ-schema a cikkekben, E-E-A-T-funkció. A GYIK `faqs` tömbje adja a látható listát és a
+ * FAQPage JSON-LD-t is — a válaszok ezért sima szövegek.
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
@@ -13,12 +32,73 @@ import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'blogWriter';
-const title = 'AI blogcikk író webshopoknak – kulcsszókutatás, cikkírás, publikálás | Content Ninja';
+const title = 'AI blogcikk író webshopoknak – valós keresési adatból, cikkfrissítéssel | Content Ninja';
 const description =
-  'A Content Ninja Blogcikk író modulja kikutatja, mire keresnek a vásárlóid, megírja rá a SEO- és GEO-barát blogcikket, majd publikálja is a webshopod blogjában vagy a WordPress oldaladon. Unas, Shoprenter, WooCommerce és WordPress integrációval.';
+  'Nem napi egy cikk, hanem az, amelyik elad: a Content Ninja valós magyar keresési adatból választ témát, megírja a cikket a termékeidre linkelve, publikálja a webshopod blogjába, és a gyengülő régi cikkeidet is frissíti. Unas, Shoprenter, WooCommerce és WordPress.';
+
+const faqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
+  {
+    q: 'Honnan tudja, miről érdemes cikket írni?',
+    a: 'Valós keresési adatból. A rendszer megnézi, mire keresnek rá a magyar Google-ben a te kategóriádban – havi keresésszámmal, 12 havi trenddel és nehézséggel –, és ezt összeveti a saját termékkínálatoddal. Így olyan témákat javasol, amikre van kereslet, és amikhez van is mit eladnod. A javasolt témákból te választasz, vagy adhatsz saját témát is.',
+  },
+  {
+    q: 'Honnan jönnek a keresési adatok?',
+    a: 'A magyar Google-keresések adataiból: havi keresésszám, trend, nehézség, a Google „Mások ezt is kérdezik" kérdései és az, hogy a keresésre megjelenik-e AI-összefoglaló. Ezek mért adatok, nem AI-becslések. Ha a Google Search Console-odat is bekötöd, a rendszer a saját boltod kereséseit is figyelembe veszi.',
+  },
+  {
+    q: 'Miért nem ír minden nap cikket?',
+    a: 'Mert a blogot nem a cikkek száma teszi erőssé. Egy webshop kategóriájában véges számú kérdés van, amire érdemben keresnek; ha minden nap új cikk születik, egy idő után ugyanarra a keresésre írt, egymással versengő, töltelék cikkek jönnek. A Content Ninja alapból heti két cikkel indul, a havi 10 keresés alatti témákat ki sem javasolja, és kihagyja, amiről már van cikked. Az ütemet persze te állítod.',
+  },
+  {
+    q: 'Mi a helyzet a már meglévő cikkeimmel?',
+    a: 'A rendszer azokat is felhozza. Megkeresi a gyengülő régi cikkeidet – amelyek a Google 8–20. helyén állnak, sokan látják őket, de kevesen kattintanak, csökken a forgalmuk, vagy elavult évszám áll a címükben –, és új változatot ír belőlük. Publikáláskor a frissített cikk ugyanazon a címen (URL-en) marad, a korábbi változat pedig visszaállítható. Unas, Shoprenter és WordPress blogon működik; a legtöbb jelhez a Google Search Console bekötése kell.',
+  },
+  {
+    q: 'Látom, melyik cikkem hoz forgalmat?',
+    a: 'Igen. A Google Search Console bekötése után az Analitika Keresés nézetében látod a kattintásokat, megjelenéseket, az átkattintási arányt és az átlagos helyezést, a top keresőszavakat és a top oldalakat – a blogcikkeid is köztük vannak –, valamint azt a listát, ami a „majdnem az első oldalon" álló oldalaidat mutatja. A keresés-analitika nem fogyaszt kreditet.',
+  },
+  {
+    q: 'Miben más, mint ChatGPT-vel cikket íratni?',
+    a: 'A ChatGPT azt írja meg, amit kérsz tőle – azt nem tudja, mire keresnek a vásárlóid, milyen termékeid vannak, és hová kell publikálni. A Content Ninja valós keresési adatból választ témát, a cikkbe a webshopod valódi termék- és kategóriaoldalait linkeli (kitalált link nem kerülhet bele), a márkahangodon ír, és egy kattintással publikál a blogodba. Utána méri is, mi működik, és a gyengülő cikkeket frissíti.',
+  },
+  {
+    q: 'Milyen rendszerekbe tud publikálni? Működik WordPresszel?',
+    a: 'Közvetlenül publikál az Unas és a Shoprenter webáruházak blogjába, valamint bármely saját tárhelyes WordPress oldalra – akkor is, ha nincs rajta webshop, és akkor is, ha WooCommerce fut rajta. A WordPresst a Content Ninja bővítmény köti be: telepíted, rákattintasz a „Csatlakozás" gombra, majd a WordPress-adminban jóváhagyod – jelszót nem kell másolni. A WordPress.com-on futó oldalak nem köthetők be. Ha más rendszert használsz, a bemutatón megnézzük, mi a lehetőség.',
+    link: { href: '/hu/webshop-integracio/', label: 'Részletek a webshop mélyintegrációról.' },
+  },
+  {
+    q: 'Mi az a GEO, és miért fontos?',
+    a: 'A GEO (Generative Engine Optimization) az AI-keresőkre – ChatGPT, Gemini, Perplexity, Google AI Overviews – való optimalizálás. Ezek nem tíz kék linket adnak, hanem választ fogalmaznak, és ehhez a tényszerű, jól strukturált, kérdés–válasz logikájú tartalmakból idéznek. A cikkek eleve így épülnek fel, hogy a webshopod ezekben a válaszokban is szerepeljen.',
+  },
+  {
+    q: 'Automatikusan kimennek a cikkek?',
+    a: 'Csak ha te úgy akarod. Alapból a kész cikket átnézed és jóváhagyod, mielőtt kikerül a blogodba – szerkeszteni is tudsz rajta. A kontroll végig nálad marad.',
+  },
+  {
+    q: 'Kell hozzá SEO-tudás?',
+    a: 'Nem. A kulcsszókutatás, a cikkszerkezet, a meta adatok és a belső linkelés a folyamat része – neked a márkahangot és a célcsoportot kell egyszer beállítanod, a témát pedig jóváhagynod.',
+  },
+  {
+    q: 'Kerül külön pénzbe a blogcikk író?',
+    a: 'Nem, ugyanaz a 39.990 Ft + ÁFA / hó előfizetés tartalmazza, mint a többi modult – posztolás, hírlevél, Shopgrade –, havi 500 megújuló AI kredittel. Egy átlagos cikk kulcsszókutatással, szöveggel és három képpel körülbelül 10 kredit, így heti két cikk a havi keretnek nagyjából az ötöde.',
+    link: { href: '/hu/arak/#kreditek', label: 'Részletes kreditdíjak.' },
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-blogcikk.jpg" lpEnabled>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
   <Fragment slot="head">
     <style is:inline>
         *,
@@ -151,7 +231,8 @@ const description =
                 <div class="flex flex-col gap-4 md:gap-7 text-left">
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        AI blogcikk-író <span class="text-primary">webshopoknak</span>
+                        AI blogcikk-író <span class="text-primary">webshopoknak</span>, ami
+                        <span class="text-primary">valós keresési adatból</span> választ témát
                     </h1>
 
                     <!-- Támogatott rendszerek -->
@@ -161,26 +242,27 @@ const description =
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Kikutatja, <span class="font-bold text-primary">mire keresnek rá a vásárlóid</span>, megírja rá a
-                        SEO- és GEO-barát blogcikket, majd <span class="font-bold text-primary">publikálja is</span> a
-                        webshopod blogjában.
+                        Nem napi egy cikk, hanem az, amelyik elad: megnézi, <span class="font-bold text-primary">mire
+                        keresnek rá Magyarországon</span>, összeveti a termékeiddel, megírja a cikket, és
+                        <span class="font-bold text-primary">publikálja</span> a webshopod blogjába.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Kulcsszókutatás:</strong> valós keresési adatokból áll össze a cikkterv – nem
-                                találgatásból</span>
+                            <span><strong>Mért adat, nem AI-tipp:</strong> havi keresésszám, trend és nehézség</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>SEO + GEO:</strong> a Google és az AI-keresők (ChatGPT, Gemini, Perplexity) is
-                                megtalálják és idézik</span>
+                            <span><strong>Vásárlót hoz:</strong> a cikk a saját termékeidre linkel</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong>Publikálás egy kattintással</strong> a webshopod blogjába – a saját
-                                termékeidre linkelve</span>
+                            <span><strong>A régi cikkeidet is felhozza:</strong> ugyanazon a címen frissíti</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong>Egy előfizetés:</strong> a posztolás és a hírlevél is benne van</span>
                         </li>
                     </ul>
 
@@ -412,42 +494,73 @@ const description =
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 2. Miért blog -->
+    <!-- 2. Miért nem napi egy cikk – szembeállítás a „cikkgyár" modellel. Szándékosan NÉV NÉLKÜL. -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Miért blog? 🔍</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">A termékoldalad csak arra hoz forgalmat, aki már tudja,
-                    mit akar</h2>
-                <p class="text-body text-lg">A vásárlók többsége nem terméknévre keres, hanem kérdez – a Google-ben és
-                    egyre inkább a ChatGPT-ben. A blogcikk az a tartalom, amivel ott is megjelenhetsz.</p>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Miért nem napi egy cikk? 🧭</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Több cikk nem jelent több forgalmat</h2>
+                <p class="text-body text-lg">A legtöbb AI-blogíró a mennyiséggel versenyez: napi egy cikket ígér,
+                    beállítod, és megy magától. Egy webshop blogját viszont nem a cikkek száma teszi erőssé, hanem az,
+                    hogy olyan kérdésekre válaszol, amikre tényleg keresnek – és onnan a termékeidhez visz.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">help</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">A kérdésekre te válaszolsz</h3>
-                    <p class="text-body text-sm leading-relaxed">„Melyik a jobb, ha…", „mennyi ideig bírja", „mire kell
-                        figyelni vásárláskor" – ezek a keresések a versenytársadhoz visznek, ha nálad nincs rájuk
-                        cikk.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
+                <div class="bg-light rounded-[16px] border border-border p-6 md:p-8">
+                    <h3 class="font-bold text-lg mb-5 text-muted">A cikkgyár</h3>
+                    <ul class="space-y-4 text-sm text-body leading-relaxed">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
+                            <span>Napi egy cikk, mert ennyi van a csomagban – egy idő után ugyanarra a keresésre
+                                írt, egymással versengő töltelék</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
+                            <span>A témát az AI találja ki – nem tudod, keres-e rá bárki</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
+                            <span>Csak új cikket gyárt, a régiek csendben lecsúsznak a Google-ben</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
+                            <span>Nem látod, melyik cikk hoz forgalmat</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
+                            <span>Egy újabb előfizetés – csak a blogra</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">smart_toy</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Az AI-keresők a cikkekből idéznek</h3>
-                    <p class="text-body text-sm leading-relaxed">A ChatGPT és a Gemini nem termékadatlapot olvas fel,
-                        hanem kifejtett, tényszerű tartalomból fogalmaz választ – és megnevezi a forrást.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">trending_up</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Nem kell hirdetésre költened</h3>
-                    <p class="text-body text-sm leading-relaxed">A hirdetés addig hoz forgalmat, amíg fizeted. Egy jó
-                        cikk évekig dolgozik – és minden új cikk hozzáad az előzőekhez.</p>
+                <div class="bg-card rounded-[16px] border-[1.5px] border-primary/30 p-6 md:p-8 shadow-card-hover">
+                    <h3 class="font-bold text-lg mb-5 text-primary">A Content Ninja</h3>
+                    <ul class="space-y-4 text-sm text-body leading-relaxed">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Annyi cikk, amennyire van keresés</strong> – alapból heti
+                                kettő, és kihagyja, amiről már van cikked</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Mért keresési adat</strong> – havi keresésszám, trend és
+                                nehézség a magyar Google-ből</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">A régi cikkeidet is frissíti</strong> – ami gyengül, azt
+                                megtalálja, és ugyanazon a címen újraírja</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Látod, mi működik</strong> – kattintás, helyezés és
+                                keresőszavak a Search Console-odból</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span><strong class="text-dark">Egy rendszer</strong> – ugyanazért a díjért posztol,
+                                hírlevelez és termékleírást elemez</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -470,7 +583,7 @@ const description =
 
             <HowItWorksSteps steps={[
                 { title: 'Bekötés', desc: 'Unas, Shoprenter, WooCommerce vagy WordPress – pár kattintás.' },
-                { title: 'Kulcsszókutatás', desc: 'Olyan témákat javasol, amikre keresnek, és amikhez van terméked.' },
+                { title: 'Kulcsszókutatás', desc: 'Mért keresésszám alapján javasol témát, amihez van terméked.' },
                 { title: 'Cikkírás', desc: 'SEO- és GEO-barát cikk a márkahangodon, a termékeidre linkelve.' },
                 { title: 'Publikálás', desc: 'Jóváhagyod, és kimegy a blogodba – bemásolás nélkül.' },
             ]} />
@@ -498,40 +611,96 @@ const description =
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">query_stats</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Valós keresési adatok</h3>
-                    <p class="text-body text-sm leading-relaxed">Nem tippelünk: a rendszer azt nézi, mire keresnek
-                        ténylegesen a te kategóriádban.</p>
+                    <h3 class="font-bold text-lg mb-2">Tudod, hányan keresnek rá</h3>
+                    <p class="text-body text-sm leading-relaxed">Havi keresésszám, 12 havi trend és nehézség a magyar
+                        Google-keresésekből – mért adat, nem AI-becslés. Bekötött Search Console-lal a saját boltod
+                        keresései is számítanak.</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">filter_alt</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Nem fizetsz felesleges cikkért</h3>
+                    <p class="text-body text-sm leading-relaxed">A havi 10 keresés alatti témákat ki sem javasolja, a
+                        többit kereslet és nehézség szerint rangsorolja – és kihagyja, amiről már van cikked.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">forum</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Kérdés alapú keresések</h3>
-                    <p class="text-body text-sm leading-relaxed">Pont azok a hosszabb, kérdő keresések, amikből az
-                        AI-keresők is válaszokat építenek.</p>
+                    <h3 class="font-bold text-lg mb-2">Arra válaszol, amit kérdeznek</h3>
+                    <p class="text-body text-sm leading-relaxed">A Google „Mások ezt is kérdezik" kérdéseiből épül a
+                        cikk – pont azokból a kérdő keresésekből, amikből az AI-keresők is válaszolnak.</p>
                 </div>
                 <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">inventory_2</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">A saját kínálatodhoz kötve</h3>
-                    <p class="text-body text-sm leading-relaxed">Csak olyan témát javasol, amihez van terméked – így a
-                        cikk nem csak olvasót, vásárlót is hoz.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">checklist</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Kész cikkterv, jóváhagyásra</h3>
-                    <p class="text-body text-sm leading-relaxed">A javasolt témákból te választod ki, mi íródjon meg –
-                        vagy adsz saját témát.</p>
+                    <h3 class="font-bold text-lg mb-2">A cikkből vásárló lesz</h3>
+                    <p class="text-body text-sm leading-relaxed">A témák a saját termékeidből és kategóriáidból
+                        indulnak – így a cikk nem csak olvasót, vásárlót is hoz. A javasoltakból te választasz, vagy adsz
+                        saját témát.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. SEO + GEO -->
-    <section class="bg-light py-20 md:py-28">
+    <!-- 5. Régi cikkek frissítése (app: docs/features/blog-refresh.md, küszöbök: src/lib/blog/refresh/config.ts) -->
+    <section id="frissites" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Régi cikkek frissítése ♻️</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem csak új cikket ír – a régieket is felhozza</h2>
+                <p class="text-body text-lg">A legolcsóbb forgalom a már megírt cikkeidben van: ami a Google második
+                    oldalán áll, annak sokszor csak egy frissítés hiányzik. A rendszer megkeresi ezeket, és új változatot
+                    ír belőlük.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">vertical_align_top</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Majdnem az első oldalon</h3>
+                    <p class="text-body text-sm leading-relaxed">A Google 8–20. helyén álló cikkek, amiket sokan látnak –
+                        egy frissítéssel feljebb jöhetnek.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">ads_click</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Sokan látják, kevesen kattintanak</h3>
+                    <p class="text-body text-sm leading-relaxed">Az első oldalon van, de alacsony az átkattintás – jobb
+                        cím és leírás kell.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">trending_down</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Csökken a forgalma</h3>
+                    <p class="text-body text-sm leading-relaxed">Aminek a kattintásai az elmúlt hónapokban esnek, vagy
+                        két cikked ugyanarra a keresésre versenyez.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">history</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Elavult</h3>
+                    <p class="text-body text-sm leading-relaxed">Régi évszám a címben, egy évnél régebbi tartalom – a
+                        Google és az olvasó is a frisset szereti.</p>
+                </div>
+            </div>
+
+            <p class="text-center text-body max-w-[720px] mx-auto mt-8">
+                A frissített cikk <strong class="text-dark">ugyanazon a címen (URL-en) marad</strong>, tehát nem kezdi
+                elölről, és a korábbi változat visszaállítható. Unas, Shoprenter és WordPress blogon; a legtöbb jelhez a
+                Google Search Console bekötése kell.
+            </p>
+        </div>
+    </section>
+
+    <!-- 6. SEO + GEO -->
+    <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SEO és GEO 🔎</span>
@@ -541,7 +710,7 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">search</span>
                     </div>
@@ -549,7 +718,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Kulcsszóra hangolt cím és alcímek, logikus H2–H3
                         szerkezet, meta cím és leírás – a keresőnek és az olvasónak is.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">psychology</span>
                     </div>
@@ -557,13 +726,14 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Tényszerű, kérdés–válasz logikájú blokkok, amikből az
                         AI-keresők szívesen idéznek – a te webshopodat megnevezve.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">link</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Belső linkek a termékeidre</h3>
-                    <p class="text-body text-sm leading-relaxed">Minden cikk a saját termékeidre és kategóriáidra
-                        hivatkozik – az olvasót továbbviszi, a keresőnek pedig struktúrát ad.</p>
+                    <h3 class="font-bold text-lg mb-2">Valódi linkek a termékeidre</h3>
+                    <p class="text-body text-sm leading-relaxed">A teljes katalógusodból választ termék- és
+                        kategóriaoldalt – kitalált link nem kerülhet a cikkbe. Az olvasót továbbviszi, a keresőnek
+                        struktúrát ad.</p>
                 </div>
             </div>
 
@@ -575,8 +745,8 @@ const description =
         </div>
     </section>
 
-    <!-- 6. Publikálás -->
-    <section class="bg-card py-20 md:py-28">
+    <!-- 7. Publikálás -->
+    <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Publikálás 🚀</span>
@@ -586,7 +756,7 @@ const description =
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">publish</span>
                     </div>
@@ -594,7 +764,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Unas és Shoprenter webáruház blogjába vagy bármely
                         WordPress oldalra egy kattintással, formázva – nem kell az adminba bemásolni.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">fact_check</span>
                     </div>
@@ -602,7 +772,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Semmi nem megy ki magától: a kész cikket átnézed,
                         szerkeszted, és csak utána publikálod.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">palette</span>
                     </div>
@@ -610,7 +780,7 @@ const description =
                     <p class="text-body text-sm leading-relaxed">Egyszer beállítod a stílust, a hangnemet és a
                         célcsoportot – minden cikk úgy szól.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
                         <span class="material-symbols-outlined text-[22px]">share</span>
                     </div>
@@ -623,7 +793,7 @@ const description =
             <!-- WordPress-publikálás: egy kapcsolat a saját „Content Ninja" bővítménnyel
                  (WooCommerce-boltnál ugyanez hozza a termékeket is). NE ígérj ide címkét,
                  szerzőválasztást, WPML/Polylangot vagy WordPress.com-ot – az app nem tudja. -->
-            <div id="wordpress" class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card max-w-[900px] mx-auto mt-6">
+            <div id="wordpress" class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card max-w-[900px] mx-auto mt-6">
                 <div class="flex flex-col md:flex-row gap-6 md:gap-10">
                     <div class="md:w-[38%] shrink-0">
                         <span class="inline-flex items-center gap-2 mb-4">
@@ -677,7 +847,65 @@ const description =
         </div>
     </section>
 
-<!-- 7. A teljes rendszer (közös modulrács) -->
+    <!-- 8. Mérés + Ninja AI. Analitika = a Search Console-ból (Analitika → Keresés nézet, app:
+         docs/features/gsc-connect.md). NE ígérj cikkenkénti forgalom-dashboardot, pozíciókövetést
+         vagy AI-idézettség-mérést – az app nem tudja. -->
+    <section id="meres" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mérés és Ninja AI 📊</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Látod, melyik cikk hoz forgalmat – és chatben rá is kérdezhetsz</h2>
+                <p class="text-body text-lg">Nem kell SEO-szakértőnek lenned ahhoz, hogy tudd, mi működik: a számok a
+                    rendszerben vannak, és a beépített AI asszisztens el is magyarázza őket.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">monitoring</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Keresés-analitika a Search Console-ból</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Kösd be a Google Search Console-odat, és a
+                        Content Ninjában látod, mire talál rád a Google – a blogcikkeiddel együtt.</p>
+                    <ul class="space-y-2.5 text-sm text-body">
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Kattintás, megjelenés, átkattintás és átlagos helyezés</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Top keresőszavak és top oldalak – melyik cikked hoz kattintást</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>„Majdnem az első oldalon" lista – mivel érdemes most foglalkozni</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Nem fogyaszt kreditet</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">chat</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Ninja AI: chatből kezeled a blogot</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">A beépített AI asszisztens kulcsszót kutat, cikket ír,
+                        szerkeszt és publikál – elég megírnod, mit szeretnél.</p>
+                    <div class="space-y-2.5">
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Keress cikktémákat a kávéfőzőkhöz."</p>
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Melyik régi cikkemet érdemes frissíteni?"</p>
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Írd meg a cikket a legjobb témából."</p>
+                    </div>
+                    <p class="text-sm text-muted mt-4">Mielőtt bármit megír vagy publikál, jóváhagyást kér.
+                        <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">A Ninja AI-ról →</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. A teljes rendszer (közös modulrács) -->
     <ModuleGrid
         locale={locale}
         exclude="blogWriter"
@@ -685,12 +913,12 @@ const description =
         sectionClass="bg-light py-20 md:py-28"
         cardClass="bg-card"
         eyebrow="A teljes rendszer 🧩"
-        heading="A blogcikk író egy nagyobb rendszer egyik modulja"
-        lead="A Content Ninja nem egyetlen funkció: egy komplett AI marketing platform webshopoknak. Ugyanabból a termékkatalógusból dolgozik minden modul – egy fiók, egy márkahang, egy előfizetés."
+        heading="Egy blogíró áráért a teljes webshop-marketinged"
+        lead="A Blogcikk író nem külön előfizetés: ugyanabban a csomagban posztolsz, hírlevelezel, és a termékleírásaidat is feljavítod. Ugyanabból a termékkatalógusból dolgozik minden modul – egy cikkből poszt és hírlevél is lesz, egy márkahangon."
         homeCta
     />
 
-        <!-- 8. Árazás -->
+    <!-- 10. Árazás -->
     <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
@@ -698,6 +926,17 @@ const description =
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
                 <p class="text-body text-lg">A blogcikk író nem külön termék: benne van ugyanabban az előfizetésben, mint
                     a posztolás, a hírlevél és a kép-videó generálás.</p>
+            </div>
+
+            <!-- Értékszámítás: 1 kulcsszó + 3 szöveg + 3×2 kép = 10 kredit (app: docs/credit-pricing.md) -->
+            <div class="bg-light rounded-[16px] border border-border p-6 md:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">calculate</span>
+                </div>
+                <p class="text-body leading-relaxed">Egy átlagos cikk – kulcsszókutatás, szöveg, három kép – körülbelül
+                    <strong class="text-dark">10 kredit</strong>. Heti két cikk így nagyjából
+                    <strong class="text-dark">90 kredit a havi 500-ból</strong>: a többi posztra, hírlevélre és
+                    termékleírásra marad.</p>
             </div>
 
             <PricingCards locale={locale} ctaHref="#hero" />
@@ -711,7 +950,7 @@ const description =
         </div>
     </section>
 
-    <!-- 9. GYIK -->
+    <!-- 11. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
     <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
@@ -720,99 +959,32 @@ const description =
             </div>
 
             <div class="space-y-3">
-                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
-                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
-                        onclick="toggleFaq(this)">
-                        Honnan tudja, miről érdemes cikket írni?
-                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
-                    </button>
-                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A kulcsszókutatásból. A rendszer megnézi, mire keresnek a te piacodon, és ezt összeveti a saját
-                        termékkínálatoddal – így olyan témákat javasol, amikre van kereslet, és amikhez van is mit
-                        eladnod. A javasolt témákból te választasz, vagy adhatsz saját témát is.
+                {faqs.map((f) => (
+                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                        <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                            onclick="toggleFaq(this)">
+                            {f.q}
+                            <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                            {f.a}
+                            {f.link && (
+                                <> <a href={f.link.href} class="text-primary font-semibold underline">{f.link.label}</a></>
+                            )}
+                        </div>
                     </div>
-                </div>
-
-                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
-                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
-                        onclick="toggleFaq(this)">
-                        Milyen rendszerekbe tud publikálni? Működik WordPresszel?
-                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
-                    </button>
-                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Közvetlenül publikál az <strong>Unas</strong> és a <strong>Shoprenter</strong> webáruházak
-                        blogjába, valamint bármely <strong>saját tárhelyes WordPress</strong> oldalra – akkor is, ha nincs
-                        rajta webshop, és akkor is, ha <strong>WooCommerce</strong> fut rajta. A WordPresst a Content Ninja
-                        bővítmény köti be: telepíted, rákattintasz a „Csatlakozás" gombra, majd a WordPress-adminban
-                        jóváhagyod – jelszót nem kell másolni. A WordPress.com-on futó oldalak nem köthetők be. Ha más
-                        rendszert használsz, a bemutatón megnézzük, mi a lehetőség.
-                        <a href="/hu/webshop-integracio/" class="text-primary font-semibold underline">Részletek a webshop
-                        mélyintegrációról.</a>
-                    </div>
-                </div>
-
-                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
-                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
-                        onclick="toggleFaq(this)">
-                        Mi az a GEO, és miért fontos?
-                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
-                    </button>
-                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A GEO (Generative Engine Optimization) az AI-keresőkre – ChatGPT, Gemini, Perplexity, Google AI
-                        Overviews – való optimalizálás. Ezek nem tíz kék linket adnak, hanem választ fogalmaznak, és
-                        ehhez a tényszerű, jól strukturált, kérdés–válasz logikájú tartalmakból idéznek. A cikkek eleve
-                        így épülnek fel, hogy a webshopod ezekben a válaszokban is szerepeljen.
-                    </div>
-                </div>
-
-                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
-                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
-                        onclick="toggleFaq(this)">
-                        Automatikusan kimennek a cikkek?
-                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
-                    </button>
-                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Csak ha te úgy akarod. Alapból a kész cikket átnézed és jóváhagyod, mielőtt kikerül a blogodba –
-                        szerkeszteni is tudsz rajta. A kontroll végig nálad marad.
-                    </div>
-                </div>
-
-                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
-                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
-                        onclick="toggleFaq(this)">
-                        Kell hozzá SEO-tudás?
-                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
-                    </button>
-                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Nem. A kulcsszókutatás, a cikkszerkezet, a meta adatok és a belső linkelés a folyamat része –
-                        neked a márkahangot és a célcsoportot kell egyszer beállítanod, a témát pedig jóváhagynod.
-                    </div>
-                </div>
-
-                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
-                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
-                        onclick="toggleFaq(this)">
-                        Kerül külön pénzbe a blogcikk író?
-                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
-                    </button>
-                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Nem, ugyanaz a 39.990 Ft + ÁFA / hó előfizetés tartalmazza, mint a többi modult, havi 500
-                        megújuló AI kredittel. A generálás kreditet fogyaszt – a
-                        <a href="/hu/arak/#kreditek" class="text-primary font-semibold underline">részletes
-                        kreditdíjakat itt találod</a>.
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     </section>
 
-    <!-- 10. Záró CTA -->
+    <!-- 12. Záró CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg a saját webshopodon</h2>
             <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
-                Egy 30 perces bemutatón megmutatjuk, milyen kulcsszavakra és milyen cikkeket írna a rendszer neked – és
-                az első hónapod fél áron, +250 bónusz kredittel indul.
+                Egy 30 perces bemutatón megmutatjuk, milyen témákról írna a rendszer neked – valós keresésszámmal –,
+                és mely régi cikkeidet hozná fel. Az első hónapod fél áron, +250 bónusz kredittel indul.
             </p>
             <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
                 Bemutatót kérek
