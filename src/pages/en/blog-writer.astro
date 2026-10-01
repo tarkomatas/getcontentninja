@@ -13,7 +13,7 @@ const locale = 'en';
 const page = 'blogWriter';
 const title = 'AI blog writer for webshops – topics from real search data, article refresh | Content Ninja';
 const description =
-  "Not an article a day – the ones that sell: Content Ninja picks topics from real Google search data, writes the article linking your products, publishes it to your webshop blog, and refreshes your weakening older articles too. Unas, Shoprenter, WooCommerce and WordPress.";
+  "It writes about topics people actually search for. Content Ninja picks topics from real Google search data, writes the article linking your products, publishes it to your webshop blog, and refreshes your weakening older articles too. Unas, Shoprenter, WooCommerce and WordPress.";
 
 // Positioning, sources and do-not-promise list: see the header comment in src/pages/hu/blogcikk-iro.astro.
 const faqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
@@ -26,7 +26,7 @@ const faqs: { q: string; a: string; link?: { href: string; label: string } }[] =
     a: "From Google search data for your market: monthly search volume, trend, difficulty, Google's \"People also ask\" questions and whether an AI Overview appears for the query. These are measured figures, not AI estimates. If you also connect your Google Search Console, the system takes your own store's searches into account too.",
   },
   {
-    q: "Why doesn't it write an article every day?",
+    q: "Why doesn't it write an article every day, like other AI blog writers?",
     a: "Because a blog isn't made strong by the number of articles. A webshop category has a finite number of questions people genuinely search for; publish a new article every day and you soon get filler articles competing with each other for the same search. Content Ninja starts at two articles a week by default, doesn't even suggest topics with fewer than 10 monthly searches, and skips what you've already covered. You set the pace, of course.",
   },
   {
@@ -222,9 +222,8 @@ const faqLd = {
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Not an article a day – the ones that sell: it checks <span class="font-bold text-primary">what
-                        people in your market search for</span>, matches it to your products, writes the article and
-                        <span class="font-bold text-primary">publishes it</span> to your webshop blog.
+                        It writes about topics people <span class="font-bold text-primary">actually search for</span>. It links the
+                        article to your products and <span class="font-bold text-primary">publishes it</span> to your webshop blog.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
@@ -475,25 +474,25 @@ const faqLd = {
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 2. Why not an article a day – contrast with the "content mill" model. Intentionally UNNAMED. -->
+    <!-- 2. Quality over quantity – contrast with the "article a day" model. Intentionally UNNAMED.
+         Visitors don't know the competitors: the intro therefore STATES what they promise, not just negates it.
+         Short sentences that make sense on their own. -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Why not an article a day? 🧭</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">More articles don't mean more traffic</h2>
-                <p class="text-body text-lg">Most AI blog writers compete on volume: an article a day, set it up and
-                    it runs on its own. But a webshop blog isn't made strong by the number of articles – it's
-                    made strong by answering questions people really search for, and leading them on to your products.</p>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Quality over quantity 🧭</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">It's not the number of articles that brings traffic</h2>
+                <p class="text-body text-lg">Many AI blog writers write an article every day. That alone won't
+                    bring you more traffic. An article brings buyers when people search for it and it leads to your products.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
                 <div class="bg-light rounded-[16px] border border-border p-6 md:p-8">
-                    <h3 class="font-bold text-lg mb-5 text-muted">The content mill</h3>
+                    <h3 class="font-bold text-lg mb-5 text-muted">The typical AI blog writer</h3>
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>An article a day because that's what the plan includes – soon, filler competing
-                                with itself for the same search</span>
+                            <span>Writes an article every day. After a while, it repeats the same topics.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>

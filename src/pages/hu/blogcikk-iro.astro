@@ -34,7 +34,7 @@ const locale = 'hu';
 const page = 'blogWriter';
 const title = 'AI blogcikk író webshopoknak – valós keresési adatból, cikkfrissítéssel | Content Ninja';
 const description =
-  'Nem napi egy cikk, hanem az, amelyik elad: a Content Ninja valós magyar keresési adatból választ témát, megírja a cikket a termékeidre linkelve, publikálja a webshopod blogjába, és a gyengülő régi cikkeidet is frissíti. Unas, Shoprenter, WooCommerce és WordPress.';
+  'Olyan témákról ír, amikre tényleg keresnek. A Content Ninja valós magyar keresési adatból választ témát, megírja a cikket a termékeidre linkelve, publikálja a webshopod blogjába, és a gyengülő régi cikkeidet is frissíti. Unas, Shoprenter, WooCommerce és WordPress.';
 
 const faqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
   {
@@ -46,7 +46,7 @@ const faqs: { q: string; a: string; link?: { href: string; label: string } }[] =
     a: 'A magyar Google-keresések adataiból: havi keresésszám, trend, nehézség, a Google „Mások ezt is kérdezik" kérdései és az, hogy a keresésre megjelenik-e AI-összefoglaló. Ezek mért adatok, nem AI-becslések. Ha a Google Search Console-odat is bekötöd, a rendszer a saját boltod kereséseit is figyelembe veszi.',
   },
   {
-    q: 'Miért nem ír minden nap cikket?',
+    q: 'Miért nem ír minden nap cikket, mint más AI-blogírók?',
     a: 'Mert a blogot nem a cikkek száma teszi erőssé. Egy webshop kategóriájában véges számú kérdés van, amire érdemben keresnek; ha minden nap új cikk születik, egy idő után ugyanarra a keresésre írt, egymással versengő, töltelék cikkek jönnek. A Content Ninja alapból heti két cikkel indul, a havi 10 keresés alatti témákat ki sem javasolja, és kihagyja, amiről már van cikked. Az ütemet persze te állítod.',
   },
   {
@@ -242,9 +242,8 @@ const faqLd = {
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Nem napi egy cikk, hanem az, amelyik elad: megnézi, <span class="font-bold text-primary">mire
-                        keresnek rá Magyarországon</span>, összeveti a termékeiddel, megírja a cikket, és
-                        <span class="font-bold text-primary">publikálja</span> a webshopod blogjába.
+                        Olyan témákról ír, amikre <span class="font-bold text-primary">tényleg keresnek</span>. Megírja a cikket
+                        a termékeidre linkelve, és <span class="font-bold text-primary">publikálja</span> a webshopod blogjába.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
@@ -494,25 +493,25 @@ const faqLd = {
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 2. Miért nem napi egy cikk – szembeállítás a „cikkgyár" modellel. Szándékosan NÉV NÉLKÜL. -->
+    <!-- 2. Minőség a mennyiség helyett – szembeállítás a „napi egy cikk" modellel. Szándékosan NÉV NÉLKÜL.
+         A látogató nem ismeri a versenytársakat: a bevezető ezért KIMONDJA, mit ígérnek, nem csak tagadja.
+         Rövid, önmagukban is érthető mondatok. -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Miért nem napi egy cikk? 🧭</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Több cikk nem jelent több forgalmat</h2>
-                <p class="text-body text-lg">A legtöbb AI-blogíró a mennyiséggel versenyez: napi egy cikket ígér,
-                    beállítod, és megy magától. Egy webshop blogját viszont nem a cikkek száma teszi erőssé, hanem az,
-                    hogy olyan kérdésekre válaszol, amikre tényleg keresnek – és onnan a termékeidhez visz.</p>
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Minőség a mennyiség helyett 🧭</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nem a cikkek száma hoz forgalmat</h2>
+                <p class="text-body text-lg">Sok AI-blogíró minden nap ír egy cikket. Ettől még nem lesz több
+                    forgalmad. Az a cikk hoz vásárlót, amire keresnek, és ami a termékeidhez visz.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
                 <div class="bg-light rounded-[16px] border border-border p-6 md:p-8">
-                    <h3 class="font-bold text-lg mb-5 text-muted">A cikkgyár</h3>
+                    <h3 class="font-bold text-lg mb-5 text-muted">A tipikus AI-blogíró</h3>
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Napi egy cikk, mert ennyi van a csomagban – egy idő után ugyanarra a keresésre
-                                írt, egymással versengő töltelék</span>
+                            <span>Minden nap ír egy cikket. Egy idő után ugyanarról ír újra.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
