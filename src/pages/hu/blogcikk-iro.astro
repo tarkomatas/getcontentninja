@@ -514,24 +514,24 @@ const faqLd = {
                     <h3 class="font-bold text-lg mb-5 text-muted">Most</h3>
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Nincs időd blogot írni, ezért a blog hónapok óta áll</span>
+                            <span class="material-symbols-outlined text-red-400 text-[20px] shrink-0">close</span>
+                            <span><strong class="text-dark block">A blog áll</strong>Nincs időd írni, hónapok óta nincs új cikk</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Ha írsz is, tippre választasz témát, és senki nem olvassa</span>
+                            <span class="material-symbols-outlined text-red-400 text-[20px] shrink-0">close</span>
+                            <span><strong class="text-dark block">Tippre választott témák</strong>Senki nem olvassa őket</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Egy AI-cikkgyár naponta ír, de ismétli magát, és nem hoz vásárlót</span>
+                            <span class="material-symbols-outlined text-red-400 text-[20px] shrink-0">close</span>
+                            <span><strong class="text-dark block">Az AI-cikkgyár ismétli magát</strong>Naponta ír, de nem hoz vásárlót</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>A régi cikkeid lassan eltűnnek a Google-ből</span>
+                            <span class="material-symbols-outlined text-red-400 text-[20px] shrink-0">close</span>
+                            <span><strong class="text-dark block">A régi cikkeid eltűnnek</strong>Lassan lecsúsznak a Google-ben</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-muted text-[20px] shrink-0">close</span>
-                            <span>Nem tudod, megéri-e egyáltalán</span>
+                            <span class="material-symbols-outlined text-red-400 text-[20px] shrink-0">close</span>
+                            <span><strong class="text-dark block">Nem tudod, megéri-e</strong>Nem látod, mi hoz forgalmat</span>
                         </li>
                     </ul>
                 </div>
@@ -540,23 +540,23 @@ const faqLd = {
                     <ul class="space-y-4 text-sm text-body leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">A blogod frissül, nélküled</strong> – heti két cikk, te csak jóváhagyod</span>
+                            <span><strong class="text-dark block">A blogod frissül, nélküled</strong>Heti két cikk, te csak jóváhagyod</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Olyan témák, amikre tényleg keresnek</strong> – valós keresési adat alapján</span>
+                            <span><strong class="text-dark block">Olyan témák, amikre tényleg keresnek</strong>Valós keresési adat alapján</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Minden cikk a termékeidhez visz</strong> – az olvasóból vásárló lesz</span>
+                            <span><strong class="text-dark block">Minden cikk a termékeidhez visz</strong>Az olvasóból vásárló lesz</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">A régi cikkeid új életet kapnak</strong> – a gyengülőket megtalálja és frissíti</span>
+                            <span><strong class="text-dark block">A régi cikkeid új életet kapnak</strong>A gyengülőket megtalálja és frissíti</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Látod, mi működik</strong> – melyik cikk hoz forgalmat</span>
+                            <span><strong class="text-dark block">Látod, mi működik</strong>Melyik cikk hoz forgalmat</span>
                         </li>
                     </ul>
                 </div>
@@ -632,17 +632,12 @@ const faqLd = {
                     <p class="text-body text-sm leading-relaxed">Régi évszám áll a címében. A Google és az olvasó is a frisset szereti.</p>
                 </div>
             </div>
-
-            <p class="text-center text-body max-w-[720px] mx-auto mt-8">
-                A frissített cikk <strong class="text-dark">ugyanazon a címen (URL-en) marad</strong>, így nem veszíted el, amit már
-                elért. A korábbi változat visszaállítható. Unas, Shoprenter és WordPress blogon működik. A legtöbb jelzéshez
-                a Google Search Console bekötése kell.
-            </p>
         </div>
     </section>
 
     <!-- 5. Mérés + Ninja AI. Analitika = Search Console (Analitika → Keresés nézet, app: docs/features/gsc-connect.md).
-         NE ígérj cikkenkénti forgalom-dashboardot, pozíciókövetést vagy AI-idézettség-mérést – az app nem tudja. -->
+         NE ígérj cikkenkénti forgalom-dashboardot, pozíciókövetést vagy AI-idézettség-mérést – az app nem tudja.
+         A két ábra illusztráció PÉLDAADATOKKAL (aria-hidden, „Példa" jelölés) – nem valós ügyfélszámok. -->
     <section id="meres" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[720px] mx-auto mb-14">
@@ -651,45 +646,123 @@ const faqLd = {
                 <p class="text-body text-lg">Nem kell SEO-szakértőnek lenned. Látod, melyik cikk hoz forgalmat. Ha kérdésed van, a beépített AI asszisztens válaszol.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">monitoring</span>
+            <!-- Asztalon: 1. sor a két ábra (egyforma magas), 2. sor a két képaláírás; mobilon ábra + saját aláírása. -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-5 max-w-[1060px] mx-auto">
+                <!-- Analitika-nézet -->
+                <div class="lg:order-1 bg-card rounded-[16px] border border-border shadow-card overflow-hidden" aria-hidden="true">
+                    <div class="flex items-center gap-2 px-4 py-3 border-b border-border">
+                        <span class="w-2.5 h-2.5 rounded-full bg-border"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-border"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-border"></span>
+                        <span class="ml-2 text-xs font-semibold text-dark">Keresés · elmúlt 28 nap</span>
+                        <span class="ml-auto text-[10px] font-bold uppercase tracking-wider text-muted bg-light border border-border rounded-full px-2 py-0.5">Példa</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Látod, mi hoz forgalmat</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Kösd be a Google Search Console-odat. A Content Ninjában látod, mire talál rád a Google.</p>
-                    <ul class="space-y-2.5 text-sm text-body">
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Melyik cikked hoz kattintást</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Mire keresnek rád a legtöbben</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Mi áll az első oldal közelében</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Ingyenes, nem fogyaszt kreditet</span>
-                        </li>
-                    </ul>
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-light rounded-[12px] p-3">
+                                <p class="text-[11px] text-muted mb-1">Kattintás</p>
+                                <p class="text-lg font-bold text-dark leading-none mb-1">1 284</p>
+                                <p class="text-[11px] font-semibold text-success inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">trending_up</span>18%</p>
+                            </div>
+                            <div class="bg-light rounded-[12px] p-3">
+                                <p class="text-[11px] text-muted mb-1">Megjelenés</p>
+                                <p class="text-lg font-bold text-dark leading-none mb-1">42 900</p>
+                                <p class="text-[11px] font-semibold text-success inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">trending_up</span>11%</p>
+                            </div>
+                            <div class="bg-light rounded-[12px] p-3">
+                                <p class="text-[11px] text-muted mb-1">Átl. helyezés</p>
+                                <p class="text-lg font-bold text-dark leading-none mb-1">11,4</p>
+                                <p class="text-[11px] text-muted">&nbsp;</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-muted mb-2">Kattintások a Google-ből</p>
+                            <svg viewBox="0 0 300 90" class="w-full h-24" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="cnClicksFill" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#6c5ce7" stop-opacity="0.18" />
+                                        <stop offset="100%" stop-color="#6c5ce7" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <line x1="0" y1="30" x2="300" y2="30" stroke="#e8e8ef" stroke-width="1" vector-effect="non-scaling-stroke" />
+                                <line x1="0" y1="60" x2="300" y2="60" stroke="#e8e8ef" stroke-width="1" vector-effect="non-scaling-stroke" />
+                                <line x1="0" y1="89.5" x2="300" y2="89.5" stroke="#e8e8ef" stroke-width="1" vector-effect="non-scaling-stroke" />
+                                <path d="M0.0,60.9 L11.1,58.6 L22.2,62.0 L33.3,56.3 L44.4,57.4 L55.6,52.9 L66.7,55.1 L77.8,50.6 L88.9,51.7 L100.0,48.3 L111.1,49.4 L122.2,44.9 L133.3,47.1 L144.4,42.6 L155.6,43.7 L166.7,39.1 L177.8,40.3 L188.9,35.7 L200.0,36.9 L211.1,32.3 L222.2,33.4 L233.3,28.9 L244.4,30.0 L255.6,24.3 L266.7,25.4 L277.8,20.9 L288.9,17.4 L300.0,14.0 L300,90 L0,90 Z" fill="url(#cnClicksFill)" />
+                                <path d="M0.0,60.9 L11.1,58.6 L22.2,62.0 L33.3,56.3 L44.4,57.4 L55.6,52.9 L66.7,55.1 L77.8,50.6 L88.9,51.7 L100.0,48.3 L111.1,49.4 L122.2,44.9 L133.3,47.1 L144.4,42.6 L155.6,43.7 L166.7,39.1 L177.8,40.3 L188.9,35.7 L200.0,36.9 L211.1,32.3 L222.2,33.4 L233.3,28.9 L244.4,30.0 L255.6,24.3 L266.7,25.4 L277.8,20.9 L288.9,17.4 L300.0,14.0" fill="none" stroke="#6c5ce7" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-muted mb-2">Top oldalak</p>
+                            <div class="space-y-2.5">
+                            <div class="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1">
+                                <span class="text-xs text-dark truncate">/blog/melyik-kavefozot-valasszam</span>
+                                <span class="text-xs font-semibold text-dark tabular-nums">412</span>
+                                <div class="col-span-2 h-1.5 bg-primary/10 rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full" style="width:100%"></div></div>
+                            </div>
+                            <div class="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1">
+                                <span class="text-xs text-dark truncate">/blog/kavebab-tarolasa</span>
+                                <span class="text-xs font-semibold text-dark tabular-nums">268</span>
+                                <div class="col-span-2 h-1.5 bg-primary/10 rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full" style="width:65%"></div></div>
+                            </div>
+                            <div class="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1">
+                                <span class="text-xs text-dark truncate">/blog/tejhabositas-otthon</span>
+                                <span class="text-xs font-semibold text-dark tabular-nums">151</span>
+                                <div class="col-span-2 h-1.5 bg-primary/10 rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full" style="width:37%"></div></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 bg-primary/5 border border-primary/15 rounded-[10px] px-3 py-2">
+                            <span class="material-symbols-outlined text-primary text-[18px]">vertical_align_top</span>
+                            <span class="text-xs text-dark"><strong>3 cikk</strong> majdnem az első oldalon</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">chat</span>
+                <div class="lg:order-3 mb-6 lg:mb-0">
+                    <h3 class="font-bold text-lg mb-1">Látod, mi hoz forgalmat</h3>
+                    <p class="text-body text-sm leading-relaxed">Kösd be a Google Search Console-odat. A Content Ninjában látod, mire talál rád a Google, és melyik cikked hoz kattintást. Nem fogyaszt kreditet.</p>
+                </div>
+
+                <!-- Ninja AI chat -->
+                <div class="lg:order-2 bg-card rounded-[16px] border border-border shadow-card overflow-hidden flex flex-col" aria-hidden="true">
+                    <div class="flex items-center gap-2 px-4 py-3 border-b border-border">
+                        <span class="w-2.5 h-2.5 rounded-full bg-border"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-border"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-border"></span>
+                        <span class="ml-2 text-xs font-semibold text-dark">Ninja AI</span>
+                        <span class="ml-auto text-[10px] font-bold uppercase tracking-wider text-muted bg-light border border-border rounded-full px-2 py-0.5">Példa</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Elég megkérdezned</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">A Ninja AI chatből kezeli a blogodat. Témát keres, cikket ír, és megmondja, mit érdemes frissíteni.</p>
-                    <div class="space-y-2.5">
-                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Keress cikktémákat a kávéfőzőkhöz."</p>
-                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Melyik régi cikkemet érdemes frissíteni?"</p>
-                        <p class="bg-light border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Írd meg a cikket a legjobb témából."</p>
+                    <div class="p-4 md:p-5 space-y-3 flex-1">
+                        <div class="flex justify-end">
+                            <p class="bg-primary text-white text-sm rounded-[14px] rounded-br-[4px] px-4 py-2.5 max-w-[85%]">Melyik régi cikkemet érdemes frissíteni?</p>
+                        </div>
+                        <div class="flex items-end gap-2">
+                            <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[16px]">smart_toy</span></span>
+                            <p class="bg-light border border-border text-dark text-sm rounded-[14px] rounded-bl-[4px] px-4 py-2.5 max-w-[85%]">A „Kávébab tárolása” a 12. helyen áll, és havonta 3 400-an látják. Egy frissítéssel feljebb jöhet. Megírjam az új változatot?</p>
+                        </div>
+                        <div class="flex justify-end">
+                            <p class="bg-primary text-white text-sm rounded-[14px] rounded-br-[4px] px-4 py-2.5 max-w-[85%]">Igen, írd meg.</p>
+                        </div>
+                        <div class="flex items-end gap-2">
+                            <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[16px]">smart_toy</span></span>
+                            <div class="bg-card border-[1.5px] border-primary/30 rounded-[14px] rounded-bl-[4px] p-3.5 max-w-[85%] shadow-card">
+                                <p class="text-[11px] font-semibold text-primary uppercase tracking-wider mb-1">Jóváhagyásra vár</p>
+                                <p class="text-sm font-semibold text-dark mb-3">Cikk frissítése: Kávébab tárolása</p>
+                                <div class="flex gap-2">
+                                    <span class="text-xs font-semibold text-white bg-primary rounded-[8px] px-3 py-1.5">Jóváhagyom</span>
+                                    <span class="text-xs font-semibold text-body border border-border rounded-[8px] px-3 py-1.5">Mégse</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-sm text-muted mt-4">Mielőtt bármit megír vagy publikál, jóváhagyást kér.
-                        <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">A Ninja AI-ról →</a></p>
+                    <div class="flex items-center gap-2 border-t border-border px-4 py-3">
+                        <span class="text-sm text-muted flex-1">Írj a Ninja AI-nak…</span>
+                        <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center"><span class="material-symbols-outlined text-[18px]">arrow_upward</span></span>
+                    </div>
+                </div>
+                <div class="lg:order-4">
+                    <h3 class="font-bold text-lg mb-1">Elég megkérdezned</h3>
+                    <p class="text-body text-sm leading-relaxed">A Ninja AI chatből kezeli a blogodat. Témát keres, cikket ír, és megmondja, mit érdemes frissíteni. Mielőtt bármit megír vagy publikál, jóváhagyást kér.
+                    <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">A Ninja AI-ról →</a></p>
                 </div>
             </div>
         </div>
