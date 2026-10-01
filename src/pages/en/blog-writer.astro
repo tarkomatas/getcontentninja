@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
-import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
@@ -38,12 +37,16 @@ const faqs: { q: string; a: string; link?: { href: string; label: string } }[] =
     a: "Yes. Once Google Search Console is connected, the Search view under Analytics shows clicks, impressions, click-through rate and average position, your top queries and top pages – your blog articles included – plus a list of the pages sitting \"almost on page one\". Search analytics doesn't use any credits.",
   },
   {
+    q: 'Can I run the blog from a chat?',
+    a: 'Yes. The built-in AI assistant, Ninja AI, researches keywords, writes, edits and publishes articles from a chat. It also tells you which old article is worth refreshing. It asks for your approval before it writes or publishes anything.',
+  },
+  {
     q: 'How is it different from having ChatGPT write an article?',
     a: "ChatGPT writes what you ask for – it doesn't know what your customers search for, what products you have, or where to publish. Content Ninja picks topics from real search data, links your webshop's real product and category pages in the article (made-up links can't get in), writes in your brand voice and publishes to your blog in one click. Then it measures what works and refreshes the articles that weaken.",
   },
   {
     q: 'Which platforms can it publish to? Does it work with WordPress?',
-    a: 'It publishes directly to Unas and Shoprenter store blogs, and to any self-hosted WordPress site – with or without a webshop, including sites running WooCommerce. WordPress is connected with the Content Ninja plugin: you install it, click "Connect", then approve in your WordPress admin – no passwords to copy. Sites hosted on WordPress.com can\'t be connected. If you use another platform, we\'ll look at the options on the demo.',
+    a: 'It publishes directly to Unas and Shoprenter store blogs, and to any self-hosted WordPress site – with or without a webshop, including sites running WooCommerce. WordPress is connected with the Content Ninja plugin: you install it, click "Connect", then approve in your WordPress admin – no passwords to copy. The post arrives with its featured image, category and filled-in Yoast / Rank Math SEO fields. It can go live now, scheduled or as a draft. Sites hosted on WordPress.com can\'t be connected. If you use another platform, we\'ll look at the options on the demo.',
     link: { href: '/en/store-integration/', label: 'More on deep store integration.' },
   },
   {
@@ -613,9 +616,8 @@ const faqLd = {
                         <span class="material-symbols-outlined text-[22px]">inventory_2</span>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Readers turn into buyers</h3>
-                    <p class="text-body text-sm leading-relaxed">Topics start from your own products and categories – so
-                        the article brings buyers, not just readers. You pick from the suggestions, or hand over your own
-                        topic.</p>
+                    <p class="text-body text-sm leading-relaxed">Topics start from your own products. The article links
+                        your real product and category pages. Made-up links can't get in.</p>
                 </div>
             </div>
         </div>
@@ -675,232 +677,14 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 6. SEO + GEO -->
-    <section class="bg-card py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">SEO and GEO 🔎</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Not just Google – AI search engines find you too</h2>
-                <p class="text-body text-lg">More and more shoppers no longer start from a Google results page; they ask
-                    ChatGPT, Gemini or Perplexity. The articles are built for both worlds.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">search</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Classic SEO</h3>
-                    <p class="text-body text-sm leading-relaxed">Keyword-targeted title and headings, a logical H2–H3
-                        structure, meta title and description – for the search engine and the reader alike.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">psychology</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">GEO – AI search optimization</h3>
-                    <p class="text-body text-sm leading-relaxed">Factual, question-and-answer style blocks that AI search
-                        engines like to quote – naming your webshop as the source.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">link</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Real links to your products</h3>
-                    <p class="text-body text-sm leading-relaxed">It picks product and category pages from your full
-                        catalogue – made-up links can't get into the article. It moves the reader on and gives search
-                        engines structure.</p>
-                </div>
-            </div>
-
-            <p class="text-center text-body max-w-[720px] mx-auto mt-8">
-                The blog is only one layer, though: search engines look at your category and product pages too.
-                <a href="/en/webshop-seo-geo/" class="text-primary font-semibold underline">See how the three become one
-                system →</a>
-            </p>
-        </div>
-    </section>
-
-    <!-- 7. Publishing -->
-    <section class="bg-light py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Publishing 🚀</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">The finished article doesn't land in a document</h2>
-                <p class="text-body text-lg">With most AI writing tools the real work is the copy-pasting. Here the
-                    article ends up where it has to do its job: on your webshop blog or WordPress site.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[900px] mx-auto">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">publish</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Straight to your blog</h3>
-                    <p class="text-body text-sm leading-relaxed">One click into your Unas or Shoprenter store blog, or
-                        any WordPress site, fully formatted – no pasting into the admin.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">fact_check</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">You approve it</h3>
-                    <p class="text-body text-sm leading-relaxed">Nothing goes out on its own: you review and edit the
-                        finished article, then publish it.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">palette</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">In your brand voice</h3>
-                    <p class="text-body text-sm leading-relaxed">Set the style, tone and target audience once – every
-                        article follows it.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">share</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">It travels to your other channels</h3>
-                    <p class="text-body text-sm leading-relaxed">The same system can turn it into social posts and
-                        newsletters – the article doesn't stop at the blog.</p>
-                </div>
-            </div>
-
-            <!-- WordPress publishing: one connection via our own "Content Ninja" plugin
-                 (on a WooCommerce store the same connection brings the products too). Do NOT
-                 promise tags, author selection, WPML/Polylang or WordPress.com here – the app can't. -->
-            <div id="wordpress" class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card max-w-[900px] mx-auto mt-6">
-                <div class="flex flex-col md:flex-row gap-6 md:gap-10">
-                    <div class="md:w-[38%] shrink-0">
-                        <span class="inline-flex items-center gap-2 mb-4">
-                            <img src="/assets/wordpress-logo.svg" alt="" aria-hidden="true" class="h-8 w-auto" loading="lazy" />
-                            <span class="font-bold text-dark text-lg leading-none">WordPress</span>
-                        </span>
-                        <h3 class="font-bold text-xl mb-2">No webshop needed: it publishes to any WordPress site</h3>
-                        <p class="text-body text-sm leading-relaxed">Running a service business, or a store on
-                            WooCommerce? The article arrives as a finished post on your self-hosted WordPress site.</p>
-                    </div>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm text-body leading-relaxed">
-                        <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Featured image:</strong> images go to your media library,
-                                and the cover becomes the post's featured image</span>
-                        </li>
-                        <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Category:</strong> set a default, and override it per
-                                article</span>
-                        </li>
-                        <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Yoast / Rank Math:</strong> the SEO title and meta
-                                description arrive filled in</span>
-                        </li>
-                        <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Now, scheduled or as a draft</strong> – if you'd rather
-                                review it in WordPress first</span>
-                        </li>
-                        <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Always in sync:</strong> edit the article later and the
-                                post updates too</span>
-                        </li>
-                        <li class="flex items-start gap-2.5">
-                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span><strong class="text-dark">Connected in a few clicks:</strong> Content Ninja plugin →
-                                "Connect" → approve in your WordPress admin. No passwords to copy.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="#hero" class="cta-primary px-8 py-4 text-base">
-                    I need to see this!
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Measurement + Ninja AI. Analytics = from Search Console (Analytics → Search view, app:
-         docs/features/gsc-connect.md). Do NOT promise a per-article traffic dashboard, rank tracking
-         or AI-citation tracking – the app can't. No link to /hu/ninja-ai/: that page is Hungarian-only. -->
-    <section id="meres" class="bg-card py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Measurement and Ninja AI 📊</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">See which article brings traffic – and ask about it in chat</h2>
-                <p class="text-body text-lg">You don't need to be an SEO expert to know what works: the numbers are in
-                    the system, and the built-in AI assistant explains them.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">monitoring</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Search analytics from Search Console</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">Connect your Google Search Console and see in
-                        Content Ninja what Google finds you for – your blog articles included.</p>
-                    <ul class="space-y-2.5 text-sm text-body">
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Clicks, impressions, click-through rate and average position</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Top queries and top pages – which article brings clicks</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>An "almost on page one" list – what's worth working on now</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
-                            <span>Uses no credits</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">chat</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Ninja AI: run your blog from a chat</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">The built-in AI assistant researches keywords, writes,
-                        edits and publishes articles – just type what you want.</p>
-                    <div class="space-y-2.5">
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Find article topics for coffee machines."</p>
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Which old article is worth refreshing?"</p>
-                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Write the article from the best topic."</p>
-                    </div>
-                    <p class="text-sm text-muted mt-4">It asks for your approval before it writes or publishes anything.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. The full system (shared module grid) -->
-    <ModuleGrid
-        locale={locale}
-        exclude="blogWriter"
-        sectionId="modulok"
-        sectionClass="bg-light py-20 md:py-28"
-        cardClass="bg-card"
-        eyebrow="The full system 🧩"
-        heading="Your whole webshop marketing for the price of a blog writer"
-        lead="The Blog writer isn't a separate subscription: the same plan covers posting, newsletters and improving your product descriptions. Every module works from the same product catalogue – one article becomes a post and a newsletter too, in one brand voice."
-        homeCta
-    />
-
-    <!-- 10. Pricing -->
+    <!-- 6. Pricing – also carries the "full system" message (no module grid on this page since 2026-10-01) -->
     <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Pricing</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent, flat monthly fee</h2>
-                <p class="text-body text-lg">The blog writer is not a separate product: it's included in the same
-                    subscription as posting, newsletters and image/video generation.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">One subscription, every module</h2>
+                <p class="text-body text-lg">The Blog writer isn't a separate product. The same subscription includes
+                    posting, newsletters, Shopgrade and image/video generation too.</p>
             </div>
 
             <!-- Value math: 1 keyword + 3 text + 3×2 images = 10 credits (app: docs/credit-pricing.md) -->
@@ -925,7 +709,9 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 11. FAQ – from the same `faqs` array as the FAQPage JSON-LD -->
+    <!-- 7. FAQ – from the same `faqs` array as the FAQPage JSON-LD. Details of the removed blocks live
+         here (WordPress publishing, measurement, Ninja AI). For WordPress do NOT promise tags, author
+         selection, WPML/Polylang or WordPress.com – the app can't. -->
     <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
@@ -953,7 +739,7 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 12. Closing CTA -->
+    <!-- 8. Closing CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Let's look at your own webshop</h2>
