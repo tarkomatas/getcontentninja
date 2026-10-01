@@ -33,7 +33,7 @@ const locale = 'hu';
 const page = 'blogWriter';
 const title = 'AI blogcikk író webshopoknak – valós keresési adatból, cikkfrissítéssel | Content Ninja';
 const description =
-  'Olyan témákról ír, amikre tényleg keresnek. A Content Ninja valós magyar keresési adatból választ témát, megírja a cikket a termékeidre linkelve, publikálja a webshopod blogjába, és a gyengülő régi cikkeidet is frissíti. Unas, Shoprenter, WooCommerce és WordPress.';
+  'Olyan témákról ír, amikre tényleg keresnek. A Content Ninja valós magyar keresési adatból választ témát, megírja a cikket a Google-re és az AI-keresőkre (ChatGPT, Gemini) is optimalizálva, a termékeidre linkelve, publikálja a webshopod blogjába, és a gyengülő régi cikkeidet is frissíti. Unas, Shoprenter, WooCommerce és WordPress.';
 
 const faqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
   {
@@ -246,8 +246,8 @@ const faqLd = {
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        Olyan témákról ír, amikre <span class="font-bold text-primary">tényleg keresnek</span>. Megírja a cikket
-                        a termékeidre linkelve, és <span class="font-bold text-primary">publikálja</span> a webshopod blogjába.
+                        Olyan témákról ír, amikre <span class="font-bold text-primary">tényleg keresnek</span>. A cikket a Google-re
+                        és az <span class="font-bold text-primary">AI-keresőkre</span> is optimalizálja, és egy kattintással kiteszi a webshopod blogjába.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
@@ -701,8 +701,66 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 6. Árazás – a „teljes rendszer" üzenetet is ez viszi (a modulrács 2026-10-01 óta nincs az oldalon) -->
-    <section id="arazas" class="bg-card py-20 md:py-28">
+    <!-- 6. Mérés + Ninja AI. Analitika = a Search Console-ból (Analitika → Keresés nézet, app:
+         docs/features/gsc-connect.md). NE ígérj cikkenkénti forgalom-dashboardot, pozíciókövetést
+         vagy AI-idézettség-mérést – az app nem tudja. -->
+    <section id="meres" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mérés és Ninja AI 📊</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Látod, melyik cikk hoz forgalmat – és chatben rá is kérdezhetsz</h2>
+                <p class="text-body text-lg">Nem kell SEO-szakértőnek lenned ahhoz, hogy tudd, mi működik: a számok a
+                    rendszerben vannak, és a beépített AI asszisztens el is magyarázza őket.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">monitoring</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Keresés-analitika a Search Console-ból</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Kösd be a Google Search Console-odat, és a
+                        Content Ninjában látod, mire talál rád a Google – a blogcikkeiddel együtt.</p>
+                    <ul class="space-y-2.5 text-sm text-body">
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Kattintás, megjelenés, átkattintás és átlagos helyezés</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Top keresőszavak és top oldalak – melyik cikked hoz kattintást</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>„Majdnem az első oldalon" lista – mivel érdemes most foglalkozni</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Nem fogyaszt kreditet</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">chat</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Ninja AI: chatből kezeled a blogot</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">A beépített AI asszisztens kulcsszót kutat, cikket ír,
+                        szerkeszt és publikál – elég megírnod, mit szeretnél.</p>
+                    <div class="space-y-2.5">
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Keress cikktémákat a kávéfőzőkhöz."</p>
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Melyik régi cikkemet érdemes frissíteni?"</p>
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">„Írd meg a cikket a legjobb témából."</p>
+                    </div>
+                    <p class="text-sm text-muted mt-4">Mielőtt bármit megír vagy publikál, jóváhagyást kér.
+                        <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">A Ninja AI-ról →</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Árazás – a „teljes rendszer" üzenetet is ez viszi (a modulrács 2026-10-01 óta nincs az oldalon) -->
+    <section id="arazas" class="bg-light py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
@@ -712,7 +770,7 @@ const faqLd = {
             </div>
 
             <!-- Értékszámítás: 1 kulcsszó + 3 szöveg + 3×2 kép = 10 kredit (app: docs/credit-pricing.md) -->
-            <div class="bg-light rounded-[16px] border border-border p-6 md:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <div class="bg-card rounded-[16px] border border-border p-6 md:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">calculate</span>
                 </div>
@@ -733,10 +791,10 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 7. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD. Ide kerültek a kivett blokkok
+    <!-- 8. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD. Ide kerültek a kivett blokkok
          részletei (WordPress-publikálás, mérés, Ninja AI). WordPressnél NE ígérj címkét, szerzőválasztást,
          WPML/Polylangot vagy WordPress.com-ot – az app nem tudja. -->
-    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
@@ -745,7 +803,7 @@ const faqLd = {
 
             <div class="space-y-3">
                 {faqs.map((f) => (
-                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
                         <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                             onclick="toggleFaq(this)">
                             {f.q}
@@ -763,7 +821,7 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 8. Záró CTA -->
+    <!-- 9. Záró CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg a saját webshopodon</h2>

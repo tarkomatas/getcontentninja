@@ -12,7 +12,7 @@ const locale = 'en';
 const page = 'blogWriter';
 const title = 'AI blog writer for webshops – topics from real search data, article refresh | Content Ninja';
 const description =
-  "It writes about topics people actually search for. Content Ninja picks topics from real Google search data, writes the article linking your products, publishes it to your webshop blog, and refreshes your weakening older articles too. Unas, Shoprenter, WooCommerce and WordPress.";
+  "It writes about topics people actually search for. Content Ninja picks topics from real Google search data, writes the article optimized for Google and AI search engines (ChatGPT, Gemini), linking your products, publishes it to your webshop blog, and refreshes your weakening older articles too. Unas, Shoprenter, WooCommerce and WordPress.";
 
 // Positioning, sources and do-not-promise list: see the header comment in src/pages/hu/blogcikk-iro.astro.
 const faqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
@@ -225,8 +225,8 @@ const faqLd = {
                     </div>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[520px]">
-                        It writes about topics people <span class="font-bold text-primary">actually search for</span>. It links the
-                        article to your products and <span class="font-bold text-primary">publishes it</span> to your webshop blog.
+                        It writes about topics people <span class="font-bold text-primary">actually search for</span>. It optimizes the
+                        article for Google and <span class="font-bold text-primary">AI search engines</span> alike, and publishes it to your webshop blog in one click.
                     </p>
 
                     <ul class="space-y-3.5 text-body">
@@ -677,8 +677,65 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 6. Pricing – also carries the "full system" message (no module grid on this page since 2026-10-01) -->
-    <section id="arazas" class="bg-card py-20 md:py-28">
+    <!-- 6. Measurement + Ninja AI. Analytics = from Search Console (Analytics → Search view, app:
+         docs/features/gsc-connect.md). Do NOT promise a per-article traffic dashboard, rank tracking
+         or AI-citation tracking – the app can't. No link to /hu/ninja-ai/: that page is Hungarian-only. -->
+    <section id="meres" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Measurement and Ninja AI 📊</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">See which article brings traffic – and ask about it in chat</h2>
+                <p class="text-body text-lg">You don't need to be an SEO expert to know what works: the numbers are in
+                    the system, and the built-in AI assistant explains them.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">monitoring</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Search analytics from Search Console</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Connect your Google Search Console and see in
+                        Content Ninja what Google finds you for – your blog articles included.</p>
+                    <ul class="space-y-2.5 text-sm text-body">
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Clicks, impressions, click-through rate and average position</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Top queries and top pages – which article brings clicks</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>An "almost on page one" list – what's worth working on now</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                            <span>Uses no credits</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">chat</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Ninja AI: run your blog from a chat</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">The built-in AI assistant researches keywords, writes,
+                        edits and publishes articles – just type what you want.</p>
+                    <div class="space-y-2.5">
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Find article topics for coffee machines."</p>
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Which old article is worth refreshing?"</p>
+                        <p class="bg-card border border-border rounded-[12px] rounded-br-[4px] px-4 py-2.5 text-sm text-dark ml-6">"Write the article from the best topic."</p>
+                    </div>
+                    <p class="text-sm text-muted mt-4">It asks for your approval before it writes or publishes anything.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Pricing – also carries the "full system" message (no module grid on this page since 2026-10-01) -->
+    <section id="arazas" class="bg-light py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Pricing</span>
@@ -688,7 +745,7 @@ const faqLd = {
             </div>
 
             <!-- Value math: 1 keyword + 3 text + 3×2 images = 10 credits (app: docs/credit-pricing.md) -->
-            <div class="bg-light rounded-[16px] border border-border p-6 md:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <div class="bg-card rounded-[16px] border border-border p-6 md:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">calculate</span>
                 </div>
@@ -709,10 +766,10 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 7. FAQ – from the same `faqs` array as the FAQPage JSON-LD. Details of the removed blocks live
+    <!-- 8. FAQ – from the same `faqs` array as the FAQPage JSON-LD. Details of the removed blocks live
          here (WordPress publishing, measurement, Ninja AI). For WordPress do NOT promise tags, author
          selection, WPML/Polylang or WordPress.com – the app can't. -->
-    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FAQ</span>
@@ -721,7 +778,7 @@ const faqLd = {
 
             <div class="space-y-3">
                 {faqs.map((f) => (
-                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
                         <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                             onclick="toggleFaq(this)">
                             {f.q}
@@ -739,7 +796,7 @@ const faqLd = {
         </div>
     </section>
 
-    <!-- 8. Closing CTA -->
+    <!-- 9. Closing CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Let's look at your own webshop</h2>
