@@ -61,7 +61,7 @@ export const UI = {
       pricing: 'Pricing',
       testimonials: 'Reviews',
       contact: 'Contact',
-      /** Not rendered: the blog is Hungarian-only (see Header.astro / Footer.astro). */
+      /** Not rendered: the blog is Hungarian-only (see Footer.astro). */
       blog: 'Blog',
       // A "Megoldások" menü elemei a `src/data/modules.ts`-ből jönnek.
       solutions: 'Solutions',

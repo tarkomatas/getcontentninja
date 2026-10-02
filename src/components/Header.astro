@@ -20,10 +20,6 @@ const APP_URL = 'https://app.getcontentninja.com';
 // elég a `showSubscribe` feltételt feloldani (az `en` felirat már megvan a ui.ts-ben).
 const REGISTER_URL = `${APP_URL}/register`;
 const showSubscribe = locale === 'hu';
-// A blog egynyelvű (magyar), ezért csak a /hu/ oldalak menüjében szerepel.
-// Ugyanabban a lapon nyílik (nincs target="_blank").
-const BLOG_URL = 'https://blog.getcontentninja.com/';
-const showBlog = locale === 'hu';
 
 // Megj.: nincs külön "funkciók" szekció az oldalon, ezért a korábban árva
 // (#funkciok) nav-elemet elhagytuk – csak létező horgonyokra mutatunk.
@@ -59,7 +55,6 @@ const integration = {
 const moduleUi = MODULE_UI[locale];
 const navItems = [
   { href: `${home}#velemenyek`, label: ui.nav.testimonials },
-  ...(showBlog ? [{ href: BLOG_URL, label: ui.nav.blog }] : []),
   // A részletes ároldalra visz (nem a főoldal #arazas szekciójára): ott lehet
   // dönteni az előfizetésről – csomag, kreditdíjak, számlázás, GYIK.
   { href: pathFor('pricing', locale), label: ui.nav.pricing },
