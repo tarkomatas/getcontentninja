@@ -15,6 +15,7 @@ export const UI = {
       pricing: 'Árazás',
       testimonials: 'Vélemények',
       contact: 'Kapcsolat',
+      blog: 'Blog',
       // A "Megoldások" menü elemei (modulnév + egysoros leírás) a
       // `src/data/modules.ts`-ből jönnek, nem innen – egy modul = egy helyen.
       solutions: 'Megoldások',
@@ -60,6 +61,8 @@ export const UI = {
       pricing: 'Pricing',
       testimonials: 'Reviews',
       contact: 'Contact',
+      /** Not rendered: the blog is Hungarian-only (see Header.astro / Footer.astro). */
+      blog: 'Blog',
       // A "Megoldások" menü elemei a `src/data/modules.ts`-ből jönnek.
       solutions: 'Solutions',
     },
