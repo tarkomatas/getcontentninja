@@ -53,10 +53,10 @@ export type NewsletterSource =
    * A `/hu/facebook-hirdetes/` oldal hero-űrlapja: a Meta posztkiemelés még nem
    * él, ezért ugyanaz a várólista-út, mint a `chatgpt_ads`-nél.
    *
-   * ⚠️ **Az app ma ezt a kulcsot csak NAPLÓZZA** (a hozzájárulás-táblába, ezzel a
-   * `source_form`-mal), külön MailerLite-csoportba nem teszi — azt csak a
-   * `chatgpt_ads` kapja (`src/lib/newsletter-optin/server.ts`). Az indulási
-   * levélhez az app oldalán kell egy „Meta Ads érdeklődők" csoport.
+   * Az app a „CN Meta Ads érdeklődők" MailerLite-csoportba teszi (app:
+   * `onMetaAdsNotifyRequest`, newsletter-optin §3.6) – de CSAK ha a
+   * `MAILERLITE_GROUP_META_ADS` env élesen fent van. Nélküle a cím a
+   * hozzájárulás-naplóban marad, onnan pótolható.
    */
   | 'meta_ads'
   /** Lábléc-űrlap (minden oldalon) – még nincs kitéve. */
