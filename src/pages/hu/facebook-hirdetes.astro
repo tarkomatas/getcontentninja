@@ -15,8 +15,9 @@
  * önmagukban is idézhetők (FAQPage JSON-LD), ezért amelyik a használatról szól,
  * az kimondja, hogy a funkció hamarosan indul.
  *
- * ✅ **Ami már MA működik, az jelen időben áll:** a hirdetésgeneráló (szöveg +
- * vizuál a termékekből, letöltéssel – `docs/features/meta-ads.md`).
+ * A már élő hirdetésgenerálónak (`docs/features/meta-ads.md`) SZÁNDÉKOSAN nincs
+ * saját szakasza (user-döntés 2026-10-03): az oldal a kiemelésről szól, a
+ * generátort csak a GYIK említi.
  *
  * Amit az oldal NEM ígérhet (v1-ben nincs): saját/hasonmás közönség, érdeklődés-
  * célzás, Story kiemelése, automatikus kiemelés szabály alapján, kampány saját
@@ -30,6 +31,7 @@ import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
+import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import WaitlistScript from '../../components/WaitlistScript.astro';
 import {
@@ -121,7 +123,7 @@ const faqLd = {
 const values = [
   {
     icon: 'campaign',
-    href: '#kiemeles',
+    href: '#hogyan-mukodik',
     title: 'Kiemeli a posztjaidat',
     desc: 'Három választással pénzt teszel a legjobb posztodra, a Content Ninja elhagyása nélkül.',
   },
@@ -363,6 +365,16 @@ const steps = [
                     </a>
                 ))}
             </div>
+
+            <!-- Mi jön a kiemelés után – SZÁNDÉKOSAN általános: a teljes kampánykezelés (v2) még csak terv. -->
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">upcoming</span>
+                </div>
+                <p class="text-body leading-relaxed flex-1"><strong class="text-dark">A kiemelés csak az első lépés.</strong>
+                    A Meta hirdetéskezelőt folyamatosan fejlesztjük. A cél, hogy a kész hirdetéseidből teljes kampányt is
+                    indíthass a Content Ninjából.</p>
+            </div>
         </div>
     </section>
 
@@ -381,139 +393,8 @@ const steps = [
         </div>
     </section>
 
-    <!-- 4. A kiemelés maga – illusztráció a poszt 4. lépéséről -->
-    <section id="kiemeles" class="bg-light py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div class="flex flex-col justify-center order-2 md:order-1">
-                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kiemelés 🚀</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark leading-tight">Három választás,
-                        és a poszt már fut is</h2>
-                    <p class="text-lg text-body mb-8 leading-relaxed">
-                        A kiemelés a poszt saját lépése a szerkesztőben. A publikálás után nyílik meg. Minden mezőnek
-                        van alapértéke, tehát akár egyet sem kell átállítanod.
-                    </p>
-                    <ul class="space-y-5 mb-8">
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">devices</span>
-                            </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Hol?</strong>
-                                Facebookon, Instagramon vagy mindkettőn</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">group</span>
-                            </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Kinek?</strong>
-                                A követőidnek, új vevőknek vagy mindkettőnek</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
-                            </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1"><strong>Mennyiért és
-                                meddig?</strong> Összesen vagy naponta, pár naptól három hónapig</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">ads_click</span>
-                            </div>
-                            <span class="text-body font-medium text-lg leading-snug pt-1">A <strong>cél magától
-                                jön</strong>: eladó posztnál a kattintás a boltra</span>
-                        </li>
-                    </ul>
-
-                    <!-- Szövegközi hivatkozás a Ninja AI oldalra (a tiktok-posztolás oldal mintájára). -->
-                    <p class="text-body mb-8 leading-relaxed">
-                        A beépített
-                        <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>
-                        chatből is elindítja: „Emeld ki a tegnapi akciós posztot 5 ezerért egy hétre a követőimnek."
-                        Indítás előtt kiírja az összeget és a végdátumot, és megvárja a jóváhagyásodat.
-                    </p>
-
-                    <div>
-                        <a href="#hero" class="inline-flex items-center justify-center rounded-[10px] h-14 px-8 cta-primary text-lg">
-                            Értesítést kérek
-                        </a>
-                    </div>
-                </div>
-
-                <!--
-                    Illusztráció az app kiemelés-űrlapjáról (boost-post §3.2), HTML-ből rajzolva –
-                    nem képernyőkép, ezért a felirat ki is mondja. A számok az app alapértékei
-                    (10 000 Ft összesen, 7 nap). Dátum szándékosan nincs benne: elavulna.
-                -->
-                <figure class="order-1 md:order-2">
-                    <div class="bg-card rounded-[16px] border border-border shadow-card p-5 sm:p-7" aria-hidden="true">
-                        <div class="flex items-center justify-between gap-3 mb-6">
-                            <div class="flex items-center gap-2.5">
-                                <span class="material-symbols-outlined text-primary text-[22px]" style="font-variation-settings:'FILL' 1">campaign</span>
-                                <span class="font-bold text-dark text-lg">Kiemelés</span>
-                            </div>
-                            <span class="text-xs font-semibold text-muted bg-light border border-border rounded-full px-2.5 py-1">4. lépés</span>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-xs font-bold text-body mb-1.5">Hol hirdessünk?</p>
-                                <div class="flex gap-2">
-                                    <span class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-[10px] border-2 border-primary bg-primary/5 text-dark text-sm font-semibold h-10">
-                                        <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1">check_box</span>
-                                        Facebook
-                                    </span>
-                                    <span class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-[10px] border-2 border-primary bg-primary/5 text-dark text-sm font-semibold h-10">
-                                        <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1">check_box</span>
-                                        Instagram
-                                    </span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-xs font-bold text-body mb-1.5">Kinek?</p>
-                                <div class="flex items-center justify-between rounded-[10px] border border-border bg-card h-10 px-3 text-sm text-dark">
-                                    Követőim és új vevők
-                                    <span class="material-symbols-outlined text-muted text-[18px]">expand_more</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-xs font-bold text-body mb-1.5">Max. keret</p>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex-1 min-w-0 flex items-center justify-between gap-1 rounded-[10px] border border-border bg-card h-10 px-3 text-sm text-dark font-semibold whitespace-nowrap">
-                                        10 000 <span class="text-muted font-normal">Ft</span>
-                                    </div>
-                                    <div class="flex shrink-0 rounded-[10px] bg-light border border-border p-0.5 text-xs font-semibold h-10">
-                                        <span class="flex items-center px-2 rounded-[8px] bg-card text-dark shadow-card">Összesen</span>
-                                        <span class="flex items-center px-2 text-muted">Naponta</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-xs font-bold text-body mb-1.5">Időtartam</p>
-                                <div class="flex items-center justify-between rounded-[10px] border border-border bg-card h-10 px-3 text-sm text-dark">
-                                    7 nap
-                                    <span class="material-symbols-outlined text-muted text-[18px]">expand_more</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-body bg-light border border-border rounded-[10px] px-4 py-3 mt-5">
-                            <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-[18px]">payments</span>legfeljebb <strong class="text-dark">10 000 Ft</strong></span>
-                            <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-[18px]">event</span>leáll a <strong class="text-dark">7. napon</strong></span>
-                            <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-[18px]">ads_click</span>kattintás a boltra</span>
-                        </div>
-
-                        <div class="mt-5 flex items-center justify-center rounded-[10px] h-12 cta-primary text-base">
-                            Kiemelés indítása
-                        </div>
-                    </div>
-                    <figcaption class="text-center text-sm text-muted mt-4">Illusztráció: a kiemelés a poszt szerkesztőjében, alapértékekkel.</figcaption>
-                </figure>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Keretek – a költés mindenképp leáll (a fő ellenvetés kezelése) -->
-    <section id="keretek" class="bg-card py-20 md:py-28">
+    <!-- 4. Keretek – a költés mindenképp leáll (a fő ellenvetés kezelése) -->
+    <section id="keretek" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Biztonság 🛡️</span>
@@ -525,25 +406,25 @@ const steps = [
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">event_busy</span>
                     <h3 class="font-bold text-lg mb-2">Végdátum a Metánál</h3>
                     <p class="text-body text-sm leading-relaxed">A kiemelés a végdátumnál leáll, és a keretet nem lépi
                         túl. Ehhez a Content Ninjának sem kell elérhetőnek lennie.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">calendar_month</span>
                     <h3 class="font-bold text-lg mb-2">Havi plafon</h3>
                     <p class="text-body text-sm leading-relaxed">Beállítod, mennyit költhetsz egy hónapban, és
                         egy kiemelés legfeljebb mennyibe kerülhet. Ami túllépné, az el sem indul.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">pause_circle</span>
                     <h3 class="font-bold text-lg mb-2">Ellenőrző pont</h3>
                     <p class="text-body text-sm leading-relaxed">A hosszan futó kiemelést 30 nap után megállítja,
                         és megkérdezi, folytatod-e. Semmi nem fut a tudtod nélkül.</p>
                 </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">touch_app</span>
                     <h3 class="font-bold text-lg mb-2">Szünet egy kattintással</h3>
                     <p class="text-body text-sm leading-relaxed">Szünet, folytatás, leállítás a poszt mellől. Ha a
@@ -552,7 +433,7 @@ const steps = [
             </div>
 
             <!-- Pénzkezelés + felülvizsgálat – egy sáv, hogy ne a bemutatón derüljön ki. -->
-            <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">info</span>
                 </div>
@@ -563,8 +444,8 @@ const steps = [
         </div>
     </section>
 
-    <!-- 6. Mérés – a poszt mellett és az Analitikán -->
-    <section id="meres" class="bg-light py-20 md:py-28">
+    <!-- 5. Mérés – a poszt mellett és az Analitikán -->
+    <section id="meres" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1">
@@ -615,69 +496,47 @@ const steps = [
         </div>
     </section>
 
-    <!-- 7. Ami MA is működik: a hirdetésgenerátor (jelen idő) + mi jön a kiemelés után -->
-    <section id="hirdetesgenerator" class="bg-card py-20 md:py-28">
-        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[760px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Már most működik ✅</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Addig is: kész hirdetés a termékeidből</h2>
-                <p class="text-body text-lg leading-relaxed">
-                    A Meta hirdetésgeneráló ma is a rendszer része. A termékeidből megírja a hirdetést, és vizuált
-                    készít hozzá.
-                </p>
+    <!-- 6. Árazás – a kiemelés az előfizetés része; a gombok a bemutatóra visznek (az a teljes
+         rendszerről szól, nem a hamarosan induló kiemelésről). -->
+    <section id="arazas" class="bg-light py-20 md:py-28">
+        <div class="max-w-[900px] mx-auto px-4 md:px-10">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
+                <p class="text-body text-lg">A kiemelés az előfizetés része lesz – nincs rá külön díj.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">edit_note</span>
-                    <h3 class="font-bold text-lg mb-2">Hirdetésszöveg</h3>
-                    <p class="text-body text-sm leading-relaxed">Elsődleges szöveg, főcím és leírás, a Meta ajánlott
-                        hosszaival. Mellé öt főcím-változat.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">image</span>
-                    <h3 class="font-bold text-lg mb-2">Kép vagy videó</h3>
-                    <p class="text-body text-sm leading-relaxed">Ugyanazokkal az AI kép- és videóeszközökkel, mint a
-                        posztoknál. A kész vizuál a Galériába is bekerül.</p>
-                </div>
-                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
-                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">download</span>
-                    <h3 class="font-bold text-lg mb-2">Letöltés</h3>
-                    <p class="text-body text-sm leading-relaxed">Előnézet, majd letöltöd a szöveget és a vizuált. A
-                        hirdetést a Meta hirdetéskezelőjében adod fel.</p>
-                </div>
-            </div>
+            <PricingCards locale={locale} />
 
-            <!-- Mi jön a kiemelés után – SZÁNDÉKOSAN feltételes és egy sáv: a v2 még csak terv. -->
-            <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
-                    <span class="material-symbols-outlined text-[22px]">upcoming</span>
+                    <span class="material-symbols-outlined text-[22px]">payments</span>
                 </div>
-                <p class="text-body leading-relaxed flex-1"><strong class="text-dark">A kiemelés csak az első lépés.</strong>
-                    A Meta hirdetéskezelőt folyamatosan fejlesztjük. A cél, hogy a kész hirdetéseidből teljes kampányt is
-                    indíthass a Content Ninjából.</p>
-                <a href="/hu/online-bemutato/" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
-                    Bemutatót kérek a rendszerről
+                <p class="text-body leading-relaxed flex-1"><strong class="text-dark">A kiemelés kreditet sem fogyaszt.</strong>
+                    A hirdetés árát a Meta számlázza, a saját hirdetési fiókodból. Annyit költesz, amennyit a keretben
+                    megadsz.</p>
+                <a href="/hu/arak/#kreditek" class="text-primary font-bold text-sm whitespace-nowrap inline-flex items-center gap-1">
+                    Részletes kreditdíjak
                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- 8. A teljes rendszer (közös modulrács) – a Meta hirdetések maga az oldal témája. -->
+    <!-- 7. A teljes rendszer (közös modulrács) – a Meta hirdetések maga az oldal témája. -->
     <ModuleGrid
         locale={locale}
         exclude="metaAds"
         sectionId="modulok"
-        sectionClass="bg-light py-20 md:py-28"
-        cardClass="bg-card"
+        sectionClass="bg-card py-20 md:py-28"
+        cardClass="bg-light"
         eyebrow="A teljes rendszer 🧩"
         heading="Egy nagyobb AI marketing rendszer része"
         lead="Ugyanaz a rendszer írja a posztjaidat, a hírleveleidet és a blogcikkeidet is – mind ugyanabból a termékkatalógusból. Egy fiók, egy márkahang, egy előfizetés."
     />
 
-    <!-- 9. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
-    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
+    <!-- 8. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
+    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
@@ -686,7 +545,7 @@ const steps = [
 
             <div class="space-y-3">
                 {faqs.map((f) => (
-                    <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                         <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                             onclick="toggleFaq(this)">
                             {f.q}
@@ -701,7 +560,7 @@ const steps = [
         </div>
     </section>
 
-    <!-- 10. Záró CTA -->
+    <!-- 9. Záró CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Legyél ott az elsők között</h2>
