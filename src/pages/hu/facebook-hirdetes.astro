@@ -69,7 +69,7 @@ const faqs = [
     a: 'Hamarosan. Ezen az oldalon feliratkozhatsz a várólistára, és e-mailben szólunk, amint bekapcsolhatod. A Meta hirdetésgeneráló addig is működik: a termékeidből hirdetési szöveget és vizuált készít.',
   },
   {
-    q: 'Mit jelent a poszt kiemelése?',
+    q: 'Mit jelent egy Facebook-poszt kiemelése?',
     a: 'A kiemeléssel egy már kiment Facebook- vagy Instagram-posztot pénzért több ember lát. A Content Ninjában a poszt mellől indítod majd: kiválasztod, hol fusson, kinek mutassa, mennyit költhet és meddig. A Meta ugyanúgy hirdetésként futtatja, mint a Facebook saját „Bejegyzés kiemelése" gombjánál, és a poszt reakciói, hozzászólásai megmaradnak.',
   },
   {
@@ -157,6 +157,7 @@ const steps = [
   title={title}
   description={description}
   keywords={keywords}
+  ogImage="/assets/og-facebook-hirdetes.jpg"
   lpEnabled
 >
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
@@ -344,9 +345,9 @@ const steps = [
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hirdetés a posztjaidból 📣</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit csinál a Meta hirdetéskezelő?</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mit csinál a Facebook- és Instagram-hirdetéskezelő?</h2>
                 <p class="text-body text-lg leading-relaxed">
-                    Ott emeled ki a posztot, ahol elkészült. Nem kell hozzá az Ads Manager.
+                    Ott emeled ki a posztot, ahol elkészült. Nem kell hozzá a Meta hirdetéskezelője (Ads Manager).
                 </p>
             </div>
 
@@ -384,7 +385,7 @@ const steps = [
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🔌</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Egyszer beállítod, utána minden posztnál kéznél van</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Így emeled ki a Facebook- és Instagram-posztjaidat</h2>
                 <p class="text-body text-lg leading-relaxed">
                     A bekötés és a keretek egyszeri feladat, nagyjából két perc. Utána egy kiemelés pár kattintás.
                 </p>
@@ -394,8 +395,53 @@ const steps = [
         </div>
     </section>
 
-    <!-- 4. Keretek – a költés mindenképp leáll (a fő ellenvetés kezelése) -->
-    <section id="keretek" class="bg-light py-20 md:py-28">
+    <!-- 4. Mikor érdemes kiemelni? – kulcsszó- és GEO-tartalom („Facebook-poszt kiemelése"),
+         önmagukban idézhető bekezdésekkel, belső linkekkel a posztolás és a Ninja AI oldalra.
+         Tények: boost-post §3.2 (trend-jelzés), §3.7/a (a poszt célja dönti el a hirdetés
+         célját), az Analitika „Top posztok" listája. -->
+    <section id="mikor-erdemes" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mikor érdemes? 🎯</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mikor érdemes kiemelni egy <span class="whitespace-nowrap">Facebook-posztot</span>?</h2>
+                <p class="text-body text-lg leading-relaxed">
+                    Nem minden posztra éri meg pénzt tenni. A rendszer megmutatja, melyikre igen, és mikor.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">trending_down</span>
+                    <h3 class="font-bold text-lg mb-2">Amikor esik az organikus elérés</h3>
+                    <p class="text-body text-sm leading-relaxed">A poszt mellett napra bontva látod az organikus
+                        elérést. Ha visszaesik, a rendszer jelzi. Ilyenkor éri meg leginkább kiemelni.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">emoji_events</span>
+                    <h3 class="font-bold text-lg mb-2">Amikor a poszt már bizonyított</h3>
+                    <p class="text-body text-sm leading-relaxed">Az Analitika „Top posztok" listája megmutatja,
+                        melyik posztod hozta a legtöbb reakciót és kattintást. Ezekre éri meg pénzt tenni.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">shopping_bag</span>
+                    <h3 class="font-bold text-lg mb-2">Amikor eladásra szól</h3>
+                    <p class="text-body text-sm leading-relaxed">Akciós, linkes posztnál a kiemelés célja a
+                        kattintás a boltra. Így azt méred, amire fizetsz: egy kattintás árát és a megtérülést.</p>
+                </div>
+            </div>
+
+            <p class="text-center text-body leading-relaxed max-w-[760px] mx-auto mt-10">
+                A kiemelt posztokat az
+                <a href="/hu/posztolas/" class="text-primary font-semibold underline">automata posztolás</a>
+                készíti a webshopod termékeiből. A kiemelést a beépített
+                <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>
+                chatből is elindítja, a jóváhagyásod után.
+            </p>
+        </div>
+    </section>
+
+    <!-- 5. Keretek – a költés mindenképp leáll (a fő ellenvetés kezelése) -->
+    <section id="keretek" class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Biztonság 🛡️</span>
@@ -407,25 +453,25 @@ const steps = [
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">event_busy</span>
                     <h3 class="font-bold text-lg mb-2">Végdátum a Metánál</h3>
                     <p class="text-body text-sm leading-relaxed">A kiemelés a végdátumnál leáll, és a keretet nem lépi
                         túl. Ehhez a Content Ninjának sem kell elérhetőnek lennie.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">calendar_month</span>
                     <h3 class="font-bold text-lg mb-2">Havi plafon</h3>
                     <p class="text-body text-sm leading-relaxed">Beállítod, mennyit költhetsz egy hónapban, és
                         egy kiemelés legfeljebb mennyibe kerülhet. Ami túllépné, az el sem indul.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">pause_circle</span>
                     <h3 class="font-bold text-lg mb-2">Ellenőrző pont</h3>
                     <p class="text-body text-sm leading-relaxed">A hosszan futó kiemelést 30 nap után megállítja,
                         és megkérdezi, folytatod-e. Semmi nem fut a tudtod nélkül.</p>
                 </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
                     <span class="material-symbols-outlined text-primary text-[26px] mb-4 block">touch_app</span>
                     <h3 class="font-bold text-lg mb-2">Szünet egy kattintással</h3>
                     <p class="text-body text-sm leading-relaxed">Szünet, folytatás, leállítás a poszt mellől. Ha a
@@ -434,7 +480,7 @@ const steps = [
             </div>
 
             <!-- Pénzkezelés + felülvizsgálat – egy sáv, hogy ne a bemutatón derüljön ki. -->
-            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">info</span>
                 </div>
@@ -445,8 +491,8 @@ const steps = [
         </div>
     </section>
 
-    <!-- 5. Mérés – a poszt mellett és az Analitikán -->
-    <section id="meres" class="bg-card py-20 md:py-28">
+    <!-- 6. Mérés – a poszt mellett és az Analitikán -->
+    <section id="meres" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1">
@@ -497,9 +543,9 @@ const steps = [
         </div>
     </section>
 
-    <!-- 6. Árazás – a kiemelés az előfizetés része; a gombok a bemutatóra visznek (az a teljes
+    <!-- 7. Árazás – a kiemelés az előfizetés része; a gombok a bemutatóra visznek (az a teljes
          rendszerről szól, nem a hamarosan induló kiemelésről). -->
-    <section id="arazas" class="bg-light py-20 md:py-28">
+    <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
@@ -509,7 +555,7 @@ const steps = [
 
             <PricingCards locale={locale} />
 
-            <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
                     <span class="material-symbols-outlined text-[22px]">payments</span>
                 </div>
@@ -524,20 +570,20 @@ const steps = [
         </div>
     </section>
 
-    <!-- 7. A teljes rendszer (közös modulrács) – a Meta hirdetések maga az oldal témája. -->
+    <!-- 8. A teljes rendszer (közös modulrács) – a Meta hirdetések maga az oldal témája. -->
     <ModuleGrid
         locale={locale}
         exclude="metaAds"
         sectionId="modulok"
-        sectionClass="bg-card py-20 md:py-28"
-        cardClass="bg-light"
+        sectionClass="bg-light py-20 md:py-28"
+        cardClass="bg-card"
         eyebrow="A teljes rendszer 🧩"
         heading="Egy nagyobb AI marketing rendszer része"
         lead="Ugyanaz a rendszer írja a posztjaidat, a hírleveleidet és a blogcikkeidet is – mind ugyanabból a termékkatalógusból. Egy fiók, egy márkahang, egy előfizetés."
     />
 
-    <!-- 8. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
-    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
+    <!-- 9. GYIK – ugyanabból a `faqs` tömbből, mint a FAQPage JSON-LD -->
+    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
@@ -546,7 +592,7 @@ const steps = [
 
             <div class="space-y-3">
                 {faqs.map((f) => (
-                    <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
                         <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                             onclick="toggleFaq(this)">
                             {f.q}
@@ -561,7 +607,7 @@ const steps = [
         </div>
     </section>
 
-    <!-- 9. Záró CTA -->
+    <!-- 10. Záró CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Legyél ott az elsők között</h2>
