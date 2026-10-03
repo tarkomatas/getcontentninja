@@ -48,6 +48,11 @@ const faqs = [
     a: 'A kredit az AI műveletek elszámolási egysége: minden generálás (posztszöveg, kép, videó, hírlevél) meghatározott számú kreditet von le. Egy posztszöveg 1 kredit, egy Nano Banana kép 2 kredit, vagyis egy képes poszt 3 kredit — ebből havi 500 kredit nagyjából 166 képes posztra elég. Egy blogcikk szövege 3 kredit (a cikkbe kerülő képek 2 kredit/kép), egy termékleírás újraírása pedig 1 kredit / termékoldal (kategóriaoldalnál 2 kredit). A publikálás és az időzítés nem AI művelet, azért nem vonunk kreditet.',
   },
   {
+    // A posztkiemelés még NEM él (/hu/facebook-hirdetes/) – a válasz ezért mondja ki a „hamarosan"-t.
+    q: 'Kerül külön pénzbe a Facebook- és Instagram-posztok kiemelése?',
+    a: 'A posztkiemelés hamarosan indul, és az előfizetés része lesz: kreditet sem fogyaszt. Magát a hirdetést a Meta számlázza, a saját hirdetési fiókodból. Annyit költesz, amennyit a keretben megadsz. A Content Ninja nem kezel pénzt.',
+  },
+  {
     q: 'Mi történik, ha elfogy a keretem?',
     a: 'Az AI-alapú tartalomgenerálás a következő keret megnyílásáig szünetel — havi előfizetésnél a következő hónapfordulóig, éves előfizetésnél az éves megújulásig —, a rendszer többi funkciója (naptár, ütemezés, publikálás, statisztikák) viszont változatlanul működik. Ha nem akarsz várni, bármikor vásárolhatsz extra kreditet.',
   },
@@ -162,7 +167,7 @@ const freeOps = [
           </h1>
           <p class="text-body text-lg leading-relaxed">
             Minden modul benne van — posztolás, blogcikk, Shopgrade, hírlevél, kép- és
-            videógenerálás.
+            videógenerálás, Meta hirdetés.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-3 mt-1">
