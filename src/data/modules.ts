@@ -196,18 +196,23 @@ export interface NavModule {
   href: string;
   label: string;
   desc: string;
+  /** Még nem élő funkció: a menü „Hamarosan" jelvényt tesz mellé. */
+  soon?: boolean;
 }
 
 export interface NavGroup {
   label: string;
   /** A csoportcím linkje (gyűjtőoldal), ha van. */
   href?: string;
+  /** A két hasáb ALATT, teljes szélességben fut, az elemei egymás mellett. */
+  wide?: boolean;
   items: NavModule[];
 }
 
 interface NavItemDef {
   page: PageKey;
   icon: string;
+  soon?: boolean;
   hu: { label: string; desc: string };
   en: { label: string; desc: string };
 }
@@ -217,6 +222,7 @@ interface NavGroupDef {
   en: string;
   /** A csoportcím maga is vihet egy gyűjtőoldalra. */
   page?: PageKey;
+  wide?: boolean;
   items: NavItemDef[];
 }
 
@@ -239,6 +245,11 @@ interface NavGroupDef {
  *   (ilyen a nemzetközi terjeszkedés) – így egy indexelhető oldal sem marad
  *   belső hivatkozás nélkül.
  *
+ * - A **leírás EGY sor** (user-kérés, 2026-10-03): kb. 32 karakter, különben a
+ *   lenyíló hasábjában két sorra törne (a fejléc `truncate`-tel le is vágja).
+ * - A **hirdetéskezelés** csoport `wide`: a két hasáb alatt, teljes szélességben
+ *   fut, a két eleme egymás mellett, „Hamarosan" jelvénnyel (`soon`).
+ *
  * A modulrács (`ModuleGrid`) ettől függetlenül továbbra is a `MODULES`-ból épül.
  */
 export const NAV_GROUPS: NavGroupDef[] = [
@@ -250,20 +261,20 @@ export const NAV_GROUPS: NavGroupDef[] = [
       {
         page: 'blogWriter',
         icon: 'article',
-        hu: { label: 'Blogcikk író', desc: 'Kulcsszókutatás és kész cikk a blogodba' },
-        en: { label: 'Blog writer', desc: 'Keyword research and a finished article' },
+        hu: { label: 'Blogcikk író', desc: 'Kulcsszókutatás + kész blogcikk' },
+        en: { label: 'Blog writer', desc: 'Keyword research + full article' },
       },
       {
         page: 'shopgrade',
         icon: 'edit_document',
-        hu: { label: 'Termékleírás író', desc: 'A gyártói szöveg helyett egyedi leírás' },
+        hu: { label: 'Termékleírás író', desc: 'Egyedi leírás a gyártói helyett' },
         en: { label: 'Product description writer', desc: "Your own copy, not the maker's" },
       },
       {
         page: 'shopgrade',
         icon: 'category',
-        hu: { label: 'Kategóriaoldal író', desc: 'A kategóriaszövegek keresésre hangolva' },
-        en: { label: 'Category page writer', desc: 'Category copy tuned to what people search' },
+        hu: { label: 'Kategóriaoldal író', desc: 'Keresésre hangolt kategóriaszöveg' },
+        en: { label: 'Category page writer', desc: 'Category copy tuned for search' },
       },
     ],
   },
@@ -274,43 +285,46 @@ export const NAV_GROUPS: NavGroupDef[] = [
       {
         page: 'demo',
         icon: 'auto_awesome',
-        hu: { label: 'Automata posztolás', desc: 'AI-tartalom a webshopod nevében, nonstop' },
-        en: { label: 'Automated posting', desc: 'AI content on behalf of your webshop, 24/7' },
+        hu: { label: 'Automata posztolás', desc: 'Posztok a webshopod nevében' },
+        en: { label: 'Automated posting', desc: 'Posts on behalf of your webshop' },
       },
       {
         page: 'newsletter',
         icon: 'mail',
-        hu: { label: 'AI hírlevél küldés', desc: 'Az AI megírja, megtervezi és kiküldi' },
-        en: { label: 'AI newsletter sending', desc: 'The AI writes, designs and sends it' },
+        hu: { label: 'AI hírlevél küldés', desc: 'Megírja, megtervezi, kiküldi' },
+        en: { label: 'AI newsletter sending', desc: 'Writes, designs and sends it' },
       },
       {
         page: 'blogWriter',
         icon: 'article',
-        hu: { label: 'Blogcikk író', desc: 'Rendszeres tartalom a webshop blogjába' },
-        en: { label: 'Blog writer', desc: 'Regular content for your webshop blog' },
+        hu: { label: 'Blogcikk író', desc: 'Rendszeres cikk a blogodba' },
+        en: { label: 'Blog writer', desc: 'Regular articles for your blog' },
       },
     ],
   },
   {
     hu: 'Hirdetéskezelés',
     en: 'Ad management',
+    wide: true,
     items: [
       {
-        // Ugyanaz, mint a ChatGPT-nél: csak magyarul, „hamarosan" a céloldalon.
+        // Csak magyarul (`metaAds` → `en: null`); a posztkiemelés még nem él.
         page: 'metaAds',
         icon: 'campaign',
-        hu: { label: 'Meta hirdetéskezelő', desc: 'Posztkiemelés Facebookon és Instagramon' },
-        en: { label: 'Meta ad manager', desc: 'Boost posts on Facebook and Instagram' },
+        soon: true,
+        hu: { label: 'Meta hirdetéskezelő', desc: 'Facebook- és Instagram-kiemelés' },
+        en: { label: 'Meta ad manager', desc: 'Boost Facebook & Instagram posts' },
       },
       {
         // A cél-oldal csak magyarul van (`chatgptAds` → `en: null`), az EN menüből
         // a `navGroupsFor` szűrője veszi ki; a csoport ilyenkor elem nélkül marad,
-        // és ki sem kerül. A „hamarosan" állapotot maga a céloldal mondja ki
-        // (jelvény + űrlap), a menüben nem ismételjük.
+        // és ki sem kerül. A „Hamarosan" jelvény 2026-10-03 óta a menüben is ott
+        // van (user-kérés), nem csak a céloldalon.
         page: 'chatgptAds',
         icon: 'ads_click',
-        hu: { label: 'ChatGPT hirdetéskezelő', desc: 'Kampány a ChatGPT-ben, a termékeidből' },
-        en: { label: 'ChatGPT ad manager', desc: 'Campaigns in ChatGPT, from your products' },
+        soon: true,
+        hu: { label: 'ChatGPT hirdetéskezelő', desc: 'Termékkampány a ChatGPT-ben' },
+        en: { label: 'ChatGPT ad manager', desc: 'Product campaigns in ChatGPT' },
       },
     ],
   },
@@ -343,12 +357,14 @@ export function navGroupsFor(locale: Locale): NavGroup[] {
   return NAV_GROUPS.map((g) => ({
     label: g[locale],
     href: g.page ? pathFor(g.page, locale) : undefined,
+    wide: g.wide,
     items: g.items
       .map((i) => ({
         icon: i.icon,
         href: pathFor(i.page, locale),
         label: i[locale].label,
         desc: i[locale].desc,
+        soon: i.soon,
       }))
       .filter((i) => i.href !== ''),
   })).filter((g) => g.items.length > 0);
@@ -407,10 +423,12 @@ export const MODULE_UI = {
     details: 'Részletek',
     wholeSystem: 'Nézd meg a teljes rendszert',
     allSolutions: 'Összes megoldás',
+    soon: 'Hamarosan',
   },
   en: {
     details: 'Details',
     wholeSystem: 'See the full system',
     allSolutions: 'All solutions',
+    soon: 'Coming soon',
   },
 } as const;

@@ -39,12 +39,16 @@ const solutionGroups = navGroupsFor(locale);
  *    lyuk maradt, amekkora a mellette lévő magasabb csoport,
  *  - `columns-2`: a böngésző MAGASSÁG szerint egyensúlyoz, így a harmadik csoport
  *    a jobb hasáb aljára került – nem oda, ahova szántuk.
- * Három csoportnál ez ad: balra a kereső-optimalizálás + a hirdetéskezelés,
- * jobbra a tartalommarketing.
+ * A `wide` csoportok (ma: hirdetéskezelés) NEM kerülnek a hasábokba: a két hasáb
+ * ALATT, teljes szélességben futnak, az elemeik egymás mellett (2026-10-03). Így a
+ * két hasáb kiegyensúlyozott (3–3 elem): balra a kereső-optimalizálás, jobbra a
+ * tartalommarketing.
  */
+const columnGroups = solutionGroups.filter((g) => !g.wide);
+const wideGroups = solutionGroups.filter((g) => g.wide);
 const solutionColumns = [
-  solutionGroups.filter((_, i) => i % 2 === 0),
-  solutionGroups.filter((_, i) => i % 2 === 1),
+  columnGroups.filter((_, i) => i % 2 === 0),
+  columnGroups.filter((_, i) => i % 2 === 1),
 ];
 const integration = {
   href: pathFor(NAV_INTEGRATION.page, locale),
@@ -82,7 +86,7 @@ const navItems = [
           <span class="material-symbols-outlined text-[18px] transition-transform duration-150 group-hover:rotate-180">expand_more</span>
         </button>
         <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150 z-50">
-          <div class="w-[600px] max-w-[calc(100vw-3rem)] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
+          <div class="w-[640px] max-w-[calc(100vw-3rem)] bg-card border border-border rounded-[14px] shadow-card-hover p-2">
             <!-- Két önálló hasáb (a szétosztás a fenti `solutionColumns`-ban). Mindegyik
                  saját függőleges verem, ezért nincsenek közös sormagasságok – a csoportok
                  szorosan követik egymást. -->
@@ -104,7 +108,8 @@ const navItems = [
                       <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">{item.icon}</span>
                       <span class="min-w-0">
                         <span class="block text-sm font-semibold text-dark group-hover/item:text-primary transition-colors">{item.label}</span>
-                        <span class="block text-xs text-body mt-0.5 leading-snug">{item.desc}</span>
+                        <!-- EGY sor (user-kérés): a szöveg rövid, a `truncate` csak biztosíték. -->
+                        <span class="block text-xs text-body mt-0.5 leading-snug truncate">{item.desc}</span>
                       </span>
                     </a>
                   ))}
@@ -113,6 +118,30 @@ const navItems = [
                 </div>
               ))}
             </div>
+
+            <!-- Teljes szélességű csoportok (`wide`, ma: hirdetéskezelés): a két hasáb alatt,
+                 az elemek egymás mellett; a még nem élő elem „Hamarosan" jelvényt kap. -->
+            {wideGroups.map((group) => (
+              <div class="mt-1 pt-1 border-t border-border">
+                <span class="block px-3 pt-1.5 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-body/60">{group.label}</span>
+                <div class="grid grid-cols-2 gap-x-1">
+                  {group.items.map((item) => (
+                    <a href={item.href} class="flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-light transition-colors group/item">
+                      <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">{item.icon}</span>
+                      <span class="min-w-0">
+                        <span class="flex items-center gap-1.5">
+                          <span class="text-sm font-semibold text-dark group-hover/item:text-primary transition-colors truncate">{item.label}</span>
+                          {item.soon && (
+                            <span class="shrink-0 bg-primary/10 text-primary text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full">{moduleUi.soon}</span>
+                          )}
+                        </span>
+                        <span class="block text-xs text-body mt-0.5 leading-snug truncate">{item.desc}</span>
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
 
             <!-- Integrációs sáv: a feltétel, nem megoldás – ezért van a csoportokon kívül -->
             <a href={integration.href} class="flex items-center justify-between gap-3 mt-1 px-3 py-2.5 border-t border-border hover:bg-light rounded-[10px] transition-colors group/int">
@@ -202,6 +231,9 @@ const navItems = [
                 <a href={item.href} class="mobile-nav-link flex items-center gap-3 text-sm pl-5 pr-3 py-2.5 rounded-[8px] hover:bg-light">
                   <span class="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
                   <span class="font-medium text-dark">{item.label}</span>
+                  {item.soon && (
+                    <span class="bg-primary/10 text-primary text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full">{moduleUi.soon}</span>
+                  )}
                 </a>
               ))}
             </>
