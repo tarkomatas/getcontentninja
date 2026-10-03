@@ -4,12 +4,13 @@ import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
+import WaitlistScript from '../../components/WaitlistScript.astro';
 import {
-  NEWSLETTER_ENDPOINT,
   NEWSLETTER_CONSENT_TEXT,
   NEWSLETTER_CONSENT_LINK_TEXT,
-  NEWSLETTER_MAX_ATTEMPTS,
-  NEWSLETTER_RETRY_BASE_MS,
+  WAITLIST_PRIVACY_CONSENT_TEXT,
+  WAITLIST_PRIVACY_LINK_TEXT,
+  splitAroundLink,
 } from '../../data/newsletter';
 import { pathFor } from '../../i18n/routes';
 
@@ -41,51 +42,14 @@ const description =
   'Hirdesd a webshopod termékeit a ChatGPT-ben. A Content Ninja termékfeedet épít a boltodból, elindítja a kampányt, naponta behúzza a számokat, és megmondja, min érdemes állítani. Hamarosan indul – kérj értesítést.';
 
 /**
- * A hozzájárulási mondat — SZÓ SZERINT ugyanaz a konstans, ami a pipa címkéjeként
- * látszik és a payload `consent_text` mezőjébe kerül (`NewsletterForm.astro`
- * mintája). A mondatot az adatkezelési tájékoztatóra mutató szövegrész mentén
- * vágjuk három részre, hogy a link ne változtasson a szavakon.
+ * A két pipa mondata — SZÓ SZERINT ugyanazok a konstansok, amiket a
+ * `WaitlistScript` a payloadba tesz (`consent_text`, `adatkezeles_consent_text`).
+ * A linkelt szövegrész mentén vágjuk őket, hogy a link ne változtasson a szavakon.
  */
 const consentText = NEWSLETTER_CONSENT_TEXT[locale];
-const consentLinkText = NEWSLETTER_CONSENT_LINK_TEXT[locale];
-const linkStart = consentText.indexOf(consentLinkText);
-const consent =
-  linkStart === -1
-    ? null
-    : {
-        before: consentText.slice(0, linkStart),
-        link: consentLinkText,
-        after: consentText.slice(linkStart + consentLinkText.length),
-      };
-
-/**
- * A KÖTELEZŐ adatkezelési pipa mondata. Ugyanaz az elv, mint fent: a látogató
- * ezt látja, és karakterre ez megy a naplóba – az indulási értesítés jogalapja
- * ez a pipa, nem a hírlevél-hozzájárulás.
- */
-const privacyConsentText =
-  'Az Adatkezelési Tájékoztatóban foglaltakat elolvastam, megértettem és tudomásul vettem.';
-const privacyLinkText = 'Adatkezelési Tájékoztatóban';
-const pStart = privacyConsentText.indexOf(privacyLinkText);
-const privacyConsent = {
-  before: privacyConsentText.slice(0, pStart),
-  link: privacyLinkText,
-  after: privacyConsentText.slice(pStart + privacyLinkText.length),
-};
-
-/** A küldő script konfigja (`define:vars`) – a végpont-URL sehol nincs kézzel leírva. */
-const nlCfg = {
-  endpoint: NEWSLETTER_ENDPOINT,
-  consentText,
-  privacyConsentText,
-  source: 'chatgpt_ads',
-  locale,
-  maxAttempts: NEWSLETTER_MAX_ATTEMPTS,
-  retryBase: NEWSLETTER_RETRY_BASE_MS,
-  // Siker után ide megyünk. A `?lead=1` a konverzió jelzése: enélkül a
-  // köszönőoldal nem lő eseményt (frissítésre, könyvjelzőre sem).
-  thanksUrl: `${pathFor('chatgptAdsThanks', locale)}?lead=1`,
-};
+const consent = splitAroundLink(consentText, NEWSLETTER_CONSENT_LINK_TEXT[locale]);
+const privacyConsentText = WAITLIST_PRIVACY_CONSENT_TEXT[locale];
+const privacyConsent = splitAroundLink(privacyConsentText, WAITLIST_PRIVACY_LINK_TEXT[locale]);
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} lpEnabled>
@@ -222,7 +186,11 @@ const nlCfg = {
                             <div class="flex items-start gap-2 text-xs text-muted ml-1">
                                 <input type="checkbox" id="waitPrivacy" class="mt-1 rounded text-primary focus:ring-primary">
                                 <label for="waitPrivacy">
-                                    <Fragment>{privacyConsent.before}<a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">{privacyConsent.link}</a>{privacyConsent.after}</Fragment>
+                                    {privacyConsent ? (
+                                        <Fragment>{privacyConsent.before}<a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">{privacyConsent.link}</a>{privacyConsent.after}</Fragment>
+                                    ) : (
+                                        <Fragment>{privacyConsentText} <a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">Adatkezelési tájékoztató</a></Fragment>
+                                    )}
                                 </label>
                             </div>
 
@@ -347,164 +315,8 @@ const nlCfg = {
         </div>
     </footer>
 
-    <!--
-        Az űrlap a HÍRLEVÉL-végpontra megy (`newsletter.ts`), NEM a lead-intake-re: a
-        látogató itt a hírlevelünkre iratkozik fel, azon megy majd ki az indulás híre.
-        A MailerLite-ra kizárólag ez az út tesz fel valakit.
-
-        A `NewsletterForm.astro` komponens helyett saját markup kell, mert ez az
-        űrlap két extra kérdést is feltesz — a szállítás szabályai viszont onnan
-        öröklődnek: 3 próba növekvő várakozással, KIZÁRÓLAG 5xx-re és hálózati
-        hibára (a 4xx kliens-hiba), mindig UGYANAZZAL a `submission_id`-vel. Ez a
-        közös `cnIntake` retry-sorától független — az másik végpontra van kötve.
-    -->
-    <script is:inline define:vars={{ nlCfg }}>
-        (function () {
-            var form = document.getElementById('waitlistForm');
-            if (!form) return;
-
-            var btn = document.getElementById('waitSubmit');
-            var label = document.getElementById('waitSubmitLabel');
-            var errorBox = document.getElementById('waitError');
-            var intro = document.getElementById('waitIntro');
-            var rejectedBox = document.getElementById('waitRejected');
-            var shopSelect = document.getElementById('waitShop');
-            var timingSelect = document.getElementById('waitTiming');
-
-            /** A kiválasztott válasz kiszűrő-e. A szabályt a MARKUP hordozza (`data-reject`). */
-            function isHardReject(select) {
-                var opt = select.options[select.selectedIndex];
-                return !!(opt && opt.getAttribute('data-reject') === 'hard');
-            }
-
-            /** Az idempotencia-kulcs. Retry-nál UGYANAZ marad; javított címnél új. */
-            var submissionId = null;
-            var lastEmail = null;
-            var sending = false;
-
-            function uuid() {
-                try {
-                    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
-                        return window.crypto.randomUUID();
-                    }
-                } catch (e) {}
-                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                    var r = (Math.random() * 16) | 0;
-                    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-                });
-            }
-
-            function fail(message) {
-                sending = false;
-                btn.disabled = false;
-                label.textContent = 'Újraküldés';
-                errorBox.textContent = message;
-                errorBox.classList.remove('hidden');
-            }
-
-            /**
-             * A köszönőoldal veszi át a szót – ő méri a `CompleteRegistration`
-             * konverziót is (`?lead=1`), ezért itt NEM mutatunk siker-üzenetet.
-             * A kérés ekkor már lefutott (a `res.ok` ágból jövünk), tehát az
-             * átirányítás nem vághatja el.
-             */
-            function succeed() {
-                window.location.href = nlCfg.thanksUrl;
-            }
-
-            function retry(payload, attempt) {
-                if (attempt + 1 >= nlCfg.maxAttempts) {
-                    return fail(
-                        'Most nem sikerült elküldeni. Próbáld meg pár perc múlva, vagy írj a support@getcontentninja.com címre.'
-                    );
-                }
-                setTimeout(function () {
-                    send(payload, attempt + 1);
-                }, nlCfg.retryBase * Math.pow(2, attempt));
-            }
-
-            function send(payload, attempt) {
-                fetch(nlCfg.endpoint, {
-                    method: 'POST',
-                    // Ha a látogató azonnal továbbkattint, a kérés akkor is elmegy.
-                    keepalive: true,
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                })
-                    .then(function (res) {
-                        // A válasz mindig `{ ok: true }`, akkor is, ha a cím már fent volt –
-                        // különben az űrlapból ki lehetne találni, ki szerepel a listánkon.
-                        if (res.ok) return succeed();
-                        // 4xx = kliens-hiba (rossz cím, hiányzó mező): újrapróbálni értelmetlen.
-                        if (res.status < 500) {
-                            return fail('Nem sikerült – ellenőrizd az e-mail címet, és próbáld újra.');
-                        }
-                        retry(payload, attempt);
-                    })
-                    .catch(function () {
-                        retry(payload, attempt);
-                    });
-            }
-
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                if (sending) return; // dupla beküldés ellen
-
-                var privacy = document.getElementById('waitPrivacy');
-                if (!privacy.checked) {
-                    alert('Kérlek fogadd el az adatkezelési tájékoztatót!');
-                    return;
-                }
-
-                // Kiszűrés a válaszok alapján – ilyenkor semmit nem küldünk el.
-                if (isHardReject(shopSelect) || isHardReject(timingSelect)) {
-                    form.classList.add('hidden');
-                    intro.classList.add('hidden');
-                    rejectedBox.classList.remove('hidden');
-                    return;
-                }
-
-                var newsletter = document.getElementById('waitNewsletter');
-                sending = true;
-                errorBox.classList.add('hidden');
-                btn.disabled = true;
-                label.textContent = 'Küldés…';
-
-                var honeypot = form.querySelector('[name="website"]');
-                var email = document.getElementById('waitEmail').value.trim();
-                if (!submissionId || email !== lastEmail) {
-                    submissionId = uuid();
-                    lastEmail = email;
-                }
-
-                send(
-                    {
-                        submission_id: submissionId,
-                        email: email,
-                        source_form: nlCfg.source,
-                        // Az UTM-eket az app ebből olvassa ki – ne küldd külön mezőben.
-                        source_url: window.location.href,
-                        locale: nlCfg.locale,
-                        website: honeypot ? honeypot.value : '',
-                        // A KÖTELEZŐ pipa: erre hivatkozva küldjük ki az indulási értesítést.
-                        adatkezeles: true,
-                        adatkezeles_consent_text: nlCfg.privacyConsentText,
-                        // Az OPCIONÁLIS pipa. Ha nincs bepipálva, `consent_text` sincs –
-                        // hírlevélre csak az kerül fel, aki kifejezetten kérte.
-                        hirlevel_feliratkozas: !!(newsletter && newsletter.checked),
-                        consent_text:
-                            newsletter && newsletter.checked ? nlCfg.consentText : null,
-                        // A két szűrőkérdés válasza. Az app MINDKETTŐT eltárolja, ezért az
-                        // indulási levél szegmentálható boltmotor és időzítés szerint.
-                        // Bővíthető válaszlista: az új értékeket is elfogadja.
-                        has_webshop: shopSelect.value,
-                        timing: timingSelect.value,
-                    },
-                    0
-                );
-            });
-        })();
-    </script>
+    <!-- Az űrlap a HÍRLEVÉL-végpontra megy (`source_form: chatgpt_ads`) – lásd a komponenst. -->
+    <WaitlistScript locale={locale} source="chatgpt_ads" thanksPath={pathFor('chatgptAdsThanks', locale)} />
 
   </div>
 </BaseLayout>

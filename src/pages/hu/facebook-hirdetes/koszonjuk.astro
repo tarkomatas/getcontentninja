@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ThanksPixel from '../../../components/ThanksPixel.astro';
+import { homeFor } from '../../../i18n/routes';
+
+/**
+ * A `/hu/facebook-hirdetes/` várólista-űrlap köszönőoldala – a
+ * `chatgpt-ads/koszonjuk` pontos mintájára (indoklás ott): nincs időpontfoglaló,
+ * mert nincs mit foglalni; közös fejléc + lábléc; bemutató-CTA szándékosan nincs.
+ *
+ * Indulási időpontot SZÁNDÉKOSAN nem ír: a kiemelés a Meta App Review
+ * jóváhagyásán múlik, annak a dátumát nem mi döntjük el.
+ */
+const locale = 'hu';
+const page = 'metaAdsThanks';
+const title = 'Felkerültél a várólistára – Meta hirdetéskezelő | Content Ninja';
+const description =
+  'Köszönjük! Szólunk e-mailben, amint a Content Ninja Facebook- és Instagram-posztkiemelése bekapcsolható.';
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  noindex={true}
+>
+  <Header locale={locale} page={page} />
+
+  <section class="hero-gradient py-14 md:py-20 px-4 md:px-10">
+    <div class="w-full max-w-[720px] mx-auto">
+      <div class="bg-card rounded-[16px] border border-border shadow-card overflow-hidden">
+
+        <!-- Visszaigazolás -->
+        <div class="px-6 md:px-12 pt-10 pb-8 text-center border-b border-border">
+          <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-5">
+            <span
+              class="material-symbols-outlined text-success text-3xl"
+              style="font-variation-settings:'FILL' 1">check_circle</span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-bold text-dark tracking-[-0.02em] leading-tight mb-3">
+            Felkerültél a várólistára
+          </h1>
+          <p class="text-body leading-relaxed max-w-[460px] mx-auto">
+            Szólunk e-mailben, amint a <strong class="text-dark">Facebook- és Instagram-posztkiemelés</strong>
+            bekapcsolható.
+          </p>
+        </div>
+
+        <!-- Mi történik ezután -->
+        <div class="px-6 md:px-12 py-8">
+          <p class="text-primary font-bold text-sm uppercase tracking-widest mb-5">Mi történik ezután?</p>
+          <ol class="space-y-4">
+            <li class="flex items-start gap-3.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-bold flex items-center justify-center shrink-0">1</span>
+              <p class="text-body text-[0.95rem] leading-relaxed">
+                Amint a kiemelés indul, kapsz tőlünk egy e-mailt.
+              </p>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-bold flex items-center justify-center shrink-0">2</span>
+              <p class="text-body text-[0.95rem] leading-relaxed">
+                Bekötöd a Meta hirdetési fiókodat, és beállítod a kereteidet. Ez nagyjából két perc.
+              </p>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-bold flex items-center justify-center shrink-0">3</span>
+              <p class="text-body text-[0.95rem] leading-relaxed">
+                Kiválasztod a legjobb posztodat, és pár kattintással kiemeled.
+              </p>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Az egyetlen kifelé vezető út: a főoldal (a chatgpt-ads köszönőoldal mintája). -->
+        <div class="px-6 md:px-12 pb-8 text-center">
+          <a href={homeFor(locale)} class="cta-primary px-6 py-3 text-sm">
+            Megnézem addig a többi modult
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer locale={locale} page={page} />
+
+  <!--
+      Konverziómérés: ugyanaz az esemény, mint a ChatGPT-várólistán
+      (`CompleteRegistration`), a `content_name` választja szét a jelentésben.
+  -->
+  <ThanksPixel event="CompleteRegistration" params={{ content_name: 'meta_ads' }} />
+</BaseLayout>

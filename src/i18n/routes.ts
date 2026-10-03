@@ -15,6 +15,8 @@ export type PageKey =
   | 'webshopSeoGeo'
   | 'chatgptAds'
   | 'chatgptAdsThanks'
+  | 'metaAds'
+  | 'metaAdsThanks'
   | 'ninjaAi'
   | 'woocommerce'
   | 'tiktok'
@@ -129,6 +131,21 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // `noindex` + robots.txt Disallow, a többi köszönőoldal módjára; a sitemapbe
   // nem kerül be.
   chatgptAdsThanks: { hu: '/hu/chatgpt-ads/koszonjuk/', en: null },
+  // **Meta (Facebook + Instagram) hirdetéskezelő – VÁRÓLISTA-oldal** (2026-10-03).
+  // Az első lépés a posztkiemelés (app: `docs/features/boost-post.md`), utána a
+  // teljes kampánykezelés (`meta-ads-manager.md`). A kiemelés a Meta App Review
+  // (`ads_management`) jóváhagyásáig admin-kapu mögött van, ezért az oldal a
+  // `chatgptAds` mintáját követi: „Hamarosan" jelvény + értesítéskérő űrlap a
+  // hírlevél-végpontra (`source_form: 'meta_ads'`). Az app MÁR ÉLŐ
+  // hirdetésgenerálóját (kreatív letöltésre) jelen időben mutatja be.
+  //
+  // A slug SZÁNDÉKOSAN „facebook-hirdetes", nem „meta-": erre keresnek sokkal
+  // többen, és a boltos is így nevezi.
+  //
+  // **Csak magyarul** (`en: null`): az app és a várólista-levél magyar.
+  metaAds: { hu: '/hu/facebook-hirdetes/', en: null },
+  // A saját köszönőoldala – a `chatgptAdsThanks` indoklásával (nincs mit foglalni).
+  metaAdsThanks: { hu: '/hu/facebook-hirdetes/koszonjuk/', en: null },
   // **A beépített AI asszisztens (Ninja AI) saját oldala.** Nem modul a
   // `modules.ts` értelmében: nem egy tartalomtípust gyárt, hanem a rendszer
   // KEZELŐFELÜLETE — kérdezel tőle, ő megnézi a valós adataidat, beállít,

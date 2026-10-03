@@ -187,6 +187,16 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Meta (Facebook + Instagram) hirdetéskezelő (csak magyarul, 2026-10-03). A posztkiemelés
+       még nem él: „hamarosan" jelvény + várólista-űrlap, FAQPage JSON-LD-vel. -->
+  <url>
+    <loc>https://getcontentninja.com/hu/facebook-hirdetes/</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/facebook-hirdetes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/facebook-hirdetes/" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Ninja AI – a beépített AI asszisztens oldala (csak magyarul: az asszisztens
        maga is magyarul beszél). Indexelhető: ez a fogalom definíciós oldala. -->
   <url>

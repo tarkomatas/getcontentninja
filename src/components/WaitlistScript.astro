@@ -1,0 +1,221 @@
+---
+/**
+ * A „szólunk, ha indul" várólista-űrlapok küldő scriptje (a `LeadFormScript`
+ * mintájára: az oldal adja a markupot, ez a viselkedést). Két oldal használja:
+ * `/hu/chatgpt-ads/` és `/hu/facebook-hirdetes/`.
+ *
+ * ⚠️ **A beküldés a HÍRLEVÉL-végpontra megy** (`src/data/newsletter.ts`), NEM a
+ * lead-intake-re: a látogató egy még nem élő funkció indulásáról kér értesítést,
+ * nem bemutatót. A `source` (`source_form`) dönti el, melyik MailerLite-csoportba
+ * kerül az app oldalán.
+ *
+ * **A markup szerződése** (fix id-k – oldalanként egy várólista-űrlap lehet):
+ *  - `#waitlistForm` (benne a `HoneypotField`), `#waitIntro` (az űrlap fejléce),
+ *  - `#waitShop` és `#waitTiming` – a két szűrőkérdés; a kiszűrés szabályát az
+ *    `<option data-reject="hard">` attribútum hordozza, mint a lead-űrlapokon,
+ *  - `#waitEmail`, `#waitPrivacy` (KÖTELEZŐ pipa), `#waitNewsletter` (opcionális),
+ *  - `#waitError`, `#waitSubmit` + `#waitSubmitLabel`, `#waitRejected`.
+ *
+ * A szállítás szabályai a `NewsletterForm`-éi: 3 próba növekvő várakozással,
+ * KIZÁRÓLAG 5xx-re és hálózati hibára (a 4xx kliens-hiba), mindig UGYANAZZAL a
+ * `submission_id`-vel. Ez a közös `cnIntake` retry-sorától független.
+ *
+ * Siker után a `thanksUrl`-re megyünk (`?lead=1`-gyel – az méri a konverziót). A
+ * kiszűrés helyben jelenik meg, és ilyenkor semmit nem küldünk el.
+ */
+import type { Locale } from '../i18n/routes';
+import {
+  NEWSLETTER_ENDPOINT,
+  NEWSLETTER_CONSENT_TEXT,
+  NEWSLETTER_MAX_ATTEMPTS,
+  NEWSLETTER_RETRY_BASE_MS,
+  WAITLIST_PRIVACY_CONSENT_TEXT,
+  type NewsletterSource,
+} from '../data/newsletter';
+
+interface Props {
+  locale: Locale;
+  source: NewsletterSource;
+  /** A saját köszönőoldal, `?lead=1` NÉLKÜL – azt a script teszi hozzá. */
+  thanksPath: string;
+}
+
+const { locale, source, thanksPath } = Astro.props;
+
+const TEXT = {
+  hu: {
+    privacy: 'Kérlek fogadd el az adatkezelési tájékoztatót!',
+    sending: 'Küldés…',
+    retry: 'Újraküldés',
+    badEmail: 'Nem sikerült – ellenőrizd az e-mail címet, és próbáld újra.',
+    failed:
+      'Most nem sikerült elküldeni. Próbáld meg pár perc múlva, vagy írj a support@getcontentninja.com címre.',
+  },
+  en: {
+    privacy: 'Please accept the privacy policy!',
+    sending: 'Sending…',
+    retry: 'Try again',
+    badEmail: 'That did not work – check your email address and try again.',
+    failed:
+      'We could not send it right now. Try again in a few minutes, or write to support@getcontentninja.com.',
+  },
+} as const;
+
+/** A küldő script konfigja (`define:vars`) – a végpont-URL sehol nincs kézzel leírva. */
+const wlCfg = {
+  endpoint: NEWSLETTER_ENDPOINT,
+  consentText: NEWSLETTER_CONSENT_TEXT[locale],
+  privacyConsentText: WAITLIST_PRIVACY_CONSENT_TEXT[locale],
+  source,
+  locale,
+  maxAttempts: NEWSLETTER_MAX_ATTEMPTS,
+  retryBase: NEWSLETTER_RETRY_BASE_MS,
+  // A `?lead=1` a konverzió jelzése: enélkül a köszönőoldal nem lő eseményt
+  // (frissítésre, könyvjelzőre sem).
+  thanksUrl: `${thanksPath}?lead=1`,
+  text: TEXT[locale],
+};
+---
+
+<script is:inline define:vars={{ wlCfg }}>
+    (function () {
+        var form = document.getElementById('waitlistForm');
+        if (!form) return;
+
+        var btn = document.getElementById('waitSubmit');
+        var label = document.getElementById('waitSubmitLabel');
+        var errorBox = document.getElementById('waitError');
+        var intro = document.getElementById('waitIntro');
+        var rejectedBox = document.getElementById('waitRejected');
+        var shopSelect = document.getElementById('waitShop');
+        var timingSelect = document.getElementById('waitTiming');
+
+        /** A kiválasztott válasz kiszűrő-e. A szabályt a MARKUP hordozza (`data-reject`). */
+        function isHardReject(select) {
+            var opt = select.options[select.selectedIndex];
+            return !!(opt && opt.getAttribute('data-reject') === 'hard');
+        }
+
+        /** Az idempotencia-kulcs. Retry-nál UGYANAZ marad; javított címnél új. */
+        var submissionId = null;
+        var lastEmail = null;
+        var sending = false;
+
+        function uuid() {
+            try {
+                if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                    return window.crypto.randomUUID();
+                }
+            } catch (e) {}
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (Math.random() * 16) | 0;
+                return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+            });
+        }
+
+        function fail(message) {
+            sending = false;
+            btn.disabled = false;
+            label.textContent = wlCfg.text.retry;
+            errorBox.textContent = message;
+            errorBox.classList.remove('hidden');
+        }
+
+        /**
+         * A köszönőoldal veszi át a szót – ő méri a konverziót is (`?lead=1`),
+         * ezért itt NEM mutatunk siker-üzenetet. A kérés ekkor már lefutott (a
+         * `res.ok` ágból jövünk), tehát az átirányítás nem vághatja el.
+         */
+        function succeed() {
+            window.location.href = wlCfg.thanksUrl;
+        }
+
+        function retry(payload, attempt) {
+            if (attempt + 1 >= wlCfg.maxAttempts) {
+                return fail(wlCfg.text.failed);
+            }
+            setTimeout(function () {
+                send(payload, attempt + 1);
+            }, wlCfg.retryBase * Math.pow(2, attempt));
+        }
+
+        function send(payload, attempt) {
+            fetch(wlCfg.endpoint, {
+                method: 'POST',
+                // Ha a látogató azonnal továbbkattint, a kérés akkor is elmegy.
+                keepalive: true,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            })
+                .then(function (res) {
+                    // A válasz mindig `{ ok: true }`, akkor is, ha a cím már fent volt –
+                    // különben az űrlapból ki lehetne találni, ki szerepel a listánkon.
+                    if (res.ok) return succeed();
+                    // 4xx = kliens-hiba (rossz cím, hiányzó mező): újrapróbálni értelmetlen.
+                    if (res.status < 500) {
+                        return fail(wlCfg.text.badEmail);
+                    }
+                    retry(payload, attempt);
+                })
+                .catch(function () {
+                    retry(payload, attempt);
+                });
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (sending) return; // dupla beküldés ellen
+
+            var privacy = document.getElementById('waitPrivacy');
+            if (!privacy.checked) {
+                alert(wlCfg.text.privacy);
+                return;
+            }
+
+            // Kiszűrés a válaszok alapján – ilyenkor semmit nem küldünk el.
+            if (isHardReject(shopSelect) || isHardReject(timingSelect)) {
+                form.classList.add('hidden');
+                intro.classList.add('hidden');
+                rejectedBox.classList.remove('hidden');
+                return;
+            }
+
+            var newsletter = document.getElementById('waitNewsletter');
+            sending = true;
+            errorBox.classList.add('hidden');
+            btn.disabled = true;
+            label.textContent = wlCfg.text.sending;
+
+            var honeypot = form.querySelector('[name="website"]');
+            var email = document.getElementById('waitEmail').value.trim();
+            if (!submissionId || email !== lastEmail) {
+                submissionId = uuid();
+                lastEmail = email;
+            }
+
+            send(
+                {
+                    submission_id: submissionId,
+                    email: email,
+                    source_form: wlCfg.source,
+                    // Az UTM-eket az app ebből olvassa ki – ne küldd külön mezőben.
+                    source_url: window.location.href,
+                    locale: wlCfg.locale,
+                    website: honeypot ? honeypot.value : '',
+                    // A KÖTELEZŐ pipa: erre hivatkozva küldjük ki az indulási értesítést.
+                    adatkezeles: true,
+                    adatkezeles_consent_text: wlCfg.privacyConsentText,
+                    // Az OPCIONÁLIS pipa. Ha nincs bepipálva, `consent_text` sincs –
+                    // hírlevélre csak az kerül fel, aki kifejezetten kérte.
+                    hirlevel_feliratkozas: !!(newsletter && newsletter.checked),
+                    consent_text: newsletter && newsletter.checked ? wlCfg.consentText : null,
+                    // A két szűrőkérdés válasza. Az app MINDKETTŐT eltárolja, ezért az
+                    // indulási levél szegmentálható boltmotor és időzítés szerint.
+                    has_webshop: shopSelect.value,
+                    timing: timingSelect.value,
+                },
+                0
+            );
+        });
+    })();
+</script>

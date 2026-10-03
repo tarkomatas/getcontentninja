@@ -158,9 +158,11 @@ export const MODULES: ModuleDef[] = [
   {
     id: 'metaAds',
     icon: 'ads_click',
+    // Csak magyarul van oldala (`metaAds` → `en: null`), az EN kártya link nélküli.
+    page: 'metaAds',
     hu: {
-      title: 'Meta hirdetésgeneráló',
-      desc: 'Facebook és Instagram hirdetési kreatívok és szövegek automatikusan, ugyanazokból a termékadatokból.',
+      title: 'Meta hirdetések',
+      desc: 'Facebook és Instagram hirdetési kreatívok és szövegek automatikusan, a termékadataidból. Hamarosan a posztjaid kiemelésével is.',
     },
     en: {
       title: 'Meta ad generator',
@@ -293,6 +295,13 @@ export const NAV_GROUPS: NavGroupDef[] = [
     hu: 'Hirdetéskezelés',
     en: 'Ad management',
     items: [
+      {
+        // Ugyanaz, mint a ChatGPT-nél: csak magyarul, „hamarosan" a céloldalon.
+        page: 'metaAds',
+        icon: 'campaign',
+        hu: { label: 'Meta hirdetéskezelő', desc: 'Posztkiemelés Facebookon és Instagramon' },
+        en: { label: 'Meta ad manager', desc: 'Boost posts on Facebook and Instagram' },
+      },
       {
         // A cél-oldal csak magyarul van (`chatgptAds` → `en: null`), az EN menüből
         // a `navGroupsFor` szűrője veszi ki; a csoport ilyenkor elem nélkül marad,

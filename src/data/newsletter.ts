@@ -49,6 +49,16 @@ export type NewsletterSource =
    * hoz-e feliratkozót a „hamarosan" kampányoldal.
    */
   | 'chatgpt_ads'
+  /**
+   * A `/hu/facebook-hirdetes/` oldal hero-űrlapja: a Meta posztkiemelés még nem
+   * él, ezért ugyanaz a várólista-út, mint a `chatgpt_ads`-nél.
+   *
+   * ⚠️ **Az app ma ezt a kulcsot csak NAPLÓZZA** (a hozzájárulás-táblába, ezzel a
+   * `source_form`-mal), külön MailerLite-csoportba nem teszi — azt csak a
+   * `chatgpt_ads` kapja (`src/lib/newsletter-optin/server.ts`). Az indulási
+   * levélhez az app oldalán kell egy „Meta Ads érdeklődők" csoport.
+   */
+  | 'meta_ads'
   /** Lábléc-űrlap (minden oldalon) – még nincs kitéve. */
   | 'footer'
   /** Blogcikkek alja – még nincs kitéve. */
@@ -84,6 +94,42 @@ export const NEWSLETTER_CONSENT_LINK_TEXT: Record<Locale, string> = {
   hu: 'Adatkezelési tájékoztatót',
   en: 'Privacy Policy',
 };
+
+/**
+ * A várólista-űrlapok (`chatgpt-ads`, `facebook-hirdetes`) KÖTELEZŐ adatkezelési
+ * pipájának mondata. Ugyanaz az elv, mint a `NEWSLETTER_CONSENT_TEXT`-nél: a
+ * látogató ezt látja, és karakterre ez megy a naplóba (`adatkezeles_consent_text`)
+ * – az indulási értesítés jogalapja ez a pipa, nem a hírlevél-hozzájárulás.
+ */
+export const WAITLIST_PRIVACY_CONSENT_TEXT: Record<Locale, string> = {
+  hu: 'Az Adatkezelési Tájékoztatóban foglaltakat elolvastam, megértettem és tudomásul vettem.',
+  en: 'I have read, understood and acknowledged the Privacy Policy.',
+};
+
+/** A fenti mondat linkként renderelt, szó szerinti részlete. */
+export const WAITLIST_PRIVACY_LINK_TEXT: Record<Locale, string> = {
+  hu: 'Adatkezelési Tájékoztatóban',
+  en: 'Privacy Policy',
+};
+
+/**
+ * Egy hozzájárulási mondat három részre vágása a linkelt szövegrész mentén, hogy
+ * a link ne változtasson a szavakon (a látott és a naplózott szöveg karakterre
+ * azonos marad). `null`, ha a részlet nincs a mondatban – ilyenkor a hívó a
+ * mondatot link nélkül írja ki.
+ */
+export function splitAroundLink(
+  text: string,
+  linkText: string
+): { before: string; link: string; after: string } | null {
+  const start = text.indexOf(linkText);
+  if (start === -1) return null;
+  return {
+    before: text.slice(0, start),
+    link: linkText,
+    after: text.slice(start + linkText.length),
+  };
+}
 
 /**
  * Újrapróbálkozás **ugyanazzal a `submission_id`-vel** (az adja az

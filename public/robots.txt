@@ -7,6 +7,8 @@ Disallow: /hu/koszonjuk
 Disallow: /en/thank-you
 # Csak a köszönőoldal – a /hu/chatgpt-ads/ kampányoldal maga indexelhető marad.
 Disallow: /hu/chatgpt-ads/koszonjuk
+# Ugyanígy: csak a köszönőoldal, a /hu/facebook-hirdetes/ maga indexelhető.
+Disallow: /hu/facebook-hirdetes/koszonjuk
 Disallow: /hu/teljes-rendszer
 Disallow: /en/all-in-one
 
