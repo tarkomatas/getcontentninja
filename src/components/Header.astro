@@ -143,8 +143,10 @@ const navItems = [
               </div>
             ))}
 
-            <!-- Integrációs sáv: a feltétel, nem megoldás – ezért van a csoportokon kívül -->
-            <a href={integration.href} class="flex items-center justify-between gap-3 mt-1 px-3 py-2.5 border-t border-border hover:bg-light rounded-[10px] transition-colors group/int">
+            <!-- Integrációs sáv: a feltétel, nem megoldás – ezért van a csoportokon kívül, és
+                 SAJÁT, halvány dobozt kap (2026-10-03), hogy ne olvadjon bele a fölötte lévő
+                 hirdetéskezelés-sorba. -->
+            <a href={integration.href} class="flex items-center justify-between gap-3 mt-2 px-3 py-3 bg-light border border-border hover:border-primary/40 rounded-[10px] transition-colors group/int">
               <span class="flex items-center gap-2.5 min-w-0">
                 <span class="material-symbols-outlined text-primary text-[20px] shrink-0">{integration.icon}</span>
                 <span class="text-sm font-semibold text-dark group-hover/int:text-primary transition-colors">{integration.label}</span>
@@ -156,7 +158,7 @@ const navItems = [
               </span>
             </a>
 
-            <a href={`${home}#megoldasok`} class="flex items-center justify-center gap-1.5 pt-2 border-t border-border text-sm font-bold text-primary hover:bg-light rounded-[10px] py-2.5 transition-colors">
+            <a href={`${home}#megoldasok`} class="flex items-center justify-center gap-1.5 mt-1 text-sm font-bold text-primary hover:bg-light rounded-[10px] py-2.5 transition-colors">
               {moduleUi.allSolutions}
               <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
