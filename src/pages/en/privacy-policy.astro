@@ -29,11 +29,11 @@ const privacyHu = pathFor('privacy', 'hu');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-        <p class="text-sm text-muted">Published: 9 September 2026 · Last updated: 29 September 2026 · Effective: 19 October 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
+        <p class="text-sm text-muted">Published: 9 September 2026 · Last updated: 5 October 2026 · Effective: 19 October 2026 · Digitallwork.hu Kft. (company reg. no. 01-09-426906, VAT no. 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
-          <strong class="text-dark">The sections on the TikTok and YouTube integration (2.13, 2.14, 11.2, 11.3) apply
-          from the date of publication, as of the moment the given channel is connected</strong> — the notice must
-          be complete at the first connection. The 19 October 2026 effective date concerns the extension of the
+          <strong class="text-dark">The sections on the TikTok and YouTube integration (2.13, 2.14, 11.2, 11.3) and
+          Section 2.4.1 on post boosting apply from the date of publication, as of the moment the given channel or
+          the Meta ad account is connected</strong> — the notice must be complete at the first connection. The 19 October 2026 effective date concerns the extension of the
           processor list in Section 5 (30-day objection period, point 9 of Annex 1 to the Terms).
         </p>
         <p class="text-sm text-muted mt-2">
@@ -145,8 +145,85 @@ const privacyHu = pathFor('privacy', 'hu');
               <p>
                 Legal basis: performance of a contract (Art. 6(1)(b) GDPR). These tokens and identifiers are used
                 <strong class="text-dark">exclusively</strong> to publish and manage the content you create in the
-                Service and to show you the performance statistics and comments of that content — see Sections 3 and 4.
+                Service and to show you the performance statistics and comments of that content, and — if you use
+                post boosting — to boost your posts (run them as ads) and to show you the results of those boosts —
+                see Sections 2.4.1, 3 and 4.
               </p>
+            </div>
+
+            <!-- A Meta App Review (ads_management, ads_read) erre a blokkra mutat: #meta-ads.
+                 Tartalma a poszt-kiemelés funkció tényleges adatkezelése (app: docs/features/boost-post.md). -->
+            <div id="meta-ads" class="yt-section scroll-mt-24 rounded-[12px] border-2 border-primary/30 bg-light p-5 md:p-6">
+              <h3 class="text-lg font-extrabold text-dark mb-3">2.4.1. Meta ad account and post boosting</h3>
+              <p>
+                If you connect <strong class="text-dark">your own Meta ad account</strong>, you can create and manage
+                ads from the Service — for example, run a Facebook or Instagram post you have already published or
+                scheduled as an ad (post boosting). This section only applies to you if you use this feature.
+              </p>
+              <p>
+                <strong class="text-dark">Source:</strong> we access the data through the Meta Marketing API, based on
+                the permission you grant when logging in with Facebook.
+              </p>
+
+              <p class="yt-sub">What permissions we request</p>
+              <ul>
+                <li><code>ads_management</code> — to create, pause and stop a boost, and to change its budget and end date, always on your instruction;</li>
+                <li><code>ads_read</code> — to retrieve the status and results of a boost;</li>
+                <li><code>pages_show_list</code>, <code>pages_read_engagement</code> — to identify the Page whose post we boost.</li>
+              </ul>
+              <p>
+                We request the advertising permission <strong class="text-dark">in a separate login window</strong>,
+                and only from users who want to use the feature.
+              </p>
+
+              <p class="yt-sub">What data we store</p>
+              <ul>
+                <li>the ID, name, currency and status of the connected ad account, the name of the business it belongs to, and whether a payment method is set up on it (yes/no). <strong class="text-dark">We do not see or store payment details (such as card numbers);</strong></li>
+                <li>the ID and name of the Meta pixel belonging to the ad account, and the time it last fired;</li>
+                <li>the Facebook user ID of the person who made the connection, and the list of permissions granted;</li>
+                <li>the Meta access token, <strong class="text-dark">stored encrypted</strong>;</li>
+                <li>the data of the boosts created in the app: Meta IDs, the objective of the boost, the audience settings, budget, start and end date, placement (Facebook/Instagram), status, any rejection reason given by Meta, and the name of the advertising business (mandatory under EU rules);</li>
+                <li>the aggregated daily results of the boosts: spend, reach, impressions, clicks, reactions, the number and value of purchases measured by the pixel, and Meta's relevance rating;</li>
+                <li>an event log: who started or changed what, and when;</li>
+                <li>the time you accepted Meta's advertising terms.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">The results are aggregated figures.</strong> We do not receive or store any
+                personal data about the people who see the ad, click on it or buy in your webshop. We do not see your
+                bank card or payment details either.
+              </p>
+
+              <p class="yt-sub">How we use it</p>
+              <ul>
+                <li>to create and manage the boost, <strong class="text-dark">solely on your instruction</strong>;</li>
+                <li>to show the results — to you only;</li>
+                <li>to enforce the spending limits you set: if spending goes over the limit, we stop the boost automatically.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">We do nothing else with it.</strong> We do not use it for our own advertising,
+                do not sell it, do not pass it on to third parties, and do not combine it with other customers' data.
+                Legal basis: performance of a contract (Art. 6(1)(b) GDPR).
+              </p>
+
+              <p class="yt-sub">Processors</p>
+              <p>
+                No new processor. The same ones apply as for the rest of the Service's data: Supabase (EU region),
+                Vercel and Sentry — see Section 5.
+              </p>
+
+              <p class="yt-sub">Retention and deletion</p>
+              <ul>
+                <li>When you disconnect the ad account, we <strong class="text-dark">immediately delete</strong> the access token.</li>
+                <li>The data and results of your boosts are kept until you delete your account (workspace), so that you can look back at earlier results — this is your own record of spending. On request, we delete them within 30 days.</li>
+                <li>When you delete your account, all advertising data is deleted. Before deletion, we stop any boosts still running at Meta.</li>
+                <li>The Meta access token expires every 60 days. After that, the ad account must be connected again.</li>
+              </ul>
+
+              <p class="yt-sub">Withdrawal</p>
+              <ul>
+                <li>in the app: <em>Integrations → Meta ad account → Disconnect</em> (running boosts must be stopped first);</li>
+                <li>on Facebook: <em>Settings → Business integrations → remove the app</em>.</li>
+              </ul>
             </div>
 
             <div>
@@ -376,9 +453,10 @@ const privacyHu = pathFor('privacy', 'hu');
           </ul>
           <p>
             <strong class="text-dark">Meta access tokens and Meta platform data are used exclusively to publish and
-            manage the content you create in the Service.</strong> We do not sell them, do not share them with any
-            third party beyond the processors listed in Section 5, and do not use them for advertising, profiling,
-            or any purpose unrelated to the Service.
+            manage the content you create in the Service, and to boost the user's posts (run them as ads) and display
+            the results of those boosts.</strong> We do not sell them, do not share them with any third party beyond
+            the processors listed in Section 5, and do not use them for our own advertising, profiling, or any
+            purpose unrelated to the Service.
           </p>
           <p>
             <strong class="text-dark">The same applies to the TikTok and YouTube connections:</strong> we use the
@@ -407,6 +485,11 @@ const privacyHu = pathFor('privacy', 'hu');
             You can revoke these permissions at any time in your Facebook settings
             (<em>Settings &amp; privacy → Settings → Business integrations</em>) or by disconnecting the account
             inside the Content Ninja application.
+          </p>
+          <p>
+            <strong class="text-dark">Post boosting:</strong> if you also want to run your posts as ads, we request
+            further permissions for this in a separate login window (<strong class="text-dark">ads_management</strong>,
+            <strong class="text-dark">ads_read</strong>). These are described in Section 2.4.1.
           </p>
         </div>
 
@@ -590,7 +673,8 @@ const privacyHu = pathFor('privacy', 'hu');
           </p>
           <p class="mt-3">
             <strong class="text-dark">Note on Meta Platforms:</strong> when the Service publishes content to your
-            Facebook Page or Instagram account, or reads insights and comments on your behalf, Meta Platforms
+            Facebook Page or Instagram account, reads insights and comments on your behalf, or boosts your post from
+            your own ad account, Meta Platforms
             processes that data as an <strong class="text-dark">independent data controller</strong> under its own
             <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">privacy policy</a> —
             not as our processor. Meta acts as our processor only in respect of the Meta Pixel used on this
@@ -661,6 +745,7 @@ const privacyHu = pathFor('privacy', 'hu');
           <ul>
             <li><strong class="text-dark">Account and content data:</strong> retained while your account exists, then deleted within 30 days after account deletion.</li>
             <li><strong class="text-dark">Meta access tokens and connected-account data:</strong> deleted immediately when you disconnect the account in the app, revoke the app's access in your Facebook settings, or delete your account.</li>
+            <li><strong class="text-dark">Meta advertising data (post boosting):</strong> the access token is deleted immediately when you disconnect the ad account; the history and results of your boosts are kept until you delete your account, and we delete them within 30 days on request; before account deletion we stop any boosts still running at Meta (see Section 2.4.1).</li>
             <li><strong class="text-dark">TikTok access tokens and channel statistics:</strong> deleted immediately when you disconnect the account in the app, or when we detect that you revoked the access in your TikTok settings; on disconnection we also revoke the access at TikTok.</li>
             <li><strong class="text-dark">YouTube access tokens and channel statistics:</strong> deleted immediately when you disconnect the channel in the app, or when we detect that the access has been revoked in your Google account — we do not wait for the 7-day and 30-day deadlines allowed by the policies; while the channel is connected, statistics are kept for 36 months at most.</li>
             <li><strong class="text-dark">Connected webshop, WordPress and newsletter keys:</strong> deleted immediately when the connection is removed; the WordPress application password is also revoked on your WordPress site at that point.</li>
@@ -787,8 +872,9 @@ const privacyHu = pathFor('privacy', 'hu');
           <p>
             The application accesses the user's Pages and accounts through the Meta Platform (Facebook Login,
             Facebook Graph API, Instagram Graph API) <strong class="text-dark">solely for the purpose of publishing
-            and managing content created by the user and displaying the performance statistics (insights) and
-            comments of that content to the user</strong>. This access can be revoked at any time in the user's
+            and managing content created by the user, displaying the performance statistics (insights) and
+            comments of that content to the user, and boosting the user's posts (running them as ads) and
+            displaying the results of those boosts</strong>. This access can be revoked at any time in the user's
             Facebook settings and within the application. The use and transfer of information received from Meta
             APIs adheres to the <a href="https://developers.facebook.com/terms/" target="_blank" rel="noopener">Meta Platform Terms</a>
             and the applicable Meta Developer Policies.
@@ -844,13 +930,22 @@ const privacyHu = pathFor('privacy', 'hu');
             <strong class="text-dark">15 days</strong> before they take effect; where a new processor is engaged, we
             publish notice at least <strong class="text-dark">30 days</strong> in advance, in line with Section 9 of
             <a href={`${terms}#annex-1`}>Annex 1</a> to our Terms. This version is effective from
-            <strong class="text-dark">19 October 2026</strong> (published on 9 September 2026, last updated on 29 September 2026). The policy is
+            <strong class="text-dark">19 October 2026</strong> (published on 9 September 2026, last updated on 5 October 2026). The policy is
             available in Hungarian and English; in case of any discrepancy, the
             <a href={privacyHu}>Hungarian text</a> prevails.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Change log</p>
           <ul>
+            <li>
+              <strong class="text-dark">5 October 2026</strong> — New Section 2.4.1:
+              <strong class="text-dark">Meta ad account and post boosting</strong>. It describes the permissions we request
+              (<code>ads_management</code>, <code>ads_read</code>, <code>pages_show_list</code>,
+              <code>pages_read_engagement</code>), the data we store, its source, how we use it, retention and how to withdraw
+              access. Boost results are aggregated figures; we receive no personal data about the people who see the
+              ad or make a purchase. Sections 2.4, 3, 4, 5 (note on Meta), 7 and 11.1 were aligned accordingly. No new
+              processor. Published and effective: 5 October 2026.
+            </li>
             <li>
               <strong class="text-dark">29 September 2026</strong> — Section 10.2 now lists the
               <strong class="text-dark"><code>cn_attr</code> cookie</strong> (campaign source tracking): on arrival

@@ -27,7 +27,7 @@ const dataDeletionHu = pathFor('dataDeletion', 'hu');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Data Deletion Instructions</h1>
-        <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026 · Last updated: 19 September 2026</p>
+        <p class="text-sm text-muted">Published: 3 August 2026 · Effective: 20 August 2026 · Last updated: 5 October 2026</p>
         <p class="text-sm text-muted mt-2">
           These instructions are available in Hungarian and English. In case of any discrepancy, the
           <a href={dataDeletionHu} class="text-primary underline">Hungarian text</a> prevails.
@@ -163,11 +163,18 @@ const dataDeletionHu = pathFor('dataDeletion', 'hu');
             <li>your account data (name, email address, company name);</li>
             <li>product data imported from your webshop (names, descriptions, images, prices, categories);</li>
             <li>Facebook and Instagram access data, including all stored Meta access tokens;</li>
+            <li>the Meta ad account connection and its access token, the data and results of the boosts (post boosts) started from the app, and the related event log — the access token is already deleted <strong class="text-dark">immediately</strong> when you disconnect the ad account;</li>
             <li>the data of the TikTok and YouTube connections: the access and refresh tokens, the identifier, name and picture of the account or channel, and the follower/subscriber and video statistics collected about them — these are deleted <strong class="text-dark">immediately</strong> when you disconnect the connection or when we detect a revocation at the platform; we do not wait for the 30-day deadline;</li>
             <li>your webshop, website and newsletter provider access keys (MailerLite, SalesAutopilot, UNAS, Shoprenter, and the application password for your WordPress site and WooCommerce store) and any data accessed through them; besides deleting the copy we hold, we also revoke the WordPress application password on your WordPress site (you can also revoke it yourself at any time in your WordPress admin, or uninstall the Content Ninja plugin, which then revokes its own application passwords);</li>
             <li>your Ninja AI assistant conversations and the “memories” saved to your workspace;</li>
             <li>data you provided via our website forms.</li>
           </ul>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            <strong class="text-dark">Meta ads:</strong> you can also disconnect the ad account on its own in the app,
+            without deleting your account (<em>Integrations</em>). At Meta, you can also revoke access in the Facebook
+            <em>Business integrations</em> settings. Before your account is deleted, we stop any boosts still running
+            at Meta. Ads created at Meta remain in your own ad account; you can delete them in Meta Ads Manager.
+          </p>
           <p class="text-sm text-body leading-relaxed mt-3">
             <strong class="text-dark">Exception:</strong> data we are legally required to retain is kept for the
             statutory period only — in particular, invoicing and accounting records must be retained for

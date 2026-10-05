@@ -29,11 +29,12 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. szeptember 29. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. október 5. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
-          <strong class="text-dark">A TikTok- és a YouTube-integrációról szóló pontok (2.13., 2.14., 11.2., 11.3.) a
-          közzététel napjától, az adott csatorna bekötésének pillanatától alkalmazandók</strong> — a tájékoztatásnak
-          már az első bekötéskor teljesnek kell lennie. A 2026. október 19-i hatály az 5. pont adatfeldolgozói
+          <strong class="text-dark">A TikTok- és a YouTube-integrációról szóló pontok (2.13., 2.14., 11.2., 11.3.),
+          valamint a poszt-kiemelésről szóló 2.4.1. pont a közzététel napjától, az adott csatorna, illetve a Meta
+          hirdetési fiók bekötésének pillanatától alkalmazandók</strong> — a tájékoztatásnak már az első bekötéskor
+          teljesnek kell lennie. A 2026. október 19-i hatály az 5. pont adatfeldolgozói
           listájának bővítésére vonatkozik (30 napos kifogásolási idő, ÁSZF 1. számú melléklet 9. pont).
         </p>
         <p class="text-sm text-muted mt-2">
@@ -147,8 +148,85 @@ const privacyEn = pathFor('privacy', 'en');
                 Jogalap: szerződés teljesítése (GDPR 6. cikk (1) b)). Ezeket a tokeneket és azonosítókat
                 <strong class="text-dark">kizárólag</strong> a Szolgáltatásban létrehozott tartalmad közzétételére és
                 kezelésére, valamint a tartalom teljesítmény-statisztikáinak és hozzászólásainak megjelenítésére
-                használjuk — lásd a 3. és 4. pontot.
+                használjuk, továbbá — ha a poszt-kiemelést használod — a posztjaid kiemelésére (hirdetésként
+                futtatására) és a kiemelések eredményeinek megjelenítésére — lásd a 2.4.1., a 3. és a 4. pontot.
               </p>
+            </div>
+
+            <!-- A Meta App Review (ads_management, ads_read) erre a blokkra mutat: #meta-ads.
+                 Tartalma a poszt-kiemelés funkció tényleges adatkezelése (app: docs/features/boost-post.md). -->
+            <div id="meta-ads" class="yt-section scroll-mt-24 rounded-[12px] border-2 border-primary/30 bg-light p-5 md:p-6">
+              <h3 class="text-lg font-extrabold text-dark mb-3">2.4.1. Meta hirdetési fiók és poszt-kiemelés</h3>
+              <p>
+                Ha beköted a <strong class="text-dark">saját Meta hirdetési fiókodat</strong>, a Szolgáltatásból
+                hirdetéseket hozhatsz létre és kezelhetsz — például a már közzétett vagy beütemezett Facebook- vagy
+                Instagram-posztodat hirdetésként futtathatod (poszt-kiemelés). Ez a pont csak akkor vonatkozik rád,
+                ha ezt a funkciót használod.
+              </p>
+              <p>
+                <strong class="text-dark">Forrás:</strong> az adatokat a Meta Marketing API-n keresztül érjük el, a
+                Facebook-bejelentkezéskor adott engedélyed alapján.
+              </p>
+
+              <p class="yt-sub">Milyen engedélyeket kérünk</p>
+              <ul>
+                <li><code>ads_management</code> — a kiemelés létrehozása, szüneteltetése, leállítása, a keret és a végdátum módosítása, mindig a te utasításodra;</li>
+                <li><code>ads_read</code> — a kiemelés állapotának és eredményeinek lekérése;</li>
+                <li><code>pages_show_list</code>, <code>pages_read_engagement</code> — annak az oldalnak az azonosítása, amelynek a posztját kiemeljük.</li>
+              </ul>
+              <p>
+                A hirdetési engedélyt <strong class="text-dark">külön bejelentkezési ablakban</strong> kérjük, és csak
+                attól, aki a funkciót használni akarja.
+              </p>
+
+              <p class="yt-sub">Milyen adatot tárolunk</p>
+              <ul>
+                <li>a bekötött hirdetési fiók azonosítója, neve, pénzneme, állapota és a hozzá tartozó cég neve, valamint az, hogy van-e a fiókon fizetési mód (igen/nem). <strong class="text-dark">A fizetési adatokat (például a kártyaszámot) nem látjuk és nem tároljuk;</strong></li>
+                <li>a hirdetési fiókhoz tartozó Meta-pixel azonosítója, neve és az utolsó jelzésének ideje;</li>
+                <li>a bekötést végző személy Facebook-felhasználóazonosítója és a megadott engedélyek listája;</li>
+                <li>a Meta hozzáférési kulcs (access token), <strong class="text-dark">titkosítva</strong>;</li>
+                <li>az appból létrehozott kiemelések adatai: Meta-azonosítók, a kiemelés célja, a közönség-beállítás, keret, kezdő és végdátum, felület (Facebook/Instagram), állapot, a Meta esetleges elutasítási indoka, valamint a hirdető cég neve (ezt az uniós szabályok kötelezővé teszik);</li>
+                <li>a kiemelések összesített eredményei napi bontásban: költés, elérés, megjelenés, kattintás, reakciók, a pixel által mért vásárlások száma és értéke, valamint a Meta relevancia-értékelése;</li>
+                <li>eseménynapló: ki, mikor, mit indított vagy módosított;</li>
+                <li>a Meta hirdetési feltételei elfogadásának időpontja.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">Az eredmények összesített számok.</strong> A hirdetést látó, arra kattintó
+                vagy a webshopodban vásárló személyekről személyes adatot nem kapunk és nem tárolunk. A bankkártya- és
+                fizetési adataidat sem látjuk.
+              </p>
+
+              <p class="yt-sub">Mire használjuk</p>
+              <ul>
+                <li>a kiemelés létrehozására és kezelésére, <strong class="text-dark">kizárólag a te utasításodra</strong>;</li>
+                <li>az eredmények megjelenítésére — kizárólag neked;</li>
+                <li>az általad beállított költési keretek betartatására: túlköltésnél a kiemelést automatikusan megállítjuk.</li>
+              </ul>
+              <p>
+                <strong class="text-dark">Mást nem csinálunk vele.</strong> Nem használjuk saját hirdetési célra, nem
+                adjuk el, nem adjuk át harmadik félnek, és nem vonjuk össze más ügyfelek adataival. Jogalap:
+                szerződés teljesítése (GDPR 6. cikk (1) b)).
+              </p>
+
+              <p class="yt-sub">Adatfeldolgozók</p>
+              <p>
+                Új adatfeldolgozó nincs. Ugyanazok érvényesek, mint a Szolgáltatás többi adatánál: Supabase (EU
+                régió), Vercel és Sentry — lásd az 5. pontot.
+              </p>
+
+              <p class="yt-sub">Megőrzés és törlés</p>
+              <ul>
+                <li>A hirdetési fiók leválasztásakor a hozzáférési kulcsot <strong class="text-dark">azonnal töröljük</strong>.</li>
+                <li>A kiemelések adatai és eredményei a fiókod (munkatered) törléséig megmaradnak, hogy a korábbi eredményeket visszanézhesd — ez a saját költési nyilvántartásod. Kérésre 30 napon belül töröljük őket.</li>
+                <li>A fiókod törlésekor minden hirdetési adat törlődik. A törlés előtt a még futó kiemeléseket megállítjuk a Metánál.</li>
+                <li>A Meta hozzáférési kulcs 60 naponta lejár. Ezután a hirdetési fiókot újra be kell kötni.</li>
+              </ul>
+
+              <p class="yt-sub">Visszavonás</p>
+              <ul>
+                <li>az alkalmazásban: <em>Integrációk → Meta hirdetési fiók → leválasztás</em> (előbb a futó kiemeléseket le kell állítani);</li>
+                <li>a Facebookon: <em>Beállítások → Üzleti integrációk → az alkalmazás eltávolítása</em>.</li>
+              </ul>
             </div>
 
             <div>
@@ -377,9 +455,10 @@ const privacyEn = pathFor('privacy', 'en');
           </ul>
           <p>
             <strong class="text-dark">A Meta hozzáférési tokeneket és a Meta platform-adatokat kizárólag a
-            Szolgáltatásban létrehozott tartalom közzétételére és kezelésére használjuk.</strong> Ezeket nem adjuk
-            el, az 5. pontban felsorolt adatfeldolgozókon túl harmadik féllel nem osztjuk meg, és nem használjuk
-            hirdetésre, profilalkotásra vagy bármely, a Szolgáltatástól független célra.
+            Szolgáltatásban létrehozott tartalom közzétételére és kezelésére, valamint a felhasználó posztjainak
+            kiemelésére (hirdetésként futtatására) és a kiemelések eredményeinek megjelenítésére használjuk.</strong>
+            Ezeket nem adjuk el, az 5. pontban felsorolt adatfeldolgozókon túl harmadik féllel nem osztjuk meg, és
+            nem használjuk saját hirdetési célra, profilalkotásra vagy bármely, a Szolgáltatástól független célra.
           </p>
           <p>
             <strong class="text-dark">Ugyanez érvényes a TikTok- és a YouTube-kapcsolatra is:</strong> az onnan
@@ -409,6 +488,11 @@ const privacyEn = pathFor('privacy', 'en');
             Ezeket az engedélyeket bármikor visszavonhatod a Facebook-beállításaidban
             (<em>Beállítások és adatvédelem → Beállítások → Üzleti integrációk</em>), vagy a fiók lekötésével a
             Content Ninja alkalmazáson belül.
+          </p>
+          <p>
+            <strong class="text-dark">Poszt-kiemelés:</strong> ha a posztjaidat hirdetésként is futtatni szeretnéd,
+            ehhez külön bejelentkezési ablakban további engedélyeket kérünk (<strong class="text-dark">ads_management</strong>,
+            <strong class="text-dark">ads_read</strong>). Ezeket a 2.4.1. pont írja le.
           </p>
         </div>
 
@@ -591,8 +675,8 @@ const privacyEn = pathFor('privacy', 'en');
           </p>
           <p class="mt-3">
             <strong class="text-dark">Megjegyzés a Meta Platformsról:</strong> amikor a Szolgáltatás tartalmat tesz
-            közzé a Facebook-oldaladon vagy Instagram-fiókodban, illetve a nevedben statisztikát és hozzászólásokat
-            olvas, a Meta Platforms ezeket az adatokat
+            közzé a Facebook-oldaladon vagy Instagram-fiókodban, a nevedben statisztikát és hozzászólásokat
+            olvas, illetve a posztodat a saját hirdetési fiókodból kiemeli, a Meta Platforms ezeket az adatokat
             <strong class="text-dark">önálló adatkezelőként</strong>, a saját
             <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">adatvédelmi
             szabályzata</a> szerint kezeli — nem a mi adatfeldolgozónkként. A Meta kizárólag az ezen a
@@ -664,6 +748,7 @@ const privacyEn = pathFor('privacy', 'en');
           <ul>
             <li><strong class="text-dark">Fiók- és tartalom-adatok:</strong> a fiók fennállásáig, majd a fiók törlését követő 30 napon belül törölve.</li>
             <li><strong class="text-dark">Meta hozzáférési tokenek és bekötött fiókok adatai:</strong> azonnal törölve, amikor lekötöd a fiókot az appban, visszavonod a hozzáférést a Facebook-beállításokban, vagy törlöd a fiókodat.</li>
+            <li><strong class="text-dark">Meta hirdetési adatok (poszt-kiemelés):</strong> a hozzáférési kulcsot a hirdetési fiók leválasztásakor azonnal töröljük; a kiemelések története és eredményei a fiókod törléséig megmaradnak, kérésre 30 napon belül töröljük őket; a fiók törlése előtt a még futó kiemeléseket megállítjuk a Metánál (lásd a 2.4.1. pontot).</li>
             <li><strong class="text-dark">TikTok hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a fiókot az appban, vagy amikor észleljük, hogy a hozzáférést a TikTok-beállításaidban visszavontad; leválasztáskor a hozzáférést a TikToknál is visszavonjuk.</li>
             <li><strong class="text-dark">YouTube hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a csatornát az appban, vagy amikor észleljük, hogy a hozzáférést a Google-fiókodban visszavonták — a 7, illetve 30 napos szabályzati határidőt nem várjuk meg; bekötött csatornánál a statisztikák legfeljebb 36 hónapig maradnak meg.</li>
             <li><strong class="text-dark">Bekötött webáruház-, WordPress- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal; a WordPress-alkalmazásjelszót ekkor a WordPress-oldaladon is visszavonjuk.</li>
@@ -788,9 +873,10 @@ const privacyEn = pathFor('privacy', 'en');
           <p class="font-semibold text-dark text-sm mb-1">11.1. Facebook / Meta</p>
           <p>
             Az alkalmazás a Meta Platformon keresztül (Facebook bejelentkezés, Facebook Graph API, Instagram Graph
-            API) <strong class="text-dark">kizárólag a felhasználó által létrehozott tartalom közzététele és
-            kezelése, valamint a tartalom teljesítmény-statisztikáinak (insights) és hozzászólásainak a felhasználó
-            részére történő megjelenítése céljából</strong> fér hozzá a felhasználó oldalaihoz és fiókjaihoz. Ez a
+            API) <strong class="text-dark">kizárólag a felhasználó által létrehozott tartalom
+            közzététele és kezelése, a tartalom teljesítmény-statisztikáinak (insights) és hozzászólásainak a
+            felhasználó részére történő megjelenítése, valamint a felhasználó posztjainak kiemelése (hirdetésként
+            futtatása) és a kiemelések eredményeinek megjelenítése céljából</strong> fér hozzá a felhasználó oldalaihoz és fiókjaihoz. Ez a
             hozzáférés bármikor visszavonható a felhasználó Facebook-beállításaiban és az alkalmazáson belül. A Meta
             API-któl kapott információk felhasználása és továbbítása megfelel a
             <a href="https://developers.facebook.com/terms/" target="_blank" rel="noopener">Meta platformfeltételeknek</a>
@@ -850,13 +936,22 @@ const privacyEn = pathFor('privacy', 'en');
             hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük; új adatfeldolgozó
             bekötéséről az ÁSZF <a href={`${terms}#melleklet-1`}>1. számú mellékletének</a> 9. pontja szerint legalább
             <strong class="text-dark">30 nappal</strong> előre értesítést teszünk közzé. Ez a változat
-            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. szeptember 29.). A
+            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. október 5.). A
             tájékoztató magyar és angol nyelven érhető el; eltérés esetén a
             <strong class="text-dark">magyar szöveg az irányadó</strong>.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Változásnapló</p>
           <ul>
+            <li>
+              <strong class="text-dark">2026. október 5.</strong> — Új 2.4.1. pont:
+              <strong class="text-dark">Meta hirdetési fiók és poszt-kiemelés</strong>. Leírja a kért engedélyeket
+              (<code>ads_management</code>, <code>ads_read</code>, <code>pages_show_list</code>,
+              <code>pages_read_engagement</code>), a tárolt adatokat, a forrást, a felhasználás célját, a megőrzést és a
+              visszavonás módját. A kiemelések eredményei összesített számok; a hirdetést látó vagy vásárló
+              személyekről személyes adatot nem kapunk. Ehhez igazodott a 2.4., a 3., a 4., az 5. (Meta-megjegyzés), a
+              7. és a 11.1. pont. Új adatfeldolgozó nincs. Közzétéve és hatályos: 2026. október 5.
+            </li>
             <li>
               <strong class="text-dark">2026. szeptember 29.</strong> — A 10.2. pont kiegészült a
               <strong class="text-dark"><code>cn_attr</code> sütivel</strong> (kampányforrás-mérés): kampánylinkes

@@ -27,7 +27,7 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adattörlési útmutató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól · Utoljára frissítve: 2026. szeptember 19.</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. augusztus 3. · Hatályos: 2026. augusztus 20-tól · Utoljára frissítve: 2026. október 5.</p>
         <p class="text-sm text-muted mt-2">
           Az útmutató magyar és angol nyelven érhető el; eltérés esetén a magyar szöveg az irányadó. Az angol
           változat <a href={dataDeletionEn} class="text-primary underline">itt olvasható</a>.
@@ -164,11 +164,19 @@ const dataDeletionEn = pathFor('dataDeletion', 'en');
             <li>a fiókadataidat (név, e-mail cím, cégnév);</li>
             <li>a webáruházadból importált termékadatokat (név, leírás, kép, ár, kategória);</li>
             <li>a Facebook és Instagram hozzáférési adatokat, ideértve minden tárolt Meta hozzáférési tokent;</li>
+            <li>a Meta hirdetési fiók kapcsolatát és hozzáférési kulcsát, az alkalmazásból indított kiemelések (poszt-kiemelések) adatait és eredményeit, valamint a kapcsolódó eseménynaplót — a hozzáférési kulcsot már a hirdetési fiók leválasztásakor <strong class="text-dark">azonnal</strong> töröljük;</li>
             <li>a TikTok- és a YouTube-kapcsolat adatait: a hozzáférési és megújítási kulcsokat, a fiók, illetve a csatorna azonosítóját, nevét és képét, valamint a róluk gyűjtött követő-/feliratkozó- és videó-statisztikákat — ezeket a kapcsolat leválasztásakor, illetve a platformnál történt visszavonás észlelésekor <strong class="text-dark">azonnal</strong> töröljük, nem várjuk meg a 30 napos határidőt;</li>
             <li>a webáruház-, weboldal- és hírlevél-szolgáltatói hozzáférési kulcsaidat (MailerLite, SalesAutopilot, UNAS, Shoprenter, valamint a WordPress-oldaladhoz és WooCommerce boltodhoz tartozó alkalmazásjelszót) és az azokon keresztül elért adatokat; a WordPress-alkalmazásjelszót a nálunk tárolt példány törlésén túl a WordPress-oldaladon is visszavonjuk (a WordPress-adminban magad is bármikor visszavonhatod, vagy eltávolíthatod a Content Ninja bővítményt, amely ekkor a saját alkalmazásjelszavait visszavonja);</li>
             <li>a Ninja AI asszisztens beszélgetéseit és a munkatérhez mentett „emlékeket”;</li>
             <li>a honlapi űrlapjainkon megadott adataidat.</li>
           </ul>
+          <p class="text-sm text-body leading-relaxed mt-3">
+            <strong class="text-dark">Meta hirdetések:</strong> a hirdetési fiókot a fióktörlés nélkül, külön is
+            leválaszthatod az alkalmazásban (<em>Integrációk</em>). A Metánál a hozzáférést a Facebook
+            <em>Üzleti integrációk</em> beállításában is visszavonhatod. A fiókod törlése előtt a még futó
+            kiemeléseket megállítjuk a Metánál. A Metánál létrejött hirdetések a saját hirdetési fiókodban maradnak;
+            azokat a Meta Hirdetéskezelőben (Ads Manager) tudod törölni.
+          </p>
           <p class="text-sm text-body leading-relaxed mt-3">
             <strong class="text-dark">Kivétel:</strong> azokat az adatokat, amelyek megőrzésére jogszabály kötelez,
             kizárólag a törvényi ideig őrizzük meg — különösen a számlázási és könyvelési bizonylatokat, amelyeket a
