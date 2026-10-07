@@ -5,6 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
 import Carousel from '../../components/Carousel.astro';
+import VideoGallery from '../../components/VideoGallery.astro';
 import MetaTechProvider from '../../components/MetaTechProvider.astro';
 import { videos, hasVideo } from '../../data/videos';
 import PricingCards from '../../components/PricingCards.astro';
@@ -397,6 +398,33 @@ const faqLd = {
                 </a>
             </div>
 
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+     MINTAVIDEÓK – sötét kiemelő sáv: szándékosan töri a light/card ritmust
+     (DESIGN.md), hogy a videók kiugorjanak. A lista: src/data/demoVideos.ts
+═══════════════════════════════════════ -->
+    <section id="videok" class="bg-dark py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="text-center max-w-[720px] mx-auto mb-12">
+                <span class="text-white/60 font-bold text-sm uppercase tracking-widest block mb-3">AI videókészítés 🎬</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight text-white">Ezeket a videókat a Content Ninja készítette</h2>
+                <p class="text-white/70 text-lg leading-relaxed">
+                    Mindegyik AI-jal készült, kamera, stúdió és vágóprogram nélkül. Indítsd el bármelyiket hanggal:
+                    a narrációt is az AI mondja.
+                </p>
+            </div>
+
+            <VideoGallery locale="hu" theme="dark" />
+
+            <div class="text-center mt-10">
+                <a href="/hu/posztolas/" class="text-white font-bold text-sm inline-flex items-center gap-1 hover:text-primary transition-colors">
+                    Részletek a videókészítésről
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            </div>
         </div>
     </section>
 

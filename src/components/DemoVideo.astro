@@ -1,17 +1,21 @@
 ---
 /**
  * Saját (nem YouTube-os) mintavideó telefonkeretben – a termék által generált
- * videók bemutatására (posztolás, TikTok oldalak).
+ * videók bemutatására (posztolás, TikTok oldalak, `VideoGallery`).
  *
- * - **Csak látótérben játszik:** `preload="none"` + borítókép, és egy
- *   IntersectionObserver indítja/állítja meg. Korábban `autoplay`-jel mentek,
- *   tehát minden videó az oldal betöltésekor letöltődött, akkor is, ha a
- *   látogató sosem görgetett odáig.
- * - **Hanggomb:** némítva indul (a böngésző csak így enged automatikus
- *   lejátszást), de épp a narráció a lényeg – a gomb az elejéről, hanggal
- *   indítja újra. Egyszerre csak egy videó szól.
- * - **Csökkentett mozgásnál** (`prefers-reduced-motion`) nincs automatikus
- *   lejátszás, csak egy lejátszó gomb a borítóképen.
+ * Két mód:
+ * - **`autoplay`** (alap, egy videós szekciókhoz): némítva, csak látótérben
+ *   játszik – `preload="none"` + borítókép, egy IntersectionObserver
+ *   indítja/állítja meg. Korábban `autoplay`-jel mentek, tehát minden videó az
+ *   oldal betöltésekor letöltődött, akkor is, ha a látogató sosem görgetett odáig.
+ * - **`click`** (galériához): borítókép + lejátszó gomb, kattintásra az elejéről,
+ *   HANGGAL indul. Egy lapozóban egyszerre 3–4 videó látszik – ha mind magától
+ *   indulna, az nyüzsgés és felesleges letöltés lenne.
+ *
+ * Mindkét módban: egyszerre csak egy videó szól; a hanggal elindított
+ * kattintós videó a többi kattintósat megállítja; ami kikerül a látótérből
+ * (a lapozóban oldalra is), megáll. Csökkentett mozgásnál (`prefers-reduced-motion`)
+ * az `autoplay` mód is kattintósként viselkedik.
  */
 import type { Locale } from '../i18n/routes';
 
@@ -23,11 +27,16 @@ interface Props {
     poster: string;
     /** Mi látható a videón – a képernyőolvasónak. */
     label: string;
-    /** Képarány; a mintavideók 9:16-osak (Reels/TikTok). */
+    /** A KERET képaránya; a mintavideók 9:16-osak (Reels/TikTok). */
     aspect?: '9/16' | '3/4' | '1/1';
+    /** `contain`: a keretnél szélesebb videó (pl. 1:1 a 9:16-os galériában) levágás nélkül, sávokkal. */
+    fit?: 'cover' | 'contain';
+    mode?: 'autoplay' | 'click';
+    /** A szülő adja a szélességet (pl. lapozó kártyája) – nincs saját max-szélesség. */
+    fill?: boolean;
 }
 
-const { locale, src, poster, label, aspect = '9/16' } = Astro.props;
+const { locale, src, poster, label, aspect = '9/16', fit = 'cover', mode = 'autoplay', fill = false } = Astro.props;
 
 const ui = {
     hu: { soundOn: 'Hang be', soundOff: 'Hang ki', play: 'Videó lejátszása hanggal' },
@@ -35,13 +44,14 @@ const ui = {
 }[locale];
 
 // 9:16-nál keskenyebb keret, hogy a kétoszlopos szekcióban ne nyúljon túl a szöveg mellett.
-const maxWidth = { '9/16': 'max-w-[300px]', '3/4': 'max-w-[360px]', '1/1': 'max-w-[420px]' }[aspect];
+const maxWidth = fill ? '' : { '9/16': 'max-w-[300px]', '3/4': 'max-w-[360px]', '1/1': 'max-w-[420px]' }[aspect];
 ---
 
-<div class:list={['mx-auto w-full rounded-[36px] bg-dark p-2.5 shadow-card', maxWidth]} data-demo-video>
+<!-- A halvány fehér körvonal csak sötét sávon látszik: ott enélkül a keret beleolvadna a háttérbe. -->
+<div class:list={['mx-auto w-full rounded-[36px] bg-dark p-2.5 shadow-card ring-1 ring-white/15', maxWidth]} data-demo-video data-mode={mode}>
     <div class="relative overflow-hidden rounded-[28px] bg-black" style={`aspect-ratio: ${aspect}`}>
         <video
-            class="absolute inset-0 w-full h-full object-cover"
+            class:list={['absolute inset-0 w-full h-full', fit === 'contain' ? 'object-contain' : 'object-cover']}
             src={src}
             poster={poster}
             preload="none"
@@ -51,7 +61,7 @@ const maxWidth = { '9/16': 'max-w-[300px]', '3/4': 'max-w-[360px]', '1/1': 'max-
             aria-label={label}
         ></video>
 
-        <!-- Csak csökkentett mozgásnál látszik (a script veszi le róla a hidden-t). -->
+        <!-- Kattintós módban és csökkentett mozgásnál látszik (a script kapcsolja). -->
         <button
             type="button"
             class="group absolute inset-0 hidden w-full h-full items-center justify-center bg-dark/25 cursor-pointer"
@@ -84,49 +94,65 @@ const maxWidth = { '9/16': 'max-w-[300px]', '3/4': 'max-w-[360px]', '1/1': 'max-
 <script>
     const roots = Array.from(document.querySelectorAll<HTMLElement>('[data-demo-video]'));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Kattintós: a galéria-mód, vagy bármelyik videó csökkentett mozgásnál.
+    const isClick = (root: HTMLElement) => reduceMotion || root.dataset.mode === 'click';
+    const videoOf = (root: HTMLElement) => root.querySelector('video')!;
 
     function setSound(root: HTMLElement, on: boolean) {
-        const video = root.querySelector('video')!;
         const btn = root.querySelector<HTMLButtonElement>('[data-demo-sound]')!;
-        video.muted = !on;
+        videoOf(root).muted = !on;
         btn.setAttribute('aria-pressed', String(on));
         btn.querySelector('[data-demo-sound-icon]')!.textContent = on ? 'volume_up' : 'volume_off';
         btn.querySelector('[data-demo-sound-label]')!.textContent = (on ? btn.dataset.labelOff : btn.dataset.labelOn) ?? '';
     }
 
-    // Hanggal indítás: az elejéről, és minden más videó elnémul.
+    // Hanggal indítás: az elejéről; a többi elnémul, a többi kattintós meg is áll.
     function playWithSound(root: HTMLElement) {
-        roots.forEach((r) => r !== root && setSound(r, false));
-        const video = root.querySelector('video')!;
+        roots.forEach((r) => {
+            if (r === root) return;
+            setSound(r, false);
+            if (isClick(r)) videoOf(r).pause();
+        });
+        const video = videoOf(root);
         setSound(root, true);
         video.currentTime = 0;
-        root.querySelector('[data-demo-play]')?.classList.add('hidden');
         video.play().catch(() => {});
     }
 
     roots.forEach((root) => {
-        const video = root.querySelector('video')!;
+        const video = videoOf(root);
+        const play = root.querySelector<HTMLElement>('[data-demo-play]')!;
 
         root.querySelector('[data-demo-sound]')!.addEventListener('click', () => {
-            if (video.muted) playWithSound(root);
+            if (video.muted || video.paused) playWithSound(root);
             else setSound(root, false);
         });
 
-        if (reduceMotion) {
-            const play = root.querySelector('[data-demo-play]')!;
-            play.classList.remove('hidden');
-            play.classList.add('flex');
+        if (isClick(root)) {
+            // Állva a lejátszó gomb a teendő, a hanggomb csak indulás után kerül elő.
+            const sound = root.querySelector('[data-demo-sound]')!;
+            const showPlay = (show: boolean) => {
+                play.classList.toggle('hidden', !show);
+                play.classList.toggle('flex', show);
+                sound.classList.toggle('hidden', show);
+            };
+            showPlay(true);
             play.addEventListener('click', () => playWithSound(root));
+            video.addEventListener('play', () => showPlay(false));
+            video.addEventListener('pause', () => showPlay(true));
+            // Lejátszás közben a videóra kattintva megáll (a gomb ilyenkor rejtett).
+            video.addEventListener('click', () => video.pause());
         }
     });
 
-    if (!reduceMotion && 'IntersectionObserver' in window) {
+    if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    const video = entry.target.querySelector('video')!;
-                    if (entry.isIntersecting) video.play().catch(() => {});
-                    else video.pause();
+                    const root = entry.target as HTMLElement;
+                    const video = videoOf(root);
+                    if (!entry.isIntersecting) video.pause();
+                    else if (!isClick(root)) video.play().catch(() => {});
                 });
             },
             { threshold: 0.5 },
