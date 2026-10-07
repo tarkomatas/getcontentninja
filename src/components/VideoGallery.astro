@@ -7,7 +7,8 @@
  * A látható videók maguktól, némítva futnak (user-kérés: mozogjon a sáv); a
  * videóra vagy a „Hang be" gombra kattintva az elejéről, hanggal indul, és
  * egyszerre egy szól. Ami kilapozódik, megáll – tehát csak a látható 1–4 videó
- * töltődik le. Desktopon 4, tableten 3/2, mobilon ~1 kártya látszik (a kártya
+ * töltődik le. A sáv magától is lapoz (`Carousel autoAdvance`, user-kérés), de
+ * megáll, amíg egy videó hanggal szól. Desktopon 4, tableten 3/2, mobilon ~1 kártya látszik (a kártya
  * szélességét a `Carousel` konvenciója szerint ő adja meg).
  */
 import type { Locale } from '../i18n/routes';
@@ -30,7 +31,7 @@ const ui = {
 }[locale];
 ---
 
-<Carousel label={ui.label} prevLabel={ui.prev} nextLabel={ui.next} variant={onDark ? 'dark' : 'light'}>
+<Carousel label={ui.label} prevLabel={ui.prev} nextLabel={ui.next} variant={onDark ? 'dark' : 'light'} autoAdvance={4500}>
     {videos.map((v) => (
         <!-- py-6: a lapozó sávja levágja, ami kilóg belőle – enélkül a keret fénye csonka lenne. -->
         <div class="shrink-0 snap-start py-6 basis-[78%] sm:basis-[calc((100%-1.5rem)/2)] md:basis-[calc((100%-3rem)/3)] lg:basis-[calc((100%-4.5rem)/4)]">

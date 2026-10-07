@@ -18,9 +18,15 @@ interface Props {
   class?: string;
   /** `dark`: sötét sávra – áttetsző, árnyék nélküli nyilak és halvány pontok. */
   variant?: 'light' | 'dark';
+  /**
+   * Automatikus lapozás ennyi ms-onként (0 = ki). Megáll, amíg az egér/fókusz a
+   * sávon van, amíg egy videó hanggal szól, ha a sáv nincs látótérben vagy a fül
+   * háttérben van, és csökkentett mozgásnál sem fut. Kézi lapozás után újraindul.
+   */
+  autoAdvance?: number;
 }
 
-const { label, prevLabel, nextLabel, class: className = '', variant = 'light' } = Astro.props;
+const { label, prevLabel, nextLabel, class: className = '', variant = 'light', autoAdvance = 0 } = Astro.props;
 
 const arrowClass =
   variant === 'dark'
@@ -30,7 +36,7 @@ const arrowClass =
 const dotIdle = variant === 'dark' ? 'bg-white/25' : 'bg-border';
 ---
 
-<div class={`relative ${className}`} data-carousel data-dot-idle={dotIdle}>
+<div class={`relative ${className}`} data-carousel data-dot-idle={dotIdle} data-auto-advance={autoAdvance || undefined}>
   <div
     data-carousel-track
     class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2"
@@ -118,5 +124,48 @@ const dotIdle = variant === 'dark' ? 'bg-white/25' : 'bg-border';
     track.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
+
+    // Automatikus lapozás (csak ha a hívó kéri: `autoAdvance`).
+    const autoMs = Number((root as HTMLElement).dataset.autoAdvance || 0);
+    if (autoMs > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let onScreen = false;
+      let held = false; // egér vagy billentyűzet-fókusz a sávon
+      let timer = 0;
+
+      // Ha egy videó épp hanggal szól, nem lapozunk el alóla.
+      const soundPlaying = () =>
+        Array.from(track.querySelectorAll('video')).some((v) => !v.muted && !v.paused);
+
+      const tick = () => {
+        if (!onScreen || held || document.hidden || soundPlaying()) return;
+        const max = track.scrollWidth - track.clientWidth;
+        if (max <= 2) return;
+        if (track.scrollLeft >= max - 2) track.scrollTo({ left: 0, behavior: 'smooth' });
+        else track.scrollBy({ left: step(), behavior: 'smooth' });
+      };
+      // Kézi lapozás után elölről indul a várakozás, hogy ne ugorjon tovább azonnal.
+      const restart = () => {
+        window.clearInterval(timer);
+        timer = window.setInterval(tick, autoMs);
+      };
+
+      // Csak valódi egér (érintésnél a koppintás „ráragadna") és csak billentyűzet-fókusz
+      // (egérrel kattintott nyílon is ott marad a fókusz, az ne állítsa meg végleg).
+      root.addEventListener('pointerenter', (e) => {
+        if (e.pointerType === 'mouse') held = true;
+      });
+      root.addEventListener('pointerleave', (e) => {
+        if (e.pointerType === 'mouse') held = false;
+      });
+      root.addEventListener('focusin', (e) => {
+        if ((e.target as Element).matches(':focus-visible')) held = true;
+      });
+      root.addEventListener('focusout', () => (held = false));
+      [prev, next, dotsWrap].forEach((el) => el.addEventListener('click', restart));
+      track.addEventListener('pointerdown', restart);
+
+      new IntersectionObserver(([entry]) => (onScreen = entry.isIntersecting), { threshold: 0.3 }).observe(root);
+      restart();
+    }
   });
 </script>
