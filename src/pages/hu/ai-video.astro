@@ -39,7 +39,7 @@ const locale = 'hu';
 const page = 'aiVideo';
 const title = 'AI videókészítő webshopoknak – termékvideó hanggal és felirattal | Content Ninja';
 const description =
-  'Termékoldalból vagy blogcikkből kész videó: élethű AI hang 7 nyelven, felirat, beszélő szereplő és mozgó grafika. Ütemezve kiposztolja Facebookra, Instagramra és TikTokra.';
+  'Termékoldalból értékesítési, blogcikkből edukatív videó: élethű AI hang 7 nyelven, felirat, beszélő szereplő és mozgó grafika. Ütemezve kiposztolja Facebookra, Instagramra és TikTokra.';
 const keywords =
   'AI videó, AI videókészítő, AI videó készítés, AI termékvideó, termékvideó készítés, narrátorvideó, AI videó webshop, Reels videó készítés, TikTok videó készítés, beszélő szereplő videó, AI avatar videó, Content Ninja videó';
 
@@ -58,7 +58,7 @@ const faqs = [
   },
   {
     q: 'Miből készül a videó?',
-    a: 'Egy termékoldalból vagy egy blogcikkből: megadod a linkjét, és az AI abból dolgozik. Ha van saját termékfotód, azt is hozzáadhatod. A fotó valódi fotóként marad a videóban, az AI nem rajzolja újra. A videó egyenként, sablonból vagy automatizmusból is készülhet, így a rendszer a kiválasztott termékekből rendszeresen magától gyárt.',
+    a: 'Egy termékoldalból vagy egy blogcikkből: megadod a linkjét, és az AI abból dolgozik. Termékoldalból értékesítési videó készül: a termék valódi fotójával, csak a megadott termékadatokból, és a végén elmondja, hol kapható. Blogcikkből edukatív videó készül: a cikk lényegét mutatja be, és megjegyezhető tanulsággal zár. Ha van saját termékfotód, azt is hozzáadhatod. A fotó valódi fotóként marad a videóban, az AI nem rajzolja újra. A videó egyenként, sablonból vagy automatizmusból is készülhet, így a rendszer a kiválasztott termékekből rendszeresen magától gyárt.',
   },
   {
     q: 'Mi lehet egy AI videóban?',
@@ -110,7 +110,7 @@ const faqLd = {
 
 /** A készítés négy lépése (`#hogyan-mukodik`). */
 const steps = [
-  { title: 'Bemenet', desc: 'Egy termékoldal vagy egy blogcikk.' },
+  { title: 'Bemenet', desc: 'Termékoldal az eladáshoz, blogcikk a tanításhoz.' },
   { title: 'Forgatókönyv', desc: 'Az AI megírja, te generálás előtt átírhatod.' },
   { title: 'Videó', desc: 'Hang, felirat, képek és szereplő – összevágva.' },
   { title: 'Publikálás', desc: 'Ütemezve kimegy Facebookra, Instagramra és TikTokra.' },
@@ -155,7 +155,7 @@ const formats = [
   {
     icon: 'palette',
     title: 'Stílus',
-    desc: 'Kész receptek: termékreklám, videó blogcikkből, mesés rajzfilm és gyurmafigurás világ.',
+    desc: 'A valósághű kép mellett mesés rajzfilm vagy gyurmafigurás világ is választható.',
   },
 ];
 ---
@@ -251,8 +251,9 @@ const formats = [
                     </h1>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[540px]">
-                        Termékoldalból vagy blogcikkből az AI <span class="font-bold text-primary">megírja, felmondja,
-                        feliratozza és összevágja</span> a videót – te csak jóváhagyod.
+                        Termékoldalból <span class="font-bold text-primary">értékesítési</span>, blogcikkből
+                        <span class="font-bold text-primary">edukatív</span> videót készít az AI – megírja, felmondja,
+                        feliratozza és összevágja, te csak jóváhagyod.
                     </p>
 
                     <ul class="space-y-3 text-body">
@@ -514,7 +515,74 @@ const formats = [
     <!-- Hitelesítések: Meta Tech Provider + UNAS partner (közös komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 2. Mintavideók – az oldal fő bizonyítéka, rögtön a hero után.
+    <!-- 2. Kétféle videó – az oldal fő üzenete (user-kérés): termékoldalból értékesítési,
+         blogcikkből edukatív videó. Tények: az app 1.30.0 két gyári promptja
+         („Narrátorvideó — termékreklám", „Narrátorvideó blogcikkből"). -->
+    <section id="ket-fajta-video" class="bg-light py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[760px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kétféle videó 🎯</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Termékoldalból eladó, blogcikkből tanító videó</h2>
+                <p class="text-body text-lg leading-relaxed">
+                    Mindkettő ugyanabból a rendszerből készül. A forrás dönti el, mi a videó célja.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                    {
+                        icon: 'storefront',
+                        source: 'Termékoldalból',
+                        title: 'Értékesítési videó',
+                        lead: 'Megadod egy termékoldal linkjét. A videó a terméket mutatja be, és vásárlásra hív.',
+                        points: [
+                            'A termék valódi fotója marad a videóban',
+                            'Csak a termékoldal adataiból dolgozik – kitalált ár vagy akció nincs',
+                            'A végén elmondja, hol kapható',
+                        ],
+                    },
+                    {
+                        icon: 'school',
+                        source: 'Blogcikkből',
+                        title: 'Edukatív videó',
+                        lead: 'Megadsz egy blogcikket. A videó a cikk lényegét mutatja be, közérthetően.',
+                        points: [
+                            'Tippek és tudnivalók, röviden',
+                            'Megjegyezhető tanulsággal zár',
+                            'A blogcikkeid így közösségi médiában is dolgoznak',
+                        ],
+                    },
+                ].map((c) => (
+                    <div class="bg-card rounded-[16px] border border-border p-8 shadow-card flex flex-col">
+                        <div class="flex items-center gap-4 mb-5">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined text-[22px]">{c.icon}</span>
+                            </div>
+                            <div>
+                                <span class="text-primary font-bold text-xs uppercase tracking-widest block">{c.source}</span>
+                                <h3 class="font-bold text-2xl text-dark leading-tight">{c.title}</h3>
+                            </div>
+                        </div>
+                        <p class="text-body leading-relaxed mb-5">{c.lead}</p>
+                        <ul class="space-y-3 mb-6 flex-1">
+                            {c.points.map((p) => (
+                                <li class="flex items-start gap-2.5 text-body">
+                                    <span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+                                    <span>{p}</span>
+                                </li>
+                            ))}
+                        </ul>
+                        <a href="#videok" class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                            Példák a videók között
+                            <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+                        </a>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Mintavideók – az oldal fő bizonyítéka, a két videótípus után.
          A CTA vissza a hero űrlaphoz visz. -->
     <VideoShowcase locale={locale} id="videok" ctaHref="#hero" ctaLabel="Ezt szeretném a webshopomnak" ctaStyle="button" />
 
