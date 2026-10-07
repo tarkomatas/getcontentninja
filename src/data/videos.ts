@@ -23,6 +23,8 @@ export const videos = {
     shopgrade: 'xy_byJtOwYo',
     /** Blogcikk író – `/hu/blogcikk-iro/`. */
     blogWriter: 'k4iSUFKfzl4',
+    /** AI videókészítés (narrátorvideó) – `/hu/ai-video/`. */
+    aiVideo: 'lQxZoZjgUCM',
 } as const;
 
 /**

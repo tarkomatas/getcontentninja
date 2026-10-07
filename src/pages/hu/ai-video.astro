@@ -26,6 +26,8 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
+import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
+import { videos, hasVideo } from '../../data/videos';
 import DemoVideo from '../../components/DemoVideo.astro';
 import VideoShowcase from '../../components/VideoShowcase.astro';
 import Header from '../../components/Header.astro';
@@ -597,6 +599,11 @@ const formats = [
                     nem kell.
                 </p>
             </div>
+
+            <!-- Széles videó a cím és a lépések között (videos.ts) -->
+            {hasVideo(videos.aiVideo) && (
+                <HowItWorksVideo id={videos.aiVideo} label="AI videókészítés bemutató videó lejátszása" />
+            )}
 
             <HowItWorksSteps steps={steps} />
 
