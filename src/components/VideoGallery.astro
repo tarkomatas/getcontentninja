@@ -1,8 +1,8 @@
 ---
 /**
  * Lapozható mintavideó-galéria: a `src/data/demoVideos.ts` összes videója
- * telefonkeretben, alattuk cím + címkék. Csak a sáv – a szekciót (háttér, cím)
- * az oldal adja, így bármelyik oldalra bevágható.
+ * telefonkeretben, felirat nélkül (user-kérés: a videó beszél magáért). Csak a
+ * sáv – a szekciót (háttér, cím) az oldal adja, így bármelyik oldalra bevágható.
  *
  * A videók kattintásra, HANGGAL indulnak (`DemoVideo mode="click"`), egyszerre
  * egy szól; ami kilapozódik, megáll. Desktopon 4, tableten 3/2, mobilon ~1 kártya
@@ -15,21 +15,15 @@ import { demoVideosFor } from '../data/demoVideos';
 
 interface Props {
     locale: Locale;
-    /** `dark`: sötét sávon (fehér szöveg), `light`: világos háttéren. */
-    theme?: 'dark' | 'light';
 }
 
-const { locale, theme = 'light' } = Astro.props;
+const { locale } = Astro.props;
 const videos = demoVideosFor(locale);
 
 const ui = {
-    hu: { label: 'AI-val készült mintavideók', prev: 'Előző videó', next: 'Következő videó', format: 'formátum' },
-    en: { label: 'Sample videos made with AI', prev: 'Previous video', next: 'Next video', format: 'format' },
+    hu: { label: 'AI-val készült mintavideók', prev: 'Előző videó', next: 'Következő videó' },
+    en: { label: 'Sample videos made with AI', prev: 'Previous video', next: 'Next video' },
 }[locale];
-
-const titleClass = theme === 'dark' ? 'text-white' : 'text-dark';
-const chipClass = theme === 'dark' ? 'bg-white/10 text-white/80' : 'bg-primary/10 text-primary';
-const formatClass = theme === 'dark' ? 'text-white/50' : 'text-muted';
 ---
 
 <Carousel label={ui.label} prevLabel={ui.prev} nextLabel={ui.next}>
@@ -44,15 +38,6 @@ const formatClass = theme === 'dark' ? 'text-white/50' : 'text-muted';
                 mode="click"
                 fill
             />
-            <div class="mt-4 px-1">
-                <h3 class:list={['font-bold text-base leading-snug', titleClass]}>{v.title}</h3>
-                <div class="mt-2 flex flex-wrap gap-1.5">
-                    {v.tags.map((tag) => (
-                        <span class:list={['rounded-full px-2.5 py-1 text-xs font-semibold', chipClass]}>{tag}</span>
-                    ))}
-                </div>
-                <p class:list={['mt-2 text-xs', formatClass]}>{v.format} {ui.format}</p>
-            </div>
         </div>
     ))}
 </Carousel>
