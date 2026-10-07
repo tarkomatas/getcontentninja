@@ -1,0 +1,64 @@
+---
+/**
+ * „Ezeket a videókat a Content Ninja készítette" – sötét kiemelő sáv a
+ * `VideoGallery` lapozóval. Szándékosan töri a light/card ritmust (DESIGN.md:
+ * az accent-sáv megteheti), hogy a videók kiugorjanak.
+ *
+ * Egy helyen él, mert több oldalra kerül (főoldal, online bemutató, teljes
+ * rendszer). A záró CTA oldalanként más: a főoldalon szövegközi link a
+ * részletekhez, a kampányoldalakon gomb vissza a hero űrlaphoz (ott nem
+ * linkelünk kifelé – minden kimenő link konverziót visz).
+ *
+ * A videók magyar hangúak és feliratosak → csak a /hu/ oldalakra való.
+ */
+import type { Locale } from '../i18n/routes';
+import VideoGallery from './VideoGallery.astro';
+
+interface Props {
+    locale: Locale;
+    /** A szekció id-ja (horgony), pl. `videok`. */
+    id?: string;
+    ctaHref: string;
+    ctaLabel: string;
+    /** `link`: szövegközi nyíl-link · `button`: elsődleges gomb (kampányoldalak). */
+    ctaStyle?: 'link' | 'button';
+}
+
+const { locale, id, ctaHref, ctaLabel, ctaStyle = 'link' } = Astro.props;
+
+const t = {
+    hu: {
+        eyebrow: 'AI videókészítés 🎬',
+        heading: 'Ezeket a videókat a Content Ninja készítette',
+        intro: 'Mindegyik AI-jal készült, kamera, stúdió és vágóprogram nélkül. Indítsd el bármelyiket hanggal: a narrációt is az AI mondja.',
+    },
+    en: {
+        eyebrow: 'AI video creation 🎬',
+        heading: 'These videos were made by Content Ninja',
+        intro: 'Each one was made with AI, without a camera, a studio or editing software. Play any of them with sound: the narration is AI too.',
+    },
+}[locale];
+---
+
+<section id={id} class="bg-dark py-20 md:py-28 px-4 md:px-10">
+    <div class="max-w-[1200px] mx-auto">
+        <div class="text-center max-w-[720px] mx-auto mb-12">
+            <span class="text-white/60 font-bold text-sm uppercase tracking-widest block mb-3">{t.eyebrow}</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight text-white">{t.heading}</h2>
+            <p class="text-white/70 text-lg leading-relaxed">{t.intro}</p>
+        </div>
+
+        <VideoGallery locale={locale} onDark />
+
+        <div class="text-center mt-10">
+            {ctaStyle === 'button' ? (
+                <a href={ctaHref} class="cta-primary px-8 py-4 text-base">{ctaLabel}</a>
+            ) : (
+                <a href={ctaHref} class="text-white font-bold text-sm inline-flex items-center gap-1 hover:text-primary transition-colors">
+                    {ctaLabel}
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            )}
+        </div>
+    </div>
+</section>

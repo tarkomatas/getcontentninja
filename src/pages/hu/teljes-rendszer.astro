@@ -7,6 +7,7 @@ import ModuleGrid from '../../components/ModuleGrid.astro';
 import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import VideoShowcase from '../../components/VideoShowcase.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
 
 /**
@@ -636,6 +637,10 @@ const moduleOptions = [
                 tartalom, és utána három helyen dolgozik.</strong></p>
         </div>
     </section>
+
+    <!-- Mintavideók – az újrahasznosítás („belőle videó is lesz") bizonyítéka, mielőtt
+         a modulrács a teljes kínálatot sorolja. A CTA vissza az űrlaphoz visz. -->
+    <VideoShowcase locale={locale} ctaHref="#hero" ctaLabel="Ezt szeretném a webshopomnak" ctaStyle="button" />
 
     <!-- 4. A teljes modulrács – ezen az oldalon `exclude` NÉLKÜL: itt pont a teljesség
          a termék, a kártyák tömege maga az érv. -->

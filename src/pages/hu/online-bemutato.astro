@@ -5,6 +5,7 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import VideoShowcase from '../../components/VideoShowcase.astro';
 
 const locale = 'hu';
 const page = 'bookDemo';
@@ -484,6 +485,10 @@ const description =
 
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
+
+    <!-- Mintavideók – közvetlenül a hero alatt: a jelentkezés előtt ez a leggyorsabb
+         bizonyíték arra, amit a bemutatón látni fog. A CTA vissza az űrlaphoz visz. -->
+    <VideoShowcase locale={locale} ctaHref="#hero" ctaLabel="Ezt szeretném a webshopomnak" ctaStyle="button" />
 
     <!-- 2. Mit mutatunk meg a bemutatón? -->
     <section class="bg-card py-20 md:py-28 px-4 md:px-10">
