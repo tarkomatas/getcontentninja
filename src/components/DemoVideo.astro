@@ -34,9 +34,25 @@ interface Props {
     mode?: 'autoplay' | 'click';
     /** A szülő adja a szélességet (pl. lapozó kártyája) – nincs saját max-szélesség. */
     fill?: boolean;
+    /** Sötét sávon: világosabb, fényes keret, hogy a telefon elváljon a háttértől. */
+    onDark?: boolean;
 }
 
-const { locale, src, poster, label, aspect = '9/16', fit = 'cover', mode = 'autoplay', fill = false } = Astro.props;
+const {
+    locale,
+    src,
+    poster,
+    label,
+    aspect = '9/16',
+    fit = 'cover',
+    mode = 'autoplay',
+    fill = false,
+    onDark = false,
+} = Astro.props;
+
+const frameClass = onDark
+    ? 'bg-gradient-to-b from-[#6b6b8c] to-[#3a3a55] ring-1 ring-white/30 shadow-primary-glow'
+    : 'bg-dark shadow-card';
 
 const ui = {
     hu: { soundOn: 'Hang be', soundOff: 'Hang ki', play: 'Videó lejátszása hanggal' },
@@ -47,8 +63,7 @@ const ui = {
 const maxWidth = fill ? '' : { '9/16': 'max-w-[300px]', '3/4': 'max-w-[360px]', '1/1': 'max-w-[420px]' }[aspect];
 ---
 
-<!-- A halvány fehér körvonal csak sötét sávon látszik: ott enélkül a keret beleolvadna a háttérbe. -->
-<div class:list={['mx-auto w-full rounded-[36px] bg-dark p-2.5 shadow-card ring-1 ring-white/15', maxWidth]} data-demo-video data-mode={mode}>
+<div class:list={['mx-auto w-full rounded-[36px] p-2.5', frameClass, maxWidth]} data-demo-video data-mode={mode}>
     <div class="relative overflow-hidden rounded-[28px] bg-black" style={`aspect-ratio: ${aspect}`}>
         <video
             class:list={['absolute inset-0 w-full h-full', fit === 'contain' ? 'object-contain' : 'object-cover']}
@@ -142,6 +157,13 @@ const maxWidth = fill ? '' : { '9/16': 'max-w-[300px]', '3/4': 'max-w-[360px]', 
             video.addEventListener('pause', () => showPlay(true));
             // Lejátszás közben a videóra kattintva megáll (a gomb ilyenkor rejtett).
             video.addEventListener('click', () => video.pause());
+        } else {
+            // Némán futó videónál a kattintás magára a videóra is hangot kér – nem csak a kis gomb.
+            video.classList.add('cursor-pointer');
+            video.addEventListener('click', () => {
+                if (video.muted) playWithSound(root);
+                else setSound(root, false);
+            });
         }
     });
 

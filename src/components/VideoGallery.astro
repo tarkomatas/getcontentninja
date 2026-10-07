@@ -4,9 +4,11 @@
  * telefonkeretben, felirat nélkül (user-kérés: a videó beszél magáért). Csak a
  * sáv – a szekciót (háttér, cím) az oldal adja, így bármelyik oldalra bevágható.
  *
- * A videók kattintásra, HANGGAL indulnak (`DemoVideo mode="click"`), egyszerre
- * egy szól; ami kilapozódik, megáll. Desktopon 4, tableten 3/2, mobilon ~1 kártya
- * látszik (a kártya szélességét a `Carousel` konvenciója szerint ő adja meg).
+ * A látható videók maguktól, némítva futnak (user-kérés: mozogjon a sáv); a
+ * videóra vagy a „Hang be" gombra kattintva az elejéről, hanggal indul, és
+ * egyszerre egy szól. Ami kilapozódik, megáll – tehát csak a látható 1–4 videó
+ * töltődik le. Desktopon 4, tableten 3/2, mobilon ~1 kártya látszik (a kártya
+ * szélességét a `Carousel` konvenciója szerint ő adja meg).
  */
 import type { Locale } from '../i18n/routes';
 import Carousel from './Carousel.astro';
@@ -15,9 +17,11 @@ import { demoVideosFor } from '../data/demoVideos';
 
 interface Props {
     locale: Locale;
+    /** Sötét sávon: világosabb, fényes telefonkeret (`DemoVideo onDark`). */
+    onDark?: boolean;
 }
 
-const { locale } = Astro.props;
+const { locale, onDark = false } = Astro.props;
 const videos = demoVideosFor(locale);
 
 const ui = {
@@ -26,16 +30,17 @@ const ui = {
 }[locale];
 ---
 
-<Carousel label={ui.label} prevLabel={ui.prev} nextLabel={ui.next}>
+<Carousel label={ui.label} prevLabel={ui.prev} nextLabel={ui.next} variant={onDark ? 'dark' : 'light'}>
     {videos.map((v) => (
-        <div class="shrink-0 snap-start basis-[78%] sm:basis-[calc((100%-1.5rem)/2)] md:basis-[calc((100%-3rem)/3)] lg:basis-[calc((100%-4.5rem)/4)]">
+        <!-- py-6: a lapozó sávja levágja, ami kilóg belőle – enélkül a keret fénye csonka lenne. -->
+        <div class="shrink-0 snap-start py-6 basis-[78%] sm:basis-[calc((100%-1.5rem)/2)] md:basis-[calc((100%-3rem)/3)] lg:basis-[calc((100%-4.5rem)/4)]">
             <DemoVideo
                 locale={locale}
                 src={v.src}
                 poster={v.poster}
                 label={v.title}
                 fit={v.format === '9:16' ? 'cover' : 'contain'}
-                mode="click"
+                onDark={onDark}
                 fill
             />
         </div>

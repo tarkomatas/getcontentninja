@@ -16,12 +16,21 @@ interface Props {
   nextLabel: string;
   /** Extra osztályok a külső wrapperre. */
   class?: string;
+  /** `dark`: sötét sávra – áttetsző, árnyék nélküli nyilak és halvány pontok. */
+  variant?: 'light' | 'dark';
 }
 
-const { label, prevLabel, nextLabel, class: className = '' } = Astro.props;
+const { label, prevLabel, nextLabel, class: className = '', variant = 'light' } = Astro.props;
+
+const arrowClass =
+  variant === 'dark'
+    ? 'w-12 h-12 rounded-full border border-white/25 bg-white/10 text-white backdrop-blur flex items-center justify-center transition-all hover:bg-primary hover:border-primary disabled:opacity-25 disabled:pointer-events-none'
+    : 'w-11 h-11 rounded-full border border-border bg-card text-dark shadow-card flex items-center justify-center transition-all hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none';
+// A pontok inaktív színe – a JS ezt váltja a `bg-primary`-vel.
+const dotIdle = variant === 'dark' ? 'bg-white/25' : 'bg-border';
 ---
 
-<div class={`relative ${className}`} data-carousel>
+<div class={`relative ${className}`} data-carousel data-dot-idle={dotIdle}>
   <div
     data-carousel-track
     class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2"
@@ -32,23 +41,13 @@ const { label, prevLabel, nextLabel, class: className = '' } = Astro.props;
   </div>
 
   <div class="flex items-center justify-center gap-4 mt-8">
-    <button
-      type="button"
-      data-carousel-prev
-      aria-label={prevLabel}
-      class="w-11 h-11 rounded-full border border-border bg-card text-dark shadow-card flex items-center justify-center transition-all hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none"
-    >
+    <button type="button" data-carousel-prev aria-label={prevLabel} class={arrowClass}>
       <span class="material-symbols-outlined text-[22px]">chevron_left</span>
     </button>
 
     <div class="flex items-center gap-2" data-carousel-dots></div>
 
-    <button
-      type="button"
-      data-carousel-next
-      aria-label={nextLabel}
-      class="w-11 h-11 rounded-full border border-border bg-card text-dark shadow-card flex items-center justify-center transition-all hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none"
-    >
+    <button type="button" data-carousel-next aria-label={nextLabel} class={arrowClass}>
       <span class="material-symbols-outlined text-[22px]">chevron_right</span>
     </button>
   </div>
@@ -61,6 +60,7 @@ const { label, prevLabel, nextLabel, class: className = '' } = Astro.props;
     const next = root.querySelector('[data-carousel-next]') as HTMLButtonElement | null;
     const dotsWrap = root.querySelector('[data-carousel-dots]') as HTMLElement | null;
     if (!track || !prev || !next || !dotsWrap) return;
+    const dotIdle = (root as HTMLElement).dataset.dotIdle ?? 'bg-border';
 
     const cards = Array.from(track.children) as HTMLElement[];
     if (cards.length === 0) return;
@@ -82,7 +82,7 @@ const { label, prevLabel, nextLabel, class: className = '' } = Astro.props;
       dots = Array.from({ length: count }, (_, i) => {
         const dot = document.createElement('button');
         dot.type = 'button';
-        dot.className = 'h-2 rounded-full bg-border transition-all';
+        dot.className = `h-2 rounded-full ${dotIdle} transition-all`;
         dot.setAttribute('aria-label', String(i + 1));
         dot.addEventListener('click', () => {
           track.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
@@ -101,7 +101,7 @@ const { label, prevLabel, nextLabel, class: className = '' } = Astro.props;
       const active = Math.min(dots.length - 1, Math.round(track.scrollLeft / step()));
       dots.forEach((dot, i) => {
         dot.classList.toggle('bg-primary', i === active);
-        dot.classList.toggle('bg-border', i !== active);
+        dot.classList.toggle(dotIdle, i !== active);
         dot.classList.toggle('w-6', i === active);
         dot.classList.toggle('w-2', i !== active);
       });
