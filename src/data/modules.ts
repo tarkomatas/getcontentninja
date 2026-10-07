@@ -136,11 +136,11 @@ export const MODULES: ModuleDef[] = [
     icon: 'movie_filter',
     hu: {
       title: 'AI videógeneráló',
-      desc: 'Statikus termékfotókból mozgó videókat és animációkat készít kameramozgásokkal és effektekkel.',
+      desc: 'A termékfotóidból és egy rövid utasításból akár 30 másodperces termékvideót készít – álló, négyzetes vagy fekvő formátumban.',
     },
     en: {
       title: 'AI video generator',
-      desc: 'Turns static product photos into moving videos and animations with camera moves and effects.',
+      desc: 'Turns your product photos and a short instruction into product videos of up to 30 seconds – in portrait, square or landscape format.',
     },
   },
   {
@@ -148,11 +148,11 @@ export const MODULES: ModuleDef[] = [
     icon: 'record_voice_over',
     hu: {
       title: 'Narrátorvideó',
-      desc: 'Terméklinkből percek alatt teljes narrátorvideót készít – AI hanggal, felirattal és a saját termékképeiddel.',
+      desc: 'Terméklinkből vagy blogcikkből kész videót készít – AI hanggal, felirattal, beszélő szereplővel és mozgó grafikával.',
     },
     en: {
       title: 'Narrated video',
-      desc: 'Builds a full narrated video from a product link in minutes – with an AI voice, captions and your own product images.',
+      desc: 'Builds a finished video from a product link or blog post – with an AI voice, captions, a speaking presenter and motion graphics.',
     },
   },
   {
