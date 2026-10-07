@@ -1,0 +1,136 @@
+---
+/**
+ * Saját (nem YouTube-os) mintavideó telefonkeretben – a termék által generált
+ * videók bemutatására (posztolás, TikTok oldalak).
+ *
+ * - **Csak látótérben játszik:** `preload="none"` + borítókép, és egy
+ *   IntersectionObserver indítja/állítja meg. Korábban `autoplay`-jel mentek,
+ *   tehát minden videó az oldal betöltésekor letöltődött, akkor is, ha a
+ *   látogató sosem görgetett odáig.
+ * - **Hanggomb:** némítva indul (a böngésző csak így enged automatikus
+ *   lejátszást), de épp a narráció a lényeg – a gomb az elejéről, hanggal
+ *   indítja újra. Egyszerre csak egy videó szól.
+ * - **Csökkentett mozgásnál** (`prefers-reduced-motion`) nincs automatikus
+ *   lejátszás, csak egy lejátszó gomb a borítóképen.
+ */
+import type { Locale } from '../i18n/routes';
+
+interface Props {
+    locale: Locale;
+    /** A videó a `public/`-ból, pl. `/assets/video-narrator.mp4`. */
+    src: string;
+    /** Borítókép (a videó egy kockája), pl. `/assets/video-narrator-poster.webp`. */
+    poster: string;
+    /** Mi látható a videón – a képernyőolvasónak. */
+    label: string;
+    /** Képarány; a mintavideók 9:16-osak (Reels/TikTok). */
+    aspect?: '9/16' | '3/4' | '1/1';
+}
+
+const { locale, src, poster, label, aspect = '9/16' } = Astro.props;
+
+const ui = {
+    hu: { soundOn: 'Hang be', soundOff: 'Hang ki', play: 'Videó lejátszása hanggal' },
+    en: { soundOn: 'Sound on', soundOff: 'Sound off', play: 'Play video with sound' },
+}[locale];
+
+// 9:16-nál keskenyebb keret, hogy a kétoszlopos szekcióban ne nyúljon túl a szöveg mellett.
+const maxWidth = { '9/16': 'max-w-[300px]', '3/4': 'max-w-[360px]', '1/1': 'max-w-[420px]' }[aspect];
+---
+
+<div class:list={['mx-auto w-full rounded-[36px] bg-dark p-2.5 shadow-card', maxWidth]} data-demo-video>
+    <div class="relative overflow-hidden rounded-[28px] bg-black" style={`aspect-ratio: ${aspect}`}>
+        <video
+            class="absolute inset-0 w-full h-full object-cover"
+            src={src}
+            poster={poster}
+            preload="none"
+            muted
+            loop
+            playsinline
+            aria-label={label}
+        ></video>
+
+        <!-- Csak csökkentett mozgásnál látszik (a script veszi le róla a hidden-t). -->
+        <button
+            type="button"
+            class="group absolute inset-0 hidden w-full h-full items-center justify-center bg-dark/25 cursor-pointer"
+            aria-label={ui.play}
+            data-demo-play
+        >
+            <span
+                class="w-[68px] h-[68px] rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow transition-transform group-hover:scale-110"
+            >
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z"></path>
+                </svg>
+            </span>
+        </button>
+
+        <button
+            type="button"
+            class="absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-full bg-dark/75 px-3.5 py-2 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-primary"
+            aria-pressed="false"
+            data-demo-sound
+            data-label-on={ui.soundOn}
+            data-label-off={ui.soundOff}
+        >
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true" data-demo-sound-icon>volume_off</span>
+            <span data-demo-sound-label>{ui.soundOn}</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    const roots = Array.from(document.querySelectorAll<HTMLElement>('[data-demo-video]'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setSound(root: HTMLElement, on: boolean) {
+        const video = root.querySelector('video')!;
+        const btn = root.querySelector<HTMLButtonElement>('[data-demo-sound]')!;
+        video.muted = !on;
+        btn.setAttribute('aria-pressed', String(on));
+        btn.querySelector('[data-demo-sound-icon]')!.textContent = on ? 'volume_up' : 'volume_off';
+        btn.querySelector('[data-demo-sound-label]')!.textContent = (on ? btn.dataset.labelOff : btn.dataset.labelOn) ?? '';
+    }
+
+    // Hanggal indítás: az elejéről, és minden más videó elnémul.
+    function playWithSound(root: HTMLElement) {
+        roots.forEach((r) => r !== root && setSound(r, false));
+        const video = root.querySelector('video')!;
+        setSound(root, true);
+        video.currentTime = 0;
+        root.querySelector('[data-demo-play]')?.classList.add('hidden');
+        video.play().catch(() => {});
+    }
+
+    roots.forEach((root) => {
+        const video = root.querySelector('video')!;
+
+        root.querySelector('[data-demo-sound]')!.addEventListener('click', () => {
+            if (video.muted) playWithSound(root);
+            else setSound(root, false);
+        });
+
+        if (reduceMotion) {
+            const play = root.querySelector('[data-demo-play]')!;
+            play.classList.remove('hidden');
+            play.classList.add('flex');
+            play.addEventListener('click', () => playWithSound(root));
+        }
+    });
+
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const video = entry.target.querySelector('video')!;
+                    if (entry.isIntersecting) video.play().catch(() => {});
+                    else video.pause();
+                });
+            },
+            { threshold: 0.5 },
+        );
+        roots.forEach((root) => observer.observe(root));
+    }
+</script>

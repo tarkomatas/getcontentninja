@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
+import DemoVideo from '../../components/DemoVideo.astro';
 import { videos, hasVideo } from '../../data/videos';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
@@ -918,19 +919,11 @@ const keywords =
                         </div>
                     </div>
                     <div class=" order-1 md:order-1">
-                        <!-- Video Player -->
-                        <div
-                            class="relative w-full aspect-square rounded-[16px] overflow-hidden group shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
-                            <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
-                                <source src="/assets/video-demo.mp4" type="video/mp4">
-                                A böngésződ nem támogatja a videó lejátszást.
-                            </video>
-                            <div
-                                class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span
-                                    class="material-symbols-outlined text-muted text-6xl drop-shadow-card hover:shadow-card-hover transition-all">play_circle</span>
-                            </div>
-                        </div>
+                        <DemoVideo
+                            locale="hu"
+                            src="/assets/video-termekreklam.mp4"
+                            poster="/assets/video-termekreklam-poster.webp"
+                            label="AI-val készült termékreklám-videó egy french pressről, mozgó feliratokkal" />
                     </div>
                 </div>
             </div>
@@ -1002,13 +995,11 @@ const keywords =
                         </div>
                     </div>
                     <div class="order-1 md:order-2">
-                        <div
-                            class="relative w-full aspect-square rounded-[16px] overflow-hidden group shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
-                            <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
-                                <source src="/assets/narrator-demo.mp4" type="video/mp4">
-                                A böngésződ nem támogatja a videó lejátszást.
-                            </video>
-                        </div>
+                        <DemoVideo
+                            locale="hu"
+                            src="/assets/video-narrator.mp4"
+                            poster="/assets/video-narrator-poster.webp"
+                            label="AI-val készült narrátorvideó fa építőkockákról, beszélő szereplővel és felirattal" />
                     </div>
                 </div>
             </div>

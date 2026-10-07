@@ -27,6 +27,7 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
+import DemoVideo from '../../components/DemoVideo.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -523,12 +524,11 @@ const steps = [
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-1 md:order-1">
-                    <div class="relative w-full aspect-square rounded-[16px] overflow-hidden shadow-card hover:shadow-card-hover transition-all border border-border bg-black/50">
-                        <video class="w-full h-full object-cover" controls autoplay loop muted playsinline>
-                            <source src="/assets/narrator-demo.mp4" type="video/mp4">
-                            A böngésződ nem támogatja a videó lejátszást.
-                        </video>
-                    </div>
+                    <DemoVideo
+                        locale="hu"
+                        src="/assets/video-narrator.mp4"
+                        poster="/assets/video-narrator-poster.webp"
+                        label="AI-val készült álló narrátorvideó fa építőkockákról, beszélő szereplővel és felirattal" />
                 </div>
                 <div class="flex flex-col justify-center order-2 md:order-2">
                     <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Tartalom a termékeidből 🎬</span>

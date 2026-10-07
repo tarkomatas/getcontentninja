@@ -11,3 +11,5 @@ npm-debug.log*
 .env.production
 # macOS
 .DS_Store
+# nyers videók (feldolgozás előtt; a kész változat a public/assets-be kerül)
+video-forras/
