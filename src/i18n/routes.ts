@@ -20,6 +20,7 @@ export type PageKey =
   | 'ninjaAi'
   | 'woocommerce'
   | 'tiktok'
+  | 'aiVideo'
   | 'newsletter'
   | 'newsletterSignup'
   | 'pricing'
@@ -188,6 +189,20 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   //
   // **Csak magyarul** (`en: null`): a súgócikk és az app felülete magyar.
   tiktok: { hu: '/hu/tiktok-posztolas/', en: null },
+  // **AI videókészítés – SEO/GEO céloldal** (2026-10-07). A narrátorvideó és az AI
+  // videógeneráló modul közös oldala: a posztolás oldal videós szekciói nem
+  // rangsorolnak az „AI videó", „AI termékvideó", „termékvideó készítés"
+  // keresésekre. Indexelhető, FAQPage JSON-LD-vel, saját `lead_forras`: 'ai-video'.
+  // A slug a user választása („ai-videó", ékezet nélkül az URL-ben).
+  // Tények: az app `docs/features/narrator-unified.md`, `narrator-motion.md`,
+  // `video-gen.md`, `wan3-video.md` és a CHANGELOG 1.29–1.30.
+  //
+  // A fejlécmenübe és a lábléc „Megoldások" hasábjába SZÁNDÉKOSAN nem kerül
+  // (user-kérés, 2026-10-07 — a `ninjaAi` mintájára: előbb a keresőforgalom).
+  // Belső linket a modulrács két videós kártyája és a `VideoShowcase` ad.
+  //
+  // **Csak magyarul** (`en: null`): a mintavideók magyar hangúak és feliratosak.
+  aiVideo: { hu: '/hu/ai-video/', en: null },
   // Hírlevél-generálás kampányoldal – kétnyelvű, rövid slug.
   newsletter: { hu: '/hu/hirlevel/', en: '/en/newsletter/' },
   // **A MI hírlevelünkre való feliratkozás** – nem összekeverendő a fenti

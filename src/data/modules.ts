@@ -134,6 +134,8 @@ export const MODULES: ModuleDef[] = [
   {
     id: 'video',
     icon: 'movie_filter',
+    // A narrátorvideóval közös oldal (`/hu/ai-video/`); EN-en nincs → link nélküli kártya.
+    page: 'aiVideo',
     hu: {
       title: 'AI videógeneráló',
       desc: 'A termékfotóidból és egy rövid utasításból mozgó termékvideót készít – álló, négyzetes vagy fekvő formátumban.',
@@ -146,6 +148,7 @@ export const MODULES: ModuleDef[] = [
   {
     id: 'narration',
     icon: 'record_voice_over',
+    page: 'aiVideo',
     hu: {
       title: 'Narrátorvideó',
       desc: 'Terméklinkből vagy blogcikkből akár 2 perces kész videót készít – AI hanggal, felirattal, beszélő szereplővel és mozgó grafikával.',
@@ -379,6 +382,13 @@ export function navGroupsFor(locale: Locale): NavGroup[] {
  * így a Shopgrade két külön néven futó bejegyzése (termékleírás / kategóriaoldal)
  * megmarad, hiába visz mindkettő ugyanarra az oldalra.
  */
+/**
+ * Kampányoldalak, amik SEM a fejléc menüjébe, SEM a lábléc „Megoldások"
+ * hasábjába nem kerülnek (user-kérés). Ma az AI videó oldal (2026-10-07): előbb a
+ * keresőforgalmát mérjük, ahogy a Ninja AI-ét. A modulrács kártyáin a link marad.
+ */
+const FOOTER_HIDDEN: PageKey[] = ['aiVideo'];
+
 export function navModulesFor(locale: Locale): NavModule[] {
   const out: NavModule[] = [];
   const seen = new Set<string>();
@@ -404,10 +414,11 @@ export function navModulesFor(locale: Locale): NavModule[] {
 
   // 2. Amit a menü nem sorol fel, de van saját kampányoldala (ma: nemzetközi
   //    terjeszkedés) – hogy egy indexelhető oldal se maradjon belső hivatkozás
-  //    nélkül, még ha a fejlécből ki is vettük.
+  //    nélkül, még ha a fejlécből ki is vettük. Kivétel a `FOOTER_HIDDEN`: azt a
+  //    user szándékosan tartja távol a menüktől (belső linket a modulrács ad).
   const linked = new Set(out.map((i) => i.href));
   for (const m of MODULES) {
-    if (!m.page) continue;
+    if (!m.page || FOOTER_HIDDEN.includes(m.page)) continue;
     const href = pathFor(m.page, locale);
     if (!href || linked.has(href)) continue;
     linked.add(href);
