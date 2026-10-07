@@ -151,11 +151,11 @@ export const MODULES: ModuleDef[] = [
     page: 'aiVideo',
     hu: {
       title: 'Narrátorvideó',
-      desc: 'Terméklinkből vagy blogcikkből akár 2 perces kész videót készít – AI hanggal, felirattal, beszélő szereplővel és mozgó grafikával.',
+      desc: 'Termékoldalból vagy blogcikkből akár 2 perces kész videót készít – AI hanggal, felirattal, beszélő szereplővel és mozgó grafikával.',
     },
     en: {
       title: 'Narrated video',
-      desc: 'Builds a finished video of up to 2 minutes from a product link or blog post – with an AI voice, captions, a speaking presenter and motion graphics.',
+      desc: 'Builds a finished video of up to 2 minutes from a product page or blog post – with an AI voice, captions, a speaking presenter and motion graphics.',
     },
   },
   {

@@ -39,7 +39,7 @@ const locale = 'hu';
 const page = 'aiVideo';
 const title = 'AI videókészítő webshopoknak – termékvideó hanggal és felirattal | Content Ninja';
 const description =
-  'Terméklinkből, fotóból vagy blogcikkből kész videó: élethű AI hang 7 nyelven, felirat, beszélő szereplő és mozgó grafika. Ütemezve kiposztolja Facebookra, Instagramra és TikTokra.';
+  'Termékoldalból vagy blogcikkből kész videó: élethű AI hang 7 nyelven, felirat, beszélő szereplő és mozgó grafika. Ütemezve kiposztolja Facebookra, Instagramra és TikTokra.';
 const keywords =
   'AI videó, AI videókészítő, AI videó készítés, AI termékvideó, termékvideó készítés, narrátorvideó, AI videó webshop, Reels videó készítés, TikTok videó készítés, beszélő szereplő videó, AI avatar videó, Content Ninja videó';
 
@@ -54,11 +54,11 @@ const HELP_URL = 'https://app.getcontentninja.com/help/narratorvideo-keszitese';
 const faqs = [
   {
     q: 'Mire jó a Content Ninja AI videókészítője?',
-    a: 'Webshopoknak készít videót a saját termékeikből, közösségi médiába. Egy terméklinkből, termékfotóból vagy blogcikkből az AI megírja a forgatókönyvet, felmondja a szöveget AI hanggal, feliratot tesz rá, és összevágja a videót. A kész videót ütemezve kiposztolja Facebookra, Instagramra és TikTokra. Kamera, stúdió és vágóprogram nem kell hozzá.',
+    a: 'Webshopoknak készít videót a saját termékeikből, közösségi médiába. Egy termékoldalból vagy blogcikkből az AI megírja a forgatókönyvet, felmondja a szöveget AI hanggal, feliratot tesz rá, és összevágja a videót. A kész videót ütemezve kiposztolja Facebookra, Instagramra és TikTokra. Kamera, stúdió és vágóprogram nem kell hozzá.',
   },
   {
     q: 'Miből készül a videó?',
-    a: 'Egy terméklinkből, a saját termékfotóidból vagy egy blogcikk szövegéből. A termékfotód valódi fotóként marad a videóban, az AI nem rajzolja újra. A videó egyenként, sablonból vagy automatizmusból is készülhet, így a rendszer a kiválasztott termékekből rendszeresen magától gyárt.',
+    a: 'Egy termékoldalból vagy egy blogcikkből: megadod a linkjét, és az AI abból dolgozik. Ha van saját termékfotód, azt is hozzáadhatod. A fotó valódi fotóként marad a videóban, az AI nem rajzolja újra. A videó egyenként, sablonból vagy automatizmusból is készülhet, így a rendszer a kiválasztott termékekből rendszeresen magától gyárt.',
   },
   {
     q: 'Mi lehet egy AI videóban?',
@@ -110,7 +110,7 @@ const faqLd = {
 
 /** A készítés négy lépése (`#hogyan-mukodik`). */
 const steps = [
-  { title: 'Bemenet', desc: 'Terméklink, termékfotó vagy egy blogcikk.' },
+  { title: 'Bemenet', desc: 'Egy termékoldal vagy egy blogcikk.' },
   { title: 'Forgatókönyv', desc: 'Az AI megírja, te generálás előtt átírhatod.' },
   { title: 'Videó', desc: 'Hang, felirat, képek és szereplő – összevágva.' },
   { title: 'Publikálás', desc: 'Ütemezve kimegy Facebookra, Instagramra és TikTokra.' },
@@ -251,7 +251,7 @@ const formats = [
                     </h1>
 
                     <p class="text-body text-[1.1rem] font-medium leading-relaxed max-w-[540px]">
-                        Terméklinkből vagy fotóból az AI <span class="font-bold text-primary">megírja, felmondja,
+                        Termékoldalból vagy blogcikkből az AI <span class="font-bold text-primary">megírja, felmondja,
                         feliratozza és összevágja</span> a videót – te csak jóváhagyod.
                     </p>
 
@@ -523,7 +523,7 @@ const formats = [
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik? 🎬</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Terméklinkből kész videó, négy lépésben</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Termékoldalból kész videó, négy lépésben</h2>
                 <p class="text-body text-lg leading-relaxed">
                     A videó egy poszthoz készül, ugyanabban a szerkesztőben, ahol a szöveg és a kép. Külön videós eszköz
                     nem kell.
