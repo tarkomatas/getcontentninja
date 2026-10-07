@@ -28,6 +28,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
+import VideoShowcase from '../../components/VideoShowcase.astro';
 import Header from '../../components/Header.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
@@ -518,6 +519,10 @@ const steps = [
             </div>
         </div>
     </section>
+
+    <!-- Mintavideók – a TikTok videós csatorna: előbb a 7 videó, utána a részletek.
+         A CTA vissza a hero űrlaphoz visz. -->
+    <VideoShowcase locale="hu" ctaHref="#hero" ctaLabel="Ezt szeretném a webshopomnak" ctaStyle="button" />
 
     <!-- 3. Mi megy ki TikTokra? – képsor és videó -->
     <section id="tartalom" class="bg-card py-20 md:py-28">
