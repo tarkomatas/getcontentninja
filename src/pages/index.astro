@@ -13,6 +13,7 @@
 // duplikált gyökér a keresőben, de semmi nem tiltja ki az ellenőrzőket, és a
 // crawler tovább tud menni a tényleges tartalomra.
 import AttributionScript from '../components/AttributionScript.astro';
+import { BRAND_NAME, brandJsonLd } from '../data/brand';
 ---
 
 <!doctype html>
@@ -36,6 +37,9 @@ import AttributionScript from '../components/AttributionScript.astro';
     <link rel="alternate" hreflang="hu" href="https://getcontentninja.com/hu/" />
     <link rel="alternate" hreflang="en" href="https://getcontentninja.com/en/" />
     <link rel="alternate" hreflang="x-default" href="https://getcontentninja.com/hu/" />
+    <meta property="og:site_name" content={BRAND_NAME} />
+    <!-- Márkanév a Google-nek – ugyanaz, mint a nyelvi főoldalakon (`src/data/brand.ts`). -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(brandJsonLd)} />
     <!-- Kampány-forrás: MÉG az átirányítás előtt, mert csak itt látszik a valódi (külső) referrer. -->
     <AttributionScript />
     <script is:inline>
