@@ -25,7 +25,9 @@ export const brandJsonLd = {
       alternateName: ['ContentNinja', 'getcontentninja.com'],
       url: SITE,
       inLanguage: ['hu', 'en'],
-      publisher: { '@id': `${SITE}#organization` },
+      // Szándékosan NINCS `publisher: { '@id': …#organization }`: azzal az
+      // Organization a WebSite alá ágyazódik, és a Google Rich Results Test nem
+      // listázza önálló elemként (2026-10-08). Két független elem kell.
     },
     {
       '@type': 'Organization',
