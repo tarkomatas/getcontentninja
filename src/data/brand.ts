@@ -38,6 +38,7 @@ export const brandJsonLd = {
       logo: `${SITE}icon.png`,
       sameAs: [
         'https://www.facebook.com/profile.php?id=61582389145717',
+        'https://www.instagram.com/contentninjahu/',
         'https://www.youtube.com/@ContentNinja_HU',
         'https://wordpress.org/plugins/content-ninja/',
       ],
