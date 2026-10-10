@@ -10,12 +10,17 @@
  * - Minden szöveg a HTML-ben van, a végleges állapotában. JS nélkül (kereső,
  *   AI-fetcher, márkaellenőrző) és `prefers-reduced-motion` mellett a statikus,
  *   kész kép látszik. Az elrejtést csak a <head>-ben feltett `html.m-motion`
- *   osztály kapcsolja be, és 4 mp után visszavonjuk, ha a GSAP nem indult el.
- * - A GSAP (+ ScrollTrigger, TextPlugin) CDN-ről jön, csak erre az oldalra.
+ *   osztály kapcsolja be, és 4 mp után visszavonjuk, ha a motion-script nem indult el.
+ * - A mozgások többsége tiszta CSS (+ egy IntersectionObserver), könyvtár
+ *   nélkül. GSAP-ot CSAK a hero-jelenet használ, és csak az oldal betöltése
+ *   után, üresjáratban tölti le – addig a jelenet kész állapotban áll.
  * - Csak `transform` és `opacity` mozog; a hero H1-e és bekezdése nem rejtőzik
  *   el (LCP).
+ * - Sebesség: build-lépéses Tailwind (`tailwindCdn={false}`) és leszűkített
+ *   ikonfont (`iconNames`). ÚJ IKON EZEN AZ OLDALON → az ICONS listába is!
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/tailwind.css';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
@@ -28,6 +33,18 @@ import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
 const page = 'home';
+
+// Az oldal ÖSSZES Material Symbols ikonja (a fejlécé, a láblécé és a JS-ből
+// beírtaké is) – csak ezek töltődnek le a ~1,1 MB-os teljes font helyett.
+// Hiányzó ikon helyén a neve jelenik meg szövegként, ezért új ikonnál bővítsd.
+// JS-ből beírtak: menu/close (Header), volume_up/volume_off (DemoVideo),
+// progress_activity/check_circle (hero-jelenet).
+const ICONS = [
+  'add', 'ads_click', 'arrow_forward', 'article', 'auto_awesome', 'calendar_month', 'campaign', 'category',
+  'check', 'check_circle', 'chevron_left', 'chevron_right', 'close', 'edit_document', 'edit_note', 'expand_more',
+  'format_quote', 'image', 'login', 'mail', 'menu', 'movie', 'progress_activity', 'public', 'schedule', 'share',
+  'storefront', 'trending_up', 'volume_off', 'volume_up',
+];
 
 const title = 'Content Ninja – All-in-one AI marketing webshopoknak | Posztolás, blog, hírlevél';
 const description =
@@ -83,7 +100,7 @@ const faqLd = {
 };
 ---
 
-<BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-fooldal.jpg" keywords={keywords} lpEnabled noindex suppressCanonical>
+<BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-fooldal.jpg" keywords={keywords} lpEnabled noindex suppressCanonical tailwindCdn={false} iconNames={ICONS}>
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
 
   <!-- A mozgás kapcsolója: még az első kirajzolás előtt fut. Reduced motion
@@ -132,19 +149,19 @@ const faqLd = {
                     </p>
 
                     <ul class="space-y-2 text-body">
-                        <li class="flex items-start gap-2.5" data-hero-in>
+                        <li class="flex items-start gap-2.5" data-hero-in style="--i:0">
                             <span class="m-check material-symbols-outlined text-primary text-[20px] mt-0.5"
                                 style="font-variation-settings:'FILL' 1">check_circle</span>
                             <span><strong class="text-dark">Hat modul egy előfizetésben</strong> – posztolás, blogcikk,
                                 hírlevél, termékleírás, kép és videó</span>
                         </li>
-                        <li class="flex items-start gap-2.5" data-hero-in>
+                        <li class="flex items-start gap-2.5" data-hero-in style="--i:1">
                             <span class="m-check material-symbols-outlined text-primary text-[20px] mt-0.5"
                                 style="font-variation-settings:'FILL' 1">check_circle</span>
                             <span><strong class="text-dark">Folyamatos, profi jelenlét</strong> a Google-ben, a social
                                 médiában és a postaládákban</span>
                         </li>
-                        <li class="flex items-start gap-2.5" data-hero-in>
+                        <li class="flex items-start gap-2.5" data-hero-in style="--i:2">
                             <span class="m-check material-symbols-outlined text-primary text-[20px] mt-0.5"
                                 style="font-variation-settings:'FILL' 1">check_circle</span>
                             <span>Több látogató és vásárló, <strong class="text-dark">kevesebb ráfordított
@@ -153,13 +170,13 @@ const faqLd = {
                     </ul>
 
                     <!-- Webshop mélyintegráció – a hero CTA-gombok helyett a támogatott rendszerek -->
-                    <div class="flex items-center gap-2.5 flex-wrap pt-1" data-hero-in>
+                    <div class="flex items-center gap-2.5 flex-wrap pt-1" data-hero-in style="--i:3">
                         <span class="text-sm font-semibold text-muted">Webshop mélyintegráció:</span>
                         <PlatformLogos variant="pill" lazy={false} />
                     </div>
 
                     <!-- Social proof (balra helyezve) -->
-                    <div class="flex items-center gap-3" data-hero-in>
+                    <div class="flex items-center gap-3" data-hero-in style="--i:4">
                         <div class="flex -space-x-2">
                             <div
                                 class="m-avatar w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">
@@ -187,10 +204,10 @@ const faqLd = {
                         aria-label="A Content Ninja egy webshop-termékből Facebook-, Instagram- és TikTok-posztot, blogcikket, hírlevelet és jobb termékleírást készít">
                         <div class="hs-bg" aria-hidden="true"></div>
 
-                        <div class="hs-label hs-label-in hs-anim" aria-hidden="true">
+                        <div class="hs-label hs-label-in" aria-hidden="true">
                             <span class="material-symbols-outlined">storefront</span>A webshopodból
                         </div>
-                        <div class="hs-label hs-label-out hs-anim" aria-hidden="true">
+                        <div class="hs-label hs-label-out" aria-hidden="true">
                             <span class="material-symbols-outlined">auto_awesome</span>Kész tartalmak
                         </div>
 
@@ -209,10 +226,9 @@ const faqLd = {
                         </svg>
 
                         <!-- A termék -->
-                        <div class="hs-product hs-anim" aria-hidden="true">
+                        <div class="hs-product" aria-hidden="true">
                             <div class="hs-product-img">
-                                <img src="/assets/motion-termek-cserep.webp" width="1024" height="1024" alt=""
-                                    fetchpriority="high" />
+                                <img src="/assets/motion-termek-cserep.webp" width="1024" height="1024" alt="" />
                                 <div class="hs-scan"></div>
                             </div>
                             <div class="hs-product-name">Pilea levendula kaspóban</div>
@@ -220,18 +236,18 @@ const faqLd = {
                         </div>
 
                         <!-- AI hub -->
-                        <div class="hs-hub hs-anim" aria-hidden="true">
+                        <div class="hs-hub" aria-hidden="true">
                             <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">auto_awesome</span>
                         </div>
 
                         <!-- Állapotjelző -->
-                        <div class="hs-status hs-anim" aria-hidden="true">
+                        <div class="hs-status" aria-hidden="true">
                             <span class="hs-status-icon material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span>
                             <span class="hs-status-text">4 tartalom kész</span>
                         </div>
 
                         <!-- 1. Poszt -->
-                        <div class="hs-card hs-anim" style="top:10%" aria-hidden="true">
+                        <div class="hs-card" style="top:10%" aria-hidden="true">
                             <img class="hs-thumb" src="/assets/motion-termek-cserep.webp" width="1024" height="1024" alt="" />
                             <div class="hs-body">
                                 <div class="hs-row">
@@ -248,7 +264,7 @@ const faqLd = {
                         </div>
 
                         <!-- 2. Blogcikk -->
-                        <div class="hs-card hs-anim" style="top:31%" aria-hidden="true">
+                        <div class="hs-card" style="top:31%" aria-hidden="true">
                             <div class="hs-ico"><span class="material-symbols-outlined">article</span></div>
                             <div class="hs-body">
                                 <div class="hs-row">
@@ -261,7 +277,7 @@ const faqLd = {
                         </div>
 
                         <!-- 3. Hírlevél -->
-                        <div class="hs-card hs-anim" style="top:52%" aria-hidden="true">
+                        <div class="hs-card" style="top:52%" aria-hidden="true">
                             <div class="hs-ico"><span class="material-symbols-outlined">mail</span></div>
                             <div class="hs-body">
                                 <div class="hs-row">
@@ -274,7 +290,7 @@ const faqLd = {
                         </div>
 
                         <!-- 4. Termékleírás (Shopgrade) -->
-                        <div class="hs-card hs-anim" style="top:73%" aria-hidden="true">
+                        <div class="hs-card" style="top:73%" aria-hidden="true">
                             <div class="hs-gauge">
                                 <svg viewBox="0 0 36 36">
                                     <circle cx="18" cy="18" r="15" class="hs-gauge-track" />
@@ -494,13 +510,11 @@ const faqLd = {
     <!-- ═══════════════════════════════════════
      HOGYAN MŰKÖDIK
 ═══════════════════════════════════════ -->
-    <!-- Görgetésre lejátszódó történet. Desktopon a blokk rögzül, és a görgetés
-         viszi végig a 4 jelenetet (scrub); mobilon nem rögzül, a jelenetek
-         maguktól, ismétlődve futnak, amíg a blokk látszik. A lépések szövege
-         ugyanaz, mint a főoldal HowItWorksSteps-kártyáin. JS nélkül a 3.
-         jelenet (Tartalomgyártás) áll, kész állapotban. -->
-    <section id="hogyan-mukodik" class="sc bg-card px-4 md:px-10">
-        <div class="sc-pin max-w-[1200px] mx-auto py-20 md:py-28">
+    <!-- Kétoszlopos elrendezés: balra a cím és a 4 lépés, jobbra a bemutató
+         videó (mobilon: cím → videó → lépések). A lépések szövege ugyanaz, mint
+         a főoldal HowItWorksSteps-kártyáin. -->
+    <section id="hogyan-mukodik" class="bg-card py-20 md:py-28 px-4 md:px-10">
+        <div class="max-w-[1200px] mx-auto">
             <div class="sc-grid">
 
                 <div class="sc-head" data-reveal>
@@ -510,171 +524,53 @@ const faqLd = {
                 </div>
 
                 <div class="sc-steps">
-                    <span class="sc-rail" aria-hidden="true"><span class="sc-rail-fill"></span></span>
+                    <span class="sc-rail" aria-hidden="true"></span>
                     <ol class="sc-list">
-                    <li class="sc-step" data-step="0">
-                        <span class="sc-num">1</span>
-                        <div>
-                            <h3 class="font-bold text-lg leading-snug">Alapbeállítás</h3>
-                            <p class="text-body text-sm leading-relaxed">Megadod a webshopod linkjét és a logódat.</p>
-                        </div>
-                    </li>
-                    <li class="sc-step" data-step="1">
-                        <span class="sc-num">2</span>
-                        <div>
-                            <h3 class="font-bold text-lg leading-snug">Ötletvadászat</h3>
-                            <p class="text-body text-sm leading-relaxed">Átnézi a webshopod, termékeket és témákat választ.</p>
-                        </div>
-                    </li>
-                    <li class="sc-step" data-step="2">
-                        <span class="sc-num">3</span>
-                        <div>
-                            <h3 class="font-bold text-lg leading-snug">Tartalomgyártás</h3>
-                            <p class="text-body text-sm leading-relaxed">Poszt, blogcikk, hírlevél vagy termékleírás – márkahűen.</p>
-                        </div>
-                    </li>
-                    <li class="sc-step" data-step="3">
-                        <span class="sc-num">4</span>
-                        <div>
-                            <h3 class="font-bold text-lg leading-snug">Publikálás</h3>
-                            <p class="text-body text-sm leading-relaxed">Az AI <span class="text-primary font-semibold">kiposztolja, blogba teszi, kiküldi</span> helyetted.</p>
-                        </div>
-                    </li>
-                </ol>
+                        <li class="sc-step" data-reveal>
+                            <span class="sc-num">1</span>
+                            <div>
+                                <h3 class="font-bold text-lg leading-snug">Alapbeállítás</h3>
+                                <p class="text-body text-sm leading-relaxed">Megadod a webshopod linkjét és a logódat.</p>
+                            </div>
+                        </li>
+                        <li class="sc-step" data-reveal>
+                            <span class="sc-num">2</span>
+                            <div>
+                                <h3 class="font-bold text-lg leading-snug">Ötletvadászat</h3>
+                                <p class="text-body text-sm leading-relaxed">Átnézi a webshopod, termékeket és témákat választ.</p>
+                            </div>
+                        </li>
+                        <li class="sc-step" data-reveal>
+                            <span class="sc-num">3</span>
+                            <div>
+                                <h3 class="font-bold text-lg leading-snug">Tartalomgyártás</h3>
+                                <p class="text-body text-sm leading-relaxed">Poszt, blogcikk, hírlevél vagy termékleírás – márkahűen.</p>
+                            </div>
+                        </li>
+                        <li class="sc-step" data-reveal>
+                            <span class="sc-num">4</span>
+                            <div>
+                                <h3 class="font-bold text-lg leading-snug">Publikálás</h3>
+                                <p class="text-body text-sm leading-relaxed">Az AI <span class="text-primary font-semibold">kiposztolja, blogba teszi, kiküldi</span> helyetted.</p>
+                            </div>
+                        </li>
+                    </ol>
                 </div>
 
-                <div class="sc-stage" aria-hidden="true">
-                    <div class="sc-window">
-                        <div class="sc-bar">
-                            <span class="sc-dots"><i></i><i></i><i></i></span>
-                            <span class="sc-bar-text">3 · Tartalomgyártás</span>
-                        </div>
-                        <div class="sc-canvas">
-
-                            <!-- 1. Alapbeállítás -->
-                            <div class="sc-scene" data-scene="0">
-                                <div class="s1-field">
-                                    <span class="s-label">Webshop címe</span>
-                                    <div class="s1-input">
-                                        <span class="material-symbols-outlined">language</span>
-                                        <span class="s1-url">zoldsarok.hu</span><i class="s1-caret"></i>
-                                    </div>
-                                </div>
-                                <div class="s1-logo-row">
-                                    <div class="s1-logo">ZS</div>
-                                    <div class="s1-logo-text"><b>Logó feltöltve</b><span>zoldsarok-logo.png</span></div>
-                                </div>
-                                <div class="s1-platforms">
-                                    <span class="s-label">Összekötés</span>
-                                    <div class="s1-logos">
-                                        <span><img src="/assets/unas_logo.png" alt="" loading="lazy" /></span>
-                                        <span><img src="/assets/shoprenter-logo.png" alt="" loading="lazy" /></span>
-                                        <span><img src="/assets/woocommerce-logo.svg" alt="" loading="lazy" /></span>
-                                    </div>
-                                </div>
-                                <div class="s1-ok"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span>Webshop összekötve · 248 termék</div>
-                                <div class="s1-tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                            </div>
-
-                            <!-- 2. Ötletvadászat -->
-                            <div class="sc-scene" data-scene="1">
-                                <div class="s2-grid">
-                                    <div class="s2-tile is-pick"><img src="/assets/motion-termek-cserep.webp" alt="" loading="lazy" /><b>Pilea kaspóban</b><span class="s2-check material-symbols-outlined">check</span></div>
-                                    <div class="s2-tile"><span class="material-symbols-outlined">potted_plant</span><b>Monstera</b></div>
-                                    <div class="s2-tile is-pick"><span class="material-symbols-outlined">wb_sunny</span><b>Növénylámpa</b><span class="s2-check material-symbols-outlined">check</span></div>
-                                    <div class="s2-tile"><span class="material-symbols-outlined">water_drop</span><b>Locsolókanna</b></div>
-                                    <div class="s2-tile is-pick"><span class="material-symbols-outlined">local_florist</span><b>Kaktusz szett</b><span class="s2-check material-symbols-outlined">check</span></div>
-                                    <div class="s2-tile"><span class="material-symbols-outlined">yard</span><b>Virágföld 10 l</b></div>
-                                </div>
-                                <div class="s2-lens"><span class="material-symbols-outlined">search</span></div>
-                                <div class="s2-ideas">
-                                    <span class="s2-idea">🌱 Tavaszi szezon</span>
-                                    <span class="s2-idea">⭐ Bestseller</span>
-                                    <span class="s2-idea">✨ Új termék</span>
-                                </div>
-                            </div>
-
-                            <!-- 3. Tartalomgyártás (ez az alapjelenet JS nélkül) -->
-                            <div class="sc-scene is-default" data-scene="2">
-                                <div class="s3-grid">
-                                    <div class="s3-card">
-                                        <div class="s3-kicker"><span class="material-symbols-outlined">share</span>Poszt</div>
-                                        <img src="/assets/motion-termek-cserep.webp" alt="" loading="lazy" class="s3-img" />
-                                        <div class="s3-text">Új zöld kedvenc 🌿 A Pilea levendula kaspóban érkezik!</div>
-                                        <div class="s3-sk"><i></i><i></i><i></i></div>
-                                    </div>
-                                    <div class="s3-card">
-                                        <div class="s3-kicker"><span class="material-symbols-outlined">article</span>Blogcikk</div>
-                                        <div class="s3-title">Pilea gondozása: 7 tipp kezdőknek</div>
-                                        <div class="s3-lines"><i style="width:100%"></i><i style="width:94%"></i><i style="width:88%"></i><i style="width:96%"></i><i style="width:60%"></i></div>
-                                        <div class="s3-sk"><i></i><i></i><i></i></div>
-                                    </div>
-                                    <div class="s3-card">
-                                        <div class="s3-kicker"><span class="material-symbols-outlined">mail</span>Hírlevél</div>
-                                        <div class="s3-mail-head">Tavaszi zöld újdonságok 🌱</div>
-                                        <div class="s3-mail-row"><img src="/assets/motion-termek-cserep.webp" alt="" loading="lazy" /><div class="s3-lines"><i style="width:100%"></i><i style="width:80%"></i><i class="s3-btn"></i></div></div>
-                                        <div class="s3-sk"><i></i><i></i><i></i></div>
-                                    </div>
-                                    <div class="s3-card">
-                                        <div class="s3-kicker"><span class="material-symbols-outlined">edit_document</span>Termékleírás</div>
-                                        <div class="s3-score"><span class="s3-score-from">42</span><span class="material-symbols-outlined">arrow_forward</span><span class="s3-score-to">91</span></div>
-                                        <div class="s3-lines"><i style="width:100%"></i><i style="width:90%"></i><i style="width:72%"></i></div>
-                                        <div class="s3-sk"><i></i><i></i><i></i></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 4. Publikálás -->
-                            <div class="sc-scene" data-scene="3">
-                                <div class="s4-cal">
-                                    <div class="s4-head"><span>H</span><span>K</span><span>Sze</span><span>Cs</span><span>P</span><span>Szo</span><span>V</span></div>
-                                    <div class="s4-cells">
-                                        <div><i class="s4-pill fb">Poszt</i></div>
-                                        <div><i class="s4-pill blog">Blog</i></div>
-                                        <div><i class="s4-pill ig">Insta</i></div>
-                                        <div><i class="s4-pill mail">Hírlevél</i></div>
-                                        <div><i class="s4-pill tt">TikTok</i></div>
-                                        <div><i class="s4-pill fb">Poszt</i></div>
-                                        <div></div>
-                                        <div><i class="s4-pill ig">Insta</i></div>
-                                        <div><i class="s4-pill tt">TikTok</i></div>
-                                        <div><i class="s4-pill blog">Blog</i></div>
-                                        <div><i class="s4-pill fb">Poszt</i></div>
-                                        <div></div>
-                                        <div><i class="s4-pill mail">Hírlevél</i></div>
-                                        <div><i class="s4-pill ig">Insta</i></div>
-                                    </div>
-                                </div>
-                                <div class="s4-toasts">
-                                    <div class="s4-toast"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span>Kiposztolva: Facebook</div>
-                                    <div class="s4-toast"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span>Blogcikk publikálva</div>
-                                    <div class="s4-toast"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span>Hírlevél kiküldve</div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                <!-- A HowItWorksVideo alsó margója itt felesleges (rácscellában ül) -->
+                <div class="sc-stage [&>figure]:mb-0" data-reveal>
+                    {hasVideo(videos.overview) ? (
+                        <HowItWorksVideo id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
+                    ) : (
+                        <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
+                            alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
+                            loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto" />
+                    )}
                 </div>
 
             </div>
-        </div>
-    </section>
 
-    <!-- A főoldali videó és a Ninja AI-hivatkozás – a rögzített történet alatt -->
-    <section class="bg-card pb-20 md:pb-28 px-4 md:px-10">
-        <div class="max-w-[1200px] mx-auto">
-
-            <div data-reveal>
-            {hasVideo(videos.overview) ? (
-                <HowItWorksVideo id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
-            ) : (
-                <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
-                    alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
-                    loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto mb-14" />
-            )}
-            </div>
-
-            <div class="text-center max-w-[720px] mx-auto mt-12" data-reveal>
+            <div class="text-center max-w-[720px] mx-auto mt-14" data-reveal>
                 <!-- Szövegközi hivatkozás a Ninja AI oldalra. SZÁNDÉKOSAN itt: ez a
                      négy lépés a „beállítás" ígérete, és a leggyakoribb néma kérdés
                      épp az, hogy mi van, ha elakad benne. A `ninjaAi` oldal nincs a
@@ -1221,44 +1117,89 @@ const faqLd = {
   <Footer locale={locale} page={page} />
 
   <!-- FAQ accordion toggle (globális, mert onclick attribútumból hívjuk).
-       Mozgás-módban a magasság lágyan nyílik/csukódik; anélkül a régi kapcsoló. -->
+       Mozgás-módban a magasság lágyan nyílik/csukódik a böngésző saját
+       animációs API-jával (Web Animations) – könyvtár nélkül. -->
   <script is:inline>
     function toggleFaq(btn) {
       var item = btn.closest('.faq-item');
       var isOpen = item.classList.contains('open');
-      var anim = window.gsap && document.documentElement.classList.contains('m-motion');
+      var anim = document.documentElement.classList.contains('m-motion') && !!Element.prototype.animate;
       document.querySelectorAll('.faq-item.open').forEach(function (i) { if (i !== item) closeItem(i); });
       if (isOpen) closeItem(item); else openItem(item);
 
+      function frames(a) {
+        return [
+          { height: '0px', paddingBottom: '0px', opacity: 0 },
+          { height: a.offsetHeight + 'px', paddingBottom: getComputedStyle(a).paddingBottom, opacity: 1 },
+        ];
+      }
       function openItem(i) {
         i.classList.add('open');
         if (!anim) return;
         var a = i.querySelector('.faq-answer');
-        gsap.fromTo(a, { height: 0, opacity: 0, paddingBottom: 0, overflow: 'hidden' },
-          { height: 'auto', opacity: 1, paddingBottom: 20, duration: 0.4, ease: 'power2.out', clearProps: 'all' });
+        a.style.overflow = 'hidden';
+        a.animate(frames(a), { duration: 350, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })
+          .onfinish = function () { a.style.overflow = ''; };
       }
       function closeItem(i) {
         if (!anim) { i.classList.remove('open'); return; }
         var a = i.querySelector('.faq-answer');
-        gsap.to(a, { height: 0, opacity: 0, paddingBottom: 0, overflow: 'hidden', duration: 0.3, ease: 'power2.in',
-          onComplete: function () { i.classList.remove('open'); gsap.set(a, { clearProps: 'all' }); } });
+        a.style.overflow = 'hidden';
+        var f = frames(a).reverse();
+        a.animate(f, { duration: 260, easing: 'ease-in', fill: 'forwards' }).onfinish = function (e) {
+          i.classList.remove('open');
+          a.style.overflow = '';
+          e.target.cancel();
+        };
       }
     }
   </script>
 
   <style is:global>
-    /* ═══ Elrejtés: CSAK mozgás-módban (html.m-motion), a GSAP hozza vissza ═══ */
-    html.m-motion [data-reveal],
-    html.m-motion [data-hero-in],
-    html.m-motion .hs-anim { opacity: 0; }
-    html.m-motion .m-swash path,
-    html.m-motion .hs-base { stroke-dashoffset: 1; }
-    html.m-motion .hs-flow { opacity: 0; }
+    /* ═══ Elrejtés: CSAK mozgás-módban (html.m-motion) ═══
+       A hero-jelenet NINCS elrejtve: kész állapotban rajzolódik ki, és csak
+       a késleltetve betöltött GSAP bontja le, majd rakja újra össze. */
 
-    /* ═══ Görgetésjelző ═══ */
+    /* Görgetésre beúszó blokkok – az IntersectionObserver "" → "in" → "done"
+       értékre váltja a data-reveal-t. A "done" már semmit nem állít, így a
+       kártyák saját hover-átmenetei visszakapják az irányítást. */
+    html.m-motion [data-reveal=""] { opacity: 0; transform: translateY(28px); }
+    html.m-motion [data-reveal="in"] { opacity: 1; transform: none;
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--rd, 0s); }
+
+    /* Vélemények csillagai: a kártyával együtt pattannak ki */
+    .ti-card .text-yellow-400 { display: inline-block; }
+    html.m-motion .ti-card .text-yellow-400 { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    html.m-motion .ti-card[data-reveal=""] .text-yellow-400 { transform: scale(0); }
+    html.m-motion .ti-card .text-yellow-400:nth-child(1) { transition-delay: 0.35s; }
+    html.m-motion .ti-card .text-yellow-400:nth-child(2) { transition-delay: 0.41s; }
+    html.m-motion .ti-card .text-yellow-400:nth-child(3) { transition-delay: 0.47s; }
+    html.m-motion .ti-card .text-yellow-400:nth-child(4) { transition-delay: 0.53s; }
+    html.m-motion .ti-card .text-yellow-400:nth-child(5) { transition-delay: 0.59s; }
+
+    /* ═══ Hero belépő: tiszta CSS, a --i sorszám adja a lépcsőzést ═══ */
+    @keyframes m-in { from { opacity: 0; transform: translateY(14px); } }
+    @keyframes m-pop { from { transform: scale(0); } }
+    @keyframes m-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+    html.m-motion [data-hero-in] { animation: m-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(0.2s + var(--i, 0) * 0.09s); }
+    html.m-motion .m-check { animation: m-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      animation-delay: calc(0.3s + var(--i, 0) * 0.09s); }
+    html.m-motion .m-avatar { animation: m-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+    html.m-motion .m-avatar:nth-child(1) { animation-delay: 0.65s; }
+    html.m-motion .m-avatar:nth-child(2) { animation-delay: 0.72s; }
+    html.m-motion .m-avatar:nth-child(3) { animation-delay: 0.79s; }
+    html.m-motion .m-swash path { animation: m-draw 0.9s 0.1s cubic-bezier(0.65, 0, 0.35, 1) both; }
+
+    /* ═══ Görgetésjelző: CSS scroll-timeline, JS nélkül. Ahol a böngésző nem
+       ismeri (pl. Firefox ma), ott egyszerűen nem jelenik meg. ═══ */
     .m-progress { display: none; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; pointer-events: none;
       background: linear-gradient(90deg, #6c5ce7, #b8adff); transform-origin: 0 50%; transform: scaleX(0); }
-    html.m-motion .m-progress { display: block; }
+    @keyframes m-prog { to { transform: scaleX(1); } }
+    @supports (animation-timeline: scroll()) {
+      html.m-motion .m-progress { display: block; animation: m-prog linear both; animation-timeline: scroll(root); }
+    }
 
     /* ═══ Hero háttér + kiemelés ═══ */
     .m-blob { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; will-change: transform; }
@@ -1269,13 +1210,15 @@ const faqLd = {
     @keyframes m-drift-a { to { transform: translate(-120px, 90px) scale(1.15); } }
     @keyframes m-drift-b { to { transform: translate(140px, -60px) scale(0.9); } }
 
-    .m-swash-wrap { position: relative; display: inline-block; white-space: nowrap; }
-    .m-swash { position: absolute; left: -2%; width: 104%; bottom: -0.14em; height: 0.3em; overflow: visible; }
+    /* A kiemelés tárolója NEM inline-block: úgy a sortörés és a H1 magassága
+       pontosan ugyanaz, mint az aláhúzás nélkül (nincs elugrás betöltéskor). */
+    .m-swash-wrap { position: relative; }
+    .m-swash { position: absolute; left: -2%; width: 104%; bottom: -0.14em; height: 0.3em; overflow: visible; pointer-events: none; }
     .m-swash path { fill: none; stroke: rgba(108, 92, 231, 0.45); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
 
     /* ═══ Hero jelenet: minden méret a jelenet szélességéhez kötött (cqw) ═══ */
     /* A konténer a SZÜLŐ: a .hs saját font-size-a csak így számol a saját szélességéből. */
-    .hs-wrap, .sc-window { container-type: inline-size; }
+    .hs-wrap { container-type: inline-size; }
     .hs { position: relative; aspect-ratio: 1 / 1; container-type: inline-size; overflow: hidden; border-radius: 20px;
       background: #fbfaff; border: 1px solid rgba(108, 92, 231, 0.12); box-shadow: 0 8px 30px rgba(108, 92, 231, 0.18);
       font-size: 2.6cqw; color: #1e1e2f; }
@@ -1298,6 +1241,8 @@ const faqLd = {
       border: 1px solid #e8e8ef; border-radius: 2.4cqw; box-shadow: 0 10px 30px rgba(30, 30, 47, 0.08); }
     .hs-product-img { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 1.6cqw; background: #f4f2fb; }
     .hs-product-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    html.m-motion .hs-product-img img { animation: m-breathe 8s ease-in-out infinite; }
+    @keyframes m-breathe { 50% { transform: scale(1.05); } }
     .hs-scan { position: absolute; left: 0; right: 0; top: 0; height: 35%; opacity: 0; transform: translateY(-100%);
       background: linear-gradient(180deg, transparent, rgba(108, 92, 231, 0.3) 75%, rgba(108, 92, 231, 0.95)); }
     .hs-product-name { margin-top: 1.2cqw; font-weight: 700; line-height: 1.25; }
@@ -1348,143 +1293,29 @@ const faqLd = {
     .hs-gauge-bar { fill: none; stroke: #22c55e; stroke-width: 3.4; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 9; }
     .hs-gauge-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05em; }
 
-    /* ═══ Görgetős történet (Hogyan működik?) ═══ */
+    /* ═══ Hogyan működik? – kétoszlopos: cím + lépések | videó ═══ */
     .sc-grid { display: grid; gap: 2.5rem; grid-template-areas: "head" "stage" "steps"; }
     .sc-head { grid-area: head; max-width: 720px; margin: 0 auto; text-align: center; }
     .sc-steps { grid-area: steps; position: relative; }
     .sc-stage { grid-area: stage; min-width: 0; }
     @media (min-width: 1024px) {
-      .sc .sc-pin { min-height: calc(100vh - 73px); display: flex; align-items: center; padding-top: 2rem; padding-bottom: 2rem; }
-      .sc-pin > .sc-grid { width: 100%; }
       .sc-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "head stage" "steps stage";
         column-gap: 4rem; row-gap: 2rem; align-items: center; }
       .sc-head { margin: 0; text-align: left; align-self: end; }
       .sc-steps { align-self: start; }
-      .sc-window { max-width: calc((100vh - 200px) * 16 / 11); margin-left: auto; }
     }
     .sc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
-    .sc-step { position: relative; display: flex; align-items: flex-start; gap: 1rem; transition: opacity 0.35s ease; }
+    .sc-step { position: relative; display: flex; align-items: flex-start; gap: 1rem; }
     .sc-step h3 { margin-top: 0.3rem; }
     .sc-num { position: relative; z-index: 1; width: 2.25rem; height: 2.25rem; flex-shrink: 0; display: flex; align-items: center;
-      justify-content: center; border-radius: 50%; font-weight: 800; color: #fff; background: #6c5ce7; border: 2px solid #6c5ce7;
-      box-shadow: 0 8px 30px rgba(108, 92, 231, 0.18); transition: all 0.35s ease; }
-    .sc-rail { position: absolute; left: calc(1.125rem - 1px); top: 1.2rem; bottom: 1.2rem; width: 2px; border-radius: 2px; background: #eceaf6; }
-    .sc-rail-fill { position: absolute; inset: 0; background: linear-gradient(#6c5ce7, #b8adff); transform-origin: 50% 0; }
-    /* Élő mód (a JS teszi fel): a még nem aktív lépések halványak */
-    .sc-live .sc-rail-fill { transform: scaleY(0); }
-    .sc-live .sc-step { opacity: 0.42; }
-    .sc-live .sc-step.is-active, .sc-live .sc-step.is-done { opacity: 1; }
-    .sc-live .sc-step:not(.is-active):not(.is-done) .sc-num { color: #6c5ce7; background: #fff; border-color: #e3defc; box-shadow: none; }
-    .sc-live .sc-step.is-active .sc-num { transform: scale(1.12); }
-
-    .sc-window { overflow: hidden; background: #fff; border: 1px solid #e8e8ef; border-radius: 20px; box-shadow: 0 8px 30px rgba(108, 92, 231, 0.18); }
-    .sc-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 1rem; background: #fbfaff; border-bottom: 1px solid #eceaf6; }
-    .sc-dots { display: flex; gap: 0.35rem; }
-    .sc-dots i { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: #e3defc; }
-    .sc-bar-text { padding: 0.25rem 0.7rem; border-radius: 99px; font-size: 0.8rem; font-weight: 700; color: #6c5ce7; background: rgba(108, 92, 231, 0.08); }
-    .sc-canvas { position: relative; aspect-ratio: 1 / 1.08; font-size: 3cqw; color: #1e1e2f;
-      background: radial-gradient(#efecfd 1px, transparent 1.3px) 0 0 / 3cqw 3cqw, #fff; }
-    @media (min-width: 1024px) { .sc-canvas { aspect-ratio: 16 / 11; font-size: 2.1cqw; } }
-    .sc-scene { position: absolute; inset: 0; padding: 2.2em; opacity: 0; visibility: hidden; }
-    .sc-scene.is-default { opacity: 1; visibility: visible; }
-    .s-label { display: block; margin-bottom: 0.5em; font-size: 0.78em; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #9090a7; }
-
-    /* 1. Alapbeállítás */
-    .sc-scene[data-scene="0"] { display: flex; flex-direction: column; gap: 1em; }
-    .s1-input { display: flex; align-items: center; gap: 0.5em; padding: 0.6em 0.9em; background: #fff; border: 1.5px solid #6c5ce7;
-      border-radius: 0.7em; box-shadow: 0 0 0 0.3em rgba(108, 92, 231, 0.1); }
-    .sc .s1-input .material-symbols-outlined { font-size: 1.3em; color: #9090a7; }
-    .s1-url { font-size: 1.1em; font-weight: 700; }
-    .s1-caret { display: inline-block; width: 2px; height: 1.2em; margin-left: -0.3em; background: #6c5ce7; animation: m-blink 1s steps(1) infinite; }
-    @keyframes m-blink { 50% { opacity: 0; } }
-    .s1-logo-row { display: flex; align-items: center; gap: 0.8em; }
-    .s1-logo { width: 3em; height: 3em; display: flex; align-items: center; justify-content: center; border-radius: 50%;
-      font-weight: 800; color: #fff; background: linear-gradient(135deg, #22c55e, #15803d); }
-    .s1-logo-text { display: flex; flex-direction: column; line-height: 1.3; }
-    .s1-logo-text b { font-size: 0.95em; }
-    .s1-logo-text span { font-size: 0.8em; color: #9090a7; }
-    .s1-logos { display: flex; gap: 0.6em; }
-    .s1-logos span { height: 2.6em; padding: 0 1em; display: flex; align-items: center; justify-content: center; background: #fff;
-      border: 1px solid #e8e8ef; border-radius: 0.6em; }
-    .s1-logos img { height: 1.3em; width: auto; }
-    .s1-ok { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.4em; padding: 0.35em 0.9em 0.35em 0.5em;
-      border-radius: 99px; font-size: 0.9em; font-weight: 700; color: #15803d; background: #dcfce7; }
-    .sc .s1-ok .material-symbols-outlined { font-size: 1.3em; }
-    .s1-tiles { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0.5em; }
-    .s1-tiles i { aspect-ratio: 1; border-radius: 0.5em; background: linear-gradient(135deg, #efecfd, #e1dcfa); }
-    .s1-tiles i:nth-child(3n) { background: linear-gradient(135deg, #e6f7ec, #ccefd8); }
-    .s1-tiles i:nth-child(4n + 2) { background: linear-gradient(135deg, #fdf1e4, #fbe0c4); }
-
-    /* 2. Ötletvadászat */
-    .s2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; }
-    .s2-tile { position: relative; display: flex; flex-direction: column; gap: 0.4em; padding: 0.5em; background: #fff;
-      border: 1px solid #e8e8ef; border-radius: 0.8em; }
-    .s2-tile > img, .sc .s2-tile > .material-symbols-outlined:first-child { width: 100%; aspect-ratio: 16 / 10; display: flex;
-      align-items: center; justify-content: center; object-fit: cover; border-radius: 0.5em; background: #f4f2fb; color: #6c5ce7; font-size: 2.4em; }
-    .sc .s2-tile > .material-symbols-outlined:first-child { border-radius: 0.2em; }
-    .s2-tile b { padding: 0 0.2em; font-size: 0.85em; }
-    .sc .s2-check { position: absolute; top: -0.45em; right: -0.45em; width: 1.6em; height: 1.6em; display: flex; align-items: center;
-      justify-content: center; border-radius: 50%; font-size: 1.1em; color: #fff; background: #6c5ce7; box-shadow: 0 2px 8px rgba(108, 92, 231, 0.4); }
-    .s2-ring { position: absolute; inset: -0.25em; border: 0.2em solid #6c5ce7; border-radius: 1em; pointer-events: none; }
-    .s2-lens { position: absolute; left: 0; top: 0; z-index: 3; width: 4.2em; height: 4.2em; display: flex; align-items: center;
-      justify-content: center; border-radius: 50%; border: 0.25em solid #6c5ce7; color: #6c5ce7; background: rgba(255, 255, 255, 0.35);
-      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.35); opacity: 0; }
-    .sc .s2-lens .material-symbols-outlined { font-size: 1.8em; }
-    .s2-ideas { display: flex; flex-wrap: wrap; gap: 0.6em; margin-top: 1.1em; }
-    .s2-idea { padding: 0.4em 0.9em; border-radius: 99px; font-size: 0.9em; font-weight: 700; background: #fff; border: 1px solid #e3defc;
-      box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1); }
-
-    /* 3. Tartalomgyártás */
-    .s3-grid { height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1em; }
-    .s3-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 0.55em; padding: 0.9em 1em;
-      background: #fff; border: 1px solid #e8e8ef; border-radius: 0.9em; box-shadow: 0 4px 14px rgba(30, 30, 47, 0.05); }
-    .s3-card:first-child { display: grid; grid-template-columns: 5em 1fr; grid-template-rows: auto 1fr; column-gap: 0.8em; row-gap: 0.55em; }
-    .s3-card:first-child .s3-kicker { grid-column: 1 / -1; }
-    .s3-kicker { display: flex; align-items: center; gap: 0.35em; font-size: 0.75em; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 0.08em; color: #6c5ce7; }
-    .sc .s3-kicker .material-symbols-outlined { font-size: 1.35em; }
-    .s3-img { width: 5em; height: 5em; object-fit: cover; border-radius: 0.6em; }
-    .s3-text { font-size: 0.92em; font-weight: 600; line-height: 1.35; }
-    .s3-title { font-size: 1.02em; font-weight: 800; line-height: 1.25; }
-    .s3-lines { flex: 1; display: flex; flex-direction: column; gap: 0.4em; }
-    .s3-lines i { display: block; height: 0.5em; border-radius: 99px; background: #eceaf6; }
-    .s3-lines i.s3-btn { width: 45%; height: 1.2em; margin-top: 0.2em; border-radius: 0.4em; background: #6c5ce7; }
-    .s3-mail-head { padding: 0.45em 0.7em; border-radius: 0.5em; font-size: 0.85em; font-weight: 700; color: #fff; background: #6c5ce7; }
-    .s3-mail-row { display: flex; align-items: flex-start; gap: 0.7em; }
-    .s3-mail-row img { width: 3.6em; height: 3.6em; object-fit: cover; border-radius: 0.5em; }
-    .s3-score { display: flex; align-items: center; gap: 0.5em; font-size: 1.7em; font-weight: 800; }
-    .s3-score-from { color: #f59e0b; }
-    .s3-score-to { color: #22c55e; }
-    .sc .s3-score .material-symbols-outlined { font-size: 0.8em; color: #9090a7; }
-    .s3-sk { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 0.6em; padding: 2.6em 1em 1em; background: #fff; opacity: 0; }
-    .s3-sk i { display: block; height: 0.7em; border-radius: 99px; background: linear-gradient(90deg, #efedf9 25%, #e1dcfa 50%, #efedf9 75%);
-      background-size: 200% 100%; animation: m-shimmer 1.2s linear infinite; }
-    .s3-sk i:nth-child(2) { width: 80%; }
-    .s3-sk i:nth-child(3) { width: 60%; }
-    @keyframes m-shimmer { to { background-position: -200% 0; } }
-
-    /* 4. Publikálás */
-    .s4-cal { padding: 0.9em; background: #fff; border: 1px solid #e8e8ef; border-radius: 0.9em; box-shadow: 0 4px 14px rgba(30, 30, 47, 0.05); }
-    .s4-head, .s4-cells { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.45em; }
-    .s4-head span { text-align: center; font-size: 0.75em; font-weight: 800; text-transform: uppercase; color: #9090a7; }
-    .s4-cells { margin-top: 0.5em; }
-    .s4-cells > div { height: 5.6em; display: flex; align-items: flex-start; padding: 0.35em; background: #f8f9fb; border: 1px solid #eef0f4; border-radius: 0.55em; }
-    .s4-pill { display: block; width: 100%; padding: 0.35em 0.3em; overflow: hidden; border-radius: 0.45em; text-align: center; white-space: nowrap;
-      text-overflow: ellipsis; font-style: normal; font-size: 0.68em; font-weight: 700; color: #fff; }
-    .s4-pill.fb { background: #1877f2; }
-    .s4-pill.ig { background: linear-gradient(135deg, #fa7e1e, #d62976 55%, #962fbf); }
-    .s4-pill.tt { background: #111; }
-    .s4-pill.blog { background: #6c5ce7; }
-    .s4-pill.mail { background: #22c55e; }
-    .s4-toasts { position: absolute; right: 2.2em; bottom: 2.2em; display: flex; flex-direction: column; align-items: flex-end; gap: 0.5em; }
-    .s4-toast { display: flex; align-items: center; gap: 0.45em; padding: 0.55em 0.9em; background: #fff; border: 1px solid #e8e8ef;
-      border-radius: 0.7em; font-size: 0.88em; font-weight: 700; box-shadow: 0 10px 30px rgba(30, 30, 47, 0.14); }
-    .sc .s4-toast .material-symbols-outlined { font-size: 1.3em; color: #22c55e; }
+      justify-content: center; border-radius: 50%; font-weight: 800; color: #fff; background: #6c5ce7;
+      box-shadow: 0 8px 30px rgba(108, 92, 231, 0.18); }
+    .sc-rail { position: absolute; left: calc(1.125rem - 1px); top: 1.2rem; bottom: 1.2rem; width: 2px; border-radius: 2px;
+      background: linear-gradient(#6c5ce7, #b8adff); }
 
     /* ═══ Apróságok ═══ */
     #megoldasok .group .w-12 { transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
     #megoldasok .group:hover .w-12 { transform: rotate(-8deg) scale(1.12); }
-    .ti-card .text-yellow-400 { display: inline-block; }
 
     .m-cta { background: linear-gradient(120deg, #6c5ce7 0%, #8b7cf6 35%, #5a4bd6 70%, #6c5ce7 100%); background-size: 250% 250%;
       animation: m-grad 14s ease-in-out infinite; }
@@ -1501,75 +1332,107 @@ const faqLd = {
     @keyframes m-pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35); } 70%, 100% { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); } }
 
     @media (prefers-reduced-motion: reduce) {
-      .m-blob, .m-cta, .m-pulse::after, .hs-flow, .hs-hub::after, .s1-caret, .s3-sk i { animation: none !important; }
+      .m-blob, .m-cta, .m-pulse::after, .hs-flow, .hs-hub::after { animation: none !important; }
       .m-cta-float { display: none; }
     }
   </style>
 
-  <!-- GSAP (ingyenes, minden plugin) – csak ezen az oldalon -->
-  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js" defer></script>
-
   <script is:inline>
-    // A defer-es GSAP-fájlok a DOMContentLoaded ELŐTT lefutnak, ezért itt várunk.
-    document.addEventListener('DOMContentLoaded', function () {
+    // Könyvtár nélküli mozgások. Inline és szinkron fut a <body> végén, ezért
+    // nincs mire várni; a GSAP-ot csak a hero-jelenet tölti be, később.
+    (function () {
       var root = document.documentElement;
       if (!root.classList.contains('m-motion')) return;
-      if (!window.gsap || !window.ScrollTrigger || !window.TextPlugin) { root.classList.remove('m-motion'); return; }
-      gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
       var $ = function (s, c) { return (c || document).querySelector(s); };
       var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
       try {
-        initProgress();
-        initHeroIntro();
-        initHeroScene();
-        initStory();
         initReveals();
         initCounters();
+        initHeroScene();
         window.__mReady = true;
       } catch (e) {
         // Bármi hiba: inkább a statikus oldal, mint egy félig elrejtett.
         console.error(e);
         root.classList.remove('m-motion');
-        gsap.set('[data-reveal], [data-hero-in], .hs-anim', { clearProps: 'all' });
-        return;
       }
 
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-
-      /* ── Görgetésjelző ── */
-      function initProgress() {
-        gsap.to('.m-progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
+      /* ── Beúszó blokkok: "" → "in" (látszik) → "done" (semmi nem állít rajta) ── */
+      function initReveals() {
+        ['#megoldasok .snap-start', '#videok > div > *', '.ti-card', '#arazas .grid > div', '.faq-item'].forEach(function (s) {
+          $$(s).forEach(function (el) { el.setAttribute('data-reveal', ''); });
+        });
+        var io = new IntersectionObserver(function (entries) {
+          var n = 0;
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            io.unobserve(el);
+            el.style.setProperty('--rd', (n++ * 0.08) + 's');
+            el.setAttribute('data-reveal', 'in');
+            el.addEventListener('transitionend', function done(ev) {
+              if (ev.target !== el || ev.propertyName !== 'opacity') return;
+              el.removeEventListener('transitionend', done);
+              el.setAttribute('data-reveal', 'done');
+              el.style.removeProperty('--rd');
+            });
+          });
+        }, { rootMargin: '0px 0px -12% 0px' });
+        $$('[data-reveal=""]').forEach(function (el) { io.observe(el); });
       }
 
-      /* ── Hero: lista, logók, avatarok, aláhúzás ── */
-      function initHeroIntro() {
-        gsap.timeline({ delay: 0.15, defaults: { ease: 'power3.out' } })
-          .to('.m-swash path', { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 0.1)
-          .fromTo('[data-hero-in]', { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.09 }, 0.2)
-          .fromTo('.m-check', { scale: 0 }, { scale: 1, duration: 0.45, stagger: 0.09, ease: 'back.out(3)' }, 0.3)
-          .fromTo('.m-avatar', { scale: 0 }, { scale: 1, duration: 0.4, stagger: 0.07, ease: 'back.out(2.5)' }, 0.65);
+      /* ── Számlálók: a HTML a végső számot tartalmazza, innen futunk fel 0-ról ── */
+      function initCounters() {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            io.unobserve(en.target);
+            var el = en.target, end = Number(el.getAttribute('data-count')), t0 = performance.now();
+            (function tick(now) {
+              var p = Math.min(1, (now - t0) / 1600), v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+              el.textContent = v.toLocaleString('hu-HU');
+              if (p < 1) requestAnimationFrame(tick);
+            })(t0);
+          });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        $$('[data-count]').forEach(function (el) { el.textContent = '0'; io.observe(el); });
       }
 
-      /* ── Hero jelenet: termék → AI → 4 tartalom, végtelenítve ── */
+      /* ── Hero-jelenet: kész állapotban indul; a GSAP-ot csak az oldal teljes
+            betöltése után, üresjáratban töltjük le, és onnantól végtelenítve
+            lebontja, majd újra felépíti (termék → AI → 4 tartalom). ── */
       function initHeroScene() {
         var hs = $('.hs');
         if (!hs) return;
+        function idle(fn) {
+          var go = function () {
+            if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 2500 });
+            else setTimeout(fn, 1200);
+          };
+          if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
+        }
+        idle(function () {
+          var s = document.createElement('script');
+          s.src = 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js';
+          s.async = true;
+          s.onload = function () { if (window.gsap) buildHeroTimeline(hs); };
+          document.head.appendChild(s);
+        });
+      }
+
+      function buildHeroTimeline(hs) {
         var cards = $$('.hs-card', hs);
         var types = $$('.hs-type', hs);
-        var texts = types.map(function (t) { return t.textContent.trim(); });
+        var chars = types.map(function (t) { return Array.from(t.textContent.trim()); }); // emoji-biztos
         var bases = $$('.hs-base', hs);
         var flows = $$('.hs-flow', hs);
         var badges = $$('.hs-badge', hs);
+        var sks = $$('.hs-lines-sk i', hs);
         var status = $('.hs-status', hs);
         var statusText = $('.hs-status-text', hs);
         var statusIcon = $('.hs-status-icon', hs);
         var gaugeBar = $('.hs-gauge-bar', hs);
         var gaugeNum = $('.hs-gauge-num', hs);
-        var gauge = { v: 42 };
 
         function setStatus(txt, working) {
           return function () {
@@ -1579,15 +1442,23 @@ const faqLd = {
           };
         }
 
-        var tl = gsap.timeline({ repeat: -1, repeatDelay: 0.3, defaults: { ease: 'power3.out' } });
-        tl.set(types, { text: '' })
+        // immediateRender: false – a jelenet kész állapotban áll, a felépítés
+        // kezdőállapotai csak akkor lépnek életbe, amikor a lejátszás odaér.
+        var tl = gsap.timeline({ repeat: -1, defaults: { ease: 'power3.out', immediateRender: false } });
+
+        // 1) Tartás a kész állapotban, majd lebontás
+        tl.to({}, { duration: 2.5 })
+          .to(cards.slice().reverse(), { autoAlpha: 0, x: 12, duration: 0.35, stagger: 0.06, ease: 'power2.in' })
+          .to(['.hs-hub', status, '.hs-product', '.hs-label'].concat(flows), { autoAlpha: 0, duration: 0.35 }, '-=0.15')
+          .to(bases, { strokeDashoffset: 1, duration: 0.3 }, '<')
+          .call(function () { types.forEach(function (t) { t.textContent = ''; }); gaugeNum.textContent = '42'; })
           .set(badges, { autoAlpha: 0, scale: 0 })
-          .set($$('.hs-lines-sk i', hs), { scaleX: 0, transformOrigin: '0 50%' })
-          .set(flows, { autoAlpha: 0 })
-          .set(bases, { strokeDashoffset: 1 })
+          .set(sks, { scaleX: 0, transformOrigin: '0 50%' })
           .set(gaugeBar, { strokeDashoffset: 58, stroke: '#f59e0b' })
-          .call(function () { gaugeNum.textContent = '42'; })
-          .fromTo('.hs-label', { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1 })
+          .to({}, { duration: 0.3 });
+
+        // 2) Felépítés: termék → beolvasás → AI → kártyák egyenként
+        tl.fromTo('.hs-label', { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1 })
           .fromTo('.hs-product', { autoAlpha: 0, y: 24, scale: 0.94 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 }, '<')
           .fromTo(status, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.4 }, '-=0.2')
           .call(setStatus('AI elemzi…', true), null, '<')
@@ -1598,15 +1469,18 @@ const faqLd = {
           .call(setStatus('Tartalom készül…', true));
 
         cards.forEach(function (card, i) {
+          var el = types[i], txt = chars[i], o = { n: 0 };
           tl.to(bases[i + 1], { strokeDashoffset: 0, duration: 0.4, ease: 'power1.inOut' }, i === 0 ? '+=0.05' : '-=0.45')
             .fromTo(card, { autoAlpha: 0, x: -18, scale: 0.92 }, { autoAlpha: 1, x: 0, scale: 1, duration: 0.55, ease: 'back.out(1.6)' }, '-=0.1')
-            .to(types[i], { text: { value: texts[i] }, duration: texts[i].length * 0.026, ease: 'none' }, '-=0.2');
+            .fromTo(o, { n: 0 }, { n: txt.length, duration: txt.length * 0.026, ease: 'none',
+              onUpdate: function () { el.textContent = txt.slice(0, Math.round(o.n)).join(''); } }, '-=0.2');
           var sk = $$('.hs-lines-sk i', card);
           if (sk.length) tl.to(sk, { scaleX: 1, duration: 0.4, stagger: 0.1 }, '-=0.35');
-          if (i === 3) {
+          if (gaugeBar && card.contains(gaugeBar)) {
+            var g = { v: 42 };
             tl.to(gaugeBar, { strokeDashoffset: 9, stroke: '#22c55e', duration: 1, ease: 'power2.out' }, '-=0.6')
-              .fromTo(gauge, { v: 42 }, { v: 91, duration: 1, ease: 'power2.out',
-                onUpdate: function () { gaugeNum.textContent = Math.round(gauge.v); } }, '<');
+              .fromTo(g, { v: 42 }, { v: 91, duration: 1, ease: 'power2.out',
+                onUpdate: function () { gaugeNum.textContent = Math.round(g.v); } }, '<');
           }
           var badge = $('.hs-badge', card);
           if (badge) tl.to(badge, { autoAlpha: 1, scale: 1, duration: 0.35, ease: 'back.out(3)' }, '-=0.1');
@@ -1614,163 +1488,11 @@ const faqLd = {
 
         tl.to(flows, { autoAlpha: 1, duration: 0.4 })
           .call(setStatus('4 tartalom kész', false), null, '<')
-          .fromTo(status, { scale: 0.94 }, { scale: 1, duration: 0.45, ease: 'back.out(3)' }, '<')
-          .to({}, { duration: 3.2 })
-          .to(cards.slice().reverse(), { autoAlpha: 0, x: 12, duration: 0.35, stagger: 0.06, ease: 'power2.in' })
-          .to(['.hs-hub', status, '.hs-product', '.hs-label'].concat(flows), { autoAlpha: 0, duration: 0.35 }, '-=0.15')
-          .to(bases, { strokeDashoffset: 1, duration: 0.3 }, '<');
+          .fromTo(status, { scale: 0.94 }, { scale: 1, duration: 0.45, ease: 'back.out(3)' }, '<');
 
-        // A termékfotó lassan „lélegzik", és a jelenet csak látható állapotban fut.
-        gsap.to('.hs-product-img img', { scale: 1.05, duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-        ScrollTrigger.create({ trigger: hs, start: 'top bottom', end: 'bottom top',
-          onToggle: function (self) { self.isActive ? tl.play() : tl.pause(); } });
+        // Csak akkor fusson, amikor látszik (akku, CPU)
+        new IntersectionObserver(function (en) { en[0].isIntersecting ? tl.play() : tl.pause(); }).observe(hs);
       }
-
-      /* ── Görgetős történet: 4 jelenet, 3-3 időegység ── */
-      function initStory() {
-        var sc = $('.sc');
-        if (!sc) return;
-        var S = $$('.sc-scene', sc);
-        var steps = $$('.sc-step', sc);
-        var fill = $('.sc-rail-fill', sc);
-        var barText = $('.sc-bar-text', sc);
-        var names = ['Alapbeállítás', 'Ötletvadászat', 'Tartalomgyártás', 'Publikálás'];
-        var q = function (s) { return $$(s, sc); };
-        sc.classList.add('sc-live');
-
-        q('.s2-tile.is-pick').forEach(function (t) {
-          var r = document.createElement('span'); r.className = 's2-ring'; t.appendChild(r);
-        });
-        var scoreTo = $('.s3-score-to', sc);
-        var score = { v: 42 };
-        scoreTo.textContent = '42';
-        gsap.set(S, { autoAlpha: 0 });
-
-        var tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.out', duration: 0.5 } });
-
-        // 1. Alapbeállítás (0–3)
-        tl.set(S[0], { autoAlpha: 1 }, 0)
-          .fromTo($$('[data-scene="0"] > *', sc), { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, stagger: 0.28, duration: 0.45 }, 0.05)
-          .set('.s1-url', { text: '' }, 0)
-          .to('.s1-url', { text: { value: 'zoldsarok.hu' }, duration: 0.8, ease: 'none' }, 0.25)
-          .fromTo('.s1-logo', { scale: 0, rotate: -40 }, { scale: 1, rotate: 0, ease: 'back.out(2.5)' }, 0.5)
-          .fromTo('.s1-logos span', { scale: 0.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, stagger: 0.1, ease: 'back.out(2)' }, 0.75)
-          .fromTo('.s1-ok', { scale: 0.7 }, { scale: 1, ease: 'back.out(3)' }, 1.05)
-          .fromTo('.s1-tiles i', { scale: 0 }, { scale: 1, stagger: 0.07, duration: 0.35, ease: 'back.out(2)' }, 1.3)
-          .to(S[0], { autoAlpha: 0, y: -14, duration: 0.4 }, 2.6);
-
-        // 2. Ötletvadászat (3–6)
-        var lens = $('.s2-lens', sc);
-        var picks = q('.s2-tile.is-pick');
-        function lensAt(tile) {
-          return {
-            x: function () { return tile.offsetLeft + tile.offsetWidth / 2 - lens.offsetWidth / 2; },
-            y: function () { return tile.offsetTop + tile.offsetHeight * 0.4 - lens.offsetHeight / 2; },
-          };
-        }
-        tl.fromTo(S[1], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 3)
-          .fromTo(q('.s2-tile'), { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, stagger: 0.07, duration: 0.35 }, 3.1)
-          .fromTo(lens, Object.assign({ autoAlpha: 0, scale: 0.6 }, lensAt(picks[0])), { autoAlpha: 1, scale: 1, duration: 0.3 }, 3.6);
-        picks.forEach(function (p, i) {
-          var t = 3.75 + i * 0.6;
-          if (i) tl.to(lens, Object.assign({ duration: 0.45, ease: 'power2.inOut' }, lensAt(p)), t - 0.45);
-          tl.fromTo($('.s2-ring', p), { autoAlpha: 0, scale: 1.15 }, { autoAlpha: 1, scale: 1, duration: 0.25 }, t)
-            .fromTo($('.s2-check', p), { scale: 0 }, { scale: 1, duration: 0.3, ease: 'back.out(3)' }, t + 0.05);
-        });
-        tl.to(lens, { autoAlpha: 0, scale: 0.6, duration: 0.25 }, 5.2)
-          .fromTo(q('.s2-idea'), { autoAlpha: 0, y: 10, scale: 0.9 }, { autoAlpha: 1, y: 0, scale: 1, stagger: 0.12, duration: 0.35, ease: 'back.out(2)' }, 5.0)
-          .to(S[1], { autoAlpha: 0, y: -14, duration: 0.4 }, 5.7);
-
-        // 3. Tartalomgyártás (6–9)
-        tl.fromTo(S[2], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 6)
-          .fromTo(q('.s3-card'), { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, stagger: 0.12, duration: 0.4 }, 6.1)
-          .fromTo(q('.s3-sk'), { autoAlpha: 1 }, { autoAlpha: 0, stagger: 0.35, duration: 0.35 }, 6.8)
-          .fromTo(q('.s3-card > :not(.s3-sk):not(.s3-kicker)'), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, stagger: 0.09, duration: 0.3 }, 6.85)
-          .fromTo(score, { v: 42 }, { v: 91, duration: 0.8, onUpdate: function () { scoreTo.textContent = Math.round(score.v); } }, 8.0)
-          .to(S[2], { autoAlpha: 0, y: -14, duration: 0.4 }, 8.7);
-
-        // 4. Publikálás (9–12)
-        tl.fromTo(S[3], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 9)
-          .fromTo(q('.s4-pill'), { autoAlpha: 0, y: -10, scale: 0.8 }, { autoAlpha: 1, y: 0, scale: 1, stagger: 0.07, duration: 0.3, ease: 'back.out(2.5)' }, 9.3)
-          .fromTo(q('.s4-toast'), { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, stagger: 0.35, duration: 0.4, ease: 'back.out(1.6)' }, 10.1)
-          .to({}, { duration: 0.6 }, 11.4);
-
-        var total = tl.duration();
-        var lastIdx = -1;
-        tl.eventCallback('onUpdate', function () {
-          var t = tl.time();
-          var idx = Math.min(3, Math.floor(t / 3));
-          gsap.set(fill, { scaleY: Math.min(1, t / (total - 0.6)) });
-          if (idx === lastIdx) return;
-          lastIdx = idx;
-          steps.forEach(function (s, i) {
-            s.classList.toggle('is-active', i === idx);
-            s.classList.toggle('is-done', i < idx);
-          });
-          barText.textContent = (idx + 1) + ' · ' + names[idx];
-        });
-        tl.progress(0.001).progress(0);
-
-        var mm = gsap.matchMedia();
-        // Desktop: a blokk rögzül, a görgetés viszi a jeleneteket. Az idővonal
-        // már a beúszáskor elindul (top 70%), hogy rögzítéskor ne üres ablak fogadjon;
-        // a vége a rögzítés végéhez igazodik.
-        mm.add('(min-width: 1024px)', function () {
-          var header = $('#top');
-          var pinST = ScrollTrigger.create({
-            trigger: '.sc-pin', pin: true, anticipatePin: 1, invalidateOnRefresh: true,
-            start: function () { return 'top top+=' + (header ? header.offsetHeight : 0); },
-            end: '+=2600',
-          });
-          var animST = ScrollTrigger.create({
-            trigger: '.sc-pin', animation: tl, scrub: 0.6, invalidateOnRefresh: true,
-            start: 'top 70%',
-            end: function () { return pinST.end; },
-          });
-          return function () { animST.kill(); pinST.kill(); };
-        });
-        // Mobil: nincs rögzítés, a jelenetek maguktól futnak, amíg látszanak
-        mm.add('(max-width: 1023px)', function () {
-          tl.repeat(-1).repeatDelay(0.8);
-          var st = ScrollTrigger.create({ trigger: '.sc-stage', start: 'top 85%', end: 'bottom 10%',
-            onToggle: function (self) { self.isActive ? tl.play() : tl.pause(); } });
-          return function () { st.kill(); tl.pause().repeat(0); };
-        });
-      }
-
-      /* ── Beúszó blokkok görgetéskor (a komponensek belsejét is itt jelöljük) ── */
-      function initReveals() {
-        ['#megoldasok .snap-start', '#videok > div > *', '.ti-card', '#arazas .grid > div', '.faq-item'].forEach(function (s) {
-          $$(s).forEach(function (el) { el.setAttribute('data-reveal', ''); });
-        });
-        gsap.set('[data-reveal]', { y: 28, transition: 'none' });
-        ScrollTrigger.batch('[data-reveal]', {
-          start: 'top 88%',
-          once: true,
-          onEnter: function (batch) {
-            gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.08, overwrite: true,
-              clearProps: 'transform,transition' });
-            batch.forEach(function (el) {
-              var stars = $$('.text-yellow-400', el);
-              if (stars.length) gsap.fromTo(stars, { scale: 0, rotate: -30 },
-                { scale: 1, rotate: 0, duration: 0.4, stagger: 0.06, delay: 0.35, ease: 'back.out(3)' });
-            });
-          },
-        });
-      }
-
-      /* ── Számlálók: a HTML a végső számot tartalmazza, innen futunk fel 0-ról ── */
-      function initCounters() {
-        $$('[data-count]').forEach(function (el) {
-          var end = Number(el.getAttribute('data-count'));
-          var o = { v: 0 };
-          el.textContent = '0';
-          ScrollTrigger.create({ trigger: el, start: 'top 92%', once: true, onEnter: function () {
-            gsap.to(o, { v: end, duration: 1.6, ease: 'power2.out',
-              onUpdate: function () { el.textContent = Math.round(o.v).toLocaleString('hu-HU'); } });
-          } });
-        });
-      }
-    });
+    })();
   </script>
 </BaseLayout>

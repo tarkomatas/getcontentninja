@@ -1,3 +1,27 @@
+        /* Méretre hangolt tartalék az Interhez (2026-10-10). Amíg az Inter
+           betöltődik, a szöveg ebben jelenik meg: az Arial úgy skálázva, hogy
+           súlyonként pontosan annyi helyet foglaljon, mint az Inter (mérve a
+           honlap valódi szövegén). Így a betűcsere nem töri át a sorokat, és a
+           H1 nem ugrik el (CLS). Az Inter megérkezése után nincs szerepe.
+           Ahol nincs Arial (Android), ott a következő, általános sans-serif jön. */
+        @font-face { font-family: 'Inter Fallback'; src: local('Arial'), local('ArialMT'); font-weight: 400;
+            size-adjust: 106.64%; ascent-override: 90.85%; descent-override: 22.65%; line-gap-override: 0%; }
+        @font-face { font-family: 'Inter Fallback'; src: local('Arial'), local('ArialMT'); font-weight: 500;
+            size-adjust: 107.80%; ascent-override: 89.87%; descent-override: 22.40%; line-gap-override: 0%; }
+        @font-face { font-family: 'Inter Fallback'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 600;
+            size-adjust: 101.89%; ascent-override: 95.08%; descent-override: 23.70%; line-gap-override: 0%; }
+        @font-face { font-family: 'Inter Fallback'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 700;
+            size-adjust: 102.96%; ascent-override: 94.09%; descent-override: 23.46%; line-gap-override: 0%; }
+        @font-face { font-family: 'Inter Fallback'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 800;
+            size-adjust: 104.27%; ascent-override: 92.91%; descent-override: 23.16%; line-gap-override: 0%; }
+
+        /* Ikonok: fix 1em széles doboz. Amíg az ikonfont nem érkezik meg, a
+           ligatúra neve („check_circle") szövegként állna ott, és szétnyomná a
+           sort; így a helye már az első kirajzoláskor a végleges. A
+           flex-shrink: 0 kötelező: az overflow: hidden miatt egy flex-sorban a
+           doboz különben összenyomódna, és levágná az ikont. */
+        .material-symbols-outlined { display: inline-block; width: 1em; overflow: hidden; flex-shrink: 0; }
+
         *, *::before, *::after { box-sizing: border-box; }
         html { margin: 0; padding: 0; background-color: #ffffff; }
         body {
@@ -5,7 +29,7 @@
             background-color: #ffffff;
             color: #4a4a68;
             letter-spacing: -0.01em;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Inter Fallback', sans-serif;
         }
 
         h1,

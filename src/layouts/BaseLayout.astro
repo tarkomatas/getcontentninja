@@ -5,6 +5,7 @@ import { t } from '../i18n/ui';
 import IntakeClient from '../components/IntakeClient.astro';
 import AttributionScript from '../components/AttributionScript.astro';
 import { BRAND_NAME, brandJsonLd } from '../data/brand';
+import { tailwindTheme } from '../styles/tailwind-theme.mjs';
 
 interface Props {
   locale: Locale;
@@ -35,6 +36,20 @@ interface Props {
    * a global.css-ben). Jogi/technikai oldalakon ne kapcsold be.
    */
   lpEnabled?: boolean;
+  /**
+   * `false`: a CDN-es Tailwind (render-blokkoló script + futásidejű CSS-gyártás)
+   * helyett az oldal a build-lépéses CSS-t használja – ilyenkor az oldalnak a
+   * BaseLayout importja UTÁN importálnia kell a `src/styles/tailwind.css`-t.
+   * Lásd `tailwind.config.mjs`. Alapból `true` (minden eddigi oldal így megy).
+   */
+  tailwindCdn?: boolean;
+  /**
+   * Ha meg van adva, a Material Symbols ikonfontból CSAK ezek az ikonok töltődnek
+   * le (pár KB a teljes ~1,1 MB helyett). A listának az oldal ÖSSZES ikonját
+   * tartalmaznia kell – a fejlécet, a láblécet és a JS-ből beírtakat is –,
+   * különben a hiányzó ikon helyén a neve jelenik meg szövegként.
+   */
+  iconNames?: string[];
 }
 
 const {
@@ -53,7 +68,14 @@ const {
   suppressCanonical = false,
   bodyClass = 'bg-card text-dark font-display antialiased',
   lpEnabled = false,
+  tailwindCdn = true,
+  iconNames,
 } = Astro.props;
+
+// A Google a `icon_names`-t ábécérendben várja, ismétlés nélkül.
+const iconQuery = iconNames?.length
+  ? `&icon_names=${[...new Set(iconNames)].sort().join(',')}`
+  : '';
 
 const site = Astro.site!;
 const canonicalUrl = canonical ?? new URL(pathFor(page, locale), site).href;
@@ -147,46 +169,27 @@ const ui = t(locale);
       <script is:inline type="application/ld+json" set:html={JSON.stringify(brandJsonLd)} />
     )}
 
-    <!-- Fonts -->
+    <!-- Fonts. A preconnect a két Google-domainhez előre felépíti a kapcsolatot,
+         így a betűtípus hamarabb megérkezik (a fontfájlok a gstatic-ról jönnek). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      href={`https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1${iconQuery}&display=swap`}
       rel="stylesheet"
     />
 
-    <!-- Tailwind (CDN) + brand config -->
-    <script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script is:inline id="tailwind-config">
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#6c5ce7",
-              "primary-hover": "#5a4bd6",
-              dark: "#1e1e2f",
-              body: "#4a4a68",
-              light: "#f8f9fb",
-              card: "#ffffff",
-              success: "#22c55e",
-              border: "#e8e8ef",
-              muted: "#9090a7",
-            },
-            fontFamily: {
-              display: ["Inter", "sans-serif"],
-              body: ["Inter", "sans-serif"],
-            },
-            boxShadow: {
-              card: "0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)",
-              "card-hover": "0 4px 6px rgba(0,0,0,0.05), 0 10px 24px rgba(0,0,0,0.08)",
-              "primary-glow": "0 8px 30px rgba(108,92,231,0.18)",
-            },
-          },
-        },
-      };
-    </script>
+    <!-- Tailwind (CDN) + brand config. A téma: src/styles/tailwind-theme.mjs
+         (ugyanabból épül a build-lépéses változat is, lásd `tailwindCdn`). -->
+    {tailwindCdn && (
+      <script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    )}
+    {tailwindCdn && (
+      <script is:inline id="tailwind-config" set:html={`tailwind.config = ${JSON.stringify({ theme: tailwindTheme })};`} />
+    )}
 
     <slot name="head" />
   </head>

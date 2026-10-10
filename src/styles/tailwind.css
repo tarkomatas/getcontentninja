@@ -1,0 +1,6 @@
+/* Build-lépéses Tailwind – lásd tailwind.config.mjs. Csak a `tailwindCdn={false}`
+   oldalak importálják, a `BaseLayout` importja UTÁN (a preflight így a
+   global.css után jön, ahogy a CDN-es változatban is). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,5 +1,5 @@
 /**
- * Favicon-készlet generálása a `public/assets/logo.webp` bal oldali „CN” jeléből.
+ * Favicon-készlet generálása az `assets-src/logo-4000x1200.webp` bal oldali „CN” jeléből.
  *
  *   npm run gen:favicon
  *
@@ -16,7 +16,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SRC = path.join(ROOT, 'public/assets/logo.webp');
+// Az eredeti, nagy felbontású logó (a public/-ba csak egy kicsinyített 800×240-es
+// változat kerül, mert a 4000×1200-as 1,5 MB volt minden oldalon).
+const SRC = path.join(ROOT, 'assets-src/logo-4000x1200.webp');
 const OUT = path.join(ROOT, 'public');
 
 // A jel bounding boxa a 4000×1200-as logóban (nem-fehér pixelek szkennelésével mérve).
