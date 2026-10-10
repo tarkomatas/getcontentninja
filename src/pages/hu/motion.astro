@@ -21,6 +21,7 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/tailwind.css';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import HowItWorksVideo from '../../components/HowItWorksVideo.astro';
@@ -139,7 +140,7 @@ const faqLd = {
 
                     <h1
                         class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        All-in-one AI marketing rendszer <span class="m-swash-wrap text-primary">webshopoknak<svg class="m-swash" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 15 C 70 5, 190 3, 296 11" pathLength="1" /></svg></span>
+                        AI marketing operációs rendszer <span class="m-swash-wrap text-primary">webshopoknak<svg class="m-swash" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 15 C 70 5, 190 3, 296 11" pathLength="1" /></svg></span>
                     </h1>
 
                     <p class="text-lg text-body leading-snug max-w-[520px]">
@@ -188,7 +189,7 @@ const faqLd = {
                                 class="m-avatar w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">
                                 ÁK</div>
                         </div>
-                        <p class="text-sm text-muted"><span class="font-semibold text-dark"><span data-count="50">50</span>+ webshop</span> már
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark"><span data-count="50" data-count-ms="3000">50</span>+ webshop</span> már
                             használja</p>
                     </div>
 
@@ -510,71 +511,46 @@ const faqLd = {
     <!-- ═══════════════════════════════════════
      HOGYAN MŰKÖDIK
 ═══════════════════════════════════════ -->
-    <!-- Kétoszlopos elrendezés: balra a cím és a 4 lépés, jobbra a bemutató
-         videó (mobilon: cím → videó → lépések). A lépések szövege ugyanaz, mint
-         a főoldal HowItWorksSteps-kártyáin. -->
+    <!-- Eredeti főoldali változat, mozgás nélkül (user-kérés, 2026-10-10:
+         a kétoszlopos videós kísérlet visszavonva). -->
     <section id="hogyan-mukodik" class="bg-card py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[1200px] mx-auto">
-            <div class="sc-grid">
 
-                <div class="sc-head" data-reveal>
-                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik?</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">4 lépés a teljes automatizálásig</h2>
-                    <p class="text-body text-lg leading-relaxed">Egyszer beállítod, az AI a többit magától intézi.</p>
-                </div>
-
-                <div class="sc-steps">
-                    <span class="sc-rail" aria-hidden="true"></span>
-                    <ol class="sc-list">
-                        <li class="sc-step" data-reveal>
-                            <span class="sc-num">1</span>
-                            <div>
-                                <h3 class="font-bold text-lg leading-snug">Alapbeállítás</h3>
-                                <p class="text-body text-sm leading-relaxed">Megadod a webshopod linkjét és a logódat.</p>
-                            </div>
-                        </li>
-                        <li class="sc-step" data-reveal>
-                            <span class="sc-num">2</span>
-                            <div>
-                                <h3 class="font-bold text-lg leading-snug">Ötletvadászat</h3>
-                                <p class="text-body text-sm leading-relaxed">Átnézi a webshopod, termékeket és témákat választ.</p>
-                            </div>
-                        </li>
-                        <li class="sc-step" data-reveal>
-                            <span class="sc-num">3</span>
-                            <div>
-                                <h3 class="font-bold text-lg leading-snug">Tartalomgyártás</h3>
-                                <p class="text-body text-sm leading-relaxed">Poszt, blogcikk, hírlevél vagy termékleírás – márkahűen.</p>
-                            </div>
-                        </li>
-                        <li class="sc-step" data-reveal>
-                            <span class="sc-num">4</span>
-                            <div>
-                                <h3 class="font-bold text-lg leading-snug">Publikálás</h3>
-                                <p class="text-body text-sm leading-relaxed">Az AI <span class="text-primary font-semibold">kiposztolja, blogba teszi, kiküldi</span> helyetted.</p>
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-
-                <!-- A HowItWorksVideo alsó margója itt felesleges (rácscellában ül) -->
-                <div class="sc-stage [&>figure]:mb-0" data-reveal>
-                    {hasVideo(videos.overview) ? (
-                        <HowItWorksVideo id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
-                    ) : (
-                        <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
-                            alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
-                            loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto" />
-                    )}
-                </div>
-
+            <div class="text-center max-w-[720px] mx-auto mb-12">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Hogyan működik?</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">4 lépés a teljes automatizálásig</h2>
+                <p class="text-body text-lg leading-relaxed">Egyszer beállítod, az AI a többit magától intézi.</p>
             </div>
 
-            <!-- A főoldalon itt áll a Ninja AI-hivatkozás (a `ninjaAi` oldal egyetlen
-                 belső bejárási útja, mert nincs a menüben). A demóból user-kérésre
-                 kivettük; ha ez a blokk átkerül a főoldalra, a linknek más helyet
-                 kell találni. -->
-            <div class="text-center max-w-[720px] mx-auto mt-14" data-reveal>
+            <!-- Széles videó a cím és a lépések között (ha nincs videó, marad az illusztráció) -->
+            {hasVideo(videos.overview) ? (
+                <HowItWorksVideo id={videos.overview} label="Content Ninja bemutató videó lejátszása" />
+            ) : (
+                <img src="/assets/hogyan-mukodik.webp" width="1024" height="1024"
+                    alt="A Content Ninja önjáró munkafolyamata körkörös ábrán: alapbeállítás, ötletkeresés, tartalomgyártás, majd publikálás és hírlevélküldés"
+                    loading="lazy" class="w-full h-auto block max-w-[460px] mx-auto mb-14" />
+            )}
+
+            <div class="mb-12">
+                <HowItWorksSteps cardClass="bg-light" steps={[
+                    { title: 'Alapbeállítás', desc: 'Megadod a webshopod linkjét és a logódat.' },
+                    { title: 'Ötletvadászat', desc: 'Átnézi a webshopod, termékeket és témákat választ.' },
+                    { title: 'Tartalomgyártás', desc: 'Poszt, blogcikk, hírlevél vagy termékleírás – márkahűen.' },
+                    { title: 'Publikálás', desc: 'Az AI <span class="text-primary font-semibold">kiposztolja, blogba teszi, kiküldi</span> helyetted.' },
+                ]} />
+            </div>
+
+            <div class="text-center max-w-[720px] mx-auto">
+                <!-- Szövegközi hivatkozás a Ninja AI oldalra. SZÁNDÉKOSAN itt: ez a
+                     négy lépés a „beállítás" ígérete, és a leggyakoribb néma kérdés
+                     épp az, hogy mi van, ha elakad benne. A `ninjaAi` oldal nincs a
+                     menüben (user-döntés), ezért ez adja a belső bejárási utat. -->
+                <p class="text-body mb-8 leading-relaxed">
+                    És ha elakadnál a beállításban, ott a beépített
+                    <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>:
+                    elmondod neki, mit szeretnél, ő pedig megnézi az adataidat és beállítja helyetted.
+                </p>
+
                 <a href="/hu/online-bemutato/" class="cta-primary px-8 py-4 text-base">
                     Bemutatót kérek – díjmentes
                 </a>
@@ -1165,7 +1141,7 @@ const faqLd = {
     /* Vélemények csillagai: a kártyával együtt pattannak ki */
     .ti-card .text-yellow-400 { display: inline-block; }
     html.m-motion .ti-card .text-yellow-400 { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    html.m-motion .ti-card[data-reveal=""] .text-yellow-400 { transform: scale(0); }
+    html.m-motion [data-reveal=""] .ti-card .text-yellow-400 { transform: scale(0); }
     html.m-motion .ti-card .text-yellow-400:nth-child(1) { transition-delay: 0.35s; }
     html.m-motion .ti-card .text-yellow-400:nth-child(2) { transition-delay: 0.41s; }
     html.m-motion .ti-card .text-yellow-400:nth-child(3) { transition-delay: 0.47s; }
@@ -1287,26 +1263,6 @@ const faqLd = {
     .hs-gauge-bar { fill: none; stroke: #22c55e; stroke-width: 3.4; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 9; }
     .hs-gauge-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05em; }
 
-    /* ═══ Hogyan működik? – kétoszlopos: cím + lépések | videó ═══ */
-    .sc-grid { display: grid; gap: 2.5rem; grid-template-areas: "head" "stage" "steps"; }
-    .sc-head { grid-area: head; max-width: 720px; margin: 0 auto; text-align: center; }
-    .sc-steps { grid-area: steps; position: relative; }
-    .sc-stage { grid-area: stage; min-width: 0; }
-    @media (min-width: 1024px) {
-      .sc-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); grid-template-areas: "head stage" "steps stage";
-        column-gap: 3rem; row-gap: 2rem; align-items: center; }
-      .sc-head { margin: 0; text-align: left; align-self: end; }
-      .sc-steps { align-self: start; }
-    }
-    .sc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
-    .sc-step { position: relative; display: flex; align-items: flex-start; gap: 1rem; }
-    .sc-step h3 { margin-top: 0.3rem; }
-    .sc-num { position: relative; z-index: 1; width: 2.25rem; height: 2.25rem; flex-shrink: 0; display: flex; align-items: center;
-      justify-content: center; border-radius: 50%; font-weight: 800; color: #fff; background: #6c5ce7;
-      box-shadow: 0 8px 30px rgba(108, 92, 231, 0.18); }
-    .sc-rail { position: absolute; left: calc(1.125rem - 1px); top: 1.2rem; bottom: 1.2rem; width: 2px; border-radius: 2px;
-      background: linear-gradient(#6c5ce7, #b8adff); }
-
     /* ═══ Apróságok ═══ */
     #megoldasok .group .w-12 { transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
     #megoldasok .group:hover .w-12 { transform: rotate(-8deg) scale(1.12); }
@@ -1351,25 +1307,40 @@ const faqLd = {
         root.classList.remove('m-motion');
       }
 
-      /* ── Beúszó blokkok: "" → "in" (látszik) → "done" (semmi nem állít rajta) ── */
+      /* ── Beúszó blokkok: "" → "in" (látszik) → "done" (semmi nem állít rajta).
+            Ritkítva (user-kérés): a GYIK, a vélemények, az árkártyák és a
+            videósáv EGY blokként jön, nem elemenként; egyenként csak a
+            megoldás-kártyák úsznak be. ── */
       function initReveals() {
-        ['#megoldasok .snap-start', '#videok > div > *', '.ti-card', '#arazas .grid > div', '.faq-item'].forEach(function (s) {
+        ['#megoldasok .snap-start', '#videok > div', '#ti-viewport', '#arazas .grid', '#faq-list'].forEach(function (s) {
           $$(s).forEach(function (el) { el.setAttribute('data-reveal', ''); });
         });
+        function reveal(el, delay) {
+          io.unobserve(el);
+          el.style.setProperty('--rd', delay + 's');
+          el.setAttribute('data-reveal', 'in');
+          el.addEventListener('transitionend', function done(ev) {
+            if (ev.target !== el || ev.propertyName !== 'opacity') return;
+            el.removeEventListener('transitionend', done);
+            el.setAttribute('data-reveal', 'done');
+            el.style.removeProperty('--rd');
+          });
+        }
         var io = new IntersectionObserver(function (entries) {
           var n = 0;
           entries.forEach(function (en) {
-            if (!en.isIntersecting) return;
+            if (!en.isIntersecting || en.target.getAttribute('data-reveal') !== '') return;
             var el = en.target;
-            io.unobserve(el);
-            el.style.setProperty('--rd', (n++ * 0.08) + 's');
-            el.setAttribute('data-reveal', 'in');
-            el.addEventListener('transitionend', function done(ev) {
-              if (ev.target !== el || ev.propertyName !== 'opacity') return;
-              el.removeEventListener('transitionend', done);
-              el.setAttribute('data-reveal', 'done');
-              el.style.removeProperty('--rd');
-            });
+            // Lapozósáv: a sáv rejtett részén álló kártyák sosem érnek be a
+            // képernyőre, ezért a sáv ÖSSZES kártyája egyszerre indul (a
+            // láthatók lépcsőzve), különben lapozáskor üresek maradnának.
+            if (el.classList.contains('snap-start')) {
+              Array.prototype.forEach.call(el.parentElement.children, function (c) {
+                if (c.getAttribute('data-reveal') === '') reveal(c, n++ * 0.08);
+              });
+              return;
+            }
+            reveal(el, n++ * 0.08);
           });
         }, { rootMargin: '0px 0px -12% 0px' });
         $$('[data-reveal=""]').forEach(function (el) { io.observe(el); });
@@ -1382,8 +1353,9 @@ const faqLd = {
             if (!en.isIntersecting) return;
             io.unobserve(en.target);
             var el = en.target, end = Number(el.getAttribute('data-count')), t0 = performance.now();
+            var ms = Number(el.getAttribute('data-count-ms')) || 1600;
             (function tick(now) {
-              var p = Math.min(1, (now - t0) / 1600), v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+              var p = Math.min(1, (now - t0) / ms), v = Math.round(end * (1 - Math.pow(1 - p, 2)));
               el.textContent = v.toLocaleString('hu-HU');
               if (p < 1) requestAnimationFrame(tick);
             })(t0);
