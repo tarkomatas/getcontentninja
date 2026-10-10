@@ -570,17 +570,11 @@ const faqLd = {
 
             </div>
 
+            <!-- A főoldalon itt áll a Ninja AI-hivatkozás (a `ninjaAi` oldal egyetlen
+                 belső bejárási útja, mert nincs a menüben). A demóból user-kérésre
+                 kivettük; ha ez a blokk átkerül a főoldalra, a linknek más helyet
+                 kell találni. -->
             <div class="text-center max-w-[720px] mx-auto mt-14" data-reveal>
-                <!-- Szövegközi hivatkozás a Ninja AI oldalra. SZÁNDÉKOSAN itt: ez a
-                     négy lépés a „beállítás" ígérete, és a leggyakoribb néma kérdés
-                     épp az, hogy mi van, ha elakad benne. A `ninjaAi` oldal nincs a
-                     menüben (user-döntés), ezért ez adja a belső bejárási utat. -->
-                <p class="text-body mb-8 leading-relaxed">
-                    És ha elakadnál a beállításban, ott a beépített
-                    <a href="/hu/ninja-ai/" class="text-primary font-semibold underline">Ninja AI asszisztens</a>:
-                    elmondod neki, mit szeretnél, ő pedig megnézi az adataidat és beállítja helyetted.
-                </p>
-
                 <a href="/hu/online-bemutato/" class="cta-primary px-8 py-4 text-base">
                     Bemutatót kérek – díjmentes
                 </a>
@@ -1299,8 +1293,8 @@ const faqLd = {
     .sc-steps { grid-area: steps; position: relative; }
     .sc-stage { grid-area: stage; min-width: 0; }
     @media (min-width: 1024px) {
-      .sc-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "head stage" "steps stage";
-        column-gap: 4rem; row-gap: 2rem; align-items: center; }
+      .sc-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); grid-template-areas: "head stage" "steps stage";
+        column-gap: 3rem; row-gap: 2rem; align-items: center; }
       .sc-head { margin: 0; text-align: left; align-self: end; }
       .sc-steps { align-self: start; }
     }
