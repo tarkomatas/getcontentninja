@@ -3,8 +3,9 @@
 Kanonikus stílus-tokenek a Content Ninja landing oldalhoz. **A főoldal (`src/pages/hu/index.astro` / `en/index.astro`) az etalon** — új és szerkesztett oldalak ezekhez igazodjanak, hogy az oldal ne szóródjon szét stílusban.
 
 A tokenek forrása a kódban:
-- **Színek / fontok / árnyékok:** inline `tailwind.config` a [src/layouts/BaseLayout.astro](src/layouts/BaseLayout.astro) `<head>`-jében.
-- **Gombok / nav / hero-gradient / FAQ / animációk:** [src/styles/global.css](src/styles/global.css).
+- **Színek / fontok / árnyékok:** [src/styles/tailwind-theme.mjs](src/styles/tailwind-theme.mjs) (a buildelt Tailwind ebből dolgozik).
+- **Gombok / nav / hero-gradient / FAQ:** [src/styles/global.css](src/styles/global.css).
+- **Mozgás:** [src/styles/motion.css](src/styles/motion.css) + [src/components/MotionScript.astro](src/components/MotionScript.astro) — szabályok lent, a „Mozgás" szakaszban.
 
 Ez a fájl a **használati konvenciókat** rögzíti (mit mikor használj), nem definiál új CSS-t.
 
@@ -55,6 +56,29 @@ Csak paletta-tokent használj (`tailwind.config`):
 
 - `.doc-section h2` = `1rem` / 700; body `0.875rem` / `line-height: 1.75`.
 - Kulcs/érték címke-oszlop (`.meta-row` grid, illetve `w-44`) = **176px**.
+
+## Mozgás
+
+Minden oldalon ugyanaz a mozgásréteg fut, **oldalanként semmit nem kell jelölni**: a [MotionScript](src/components/MotionScript.astro) maga ismeri fel a szakaszokat. Kikapcsolás: `BaseLayout` `motion={false}` (egész oldal), illetve `data-motion="off"` (egy szakasz).
+
+**Ami magától mozog:**
+- **Beúszás görgetéskor:** minden szakasz tartalmi dobozának közvetlen gyerekei **egy-egy blokként** (cím, kártyarács, GYIK-lista, vélemények …). Kártyák, GYIK-sorok, lépések **nem egyenként** — kivétel a lapozósáv (`Carousel`), annak kártyái lépcsőzve jönnek.
+- **Hero:** a pipás lista sorai lépcsőzve érkeznek, a pipák kipattannak; a H1 `text-primary` kiemelése alá aláhúzás rajzolódik (csak ha egy sorban fér el). Más hero-elem a `data-hero-in` + `style="--i:N"` jelöléssel kapcsolható be.
+- **Számláló:** `<span data-count="50" data-count-ms="3000">50</span>` — a HTML a végső számot tartalmazza.
+- **GYIK** lágyan nyílik/csukódik; **lila CTA-sáv** (`section.bg-primary`): mozgó színátmenet, felfelé úszó ikonok, pulzáló fő gomb; **hero-háttér**: két sodródó folt; **kártyaikon** egérrel fölé állva megbillen; **görgetésjelző** csík felül.
+
+**Ami szándékosan NEM mozog:**
+- A **„Hogyan működik?"** (`#hogyan-mukodik`) szakasz — user-döntés (2026-10-10), statikus marad.
+- **Űrlap** soha nem rejtőzik el és nem úszik be (konverzió).
+- A hero **H1-e és bekezdése** soha nem rejtőzik el (LCP).
+- Ami betöltéskor már a képernyőn van, az sem rejtőzik el (nincs villanás).
+
+**Kötelező keretek** (minden új mozgásra):
+- Csak `transform` és `opacity` mozog (díszítő háttér kivétel) — semmi nem változtat elrendezést (CLS = 0).
+- Minden a `html.m-motion` alatt él: JS nélkül, `prefers-reduced-motion` mellett és hiba esetén a kész, statikus kép látszik. A keresők és az AI-fetcherek minden szöveget a HTML-ben látnak.
+- Könyvtár nélkül (CSS + IntersectionObserver). **GSAP-ot csak hero-szintű jelenet** használhat, és csak a betöltés után, üresjáratban töltheti le.
+
+**Hero-szintű egyedi jelenet** (mint a főoldali [HeroScene](src/components/HeroScene.astro): élő HTML/CSS + GSAP, saját forgatókönyvvel) **csak előzetes jóváhagyással készül** — előbb javaslat (mit mutatna, hol), utána építés. A jelenet a kész állapotában álljon a markupban, a mintaadatok illusztrációk, és a tényeknél ugyanazok a tiltások érvényesek, mint a szövegben (CLAUDE.md, oldalankénti „amit nem ígérhet").
 
 ## Ismert, szándékosan nyitva hagyott pontok
 

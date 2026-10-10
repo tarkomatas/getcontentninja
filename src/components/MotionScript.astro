@@ -1,0 +1,195 @@
+---
+/**
+ * A mozgásréteg scriptje – a BaseLayout teszi ki minden oldal <body>-jának
+ * végére (a stílus: `src/styles/motion.css`, a szabályok: DESIGN.md „Mozgás").
+ *
+ * Könyvtár nélkül, inline és szinkron fut, amikor az oldal tartalma már
+ * beolvasott. Oldalanként SEMMIT nem kell jelölni: a szakaszokat maga ismeri fel.
+ *
+ * Mit csinál:
+ * - Beúszás: minden <section> (a hero, a „Hogyan működik?" és a
+ *   `data-motion="off"` kivételével) tartalmi dobozának közvetlen gyerekei
+ *   EGY-EGY blokként úsznak be (cím, kártyarács, GYIK-lista …). Ha a dobozban
+ *   nincs blokk-szerű elem (pl. a lila CTA-sáv), az egész egy blokk. A
+ *   lapozósáv (`[data-carousel-track]`) kártyái egyenként, lépcsőzve jönnek –
+ *   és egyszerre MIND, mert a sáv rejtett részén állók sosem érnének be.
+ *   Űrlapot soha nem rejt el, és ami betöltéskor már látszik, azt sem.
+ * - Számláló: `data-count="50"` (+ opcionális `data-count-ms`) – a HTML a
+ *   végső számot tartalmazza, innen fut fel 0-ról, amikor látszik.
+ * - GYIK: a lapok saját `toggleFaq`-ját lágyan nyíló/csukódó változatra cseréli
+ *   (ugyanaz a viselkedés: egyszerre egy nyitott kérdés).
+ * - A hero H1 kiemelése alá aláhúzást rajzol (csak ha egy sorban fér el).
+ * - A lila CTA-sávokba felfelé úszó ikonokat tesz (dekoráció, aria-hidden).
+ *
+ * Hiba esetén leveszi a `m-motion` osztályt: inkább statikus oldal, mint egy
+ * félig elrejtett.
+ */
+---
+
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('m-motion')) return;
+    var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+    try {
+      initReveals();
+      initCounters();
+      initFaq();
+      initSwash();
+      initCtaBands();
+      window.__mReady = true;
+    } catch (e) {
+      console.error(e);
+      root.classList.remove('m-motion');
+    }
+
+    /* ── Beúszás ── */
+    function initReveals() {
+      var BLOCKY = '.grid, ol, ul, [data-carousel], #ti-viewport, .faq-item, figure, img, video, iframe, table';
+      var vh = window.innerHeight;
+      var units = [];
+      $$('section').forEach(function (sec) {
+        if (sec.id === 'hero' || sec.id === 'hogyan-mukodik' || sec.classList.contains('hero-gradient')) return;
+        if (sec.closest('[data-motion="off"], header, footer, form')) return;
+        // a tartalmi doboz: az első NEM abszolút pozícionált gyerek (a díszítő rétegek kimaradnak)
+        var box = Array.prototype.find.call(sec.children, function (c) {
+          return c.tagName !== 'SCRIPT' && c.tagName !== 'STYLE' && getComputedStyle(c).position !== 'absolute';
+        });
+        if (!box) return;
+        var kids = Array.prototype.filter.call(box.children, function (c) { return c.tagName !== 'SCRIPT' && c.tagName !== 'STYLE'; });
+        var blocky = kids.some(function (c) { return c.matches(BLOCKY) || c.querySelector(BLOCKY); });
+        (blocky ? kids : [box]).forEach(function (u) {
+          if (u.matches('form') || u.querySelector('form')) return; // űrlap sosem rejtőzik
+          var track = u.querySelector('[data-carousel-track]');
+          if (track) { Array.prototype.forEach.call(track.children, function (c) { units.push(c); }); return; }
+          units.push(u);
+        });
+      });
+
+      units.forEach(function (u) {
+        // ami betöltéskor már a képernyőn van, azt nem rejtjük el (nincs villanás)
+        if (u.getBoundingClientRect().top < vh) return;
+        u.setAttribute('data-reveal', '');
+      });
+
+      function reveal(el, delay) {
+        io.unobserve(el);
+        el.style.setProperty('--rd', delay + 's');
+        el.setAttribute('data-reveal', 'in');
+        el.addEventListener('transitionend', function done(ev) {
+          if (ev.target !== el || ev.propertyName !== 'opacity') return;
+          el.removeEventListener('transitionend', done);
+          el.setAttribute('data-reveal', 'done');
+          el.style.removeProperty('--rd');
+        });
+      }
+      var io = new IntersectionObserver(function (entries) {
+        var n = 0;
+        entries.forEach(function (en) {
+          var el = en.target;
+          if (!en.isIntersecting || el.getAttribute('data-reveal') !== '') return;
+          if (el.parentElement && el.parentElement.hasAttribute('data-carousel-track')) {
+            Array.prototype.forEach.call(el.parentElement.children, function (c) {
+              if (c.getAttribute('data-reveal') === '') reveal(c, n++ * 0.08);
+            });
+            return;
+          }
+          reveal(el, n++ * 0.08);
+        });
+      }, { rootMargin: '0px 0px -12% 0px' });
+      $$('[data-reveal=""]').forEach(function (el) { io.observe(el); });
+
+      // Tartalék: gyors (lendületes) görgetésnél egy kis elem egyetlen képkocka
+      // alatt átugorhatja a képernyőt – az observer ilyenkor nem jelez, és az
+      // elem rejtve maradna. Görgetés közben (ritkítva) megjelenítjük mindazt,
+      // aminek a teteje már a képernyő alsó széle fölé ért.
+      var pending = true, ticking = false;
+      function sweep() {
+        ticking = false;
+        var left = $$('[data-reveal=""]');
+        if (!left.length) { removeEventListener('scroll', onScroll); pending = false; return; }
+        var n = 0, limit = window.innerHeight * 0.88;
+        left.forEach(function (el) { if (el.getBoundingClientRect().top < limit) reveal(el, n++ * 0.08); });
+      }
+      function onScroll() { if (pending && !ticking) { ticking = true; setTimeout(sweep, 150); } }
+      addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    /* ── Számlálók ── */
+    function initCounters() {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          io.unobserve(en.target);
+          var el = en.target, end = Number(el.getAttribute('data-count')), t0 = performance.now();
+          var ms = Number(el.getAttribute('data-count-ms')) || 1600;
+          var locale = document.documentElement.lang || 'hu';
+          (function tick(now) {
+            var p = Math.min(1, (now - t0) / ms), v = Math.round(end * (1 - Math.pow(1 - p, 2)));
+            el.textContent = v.toLocaleString(locale);
+            if (p < 1) requestAnimationFrame(tick);
+          })(t0);
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      $$('[data-count]').forEach(function (el) { el.textContent = '0'; io.observe(el); });
+    }
+
+    /* ── GYIK: lágy nyitás/csukás (Web Animations API) ── */
+    function initFaq() {
+      if (typeof window.toggleFaq !== 'function' || !Element.prototype.animate) return;
+      function frames(a) {
+        return [
+          { height: '0px', paddingBottom: '0px', opacity: 0 },
+          { height: a.offsetHeight + 'px', paddingBottom: getComputedStyle(a).paddingBottom, opacity: 1 },
+        ];
+      }
+      function openItem(i) {
+        i.classList.add('open');
+        var a = i.querySelector('.faq-answer');
+        if (!a) return;
+        a.style.overflow = 'hidden';
+        a.animate(frames(a), { duration: 350, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })
+          .onfinish = function () { a.style.overflow = ''; };
+      }
+      function closeItem(i) {
+        var a = i.querySelector('.faq-answer');
+        if (!a) { i.classList.remove('open'); return; }
+        a.style.overflow = 'hidden';
+        a.animate(frames(a).reverse(), { duration: 260, easing: 'ease-in', fill: 'forwards' }).onfinish = function (e) {
+          i.classList.remove('open');
+          a.style.overflow = '';
+          e.target.cancel();
+        };
+      }
+      window.toggleFaq = function (btn) {
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        $$('.faq-item.open').forEach(function (i) { if (i !== item) closeItem(i); });
+        if (isOpen) closeItem(item); else openItem(item);
+      };
+    }
+
+    /* ── Aláhúzás a hero H1 kiemelése alá ── */
+    function initSwash() {
+      var hl = document.querySelector('#hero h1 .text-primary, .hero-gradient h1 .text-primary');
+      if (!hl || hl.getClientRects().length !== 1) return;
+      hl.classList.add('m-swash-wrap');
+      hl.insertAdjacentHTML('beforeend',
+        '<svg class="m-swash" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">' +
+        '<path d="M4 15 C 70 5, 190 3, 296 11" pathLength="1" /></svg>');
+    }
+
+    /* ── Felfelé úszó ikonok a lila CTA-sávokban ── */
+    function initCtaBands() {
+      var ICONS = [['share', 6, 0, 16], ['article', 18, -6, 19], ['mail', 31, -11, 17], ['image', 69, -3, 18], ['movie', 82, -9, 15], ['edit_document', 93, -13, 20]];
+      $$('section.bg-primary').forEach(function (sec) {
+        if (sec.querySelector('.m-cta-float') || sec.closest('[data-motion="off"]')) return;
+        var html = ICONS.map(function (x) {
+          return '<span class="material-symbols-outlined" style="left:' + x[1] + '%;--d:' + x[2] + 's;--t:' + x[3] + 's">' + x[0] + '</span>';
+        }).join('');
+        sec.insertAdjacentHTML('afterbegin', '<div class="m-cta-float" aria-hidden="true">' + html + '</div>');
+      });
+    }
+  })();
+</script>

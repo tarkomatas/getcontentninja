@@ -1,11 +1,15 @@
 ---
 import '../styles/global.css';
+// A sorrend számít: global.css → Tailwind (preflight + utility-k) → mozgásréteg.
+import '../styles/tailwind.css';
+import '../styles/motion.css';
 import { pathFor, alternatesFor, type Locale, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import IntakeClient from '../components/IntakeClient.astro';
 import AttributionScript from '../components/AttributionScript.astro';
 import { BRAND_NAME, brandJsonLd } from '../data/brand';
-import { tailwindTheme } from '../styles/tailwind-theme.mjs';
+import MotionScript from '../components/MotionScript.astro';
+import { ICONS } from '../data/icons';
 
 interface Props {
   locale: Locale;
@@ -37,19 +41,11 @@ interface Props {
    */
   lpEnabled?: boolean;
   /**
-   * `false`: a CDN-es Tailwind (render-blokkoló script + futásidejű CSS-gyártás)
-   * helyett az oldal a build-lépéses CSS-t használja – ilyenkor az oldalnak a
-   * BaseLayout importja UTÁN importálnia kell a `src/styles/tailwind.css`-t.
-   * Lásd `tailwind.config.mjs`. Alapból `true` (minden eddigi oldal így megy).
+   * Mozgásréteg (beúszás, hero-belépő, számlálók, lágy GYIK …) – lásd
+   * `src/styles/motion.css`, `MotionScript.astro`, DESIGN.md „Mozgás".
+   * Alapból be van kapcsolva; `false`-szal az oldal teljesen statikus.
    */
-  tailwindCdn?: boolean;
-  /**
-   * Ha meg van adva, a Material Symbols ikonfontból CSAK ezek az ikonok töltődnek
-   * le (pár KB a teljes ~1,1 MB helyett). A listának az oldal ÖSSZES ikonját
-   * tartalmaznia kell – a fejlécet, a láblécet és a JS-ből beírtakat is –,
-   * különben a hiányzó ikon helyén a neve jelenik meg szövegként.
-   */
-  iconNames?: string[];
+  motion?: boolean;
 }
 
 const {
@@ -68,14 +64,12 @@ const {
   suppressCanonical = false,
   bodyClass = 'bg-card text-dark font-display antialiased',
   lpEnabled = false,
-  tailwindCdn = true,
-  iconNames,
+  motion = true,
 } = Astro.props;
 
-// A Google a `icon_names`-t ábécérendben várja, ismétlés nélkül.
-const iconQuery = iconNames?.length
-  ? `&icon_names=${[...new Set(iconNames)].sort().join(',')}`
-  : '';
+// Material Symbols: csak a honlapon használt ikonok töltődnek le (src/data/icons.ts;
+// a build ellenőrzi, hogy egy sem hiányzik). A Google ábécérendben várja őket.
+const iconQuery = `&icon_names=${[...new Set(ICONS)].sort().join(',')}`;
 
 const site = Astro.site!;
 const canonicalUrl = canonical ?? new URL(pathFor(page, locale), site).href;
@@ -182,13 +176,22 @@ const ui = t(locale);
       rel="stylesheet"
     />
 
-    <!-- Tailwind (CDN) + brand config. A téma: src/styles/tailwind-theme.mjs
-         (ugyanabból épül a build-lépéses változat is, lásd `tailwindCdn`). -->
-    {tailwindCdn && (
-      <script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    )}
-    {tailwindCdn && (
-      <script is:inline id="tailwind-config" set:html={`tailwind.config = ${JSON.stringify({ theme: tailwindTheme })};`} />
+    <!-- Tailwind: build-lépésben készül (src/styles/tailwind.css, tailwind.config.mjs,
+         a téma: src/styles/tailwind-theme.mjs) – 2026-10-10-ig CDN-ről, futásidőben
+         gyártotta a böngésző, ami render-blokkoló volt. -->
+
+    <!-- Mozgásréteg kapcsolója: még az első kirajzolás előtt fut. Reduced motion
+         mellett be sem kapcsol; ha a MotionScript 4 mp alatt nem jelzi, hogy
+         elindult, visszavonjuk, és minden látszik. -->
+    {motion && (
+      <script is:inline>
+        (function () {
+          if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          var d = document.documentElement;
+          d.classList.add('m-motion');
+          setTimeout(function () { if (!window.__mReady) d.classList.remove('m-motion'); }, 4000);
+        })();
+      </script>
     )}
 
     <slot name="head" />
@@ -196,6 +199,10 @@ const ui = t(locale);
 
   <body class={bodyClass} style="overflow-x: clip;">
     <slot />
+
+    <!-- Mozgásréteg: a tartalom UTÁN, hogy lássa a szakaszokat és felülírhassa a
+         lapok saját toggleFaq-ját. -->
+    {motion && <MotionScript />}
 
     <!--
       Űrlap-küldés: window.cnIntake + a localStorage retry-sor. MINDEN oldalon

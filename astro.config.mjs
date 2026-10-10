@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import iconCheck from './src/integrations/icon-check.mjs';
 
 // Kanonikus domain. A régi contentninja.hu -> ide irányít (külső redirect).
 // A sitemap.xml-t kézzel generáljuk (public/sitemap.xml) a teljes hreflang
@@ -30,5 +31,7 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
-  integrations: [],
+  // icon-check: a build megáll, ha egy oldalon olyan ikon van, ami nincs a
+  // src/data/icons.ts listában (a font csak a listázott ikonokat tölti le).
+  integrations: [iconCheck()],
 });

@@ -10,6 +10,7 @@ import { videos, hasVideo } from '../../data/videos';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
+import HeroScene from '../../components/HeroScene.astro';
 
 const locale = 'hu';
 const page = 'home';
@@ -82,12 +83,12 @@ const faqLd = {
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
                 <!-- Left: szöveg -->
-                <div class="flex flex-col gap-5 animate-fade-up">
+                <div class="flex flex-col gap-5">
                     <span class="text-primary font-bold text-sm uppercase tracking-widest">6 modul · 1 előfizetés</span>
 
                     <h1
                         class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
-                        All-in-one AI marketing rendszer <span class="text-primary">webshopoknak</span>
+                        AI marketing operációs rendszer <span class="text-primary">webshopoknak</span>
                     </h1>
 
                     <p class="text-lg text-body leading-snug max-w-[520px]">
@@ -118,13 +119,13 @@ const faqLd = {
                     </ul>
 
                     <!-- Webshop mélyintegráció – a hero CTA-gombok helyett a támogatott rendszerek -->
-                    <div class="flex items-center gap-2.5 flex-wrap pt-1">
+                    <div class="flex items-center gap-2.5 flex-wrap pt-1" data-hero-in style="--i:3">
                         <span class="text-sm font-semibold text-muted">Webshop mélyintegráció:</span>
                         <PlatformLogos variant="pill" lazy={false} />
                     </div>
 
                     <!-- Social proof (balra helyezve) -->
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3" data-hero-in style="--i:4">
                         <div class="flex -space-x-2">
                             <div
                                 class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-white">
@@ -136,20 +137,16 @@ const faqLd = {
                                 class="w-8 h-8 rounded-full bg-primary/50 flex items-center justify-center text-white text-xs font-bold border-2 border-white">
                                 ÁK</div>
                         </div>
-                        <p class="text-sm text-muted"><span class="font-semibold text-dark">50+ webshop</span> már
+                        <p class="text-sm text-muted"><span class="font-semibold text-dark"><span data-count="50" data-count-ms="3000">50</span>+ webshop</span> már
                             használja</p>
                     </div>
 
                 </div>
 
-                <!-- Right: szoftver látványkép -->
-                <div class="animate-fade-up delay-200">
-                    <div
-                        class="relative rounded-[20px] overflow-hidden shadow-primary-glow border border-primary/10 bg-light aspect-square">
-                        <img src="/assets/hero-illusztracio.webp" width="1024" height="1024"
-                            alt="A Content Ninja a webshopod termékeiből automatikusan közösségi média posztokat (Facebook, Instagram), blogcikkeket, hírleveleket és termékleírásokat gyárt"
-                            class="w-full h-full object-cover" />
-                    </div>
+                <!-- Right: élő jelenet – „egy termékből négy tartalom" (HeroScene.astro).
+                     Kész állapotban rajzolódik ki; a mozgás a betöltés után indul. -->
+                <div>
+                    <HeroScene />
                 </div>
             </div>
         </div>
