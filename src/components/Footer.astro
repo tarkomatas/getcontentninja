@@ -21,9 +21,6 @@ const APP_URL = 'https://app.getcontentninja.com';
 const contact = pathFor('contact', locale);
 const SUPPORT_EMAIL = 'support@getcontentninja.com';
 
-// Publikus changelog: az app aldomainjén él, nyelvenként külön útvonalon.
-const CHANGELOG_URL = locale === 'en' ? `${APP_URL}/changelog/en` : `${APP_URL}/changelog`;
-
 // A blog egynyelvű (magyar), ezért csak a /hu/ oldalak láblécében szerepel.
 const BLOG_URL = 'https://blog.getcontentninja.com/';
 const showBlog = locale === 'hu';
@@ -119,12 +116,11 @@ const solutions = navModulesFor(locale);
         </ul>
       </div>
 
-      <!-- Információk: elöl a nem jogi elemek (kapcsolat, changelog), utánuk a jogi oldalak -->
+      <!-- Információk: elöl a nem jogi elemek (kapcsolat, blog), utánuk a jogi oldalak -->
       <div>
         <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wide">{ui.footer.infoHeading}</h4>
         <ul class="space-y-2 text-sm">
           <li><a href={legal.contact} class="hover:text-white transition-colors">{ui.footer.contact}</a></li>
-          <li><a href={CHANGELOG_URL} class="hover:text-white transition-colors">{ui.footer.whatsNew}</a></li>
           {showBlog && <li><a href={BLOG_URL} class="hover:text-white transition-colors">{ui.nav.blog}</a></li>}
           <li><a href={legal.privacy} class="hover:text-white transition-colors">{ui.footer.privacy}</a></li>
           <li><a href={legal.imprint} class="hover:text-white transition-colors">{ui.footer.imprint}</a></li>
