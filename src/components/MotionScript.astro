@@ -18,7 +18,8 @@
  *   végső számot tartalmazza, innen fut fel 0-ról, amikor látszik.
  * - GYIK: a lapok saját `toggleFaq`-ját lágyan nyíló/csukódó változatra cseréli
  *   (ugyanaz a viselkedés: egyszerre egy nyitott kérdés).
- * - A hero H1 kiemelése alá aláhúzást rajzol (csak ha egy sorban fér el).
+ * - A hero H1 kiemelését időnként kitörli és újragépeli egy kurzor
+ *   (betöltéskor a szó teljes; csak akkor fut, ha a hero látszik).
  * - A lila CTA-sávokba felfelé úszó ikonokat tesz (dekoráció, aria-hidden).
  *
  * Hiba esetén leveszi a `m-motion` osztályt: inkább statikus oldal, mint egy
@@ -36,7 +37,7 @@
       initReveals();
       initCounters();
       initFaq();
-      initSwash();
+      initTyping();
       initCtaBands();
       window.__mReady = true;
     } catch (e) {
@@ -170,14 +171,76 @@
       };
     }
 
-    /* ── Aláhúzás a hero H1 kiemelése alá ── */
-    function initSwash() {
+    /* ── Gépelő kurzor a hero H1 kiemelésén ──
+       Betöltéskor a szó TELJES (a H1 sosem rejtőzik el, LCP). Utána időnként
+       egy kurzor kitörli és újragépeli. A betűk külön spanban ülnek, a
+       „kitörölt" betű csak láthatatlan (visibility), így a sor nem ugrál –
+       több sorban is működik. Csak akkor fut, ha a hero látszik. */
+    function initTyping() {
       var hl = document.querySelector('#hero h1 .text-primary, .hero-gradient h1 .text-primary');
-      if (!hl || hl.getClientRects().length !== 1) return;
-      hl.classList.add('m-swash-wrap');
-      hl.insertAdjacentHTML('beforeend',
-        '<svg class="m-swash" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">' +
-        '<path d="M4 15 C 70 5, 190 3, 296 11" pathLength="1" /></svg>');
+      if (!hl || hl.children.length || !hl.textContent.trim()) return; // csak sima szöveges kiemelés
+      var FIRST = 3000, EVERY = 7000, DEL = 40, TYPE = 70;
+      // a forrás sortörése/behúzása ne legyen „betű" (a kurzor ne szóköz után álljon)
+      var text = hl.textContent.trim().replace(/\s+/g, ' ');
+      var sr = document.createElement('span');
+      sr.className = 'm-type-sr';
+      sr.textContent = text;
+      var vis = document.createElement('span');
+      vis.setAttribute('aria-hidden', 'true');
+      var chars = text.split('').map(function (ch) {
+        var c = document.createElement('span');
+        c.textContent = ch;
+        vis.appendChild(c);
+        return c;
+      });
+      var caret = document.createElement('span');
+      caret.className = 'm-caret';
+      hl.textContent = '';
+      hl.appendChild(sr);
+      hl.appendChild(vis);
+
+      var inView = true, running = false, queued = false;
+      var hero = hl.closest('section') || hl;
+      new IntersectionObserver(function (en) {
+        inView = en[0].isIntersecting;
+        if (inView && queued) { queued = false; later(cycle, 1200); }
+      }).observe(hero);
+      function later(fn, ms) { setTimeout(fn, ms); }
+      function next() {
+        if (inView && !document.hidden) later(cycle, EVERY);
+        else queued = true;
+      }
+      function cycle() {
+        if (running) return;
+        if (!inView || document.hidden) { queued = true; return; }
+        running = true;
+        chars[chars.length - 1].after(caret);
+        caret.className = 'm-caret m-caret-blink';
+        later(function () {
+          caret.className = 'm-caret';
+          var i = chars.length - 1;
+          (function del() {
+            chars[i].classList.add('m-type-off');
+            chars[i].before(caret);
+            if (--i >= 0) return later(del, DEL);
+            later(function () {
+              var j = 0;
+              (function type() {
+                chars[j].classList.remove('m-type-off');
+                chars[j].after(caret);
+                if (++j < chars.length) return later(type, TYPE);
+                caret.className = 'm-caret m-caret-blink';
+                later(function () {
+                  caret.className = 'm-caret m-caret-out';
+                  running = false;
+                  next();
+                }, 2000);
+              })();
+            }, 400);
+          })();
+        }, 900);
+      }
+      later(cycle, FIRST);
     }
 
     /* ── Felfelé úszó ikonok a lila CTA-sávokban ── */

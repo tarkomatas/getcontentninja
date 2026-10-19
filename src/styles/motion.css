@@ -37,7 +37,6 @@ html.m-motion .ti-card .text-yellow-400:nth-child(5) { transition-delay: 0.59s; 
       jelöléssel és `--i` sorszámmal kapcsolható be. Az űrlap sosem. ── */
 @keyframes m-in { from { opacity: 0; transform: translateY(14px); } }
 @keyframes m-pop { from { transform: scale(0); } }
-@keyframes m-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 html.m-motion #hero ul > li:not(form li),
 html.m-motion [data-hero-in] {
   animation: m-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -53,13 +52,16 @@ html.m-motion #hero ul > li:not(form li) > .material-symbols-outlined:first-chil
 #hero ul > li:nth-child(5) { --i: 4; }
 #hero ul > li:nth-child(6) { --i: 5; }
 
-/* A H1 kiemelése alá kirajzolódó aláhúzás (a MotionScript illeszti be, csak
-   ha a kiemelés egy sorban fér el). A tároló NEM inline-block: így a sortörés
-   és a H1 magassága pontosan ugyanaz, mint nélküle. */
-.m-swash-wrap { position: relative; }
-.m-swash { position: absolute; left: -2%; width: 104%; bottom: -0.14em; height: 0.3em; overflow: visible; pointer-events: none; }
-.m-swash path { fill: none; stroke: rgba(108, 92, 231, 0.45); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1;
-  animation: m-draw 0.9s 0.1s cubic-bezier(0.65, 0, 0.35, 1) both; }
+/* Gépelő kurzor a H1 kiemelésén (a MotionScript bontja betűkre). A „kitörölt"
+   betű csak láthatatlan, a helyét megtartja: a sortörés és a H1 magassága így
+   egy pillanatra sem változik. A felolvasó a rejtett, egyben álló szöveget kapja. */
+.m-type-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.m-type-off { visibility: hidden; }
+.m-caret { display: inline-block; width: 0; position: relative; }
+.m-caret::after { content: ''; position: absolute; left: 0.03em; bottom: -0.1em; height: 0.92em; width: 0.07em; border-radius: 1px; background: #6c5ce7; }
+.m-caret-blink::after { animation: m-blink 1s step-end infinite; }
+.m-caret-out::after { opacity: 0; transition: opacity 0.4s; }
+@keyframes m-blink { 50% { opacity: 0; } }
 
 /* ── Hero háttér: két lassan sodródó, elmosott folt (csak dekoráció) ── */
 html.m-motion .hero-gradient { position: relative; isolation: isolate; overflow: clip; }

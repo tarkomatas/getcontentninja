@@ -63,7 +63,7 @@ Minden oldalon ugyanaz a mozgásréteg fut, **oldalanként semmit nem kell jelö
 
 **Ami magától mozog:**
 - **Beúszás görgetéskor:** minden szakasz tartalmi dobozának közvetlen gyerekei **egy-egy blokként** (cím, kártyarács, GYIK-lista, vélemények …). Kártyák, GYIK-sorok, lépések **nem egyenként** — kivétel a lapozósáv (`Carousel`), annak kártyái lépcsőzve jönnek.
-- **Hero:** a pipás lista sorai lépcsőzve érkeznek, a pipák kipattannak; a H1 `text-primary` kiemelése alá aláhúzás rajzolódik (csak ha egy sorban fér el). Más hero-elem a `data-hero-in` + `style="--i:N"` jelöléssel kapcsolható be.
+- **Hero:** a pipás lista sorai lépcsőzve érkeznek, a pipák kipattannak; a H1 `text-primary` kiemelését egy kurzor időnként (először 3 mp után, utána 7 mp-enként) kitörli és újragépeli. Betöltéskor a szó teljes, és a „kitörölt" betűk is helyet foglalnak, így a sor nem ugrál. Csak sima szöveges kiemelésen fut (beágyazott elemmel nem), és csak amíg a hero látszik. Más hero-elem a `data-hero-in` + `style="--i:N"` jelöléssel kapcsolható be.
 - **Számláló:** `<span data-count="50" data-count-ms="3000">50</span>` — a HTML a végső számot tartalmazza.
 - **GYIK** lágyan nyílik/csukódik; **lila CTA-sáv** (`section.bg-primary`): mozgó színátmenet, felfelé úszó ikonok, pulzáló fő gomb; **hero-háttér**: két sodródó folt; **kártyaikon** egérrel fölé állva megbillen; **görgetésjelző** csík felül.
 
