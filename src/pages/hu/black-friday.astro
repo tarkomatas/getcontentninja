@@ -208,45 +208,43 @@ const faqLd = {
                „korábbi ár", ezért áll mellette a címke. A kredit forintértéke az extra
                kreditcsomag ára. JS nélkül a listaáras példa látszik (SSR alapértékek).
                A visszaszámláló nem itt van: a folyamatosan látszó alsó sáv viszi (#bf-sticky). -->
-          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF} data-consult={CONSULT_HUF}>
-            <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-4">Számold ki a saját árad</span>
-
-            <label for="bf-fee" class="block text-sm font-semibold text-dark mb-2">Mennyi most a havidíjad?</label>
-            <select id="bf-fee" class="w-full h-12 rounded-[10px] border-border bg-light text-dark font-semibold text-sm focus:border-primary focus:ring-primary mb-5">
+          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-6 shadow-card" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF} data-consult={CONSULT_HUF}>
+            <label for="bf-fee" class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Számold ki a saját árad</label>
+            <select id="bf-fee" aria-label="A mostani havidíjad" class="w-full h-11 rounded-[10px] border-border bg-light text-dark font-semibold text-sm focus:border-primary focus:ring-primary mb-4">
               {FEE_OPTIONS.map((o, i) => <option value={o.value} selected={i === 0}>{o.label}</option>)}
             </select>
 
-            <dl class="space-y-4 text-sm">
+            <dl class="space-y-2.5 text-sm">
               <div class="flex items-baseline justify-between gap-4">
-                <dt class="text-body">Havidíjjal 12 hónap<br /><span class="text-muted text-xs">12 × <span data-calc="fee">39.990</span> Ft</span></dt>
-                <dd class="text-muted text-lg font-bold line-through decoration-2 whitespace-nowrap"><span data-calc="year">479.880</span> Ft</dd>
+                <dt class="text-body">Havidíjjal 12 hónap</dt>
+                <dd class="text-muted font-bold line-through decoration-2 whitespace-nowrap"><span data-calc="year">479.880</span> Ft</dd>
               </div>
               <div class="flex items-baseline justify-between gap-4">
-                <dt class="text-dark font-semibold">Black Friday éves csomag<br /><span class="text-muted text-xs font-normal">9 havidíj ára, kb. <span data-calc="avg">30.000</span> Ft / hó</span></dt>
-                <dd class="text-dark text-3xl font-extrabold tracking-[-0.02em] whitespace-nowrap"><span data-calc="bf">359.910</span> Ft</dd>
+                <dt class="text-dark font-semibold">Black Friday éves <span class="hidden sm:inline text-muted font-normal">(9 havidíj)</span></dt>
+                <dd class="text-dark text-2xl md:text-3xl font-extrabold tracking-[-0.02em] whitespace-nowrap"><span data-calc="bf">359.910</span> Ft</dd>
               </div>
 
-              <div class="border-t border-border pt-4 flex items-baseline justify-between gap-4">
-                <dt class="text-body">Megtakarítás<br /><span class="text-muted text-xs">3 hónap, 25%</span></dt>
-                <dd class="text-success text-lg font-bold whitespace-nowrap">+<span data-calc="save">119.970</span> Ft</dd>
+              <div class="border-t border-border pt-2.5 flex items-baseline justify-between gap-4">
+                <dt class="text-body">Megtakarítás <span class="text-muted">(3 hónap)</span></dt>
+                <dd class="text-success font-bold whitespace-nowrap">+<span data-calc="save">119.970</span> Ft</dd>
               </div>
               <div class="flex items-baseline justify-between gap-4">
-                <dt class="text-body">+500 ajándék kredit<br /><span class="text-muted text-xs">az 500 kredites extra csomag ára</span></dt>
-                <dd class="text-success text-lg font-bold whitespace-nowrap">+14.990 Ft</dd>
+                <dt class="text-body">+500 ajándék kredit</dt>
+                <dd class="text-success font-bold whitespace-nowrap">+14.990 Ft</dd>
               </div>
               <div class="flex items-baseline justify-between gap-4">
-                <dt class="text-body">Személyes konzultáció<br /><span class="text-muted text-xs">beüzemelő vagy hatékonyságnövelő</span></dt>
-                <dd class="text-success text-lg font-bold whitespace-nowrap">+20.000 Ft</dd>
+                <dt class="text-body">Személyes konzultáció</dt>
+                <dd class="text-success font-bold whitespace-nowrap">+20.000 Ft</dd>
               </div>
 
-              <div class="bg-success/10 border border-success/30 rounded-[12px] px-4 py-3 flex items-center justify-between gap-4">
+              <div class="bg-success/10 border border-success/30 rounded-[12px] px-4 py-2.5 flex items-center justify-between gap-4">
                 <dt class="text-dark font-bold">Összes előnyöd</dt>
-                <dd class="text-success text-2xl font-extrabold whitespace-nowrap"><span data-calc="total">154.960</span> Ft</dd>
+                <dd class="text-success text-xl md:text-2xl font-extrabold whitespace-nowrap"><span data-calc="total">154.960</span> Ft</dd>
               </div>
             </dl>
 
-            <p class="text-muted text-xs mt-4">
-              Nettó árak, + ÁFA. Bruttó: <span data-calc="gross">457.086</span> Ft egy évre.
+            <p class="text-muted text-xs mt-3">
+              Nettó árak, + ÁFA. Bruttó <span data-calc="gross">457.086</span> Ft / év, kb. <span data-calc="avg">30.000</span> Ft / hó.
             </p>
           </div>
         </div>
