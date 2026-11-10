@@ -29,7 +29,7 @@ const privacyEn = pathFor('privacy', 'en');
 
       <div class="mb-10">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Adatkezelési tájékoztató</h1>
-        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. október 26. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
+        <p class="text-sm text-muted">Közzétéve: 2026. szeptember 9. · Utoljára frissítve: 2026. november 10. · Hatályos: 2026. október 19-től · Digitallwork.hu Kft. (cégjegyzékszám: 01-09-426906, adószám: 32489819-2-43)</p>
         <p class="text-sm text-muted mt-2">
           <strong class="text-dark">A TikTok- és a YouTube-integrációról szóló pontok (2.13., 2.14., 11.2., 11.3.),
           valamint a poszt-kiemelésről szóló 2.4.1. pont a közzététel napjától, az adott csatorna, illetve a Meta
@@ -566,7 +566,7 @@ const privacyEn = pathFor('privacy', 'en');
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google LLC</td>
                   <td class="px-4 py-3 text-muted border-r border-border">USA</td>
-                  <td class="px-4 py-3 text-body border-r border-border">AI szöveg-, kép- és videógenerálás; keresési teljesítmény-adatok lekérése a Google Search Console-ból</td>
+                  <td class="px-4 py-3 text-body border-r border-border">AI szöveg-, kép- és videógenerálás; Google Search Console és Google Analytics adatainak lekérése a felhasználó kérésére (csak olvasás)</td>
                 </tr>
                 <tr class="border-b border-border hover:bg-light/60 transition-colors">
                   <td class="px-4 py-3 text-dark font-medium border-l border-r border-border">Google Ireland Limited</td>
@@ -665,6 +665,23 @@ const privacyEn = pathFor('privacy', 'en');
             <strong class="text-dark">szerződés teljesítése</strong> (te kérted a bekötést).
           </p>
           <p class="mt-3">
+            <strong class="text-dark">Megjegyzés a Google Analyticsről:</strong> ha a felhasználó a Content Ninjában
+            összeköti webshopja Google Analytics (GA4) fiókját, a Google engedélyével (csak olvasási joggal) lekérjük a
+            webshop forgalmi adatait. Ezek összesített számok: látogatások, kosárba tételek, vásárlások és bevétel napi
+            és heti bontásban, belépő oldal, forgalmi csatorna, eszköztípus és termék szerint. Az egyes látogatókat
+            azonosító adatot nem kérünk le. Az adatokat kizárólag arra használjuk, hogy a felhasználó saját
+            webshopjának teljesítményét megmutassuk az Analitika oldalon, és hogy a beépített asszisztens (Ninja AI) a
+            felhasználó kérdéseire válaszoljon. Ehhez a válasz elkészítéséhez szükséges adatrész átkerülhet az általunk
+            használt AI-szolgáltatóhoz, amely azt modell-tanításra nem használja. A Google Analyticsbe semmit nem írunk
+            vissza, az adatokat más felhasználókkal vagy harmadik féllel nem osztjuk meg, hirdetési célra és AI-modellek
+            tanítására nem használjuk. Megőrzés: legfeljebb <strong class="text-dark">16 hónap</strong>. Ha a felhasználó
+            a Content Ninjában leválasztja a fiókot, a tárolt hozzáférési kulcsot és minden Google Analytics-adatot
+            azonnal töröljük. A hozzáférés a Google-fiók biztonsági oldalán is bármikor visszavonható:
+            <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">https://myaccount.google.com/permissions</a>. Jogalap: <strong class="text-dark">szerződés teljesítése</strong>. A Google API-kon
+            keresztül kapott adatok használata megfelel a Google API Services User Data Policy szabályzatnak, beleértve
+            a Limited Use követelményeket.
+          </p>
+          <p class="mt-3">
             <strong class="text-dark">Megjegyzés a hangdiktálásról:</strong> az alkalmazásban a szövegmezőkbe és a
             Ninja AI asszisztensnek hanggal is lehet utasítást adni. A hangfelvételt kizárólag szöveggé alakítás
             céljából továbbítjuk az OpenAI-nak. <strong class="text-dark">A felvételt nem tároljuk:</strong> se
@@ -753,6 +770,7 @@ const privacyEn = pathFor('privacy', 'en');
             <li><strong class="text-dark">YouTube hozzáférési kulcsok és csatorna-statisztika:</strong> azonnal törölve, amikor leválasztod a csatornát az appban, vagy amikor észleljük, hogy a hozzáférést a Google-fiókodban visszavonták — a 7, illetve 30 napos szabályzati határidőt nem várjuk meg; bekötött csatornánál a statisztikák legfeljebb 36 hónapig maradnak meg.</li>
             <li><strong class="text-dark">Bekötött webáruház-, WordPress- és hírlevél-kulcsok:</strong> a kapcsolat törlésekor azonnal; a WordPress-alkalmazásjelszót ekkor a WordPress-oldaladon is visszavonjuk.</li>
             <li><strong class="text-dark">Google Search Console keresési adatok:</strong> legfeljebb 16 hónap, azt követően automatikus törlés; a bekötés lekapcsolásakor a hozzáférés azonnal megszűnik.</li>
+            <li><strong class="text-dark">Google Analytics forgalmi adatok:</strong> legfeljebb 16 hónap; a fiók leválasztásakor a hozzáférési kulcsot és minden Google Analytics-adatot azonnal töröljük.</li>
             <li><strong class="text-dark">Számlázási adatok:</strong> 8 év (a számvitelről szóló 2000. évi C. törvény alapján).</li>
             <li><strong class="text-dark">Műveleti napló:</strong> a fiók fennállásáig, illetve ameddig a hibakereséshez, a kreditfelhasználás elszámolásához és a visszaélés-megelőzéshez szükséges; ezt követően törölve.</li>
             <li><strong class="text-dark">Adat-audit napló:</strong> legfeljebb 90 nap (automatikus törlés).</li>
@@ -768,7 +786,7 @@ const privacyEn = pathFor('privacy', 'en');
             <li>küldj törlési kérelmet a <a href="mailto:support@getcontentninja.com">support@getcontentninja.com</a> címre;</li>
             <li>vond vissza az alkalmazás hozzáférését a Facebook-beállításaidban (<em>Beállítások és adatvédelem → Beállítások → Üzleti integrációk</em>) — ez azonnal érvényteleníti a tárolt tokeneket;</li>
             <li>vond vissza a hozzáférést a TikTok-fiókod beállításaiban (<em>Beállítások és adatvédelem → Biztonság és engedélyek → Alkalmazás-engedélyek</em>);</li>
-            <li>vond vissza a hozzáférést a Google biztonsági oldalán (<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>) — ez a YouTube-csatorna és a Google Search Console kapcsolatra egyaránt vonatkozik.</li>
+            <li>vond vissza a hozzáférést a Google biztonsági oldalán (<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>) — ez a YouTube-csatorna, a Google Search Console és a Google Analytics kapcsolatra egyaránt vonatkozik.</li>
           </ul>
           <p>
             A törlési kérelmeket legkésőbb 30 napon belül teljesítjük, kivéve azokat az adatokat, amelyek megőrzésére
@@ -936,13 +954,20 @@ const privacyEn = pathFor('privacy', 'en');
             hatálybalépés előtt legalább <strong class="text-dark">15 nappal</strong> közzétesszük; új adatfeldolgozó
             bekötéséről az ÁSZF <a href={`${terms}#melleklet-1`}>1. számú mellékletének</a> 9. pontja szerint legalább
             <strong class="text-dark">30 nappal</strong> előre értesítést teszünk közzé. Ez a változat
-            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. október 26.). A
+            <strong class="text-dark">2026. október 19-től</strong> hatályos (közzététel: 2026. szeptember 9., utolsó frissítés: 2026. november 10.). A
             tájékoztató magyar és angol nyelven érhető el; eltérés esetén a
             <strong class="text-dark">magyar szöveg az irányadó</strong>.
           </p>
 
           <p class="font-semibold text-dark text-sm mt-6 mb-1">12.1. Változásnapló</p>
           <ul>
+            <li>
+              <strong class="text-dark">2026. november 10.</strong> — Új megjegyzés az 5. pontban:
+              <strong class="text-dark">Google Analytics (GA4)</strong>. A bekötött webshop összesített forgalmi
+              adatait csak olvasható hozzáféréssel kérjük le, és az Analitika oldalon, valamint a Ninja AI
+              válaszaiban használjuk. Ehhez igazodott az 5. pont Google LLC sora és a 7. pont (megőrzés: legfeljebb
+              16 hónap; visszavonás). Új adatfeldolgozó nincs.
+            </li>
             <li>
               <strong class="text-dark">2026. október 26.</strong> — A háttérzenét mostantól a Replicate-en keresztül
               készítjük; a MiniMax szerepe a narrációs hangra szűkült.
