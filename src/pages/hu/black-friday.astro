@@ -24,6 +24,10 @@ const END_ISO = '2026-11-27T23:59:59+01:00';
 const SIGNUP_URL = 'https://app.getcontentninja.com';
 const UPGRADE_URL = 'https://app.getcontentninja.com';
 
+// A korlátozó feltételek egy sorban, minden fő gomb alatt (hero, záró CTA).
+const TERMS_LINE =
+  'Egyszeri éves díj, előre fizetve, nem téríthető vissza. A +500 kredit a vásárlástól 1 évig érvényes. Az akció 2026. november 27-én éjfélig tart.';
+
 // ── Árak (nettó) ──
 // Normál árak forrása: /hu/arak/ (PricingCards). Ha ott változik, itt is.
 // 359.910 = 9 × 39.990; bruttó 359.910 × 1,27 = 457.086 Ft.
@@ -194,10 +198,23 @@ const faqLd = {
             posztot, képet, videót és hírlevelet ír a termékeidből, és időzítve ki is küldi.
           </p>
 
+          <!-- Áthúzott ár: a 399.900 Ft a valódi, folyamatosan alkalmazott éves listaár
+               (/hu/arak/). Csak addig maradhat, amíg az elmúlt 30 napban nem volt olcsóbb. -->
+          <div class="flex flex-col items-center gap-1">
+            <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
+              <span class="text-muted text-xl line-through decoration-2">399.900 Ft</span>
+              <span class="text-4xl md:text-5xl font-extrabold text-dark tracking-[-0.02em]">359.910 Ft</span>
+              <span class="text-body text-base font-semibold">+ ÁFA / év</span>
+            </div>
+            <p class="text-sm text-body">
+              Kb. 30.000 Ft havonta · egyszeri, Black Friday-ra szóló ajánlat
+            </p>
+          </div>
+
           <div class="flex flex-wrap items-center justify-center gap-3">
             <span class="inline-flex items-center gap-2 bg-success/10 border border-success/30 text-success rounded-[10px] px-4 py-2 text-sm font-bold">
-              <span class="material-symbols-outlined text-[18px]">savings</span>
-              359.910 Ft + ÁFA / év (kb. 30.000 Ft/hó)
+              <span class="material-symbols-outlined text-[18px]">redeem</span>
+              3 hónap + 500 kredit ajándék
             </span>
             <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
               <span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
@@ -221,14 +238,18 @@ const faqLd = {
             </div>
           </div>
 
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2" data-bf-cta>
-            <a href={SIGNUP_URL} class="cta-primary px-6 h-12 text-sm w-full sm:w-auto justify-center">
+          <!-- EGY fő gomb. A havi előfizetők szöveges linket kapnak (ők főleg
+               e-mailből jönnek, ott eleve a váltó link megy nekik). -->
+          <div class="flex flex-col items-center gap-3 mt-2" data-bf-cta>
+            <a href={SIGNUP_URL} class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
               Előfizetek az akciós áron
-              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
             </a>
-            <a href={UPGRADE_URL} class="cta-secondary px-6 h-12 text-sm w-full sm:w-auto justify-center">
-              <span class="material-symbols-outlined text-[16px]">login</span>
-              Havi előfizető vagyok, váltok
+            <!-- A korlátozó feltételek a gomb mellett, nem csak a GYIK-ben (GVH-gyakorlat). -->
+            <p class="text-xs text-muted max-w-[520px]">{TERMS_LINE}</p>
+            <a href={UPGRADE_URL} class="text-sm font-semibold text-primary hover:underline inline-flex items-center gap-1">
+              Már havi előfizető vagy? Válts évesre itt
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
           </div>
         </div>
@@ -432,7 +453,7 @@ const faqLd = {
     <!-- ═══════════════════════════════════════
      ZÁRÓ CTA
 ═══════════════════════════════════════ -->
-    <section class="bg-primary py-16 md:py-20">
+    <section id="zaro-cta" class="bg-primary py-16 md:py-20">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, Black Friday éjfélig</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[640px] mx-auto">
@@ -452,20 +473,47 @@ const faqLd = {
           </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3" data-bf-cta>
+        <div class="flex flex-col items-center gap-3" data-bf-cta>
           <a href={SIGNUP_URL} class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
             Előfizetek az akciós áron
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </a>
-          <a href={UPGRADE_URL} class="cta-outline-white px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
-            Havi előfizető vagyok, váltok
+          <p class="text-xs text-white/60 max-w-[520px]">{TERMS_LINE}</p>
+          <a href={UPGRADE_URL} class="text-sm font-semibold text-white hover:underline inline-flex items-center gap-1">
+            Már havi előfizető vagy? Válts évesre itt
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
           </a>
         </div>
+        <!-- A habozóknak: halk link, nem versenyez a fő gombbal. -->
+        <p class="text-sm text-white/70 mt-6">
+          Kérdésed van a váltás vagy a csomag előtt?
+          <a href="/hu/kapcsolat/" class="text-white font-semibold underline">Írj nekünk</a>
+        </p>
       </div>
     </section>
   </main>
 
   <Footer locale={locale} page={page} />
+
+  <!-- Mobilon tapadó alsó sáv: ár + hátralévő idő + gomb. A hero gombja után jelenik
+       meg, a záró CTA-sávnál és lejárat után eltűnik. Csak transform mozog. -->
+  <div
+    id="bf-sticky"
+    class="md:hidden fixed inset-x-0 bottom-0 z-40 bg-card border-t border-border shadow-card px-4 py-3 translate-y-full transition-transform duration-300"
+    data-bf-cta
+    aria-hidden="true"
+  >
+    <div class="flex items-center gap-3">
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-extrabold text-dark leading-tight">359.910 Ft + ÁFA / év</p>
+        <p class="text-xs text-muted leading-tight" data-bf-compact>Black Friday-ajánlat</p>
+      </div>
+      <a href={SIGNUP_URL} class="cta-primary px-4 h-11 text-sm justify-center shrink-0" tabindex="-1">
+        Előfizetek
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+      </a>
+    </div>
+  </div>
 
   <script is:inline>
     function toggleFaq(btn) {
@@ -513,6 +561,16 @@ const faqLd = {
           });
           clock.classList.remove('hidden');
         });
+        // A tapadó sáv rövid változata
+        var compact = document.querySelector('[data-bf-compact]');
+        var s0 = Date.parse(boxes[0].dataset.start);
+        var e0 = Date.parse(boxes[0].dataset.end);
+        if (compact && now <= e0) {
+          var left = Math.max(0, Math.floor(((now < s0 ? s0 : e0) - now) / 1000));
+          var dd = Math.floor(left / 86400);
+          var hms = pad(Math.floor((left % 86400) / 3600)) + ':' + pad(Math.floor((left % 3600) / 60)) + ':' + pad(left % 60);
+          compact.textContent = (now < s0 ? 'Indulásig: ' : 'Még ') + (dd ? dd + ' nap ' : '') + hms;
+        }
         if (now > Date.parse(boxes[0].dataset.end)) {
           document.querySelectorAll('[data-bf-cta]').forEach(function (el) { el.classList.add('hidden'); });
           clearInterval(timer);
@@ -520,6 +578,29 @@ const faqLd = {
       }
       var timer = setInterval(tick, 1000);
       tick();
+    })();
+
+    // Tapadó sáv: csak a hero gombja UTÁN és a záró CTA-sáv ELŐTT látszik
+    // (a lábléc fölé sem csúszik rá).
+    (function () {
+      var bar = document.getElementById('bf-sticky');
+      var heroCta = document.querySelector('#hero [data-bf-cta]');
+      var closing = document.getElementById('zaro-cta');
+      if (!bar || !heroCta || !closing) return;
+      var shown = false;
+      function update() {
+        var show = heroCta.getBoundingClientRect().bottom < 0 &&
+          closing.getBoundingClientRect().top > window.innerHeight;
+        if (show === shown) return;
+        shown = show;
+        bar.classList.toggle('translate-y-full', !show);
+        bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+        var link = bar.querySelector('a');
+        if (link) link.tabIndex = show ? 0 : -1;
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
     })();
   </script>
 </BaseLayout>
