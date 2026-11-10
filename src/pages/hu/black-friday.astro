@@ -18,6 +18,10 @@ const description =
 const START_ISO = '2026-11-16T00:00:00+01:00';
 const END_ISO = '2026-11-27T23:59:59+01:00';
 
+// ── A hero H1 váltakozó kifejezései („Éves előfizetéshez exkluzív ___ kedvezmény") ──
+// Mind listaáron igaz. Rövidek maradjanak: mobilon is egy sorba kell férniük.
+const HERO_ROTATE = ['3 hónapos', '25%-os', '+500 kredites', '154.960 Ft értékű'];
+
 // ── CTA-link: EGY gomb az újaknak ÉS a meglévő előfizetőknek (user-döntés) ──
 // Az app dönt a látogató állapota szerint: kijelentkezve regisztráció (rajta
 // „Már van fiókod? Belépés"), belépve az éves váltás az akciós áron.
@@ -208,9 +212,17 @@ const faqLd = {
         <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
           <!-- BAL: ajánlat -->
           <div class="flex flex-col gap-5 text-center lg:text-left">
+            <!-- H1 (user-kérés): „Éves előfizetéshez exkluzív ___ kedvezmény", a középső sor
+                 váltakozik (HERO_ROTATE). A váltakozó sor SAJÁT sorban áll, fix magassággal és
+                 nowrap-pel, így a hosszabb/rövidebb kifejezés nem tördeli újra a címet (CLS = 0).
+                 A kiemelésben belső span van, ezért a MotionScript közös gépelő kurzora
+                 kihagyja – a forgatást a lenti saját script végzi. JS nélkül az első kifejezés áll. -->
             <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
-              <span class="text-primary">3 hónap ajándék</span> és <span class="text-primary">+500 kredit</span>
-              az AI tartalomgyártóhoz webshopoknak
+              Éves előfizetéshez exkluzív
+              <span class="block min-h-[1.25em] text-primary whitespace-nowrap" id="bf-rotate" data-words={JSON.stringify(HERO_ROTATE)}>
+                <span class="sr-only">{HERO_ROTATE[0]}</span><span aria-hidden="true" data-rotate-text>{HERO_ROTATE[0]}</span>
+              </span>
+              kedvezmény
             </h1>
             <!-- Alcím = az akció neve és ideje (user-kérés). -->
             <p class="inline-flex items-center justify-center lg:justify-start gap-2 text-primary font-bold text-sm uppercase tracking-widest">
@@ -547,6 +559,41 @@ const faqLd = {
   </div>
 
   <script is:inline>
+    // Hero H1: a középső kifejezés kitörlődik és újragépelődik, a következővel.
+    (function () {
+      var root = document.getElementById('bf-rotate');
+      if (!root) return;
+      var out = root.querySelector('[data-rotate-text]');
+      var words = JSON.parse(root.dataset.words || '[]');
+      if (words.length < 2) return;
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var caret = document.createElement('span');
+      caret.className = 'm-caret m-caret-blink';
+      root.appendChild(caret);
+      var i = 0, inView = true;
+      new IntersectionObserver(function (en) { inView = en[0].isIntersecting; }).observe(root);
+      function wait(ms, fn) { setTimeout(fn, ms); }
+      function cycle() {
+        if (!inView || document.hidden) return wait(1000, cycle);
+        caret.className = 'm-caret';
+        var txt = out.textContent;
+        (function del() {
+          txt = txt.slice(0, -1);
+          out.textContent = txt;
+          if (txt.length) return wait(35, del);
+          i = (i + 1) % words.length;
+          var w = words[i], k = 0;
+          wait(250, function type() {
+            out.textContent = w.slice(0, ++k);
+            if (k < w.length) return wait(65, type);
+            caret.className = 'm-caret m-caret-blink';
+            wait(2600, cycle);
+          });
+        })();
+      }
+      wait(2600, cycle);
+    })();
+
     // Kalkulátor: 12 hónap = 9 × a választott havidíj.
     (function () {
       var root = document.getElementById('bf-calc');
