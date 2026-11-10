@@ -26,7 +26,7 @@ const UPGRADE_URL = 'https://app.getcontentninja.com';
 
 // A korlátozó feltételek egy sorban, minden fő gomb alatt (hero, záró CTA).
 const TERMS_LINE =
-  'Egyszeri éves díj, előre fizetve, nem téríthető vissza. A +500 kredit a vásárlástól 1 évig érvényes. Az akció 2026. november 27-én éjfélig tart.';
+  'Az éves díj előre fizetendő, és nem téríthető vissza. Az ajándék kredit 1 évig érvényes. Az akció november 27-én éjfélig tart.';
 
 // ── Árak (nettó) ──
 // Normál árak forrása: /hu/arak/ (PricingCards). Ha ott változik, itt is.
@@ -35,12 +35,12 @@ const offerCards = [
   {
     icon: 'redeem',
     title: '3 hónap ajándék',
-    body: '12 hónapot kapsz 9 havidíj áráért: 359.910 Ft + ÁFA egy évre. Ez havonta kb. 30.000 Ft.',
+    body: '12 hónapot kapsz 9 havidíj áráért. A havidíjhoz képest 119.970 Ft-ot spórolsz egy év alatt.',
   },
   {
     icon: 'bolt',
     title: '+500 kredit ajándék',
-    body: 'Egy teljes havi keret pluszban. Így 6.000 helyett 6.500 kreditet kapsz. A plusz kredit a vásárlástól számítva 1 évig él.',
+    body: '14.990 Ft értékben: ennyibe kerül egy 500 kredites extra csomag. Így 6.500 kredited lesz 6.000 helyett. 1 évig érvényes.',
   },
   {
     icon: 'verified_user',
@@ -60,7 +60,9 @@ const compareRows = [
   { label: 'Havonta átlagosan', monthly: '39.990 Ft', annual: 'kb. 33.325 Ft', bf: 'kb. 30.000 Ft' },
   { label: 'Hány havidíjat fizetsz', monthly: '12', annual: '10', bf: '9' },
   { label: 'Kredit egy évre', monthly: '500 / hó (havonta nullázódik)', annual: '6.000, egy összegben', bf: '6.500, egy összegben' },
-  { label: 'Megtakarítás a havi árhoz képest', monthly: '–', annual: '79.980 Ft (2 hónap)', bf: '119.970 Ft (3 hónap, 25%)' },
+  { label: 'Ajándék kredit forintban', monthly: '–', annual: '–', bf: '+14.990 Ft értékben' },
+  { label: 'Megtakarítás a havidíjhoz képest', monthly: '–', annual: '79.980 Ft (2 hónap)', bf: '119.970 Ft (3 hónap, 25%)' },
+  { label: 'Összes előny a havidíjhoz képest', monthly: '–', annual: '79.980 Ft', bf: '134.960 Ft' },
   { label: 'Ár-garancia a következő évre', monthly: false, annual: false, bf: true },
   { label: 'Személyes beüzemelés', monthly: false, annual: false, bf: true },
 ];
@@ -194,48 +196,25 @@ const faqLd = {
             az AI tartalomgyártóhoz webshopoknak
           </h1>
           <p class="text-body text-lg leading-relaxed">
-            Fizess elő most évesre, és már a saját Black Friday-kampányodat is a Ninja csinálja meg:
-            posztot, képet, videót és hírlevelet ír a termékeidből, és időzítve ki is küldi.
+            A Ninja a termékeidből posztot, képet, videót és hírlevelet készít, és ki is küldi.
           </p>
 
-          <!-- Áthúzott ár: a 399.900 Ft a valódi, folyamatosan alkalmazott éves listaár
-               (/hu/arak/). Csak addig maradhat, amíg az elmúlt 30 napban nem volt olcsóbb. -->
-          <div class="flex flex-col items-center gap-1">
+          <!-- Összevetés a HAVIDÍJJAL (user-kérés: így látványosabb). A 479.880 Ft nem
+               „korábbi ár", hanem 12 × 39.990 Ft havidíj — ezért áll mellette a címke.
+               A kredit forintértéke az extra kreditcsomag ára (500 kredit = 14.990 Ft + ÁFA).
+               A visszaszámláló nem itt van: a folyamatosan látszó alsó sáv viszi (#bf-sticky). -->
+          <div class="flex flex-col items-center gap-2">
+            <p class="text-sm text-muted">
+              Havidíjjal egy év: <span class="line-through decoration-2">479.880 Ft</span> (12 × 39.990 Ft)
+            </p>
             <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
-              <span class="text-muted text-xl line-through decoration-2">399.900 Ft</span>
               <span class="text-4xl md:text-5xl font-extrabold text-dark tracking-[-0.02em]">359.910 Ft</span>
               <span class="text-body text-base font-semibold">+ ÁFA / év</span>
             </div>
-            <p class="text-sm text-body">
-              Kb. 30.000 Ft havonta · egyszeri, Black Friday-ra szóló ajánlat
-            </p>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-center gap-3">
             <span class="inline-flex items-center gap-2 bg-success/10 border border-success/30 text-success rounded-[10px] px-4 py-2 text-sm font-bold">
-              <span class="material-symbols-outlined text-[18px]">redeem</span>
-              3 hónap + 500 kredit ajándék
+              <span class="material-symbols-outlined text-[18px]">savings</span>
+              119.970 Ft-ot spórolsz + 14.990 Ft értékű kredit ajándékba
             </span>
-            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
-              <span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
-              Ár-garancia jövőre is
-            </span>
-            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
-              <span class="material-symbols-outlined text-primary text-[18px]">support_agent</span>
-              Személyes beüzemelés
-            </span>
-          </div>
-
-          <div class="bf-countdown mt-2" data-bf-countdown data-start={START_ISO} data-end={END_ISO} data-theme="light">
-            <p class="text-sm font-semibold text-body mb-3" data-bf-label>Az akció 2026. november 27-én éjfélkor jár le.</p>
-            <div class="hidden flex justify-center gap-2 sm:gap-3" data-bf-clock>
-              {[['d', 'nap'], ['h', 'óra'], ['m', 'perc'], ['s', 'mp']].map(([k, l]) => (
-                <div class="w-16 sm:w-20 bg-card border border-border rounded-[12px] shadow-card py-3">
-                  <span class="block text-2xl sm:text-3xl font-extrabold text-dark tabular-nums" data-bf-unit={k}>00</span>
-                  <span class="block text-xs text-muted uppercase tracking-wide">{l}</span>
-                </div>
-              ))}
-            </div>
           </div>
 
           <!-- EGY fő gomb. A havi előfizetők szöveges linket kapnak (ők főleg
@@ -290,8 +269,8 @@ const faqLd = {
       <div class="max-w-[1000px] mx-auto px-4 md:px-10">
         <div class="text-center max-w-[700px] mx-auto mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árösszevetés</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ennyit spórolsz egy év alatt</h2>
-          <p class="text-body text-lg">Ugyanaz a csomag, minden modullal. Csak az ár és a ráadás más.</p>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">134.960 Ft előny a havidíjhoz képest</h2>
+          <p class="text-body text-lg">119.970 Ft megtakarítás + 14.990 Ft értékű ajándék kredit. Ugyanaz a csomag, minden modullal.</p>
         </div>
 
         <div class="overflow-x-auto rounded-[16px] border border-border shadow-card">
@@ -457,21 +436,9 @@ const faqLd = {
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, Black Friday éjfélig</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[640px] mx-auto">
-          359.910 Ft + ÁFA egy évre, ár-garanciával és személyes beüzemeléssel.
+          359.910 Ft + ÁFA egy évre: 134.960 Ft előny a havidíjhoz képest, ár-garanciával és személyes beüzemeléssel.
           Utána az éves csomag újra a normál áron érhető el.
         </p>
-
-        <div class="mb-8" data-bf-countdown data-start={START_ISO} data-end={END_ISO} data-theme="dark">
-          <p class="text-sm font-semibold text-white/80 mb-3" data-bf-label>Az akció 2026. november 27-én éjfélkor jár le.</p>
-          <div class="hidden flex justify-center gap-2 sm:gap-3" data-bf-clock>
-            {[['d', 'nap'], ['h', 'óra'], ['m', 'perc'], ['s', 'mp']].map(([k, l]) => (
-              <div class="w-16 sm:w-20 bg-white/10 border border-white/20 rounded-[12px] py-3">
-                <span class="block text-2xl sm:text-3xl font-extrabold text-white tabular-nums" data-bf-unit={k}>00</span>
-                <span class="block text-xs text-white/60 uppercase tracking-wide">{l}</span>
-              </div>
-            ))}
-          </div>
-        </div>
 
         <div class="flex flex-col items-center gap-3" data-bf-cta>
           <a href={SIGNUP_URL} class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
@@ -495,21 +462,39 @@ const faqLd = {
 
   <Footer locale={locale} page={page} />
 
-  <!-- Mobilon tapadó alsó sáv: ár + hátralévő idő + gomb. A hero gombja után jelenik
-       meg, a záró CTA-sávnál és lejárat után eltűnik. Csak transform mozog. -->
+  <!-- Helytartó: a fix alsó sáv ne takarja el a lábléc alját. -->
+  <div class="h-[76px] md:h-[96px]" data-bf-cta aria-hidden="true"></div>
+
+  <!-- Folyamatosan látszó alsó sáv, MINDEN nézetben (user-kérés): nagy visszaszámláló
+       + gomb, asztalin az ajánlat és az ár is. Ugyanaz a tick frissíti, mint a záró
+       számlálót; lejárat után a helytartóval együtt eltűnik (`data-bf-cta`). -->
   <div
     id="bf-sticky"
-    class="md:hidden fixed inset-x-0 bottom-0 z-40 bg-card border-t border-border shadow-card px-4 py-3 translate-y-full transition-transform duration-300"
+    class="fixed inset-x-0 bottom-0 z-40 bg-dark text-white shadow-[0_-8px_24px_rgba(0,0,0,0.18)] px-4 md:px-10 py-3"
     data-bf-cta
-    aria-hidden="true"
+    data-bf-countdown
+    data-start={START_ISO}
+    data-end={END_ISO}
   >
-    <div class="flex items-center gap-3">
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-extrabold text-dark leading-tight">359.910 Ft + ÁFA / év</p>
-        <p class="text-xs text-muted leading-tight" data-bf-compact>Black Friday-ajánlat</p>
+    <div class="max-w-[1200px] mx-auto flex items-center gap-3 md:gap-6">
+      <div class="hidden lg:block flex-1 min-w-0">
+        <p class="text-xs font-bold uppercase tracking-widest text-white/60">Black Friday</p>
+        <p class="font-bold leading-snug">359.910 Ft + ÁFA / év · 134.960 Ft előny a havidíjhoz képest</p>
       </div>
-      <a href={SIGNUP_URL} class="cta-primary px-4 h-11 text-sm justify-center shrink-0" tabindex="-1">
-        Előfizetek
+      <div class="flex-1 lg:flex-none min-w-0">
+        <p class="hidden md:block text-xs font-semibold text-white/60 mb-1 text-center" data-bf-label>Az akció november 27-én éjfélig tart.</p>
+        <div class="hidden flex gap-1.5 md:gap-2 md:justify-center" data-bf-clock>
+          {[['d', 'nap'], ['h', 'óra'], ['m', 'perc'], ['s', 'mp']].map(([k, l]) => (
+            <div class="w-12 md:w-16 bg-white/10 border border-white/15 rounded-[10px] py-1 md:py-1.5 text-center">
+              <span class="block text-xl md:text-3xl font-extrabold tabular-nums leading-tight" data-bf-unit={k}>00</span>
+              <span class="block text-[10px] md:text-xs text-white/60 uppercase tracking-wide">{l}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <a href={SIGNUP_URL} class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
+        <span class="md:hidden">Előfizetek</span>
+        <span class="hidden md:inline">Előfizetek az akciós áron</span>
         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
       </a>
     </div>
@@ -539,10 +524,10 @@ const faqLd = {
           var target;
           if (now < start) {
             target = start;
-            label.textContent = 'Az akció november 16-án indul. Indulásig:';
+            label.textContent = 'Indulásig:';
           } else if (now <= end) {
             target = end;
-            label.textContent = 'Az akció lejártáig még:';
+            label.textContent = 'Az akció végéig:';
           } else {
             label.textContent = 'A Black Friday-akció lejárt. Köszönjük, hogy velünk voltál!';
             clock.classList.add('hidden');
@@ -561,16 +546,6 @@ const faqLd = {
           });
           clock.classList.remove('hidden');
         });
-        // A tapadó sáv rövid változata
-        var compact = document.querySelector('[data-bf-compact]');
-        var s0 = Date.parse(boxes[0].dataset.start);
-        var e0 = Date.parse(boxes[0].dataset.end);
-        if (compact && now <= e0) {
-          var left = Math.max(0, Math.floor(((now < s0 ? s0 : e0) - now) / 1000));
-          var dd = Math.floor(left / 86400);
-          var hms = pad(Math.floor((left % 86400) / 3600)) + ':' + pad(Math.floor((left % 3600) / 60)) + ':' + pad(left % 60);
-          compact.textContent = (now < s0 ? 'Indulásig: ' : 'Még ') + (dd ? dd + ' nap ' : '') + hms;
-        }
         if (now > Date.parse(boxes[0].dataset.end)) {
           document.querySelectorAll('[data-bf-cta]').forEach(function (el) { el.classList.add('hidden'); });
           clearInterval(timer);
@@ -580,27 +555,5 @@ const faqLd = {
       tick();
     })();
 
-    // Tapadó sáv: csak a hero gombja UTÁN és a záró CTA-sáv ELŐTT látszik
-    // (a lábléc fölé sem csúszik rá).
-    (function () {
-      var bar = document.getElementById('bf-sticky');
-      var heroCta = document.querySelector('#hero [data-bf-cta]');
-      var closing = document.getElementById('zaro-cta');
-      if (!bar || !heroCta || !closing) return;
-      var shown = false;
-      function update() {
-        var show = heroCta.getBoundingClientRect().bottom < 0 &&
-          closing.getBoundingClientRect().top > window.innerHeight;
-        if (show === shown) return;
-        shown = show;
-        bar.classList.toggle('translate-y-full', !show);
-        bar.setAttribute('aria-hidden', show ? 'false' : 'true');
-        var link = bar.querySelector('a');
-        if (link) link.tabIndex = show ? 0 : -1;
-      }
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
-    })();
   </script>
 </BaseLayout>
