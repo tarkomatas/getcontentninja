@@ -285,21 +285,13 @@ const faqLd = {
                     <div class="flex items-center gap-3 mb-4 flex-wrap">
                         <PlatformLogos />
                     </div>
+                    <!-- GA4: diszkrét említés (a Google OAuth-bírálathoz kell a főoldalon). Eredeti GA-logó; partnerséget NEM állíthat. -->
+                    <p class="flex items-start gap-2 text-xs text-muted leading-snug mb-4"><img src="/assets/google-analytics-logo.svg" alt="" aria-hidden="true" class="h-4 w-4 shrink-0" loading="lazy" /><span>With a Google Analytics (GA4) connection you also see which pages bring sales.</span></p>
                     <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
                         Learn more
                         <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
                     </span>
                 </a>
-
-                <!-- Google Analytics (GA4) bekötés – nincs saját oldala, ezért nem link. A GA-logó eredeti, módosítatlan formában; partnerséget/együttműködést NEM állíthat (a Google OAuth-bírálathoz kell a főoldali említés). -->
-                <div
-                    class="snap-start shrink-0 basis-full sm:basis-[calc((100%-1.5rem)/2)] lg:basis-[calc((100%-4.5rem)/4)] bg-card rounded-[16px] border border-border p-8 shadow-card flex flex-col">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-5">
-                        <img src="/assets/google-analytics-logo.svg" alt="Google Analytics" class="h-6 w-6" loading="lazy" />
-                    </div>
-                    <h3 class="font-bold text-xl mb-2 text-dark">Google Analytics: see which pages bring sales</h3>
-                    <p class="text-body text-sm leading-relaxed flex-1">Connect your web store’s Google Analytics (GA4) account, and the Content Ninja Analytics page shows in one place where your visitors come from, which product, category or blog page they land on, and which ones lead to a purchase. You can also ask Ninja AI what works and what doesn’t. We only read your data, and use it only for your own analysis.</p>
-                </div>
 
             </Carousel>
         </div>
@@ -730,6 +722,18 @@ const faqLd = {
                         expansion</a>. On top of those you get AI image, video and narrated-video generation, plus the Meta
                         ad generator. All of them are part of the HUF 39,990 + VAT / month subscription with no per-module
                         surcharge – you can spend the 500 monthly AI credits on whichever you like.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Can I connect Google Analytics?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Yes. Connect your web store’s Google Analytics (GA4) account, and the Content Ninja Analytics page shows in one place where your visitors come from, which product, category or blog page they land on, and which ones lead to a purchase. You can also ask Ninja AI what works and what doesn’t. We only read your data, and use it only for your own analysis.
                     </div>
                 </div>
 
