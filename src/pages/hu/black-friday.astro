@@ -386,8 +386,7 @@ const faqLd = {
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, Black Friday éjfélig</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[640px] mx-auto">
-          12 hónap 9 havidíj áráért, a saját havidíjadból számolva, ár-garanciával és személyes konzultációval: beüzemelő, vagy hatékonyságnövelő, ha már használod.
-          Utána az éves csomag újra a normál áron érhető el.
+          12 hónap 9 havidíj áráért, ár-garanciával és személyes konzultációval.
         </p>
 
         <div class="flex flex-col items-center gap-3" data-bf-cta>
@@ -396,13 +395,11 @@ const faqLd = {
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </a>
           <p class="text-xs text-white/60 max-w-[520px]">{TERMS_LINE}</p>
-          <p class="text-sm text-white/80">Új ügyfeleknek és meglévő előfizetőknek is.</p>
+          <!-- A habozóknak: halk link, nem versenyez a fő gombbal. -->
+          <p class="text-sm text-white/70">
+            Kérdésed van? <a href="/hu/kapcsolat/" class="text-white font-semibold underline">Írj nekünk</a>
+          </p>
         </div>
-        <!-- A habozóknak: halk link, nem versenyez a fő gombbal. -->
-        <p class="text-sm text-white/70 mt-6">
-          Kérdésed van a váltás vagy a csomag előtt?
-          <a href="/hu/kapcsolat/" class="text-white font-semibold underline">Írj nekünk</a>
-        </p>
       </div>
     </section>
   </main>
