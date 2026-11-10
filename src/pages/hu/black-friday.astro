@@ -11,18 +11,18 @@ const page = 'blackFriday';
 
 const title = 'Black Friday: 3 hónap ajándék + 500 kredit – Content Ninja';
 const description =
-  'Black Friday 2026 (november 16–27.): Content Ninja éves előfizetés 9 havidíj áráért, 359.910 Ft + ÁFA / év. Mellé 500 ajándék kredit, ár-garancia a következő évre és személyes beüzemelés. Új és meglévő havi ügyfeleknek is.';
+  'Black Friday 2026 (november 16–27.): Content Ninja éves előfizetés 9 havidíj áráért, 359.910 Ft + ÁFA / év. Mellé 500 ajándék kredit, ár-garancia a következő évre és 20.000 Ft értékű kampánytervező konzultáció. Új és meglévő havi ügyfeleknek is.';
 
 // ── Az akció időkerete (Europe/Budapest, novemberben CET = +01:00) ──
 // A visszaszámláló és a lejárat utáni állapot is ebből dolgozik.
 const START_ISO = '2026-11-16T00:00:00+01:00';
 const END_ISO = '2026-11-27T23:59:59+01:00';
 
-// ── CTA-linkek ──
-// TODO: a végleges linkeket a megrendelő később adja meg. Addig mindkettő az
-// app nyitóoldalára mutat — élesítés előtt cseréld le.
-const SIGNUP_URL = 'https://app.getcontentninja.com';
-const UPGRADE_URL = 'https://app.getcontentninja.com';
+// ── CTA-link: EGY gomb az újaknak ÉS a meglévő előfizetőknek (user-döntés) ──
+// Az app dönt a látogató állapota szerint: kijelentkezve regisztráció (rajta
+// „Már van fiókod? Belépés"), belépve az éves váltás az akciós áron.
+// TODO: a végleges linket a megrendelő adja meg. Addig az app nyitóoldala.
+const OFFER_URL = 'https://app.getcontentninja.com';
 
 // ── Kalkulátor: választható havidíjak (nettó Ft) ──
 // A meglévő ügyfelek eltérő havidíjon lehetnek (régi listaár, partner-ár). A
@@ -35,6 +35,7 @@ const FEE_OPTIONS = [
   { value: 34990, label: '34.990 Ft / hó – korábbi listaár' },
   { value: 24990, label: '24.990 Ft / hó' },
 ];
+const CONSULT_HUF = 20000; // kampánytervező konzultáció értéke (user-döntés)
 const CREDIT_GIFT_HUF = 14990; // 500 kredit = az 500 kredites extra csomag ára
 
 // A korlátozó feltételek egy sorban, minden fő gomb alatt (hero, záró CTA).
@@ -62,8 +63,8 @@ const offerCards = [
   },
   {
     icon: 'support_agent',
-    title: 'Személyes beüzemelés',
-    body: 'Vásárlás után jelentkezünk. Együtt bekötjük a boltodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat.',
+    title: 'Kampánytervező konzultáció',
+    body: '20.000 Ft értékben. Együtt megtervezzük a következő kampányodat. Ha új vagy, előtte bekötjük a boltodat és beállítjuk a márkádat.',
   },
 ];
 
@@ -75,9 +76,9 @@ const compareRows = [
   { label: 'Kredit egy évre', monthly: '500 / hó (havonta nullázódik)', annual: '6.000, egy összegben', bf: '6.500, egy összegben' },
   { label: 'Ajándék kredit forintban', monthly: '–', annual: '–', bf: '+14.990 Ft értékben' },
   { label: 'Megtakarítás a havidíjhoz képest', monthly: '–', annual: '79.980 Ft (2 hónap)', bf: '119.970 Ft (3 hónap, 25%)' },
-  { label: 'Összes előny a havidíjhoz képest', monthly: '–', annual: '79.980 Ft', bf: '134.960 Ft' },
+  { label: 'Összes előny a havidíjhoz képest', monthly: '–', annual: '79.980 Ft', bf: '154.960 Ft' },
   { label: 'Ár-garancia a következő évre', monthly: false, annual: false, bf: true },
-  { label: 'Személyes beüzemelés', monthly: false, annual: false, bf: true },
+  { label: 'Kampánytervező konzultáció', monthly: '–', annual: '–', bf: '20.000 Ft értékben' },
 ];
 
 const features = [
@@ -105,7 +106,7 @@ const features = [
 
 const bfSteps = [
   { title: 'Előfizetsz', desc: 'Az éves csomagot most, a Black Friday-áron veszed meg.' },
-  { title: 'Beüzemelünk', desc: 'Egy közös alkalommal bekötjük a boltodat és beállítjuk a márkádat.' },
+  { title: 'Megtervezzük', desc: 'A kampánytervező konzultáción együtt összerakjuk a kampányodat (új ügyfélnél a bekötéssel együtt).' },
   { title: 'Kész a kampány', desc: 'A Ninja megírja az akciós posztokat, a hírlevelet és a videókat.' },
   { title: 'Kimegy', desc: 'Jóváhagyod, és a tartalom időzítve megjelenik a csatornáidon.' },
 ];
@@ -142,15 +143,15 @@ const faqs = [
   },
   {
     q: 'Már havi előfizető vagyok. Nekem is jár?',
-    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát és a beüzemelési konzultációt. A váltást az appban, belépés után indíthatod.',
+    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát és a kampánytervező konzultációt. Ugyanazzal a „Kérem az ajánlatot" gombbal lépsz be, és ott válthatsz évesre.',
   },
   {
     q: 'Mit jelent az ár-garancia?',
     a: 'Aki most előfizet, a következő évben is ugyanezzel a kedvezménnyel újíthatja meg az éves csomagot. Akkor sem kell többet fizetned, ha addig a normál ár változik.',
   },
   {
-    q: 'Hogyan zajlik a beüzemelési konzultáció?',
-    a: 'A vásárlás után felvesszük veled a kapcsolatot, és egyeztetünk egy időpontot. A közös alkalmon bekötjük a webshopodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat. Utána már magad is gyárthatod a tartalmat.',
+    q: 'Mi a kampánytervező konzultáció, és hogyan zajlik?',
+    a: 'Egy személyes, közös alkalom, 20.000 Ft + ÁFA értékben, amit ajándékba kapsz. A vásárlás után felvesszük veled a kapcsolatot, és egyeztetünk egy időpontot. Ha új ügyfél vagy, bekötjük a webshopodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat. Ha már előfizető vagy, átnézzük a beállításaidat, és együtt megtervezzük a következő kampányodat.',
   },
   {
     q: 'Meddig használhatom fel az 500 ajándék kreditet?',
@@ -207,31 +208,28 @@ const faqLd = {
         <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
           <!-- BAL: ajánlat -->
           <div class="flex flex-col gap-5 text-center lg:text-left">
-            <span class="inline-flex items-center justify-center lg:justify-start gap-2 text-primary font-bold text-sm uppercase tracking-widest">
-              <span class="material-symbols-outlined text-[18px]">sell</span>
-              Black Friday · november 16–27.
-            </span>
             <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
               <span class="text-primary">3 hónap ajándék</span> és <span class="text-primary">+500 kredit</span>
               az AI tartalomgyártóhoz webshopoknak
             </h1>
-            <p class="text-body text-lg leading-relaxed">
-              A Ninja a termékeidből posztot, képet, videót és hírlevelet készít, és ki is küldi.
+            <!-- Alcím = az akció neve és ideje (user-kérés). -->
+            <p class="inline-flex items-center justify-center lg:justify-start gap-2 text-dark text-xl md:text-2xl font-bold">
+              <span class="material-symbols-outlined text-primary text-[24px]">sell</span>
+              Black Friday · november 16–27.
             </p>
 
-            <!-- EGY fő gomb. A havi előfizetők szöveges linket kapnak (ők főleg
-                 e-mailből jönnek, ott eleve a váltó link megy nekik). -->
+            <!-- EGY gomb mindenkinek: az app a belépés állapota szerint irányít. -->
             <div class="flex flex-col items-center lg:items-start gap-3 mt-2" data-bf-cta>
-              <a href={SIGNUP_URL} class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
-                Előfizetek az akciós áron
+              <a href={OFFER_URL} class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
+                Kérem az ajánlatot
                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
               </a>
               <!-- A korlátozó feltételek a gomb mellett, nem csak a GYIK-ben (GVH-gyakorlat). -->
               <p class="text-xs text-muted max-w-[480px]">{TERMS_LINE}</p>
               <p class="text-sm text-body max-w-[480px]">
                 <strong class="text-dark">Már előfizető vagy? A kedvezményed megmarad.</strong>
-                Te is 3 hónapot kapsz ajándékba, a saját havidíjadból számolva.
-                <a href={UPGRADE_URL} class="font-semibold text-primary hover:underline whitespace-nowrap">Váltás évesre →</a>
+                Te is 3 hónapot kapsz ajándékba, a saját havidíjadból számolva. Ugyanezzel a gombbal
+                lépsz be, és válthatsz évesre.
               </p>
             </div>
           </div>
@@ -241,7 +239,7 @@ const faqLd = {
                „korábbi ár", ezért áll mellette a címke. A kredit forintértéke az extra
                kreditcsomag ára. JS nélkül a listaáras példa látszik (SSR alapértékek).
                A visszaszámláló nem itt van: a folyamatosan látszó alsó sáv viszi (#bf-sticky). -->
-          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF}>
+          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF} data-consult={CONSULT_HUF}>
             <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-4">Számold ki a saját árad</span>
 
             <label for="bf-fee" class="block text-sm font-semibold text-dark mb-2">Mennyi most a havidíjad?</label>
@@ -267,10 +265,14 @@ const faqLd = {
                 <dt class="text-body">+500 ajándék kredit<br /><span class="text-muted text-xs">az 500 kredites extra csomag ára</span></dt>
                 <dd class="text-success text-lg font-bold whitespace-nowrap">+14.990 Ft</dd>
               </div>
+              <div class="flex items-baseline justify-between gap-4">
+                <dt class="text-body">Kampánytervező konzultáció<br /><span class="text-muted text-xs">személyes, közös alkalom</span></dt>
+                <dd class="text-success text-lg font-bold whitespace-nowrap">+20.000 Ft</dd>
+              </div>
 
               <div class="bg-success/10 border border-success/30 rounded-[12px] px-4 py-3 flex items-center justify-between gap-4">
                 <dt class="text-dark font-bold">Összes előnyöd</dt>
-                <dd class="text-success text-2xl font-extrabold whitespace-nowrap"><span data-calc="total">134.960</span> Ft</dd>
+                <dd class="text-success text-2xl font-extrabold whitespace-nowrap"><span data-calc="total">154.960</span> Ft</dd>
               </div>
             </dl>
 
@@ -316,8 +318,8 @@ const faqLd = {
       <div class="max-w-[1000px] mx-auto px-4 md:px-10">
         <div class="text-center max-w-[700px] mx-auto mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árösszevetés</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">134.960 Ft előny a havidíjhoz képest</h2>
-          <p class="text-body text-lg">119.970 Ft megtakarítás + 14.990 Ft értékű ajándék kredit. Ugyanaz a csomag, minden modullal.</p>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">154.960 Ft előny a havidíjhoz képest</h2>
+          <p class="text-body text-lg">119.970 Ft megtakarítás + 14.990 Ft értékű ajándék kredit + 20.000 Ft értékű konzultáció. Listaáron számolva.</p>
         </div>
 
         <div class="overflow-x-auto rounded-[16px] border border-border shadow-card">
@@ -374,7 +376,7 @@ const faqLd = {
           <h2 class="text-3xl md:text-4xl font-bold mb-4">A saját Black Friday-kampányodat is a Ninja csinálja</h2>
           <p class="text-body text-lg">
             A webshopodnak most kell a legtöbb tartalom. Ne decemberben kezdj neki.
-            A beüzemelés után azonnal indulhat a tartalomgyártás.
+            A konzultáció után azonnal indulhat a tartalomgyártás.
           </p>
         </div>
 
@@ -483,20 +485,17 @@ const faqLd = {
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, Black Friday éjfélig</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[640px] mx-auto">
-          12 hónap 9 havidíj áráért, a saját havidíjadból számolva, ár-garanciával és személyes beüzemeléssel.
+          12 hónap 9 havidíj áráért, a saját havidíjadból számolva, ár-garanciával és kampánytervező konzultációval.
           Utána az éves csomag újra a normál áron érhető el.
         </p>
 
         <div class="flex flex-col items-center gap-3" data-bf-cta>
-          <a href={SIGNUP_URL} class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
-            Előfizetek az akciós áron
+          <a href={OFFER_URL} class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
+            Kérem az ajánlatot
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </a>
           <p class="text-xs text-white/60 max-w-[520px]">{TERMS_LINE}</p>
-          <a href={UPGRADE_URL} class="text-sm font-semibold text-white hover:underline inline-flex items-center gap-1">
-            Már havi előfizető vagy? Válts évesre itt
-            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-          </a>
+          <p class="text-sm text-white/80">Új ügyfeleknek és meglévő előfizetőknek is.</p>
         </div>
         <!-- A habozóknak: halk link, nem versenyez a fő gombbal. -->
         <p class="text-sm text-white/70 mt-6">
@@ -539,9 +538,9 @@ const faqLd = {
           ))}
         </div>
       </div>
-      <a href={SIGNUP_URL} class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
-        <span class="md:hidden">Előfizetek</span>
-        <span class="hidden md:inline">Előfizetek az akciós áron</span>
+      <a href={OFFER_URL} class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
+        <span class="md:hidden">Kérem</span>
+        <span class="hidden md:inline">Kérem az ajánlatot</span>
         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
       </a>
     </div>
@@ -553,7 +552,7 @@ const faqLd = {
       var root = document.getElementById('bf-calc');
       var sel = document.getElementById('bf-fee');
       if (!root || !sel) return;
-      var gift = Number(root.dataset.creditGift) || 0;
+      var gift = (Number(root.dataset.creditGift) || 0) + (Number(root.dataset.consult) || 0);
       var fmt = function (n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
       function set(k, v) {
         root.querySelectorAll('[data-calc="' + k + '"]').forEach(function (el) { el.textContent = fmt(v); });
