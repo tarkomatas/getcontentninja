@@ -1,0 +1,525 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import TrustBadges from '../../components/TrustBadges.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
+import PlatformLogos from '../../components/PlatformLogos.astro';
+
+const locale = 'hu';
+const page = 'blackFriday';
+
+const title = 'Black Friday: 3 hónap ajándék + 500 kredit – Content Ninja';
+const description =
+  'Black Friday 2026 (november 16–27.): Content Ninja éves előfizetés 9 havidíj áráért, 359.910 Ft + ÁFA / év. Mellé 500 ajándék kredit, ár-garancia a következő évre és személyes beüzemelés. Új és meglévő havi ügyfeleknek is.';
+
+// ── Az akció időkerete (Europe/Budapest, novemberben CET = +01:00) ──
+// A visszaszámláló és a lejárat utáni állapot is ebből dolgozik.
+const START_ISO = '2026-11-16T00:00:00+01:00';
+const END_ISO = '2026-11-27T23:59:59+01:00';
+
+// ── CTA-linkek ──
+// TODO: a végleges linkeket a megrendelő később adja meg. Addig mindkettő az
+// app nyitóoldalára mutat — élesítés előtt cseréld le.
+const SIGNUP_URL = 'https://app.getcontentninja.com';
+const UPGRADE_URL = 'https://app.getcontentninja.com';
+
+// ── Árak (nettó) ──
+// Normál árak forrása: /hu/arak/ (PricingCards). Ha ott változik, itt is.
+// 359.910 = 9 × 39.990; bruttó 359.910 × 1,27 = 457.086 Ft.
+const offerCards = [
+  {
+    icon: 'redeem',
+    title: '3 hónap ajándék',
+    body: '12 hónapot kapsz 9 havidíj áráért: 359.910 Ft + ÁFA egy évre. Ez havonta kb. 30.000 Ft.',
+  },
+  {
+    icon: 'bolt',
+    title: '+500 kredit ajándék',
+    body: 'Egy teljes havi keret pluszban. Így 6.000 helyett 6.500 kreditet kapsz. A plusz kredit a vásárlástól számítva 1 évig él.',
+  },
+  {
+    icon: 'verified_user',
+    title: 'Ár-garancia',
+    body: 'A következő évben is ugyanezzel a kedvezménnyel újíthatod meg az előfizetésed.',
+  },
+  {
+    icon: 'support_agent',
+    title: 'Személyes beüzemelés',
+    body: 'Vásárlás után jelentkezünk. Együtt bekötjük a boltodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat.',
+  },
+];
+
+const compareRows = [
+  { label: 'Ár', monthly: '39.990 Ft + ÁFA / hó', annual: '399.900 Ft + ÁFA / év', bf: '359.910 Ft + ÁFA / év' },
+  { label: 'Egy évre összesen', monthly: '479.880 Ft + ÁFA', annual: '399.900 Ft + ÁFA', bf: '359.910 Ft + ÁFA' },
+  { label: 'Havonta átlagosan', monthly: '39.990 Ft', annual: 'kb. 33.325 Ft', bf: 'kb. 30.000 Ft' },
+  { label: 'Hány havidíjat fizetsz', monthly: '12', annual: '10', bf: '9' },
+  { label: 'Kredit egy évre', monthly: '500 / hó (havonta nullázódik)', annual: '6.000, egy összegben', bf: '6.500, egy összegben' },
+  { label: 'Megtakarítás a havi árhoz képest', monthly: '–', annual: '79.980 Ft (2 hónap)', bf: '119.970 Ft (3 hónap, 25%)' },
+  { label: 'Ár-garancia a következő évre', monthly: false, annual: false, bf: true },
+  { label: 'Személyes beüzemelés', monthly: false, annual: false, bf: true },
+];
+
+const features = [
+  {
+    icon: 'auto_awesome',
+    title: 'Szöveg, kép és videó egy helyen',
+    body: 'Közösségi poszt, blogcikk, hírlevél és hirdetés a webshopod termékeiből. Képpel és videóval együtt.',
+  },
+  {
+    icon: 'palette',
+    title: 'A te márkád hangján',
+    body: 'Megtanulja a boltod stílusát. A képekre a logódat teszi. Minden tartalom rád hasonlít.',
+  },
+  {
+    icon: 'schedule_send',
+    title: 'Ütemezett publikálás',
+    body: 'Facebookra, Instagramra és TikTokra időzítve posztol. A blogcikk a webshopod blogjába kerül, a hírlevél a saját listáidra megy.',
+  },
+  {
+    icon: 'storefront',
+    title: 'Bekötés a webshopodba',
+    body: 'UNAS, Shoprenter és WordPress/WooCommerce. A termékeidet magától behúzza, nem kell semmit bemásolnod.',
+  },
+];
+
+const bfSteps = [
+  { title: 'Előfizetsz', desc: 'Az éves csomagot most, a Black Friday-áron veszed meg.' },
+  { title: 'Beüzemelünk', desc: 'Egy közös alkalommal bekötjük a boltodat és beállítjuk a márkádat.' },
+  { title: 'Kész a kampány', desc: 'A Ninja megírja az akciós posztokat, a hírlevelet és a videókat.' },
+  { title: 'Kimegy', desc: 'Jóváhagyod, és a tartalom időzítve megjelenik a csatornáidon.' },
+];
+
+const testimonials = [
+  {
+    quote: '20-30 tartalmat legenerálok 1 óra alatt – ez korábban ennek a sokszorosa volt. Az is nagy előny, hogy egyetlen átlátható felületen belül látom az összes posztomat.',
+    name: 'Dr. Madarász Tamás',
+    shop: 'DoktorDivat',
+    initials: 'MT',
+  },
+  {
+    quote: 'Kevés időm jut marketingre, de ezzel mégis tudok rendszeresen posztolni. Tömegesen generál tartalmakat, témákat is javasol magától, a videós funkciói pedig egyre jobbak. Komoly időmegtakarítás.',
+    name: 'Luca Márió',
+    shop: 'PanDani.hu Játékbolt és webshop',
+    initials: 'L',
+  },
+  {
+    quote: 'Rengeteg időt spórol azzal, hogy terméklink alapján magától generál szöveget, képet és automatikusan posztol is. Nagy segítség!',
+    name: 'Szabad Mária',
+    shop: 'Károlyi-plast webáruház',
+    initials: 'Sz',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Meddig tart az akció?',
+    a: '2026. november 16-tól november 27-ig, Black Friday éjféléig. Az akciós árat az kapja, aki eddig az időpontig előfizet. Utána az éves csomag a normál, 399.900 Ft + ÁFA áron érhető el.',
+  },
+  {
+    q: 'Már havi előfizető vagyok. Nekem is jár?',
+    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát és a beüzemelési konzultációt. A váltást az appban, belépés után indíthatod.',
+  },
+  {
+    q: 'Mit jelent az ár-garancia?',
+    a: 'Aki most előfizet, a következő évben is ugyanezzel a kedvezménnyel újíthatja meg az éves csomagot. Akkor sem kell többet fizetned, ha addig a normál ár változik.',
+  },
+  {
+    q: 'Hogyan zajlik a beüzemelési konzultáció?',
+    a: 'A vásárlás után felvesszük veled a kapcsolatot, és egyeztetünk egy időpontot. A közös alkalmon bekötjük a webshopodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat. Utána már magad is gyárthatod a tartalmat.',
+  },
+  {
+    q: 'Meddig használhatom fel az 500 ajándék kreditet?',
+    a: 'A vásárlástól számított 1 évig. A csomag 6.000 kreditjével együtt, egy összegben kapod meg, így összesen 6.500 kredited lesz.',
+  },
+  {
+    q: 'Mire elég 6.500 kredit?',
+    a: 'Egy képes poszt 3 kredit, egy képes blogcikk kb. 7, egy hírlevél kb. 5, egy 30 mp-es narrátorvideó kb. 17. A kreditet nem kell havonta beosztanod: az év során akkor használod, amikor kell. A részletes kreditdíjakat az Árak oldalon találod.',
+  },
+  {
+    q: 'Elkészül még a saját Black Friday-kampányom?',
+    a: 'Igen, ha időben előfizetsz. A konzultáció után azonnal indulhat a tartalomgyártás. Az akciós posztokat, a hírlevelet és a videókat percek alatt legenerálod, és időzítve kiküldöd.',
+  },
+  {
+    q: 'Lemondhatom év közben?',
+    a: 'Lemondani bármikor lehet, de a lemondás a kifizetett 12 hónap végén lép életbe. Az éves díjat egy összegben, előre fizeted, és az ÁSZF szerint nem téríthető vissza, az időarányos része sem. Addig viszont minden funkciót korlátlanul használhatsz.',
+  },
+  {
+    q: 'Hogyan fizetek?',
+    a: 'Bankkártyával, a Stripe felületén, egy összegben. A számlát a regisztrációkor megadott adataidra állítjuk ki.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  noindex
+  lpEnabled
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+
+  <Header locale={locale} page={page} />
+
+  <main>
+    <!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+    <section id="hero" class="hero-gradient py-12 md:py-16">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="max-w-[820px] mx-auto text-center flex flex-col gap-5">
+          <span class="inline-flex items-center justify-center gap-2 text-primary font-bold text-sm uppercase tracking-widest">
+            <span class="material-symbols-outlined text-[18px]">sell</span>
+            Black Friday · november 16–27.
+          </span>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
+            <span class="text-primary">3 hónap ajándék</span> és <span class="text-primary">+500 kredit</span>
+            az AI tartalomgyártóhoz webshopoknak
+          </h1>
+          <p class="text-body text-lg leading-relaxed">
+            Fizess elő most évesre, és már a saját Black Friday-kampányodat is a Ninja csinálja meg:
+            posztot, képet, videót és hírlevelet ír a termékeidből, és időzítve ki is küldi.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <span class="inline-flex items-center gap-2 bg-success/10 border border-success/30 text-success rounded-[10px] px-4 py-2 text-sm font-bold">
+              <span class="material-symbols-outlined text-[18px]">savings</span>
+              359.910 Ft + ÁFA / év (kb. 30.000 Ft/hó)
+            </span>
+            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
+              <span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+              Ár-garancia jövőre is
+            </span>
+            <span class="inline-flex items-center gap-2 bg-card border border-border rounded-[10px] px-4 py-2 text-sm font-medium text-body">
+              <span class="material-symbols-outlined text-primary text-[18px]">support_agent</span>
+              Személyes beüzemelés
+            </span>
+          </div>
+
+          <div class="bf-countdown mt-2" data-bf-countdown data-start={START_ISO} data-end={END_ISO} data-theme="light">
+            <p class="text-sm font-semibold text-body mb-3" data-bf-label>Az akció 2026. november 27-én éjfélkor jár le.</p>
+            <div class="hidden flex justify-center gap-2 sm:gap-3" data-bf-clock>
+              {[['d', 'nap'], ['h', 'óra'], ['m', 'perc'], ['s', 'mp']].map(([k, l]) => (
+                <div class="w-16 sm:w-20 bg-card border border-border rounded-[12px] shadow-card py-3">
+                  <span class="block text-2xl sm:text-3xl font-extrabold text-dark tabular-nums" data-bf-unit={k}>00</span>
+                  <span class="block text-xs text-muted uppercase tracking-wide">{l}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2" data-bf-cta>
+            <a href={SIGNUP_URL} class="cta-primary px-6 h-12 text-sm w-full sm:w-auto justify-center">
+              Előfizetek az akciós áron
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+            <a href={UPGRADE_URL} class="cta-secondary px-6 h-12 text-sm w-full sm:w-auto justify-center">
+              <span class="material-symbols-outlined text-[16px]">login</span>
+              Havi előfizető vagyok, váltok
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <TrustBadges locale={locale} />
+
+    <!-- ═══════════════════════════════════════
+     MIT KAPSZ
+═══════════════════════════════════════ -->
+    <section id="mit-kapsz" class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[700px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mit kapsz?</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Négy ajándék egy éves csomagban</h2>
+          <p class="text-body text-lg">Új ügyfélként és havi előfizetőként is, ha most évesre váltasz.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {offerCards.map((c) => (
+            <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{c.icon}</span>
+              </div>
+              <h3 class="text-xl font-bold text-dark mb-2">{c.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     ÁRÖSSZEVETÉS
+═══════════════════════════════════════ -->
+    <section id="arazas" class="bg-card py-20 md:py-28">
+      <div class="max-w-[1000px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[700px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árösszevetés</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ennyit spórolsz egy év alatt</h2>
+          <p class="text-body text-lg">Ugyanaz a csomag, minden modullal. Csak az ár és a ráadás más.</p>
+        </div>
+
+        <div class="overflow-x-auto rounded-[16px] border border-border shadow-card">
+          <table class="w-full text-sm min-w-[640px]">
+            <thead>
+              <tr class="bg-light">
+                <th class="text-left font-bold text-dark px-4 py-4 border-b border-border w-[28%]"></th>
+                <th class="text-left font-bold text-dark px-4 py-4 border-b border-border">Havi előfizetés</th>
+                <th class="text-left font-bold text-dark px-4 py-4 border-b border-border">Éves, normál ár</th>
+                <th class="text-left font-bold text-white px-4 py-4 border-b border-primary bg-primary">
+                  Black Friday éves
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {compareRows.map((r) => (
+                <tr class="border-b border-border last:border-b-0">
+                  <td class="px-4 py-3 font-semibold text-dark">{r.label}</td>
+                  {[r.monthly, r.annual].map((v) => (
+                    <td class="px-4 py-3 text-body">
+                      {typeof v === 'boolean' ? (
+                        <span class="material-symbols-outlined text-muted text-[20px]">remove</span>
+                      ) : (
+                        v
+                      )}
+                    </td>
+                  ))}
+                  <td class="px-4 py-3 font-bold text-dark bg-primary/5">
+                    {typeof r.bf === 'boolean' ? (
+                      <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                    ) : (
+                      r.bf
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-muted text-sm mt-4 text-center">
+          Minden ár nettó, ÁFA nélkül. A Black Friday éves csomag bruttó 457.086 Ft.
+          A normál árakat és a kreditdíjakat az <a href="/hu/arak/" class="text-primary font-semibold underline">Árak oldalon</a> találod.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     A SAJÁT BLACK FRIDAY-ED
+═══════════════════════════════════════ -->
+    <section id="sajat-kampany" class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[760px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Már most hasznát veszed</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">A saját Black Friday-kampányodat is a Ninja csinálja</h2>
+          <p class="text-body text-lg">
+            A webshopodnak most kell a legtöbb tartalom. Ne decemberben kezdj neki.
+            A beüzemelés után azonnal indulhat a tartalomgyártás.
+          </p>
+        </div>
+
+        <HowItWorksSteps steps={bfSteps} />
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     MIT TUD
+═══════════════════════════════════════ -->
+    <section id="funkciok" class="bg-card py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[700px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mit tud a Content Ninja?</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Profi jelenlét, kevés kattintással</h2>
+          <p class="text-body text-lg">
+            Neked, ha egyedül vagy kis csapattal viszed a boltot, és nincs időd minden nap posztolni.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((f) => (
+            <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
+                <span class="material-symbols-outlined text-primary text-[22px]">{f.icon}</span>
+              </div>
+              <h3 class="text-lg font-bold text-dark mb-2">{f.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{f.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-10">
+          <span class="text-sm font-semibold text-muted mr-1">Támogatott rendszerek:</span>
+          <PlatformLogos variant="pill" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     VÉLEMÉNYEK
+═══════════════════════════════════════ -->
+    <section id="velemenyek" class="bg-light py-20 md:py-28">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div class="text-center max-w-[700px] mx-auto mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Vélemények</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Webshopok, akik már a Ninjával dolgoznak</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((t) => (
+            <div class="flex flex-col bg-card p-5 sm:p-8 rounded-[16px] border border-border shadow-card">
+              <div class="flex gap-0.5 mb-4">
+                <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span>
+              </div>
+              <p class="text-body italic mb-6 leading-relaxed flex-1">„{t.quote}"</p>
+              <div class="flex items-center gap-3 mt-auto">
+                <div class="w-11 h-11 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm uppercase">{t.initials}</div>
+                <div>
+                  <p class="font-bold text-dark text-sm">{t.name}</p>
+                  <p class="text-xs text-muted">{t.shop}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     GYIK
+═══════════════════════════════════════ -->
+    <section id="faq" class="bg-card py-20 md:py-28">
+      <div class="max-w-[800px] mx-auto px-4 md:px-10">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Kérdések az akcióról</h2>
+        </div>
+
+        <div class="space-y-3" id="faq-list">
+          {faqs.map((f) => (
+            <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+              <button
+                class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                onclick="toggleFaq(this)"
+              >
+                {f.q}
+                <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+              </button>
+              <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">{f.a}</div>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-muted text-sm text-center mt-8">
+          A teljes szerződéses feltételek az
+          <a href="/hu/aszf/" class="text-primary font-semibold underline">ÁSZF-ben</a> olvashatók.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     ZÁRÓ CTA
+═══════════════════════════════════════ -->
+    <section class="bg-primary py-16 md:py-20">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, Black Friday éjfélig</h2>
+        <p class="text-white/80 text-lg mb-8 max-w-[640px] mx-auto">
+          359.910 Ft + ÁFA egy évre, ár-garanciával és személyes beüzemeléssel.
+          Utána az éves csomag újra a normál áron érhető el.
+        </p>
+
+        <div class="mb-8" data-bf-countdown data-start={START_ISO} data-end={END_ISO} data-theme="dark">
+          <p class="text-sm font-semibold text-white/80 mb-3" data-bf-label>Az akció 2026. november 27-én éjfélkor jár le.</p>
+          <div class="hidden flex justify-center gap-2 sm:gap-3" data-bf-clock>
+            {[['d', 'nap'], ['h', 'óra'], ['m', 'perc'], ['s', 'mp']].map(([k, l]) => (
+              <div class="w-16 sm:w-20 bg-white/10 border border-white/20 rounded-[12px] py-3">
+                <span class="block text-2xl sm:text-3xl font-extrabold text-white tabular-nums" data-bf-unit={k}>00</span>
+                <span class="block text-xs text-white/60 uppercase tracking-wide">{l}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3" data-bf-cta>
+          <a href={SIGNUP_URL} class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
+            Előfizetek az akciós áron
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+          <a href={UPGRADE_URL} class="cta-outline-white px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
+            Havi előfizető vagyok, váltok
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer locale={locale} page={page} />
+
+  <script is:inline>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Visszaszámláló: az akció indulásáig, majd a lejáratig. Lejárat után a
+    // gombok helyén egy „lejárt" sor áll. JS nélkül a lejárati dátum látszik.
+    (function () {
+      var boxes = document.querySelectorAll('[data-bf-countdown]');
+      if (!boxes.length) return;
+      var pad = function (n) { return String(n).padStart(2, '0'); };
+      function tick() {
+        var now = Date.now();
+        boxes.forEach(function (box) {
+          var start = Date.parse(box.dataset.start);
+          var end = Date.parse(box.dataset.end);
+          var label = box.querySelector('[data-bf-label]');
+          var clock = box.querySelector('[data-bf-clock]');
+          var target;
+          if (now < start) {
+            target = start;
+            label.textContent = 'Az akció november 16-án indul. Indulásig:';
+          } else if (now <= end) {
+            target = end;
+            label.textContent = 'Az akció lejártáig még:';
+          } else {
+            label.textContent = 'A Black Friday-akció lejárt. Köszönjük, hogy velünk voltál!';
+            clock.classList.add('hidden');
+            return;
+          }
+          var diff = Math.max(0, Math.floor((target - now) / 1000));
+          var u = {
+            d: Math.floor(diff / 86400),
+            h: Math.floor((diff % 86400) / 3600),
+            m: Math.floor((diff % 3600) / 60),
+            s: diff % 60,
+          };
+          Object.keys(u).forEach(function (k) {
+            var el = box.querySelector('[data-bf-unit="' + k + '"]');
+            if (el) el.textContent = pad(u[k]);
+          });
+          clock.classList.remove('hidden');
+        });
+        if (now > Date.parse(boxes[0].dataset.end)) {
+          document.querySelectorAll('[data-bf-cta]').forEach(function (el) { el.classList.add('hidden'); });
+          clearInterval(timer);
+        }
+      }
+      var timer = setInterval(tick, 1000);
+      tick();
+    })();
+  </script>
+</BaseLayout>

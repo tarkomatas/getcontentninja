@@ -24,7 +24,7 @@ export const ICONS: string[] = [
   'mark_email_read', 'menu', 'menu_book', 'money_off', 'monitoring', 'move_down', 'movie', 'movie_filter', 'music_note',
   'open_in_new', 'page_control', 'palette', 'pause_circle', 'payments', 'person_search', 'photo_library', 'play_circle',
   'precision_manufacturing', 'progress_activity', 'psychology', 'public', 'publish', 'query_stats', 'quiz',
-  'receipt_long', 'record_voice_over', 'remove', 'rocket_launch', 'rule', 'savings', 'schedule', 'schedule_send',
+  'receipt_long', 'record_voice_over', 'redeem', 'remove', 'rocket_launch', 'rule', 'savings', 'schedule', 'schedule_send',
   'school', 'script', 'search', 'sell', 'send', 'sentiment_dissatisfied', 'settings_suggest', 'share', 'shield',
   'shield_lock', 'shield_person', 'shopping_bag', 'shopping_cart', 'smart_toy', 'sort', 'stacked_bar_chart', 'stacks',
   'stay_current_portrait', 'storefront', 'support_agent', 'swap_horiz', 'swap_vert', 'sync', 'sync_alt', 'thumb_up',

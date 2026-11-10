@@ -24,6 +24,7 @@ export type PageKey =
   | 'newsletter'
   | 'newsletterSignup'
   | 'pricing'
+  | 'blackFriday'
   | 'onlineDemo'
   | 'contact'
   | 'thanks'
@@ -222,6 +223,11 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   // kreditvásárlás, fizetés/számlázás és árazási GYIK. A landing oldalak
   // "Részletes kreditdíjak" linkje ide mutat (korábban egy Notion doksira).
   pricing: { hu: '/hu/arak/', en: '/en/pricing/' },
+  // **Black Friday 2026 kampányoldal** (2026-11-16 – 11-27, BF éjfélig). Éves
+  // csomag 9 havidíj áráért + 500 ajándék kredit + ár-garancia + beüzemelési
+  // konzultáció. Időszakos ajánlat: `noindex`, de robots.txt Disallow NÉLKÜL
+  // (a `termekleiras-diagnozis` leckéje), sitemapbe nem kerül. Csak magyarul.
+  blackFriday: { hu: '/hu/black-friday/', en: null },
   // Önálló, nyelvi prefix nélküli kampány-link online konzultációhoz (Fillout-űrlap).
   // Szándékosan csak egy nyelven (HU) és prefix nélkül él – ez a brief kérése.
   onlineDemo: { hu: '/online-demo/', en: null },
