@@ -3,15 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
-import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
 
 const locale = 'hu';
 const page = 'blackFriday';
 
 const title = 'Black Friday: 3 hónap ajándék + 500 kredit – Content Ninja';
 const description =
-  'Black Friday 2026 (november 16–27.): Content Ninja éves előfizetés 9 havidíj áráért, 359.910 Ft + ÁFA / év. Mellé 500 ajándék kredit, ár-garancia a következő évre és 20.000 Ft értékű kampánytervező konzultáció. Új és meglévő havi ügyfeleknek is.';
+  'Black Friday 2026 (november 16–27.): Content Ninja éves előfizetés 9 havidíj áráért, 359.910 Ft + ÁFA / év. Mellé 500 ajándék kredit, ár-garancia a következő évre és 20.000 Ft értékű személyes konzultáció (beüzemelő vagy hatékonyságnövelő). Új és meglévő havi ügyfeleknek is.';
 
 // ── Az akció időkerete (Europe/Budapest, novemberben CET = +01:00) ──
 // A visszaszámláló és a lejárat utáni állapot is ebből dolgozik.
@@ -22,11 +22,17 @@ const END_ISO = '2026-11-27T23:59:59+01:00';
 // Mind listaáron igaz. Rövidek maradjanak: mobilon is egy sorba kell férniük.
 const HERO_ROTATE = ['3 hónapos', '25%-os', '+500 kredites', '154.960 Ft értékű'];
 
-// ── CTA-link: EGY gomb az újaknak ÉS a meglévő előfizetőknek (user-döntés) ──
-// Az app dönt a látogató állapota szerint: kijelentkezve regisztráció (rajta
-// „Már van fiókod? Belépés"), belépve az éves váltás az akciós áron.
-// TODO: a végleges linket a megrendelő adja meg. Addig az app nyitóoldala.
-const OFFER_URL = 'https://app.getcontentninja.com';
+// ── CTA: EGY gomb az újaknak ÉS a meglévő előfizetőknek (user-döntés) ──
+// Az appot NEM módosítjuk (user-döntés), ezért a gomb egy kis választó ablakot nyit
+// (#bf-choose), és onnan az app két MEGLÉVŐ címére visz:
+// - új ügyfél: regisztráció, az éves csomag előre kiválasztva (`?plan=annual`);
+// - előfizető: Előfizetés oldal, az éves váltás ablaka magától nyílik
+//   (`?switch=annual`). Kijelentkezve az app előbb belépteti, majd visszahozza ide.
+//   A `src` paramétert szándékosan nem adjuk: az app allowlistje a saját felületeit
+//   méri (popup, banner …), egy idegen érték amúgy is kiesne.
+// JS nélkül a gomb sima link a regisztrációra.
+const REGISTER_URL = 'https://app.getcontentninja.com/register?plan=annual';
+const SWITCH_URL = 'https://app.getcontentninja.com/subscription?switch=annual';
 
 // ── Kalkulátor: választható havidíjak (nettó Ft) ──
 // A meglévő ügyfelek eltérő havidíjon lehetnek (régi listaár, partner-ár). A
@@ -39,7 +45,7 @@ const FEE_OPTIONS = [
   { value: 34990, label: '34.990 Ft / hó – korábbi listaár' },
   { value: 24990, label: '24.990 Ft / hó' },
 ];
-const CONSULT_HUF = 20000; // kampánytervező konzultáció értéke (user-döntés)
+const CONSULT_HUF = 20000; // a személyes konzultáció értéke (user-döntés): beüzemelő (új) vagy hatékonyságnövelő (meglévő)
 const CREDIT_GIFT_HUF = 14990; // 500 kredit = az 500 kredites extra csomag ára
 
 // A korlátozó feltételek egy sorban, minden fő gomb alatt (hero, záró CTA).
@@ -67,53 +73,13 @@ const offerCards = [
   },
   {
     icon: 'support_agent',
-    title: 'Kampánytervező konzultáció',
-    body: '20.000 Ft értékben. Együtt megtervezzük a következő kampányodat. Ha új vagy, előtte bekötjük a boltodat és beállítjuk a márkádat.',
+    title: 'Személyes konzultáció',
+    body: '20.000 Ft értékben. Beüzemelő, ha új vagy: bekötjük a boltodat és beállítjuk a márkádat. Hatékonyságnövelő, ha már használod: átnézzük, hogyan hozhatsz ki többet a Ninjából.',
   },
 ];
 
-const compareRows = [
-  { label: 'Ár', monthly: '39.990 Ft + ÁFA / hó', annual: '399.900 Ft + ÁFA / év', bf: '359.910 Ft + ÁFA / év' },
-  { label: 'Egy évre összesen', monthly: '479.880 Ft + ÁFA', annual: '399.900 Ft + ÁFA', bf: '359.910 Ft + ÁFA' },
-  { label: 'Havonta átlagosan', monthly: '39.990 Ft', annual: 'kb. 33.325 Ft', bf: 'kb. 30.000 Ft' },
-  { label: 'Hány havidíjat fizetsz', monthly: '12', annual: '10', bf: '9' },
-  { label: 'Kredit egy évre', monthly: '500 / hó (havonta nullázódik)', annual: '6.000, egy összegben', bf: '6.500, egy összegben' },
-  { label: 'Ajándék kredit forintban', monthly: '–', annual: '–', bf: '+14.990 Ft értékben' },
-  { label: 'Megtakarítás a havidíjhoz képest', monthly: '–', annual: '79.980 Ft (2 hónap)', bf: '119.970 Ft (3 hónap, 25%)' },
-  { label: 'Összes előny a havidíjhoz képest', monthly: '–', annual: '79.980 Ft', bf: '154.960 Ft' },
-  { label: 'Ár-garancia a következő évre', monthly: false, annual: false, bf: true },
-  { label: 'Kampánytervező konzultáció', monthly: '–', annual: '–', bf: '20.000 Ft értékben' },
-];
 
-const features = [
-  {
-    icon: 'auto_awesome',
-    title: 'Szöveg, kép és videó egy helyen',
-    body: 'Közösségi poszt, blogcikk, hírlevél és hirdetés a webshopod termékeiből. Képpel és videóval együtt.',
-  },
-  {
-    icon: 'palette',
-    title: 'A te márkád hangján',
-    body: 'Megtanulja a boltod stílusát. A képekre a logódat teszi. Minden tartalom rád hasonlít.',
-  },
-  {
-    icon: 'schedule_send',
-    title: 'Ütemezett publikálás',
-    body: 'Facebookra, Instagramra és TikTokra időzítve posztol. A blogcikk a webshopod blogjába kerül, a hírlevél a saját listáidra megy.',
-  },
-  {
-    icon: 'storefront',
-    title: 'Bekötés a webshopodba',
-    body: 'UNAS, Shoprenter és WordPress/WooCommerce. A termékeidet magától behúzza, nem kell semmit bemásolnod.',
-  },
-];
 
-const bfSteps = [
-  { title: 'Előfizetsz', desc: 'Az éves csomagot most, a Black Friday-áron veszed meg.' },
-  { title: 'Megtervezzük', desc: 'A kampánytervező konzultáción együtt összerakjuk a kampányodat (új ügyfélnél a bekötéssel együtt).' },
-  { title: 'Kész a kampány', desc: 'A Ninja megírja az akciós posztokat, a hírlevelet és a videókat.' },
-  { title: 'Kimegy', desc: 'Jóváhagyod, és a tartalom időzítve megjelenik a csatornáidon.' },
-];
 
 const testimonials = [
   {
@@ -147,15 +113,15 @@ const faqs = [
   },
   {
     q: 'Már havi előfizető vagyok. Nekem is jár?',
-    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát és a kampánytervező konzultációt. Ugyanazzal a „Kérem az ajánlatot" gombbal lépsz be, és ott válthatsz évesre.',
+    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát és a személyes konzultációt (nálad a hatékonyságnövelőt). Ugyanazzal a „Kérem az ajánlatot" gombbal lépsz be, és ott válthatsz évesre.',
   },
   {
     q: 'Mit jelent az ár-garancia?',
     a: 'Aki most előfizet, a következő évben is ugyanezzel a kedvezménnyel újíthatja meg az éves csomagot. Akkor sem kell többet fizetned, ha addig a normál ár változik.',
   },
   {
-    q: 'Mi a kampánytervező konzultáció, és hogyan zajlik?',
-    a: 'Egy személyes, közös alkalom, 20.000 Ft + ÁFA értékben, amit ajándékba kapsz. A vásárlás után felvesszük veled a kapcsolatot, és egyeztetünk egy időpontot. Ha új ügyfél vagy, bekötjük a webshopodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat. Ha már előfizető vagy, átnézzük a beállításaidat, és együtt megtervezzük a következő kampányodat.',
+    q: 'Milyen konzultációt kapok, és hogyan zajlik?',
+    a: 'Egy személyes, közös alkalmat, 20.000 Ft + ÁFA értékben, ajándékba. A vásárlás után felvesszük veled a kapcsolatot, és egyeztetünk egy időpontot. Ha új ügyfél vagy, beüzemelő konzultációt kapsz: bekötjük a webshopodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat. Ha már használod a Ninját, hatékonyságnövelő konzultációt kapsz: átnézzük a beállításaidat, és megmutatjuk, hogyan hozhatsz ki belőle többet.',
   },
   {
     q: 'Meddig használhatom fel az 500 ajándék kreditet?',
@@ -232,17 +198,12 @@ const faqLd = {
 
             <!-- EGY gomb mindenkinek: az app a belépés állapota szerint irányít. -->
             <div class="flex flex-col items-center lg:items-start gap-3 mt-2" data-bf-cta>
-              <a href={OFFER_URL} class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
+              <a href={REGISTER_URL} data-bf-offer class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
                 Kérem az ajánlatot
                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
               </a>
               <!-- A korlátozó feltételek a gomb mellett, nem csak a GYIK-ben (GVH-gyakorlat). -->
               <p class="text-xs text-muted max-w-[480px]">{TERMS_LINE}</p>
-              <p class="text-sm text-body max-w-[480px]">
-                <strong class="text-dark">Már előfizető vagy? A kedvezményed megmarad.</strong>
-                Te is 3 hónapot kapsz ajándékba, a saját havidíjadból számolva. Ugyanezzel a gombbal
-                lépsz be, és válthatsz évesre.
-              </p>
             </div>
           </div>
 
@@ -278,7 +239,7 @@ const faqLd = {
                 <dd class="text-success text-lg font-bold whitespace-nowrap">+14.990 Ft</dd>
               </div>
               <div class="flex items-baseline justify-between gap-4">
-                <dt class="text-body">Kampánytervező konzultáció<br /><span class="text-muted text-xs">személyes, közös alkalom</span></dt>
+                <dt class="text-body">Személyes konzultáció<br /><span class="text-muted text-xs">beüzemelő vagy hatékonyságnövelő</span></dt>
                 <dd class="text-success text-lg font-bold whitespace-nowrap">+20.000 Ft</dd>
               </div>
 
@@ -324,114 +285,9 @@ const faqLd = {
     </section>
 
     <!-- ═══════════════════════════════════════
-     ÁRÖSSZEVETÉS
-═══════════════════════════════════════ -->
-    <section id="arazas" class="bg-card py-20 md:py-28">
-      <div class="max-w-[1000px] mx-auto px-4 md:px-10">
-        <div class="text-center max-w-[700px] mx-auto mb-14">
-          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árösszevetés</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">154.960 Ft előny a havidíjhoz képest</h2>
-          <p class="text-body text-lg">119.970 Ft megtakarítás + 14.990 Ft értékű ajándék kredit + 20.000 Ft értékű konzultáció. Listaáron számolva.</p>
-        </div>
-
-        <div class="overflow-x-auto rounded-[16px] border border-border shadow-card">
-          <table class="w-full text-sm min-w-[640px]">
-            <thead>
-              <tr class="bg-light">
-                <th class="text-left font-bold text-dark px-4 py-4 border-b border-border w-[28%]"></th>
-                <th class="text-left font-bold text-dark px-4 py-4 border-b border-border">Havi előfizetés</th>
-                <th class="text-left font-bold text-dark px-4 py-4 border-b border-border">Éves, normál ár</th>
-                <th class="text-left font-bold text-white px-4 py-4 border-b border-primary bg-primary">
-                  Black Friday éves
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {compareRows.map((r) => (
-                <tr class="border-b border-border last:border-b-0">
-                  <td class="px-4 py-3 font-semibold text-dark">{r.label}</td>
-                  {[r.monthly, r.annual].map((v) => (
-                    <td class="px-4 py-3 text-body">
-                      {typeof v === 'boolean' ? (
-                        <span class="material-symbols-outlined text-muted text-[20px]">remove</span>
-                      ) : (
-                        v
-                      )}
-                    </td>
-                  ))}
-                  <td class="px-4 py-3 font-bold text-dark bg-primary/5">
-                    {typeof r.bf === 'boolean' ? (
-                      <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
-                    ) : (
-                      r.bf
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="text-muted text-sm mt-4 text-center">
-          Minden ár nettó, ÁFA nélkül. A Black Friday éves csomag bruttó 457.086 Ft.
-          A normál árakat és a kreditdíjakat az <a href="/hu/arak/" class="text-primary font-semibold underline">Árak oldalon</a> találod.
-        </p>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
-     A SAJÁT BLACK FRIDAY-ED
-═══════════════════════════════════════ -->
-    <section id="sajat-kampany" class="bg-light py-20 md:py-28">
-      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-        <div class="text-center max-w-[760px] mx-auto mb-14">
-          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Már most hasznát veszed</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">A saját Black Friday-kampányodat is a Ninja csinálja</h2>
-          <p class="text-body text-lg">
-            A webshopodnak most kell a legtöbb tartalom. Ne decemberben kezdj neki.
-            A konzultáció után azonnal indulhat a tartalomgyártás.
-          </p>
-        </div>
-
-        <HowItWorksSteps steps={bfSteps} />
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
-     MIT TUD
-═══════════════════════════════════════ -->
-    <section id="funkciok" class="bg-card py-20 md:py-28">
-      <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-        <div class="text-center max-w-[700px] mx-auto mb-14">
-          <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mit tud a Content Ninja?</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Profi jelenlét, kevés kattintással</h2>
-          <p class="text-body text-lg">
-            Neked, ha egyedül vagy kis csapattal viszed a boltot, és nincs időd minden nap posztolni.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((f) => (
-            <div class="bg-light rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
-              <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
-                <span class="material-symbols-outlined text-primary text-[22px]">{f.icon}</span>
-              </div>
-              <h3 class="text-lg font-bold text-dark mb-2">{f.title}</h3>
-              <p class="text-body text-sm leading-relaxed">{f.body}</p>
-            </div>
-          ))}
-        </div>
-
-        <div class="flex flex-wrap items-center justify-center gap-3 mt-10">
-          <span class="text-sm font-semibold text-muted mr-1">Támogatott rendszerek:</span>
-          <PlatformLogos variant="pill" />
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
      VÉLEMÉNYEK
 ═══════════════════════════════════════ -->
-    <section id="velemenyek" class="bg-light py-20 md:py-28">
+    <section id="velemenyek" class="bg-card py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10">
         <div class="text-center max-w-[700px] mx-auto mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Vélemények</span>
@@ -440,7 +296,7 @@ const faqLd = {
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <div class="flex flex-col bg-card p-5 sm:p-8 rounded-[16px] border border-border shadow-card">
+            <div class="flex flex-col bg-light p-5 sm:p-8 rounded-[16px] border border-border shadow-card">
               <div class="flex gap-0.5 mb-4">
                 <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span>
               </div>
@@ -461,7 +317,7 @@ const faqLd = {
     <!-- ═══════════════════════════════════════
      GYIK
 ═══════════════════════════════════════ -->
-    <section id="faq" class="bg-card py-20 md:py-28">
+    <section id="faq" class="bg-light py-20 md:py-28">
       <div class="max-w-[800px] mx-auto px-4 md:px-10">
         <div class="text-center mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
@@ -470,7 +326,7 @@ const faqLd = {
 
         <div class="space-y-3" id="faq-list">
           {faqs.map((f) => (
-            <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+            <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
               <button
                 class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                 onclick="toggleFaq(this)"
@@ -491,18 +347,41 @@ const faqLd = {
     </section>
 
     <!-- ═══════════════════════════════════════
+     A TELJES RENDSZER (user-kérés: általános bemutató sok kártyával, alul)
+     A modulrács a `modules.ts`-ből jön (mind a 10 modul). `noLinks`: a kampányoldalról
+     ne vigyen el a látogató, csak megmutassa, mennyi mindent tud a rendszer.
+═══════════════════════════════════════ -->
+    <ModuleGrid
+      locale={locale}
+      eyebrow="Mit tud a Content Ninja?"
+      heading="Ez mind benne van az éves csomagban"
+      lead="Nem modulonként fizetsz: minden funkció ugyanannak az előfizetésnek a része, a kreditedet szabadon osztod el közöttük."
+      sectionId="funkciok"
+      sectionClass="bg-card py-20 md:py-28"
+      cardClass="bg-light"
+      compact
+      noLinks
+    />
+    <div class="bg-card px-4 md:px-10 pb-20 md:pb-28 -mt-6">
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <span class="text-sm font-semibold text-muted mr-1">Támogatott rendszerek:</span>
+        <PlatformLogos variant="pill" />
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
      ZÁRÓ CTA
 ═══════════════════════════════════════ -->
     <section id="zaro-cta" class="bg-primary py-16 md:py-20">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, Black Friday éjfélig</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[640px] mx-auto">
-          12 hónap 9 havidíj áráért, a saját havidíjadból számolva, ár-garanciával és kampánytervező konzultációval.
+          12 hónap 9 havidíj áráért, a saját havidíjadból számolva, ár-garanciával és személyes konzultációval: beüzemelő, vagy hatékonyságnövelő, ha már használod.
           Utána az éves csomag újra a normál áron érhető el.
         </p>
 
         <div class="flex flex-col items-center gap-3" data-bf-cta>
-          <a href={OFFER_URL} class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
+          <a href={REGISTER_URL} data-bf-offer class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
             Kérem az ajánlatot
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </a>
@@ -519,6 +398,44 @@ const faqLd = {
   </main>
 
   <Footer locale={locale} page={page} />
+
+  <!-- Választó ablak az egyetlen „Kérem az ajánlatot" gomb mögött. -->
+  <dialog
+    id="bf-choose"
+    class="w-[calc(100%-2rem)] max-w-[480px] rounded-[16px] border border-border bg-card p-0 shadow-card-hover backdrop:bg-dark/60"
+    aria-labelledby="bf-choose-title"
+  >
+    <div class="p-5 sm:p-8">
+      <div class="flex items-start justify-between gap-4 mb-5">
+        <h2 id="bf-choose-title" class="text-xl font-bold text-dark">Hogyan folytatod?</h2>
+        <button type="button" class="text-muted hover:text-dark" data-bf-close aria-label="Bezárás">
+          <span class="material-symbols-outlined text-[22px]">close</span>
+        </button>
+      </div>
+      <div class="flex flex-col gap-3">
+        <a href={REGISTER_URL} class="group flex items-center gap-4 rounded-[12px] border border-border bg-light p-4 hover:border-primary transition-colors">
+          <span class="w-11 h-11 rounded-[10px] bg-primary/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-primary text-[22px]">add_circle</span>
+          </span>
+          <span class="flex-1">
+            <span class="block font-bold text-dark">Még nem vagyok előfizető</span>
+            <span class="block text-sm text-body">Regisztrálsz, az éves csomag már ki lesz választva.</span>
+          </span>
+          <span class="material-symbols-outlined text-primary text-[20px]">arrow_forward</span>
+        </a>
+        <a href={SWITCH_URL} class="group flex items-center gap-4 rounded-[12px] border border-border bg-light p-4 hover:border-primary transition-colors">
+          <span class="w-11 h-11 rounded-[10px] bg-primary/10 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-primary text-[22px]">login</span>
+          </span>
+          <span class="flex-1">
+            <span class="block font-bold text-dark">Már előfizető vagyok</span>
+            <span class="block text-sm text-body">Belépsz, és évesre váltasz. A kedvezményed megmarad: te is 3 hónapot kapsz ajándékba, a saját havidíjadból számolva.</span>
+          </span>
+          <span class="material-symbols-outlined text-primary text-[20px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </dialog>
 
   <!-- Helytartó: a fix alsó sáv ne takarja el a lábléc alját. -->
   <div class="h-[76px] md:h-[96px]" data-bf-cta aria-hidden="true"></div>
@@ -550,7 +467,7 @@ const faqLd = {
           ))}
         </div>
       </div>
-      <a href={OFFER_URL} class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
+      <a href={REGISTER_URL} data-bf-offer class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
         <span class="md:hidden">Kérem</span>
         <span class="hidden md:inline">Kérem az ajánlatot</span>
         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -592,6 +509,20 @@ const faqLd = {
         })();
       }
       wait(2600, cycle);
+    })();
+
+    // Az egyetlen ajánlat-gomb: választó ablakot nyit (új ügyfél / előfizető).
+    (function () {
+      var dlg = document.getElementById('bf-choose');
+      if (!dlg || typeof dlg.showModal !== 'function') return; // régi böngésző: marad a sima link
+      document.querySelectorAll('[data-bf-offer]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          dlg.showModal();
+        });
+      });
+      dlg.querySelector('[data-bf-close]').addEventListener('click', function () { dlg.close(); });
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); }); // háttérre kattintás
     })();
 
     // Kalkulátor: 12 hónap = 9 × a választott havidíj.
