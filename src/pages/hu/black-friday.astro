@@ -186,50 +186,73 @@ const faqLd = {
 ═══════════════════════════════════════ -->
     <section id="hero" class="hero-gradient py-12 md:py-16">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-        <div class="max-w-[820px] mx-auto text-center flex flex-col gap-5">
-          <span class="inline-flex items-center justify-center gap-2 text-primary font-bold text-sm uppercase tracking-widest">
-            <span class="material-symbols-outlined text-[18px]">sell</span>
-            Black Friday · november 16–27.
-          </span>
-          <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
-            <span class="text-primary">3 hónap ajándék</span> és <span class="text-primary">+500 kredit</span>
-            az AI tartalomgyártóhoz webshopoknak
-          </h1>
-          <p class="text-body text-lg leading-relaxed">
-            A Ninja a termékeidből posztot, képet, videót és hírlevelet készít, és ki is küldi.
-          </p>
-
-          <!-- Összevetés a HAVIDÍJJAL (user-kérés: így látványosabb). A 479.880 Ft nem
-               „korábbi ár", hanem 12 × 39.990 Ft havidíj — ezért áll mellette a címke.
-               A kredit forintértéke az extra kreditcsomag ára (500 kredit = 14.990 Ft + ÁFA).
-               A visszaszámláló nem itt van: a folyamatosan látszó alsó sáv viszi (#bf-sticky). -->
-          <div class="flex flex-col items-center gap-2">
-            <p class="text-sm text-muted">
-              Havidíjjal egy év: <span class="line-through decoration-2">479.880 Ft</span> (12 × 39.990 Ft)
-            </p>
-            <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
-              <span class="text-4xl md:text-5xl font-extrabold text-dark tracking-[-0.02em]">359.910 Ft</span>
-              <span class="text-body text-base font-semibold">+ ÁFA / év</span>
-            </div>
-            <span class="inline-flex items-center gap-2 bg-success/10 border border-success/30 text-success rounded-[10px] px-4 py-2 text-sm font-bold">
-              <span class="material-symbols-outlined text-[18px]">savings</span>
-              119.970 Ft-ot spórolsz + 14.990 Ft értékű kredit ajándékba
+        <!-- Két hasáb (user-kérés): bal = az ajánlat, jobb = a matek. Mobilon egymás alatt. -->
+        <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
+          <!-- BAL: ajánlat -->
+          <div class="flex flex-col gap-5 text-center lg:text-left">
+            <span class="inline-flex items-center justify-center lg:justify-start gap-2 text-primary font-bold text-sm uppercase tracking-widest">
+              <span class="material-symbols-outlined text-[18px]">sell</span>
+              Black Friday · november 16–27.
             </span>
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-[-0.03em] leading-tight">
+              <span class="text-primary">3 hónap ajándék</span> és <span class="text-primary">+500 kredit</span>
+              az AI tartalomgyártóhoz webshopoknak
+            </h1>
+            <p class="text-body text-lg leading-relaxed">
+              A Ninja a termékeidből posztot, képet, videót és hírlevelet készít, és ki is küldi.
+            </p>
+
+            <!-- EGY fő gomb. A havi előfizetők szöveges linket kapnak (ők főleg
+                 e-mailből jönnek, ott eleve a váltó link megy nekik). -->
+            <div class="flex flex-col items-center lg:items-start gap-3 mt-2" data-bf-cta>
+              <a href={SIGNUP_URL} class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
+                Előfizetek az akciós áron
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </a>
+              <!-- A korlátozó feltételek a gomb mellett, nem csak a GYIK-ben (GVH-gyakorlat). -->
+              <p class="text-xs text-muted max-w-[480px]">{TERMS_LINE}</p>
+              <a href={UPGRADE_URL} class="text-sm font-semibold text-primary hover:underline inline-flex items-center gap-1">
+                Már havi előfizető vagy? Válts évesre itt
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            </div>
           </div>
 
-          <!-- EGY fő gomb. A havi előfizetők szöveges linket kapnak (ők főleg
-               e-mailből jönnek, ott eleve a váltó link megy nekik). -->
-          <div class="flex flex-col items-center gap-3 mt-2" data-bf-cta>
-            <a href={SIGNUP_URL} class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
-              Előfizetek az akciós áron
-              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-            </a>
-            <!-- A korlátozó feltételek a gomb mellett, nem csak a GYIK-ben (GVH-gyakorlat). -->
-            <p class="text-xs text-muted max-w-[520px]">{TERMS_LINE}</p>
-            <a href={UPGRADE_URL} class="text-sm font-semibold text-primary hover:underline inline-flex items-center gap-1">
-              Már havi előfizető vagy? Válts évesre itt
-              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </a>
+          <!-- JOBB: a matek, a HAVIDÍJHOZ mérve (user-kérés: így látványosabb). A 479.880 Ft
+               nem „korábbi ár", hanem 12 × 39.990 Ft havidíj — ezért áll mellette a címke.
+               A kredit forintértéke az extra kreditcsomag ára (500 kredit = 14.990 Ft + ÁFA).
+               A visszaszámláló nem itt van: a folyamatosan látszó alsó sáv viszi (#bf-sticky). -->
+          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-8 shadow-card">
+            <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-5">A matek</span>
+
+            <dl class="space-y-4 text-sm">
+              <div class="flex items-baseline justify-between gap-4">
+                <dt class="text-body">Havidíjjal 12 hónap<br /><span class="text-muted text-xs">12 × 39.990 Ft</span></dt>
+                <dd class="text-muted text-lg font-bold line-through decoration-2 whitespace-nowrap">479.880 Ft</dd>
+              </div>
+              <div class="flex items-baseline justify-between gap-4">
+                <dt class="text-dark font-semibold">Black Friday éves csomag<br /><span class="text-muted text-xs font-normal">9 havidíj ára, kb. 30.000 Ft / hó</span></dt>
+                <dd class="text-dark text-3xl font-extrabold tracking-[-0.02em] whitespace-nowrap">359.910 Ft</dd>
+              </div>
+
+              <div class="border-t border-border pt-4 flex items-baseline justify-between gap-4">
+                <dt class="text-body">Megtakarítás<br /><span class="text-muted text-xs">3 hónap, 25%</span></dt>
+                <dd class="text-success text-lg font-bold whitespace-nowrap">+119.970 Ft</dd>
+              </div>
+              <div class="flex items-baseline justify-between gap-4">
+                <dt class="text-body">+500 ajándék kredit<br /><span class="text-muted text-xs">az 500 kredites extra csomag ára</span></dt>
+                <dd class="text-success text-lg font-bold whitespace-nowrap">+14.990 Ft</dd>
+              </div>
+
+              <div class="bg-success/10 border border-success/30 rounded-[12px] px-4 py-3 flex items-center justify-between gap-4">
+                <dt class="text-dark font-bold">Összes előnyöd</dt>
+                <dd class="text-success text-2xl font-extrabold whitespace-nowrap">134.960 Ft</dd>
+              </div>
+            </dl>
+
+            <p class="text-muted text-xs mt-4">
+              Nettó árak, + ÁFA. A Black Friday éves csomag bruttó 457.086 Ft.
+            </p>
           </div>
         </div>
       </div>
