@@ -64,7 +64,7 @@ const offerCards = [
   {
     icon: 'bolt',
     title: '+500 kredit ajándék',
-    body: '14.990 Ft értékben. Mind a 6.500 kredit 1 évig megmarad, nem nullázódik havonta.',
+    body: '14.990 Ft értékű extra kredit. Így 6.500 kredited lesz 6.000 helyett, 1 évig érvényes.',
   },
   {
     icon: 'verified_user',
@@ -280,6 +280,16 @@ const faqLd = {
               <p class="text-body text-sm leading-relaxed">{c.body}</p>
             </div>
           ))}
+        </div>
+
+        <!-- Éves előny, külön kiemelve (user-kérés): a kredit nem vész el havonta. -->
+        <div class="mt-8 bg-success/10 border border-success/30 rounded-[16px] p-5 sm:p-6 flex items-start sm:items-center gap-4">
+          <span class="material-symbols-outlined text-success text-[28px] shrink-0">savings</span>
+          <p class="text-body leading-relaxed">
+            <strong class="text-dark">A kredit nem vész el havonta.</strong>
+            Havi előfizetésnél a fel nem használt kredit minden hónap végén nullázódik. Az éves csomagban
+            mind a 6.500 kredited 1 évig megmarad, és akkor használod el, amikor kell.
+          </p>
         </div>
       </div>
     </section>
