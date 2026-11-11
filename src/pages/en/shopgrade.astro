@@ -13,7 +13,7 @@ const locale = 'en';
 const page = 'shopgrade';
 const title = 'Shopgrade – AI content optimization for Unas, Shoprenter & WooCommerce stores | Content Ninja';
 const description =
-  'Shopgrade pulls your existing product descriptions and category pages, rewrites them with AI into SEO-friendly, sales-focused copy, then uploads them back to your store – thousands of products at once. Works with Unas, Shoprenter and WooCommerce.';
+  'Shopgrade pulls your existing product descriptions and category pages, rewrites them with AI into SEO-friendly, sales-focused copy, then uploads them back to your store – thousands of products at once, and new products automatically. Works with Unas, Shoprenter and WooCommerce.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-shopgrade.jpg" lpEnabled>
@@ -851,8 +851,8 @@ const description =
                     </div>
                     <h3 class="font-bold text-lg mb-2">Your store won't break</h3>
                     <p class="text-body text-sm leading-relaxed">The category <strong class="text-dark">name, URL and
-                        product list stay exactly as they are</strong> – only the copy changes, and only after your
-                        approval. It can be rolled back any time.</p>
+                        product list stay exactly as they are</strong> – only the copy changes, and by default only
+                        after your approval. It can be rolled back any time.</p>
                 </div>
             </div>
 
@@ -898,13 +898,65 @@ const description =
         </div>
     </section>
 
+    <!-- 7b. Automatizmus – a Shopgrade magától is fut (app: automations-new-products, 2026-11-10).
+         NE ígérd: azonnali reagálást (legsűrűbben naponta egy kör), a módosított termékek újraírását,
+         visszamenőleges indulást, az extra kredit elköltését. -->
+    <section id="automatizmus" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Automation 🔁</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Your new products get their copy on their own</h2>
+                <p class="text-body text-lg">Your store keeps growing. New products and new categories keep coming. Set it up once, and Shopgrade writes their copy on its own.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">event_repeat</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">New in store</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">On the day you choose, it checks whether a new product or category has appeared in your store. If so, it writes the copy with your usual Shopgrade settings. It can run daily, weekly or monthly. Watching starts on the day you switch it on. For older products, use a manual run.</p>
+                    <p class="text-sm italic text-dark bg-card border border-border rounded-[10px] px-4 py-3">“Every Wednesday at 06:00, if a new product has appeared in the store → rewrite it with Shopgrade.”</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">savings</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Leftover credits</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">Your monthly credits expire at the end of the cycle if you don't use them. This automation spends what's left at the very end of the cycle on products or categories that haven't been rewritten yet. It moves on month by month until it reaches the end of the catalog. It never touches the extra credits you bought.</p>
+                    <p class="text-sm italic text-dark bg-card border border-border rounded-[10px] px-4 py-3">It leaves your good, long descriptions alone: you can set it to rewrite only the ones shorter than a given length.</p>
+                </div>
+            </div>
+
+            <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                <li class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">fact_check</span>
+                    <span class="text-body text-sm leading-relaxed">By default it waits for your approval. If you want, it writes straight to your store.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">tune</span>
+                    <span class="text-body text-sm leading-relaxed">A cap per round: one round rewrites at most as many items as you set.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">auto_fix_high</span>
+                    <span class="text-body text-sm leading-relaxed">A wizard sets it up in one window. You can also ask Ninja AI. Works with Unas, Shoprenter and WooCommerce.</span>
+                </li>
+            </ul>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">Request a free demo</a>
+            </div>
+        </div>
+    </section>
+
+
 <!-- 8. The whole platform – Shopgrade is one module of it (shared module grid) -->
     <ModuleGrid
         locale={locale}
         exclude="shopgrade"
         sectionId="modulok"
-        sectionClass="bg-card py-20 md:py-28"
-        cardClass="bg-light"
+        sectionClass="bg-light py-20 md:py-28"
+        cardClass="bg-card"
         eyebrow="The whole system 🧩"
         heading="Shopgrade is one module of a bigger system"
         lead={"Content Ninja isn't a single feature: it's a complete AI marketing platform for webshops. Shopgrade improves the content your store <strong>already has</strong> – the other modules turn the same product catalog into <strong>new</strong> content and publish it. One account, one brand voice, one subscription."}
@@ -912,7 +964,7 @@ const description =
     />
 
         <!-- 9. Pricing -->
-    <section id="arazas" class="bg-light py-20 md:py-28">
+    <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Pricing</span>
@@ -933,7 +985,7 @@ const description =
     </section>
 
     <!-- 10. FAQ -->
-    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
+    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">FAQ</span>
@@ -941,7 +993,7 @@ const description =
             </div>
 
             <div class="space-y-3">
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         What is Shopgrade?
@@ -955,7 +1007,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         What exactly does it write on a category page?
@@ -971,7 +1023,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Which store platforms does it work with?
@@ -990,7 +1042,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         What is GEO, and why does it matter?
@@ -1004,7 +1056,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Can it really handle thousands of products?
@@ -1013,11 +1065,39 @@ const description =
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Yes – the system works in batches, so it's usable on large catalogs too; you don't have to start
                         it product by product. You decide whether the whole catalog, a single category or just a few key
-                        products get rewritten.
+                        products get rewritten. And you don't have to come back for new products: an automation writes
+                        their copy on its own.
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Do my new products get descriptions automatically?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Yes, if you switch on the “New in store” automation. On the day you choose, it checks whether a new
+                        product or category has appeared in your store, and writes its copy. It can run daily, weekly or
+                        monthly. Watching starts on the day you switch it on; for older products, use a manual run. It
+                        doesn't rewrite edited old products, only newly added ones.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        What happens to the credits left at the end of the month?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Monthly credits expire at the end of the cycle. The “Leftover credits” automation spends what's left at
+                        the very end of the cycle on products or categories that haven't been rewritten yet. It never touches
+                        the extra credits you bought, and it doesn't use next month's credits.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Can I restore the old descriptions?
@@ -1030,7 +1110,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Where does the data come from – does it invent facts?
@@ -1044,19 +1124,20 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         What if I don't like the finished copy?
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        Nothing goes into your store without your approval. Before publishing you can edit it by hand or
-                        regenerate it with different settings, and anything already live can be rolled back.
+                        By default nothing goes into your store without your approval. If you want, you can let the
+                        finished copy go straight to your store. Before publishing you can edit it by hand or regenerate it
+                        with different settings. Anything already live can be rolled back.
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Is there a minimum term? Can I cancel any time?
@@ -1071,7 +1152,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Do I need SEO knowledge?
@@ -1084,7 +1165,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Does Shopgrade cost extra?

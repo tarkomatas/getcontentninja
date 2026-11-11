@@ -15,7 +15,7 @@ const locale = 'hu';
 const page = 'shopgrade';
 const title = 'Shopgrade – AI tartalomoptimalizálás Unas, Shoprenter és WooCommerce webshopoknak | Content Ninja';
 const description =
-  'A Shopgrade letölti a webáruházad meglévő termékleírásait és kategóriaoldalait, az AI SEO- és értékesítés-fókuszú szöveggé írja át őket, majd vissza is tölti a webshopodba – akár több ezer terméket egyszerre. Unas, Shoprenter és WooCommerce integrációval.';
+  'A Shopgrade letölti a webáruházad meglévő termékleírásait és kategóriaoldalait, az AI SEO- és értékesítés-fókuszú szöveggé írja át őket, majd vissza is tölti a webshopodba – akár több ezer terméket egyszerre, az új termékekre pedig magától is. Unas, Shoprenter és WooCommerce integrációval.';
 ---
 
 <BaseLayout locale={locale} page={page} title={title} description={description} ogImage="/assets/og-shopgrade.jpg" lpEnabled>
@@ -852,7 +852,7 @@ const description =
                     </div>
                     <h3 class="font-bold text-lg mb-2">A boltod nem borul fel</h3>
                     <p class="text-body text-sm leading-relaxed">A kategória <strong class="text-dark">neve, URL-je és a
-                        terméklista marad</strong>, ahogy van – csak a szöveg változik, az is csak a jóváhagyásod után.
+                        terméklista marad</strong>, ahogy van – csak a szöveg változik, az is alapból csak a jóváhagyásod után.
                         És bármikor visszaállítható.</p>
                 </div>
             </div>
@@ -899,13 +899,65 @@ const description =
         </div>
     </section>
 
+    <!-- 7b. Automatizmus – a Shopgrade magától is fut (app: automations-new-products, 2026-11-10).
+         NE ígérd: azonnali reagálást (legsűrűbben naponta egy kör), a módosított termékek újraírását,
+         visszamenőleges indulást, az extra kredit elköltését. -->
+    <section id="automatizmus" class="bg-card py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-10">
+            <div class="text-center max-w-[720px] mx-auto mb-14">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Automatizmus 🔁</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Az új termékeid maguktól kapnak szöveget</h2>
+                <p class="text-body text-lg">A boltod folyamatosan bővül. Új termékek és új kategóriák jönnek. Egyszer beállítod, és a Shopgrade magától megírja a szövegüket.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">event_repeat</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Új a boltban</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">A választott napon megnézi, került-e új termék vagy kategória a boltodba. Ha igen, megírja a szövegét a megszokott Shopgrade-beállításaiddal. Futhat naponta, hetente vagy havonta. A figyelés a bekapcsolás napján indul. A korábbi termékekre ott a kézi futás.</p>
+                    <p class="text-sm italic text-dark bg-card border border-border rounded-[10px] px-4 py-3">„Minden szerdán 06:00-kor, ha új termék került a boltba → írasd át a Shopgrade-del.”</p>
+                </div>
+                <div class="bg-light rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">savings</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Maradék kredit</h3>
+                    <p class="text-body text-sm leading-relaxed mb-4">A havi kredit a ciklus végén elvész, ha nem használod el. Ez az automatizmus a ciklus legvégén a maradékból átírja a még át nem írt termékeidet vagy kategóriáidat. Hónapról hónapra halad, amíg a katalógus végére nem ér. A vásárolt extra kreditedhez nem nyúl.</p>
+                    <p class="text-sm italic text-dark bg-card border border-border rounded-[10px] px-4 py-3">A jó, hosszú leírásaidat békén hagyja: megadhatod, hogy csak az adott hossznál rövidebbeket írja át.</p>
+                </div>
+            </div>
+
+            <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                <li class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">fact_check</span>
+                    <span class="text-body text-sm leading-relaxed">Alapból jóváhagyásra vár. Ha akarod, egyenesen a boltba írja.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">tune</span>
+                    <span class="text-body text-sm leading-relaxed">Körönként felső határ: egy kör legfeljebb annyi elemet ír át, amennyit megadsz.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">auto_fix_high</span>
+                    <span class="text-body text-sm leading-relaxed">Egy varázsló egy ablakban összerakja. A Ninja AI-tól is kérheted. Unas, Shoprenter és WooCommerce boltokon is.</span>
+                </li>
+            </ul>
+
+            <div class="text-center mt-10">
+                <a href="#hero" class="cta-primary px-8 py-4 text-base">Bemutatót kérek – díjmentes</a>
+            </div>
+        </div>
+    </section>
+
+
 <!-- 8. A teljes rendszer – a Shopgrade csak az egyik modul (közös modulrács) -->
     <ModuleGrid
         locale={locale}
         exclude="shopgrade"
         sectionId="modulok"
-        sectionClass="bg-card py-20 md:py-28"
-        cardClass="bg-light"
+        sectionClass="bg-light py-20 md:py-28"
+        cardClass="bg-card"
         eyebrow="A teljes rendszer 🧩"
         heading="A Shopgrade egy nagyobb rendszer egyik modulja"
         lead={'A Content Ninja nem egyetlen funkció: egy komplett AI marketing platform webshopoknak. A Shopgrade a webáruházad <strong>meglévő</strong> tartalmát javítja fel – a többi modul ugyanabból a termékkatalógusból <strong>új</strong> tartalmat gyárt és publikál. Egy fiók, egy márkahang, egy előfizetés.'}
@@ -913,7 +965,7 @@ const description =
     />
 
         <!-- 9. Árazás -->
-    <section id="arazas" class="bg-light py-20 md:py-28">
+    <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
@@ -934,7 +986,7 @@ const description =
     </section>
 
     <!-- 10. GYIK -->
-    <section id="gyik" class="bg-card py-20 md:py-28 px-4 md:px-10">
+    <section id="gyik" class="bg-light py-20 md:py-28 px-4 md:px-10">
         <div class="max-w-[800px] mx-auto">
             <div class="text-center mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">GYIK</span>
@@ -942,7 +994,7 @@ const description =
             </div>
 
             <div class="space-y-3">
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Mi az a Shopgrade?
@@ -956,7 +1008,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Pontosan mit ír a kategóriaoldalra?
@@ -972,7 +1024,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Milyen webshoprendszerekkel működik?
@@ -991,7 +1043,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Mi az a GEO, és miért fontos?
@@ -1005,7 +1057,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Tényleg elbír több ezer terméket?
@@ -1014,11 +1066,39 @@ const description =
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
                         Igen, a rendszer kötegelve dolgozik, így nagy katalógusnál is használható – nem terméknként
                         kell elindítanod. Azt te döntöd el, hogy a teljes katalógus, egy kategória vagy csak néhány
-                        kiemelt termék kerüljön sorra.
+                        kiemelt termék kerüljön sorra. Az új termékekhez pedig nem kell újra leülnöd: egy automatizmus
+                        magától megírja a szövegüket.
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Az új termékeim maguktól kapnak leírást?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        Igen, ha bekapcsolod az „Új a boltban” automatizmust. A választott napon megnézi, került-e új termék vagy
+                        kategória a boltodba, és megírja a szövegüket. Futhat naponta, hetente vagy havonta. A figyelés a
+                        bekapcsolás napján indul, a korábbi termékekre ott a kézi futás. A módosított régi termékeket nem
+                        írja át újra, csak az újonnan felvitteket.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Mi lesz a hónap végén megmaradt kredittel?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        A havi kredit a ciklus végén elvész. A „Maradék kredit” automatizmus ezt a maradékot a ciklus legvégén a
+                        még át nem írt termékeidre vagy kategóriáidra költi. A vásárolt extra kreditedhez nem nyúl, és az
+                        új hónap kreditjét sem használja.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Vissza tudom állítani a régi leírásokat?
@@ -1031,7 +1111,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Honnan veszi az adatokat – nem talál ki tényeket?
@@ -1045,19 +1125,20 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Mi van, ha nem tetszik a kész szöveg?
                         <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
                     </button>
                     <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
-                        A jóváhagyásod nélkül semmi nem kerül a webshopba. A kiírás előtt kézzel is szerkesztheted, vagy
-                        más beállítással újragenerálhatod, és ami már kint van, azt vissza tudod állítani.
+                        Alapból semmi nem kerül a webshopba a jóváhagyásod nélkül. Ha akarod, bekapcsolhatod, hogy a
+                        kész szöveg egyenesen a boltba menjen. A kiírás előtt kézzel is szerkesztheted, vagy más
+                        beállítással újragenerálhatod. Ami már kint van, azt vissza tudod állítani.
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Van hűségidő? Bármikor lemondhatom?
@@ -1073,7 +1154,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Kell hozzá SEO-tudás?
@@ -1086,7 +1167,7 @@ const description =
                     </div>
                 </div>
 
-                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                <div class="faq-item bg-card rounded-[12px] border border-border overflow-hidden">
                     <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
                         onclick="toggleFaq(this)">
                         Kerül külön pénzbe a Shopgrade?
