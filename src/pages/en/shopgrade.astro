@@ -431,132 +431,135 @@ const description =
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 1/b. The qualifiers – why the buyer never finds you. Deliberately BEFORE the demo:
-         problem first, proof second. -->
+    <!-- 1/b. Before / after – PRODUCT PAGE. Left: what changes and why it helps; right: mock-up. (2026-11-11: the former "qualifiers" and "Before / after" sections merged into this one.) The After copy deliberately uses only the Before data and keeps the drawback – "we don't invent facts". -->
     <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">The missing words 🔍</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Your product would fit – the copy just never says so</h2>
-                <p class="text-body text-lg">Nobody searches for "a flask" any more. They narrow it down: <em>"quiet
-                    nasal aspirator for babies"</em>, <em>"flask that fits a cup holder"</em>, <em>"good for
-                    travel"</em>. If those words aren't in the description, you won't come up – even when your product
-                    is exactly what they're looking for.</p>
-            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Product page – before / after ✍️</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">Same product – now it actually sells itself</h2>
+                    <p class="text-body text-lg mb-8 leading-relaxed">The manufacturer sheet lists the data. Shopgrade writes what it means to the buyer. It adds no new facts.</p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">emoji_objects</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark mb-1">From spec to benefit</h3>
+                                <p class="text-body text-sm leading-relaxed">Instead of "18/8 steel": no aftertaste, and it won't rust. The buyer understands what they get.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">person_search</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark mb-1">Who it's for and what it's for</h3>
+                                <p class="text-body text-sm leading-relaxed">Buyers search for situations, not parameters. These words bring them in from Google and AI answers.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">fact_check</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark mb-1">The drawback stays in</h3>
+                                <p class="text-body text-sm leading-relaxed">"Hand wash only." Whoever needs something else won't order it – and won't send it back.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark mb-1">Only on your site</h3>
+                                <p class="text-body text-sm leading-relaxed">The manufacturer copy runs in twenty other stores. The new copy is unique, so search engines can tell yours apart.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#hero" class="cta-primary px-8 py-4 text-base">See it on my own products</a>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">person_search</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Who it's for – and who it isn't</h3>
-                    <p class="text-body text-sm leading-relaxed">"It has a soft silicone tip, so it works on newborns
-                        too." The limitation is worth just as much: the wrong buyer doesn't order – and doesn't send it
-                        back.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">explore</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">What situation it suits</h3>
-                    <p class="text-body text-sm leading-relaxed">"Battery powered, so it travels well." Buyers search by
-                        the situation they're in, not by the spec – and that's the word that brings them in.</p>
-                </div>
-                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">compare_arrows</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Compared to what</h3>
-                    <p class="text-body text-sm leading-relaxed">"Its sibling, the Pro, runs off mains power." The
-                        difference within your own catalog decides which one goes in the cart – and no field in your
-                        store stores it.</p>
+                <div class="flex flex-col">
+                        <div class="bg-card rounded-[16px] border border-red-200 p-6 shadow-card">
+                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500"><span class="material-symbols-outlined text-[16px]">close</span>Before – manufacturer spec sheet</span></div>
+                            <p class="text-muted text-sm leading-relaxed">Stainless steel thermos, 500 ml. Material: 18/8 steel. Weight: 320 g. Colour: black. Not dishwasher safe.</p>
+                        </div>
+                        <div class="flex justify-center -my-1 relative z-10">
+                            <span class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow">
+                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
+                            </span>
+                        </div>
+                        <div class="bg-card rounded-[16px] border-2 border-success/40 p-6 shadow-card">
+                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success"><span class="material-symbols-outlined text-[16px]">check_circle</span>After – Shopgrade</span></div>
+                            <p class="text-body text-sm leading-relaxed"><span class="bg-primary/10 text-dark font-semibold rounded px-1">Half a litre of coffee, with no metallic aftertaste.</span> 18/8 stainless steel <span class="bg-primary/10 text-dark font-semibold rounded px-1">adds no flavour of its own and won't rust</span> – which is why this alloy is the benchmark for flasks. 320 grams empty: you'll notice it in the bag, but it isn't the weight you leave at home on day three. <span class="bg-primary/10 text-dark font-semibold rounded px-1">Hand wash only</span> – not dishwasher safe.</p>
+                        </div>
+                        <p class="text-muted text-xs mt-4 text-center">Every sentence follows from the store's own product data.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. Before / after – text comparison -->
+    <!-- 1/c. Before / after – CATEGORY PAGE. Same layout as the product page. (2026-11-11: the before/after pair of the category section below moved here.) -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Before / after ✍️</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Same product, two very different descriptions</h2>
-                <p class="text-body text-lg">Most stores run the manufacturer's spec sheet – the exact same text twenty
-                    other shops use. Neither Google nor the AI can tell which one to pick, and the shopper gets no
-                    answer to their questions.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-                <!-- Before -->
-                <div class="bg-light rounded-[16px] border border-red-200 p-8 shadow-card flex flex-col h-full">
-                    <div class="flex items-center gap-2 mb-5">
-                        <span class="material-symbols-outlined text-red-500 text-[20px]">close</span>
-                        <h3 class="font-bold text-lg text-dark">Before – manufacturer spec sheet</h3>
-                    </div>
-                    <p class="text-body text-sm leading-relaxed italic border-l-2 border-red-200 pl-4 mb-6">
-                        "Stainless steel thermos, 500 ml. Material: 18/8 steel. Weight: 320 g. Colour: black. Not
-                        dishwasher safe."
-                    </p>
-                    <ul class="space-y-3 mt-auto">
-                        <li class="flex items-start gap-2.5 text-body text-sm">
-                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5">remove</span>
-                            <span>The same text runs in twenty other webshops</span>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div>
+                    <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Category page – before / after 📁</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">Your category page finally helps people choose</h2>
+                    <p class="text-body text-lg mb-8 leading-relaxed">Forty-one nasal aspirators listed one after another, nothing to go on. Someone who can't decide doesn't buy: they go back to the search box. Shopgrade writes what to choose by.</p>
+                    <ul class="space-y-5 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">rule</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark mb-1">What the choice comes down to</h3>
+                                <p class="text-body text-sm leading-relaxed">The category's two or three main criteria. Based on your products, not a generic intro.</p>
+                            </div>
                         </li>
-                        <li class="flex items-start gap-2.5 text-body text-sm">
-                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5">remove</span>
-                            <span>No keywords, no structure, no context</span>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">stacked_bar_chart</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark mb-1">Real numbers from your range</h3>
+                                <p class="text-body text-sm leading-relaxed">"The models range from 55 to 78 dB." It works this out from your category's product data.</p>
+                            </div>
                         </li>
-                        <li class="flex items-start gap-2.5 text-body text-sm">
-                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5">remove</span>
-                            <span>Answers none of the questions a buyer actually has</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- After -->
-                <div class="bg-light rounded-[16px] border-2 border-success/40 p-8 shadow-card flex flex-col h-full">
-                    <div class="flex items-center gap-2 mb-5">
-                        <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
-                        <h3 class="font-bold text-lg text-dark">After – Shopgrade</h3>
-                    </div>
-                    <p class="text-body text-sm leading-relaxed italic border-l-2 border-success/40 pl-4 mb-6">
-                        "<strong class="not-italic text-dark">Half a litre of coffee, with no metallic aftertaste.</strong>
-                        18/8 stainless steel adds no flavour of its own and won't rust – which is why this alloy is the
-                        benchmark for flasks. 320 grams empty: you'll notice it in the bag, but it isn't the weight you
-                        leave at home on day three. <strong class="not-italic text-dark">Hand wash only</strong> – not
-                        dishwasher safe."
-                    </p>
-                    <ul class="space-y-3 mt-auto">
-                        <li class="flex items-start gap-2.5 text-body text-sm">
-                            <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
-                            <span>Unique copy that exists only in your store</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-body text-sm">
-                            <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
-                            <span>Keyword-rich headings and lists – an SEO- and GEO-friendly structure</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-body text-sm">
-                            <span class="material-symbols-outlined text-success text-[18px] mt-0.5">check</span>
-                            <span><strong>Every claim comes from the store's own data</strong> – the downside stays in</span>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[20px]">quiz</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark mb-1">It answers the buyer's question</h3>
+                                <p class="text-body text-sm leading-relaxed">"Which one is right for a newborn?" The copy says so. The buyer doesn't have to guess or email you.</p>
+                            </div>
                         </li>
                     </ul>
+                    <a href="#hero" class="cta-primary px-8 py-4 text-base">See it on my own categories</a>
                 </div>
-            </div>
 
-            <!-- The "we don't invent facts" rule: the After example deliberately works only from the
-                 data in Before, and keeps the negative – that's the price of credibility. -->
-            <div class="flex items-start gap-2.5 max-w-[720px] mx-auto mt-8 bg-light border border-border rounded-[12px] px-5 py-4">
-                <span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">info</span>
-                <p class="text-body text-sm leading-relaxed">Every sentence follows from the store's own product data –
-                    <strong class="text-dark">we never invent a fact</strong>. Where the data is thin, the copy gets
-                    tidier but doesn't say more; that's when you can upload a supplier Excel or CSV and we build on
-                    that.</p>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="#hero" class="cta-primary px-8 py-4 text-base">
-                    Show me this on my own products
-                </a>
+                <div class="flex flex-col">
+                        <div class="bg-light rounded-[16px] border border-red-200 p-6 shadow-card">
+                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500"><span class="material-symbols-outlined text-[16px]">close</span>Before – empty category page</span></div>
+                            <p class="font-bold text-dark">Electric nasal aspirators <span class="text-muted text-xs font-normal">· 41 products</span></p>
+                            <p class="text-muted text-sm italic mt-2 border border-dashed border-red-200 rounded-[8px] px-3 py-2">No category copy – just the product list.</p>
+                            <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
+                        </div>
+                        <div class="flex justify-center -my-1 relative z-10">
+                            <span class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow">
+                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
+                            </span>
+                        </div>
+                        <div class="bg-light rounded-[16px] border-2 border-success/40 p-6 shadow-card">
+                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success"><span class="material-symbols-outlined text-[16px]">check_circle</span>After – Shopgrade</span></div>
+                            <p class="font-bold text-dark">Electric nasal aspirators <span class="text-muted text-xs font-normal">· 41 products</span></p>
+                            <p class="text-body text-sm leading-relaxed mt-2">With an electric nasal aspirator three things decide it: suction, noise, and whether it runs on a battery or from the mains. In this category the models <span class="bg-primary/10 text-dark font-semibold rounded px-1">range from 55 to 78 dB</span> – <span class="bg-primary/10 text-dark font-semibold rounded px-1">for a newborn the quieter one matters more</span>, because the strongest suction is worth nothing if it wakes the baby.</p>
+                            <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
+                        </div>
+                        <p class="text-muted text-xs mt-4 text-center">The name, URL and product list stay. Only the copy is new.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -762,55 +765,8 @@ const description =
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="text-center max-w-[760px] mx-auto mb-14">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Category pages 📁</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">The buyer chooses on your category page – and yours is empty</h2>
-                <p class="text-body text-lg">Forty-one nasal aspirators listed one after another, nothing to go on.
-                    Someone who can't decide which one to buy <strong class="text-dark">doesn't buy</strong>: they go
-                    back to the search box and decide somewhere else. This is one of the most visited pages in your
-                    store – and Shopgrade now writes it too.</p>
-            </div>
-
-            <!-- Pain → desire: on the left what the buyer does NOT get today, on the right what they
-                 read instead. The machinery (computing the parameter spread) is deliberately left to
-                 the FAQ. -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-6">
-                <div class="bg-card rounded-[16px] border border-red-200 p-8 shadow-card flex flex-col h-full">
-                    <div class="flex items-center gap-2 mb-5">
-                        <span class="material-symbols-outlined text-red-500 text-[20px]">help</span>
-                        <h3 class="font-bold text-lg text-dark">The questions they never get answered</h3>
-                    </div>
-                    <ul class="space-y-3 mb-5">
-                        <li class="flex items-start gap-2.5 text-body text-sm italic">
-                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
-                            <span>"Should it be quiet or strong?"</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-body text-sm italic">
-                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
-                            <span>"Battery or mains?"</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-body text-sm italic">
-                            <span class="material-symbols-outlined text-red-400 text-[18px] mt-0.5 not-italic">remove</span>
-                            <span>"Which one is right for a newborn?"</span>
-                        </li>
-                    </ul>
-                    <p class="text-body text-sm leading-relaxed mt-auto">The product list answers none of them. So the
-                        buyer either emails you – or, far more often, <strong class="text-dark">quietly moves on</strong>.</p>
-                </div>
-
-                <div class="bg-card rounded-[16px] border-2 border-success/40 p-8 shadow-card flex flex-col h-full">
-                    <div class="flex items-center gap-2 mb-5">
-                        <span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
-                        <h3 class="font-bold text-lg text-dark">What they read instead</h3>
-                    </div>
-                    <p class="text-body text-sm leading-relaxed italic border-l-2 border-success/40 pl-4 mb-5">
-                        "With an electric nasal aspirator three things decide it: suction, noise, and whether it runs on
-                        a battery or from the mains. In this category the models
-                        <strong class="not-italic text-dark">range from 55 to 78 dB</strong> – for a newborn the quieter
-                        one matters more, because the strongest suction is worth nothing if it wakes the baby."
-                    </p>
-                    <p class="text-body text-sm leading-relaxed mt-auto">A salesperson on the floor, not filler text.
-                        And every sentence comes from <strong class="text-dark">your products' real data</strong> – we
-                        don't invent facts here either.</p>
-                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What goes into the category copy</h2>
+                <p class="text-body text-lg">Before it writes a single sentence, Shopgrade goes through every product in the category. All you see is the finished copy.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
