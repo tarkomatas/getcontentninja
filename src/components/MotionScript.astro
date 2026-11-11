@@ -187,11 +187,26 @@
       sr.textContent = text;
       var vis = document.createElement('span');
       vis.setAttribute('aria-hidden', 'true');
-      var chars = text.split('').map(function (ch) {
-        var c = document.createElement('span');
-        c.textContent = ch;
-        vis.appendChild(c);
-        return c;
+      // A szavak egy-egy törhetetlen dobozba kerülnek: betűnkénti spanoknál a
+      // böngésző BÁRMELY betű után sort törhetne („web|shopoknak”). Sort csak a
+      // szóközöknél tör, mint a sima szövegben.
+      var chars = [];
+      text.split(' ').forEach(function (word, wi) {
+        if (wi) {
+          var sp = document.createElement('span');
+          sp.textContent = ' ';
+          vis.appendChild(sp);
+          chars.push(sp);
+        }
+        var w = document.createElement('span');
+        w.style.whiteSpace = 'nowrap';
+        word.split('').forEach(function (ch) {
+          var c = document.createElement('span');
+          c.textContent = ch;
+          w.appendChild(c);
+          chars.push(c);
+        });
+        vis.appendChild(w);
       });
       var caret = document.createElement('span');
       caret.className = 'm-caret';
