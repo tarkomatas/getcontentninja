@@ -1,0 +1,79 @@
+---
+/**
+ * Előtte / utána csúszka – két egymásra tett réteg, köztük húzható választóvonal.
+ *
+ * - A két réteg ugyanabban a rácscellában ül, ezért a doboz magassága a
+ *   hosszabbiké – nincs fix magasság, a szöveg bárhogy tördelhet.
+ * - Az „utána" réteg felül van, és balról a `--pos` értékig le van vágva
+ *   (`clip-path`): a vonaltól balra az előtte, jobbra az utána látszik.
+ * - A húzást egy láthatatlan, teljes méretű natív `<input type="range">` kapja:
+ *   egér, érintés és billentyűzet (nyilak) külön kód nélkül működik.
+ * - Ha a doboz először látszik, a csúszka egyszer finoman megmozdul, jelezve, hogy
+ *   húzható (csökkentett mozgás beállításnál nem).
+ *
+ * Slotok: `before`, `after`. Egy oldalon több példány is lehet.
+ */
+interface Props {
+  beforeLabel: string;
+  afterLabel: string;
+  ariaLabel: string;
+  hint?: string;
+}
+const { beforeLabel, afterLabel, ariaLabel, hint } = Astro.props;
+---
+
+<div class="ba-slider relative rounded-[16px] border border-border shadow-card overflow-hidden bg-card select-none focus-within:ring-2 focus-within:ring-primary/60"
+    data-ba style="--pos:50%">
+    <div class="grid">
+        <div class="col-start-1 row-start-1 bg-card p-6 pt-14">
+            <span class="absolute top-4 left-5 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500">
+                <span class="material-symbols-outlined text-[16px]">close</span>{beforeLabel}
+            </span>
+            <slot name="before" />
+        </div>
+        <div class="col-start-1 row-start-1 bg-card p-6 pt-14 relative" style="clip-path: inset(0 0 0 var(--pos))">
+            <span class="absolute top-4 right-5 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success">
+                <span class="material-symbols-outlined text-[16px]">check_circle</span>{afterLabel}
+            </span>
+            <slot name="after" />
+        </div>
+    </div>
+
+    <div class="absolute inset-y-0 w-0.5 bg-primary pointer-events-none" style="left: var(--pos)" aria-hidden="true">
+        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow">
+            <span class="material-symbols-outlined text-[22px]">swap_horiz</span>
+        </span>
+    </div>
+
+    <input type="range" min="0" max="100" value="50" aria-label={ariaLabel}
+        class="absolute inset-0 w-full h-full m-0 opacity-0 cursor-ew-resize" />
+</div>
+{hint && <p class="text-muted text-xs mt-3 text-center">{hint}</p>}
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((box) => {
+    const range = box.querySelector('input') as HTMLInputElement;
+    let touched = false;
+    const set = (v: number) => box.style.setProperty('--pos', v + '%');
+    range.addEventListener('input', () => { touched = true; set(+range.value); });
+
+    // Egyszeri „húzható" jelzés, amikor a doboz először látszik.
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((en) => {
+      if (!en[0].isIntersecting) return;
+      io.disconnect();
+      const keys = [50, 68, 34, 50], seg = 450;
+      const t0 = performance.now() + 400;
+      const step = (now: number) => {
+        if (touched) return;
+        const t = Math.max(0, now - t0), i = Math.floor(t / seg);
+        if (i >= keys.length - 1) { set(50); range.value = '50'; return; }
+        const p = (t % seg) / seg, e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        set(keys[i] + (keys[i + 1] - keys[i]) * e);
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    io.observe(box);
+  });
+</script>

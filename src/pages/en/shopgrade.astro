@@ -7,6 +7,7 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import BeforeAfterSlider from '../../components/BeforeAfterSlider.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'en';
@@ -480,21 +481,12 @@ const description =
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">See it on my own products</a>
                 </div>
 
-                <div class="flex flex-col">
-                        <div class="bg-card rounded-[16px] border border-red-200 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500"><span class="material-symbols-outlined text-[16px]">close</span>Before – manufacturer spec sheet</span></div>
-                            <p class="text-muted text-sm leading-relaxed">Stainless steel thermos, 500 ml. Material: 18/8 steel. Weight: 320 g. Colour: black. Not dishwasher safe.</p>
-                        </div>
-                        <div class="flex justify-center -my-1 relative z-10">
-                            <span class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow">
-                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
-                            </span>
-                        </div>
-                        <div class="bg-card rounded-[16px] border-2 border-success/40 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success"><span class="material-symbols-outlined text-[16px]">check_circle</span>After – Shopgrade</span></div>
-                            <p class="text-body text-sm leading-relaxed"><span class="bg-primary/10 text-dark font-semibold rounded px-1">Half a litre of coffee, with no metallic aftertaste.</span> 18/8 stainless steel <span class="bg-primary/10 text-dark font-semibold rounded px-1">adds no flavour of its own and won't rust</span> – which is why this alloy is the benchmark for flasks. 320 grams empty: you'll notice it in the bag, but it isn't the weight you leave at home on day three. <span class="bg-primary/10 text-dark font-semibold rounded px-1">Hand wash only</span> – not dishwasher safe.</p>
-                        </div>
-                        <p class="text-muted text-xs mt-4 text-center">Every sentence follows from the store's own product data.</p>
+                <div>
+                    <BeforeAfterSlider beforeLabel="Before – spec sheet" afterLabel="After – Shopgrade" ariaLabel="Before–after slider: product description"
+                        hint="Drag the line – before on the left, after on the right. Every sentence follows from the store's own product data.">
+                        <p slot="before" class="text-muted text-sm leading-relaxed">Stainless steel thermos, 500 ml. Material: 18/8 steel. Weight: 320 g. Colour: black. Not dishwasher safe.</p>
+                        <p slot="after" class="text-body text-sm leading-relaxed"><span class="bg-primary/10 text-dark font-semibold rounded px-1">Half a litre of coffee, with no metallic aftertaste.</span> 18/8 stainless steel <span class="bg-primary/10 text-dark font-semibold rounded px-1">adds no flavour of its own and won't rust</span> – which is why this alloy is the benchmark for flasks. 320 grams empty: you'll notice it in the bag, but it isn't the weight you leave at home on day three. <span class="bg-primary/10 text-dark font-semibold rounded px-1">Hand wash only</span> – not dishwasher safe.</p>
+                    </BeforeAfterSlider>
                 </div>
             </div>
         </div>
@@ -540,25 +532,20 @@ const description =
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">See it on my own categories</a>
                 </div>
 
-                <div class="flex flex-col">
-                        <div class="bg-light rounded-[16px] border border-red-200 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500"><span class="material-symbols-outlined text-[16px]">close</span>Before – empty category page</span></div>
+                <div>
+                    <BeforeAfterSlider beforeLabel="Before – empty page" afterLabel="After – Shopgrade" ariaLabel="Before–after slider: category page"
+                        hint="Drag the line. The name, URL and product list stay – only the copy is new.">
+                        <div slot="before">
                             <p class="font-bold text-dark">Electric nasal aspirators <span class="text-muted text-xs font-normal">· 41 products</span></p>
                             <p class="text-muted text-sm italic mt-2 border border-dashed border-red-200 rounded-[8px] px-3 py-2">No category copy – just the product list.</p>
                             <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
                         </div>
-                        <div class="flex justify-center -my-1 relative z-10">
-                            <span class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow">
-                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
-                            </span>
-                        </div>
-                        <div class="bg-light rounded-[16px] border-2 border-success/40 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success"><span class="material-symbols-outlined text-[16px]">check_circle</span>After – Shopgrade</span></div>
+                        <div slot="after">
                             <p class="font-bold text-dark">Electric nasal aspirators <span class="text-muted text-xs font-normal">· 41 products</span></p>
                             <p class="text-body text-sm leading-relaxed mt-2">With an electric nasal aspirator three things decide it: suction, noise, and whether it runs on a battery or from the mains. In this category the models <span class="bg-primary/10 text-dark font-semibold rounded px-1">range from 55 to 78 dB</span> – <span class="bg-primary/10 text-dark font-semibold rounded px-1">for a newborn the quieter one matters more</span>, because the strongest suction is worth nothing if it wakes the baby.</p>
                             <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
                         </div>
-                        <p class="text-muted text-xs mt-4 text-center">The name, URL and product list stay. Only the copy is new.</p>
+                    </BeforeAfterSlider>
                 </div>
             </div>
         </div>

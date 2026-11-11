@@ -9,6 +9,7 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import BeforeAfterSlider from '../../components/BeforeAfterSlider.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
 
 const locale = 'hu';
@@ -480,21 +481,12 @@ const description =
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">Nézzük meg a saját termékeimen</a>
                 </div>
 
-                <div class="flex flex-col">
-                        <div class="bg-card rounded-[16px] border border-red-200 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500"><span class="material-symbols-outlined text-[16px]">close</span>Előtte – gyártói adatlap</span></div>
-                            <p class="text-muted text-sm leading-relaxed">Rozsdamentes acél termosz, 500 ml. Anyag: 18/8 acél. Súly: 320 g. Szín: fekete. Mosogatógépben nem tisztítható.</p>
-                        </div>
-                        <div class="flex justify-center -my-1 relative z-10">
-                            <span class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow">
-                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
-                            </span>
-                        </div>
-                        <div class="bg-card rounded-[16px] border-2 border-success/40 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success"><span class="material-symbols-outlined text-[16px]">check_circle</span>Utána – Shopgrade</span></div>
-                            <p class="text-body text-sm leading-relaxed"><span class="bg-primary/10 text-dark font-semibold rounded px-1">Fél liter kávé, fémíz nélkül.</span> A 18/8-as rozsdamentes acél <span class="bg-primary/10 text-dark font-semibold rounded px-1">nem ad mellékízt és nem rozsdásodik</span> – ezért ez az ötvözet a termoszok mércéje. 320 gramm üresen: érezhető a táskában, de nem az a súly, amit a harmadik nap után otthon hagysz. <span class="bg-primary/10 text-dark font-semibold rounded px-1">Kézzel mosandó</span> – mosogatógépbe nem való.</p>
-                        </div>
-                        <p class="text-muted text-xs mt-4 text-center">Minden mondat a bolt saját termékadatából következik.</p>
+                <div>
+                    <BeforeAfterSlider beforeLabel="Előtte – gyártói adatlap" afterLabel="Utána – Shopgrade" ariaLabel="Előtte–utána csúszka: termékleírás"
+                        hint="Húzd a vonalat – balra az előtte, jobbra az utána. Minden mondat a bolt saját termékadatából következik.">
+                        <p slot="before" class="text-muted text-sm leading-relaxed">Rozsdamentes acél termosz, 500 ml. Anyag: 18/8 acél. Súly: 320 g. Szín: fekete. Mosogatógépben nem tisztítható.</p>
+                        <p slot="after" class="text-body text-sm leading-relaxed"><span class="bg-primary/10 text-dark font-semibold rounded px-1">Fél liter kávé, fémíz nélkül.</span> A 18/8-as rozsdamentes acél <span class="bg-primary/10 text-dark font-semibold rounded px-1">nem ad mellékízt és nem rozsdásodik</span> – ezért ez az ötvözet a termoszok mércéje. 320 gramm üresen: érezhető a táskában, de nem az a súly, amit a harmadik nap után otthon hagysz. <span class="bg-primary/10 text-dark font-semibold rounded px-1">Kézzel mosandó</span> – mosogatógépbe nem való.</p>
+                    </BeforeAfterSlider>
                 </div>
             </div>
         </div>
@@ -540,25 +532,20 @@ const description =
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">Nézzük meg a saját kategóriáimon</a>
                 </div>
 
-                <div class="flex flex-col">
-                        <div class="bg-light rounded-[16px] border border-red-200 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500"><span class="material-symbols-outlined text-[16px]">close</span>Előtte – üres kategóriaoldal</span></div>
+                <div>
+                    <BeforeAfterSlider beforeLabel="Előtte – üres oldal" afterLabel="Utána – Shopgrade" ariaLabel="Előtte–utána csúszka: kategóriaoldal"
+                        hint="Húzd a vonalat. A név, az URL és a terméklista marad – csak a szöveg új.">
+                        <div slot="before">
                             <p class="font-bold text-dark">Elektromos orrszívók <span class="text-muted text-xs font-normal">· 41 termék</span></p>
                             <p class="text-muted text-sm italic mt-2 border border-dashed border-red-200 rounded-[8px] px-3 py-2">Nincs kategóriaszöveg – csak a terméklista.</p>
                             <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
                         </div>
-                        <div class="flex justify-center -my-1 relative z-10">
-                            <span class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shadow-primary-glow">
-                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
-                            </span>
-                        </div>
-                        <div class="bg-light rounded-[16px] border-2 border-success/40 p-6 shadow-card">
-                            <div class="mb-3"><span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success"><span class="material-symbols-outlined text-[16px]">check_circle</span>Utána – Shopgrade</span></div>
+                        <div slot="after">
                             <p class="font-bold text-dark">Elektromos orrszívók <span class="text-muted text-xs font-normal">· 41 termék</span></p>
                             <p class="text-body text-sm leading-relaxed mt-2">Elektromos orrszívónál három dolog dönt: a szívóerő, a zajszint, és hogy akkumulátorról vagy hálózatról megy. Ebben a kategóriában <span class="bg-primary/10 text-dark font-semibold rounded px-1">55 és 78 dB között szórnak a modellek</span> – <span class="bg-primary/10 text-dark font-semibold rounded px-1">újszülöttnél a halkabb a fontosabb</span>, mert amire a baba felébred, az a legerősebb szívóerővel sem ér semmit.</p>
                             <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
                         </div>
-                        <p class="text-muted text-xs mt-4 text-center">A név, az URL és a terméklista marad. Csak a szöveg új.</p>
+                    </BeforeAfterSlider>
                 </div>
             </div>
         </div>
