@@ -11,7 +11,7 @@ const page = 'blackFriday';
 
 const title = 'Black Friday: 3 hónap ajándék + 500 kredit – Content Ninja';
 const description =
-  'Black Friday 2026 (november 16–27.): Content Ninja éves előfizetés 9 havidíj áráért, 359.910 Ft + ÁFA / év. Mellé 500 ajándék kredit, ár-garancia a következő évre és 20.000 Ft értékű személyes konzultáció (beüzemelő vagy hatékonyságnövelő). Új és meglévő havi ügyfeleknek is.';
+  'Black Friday 2026 (november 16–27.): Content Ninja éves előfizetés 9 havidíj áráért, 359.910 Ft + ÁFA / év. Mellé 500 ajándék kredit, ár-garancia a következő évre, 20.000 Ft értékű személyes konzultáció és 20.000 Ft értékű fiók audit. Új és meglévő havi ügyfeleknek is.';
 
 // ── Az akció időkerete (Europe/Budapest, novemberben CET = +01:00) ──
 // A visszaszámláló és a lejárat utáni állapot is ebből dolgozik.
@@ -20,7 +20,7 @@ const END_ISO = '2026-11-27T23:59:59+01:00';
 
 // ── A hero H1 váltakozó kifejezései („Éves előfizetéshez exkluzív ___ kedvezmény") ──
 // Mind listaáron igaz. Rövidek maradjanak: mobilon is egy sorba kell férniük.
-const HERO_ROTATE = ['3 hónapos', '25%-os', '+500 kredites', '154.960 Ft értékű'];
+const HERO_ROTATE = ['3 hónapos', '25%-os', '+500 kredites', '174.960 Ft értékű'];
 
 // ── CTA: EGY gomb az újaknak ÉS a meglévő előfizetőknek (user-döntés) ──
 // Az appot NEM módosítjuk (user-döntés), ezért a gomb egy kis választó ablakot nyit
@@ -45,6 +45,7 @@ const FEE_OPTIONS = [
   { value: 34990, label: '34.990 Ft / hó – korábbi listaár' },
   { value: 24990, label: '24.990 Ft / hó' },
 ];
+const AUDIT_HUF = 20000; // fiók audit: elemzés + javaslatok e-mailben (user-döntés)
 const CONSULT_HUF = 20000; // a személyes konzultáció értéke (user-döntés): beüzemelő (új) vagy hatékonyságnövelő (meglévő)
 const CREDIT_GIFT_HUF = 14990; // 500 kredit = az 500 kredites extra csomag ára
 
@@ -76,6 +77,16 @@ const offerCards = [
     title: 'Személyes konzultáció',
     body: '20.000 Ft értékben. Beüzemelő, ha új vagy, és hatékonyságnövelő, ha már használod a Ninját.',
   },
+  {
+    icon: 'fact_check',
+    title: 'Fiók audit',
+    body: '20.000 Ft értékben. Kielemezzük a fiókodat, és e-mailben elküldjük a fejlesztési javaslatainkat.',
+  },
+  {
+    icon: 'savings',
+    title: 'A kredit nem vész el havonta',
+    body: 'Havi előfizetésnél a maradék kredit nullázódik. Az éves csomagban mind 1 évig megmarad.',
+  },
 ];
 
 
@@ -105,7 +116,7 @@ const testimonials = [
 const faqs = [
   {
     q: 'Meddig tart az akció?',
-    a: '2026. november 16-tól november 27-ig, Black Friday éjféléig. Az akciós árat az kapja, aki eddig az időpontig előfizet. Utána az éves csomag a normál, 399.900 Ft + ÁFA áron érhető el.',
+    a: '2026. november 16-tól november 27-én éjfélig. Az akciós árat az kapja, aki eddig az időpontig előfizet. Utána az éves csomag a normál, 399.900 Ft + ÁFA áron érhető el.',
   },
   {
     q: 'Kedvezményes havidíjon vagyok. Nekem mennyibe kerül?',
@@ -113,7 +124,7 @@ const faqs = [
   },
   {
     q: 'Már havi előfizető vagyok. Nekem is jár?',
-    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát és a személyes konzultációt (nálad a hatékonyságnövelőt). Ugyanazzal a „Kérem az ajánlatot" gombbal lépsz be, és ott válthatsz évesre.',
+    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát, a személyes konzultációt (nálad a hatékonyságnövelőt) és a fiók auditot. Ugyanazzal a „Kérem az ajánlatot" gombbal lépsz be, és ott válthatsz évesre.',
   },
   {
     q: 'Mit jelent az ár-garancia?',
@@ -122,6 +133,10 @@ const faqs = [
   {
     q: 'Milyen konzultációt kapok, és hogyan zajlik?',
     a: 'Egy személyes, közös alkalmat, 20.000 Ft + ÁFA értékben, ajándékba. A vásárlás után felvesszük veled a kapcsolatot, és egyeztetünk egy időpontot. Ha új ügyfél vagy, beüzemelő konzultációt kapsz: bekötjük a webshopodat, beállítjuk a márkádat, és elkészítjük az első tartalmakat. Ha már használod a Ninját, hatékonyságnövelő konzultációt kapsz: átnézzük a beállításaidat, és megmutatjuk, hogyan hozhatsz ki belőle többet.',
+  },
+  {
+    q: 'Mi az a fiók audit?',
+    a: 'Egy 20.000 Ft + ÁFA értékű elemzés, amit ajándékba kapsz. Átnézzük a fiókodat és a beállításaidat, és e-mailben elküldjük a fejlesztési javaslatainkat: mit érdemes másképp csinálnod, hogy többet hozz ki a Ninjából.',
   },
   {
     q: 'Meddig használhatom fel az 500 ajándék kreditet?',
@@ -208,7 +223,7 @@ const faqLd = {
                „korábbi ár", ezért áll mellette a címke. A kredit forintértéke az extra
                kreditcsomag ára. JS nélkül a listaáras példa látszik (SSR alapértékek).
                A visszaszámláló nem itt van: a folyamatosan látszó alsó sáv viszi (#bf-sticky). -->
-          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-6 shadow-card" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF} data-consult={CONSULT_HUF}>
+          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-6 shadow-card" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF} data-consult={CONSULT_HUF} data-audit={AUDIT_HUF}>
             <label for="bf-fee" class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Számold ki a saját árad</label>
             <select id="bf-fee" aria-label="A mostani havidíjad" class="w-full h-11 rounded-[10px] border-border bg-light text-dark font-semibold text-sm focus:border-primary focus:ring-primary mb-4">
               {FEE_OPTIONS.map((o, i) => <option value={o.value} selected={i === 0}>{o.label}</option>)}
@@ -236,10 +251,14 @@ const faqLd = {
                 <dt class="text-body">Személyes konzultáció</dt>
                 <dd class="text-success font-bold whitespace-nowrap">+20.000 Ft</dd>
               </div>
+              <div class="flex items-baseline justify-between gap-4">
+                <dt class="text-body">Fiók audit</dt>
+                <dd class="text-success font-bold whitespace-nowrap">+20.000 Ft</dd>
+              </div>
 
               <div class="bg-success/10 border border-success/30 rounded-[12px] px-4 py-2.5 flex items-center justify-between gap-4">
                 <dt class="text-dark font-bold">Összes előnyöd</dt>
-                <dd class="text-success text-xl md:text-2xl font-extrabold whitespace-nowrap"><span data-calc="total">154.960</span> Ft</dd>
+                <dd class="text-success text-xl md:text-2xl font-extrabold whitespace-nowrap"><span data-calc="total">174.960</span> Ft</dd>
               </div>
             </dl>
 
@@ -260,11 +279,11 @@ const faqLd = {
       <div class="max-w-[1200px] mx-auto px-4 md:px-10">
         <div class="text-center max-w-[700px] mx-auto mb-14">
           <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Mit kapsz?</span>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Négy ajándék egy éves csomagban</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Öt ajándék az éves csomagban</h2>
           <p class="text-body text-lg">Új ügyfélként és havi előfizetőként is, ha most évesre váltasz.</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {offerCards.map((c) => (
             <div class="bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all">
               <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center mb-5">
@@ -276,24 +295,11 @@ const faqLd = {
           ))}
         </div>
 
-        <!-- Éves előny, külön kiemelve (user-kérés): a kredit nem vész el havonta. -->
-        <div class="mt-6 bg-card rounded-[16px] border border-border p-8 shadow-card hover:shadow-card-hover transition-all flex flex-col sm:flex-row sm:items-center gap-5">
-          <div class="w-12 h-12 rounded-[12px] bg-primary/10 flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary text-[22px]">savings</span>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-dark mb-2">A kredit nem vész el havonta</h3>
-            <p class="text-body text-sm leading-relaxed">
-              Havi előfizetésnél a fel nem használt kredit minden hónap végén nullázódik. Az éves csomagban
-              mind a 6.500 kredited 1 évig megmarad, és akkor használod el, amikor kell.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════
-     A TELJES RENDSZER (user-kérés: általános bemutató sok kártyával, a „Négy ajándék" után)
+     A TELJES RENDSZER (user-kérés: általános bemutató sok kártyával, az „Öt ajándék" után)
      A modulrács a `modules.ts`-ből jön (mind a 10 modul). `noLinks`: a kampányoldalról
      ne vigyen el a látogató, csak megmutassa, mennyi mindent tud a rendszer.
 ═══════════════════════════════════════ -->
@@ -382,9 +388,9 @@ const faqLd = {
 ═══════════════════════════════════════ -->
     <section id="zaro-cta" class="bg-primary py-16 md:py-20">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, Black Friday éjfélig</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">3 hónap ajándék + 500 kredit, november 27. éjfélig</h2>
         <p class="text-white/80 text-lg mb-8 max-w-[640px] mx-auto">
-          12 hónap 9 havidíj áráért, ár-garanciával és személyes konzultációval.
+          12 hónap 9 havidíj áráért, ár-garanciával, személyes konzultációval és fiók audittal.
         </p>
 
         <div class="flex flex-col items-center gap-3" data-bf-cta>
@@ -535,7 +541,7 @@ const faqLd = {
       var root = document.getElementById('bf-calc');
       var sel = document.getElementById('bf-fee');
       if (!root || !sel) return;
-      var gift = (Number(root.dataset.creditGift) || 0) + (Number(root.dataset.consult) || 0);
+      var gift = (Number(root.dataset.creditGift) || 0) + (Number(root.dataset.consult) || 0) + (Number(root.dataset.audit) || 0);
       var fmt = function (n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
       function set(k, v) {
         root.querySelectorAll('[data-calc="' + k + '"]').forEach(function (el) { el.textContent = fmt(v); });
