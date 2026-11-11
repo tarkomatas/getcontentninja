@@ -1,30 +1,28 @@
 ---
 /**
- * **Meta (Facebook + Instagram) hirdetéskezelő – várólista-oldal** (`/hu/facebook-hirdetes/`,
- * csak magyarul, 2026-10-03).
+ * **Meta (Facebook + Instagram) hirdetéskezelő – posztkiemelés** (`/hu/facebook-hirdetes/`,
+ * csak magyarul; 2026-10-03-án várólista-oldalként indult, 2026-11-11 óta élő oldal).
  *
- * Az első lépés a **posztkiemelés** (app: `docs/features/boost-post.md`): egy már
- * kiment posztra a boltos három választással pénzt tesz, a pénz a SAJÁT Meta
- * hirdetési fiókjából fogy, és a Meta-oldali keret + végdátum miatt mindenképp
- * leáll. A teljes kampánykezelés a következő lépés (`meta-ads-manager.md`, még
- * csak terv – az oldal ezért csak egy sávban, „következik" címkével említi).
+ * A funkció a **posztkiemelés** (app: `docs/features/boost-post.md`, 2026-10-20 óta
+ * minden előfizetőnek nyitva; a Meta App Review ekkor hagyta jóvá): egy kiment vagy
+ * beütemezett posztra a boltos pár választással pénzt tesz, a pénz a SAJÁT Meta hirdetési
+ * fiókjából fogy, és a Meta-oldali keret + végdátum miatt mindenképp leáll. A sablonban
+ * előre is beállítható (`boost-template.md`, 2026-10-28), így az automatizmus posztjai is
+ * kiemelve mennek ki. A teljes kampánykezelés a következő lépés (`meta-ads-manager.md`,
+ * még csak terv – az oldal ezért csak egy „folyamatosan fejlesztjük" sávban említi).
  *
- * ⚠️ **A kiemelés még NEM él** (admin-kapu, a Meta App Review jóváhagyásáig),
- * ezért a `chatgpt-ads` mintája: „Hamarosan" jelvény, és az űrlap az indulásról
- * kér értesítést (hírlevél-végpont, `source_form: 'meta_ads'`). A GYIK válaszai
- * önmagukban is idézhetők (FAQPage JSON-LD), ezért amelyik a használatról szól,
- * az kimondja, hogy a funkció hamarosan indul.
+ * Az űrlap a bemutató-foglaló lead-űrlap (`LeadFormScript`, `lead_forras: 'facebook-hirdetes'`),
+ * a kiszűrő kérdések a `tiktok` / `youtube` oldaléval azonosak. Az „Egyéb" boltmotor itt
+ * sem kiszűrő. A régi várólista köszönőoldala (`metaAdsThanks`) megmaradt, de már nem visz rá út.
  *
- * A már élő hirdetésgenerálónak (`docs/features/meta-ads.md`) SZÁNDÉKOSAN nincs
- * saját szakasza (user-döntés 2026-10-03): az oldal a kiemelésről szól, a
- * generátort csak a GYIK említi.
+ * A hirdetésgenerálónak (`docs/features/meta-ads.md`) SZÁNDÉKOSAN nincs saját szakasza
+ * (user-döntés 2026-10-03): az oldal a kiemelésről szól, a generátort csak a GYIK említi.
  *
  * Amit az oldal NEM ígérhet (v1-ben nincs): saját/hasonmás közönség, érdeklődés-
- * célzás, Story kiemelése, automatikus kiemelés szabály alapján, kampány saját
- * anyagból, hirdetés publikálás nélkül. Mi nem kezelünk pénzt, és a kiemelésért
- * kreditet sem vonunk le.
+ * célzás, Story kiemelése, kampány saját anyagból, hirdetés publikálás nélkül.
+ * Mi nem kezelünk pénzt, és a kiemelésért kreditet sem vonunk le.
  *
- * **Csak magyarul** (`en: null`): az app és a várólista-levél magyar.
+ * **Csak magyarul** (`en: null`): az app és a súgó magyar.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
@@ -33,44 +31,34 @@ import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
 import ModuleGrid from '../../components/ModuleGrid.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
-import WaitlistScript from '../../components/WaitlistScript.astro';
-import {
-  NEWSLETTER_CONSENT_TEXT,
-  NEWSLETTER_CONSENT_LINK_TEXT,
-  WAITLIST_PRIVACY_CONSENT_TEXT,
-  WAITLIST_PRIVACY_LINK_TEXT,
-  splitAroundLink,
-} from '../../data/newsletter';
-import { pathFor } from '../../i18n/routes';
+import LeadFormScript from '../../components/LeadFormScript.astro';
 
 const locale = 'hu';
 const page = 'metaAds';
 // A cím ~60, a leírás ~155 karakter alatt: a Google e fölött levágja a találati listában.
 const title = 'Facebook-hirdetés webshopoknak: posztkiemelés | Content Ninja';
 const description =
-  'Emeld ki a legjobb Facebook- és Instagram-posztjaidat a Content Ninjából: havi plafon, végdátum, mérés. Hamarosan indul – kérj értesítést.';
+  'Emeld ki a legjobb Facebook- és Instagram-posztjaidat a Content Ninjából: havi plafon, végdátum, mérés. Kérj díjmentes online bemutatót!';
 const keywords =
   'Facebook hirdetés, Facebook poszt kiemelése, Instagram hirdetés, Meta hirdetés, Facebook hirdetéskezelő, poszt kiemelés, webshop Facebook hirdetés, Meta hirdetéskezelő, Content Ninja';
 
-/** A két pipa mondata – SZÓ SZERINT az, ami a `WaitlistScript` payloadjába kerül. */
-const consentText = NEWSLETTER_CONSENT_TEXT[locale];
-const consent = splitAroundLink(consentText, NEWSLETTER_CONSENT_LINK_TEXT[locale]);
-const privacyConsentText = WAITLIST_PRIVACY_CONSENT_TEXT[locale];
-const privacyConsent = splitAroundLink(privacyConsentText, WAITLIST_PRIVACY_LINK_TEXT[locale]);
+/** A kiemelés súgócikkei az appban. */
+const HELP_URL = 'https://app.getcontentninja.com/help/poszt-kiemelese';
+const HELP_AD_ACCOUNT_URL = 'https://app.getcontentninja.com/help/meta-hirdetesi-fiok-bekotese';
 
 /**
  * GYIK – EGY forrás a látható listának és a FAQPage JSON-LD-nek. A válaszok
  * önmagukban is teljesek: egy AI-kereső egy-egy `acceptedAnswer`-t emel ki,
- * kontextus nélkül – ezért ahol a használatról van szó, a „hamarosan" benne van.
+ * kontextus nélkül.
  */
 const faqs = [
   {
-    q: 'Mikor indul a Facebook- és Instagram-posztkiemelés a Content Ninjában?',
-    a: 'Hamarosan. Ezen az oldalon feliratkozhatsz a várólistára, és e-mailben szólunk, amint bekapcsolhatod. A Meta hirdetésgeneráló addig is működik: a termékeidből hirdetési szöveget és vizuált készít.',
+    q: 'Ki lehet emelni a posztjaimat a Content Ninjából?',
+    a: 'Igen, minden előfizetőnek. A publikált vagy beütemezett Facebook- és Instagram-posztodat a poszt-szerkesztő Kiemelés lépésén emeled ki, a saját Meta hirdetési fiókodról. Kiválasztod a célt, a közönséget, az összeget és az időtartamot, és bármikor szüneteltetheted vagy leállíthatod.',
   },
   {
     q: 'Mit jelent egy Facebook-poszt kiemelése?',
-    a: 'A kiemeléssel egy már kiment Facebook- vagy Instagram-posztot pénzért több ember lát. A Content Ninjában a poszt mellől indítod majd: kiválasztod, hol fusson, kinek mutassa, mennyit költhet és meddig. A Meta ugyanúgy hirdetésként futtatja, mint a Facebook saját „Bejegyzés kiemelése" gombjánál, és a poszt reakciói, hozzászólásai megmaradnak.',
+    a: 'A kiemeléssel egy már kiment Facebook- vagy Instagram-posztot pénzért több ember lát. A Content Ninjában a poszt mellől indítod: kiválasztod, hol fusson, kinek mutassa, mennyit költhet és meddig. A Meta ugyanúgy hirdetésként futtatja, mint a Facebook saját „Bejegyzés kiemelése" gombjánál, és a poszt reakciói, hozzászólásai megmaradnak.',
   },
   {
     q: 'Ki fizeti a hirdetést, és kerül-e külön pénzbe a kiemelés?',
@@ -82,7 +70,7 @@ const faqs = [
   },
   {
     q: 'Kell hozzá saját Meta hirdetési fiók?',
-    a: 'Igen, egy saját hirdetési fiók kell, érvényes fizetési móddal. A Content Ninjában külön gombbal kötöd majd be, egy külön Facebook-ablakban, ahol csak a hirdetési engedélyt adod meg. A posztolási kapcsolatodat ez nem érinti. Bekötéskor a rendszer ellenőrzi, hogy a fiók aktív-e, és van-e rajta fizetési mód.',
+    a: 'Igen, egy saját hirdetési fiók kell, érvényes fizetési móddal. A Content Ninjában külön gombbal kötöd be, egy külön Facebook-ablakban, ahol csak a hirdetési engedélyt adod meg. A posztolási kapcsolatodat ez nem érinti. Bekötéskor a rendszer ellenőrzi, hogy a fiók aktív-e, és van-e rajta fizetési mód.',
   },
   {
     q: 'Kinek mutatja a kiemelt posztot?',
@@ -97,16 +85,20 @@ const faqs = [
     a: 'A költést, az elérést, a boltra kattintásokat, egy kattintás árát és az átkattintási arányt. A Meta-pixeled alapján a vásárlásokat és a megtérülést is. Mellé kerül a Meta saját relevancia-rangsora: minőség, interakció, konverzió. A kiemelt és az organikus elérést egy grafikonon látod, az összes kiemelést pedig az Analitika „Meta hirdetések" fülén.',
   },
   {
+    q: 'Az automatizmus posztjait is ki lehet emelni?',
+    a: 'Igen. A sablonban előre beállíthatod a kiemelést: a felületet, a közönséget, a keretet és az időtartamot. Minden ebből a sablonból készülő poszt – kézzel vagy automatizmusból – kiemelve megy ki, amikor kimegy. Bekapcsoláskor és a keret emelésekor egyszer rákérdezünk, és kiírjuk, posztonként legfeljebb mennyit költ.',
+  },
+  {
     q: 'Mi történik, ha a Meta elutasítja a kiemelést?',
     a: 'A Meta minden hirdetést felülvizsgál, általában perceken belül. Ha elutasítja, nem indul költés. Az okát magyarul látod, egy linkkel, ahol újra-ellenőrzést kérhetsz.',
   },
   {
     q: 'Mi a különbség a Meta hirdetésgeneráló és a posztkiemelés között?',
-    a: 'A hirdetésgeneráló már most működik: a termékeidből hirdetési szöveget, főcím-változatokat és képet vagy videót készít, amit letöltesz, és a Meta hirdetéskezelőjében adsz fel. A posztkiemelés hamarosan indul: egy már kiment posztra tesz pénzt, közvetlenül a Content Ninjából.',
+    a: 'A hirdetésgeneráló már most működik: a termékeidből hirdetési szöveget, főcím-változatokat és képet vagy videót készít, amit letöltesz, és a Meta hirdetéskezelőjében adsz fel. A posztkiemelés egy már kiment vagy beütemezett posztra tesz pénzt, közvetlenül a Content Ninjából.',
   },
   {
     q: 'A Ninja AI asszisztenssel is ki lehet emelni egy posztot?',
-    a: 'Igen, a kiemelés indulásától a beépített Ninja AI is el tudja indítani. Például: „Emeld ki a tegnapi akciós posztot 5 ezerért egy hétre a követőimnek." Indítás előtt egy kártyán kiírja az összeget és a végdátumot, és csak a jóváhagyásod után indul.',
+    a: 'Igen, a beépített Ninja AI is el tudja indítani. Például: „Emeld ki a tegnapi akciós posztot 5 ezerért egy hétre a követőimnek." Indítás előtt egy kártyán kiírja az összeget és a végdátumot, és csak a jóváhagyásod után indul.',
   },
 ];
 
@@ -164,7 +156,18 @@ const steps = [
 
   <Fragment slot="head">
     <style is:inline>
-        /* Csak ami nincs a global.css-ben: a hero jobb oszlopának kiemelt kártyája. */
+        /* Csak ami nincs a global.css-ben: a lead-űrlap lépései + a hero jobb oszlopának kártyája. */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+        .form-step { display: none; animation: fadeIn 0.4s ease-out; }
+        .form-step.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .hero-form-card {
             background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
             border: 1.5px solid rgba(108, 92, 231, 0.24);
@@ -182,7 +185,7 @@ const steps = [
     <!-- Közös fejléc – ?type=ld (lp-mode) esetén minimálra vált (logó + nyelvváltó) -->
     <Header locale={locale} page={page} />
 
-    <!-- 1. Hero + értesítéskérő űrlap -->
+    <!-- 1. Hero + jelentkezési űrlap -->
     <section id="hero" class="hero-gradient py-12 md:py-16 px-4 md:px-10 overflow-hidden">
         <div class="max-w-[1200px] mx-auto w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
@@ -191,8 +194,8 @@ const steps = [
                 <div class="flex flex-col gap-4 md:gap-6 text-left">
 
                     <span class="inline-flex items-center gap-2 self-start bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
-                        <span class="material-symbols-outlined text-[16px]">rocket_launch</span>
-                        Hamarosan indul
+                        <span class="material-symbols-outlined text-[16px]">campaign</span>
+                        Posztkiemelés
                     </span>
 
                     <h1 class="text-4xl md:text-[2.85rem] lg:text-5xl font-extrabold leading-[1.08] tracking-[-0.03em] text-dark">
@@ -236,103 +239,212 @@ const steps = [
 
                 </div>
 
-                <!-- Értesítéskérő űrlap (a hírlevél-végpontra megy – `WaitlistScript`) -->
+                <!-- Jelentkezési űrlap (bemutató-foglaló, `LeadFormScript`) – a tiktok/youtube oldaléval azonos -->
                 <div class="w-full relative">
                     <div class="hero-form-card relative w-full rounded-[16px] transition-all py-6 px-4 md:py-8 md:px-5">
-                        <div id="waitIntro">
-                            <h2 class="text-2xl font-bold text-center mb-2 text-primary">Szólunk, amikor indul</h2>
-                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-5">
+                        <div id="formIntro">
+                            <h2 class="text-2xl font-bold text-center mb-2 text-primary">Jelentkezés online bemutatóra</h2>
+                            <div class="flex items-center gap-2.5 justify-center bg-light border border-primary/15 rounded-[10px] px-4 py-3 mb-3">
                                 <span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
-                                <p class="text-sm text-body"><strong class="font-bold text-dark">A posztkiemelés hamarosan
-                                    indul.</strong> Iratkozz fel, és e-mailben szólunk, amint bekapcsolhatod.</p>
+                                <p class="text-sm text-body"><strong class="font-bold text-dark">Közvetlen kipróbálásra
+                                    nincs lehetőség</strong> – de egy online megbeszélés keretében bemutatjuk neked a
+                                    rendszert részletesen, akár a te saját webáruházad termékeivel.</p>
                             </div>
                         </div>
 
-                        <form id="waitlistForm" class="space-y-4">
+                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
-                            <!--
-                                A kiszűrés szabályát az `<option data-reject="hard">` mondja meg (a
-                                `WaitlistScript` olvassa). Az „Egyéb" boltmotor itt NEM kiszűrő: a
-                                kiemelés a kiment posztra épül, nem a webshop-integrációra – ugyanúgy,
-                                mint a posztolás űrlapján. Kiszűrő viszont, akinek nincs webshopja, és aki
-                                nem a közeljövőben hirdetne (a `chatgpt-ads` várólista szabálya).
-                            -->
-                            <div>
-                                <label for="waitShop" class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
-                                <select id="waitShop" required
-                                    class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
-                                    <option value="" disabled selected>Válassz...</option>
-                                    <option value="UNAS">UNAS</option>
-                                    <option value="Shoprenter">Shoprenter</option>
-                                    <option value="WooCommerce">WooCommerce</option>
-                                    <option value="Egyéb">Egyéb</option>
-                                    <option value="Még nincs webshopom" data-reject="hard">Még nincs webshopom</option>
-                                </select>
+                            <!-- Step 1: Qualifying Questions -->
+                            <div class="form-step active" data-step="1">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Milyen webshopod van?</label>
+                                        <select name="has_webshop" id="hasWebshop"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="UNAS">UNAS</option>
+                                            <option value="Shoprenter">Shoprenter</option>
+                                            <option value="WooCommerce">WooCommerce</option>
+                                            <option value="Egyéb">Egyéb</option>
+                                            <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
+                                                indítani</option>
+                                            <option value="Más típusú vállalkozásom van" data-reject="hard">Más típusú vállalkozásom
+                                                van</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Milyen szinten van a céged
+                                            a marketingben?</label>
+                                        <select name="marketing_level" id="marketingLevel"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Egyáltalán nem értünk semmit a témához" data-reject="hard">Egyáltalán nem értünk
+                                                semmit a témához</option>
+                                            <option value="Kezdő, minimális tudással">Kezdő, minimális tudással</option>
+                                            <option value="Haladó">Haladó</option>
+                                            <option value="Profi">Profi</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ki csinálja jelenleg a
+                                            posztolást?</label>
+                                        <select name="marketing_role" id="marketingRole"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Én, cégvezetőként">Én, cégvezetőként</option>
+                                            <option value="Belsős marketing csapat">Belsős marketing csapat</option>
+                                            <option value="Külsős ügynökség">Külsős ügynökség</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Ha a bemutató alapján
+                                            tetszik, mikor tudnád elkezdeni használni a szoftvert?</label>
+                                        <select name="timing" id="timing"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
+                                            <option value="" disabled selected>Válassz...</option>
+                                            <option value="Azonnal">Azonnal</option>
+                                            <option value="1 hónapon belül">1 hónapon belül</option>
+                                            <option value="2-3 hónapon belül" data-reject="soft">2-3 hónapon belül</option>
+                                            <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="qualifyAndNext()"
+                                        class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Tovább
+                                    </button>
+                                </div>
                             </div>
 
-                            <div>
-                                <label for="waitTiming" class="block text-sm font-bold text-body mb-1">Mikor tervezed elkezdeni használni?</label>
-                                <select id="waitTiming" required
-                                    class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all">
-                                    <option value="" disabled selected>Válassz...</option>
-                                    <option value="Azonnal">Azonnal</option>
-                                    <option value="1 hónapon belül">1 hónapon belül</option>
-                                    <option value="2-3 hónapon belül" data-reject="hard">2-3 hónapon belül</option>
-                                    <option value="Még csak érdeklődöm" data-reject="hard">Még csak érdeklődöm</option>
-                                </select>
+                            <!-- Disqualification Screen (hard reject) -->
+                            <div class="form-step" data-step="rejected">
+                                <div class="text-center py-6 space-y-4">
+                                    <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                    <p class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        A megadott adatok alapján úgy látjuk, hogy nem lenne a platformunk megfelelő
+                                        számodra. Így nem is szeretnénk az idődet húzni, megértésed köszönjük!
+                                    </p>
+                                </div>
                             </div>
 
-                            <div>
-                                <label for="waitEmail" class="block text-sm font-bold text-body mb-1">E-mail cím</label>
-                                <input type="email" id="waitEmail" required autocomplete="email"
-                                    class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
-                                    placeholder="pl. anna@webshopom.hu">
+                            <!-- Soft Reject Screen (timing not ideal) -->
+                            <div class="form-step" data-step="soft-reject">
+                                <div class="space-y-5">
+                                    <div class="text-center space-y-3">
+                                        <h4 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h4>
+                                        <p class="text-body leading-relaxed text-sm">
+                                            A bemutatót csak olyanoknak tudjuk vállalni, akik azonnal használni szeretnék
+                                            a rendszert. Maradjunk kapcsolatban addig is – szívesen elküldenénk egy
+                                            <strong>videós bemutatót</strong> neked.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Email cím</label>
+                                        <input type="email" id="softRejectEmail"
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectPrivacy"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectPrivacy">
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+                                    <div class="flex items-start gap-2 text-xs text-muted ml-1">
+                                        <input type="checkbox" id="softRejectNewsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="softRejectNewsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles/"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+                                    <button type="button" onclick="submitSoftReject(this)"
+                                        class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                        Kérem a videót
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- KÖTELEZŐ adatkezelési pipa – az indulási értesítés jogalapja. -->
-                            <div class="flex items-start gap-2 text-xs text-muted ml-1">
-                                <input type="checkbox" id="waitPrivacy" class="mt-1 rounded text-primary focus:ring-primary">
-                                <label for="waitPrivacy">
-                                    {privacyConsent ? (
-                                        <Fragment>{privacyConsent.before}<a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">{privacyConsent.link}</a>{privacyConsent.after}</Fragment>
-                                    ) : (
-                                        <Fragment>{privacyConsentText} <a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">Adatkezelési tájékoztató</a></Fragment>
-                                    )}
-                                </label>
+                            <!-- Soft Reject Thank You Screen -->
+                            <div class="form-step" data-step="soft-reject-thanks">
+                                <div class="text-center py-6 space-y-4">
+                                    <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                                        <span class="material-symbols-outlined text-success text-3xl">check_circle</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark">Megkaptuk!</h4>
+                                    <!-- Két változat: az „újdonságok" csak akkor igaz, ha a hírlevelet is kérte.
+                                         A videó minden esetben megy – a script választ közülük. -->
+                                    <p data-thanks="plain" class="text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Néhány percen belül elküldjük a bemutató videót. Köszönjük az érdeklődésedet!
+                                    </p>
+                                    <p data-thanks="newsletter" class="hidden text-body leading-relaxed max-w-[400px] mx-auto">
+                                        Néhány percen belül elküldjük a bemutató videót, és ezentúl az aktuális újdonságokról is hírt adunk. Köszönjük az érdeklődésedet!
+                                    </p>
+                                </div>
                             </div>
 
-                            <!-- OPCIONÁLIS hírlevél-pipa – a címkéje SZÓ SZERINT a naplózott mondat. -->
-                            <div class="flex items-start gap-2 text-xs text-muted ml-1">
-                                <input type="checkbox" id="waitNewsletter" class="mt-1 rounded text-primary focus:ring-primary">
-                                <label for="waitNewsletter">
-                                    {consent ? (
-                                        <Fragment>{consent.before}<a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">{consent.link}</a>{consent.after}</Fragment>
-                                    ) : (
-                                        <Fragment>{consentText} <a href="/hu/adatkezeles/" target="_blank" class="underline hover:text-primary">Adatkezelési tájékoztató</a></Fragment>
-                                    )}
-                                </label>
+                            <!-- Step 2: Contact Info & Privacy -->
+                            <div class="form-step" data-step="2">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Név</label>
+                                        <input type="text" name="name" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. Kovács János">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Céges email cím</label>
+                                        <input type="email" name="email" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="pl. janos@ceg.hu">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-body mb-1">Telefonszám</label>
+                                        <input type="tel" name="phone" required
+                                            class="w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+                                            placeholder="+36 30 123 4567">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="privacy" required
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="privacy">
+                                            Az <a href="/hu/adatkezeles/" target="_blank"
+                                                class="underline hover:text-primary">Adatkezelési Tájékoztatóban</a>
+                                            foglaltakat elolvastam, megértettem és tudomásul vettem.
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-start gap-2 text-xs text-muted my-2 ml-1">
+                                        <input type="checkbox" id="newsletter" name="newsletter"
+                                            class="mt-1 rounded text-primary focus:ring-primary">
+                                        <label for="newsletter">
+                                            Érdekelnek hasonló izgalmas tartalmak! Feliratkozom a hírlevélre.
+                                            (<a href="/hu/adatkezeles/"
+                                                class="underline hover:text-primary">Adatkezelési tájékoztató</a>)
+                                        </label>
+                                    </div>
+
+                                    <div class="flex gap-3 mt-4">
+                                        <button type="button" onclick="nextStep(1)"
+                                            class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
+                                            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+                                            Vissza
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="flex-1 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
+                                            Tovább az időpontfoglaláshoz!
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div id="waitError" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-[10px] px-4 py-3"></div>
-
-                            <button type="submit" id="waitSubmit"
-                                class="w-full flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
-                                <span id="waitSubmitLabel">Értesítést kérek az indulásról</span>
-                            </button>
                         </form>
-
-                        <!-- Kiszűrés: semmit nem küldünk el (a `WaitlistScript` mutatja). -->
-                        <div id="waitRejected" class="hidden text-center py-6 space-y-4">
-                            <h3 class="text-xl font-bold text-dark">Köszönjük az érdeklődésedet!</h3>
-                            <p class="text-body leading-relaxed max-w-[400px] mx-auto text-sm">
-                                A megadott adatok alapján úgy látjuk, hogy a Meta hirdetéskezelő most nem lenne
-                                megfelelő számodra. Így nem is szeretnénk az idődet húzni – megértésed köszönjük!
-                            </p>
-                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -392,6 +504,14 @@ const steps = [
             </div>
 
             <HowItWorksSteps cardClass="bg-light" steps={steps} />
+
+            <p class="text-center text-body text-sm mt-10">
+                Lépésről lépésre a súgóban:
+                <a href={HELP_AD_ACCOUNT_URL} target="_blank" rel="noopener" class="text-primary font-semibold underline">a Meta
+                    hirdetési fiók bekötése</a> és
+                <a href={HELP_URL} target="_blank" rel="noopener" class="text-primary font-semibold underline">egy poszt
+                    kiemelése</a>.
+            </p>
         </div>
     </section>
 
@@ -543,17 +663,16 @@ const steps = [
         </div>
     </section>
 
-    <!-- 7. Árazás – a kiemelés az előfizetés része; a gombok a bemutatóra visznek (az a teljes
-         rendszerről szól, nem a hamarosan induló kiemelésről). -->
+    <!-- 7. Árazás – a kiemelés az előfizetés része; a gombok a hero űrlapjához visznek. -->
     <section id="arazas" class="bg-card py-20 md:py-28">
         <div class="max-w-[900px] mx-auto px-4 md:px-10">
             <div class="text-center mb-10 md:mb-16">
                 <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Árazás</span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Átlátható, fix havidíj</h2>
-                <p class="text-body text-lg">A kiemelés az előfizetés része lesz – nincs rá külön díj.</p>
+                <p class="text-body text-lg">A kiemelés az előfizetés része – nincs rá külön díj.</p>
             </div>
 
-            <PricingCards locale={locale} />
+            <PricingCards locale={locale} ctaHref="#hero" />
 
             <div class="bg-light rounded-[16px] border border-border p-5 sm:p-8 shadow-card mt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
@@ -610,13 +729,13 @@ const steps = [
     <!-- 10. Záró CTA -->
     <section class="bg-primary py-16 md:py-20">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Legyél ott az elsők között</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nézzük meg, mit hozna a kiemelés a te posztjaidnak</h2>
             <p class="text-white/80 text-lg mb-8 max-w-[620px] mx-auto">
-                Szólunk e-mailben, amint a posztkiemelés bekapcsolható.
+                Egy online bemutatón végigmegyünk a rendszeren – akár a te saját webáruházad termékeivel.
             </p>
             <a href="#hero" class="cta-on-primary px-8 h-14 text-base inline-flex">
-                Értesítést kérek az indulásról
-                <span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+                Bemutatót kérek
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
             </a>
         </div>
     </section>
@@ -656,7 +775,7 @@ const steps = [
         }
     </script>
 
-    <!-- Várólista: a HÍRLEVÉL-végpontra megy (`source_form: meta_ads`) – lásd a komponenst. -->
-    <WaitlistScript locale={locale} source="meta_ads" thanksPath={pathFor('metaAdsThanks', locale)} />
+    <!-- Lead form script -->
+    <LeadFormScript locale={locale} source="facebook-hirdetes" />
   </div>
 </BaseLayout>

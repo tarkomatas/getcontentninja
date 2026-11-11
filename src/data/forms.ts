@@ -66,6 +66,7 @@ export type FormSource =
   | 'woocommerce'
   | 'tiktok'
   | 'youtube-shorts'
+  | 'facebook-hirdetes'
   | 'ai-video'
   | 'kapcsolat';
 
@@ -117,6 +118,9 @@ export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
   // A YouTube Shorts-posztolás SEO/GEO céloldal (`/hu/youtube-shorts-posztolas/`, csak
   // magyarul) – a `tiktok` kulcs mintájára. Az app oldalán érdemes a
   // `FORM_LABELS`/`PATH_TO_FORRAS` táblákba is felvenni.
+  // A Meta posztkiemelés oldala (`/hu/facebook-hirdetes/`, csak magyarul) – 2026-11-11-ig
+  // várólista volt (hírlevél-végpont, `meta_ads`), azóta bemutató-foglaló lead-űrlap.
+  'facebook-hirdetes': { hu: '📣 Facebook-hirdetés (posztkiemelés) jelentkezés', en: '📣 Facebook ads (post boost) lead' },
   'youtube-shorts': { hu: '▶️ YouTube Shorts-posztolás jelentkezés', en: '▶️ YouTube Shorts posting lead' },
   // Az AI videókészítés SEO/GEO céloldal (`/hu/ai-video/`, csak magyarul). Külön
   // kulcs, hogy a videós keresésekből jött érdeklődő elkülönüljön a `posztolas`

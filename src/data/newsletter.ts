@@ -50,8 +50,8 @@ export type NewsletterSource =
    */
   | 'chatgpt_ads'
   /**
-   * A `/hu/facebook-hirdetes/` oldal hero-űrlapja: a Meta posztkiemelés még nem
-   * él, ezért ugyanaz a várólista-út, mint a `chatgpt_ads`-nél.
+   * A `/hu/facebook-hirdetes/` oldal hero-űrlapja volt 2026-11-11-ig (várólista). A kiemelés
+   * azóta él, az oldal bemutató-foglaló lead-űrlapot használ; a kulcs a régi beküldések miatt marad.
    *
    * Az app a „CN Meta Ads érdeklődők" MailerLite-csoportba teszi (app:
    * `onMetaAdsNotifyRequest`, newsletter-optin §3.6) – de CSAK ha a

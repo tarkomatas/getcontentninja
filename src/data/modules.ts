@@ -165,7 +165,7 @@ export const MODULES: ModuleDef[] = [
     page: 'metaAds',
     hu: {
       title: 'Meta hirdetések',
-      desc: 'Facebook és Instagram hirdetési kreatívok és szövegek automatikusan, a termékadataidból. Hamarosan a posztjaid kiemelésével is.',
+      desc: 'Facebook és Instagram hirdetési kreatívok és szövegek automatikusan, a termékadataidból, és a legjobb posztjaid kiemelése pénzért.',
     },
     en: {
       title: 'Meta ad generator',
@@ -311,10 +311,9 @@ export const NAV_GROUPS: NavGroupDef[] = [
     wide: true,
     items: [
       {
-        // Csak magyarul (`metaAds` → `en: null`); a posztkiemelés még nem él.
+        // Csak magyarul (`metaAds` → `en: null`). A posztkiemelés 2026-10-20 óta él.
         page: 'metaAds',
         icon: 'campaign',
-        soon: true,
         hu: { label: 'Meta hirdetéskezelő', desc: 'Facebook- és Instagram-kiemelés' },
         en: { label: 'Meta ad manager', desc: 'Boost Facebook & Instagram posts' },
       },
