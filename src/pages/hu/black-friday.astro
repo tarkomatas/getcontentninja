@@ -209,6 +209,11 @@ const faqLd = {
 
             <!-- EGY gomb mindenkinek: az app a belépés állapota szerint irányít. -->
             <div class="flex flex-col items-center lg:items-start gap-3 mt-2" data-bf-cta>
+              <!-- Kis számláló a gomb fölött (4. ötlet). JS nélkül rejtve marad. -->
+              <span class="hidden items-center gap-2 bg-primary/10 text-primary font-bold text-sm rounded-full px-3 py-1.5 tabular-nums" data-bf-pill>
+                <span class="bf-dot w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>
+                <span data-bf-pill-text></span>
+              </span>
               <a href={REGISTER_URL} data-bf-offer class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
                 Kérem az ajánlatot
                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -456,7 +461,7 @@ const faqLd = {
        számlálót; lejárat után a helytartóval együtt eltűnik (`data-bf-cta`). -->
   <div
     id="bf-sticky"
-    class="fixed inset-x-0 bottom-0 z-40 bg-dark text-white shadow-[0_-8px_24px_rgba(0,0,0,0.18)] px-4 md:px-10 py-3"
+    class="bf-bar fixed inset-x-0 bottom-0 z-40 bg-dark text-white shadow-[0_-8px_24px_rgba(0,0,0,0.18)] px-4 md:px-10 py-3 transition-colors duration-500"
     data-bf-cta
     data-bf-countdown
     data-start={START_ISO}
@@ -471,20 +476,35 @@ const faqLd = {
         <p class="hidden md:block text-xs font-semibold text-white/60 mb-1 text-center" data-bf-label>Az akció november 27-én éjfélig tart.</p>
         <div class="hidden flex gap-1.5 md:gap-2 md:justify-center" data-bf-clock>
           {[['d', 'nap'], ['h', 'óra'], ['m', 'perc'], ['s', 'mp']].map(([k, l]) => (
-            <div class="w-12 md:w-16 bg-white/10 border border-white/15 rounded-[10px] py-1 md:py-1.5 text-center">
-              <span class="block text-xl md:text-3xl font-extrabold tabular-nums leading-tight" data-bf-unit={k}>00</span>
+            <div class:list={['w-12 md:w-16 bg-white/10 border border-white/15 rounded-[10px] py-1 md:py-1.5 text-center', k === 's' && 'bf-sec']}>
+              <span class="bf-digits block text-xl md:text-3xl font-extrabold tabular-nums leading-tight" data-bf-unit={k}><span>00</span></span>
               <span class="block text-[10px] md:text-xs text-white/60 uppercase tracking-wide">{l}</span>
             </div>
           ))}
         </div>
       </div>
-      <a href={REGISTER_URL} data-bf-offer class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
+      <a href={REGISTER_URL} data-bf-offer data-bf-bar-btn class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
         <span class="md:hidden">Kérem</span>
         <span class="hidden md:inline">Kérem az ajánlatot</span>
         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
       </a>
     </div>
   </div>
+
+  <style is:global>
+    .bf-digits { position: relative; height: 1.25em; overflow: hidden; }
+    .bf-digits > span { position: absolute; inset: 0; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s; }
+    .bf-digits > span.bf-enter { transform: translateY(100%); opacity: 0; }
+    .bf-digits > span.bf-leave { transform: translateY(-100%); opacity: 0; }
+    .bf-s24 .bf-sec { animation: bf-pulse 1s ease-in-out infinite; }
+    @keyframes bf-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    .bf-dot { animation: bf-blink 1s step-end infinite; }
+    @keyframes bf-blink { 50% { opacity: .25; } }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-digits > span { transition: none; }
+      .bf-s24 .bf-sec, .bf-dot { animation: none; }
+    }
+  </style>
 
   <script is:inline>
     // Hero H1: a középső kifejezés kitörlődik és újragépelődik, a következővel.
@@ -567,48 +587,84 @@ const faqLd = {
       if (!isOpen) item.classList.add('open');
     }
 
-    // Visszaszámláló: az akció indulásáig, majd a lejáratig. Lejárat után a
-    // gombok helyén egy „lejárt" sor áll. JS nélkül a lejárati dátum látszik.
+    // Visszaszámláló (alsó sáv + hero-jelvény). A user által választott 4 ötlet:
+    // (1) fokozatok: az utolsó 48 órában lila sáv + jelvény, az utolsó napon lüktető mp;
+    // (2) pörgő számjegyek; (3) emberi felirat; (4) kis számláló a hero gombja fölött.
+    // JS nélkül a lejárati dátum látszik. Lejárat után a gombok és a sáv eltűnnek.
     (function () {
-      var boxes = document.querySelectorAll('[data-bf-countdown]');
-      if (!boxes.length) return;
+      var bar = document.getElementById('bf-sticky');
+      if (!bar) return;
+      var START = Date.parse(bar.dataset.start), END = Date.parse(bar.dataset.end);
+      var DAY = 86400000, HOUR = 3600000;
+      var label = bar.querySelector('[data-bf-label]');
+      var clock = bar.querySelector('[data-bf-clock]');
+      var btn = bar.querySelector('[data-bf-bar-btn]');
+      var pill = document.querySelector('[data-bf-pill]');
+      var pillText = document.querySelector('[data-bf-pill-text]');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
       var pad = function (n) { return String(n).padStart(2, '0'); };
+      var first = true; // az első kirajzolás nem animál (ne pörögjön be a 00-ról)
+
+      function setDigit(slot, val) {
+        var cur = slot.lastElementChild;
+        if (cur && cur.textContent === val) return;
+        if (reduce || !cur || first) { slot.innerHTML = '<span>' + val + '</span>'; return; }
+        var nx = document.createElement('span');
+        nx.textContent = val;
+        nx.className = 'bf-enter';
+        slot.appendChild(nx);
+        requestAnimationFrame(function () { requestAnimationFrame(function () {
+          cur.classList.add('bf-leave');
+          nx.classList.remove('bf-enter');
+        }); });
+        setTimeout(function () { if (cur.parentNode) cur.remove(); }, 400);
+      }
+
+      function flag(t) {
+        return '<span class="inline-block bg-white text-primary font-extrabold rounded-full px-3 py-0.5">' + t + '</span>';
+      }
+
       function tick() {
         var now = Date.now();
-        boxes.forEach(function (box) {
-          var start = Date.parse(box.dataset.start);
-          var end = Date.parse(box.dataset.end);
-          var label = box.querySelector('[data-bf-label]');
-          var clock = box.querySelector('[data-bf-clock]');
-          var target;
-          if (now < start) {
-            target = start;
-            label.textContent = 'Indulásig:';
-          } else if (now <= end) {
-            target = end;
-            label.textContent = 'Az akció végéig:';
-          } else {
-            label.textContent = 'A Black Friday-akció lejárt. Köszönjük, hogy velünk voltál!';
-            clock.classList.add('hidden');
-            return;
-          }
-          var diff = Math.max(0, Math.floor((target - now) / 1000));
-          var u = {
-            d: Math.floor(diff / 86400),
-            h: Math.floor((diff % 86400) / 3600),
-            m: Math.floor((diff % 3600) / 60),
-            s: diff % 60,
-          };
-          Object.keys(u).forEach(function (k) {
-            var el = box.querySelector('[data-bf-unit="' + k + '"]');
-            if (el) el.textContent = pad(u[k]);
-          });
-          clock.classList.remove('hidden');
-        });
-        if (now > Date.parse(boxes[0].dataset.end)) {
+        if (now > END) {
           document.querySelectorAll('[data-bf-cta]').forEach(function (el) { el.classList.add('hidden'); });
           clearInterval(timer);
+          return;
         }
+        var pre = now < START;
+        var left = (pre ? START : END) - now;
+        var stage = pre ? 'pre' : left <= DAY ? 's24' : left <= 2 * DAY ? 's48' : 'normal';
+
+        // (1) fokozatok
+        var hot = stage === 's48' || stage === 's24';
+        bar.classList.toggle('bg-dark', !hot);
+        bar.classList.toggle('bg-primary', hot);
+        bar.classList.toggle('bf-s24', stage === 's24');
+        btn.classList.toggle('cta-primary', !hot);
+        btn.classList.toggle('cta-on-primary', hot);
+
+        // (3) emberi felirat
+        if (stage === 'pre') label.textContent = 'Indul november 16-án. Indulásig:';
+        else if (stage === 'normal') label.textContent = 'Már csak ' + Math.floor(left / DAY) + ' nap van hátra!';
+        else if (stage === 's48') label.innerHTML = flag('Már csak 2 nap!');
+        else label.innerHTML = flag(left <= HOUR ? 'Utolsó óra! Éjfélkor lejár' : 'Utolsó nap! Éjfélkor lejár');
+
+        // (2) pörgő számjegyek
+        var sec = Math.floor(left / 1000);
+        var u = { d: Math.floor(sec / 86400), h: Math.floor((sec % 86400) / 3600), m: Math.floor((sec % 3600) / 60), s: sec % 60 };
+        Object.keys(u).forEach(function (k) {
+          var slot = clock.querySelector('[data-bf-unit="' + k + '"]');
+          if (slot) setDigit(slot, pad(u[k]));
+        });
+        clock.classList.remove('hidden');
+
+        // (4) hero-jelvény
+        if (pill) {
+          pillText.textContent = (pre ? 'Indulásig: ' : 'Még ') + (u.d ? u.d + ' nap ' : '') + pad(u.h) + ':' + pad(u.m) + ':' + pad(u.s);
+          pill.classList.remove('hidden');
+          pill.classList.add('inline-flex');
+        }
+        first = false;
       }
       var timer = setInterval(tick, 1000);
       tick();
