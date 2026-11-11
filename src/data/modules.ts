@@ -47,11 +47,11 @@ export const MODULES: ModuleDef[] = [
     page: 'demo',
     hu: {
       title: 'Automata posztolás',
-      desc: 'Az AI a termékeidből posztokat ír, képet és videót készít hozzájuk, majd időzítve publikálja Facebookra, Instagramra és TikTokra.',
+      desc: 'Az AI a termékeidből posztokat ír, képet és videót készít hozzájuk, majd időzítve publikálja Facebookra, Instagramra, TikTokra és YouTube Shortsra.',
     },
     en: {
       title: 'Automated posting',
-      desc: 'The AI writes posts from your products, creates images and videos for them, then publishes them on a schedule to Facebook, Instagram and TikTok.',
+      desc: 'The AI writes posts from your products, creates images and videos for them, then publishes them on a schedule to Facebook, Instagram, TikTok and YouTube Shorts.',
     },
   },
   {

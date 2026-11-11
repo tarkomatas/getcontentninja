@@ -20,6 +20,7 @@ export type PageKey =
   | 'ninjaAi'
   | 'woocommerce'
   | 'tiktok'
+  | 'youtube'
   | 'aiVideo'
   | 'newsletter'
   | 'newsletterSignup'
@@ -190,6 +191,14 @@ export const PAGES: Record<PageKey, Record<Locale, string | null>> = {
   //
   // **Csak magyarul** (`en: null`): a súgócikk és az app felülete magyar.
   tiktok: { hu: '/hu/tiktok-posztolas/', en: null },
+  // **YouTube Shorts-posztolás – SEO/GEO céloldal** (2026-11-11, az élesítés másnapján;
+  // a YouTube API-átvizsgálás 2026-11-10-én jóváhagyva). A `tiktok` mintája: indexelhető,
+  // FAQPage JSON-LD-vel, saját `lead_forras`: 'youtube-shorts'. Nem modul, a posztolás
+  // egyik csatornája. Tények: az app `docs/features/youtube-shorts.md` + a
+  // `youtube-shorts-bekotese-es-posztolas` súgócikk.
+  //
+  // **Csak magyarul** (`en: null`): a súgócikk és az app felülete magyar.
+  youtube: { hu: '/hu/youtube-shorts-posztolas/', en: null },
   // **AI videókészítés – SEO/GEO céloldal** (2026-10-07). A narrátorvideó és az AI
   // videógeneráló modul közös oldala: a posztolás oldal videós szekciói nem
   // rangsorolnak az „AI videó", „AI termékvideó", „termékvideó készítés"

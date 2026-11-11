@@ -3,12 +3,12 @@ import type { Locale } from '../i18n/routes';
 /**
  * A közösségi posztolási csatornák állapota – EGY forrás.
  *
- * `live`: a honlap élőként írhatja le (Facebook, Instagram, TikTok).
+ * `live`: a honlap élőként írhatja le (Facebook, Instagram, TikTok, YouTube).
  * `soon`: az integráció elkészült, de az előfizetők még nem használhatják —
  * a honlap csak „hamarosan"-ként említheti, élőként SEHOL.
  *
  * - **TikTok:** 2026-10-02 óta él (a TikTok 2026-10-01-én jóváhagyta a Direct Post auditot).
- * - **YouTube (Shorts):** elkészült, a platform hivatalos átvizsgálása alatt áll.
+ * - **YouTube (Shorts):** 2026-11-11 óta él (a YouTube API-átvizsgálás 2026-11-10-én jóváhagyva).
  *
  * A logósorokban a `soon` platformok mellé a `SoonBadge.astro` jelvény kerül
  * (a logót magát NEM szürkítjük el: a TikTok/YouTube márkajel csak eredeti,
@@ -25,7 +25,7 @@ export const SOCIAL_STATUS: Record<SocialId, 'live' | 'soon'> = {
   facebook: 'live',
   instagram: 'live',
   tiktok: 'live',
-  youtube: 'soon',
+  youtube: 'live',
 };
 
 export const isSoon = (id: SocialId) => SOCIAL_STATUS[id] === 'soon';

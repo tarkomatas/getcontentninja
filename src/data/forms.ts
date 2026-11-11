@@ -65,6 +65,7 @@ export type FormSource =
   | 'ninja-ai'
   | 'woocommerce'
   | 'tiktok'
+  | 'youtube-shorts'
   | 'ai-video'
   | 'kapcsolat';
 
@@ -113,6 +114,10 @@ export const SUBJECT_PREFIX: Record<FormSource, Record<Locale, string>> = {
   // `posztolas` forgalomtól. Az app oldalán érdemes a `FORM_LABELS`/`PATH_TO_FORRAS`
   // táblákba is felvenni.
   tiktok: { hu: '🎵 TikTok-posztolás jelentkezés', en: '🎵 TikTok posting lead' },
+  // A YouTube Shorts-posztolás SEO/GEO céloldal (`/hu/youtube-shorts-posztolas/`, csak
+  // magyarul) – a `tiktok` kulcs mintájára. Az app oldalán érdemes a
+  // `FORM_LABELS`/`PATH_TO_FORRAS` táblákba is felvenni.
+  'youtube-shorts': { hu: '▶️ YouTube Shorts-posztolás jelentkezés', en: '▶️ YouTube Shorts posting lead' },
   // Az AI videókészítés SEO/GEO céloldal (`/hu/ai-video/`, csak magyarul). Külön
   // kulcs, hogy a videós keresésekből jött érdeklődő elkülönüljön a `posztolas`
   // forgalomtól. Az app oldalán érdemes a `FORM_LABELS`/`PATH_TO_FORRAS` táblákba
