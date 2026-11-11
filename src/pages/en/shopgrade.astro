@@ -432,119 +432,100 @@ const description =
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 1/b. Before / after – PRODUCT PAGE. Left: what changes and why it helps; right: mock-up. (2026-11-11: the former "qualifiers" and "Before / after" sections merged into this one.) The After copy deliberately uses only the Before data and keeps the drawback – "we don't invent facts". -->
+    <!-- 1/b. Before / after – PRODUCT PAGE. Left: the point in 3 bullets; right: slider with realistic DEMO-store images (fictional store, public/assets/shopgrade-demo-*). The "design" bullet is backed by app shopgrade-design-html + shopgrade-design-patterns. -->
     <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
                     <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Product page – before / after ✍️</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">Same product – now it actually sells itself</h2>
-                    <p class="text-body text-lg mb-8 leading-relaxed">The manufacturer sheet lists the data. Shopgrade writes what it means to the buyer. It adds no new facts.</p>
-                    <ul class="space-y-5 mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-dark leading-tight">Same product – now it actually sells itself</h2>
+                    <ul class="space-y-6 mb-10">
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">emoji_objects</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">trending_up</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">From spec to benefit</h3>
-                                <p class="text-body text-sm leading-relaxed">Instead of "18/8 steel": no aftertaste, and it won't rust. The buyer understands what they get.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Boosts sales</h3>
+                                <p class="text-body leading-relaxed">The buyer understands why to choose this one.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">person_search</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">palette</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Who it's for and what it's for</h3>
-                                <p class="text-body text-sm leading-relaxed">Buyers search for situations, not parameters. These words bring them in from Google and AI answers.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">fact_check</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">The drawback stays in</h3>
-                                <p class="text-body text-sm leading-relaxed">"Hand wash only." Whoever needs something else won't order it – and won't send it back.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Not just copy – design too</h3>
+                                <p class="text-body leading-relaxed">Highlight box, benefit cards, spec table.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">travel_explore</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Only on your site</h3>
-                                <p class="text-body text-sm leading-relaxed">The manufacturer copy runs in twenty other stores. The new copy is unique, so search engines can tell yours apart.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Google and AI find you</h3>
+                                <p class="text-body leading-relaxed">Keyword-rich, well-structured copy that ChatGPT can work with too.</p>
                             </div>
                         </li>
                     </ul>
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">See it on my own products</a>
                 </div>
 
-                <div>
-                    <BeforeAfterSlider beforeLabel="Before – spec sheet" afterLabel="After – Shopgrade" ariaLabel="Before–after slider: product description"
-                        hint="Drag the line – before on the left, after on the right. Every sentence follows from the store's own product data.">
-                        <p slot="before" class="text-muted text-sm leading-relaxed">Stainless steel thermos, 500 ml. Material: 18/8 steel. Weight: 320 g. Colour: black. Not dishwasher safe.</p>
-                        <p slot="after" class="text-body text-sm leading-relaxed"><span class="bg-primary/10 text-dark font-semibold rounded px-1">Half a litre of coffee, with no metallic aftertaste.</span> 18/8 stainless steel <span class="bg-primary/10 text-dark font-semibold rounded px-1">adds no flavour of its own and won't rust</span> – which is why this alloy is the benchmark for flasks. 320 grams empty: you'll notice it in the bag, but it isn't the weight you leave at home on day three. <span class="bg-primary/10 text-dark font-semibold rounded px-1">Hand wash only</span> – not dishwasher safe.</p>
+                <div class="max-w-[560px] w-full mx-auto">
+                    <BeforeAfterSlider media beforeLabel="Before" afterLabel="After" ariaLabel="Before–after slider: product page"
+                        hint="Demo store. Drag the line: before on the left, after on the right.">
+                        <img slot="before" src="/assets/shopgrade-demo-en-termek-elotte.webp" alt="Demo store product page before: the thermos description is a single line of manufacturer data" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
+                        <img slot="after" src="/assets/shopgrade-demo-en-termek-utana.webp" alt="The same product page after Shopgrade: highlight header, four benefit cards, spec table and a care note" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
                     </BeforeAfterSlider>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 1/c. Before / after – CATEGORY PAGE. Same layout as the product page. (2026-11-11: the before/after pair of the category section below moved here.) -->
+    <!-- 1/c. Before / after – CATEGORY PAGE. Same layout as the product page. -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
                     <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Category page – before / after 📁</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">Your category page finally helps people choose</h2>
-                    <p class="text-body text-lg mb-8 leading-relaxed">Forty-one nasal aspirators listed one after another, nothing to go on. Someone who can't decide doesn't buy: they go back to the search box. Shopgrade writes what to choose by.</p>
-                    <ul class="space-y-5 mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-dark leading-tight">Your category page finally helps people choose</h2>
+                    <ul class="space-y-6 mb-10">
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">rule</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">trending_up</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">What the choice comes down to</h3>
-                                <p class="text-body text-sm leading-relaxed">The category's two or three main criteria. Based on your products, not a generic intro.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Boosts sales</h3>
+                                <p class="text-body leading-relaxed">Someone who knows which one to pick actually buys.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">stacked_bar_chart</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">rule</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Real numbers from your range</h3>
-                                <p class="text-body text-sm leading-relaxed">"The models range from 55 to 78 dB." It works this out from your category's product data.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Helps people choose</h3>
+                                <p class="text-body leading-relaxed">What to decide by – with real numbers from your range.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">quiz</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">travel_explore</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">It answers the buyer's question</h3>
-                                <p class="text-body text-sm leading-relaxed">"Which one is right for a newborn?" The copy says so. The buyer doesn't have to guess or email you.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Google and AI find you</h3>
+                                <p class="text-body leading-relaxed">Written for what buyers actually search for.</p>
                             </div>
                         </li>
                     </ul>
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">See it on my own categories</a>
                 </div>
 
-                <div>
-                    <BeforeAfterSlider beforeLabel="Before – empty page" afterLabel="After – Shopgrade" ariaLabel="Before–after slider: category page"
-                        hint="Drag the line. The name, URL and product list stay – only the copy is new.">
-                        <div slot="before">
-                            <p class="font-bold text-dark">Electric nasal aspirators <span class="text-muted text-xs font-normal">· 41 products</span></p>
-                            <p class="text-muted text-sm italic mt-2 border border-dashed border-red-200 rounded-[8px] px-3 py-2">No category copy – just the product list.</p>
-                            <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
-                        </div>
-                        <div slot="after">
-                            <p class="font-bold text-dark">Electric nasal aspirators <span class="text-muted text-xs font-normal">· 41 products</span></p>
-                            <p class="text-body text-sm leading-relaxed mt-2">With an electric nasal aspirator three things decide it: suction, noise, and whether it runs on a battery or from the mains. In this category the models <span class="bg-primary/10 text-dark font-semibold rounded px-1">range from 55 to 78 dB</span> – <span class="bg-primary/10 text-dark font-semibold rounded px-1">for a newborn the quieter one matters more</span>, because the strongest suction is worth nothing if it wakes the baby.</p>
-                            <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
-                        </div>
+                <div class="max-w-[560px] w-full mx-auto">
+                    <BeforeAfterSlider media beforeLabel="Before" afterLabel="After" ariaLabel="Before–after slider: category page"
+                        hint="Demo store. Drag the line: before on the left, after on the right.">
+                        <img slot="before" src="/assets/shopgrade-demo-en-kategoria-elotte.webp" alt="Demo store category page before: just the product list, no copy" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
+                        <img slot="after" src="/assets/shopgrade-demo-en-kategoria-utana.webp" alt="The same category page after Shopgrade: a buying guide with criteria above the product list" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
                     </BeforeAfterSlider>
                 </div>
             </div>

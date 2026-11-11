@@ -432,119 +432,100 @@ const description =
     <!-- Hitelesitesek: Meta Tech Provider + UNAS partner (kozos komponens) -->
     <TrustBadges locale={locale} />
 
-    <!-- 1/b. Előtte / utána – TERMÉKOLDAL. Bal: mit változtat és miért jó; jobb: makett. (2026-11-11: ide olvadt be a korábbi „A hiányzó szavak” és „Előtte / Utána” szakasz.) Az Utána szöveg szándékosan csak az Előtte adataiból dolgozik, és megtartja a negatívumot – „tényt nem találunk ki”. -->
+    <!-- 1/b. Előtte / utána – TERMÉKOLDAL. Bal: a lényeg 3 pontban; jobb: csúszka valósághű DEMÓ-bolt képeivel (kitalált bolt; a képek forrása a scratchpad-generátor, public/assets/shopgrade-demo-*). A „dizájn” pont fedett: app shopgrade-design-html + shopgrade-design-patterns. -->
     <section class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
                     <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Termékoldal – előtte / utána ✍️</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">Ugyanaz a termék – csak most el is adja magát</h2>
-                    <p class="text-body text-lg mb-8 leading-relaxed">A gyártói adatlap felsorolja az adatokat. A Shopgrade megírja, mit jelentenek a vevőnek. Új tényt nem tesz hozzá.</p>
-                    <ul class="space-y-5 mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-dark leading-tight">Ugyanaz a termék – csak most el is adja magát</h2>
+                    <ul class="space-y-6 mb-10">
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">emoji_objects</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">trending_up</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Adatból előny</h3>
-                                <p class="text-body text-sm leading-relaxed">„18/8-as acél” helyett: nem ad mellékízt, és nem rozsdásodik. A vevő azt érti meg, mit kap.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Növeli az eladásokat</h3>
+                                <p class="text-body leading-relaxed">A vevő megérti, miért ezt vegye.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">person_search</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">palette</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Kinek és mire való</h3>
-                                <p class="text-body text-sm leading-relaxed">A vevő élethelyzetre keres, nem paraméterre. Ezek a szavak hozzák be a Google-ből és az AI-válaszokból.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">fact_check</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">A negatívum is bent marad</h3>
-                                <p class="text-body text-sm leading-relaxed">„Kézzel mosandó.” Aki nem ezt keresi, nem rendeli meg, és nem küldi vissza.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Nem csak szöveg – dizájn is</h3>
+                                <p class="text-body leading-relaxed">Kiemelő doboz, előny-kártyák, műszaki táblázat.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">travel_explore</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Csak nálad olvasható</h3>
-                                <p class="text-body text-sm leading-relaxed">A gyártói szöveg húsz másik boltban is fut. Az új szöveg egyedi, ezért a kereső is meg tudja különböztetni.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">A Google és az AI is rátalál</h3>
+                                <p class="text-body leading-relaxed">Kulcsszavas, jól tagolt szöveg, amiből a ChatGPT is dolgozni tud.</p>
                             </div>
                         </li>
                     </ul>
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">Nézzük meg a saját termékeimen</a>
                 </div>
 
-                <div>
-                    <BeforeAfterSlider beforeLabel="Előtte – gyártói adatlap" afterLabel="Utána – Shopgrade" ariaLabel="Előtte–utána csúszka: termékleírás"
-                        hint="Húzd a vonalat – balra az előtte, jobbra az utána. Minden mondat a bolt saját termékadatából következik.">
-                        <p slot="before" class="text-muted text-sm leading-relaxed">Rozsdamentes acél termosz, 500 ml. Anyag: 18/8 acél. Súly: 320 g. Szín: fekete. Mosogatógépben nem tisztítható.</p>
-                        <p slot="after" class="text-body text-sm leading-relaxed"><span class="bg-primary/10 text-dark font-semibold rounded px-1">Fél liter kávé, fémíz nélkül.</span> A 18/8-as rozsdamentes acél <span class="bg-primary/10 text-dark font-semibold rounded px-1">nem ad mellékízt és nem rozsdásodik</span> – ezért ez az ötvözet a termoszok mércéje. 320 gramm üresen: érezhető a táskában, de nem az a súly, amit a harmadik nap után otthon hagysz. <span class="bg-primary/10 text-dark font-semibold rounded px-1">Kézzel mosandó</span> – mosogatógépbe nem való.</p>
+                <div class="max-w-[560px] w-full mx-auto">
+                    <BeforeAfterSlider media beforeLabel="Előtte" afterLabel="Utána" ariaLabel="Előtte–utána csúszka: termékoldal"
+                        hint="Demó bolt. Húzd a vonalat: balra az előtte, jobbra az utána.">
+                        <img slot="before" src="/assets/shopgrade-demo-hu-termek-elotte.webp" alt="Demó webshop termékoldala előtte: a termosz leírása egyetlen sor gyártói adat" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
+                        <img slot="after" src="/assets/shopgrade-demo-hu-termek-utana.webp" alt="Ugyanaz a termékoldal a Shopgrade után: kiemelő fejléc, négy előny-kártya, műszaki táblázat és figyelmeztetés" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
                     </BeforeAfterSlider>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 1/c. Előtte / utána – KATEGÓRIAOLDAL. Ugyanaz a felépítés, mint a termékoldalé. (2026-11-11: ide került a lenti kategória-szakasz korábbi előtte/utána párja.) -->
+    <!-- 1/c. Előtte / utána – KATEGÓRIAOLDAL. Ugyanaz a felépítés, mint a termékoldalé. -->
     <section class="bg-card py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
                     <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Kategóriaoldal – előtte / utána 📁</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark leading-tight">A kategóriaoldalad végre segít választani</h2>
-                    <p class="text-body text-lg mb-8 leading-relaxed">Negyvenegy orrszívó egymás alatt, semmi támpont. Aki nem tud dönteni, nem vesz: visszamegy a keresőbe. A Shopgrade megírja, mi alapján válasszon.</p>
-                    <ul class="space-y-5 mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-dark leading-tight">A kategóriaoldalad végre segít választani</h2>
+                    <ul class="space-y-6 mb-10">
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">rule</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">trending_up</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Mi dönt a választásnál</h3>
-                                <p class="text-body text-sm leading-relaxed">A kategória két-három fő szempontja. A te termékeid alapján, nem általános bevezetőként.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Növeli az eladásokat</h3>
+                                <p class="text-body leading-relaxed">Aki tudja, melyiket válassza, az vásárol is.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">stacked_bar_chart</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">rule</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Valódi számok a kínálatodból</h3>
-                                <p class="text-body text-sm leading-relaxed">„55 és 78 dB között szórnak a modellek.” Ezt a kategóriád termékeinek adataiból számolja.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">Segít választani</h3>
+                                <p class="text-body leading-relaxed">Mi alapján döntsön – valódi számokkal a kínálatodból.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[20px]">quiz</span>
+                            <div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[22px]">travel_explore</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-dark mb-1">Választ ad a vevő kérdésére</h3>
-                                <p class="text-body text-sm leading-relaxed">„Újszülötthöz melyik jó?” A szöveg megmondja. Nem a vevőnek kell kitalálnia, és nem kell e-mailben megkérdeznie.</p>
+                            <div class="pt-0.5">
+                                <h3 class="font-bold text-dark text-lg leading-snug">A Google és az AI is rátalál</h3>
+                                <p class="text-body leading-relaxed">A vevők valódi kereséseire írja.</p>
                             </div>
                         </li>
                     </ul>
                     <a href="#hero" class="cta-primary px-8 py-4 text-base">Nézzük meg a saját kategóriáimon</a>
                 </div>
 
-                <div>
-                    <BeforeAfterSlider beforeLabel="Előtte – üres oldal" afterLabel="Utána – Shopgrade" ariaLabel="Előtte–utána csúszka: kategóriaoldal"
-                        hint="Húzd a vonalat. A név, az URL és a terméklista marad – csak a szöveg új.">
-                        <div slot="before">
-                            <p class="font-bold text-dark">Elektromos orrszívók <span class="text-muted text-xs font-normal">· 41 termék</span></p>
-                            <p class="text-muted text-sm italic mt-2 border border-dashed border-red-200 rounded-[8px] px-3 py-2">Nincs kategóriaszöveg – csak a terméklista.</p>
-                            <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
-                        </div>
-                        <div slot="after">
-                            <p class="font-bold text-dark">Elektromos orrszívók <span class="text-muted text-xs font-normal">· 41 termék</span></p>
-                            <p class="text-body text-sm leading-relaxed mt-2">Elektromos orrszívónál három dolog dönt: a szívóerő, a zajszint, és hogy akkumulátorról vagy hálózatról megy. Ebben a kategóriában <span class="bg-primary/10 text-dark font-semibold rounded px-1">55 és 78 dB között szórnak a modellek</span> – <span class="bg-primary/10 text-dark font-semibold rounded px-1">újszülöttnél a halkabb a fontosabb</span>, mert amire a baba felébred, az a legerősebb szívóerővel sem ér semmit.</p>
-                            <div class="grid grid-cols-3 gap-2 mt-4" aria-hidden="true"><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div><div class="h-9 rounded-[6px] bg-border"></div></div>
-                        </div>
+                <div class="max-w-[560px] w-full mx-auto">
+                    <BeforeAfterSlider media beforeLabel="Előtte" afterLabel="Utána" ariaLabel="Előtte–utána csúszka: kategóriaoldal"
+                        hint="Demó bolt. Húzd a vonalat: balra az előtte, jobbra az utána.">
+                        <img slot="before" src="/assets/shopgrade-demo-hu-kategoria-elotte.webp" alt="Demó webshop kategóriaoldala előtte: csak a terméklista, szöveg nélkül" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
+                        <img slot="after" src="/assets/shopgrade-demo-hu-kategoria-utana.webp" alt="Ugyanaz a kategóriaoldal a Shopgrade után: választási útmutató a terméklista fölött, szempontokkal" width="960" height="1350" loading="lazy" draggable="false" class="block w-full h-auto">
                     </BeforeAfterSlider>
                 </div>
             </div>

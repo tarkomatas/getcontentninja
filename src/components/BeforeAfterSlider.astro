@@ -18,21 +18,26 @@ interface Props {
   afterLabel: string;
   ariaLabel: string;
   hint?: string;
+  /** Kép a két rétegben: nincs belső margó, a címkék „pirulaként” ülnek a képen. */
+  media?: boolean;
 }
-const { beforeLabel, afterLabel, ariaLabel, hint } = Astro.props;
+const { beforeLabel, afterLabel, ariaLabel, hint, media = false } = Astro.props;
+const pad = media ? '' : 'p-6 pt-14';
+const vpos = media ? 'bottom-4' : 'top-4';
+const pill = media ? 'bg-white/95 rounded-full px-2.5 py-1 shadow-card' : '';
 ---
 
 <div class="ba-slider relative rounded-[16px] border border-border shadow-card overflow-hidden bg-card select-none focus-within:ring-2 focus-within:ring-primary/60"
     data-ba style="--pos:50%">
     <div class="grid">
-        <div class="col-start-1 row-start-1 bg-card p-6 pt-14">
-            <span class="absolute top-4 left-5 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500">
+        <div class:list={["col-start-1 row-start-1 bg-card", pad]}>
+            <span class:list={["absolute left-5 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-red-500", vpos, pill]}>
                 <span class="material-symbols-outlined text-[16px]">close</span>{beforeLabel}
             </span>
             <slot name="before" />
         </div>
-        <div class="col-start-1 row-start-1 bg-card p-6 pt-14 relative" style="clip-path: inset(0 0 0 var(--pos))">
-            <span class="absolute top-4 right-5 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success">
+        <div class:list={["col-start-1 row-start-1 bg-card relative", pad]} style="clip-path: inset(0 0 0 var(--pos))">
+            <span class:list={["absolute right-5 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-success", vpos, pill]}>
                 <span class="material-symbols-outlined text-[16px]">check_circle</span>{afterLabel}
             </span>
             <slot name="after" />
