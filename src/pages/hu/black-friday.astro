@@ -186,7 +186,7 @@ const faqLd = {
     <section id="hero" class="hero-gradient py-12 md:py-16">
       <div class="max-w-[1200px] mx-auto px-4 md:px-10">
         <!-- Két hasáb (user-kérés): bal = az ajánlat, jobb = a matek. Mobilon egymás alatt. -->
-        <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-center">
           <!-- BAL: ajánlat -->
           <div class="flex flex-col gap-5 text-center lg:text-left">
             <!-- H1 (user-kérés): „Éves előfizetéshez exkluzív ___ kedvezmény", a középső sor
@@ -242,23 +242,23 @@ const faqLd = {
                „korábbi ár", ezért áll mellette a címke. A kredit forintértéke az extra
                kreditcsomag ára. JS nélkül a listaáras példa látszik (SSR alapértékek).
                A visszaszámláló nem itt van: a folyamatosan látszó alsó sáv viszi (#bf-sticky). -->
-          <div class="bg-card rounded-[16px] border border-border p-5 sm:p-6 shadow-card" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF} data-consult={CONSULT_HUF} data-audit={AUDIT_HUF}>
-            <label for="bf-fee" class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Számold ki a saját árad</label>
-            <select id="bf-fee" aria-label="A mostani havidíjad" class="w-full h-11 rounded-[10px] border-border bg-light text-dark font-semibold text-sm focus:border-primary focus:ring-primary mb-4">
+          <div class="bg-card rounded-[16px] border border-border p-6 sm:p-8 shadow-card-hover" id="bf-calc" data-credit-gift={CREDIT_GIFT_HUF} data-consult={CONSULT_HUF} data-audit={AUDIT_HUF}>
+            <label for="bf-fee" class="text-primary font-bold text-sm uppercase tracking-widest block mb-4">Számold ki a saját árad</label>
+            <select id="bf-fee" aria-label="A mostani havidíjad" class="w-full h-12 rounded-[10px] border-border bg-light text-dark font-semibold text-sm md:text-base focus:border-primary focus:ring-primary mb-5">
               {FEE_OPTIONS.map((o, i) => <option value={o.value} selected={i === 0}>{o.label}</option>)}
             </select>
 
-            <dl class="space-y-2.5 text-sm">
+            <dl class="space-y-3 text-sm md:text-base">
               <div class="flex items-baseline justify-between gap-4">
                 <dt class="text-body">Havidíjjal 12 hónap</dt>
                 <dd class="text-muted font-bold line-through decoration-2 whitespace-nowrap"><span data-calc="year">479.880</span> Ft</dd>
               </div>
               <div class="flex items-baseline justify-between gap-4">
                 <dt class="text-dark font-semibold">Black Friday éves <span class="hidden sm:inline text-muted font-normal">(9 havidíj)</span></dt>
-                <dd class="text-dark text-2xl md:text-3xl font-extrabold tracking-[-0.02em] whitespace-nowrap"><span data-calc="bf">359.910</span> Ft</dd>
+                <dd class="text-dark text-3xl md:text-4xl font-extrabold tracking-[-0.02em] whitespace-nowrap"><span data-calc="bf">359.910</span> Ft</dd>
               </div>
 
-              <div class="border-t border-border pt-2.5 flex items-baseline justify-between gap-4">
+              <div class="border-t border-border pt-3 flex items-baseline justify-between gap-4">
                 <dt class="text-body">Megtakarítás <span class="text-muted">(3 hónap)</span></dt>
                 <dd class="text-success font-bold whitespace-nowrap">+<span data-calc="save">119.970</span> Ft</dd>
               </div>
@@ -275,13 +275,13 @@ const faqLd = {
                 <dd class="text-success font-bold whitespace-nowrap">+20.000 Ft</dd>
               </div>
 
-              <div class="bg-success/10 border border-success/30 rounded-[12px] px-4 py-2.5 flex items-center justify-between gap-4">
+              <div class="bg-success/10 border border-success/30 rounded-[12px] px-4 py-3.5 flex items-center justify-between gap-4">
                 <dt class="text-dark font-bold">Összes előnyöd</dt>
-                <dd class="text-success text-xl md:text-2xl font-extrabold whitespace-nowrap"><span data-calc="total">174.960</span> Ft</dd>
+                <dd class="text-success text-2xl md:text-3xl font-extrabold whitespace-nowrap"><span data-calc="total">174.960</span> Ft</dd>
               </div>
             </dl>
 
-            <p class="text-muted text-xs mt-3">
+            <p class="text-muted text-xs md:text-sm mt-4">
               Nettó árak, + ÁFA. Bruttó <span data-calc="gross">457.086</span> Ft / év, kb. <span data-calc="avg">30.000</span> Ft / hó.
             </p>
           </div>
