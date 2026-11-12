@@ -31,7 +31,7 @@ Top to bottom:
 | Subhead | mechanism | 1 sentence: how it works; the clever slogan may open it |
 | Checklist | proof points / objection handling | details and objections live here, not in H1/subhead |
 | Platform chips | concrete channels | named platforms (Facebook, Instagram, Hírlevél), not generic "social" |
-| Social proof | trust | e.g. „50+ hazai webshop már használja" |
+| Social proof | trust | e.g. „100+ hazai webshop már használja" |
 
 ### H1 rules
 
