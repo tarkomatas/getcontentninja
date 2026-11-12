@@ -207,6 +207,20 @@ const faqLd = {
               Black Friday · november 16–27.
             </p>
 
+            <!-- A 3 legfontosabb előny (user-kérés), pipás listaként: a mozgásréteg sorban hozza be. -->
+            <ul class="flex flex-col gap-2.5 text-left self-center lg:self-start">
+              {[
+                ['12 hónap 9 havidíj áráért,', 'jövőre is ezen az áron.'],
+                ['+500 kredit ajándékba,', 'és 1 évig megmarad.'],
+                ['Személyes konzultáció és fiók audit', 'ajándékba.'],
+              ].map(([strong, rest]) => (
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-success text-[22px] shrink-0">check_circle</span>
+                  <span class="text-body leading-snug"><strong class="text-dark">{strong}</strong> {rest}</span>
+                </li>
+              ))}
+            </ul>
+
             <!-- EGY gomb mindenkinek: az app a belépés állapota szerint irányít. -->
             <div class="flex flex-col items-center lg:items-start gap-3 mt-2" data-bf-cta>
               <!-- Kis számláló a gomb fölött (4. ötlet). JS nélkül rejtve marad. -->
