@@ -626,45 +626,41 @@ const description =
          visszamenőleges indulást, az extra kredit elköltését. -->
     <section id="automatizmus" class="bg-light py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-4 md:px-10">
-            <div class="text-center max-w-[720px] mx-auto mb-14">
-                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Automatizmus 🔁</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Az új termékeid maguktól kapnak szöveget</h2>
-                <p class="text-body text-lg">A boltod folyamatosan bővül. Új termékek és új kategóriák jönnek. Egyszer beállítod, és a Shopgrade magától megírja a szövegüket.</p>
+            <div class="text-center max-w-[720px] mx-auto mb-12">
+                <span class="text-primary font-bold text-sm uppercase tracking-widest block mb-3">Új a boltban 🔁</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Te feltöltöd a terméket – a leírást a Shopgrade írja meg</h2>
+                <p class="text-body text-lg">Egyszer beállítod, és minden új termék magától kap leírást.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">event_repeat</span>
+                        <span class="material-symbols-outlined text-[22px]">schedule</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Új a boltban</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">A választott napon megnézi, került-e új termék vagy kategória a boltodba. Ha igen, megírja a szövegét a megszokott Shopgrade-beállításaiddal. Futhat naponta, hetente vagy havonta. A figyelés a bekapcsolás napján indul. A korábbi termékekre ott a kézi futás.</p>
-                    <p class="text-sm italic text-dark bg-light border border-border rounded-[10px] px-4 py-3">„Minden szerdán 06:00-kor, ha új termék került a boltba → írasd át a Shopgrade-del.”</p>
+                    <h3 class="font-bold text-lg mb-2">Nem kell rá időt szánnod</h3>
+                    <p class="text-body leading-relaxed">Nem kell leülnöd, és nem kell emlékezned rá. A leírás elkészül, amíg te mással foglalkozol.</p>
                 </div>
                 <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
-                        <span class="material-symbols-outlined text-[22px]">savings</span>
+                        <span class="material-symbols-outlined text-[22px]">storefront</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Maradék kredit</h3>
-                    <p class="text-body text-sm leading-relaxed mb-4">A havi kredit a ciklus végén elvész, ha nem használod el. Ez az automatizmus a ciklus legvégén a maradékból átírja a még át nem írt termékeidet vagy kategóriáidat. Hónapról hónapra halad, amíg a katalógus végére nem ér. A vásárolt extra kreditedhez nem nyúl.</p>
-                    <p class="text-sm italic text-dark bg-light border border-border rounded-[10px] px-4 py-3">A jó, hosszú leírásaidat békén hagyja: megadhatod, hogy csak az adott hossznál rövidebbeket írja át.</p>
+                    <h3 class="font-bold text-lg mb-2">Nincs több üres termékoldal</h3>
+                    <p class="text-body leading-relaxed">Egyetlen új termék sem marad szöveg nélkül vagy a gyártói adatlappal.</p>
+                </div>
+                <div class="bg-card rounded-[16px] border border-border p-8 shadow-card">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-5">
+                        <span class="material-symbols-outlined text-[22px]">trending_up</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Az új termék is elad</h3>
+                    <p class="text-body leading-relaxed">Ugyanaz a márkahang és ugyanaz a minőség, mint a többinél. A Google és az AI is rátalál.</p>
                 </div>
             </div>
 
-            <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-                <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">fact_check</span>
-                    <span class="text-body text-sm leading-relaxed">Alapból jóváhagyásra vár. Ha akarod, egyenesen a boltba írja.</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">tune</span>
-                    <span class="text-body text-sm leading-relaxed">Körönként felső határ: egy kör legfeljebb annyi elemet ír át, amennyit megadsz.</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0">auto_fix_high</span>
-                    <span class="text-body text-sm leading-relaxed">Egy varázsló egy ablakban összerakja. A Ninja AI-tól is kérheted. Unas, Shoprenter és WooCommerce boltokon is.</span>
-                </li>
-            </ul>
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8">
+                <span class="inline-flex items-center gap-1.5 text-sm text-body"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>Új kategóriákra is</span>
+                <span class="inline-flex items-center gap-1.5 text-sm text-body"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>Alapból jóváhagyásra vár</span>
+                <span class="inline-flex items-center gap-1.5 text-sm text-body"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>Unas, Shoprenter, WooCommerce</span>
+            </div>
 
             <div class="text-center mt-10">
                 <a href="#hero" class="cta-primary px-8 py-4 text-base">Bemutatót kérek – díjmentes</a>
