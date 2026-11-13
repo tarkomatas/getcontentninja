@@ -22,7 +22,7 @@ export const brandJsonLd = {
       '@type': 'WebSite',
       '@id': `${SITE}#website`,
       name: BRAND_NAME,
-      alternateName: ['ContentNinja', 'getcontentninja.com'],
+      alternateName: ['ContentNinja', 'Content Ninja AI', 'getcontentninja.com'],
       url: SITE,
       inLanguage: ['hu', 'en'],
       // Szándékosan NINCS `publisher: { '@id': …#organization }`: azzal az
@@ -33,7 +33,7 @@ export const brandJsonLd = {
       '@type': 'Organization',
       '@id': `${SITE}#organization`,
       name: BRAND_NAME,
-      alternateName: 'ContentNinja',
+      alternateName: ['ContentNinja', 'Content Ninja AI'],
       url: SITE,
       logo: `${SITE}icon.png`,
       sameAs: [
