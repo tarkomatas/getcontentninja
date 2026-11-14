@@ -22,17 +22,12 @@ const END_ISO = '2026-11-27T23:59:59+01:00';
 // Mind listaáron igaz. Rövidek maradjanak: mobilon is egy sorba kell férniük.
 const HERO_ROTATE = ['3 hónapos', '25%-os', '+500 kredites', '174.960 Ft értékű'];
 
-// ── CTA: EGY gomb az újaknak ÉS a meglévő előfizetőknek (user-döntés) ──
-// Az appot NEM módosítjuk (user-döntés), ezért a gomb egy kis választó ablakot nyit
-// (#bf-choose), és onnan az app két MEGLÉVŐ címére visz:
-// - új ügyfél: regisztráció, az éves csomag előre kiválasztva (`?plan=annual`);
-// - előfizető: Előfizetés oldal, az éves váltás ablaka magától nyílik
-//   (`?switch=annual`). Kijelentkezve az app előbb belépteti, majd visszahozza ide.
-//   A `src` paramétert szándékosan nem adjuk: az app allowlistje a saját felületeit
-//   méri (popup, banner …), egy idegen érték amúgy is kiesne.
-// JS nélkül a gomb sima link a regisztrációra.
-const REGISTER_URL = 'https://app.getcontentninja.com/register?plan=annual';
-const SWITCH_URL = 'https://app.getcontentninja.com/subscription?switch=annual';
+// ── CTA: EGY link minden „Kérem az ajánlatot" gombon (az app brief-je, 2026-11-14) ──
+// Az app saját oldala dönti el, ki érkezik (új ügyfél, havi előfizető, lemondott ügyfél),
+// ő adja hozzá a kupont és az éves csomagot, és ő kezeli az időzítést is: nov. 16. előtt
+// „hamarosan indul", nov. 27. éjfél után „lejárt" oldalt mutat. Ezért a link végére
+// SEMMI nem kerül, és ugyanabban a lapon nyílik (nincs target="_blank").
+const OFFER_URL = 'https://app.getcontentninja.com/black-friday';
 
 // ── Kalkulátor: választható havidíjak (nettó Ft) ──
 // A meglévő ügyfelek eltérő havidíjon lehetnek (régi listaár, partner-ár). A
@@ -123,8 +118,12 @@ const faqs = [
     a: 'Neked is 12 hónap 9 havidíj áráért, a saját havidíjadból számolva. A kedvezményed tehát nem vész el, és erre jön rá a 3 hónap ajándék. Az oldal tetején lévő kalkulátorban kiválaszthatod a mostani havidíjad, és látod a pontos árat.',
   },
   {
+    q: 'Korábban lemondtam az előfizetésem. Nekem is jár?',
+    a: 'Igen, neked is jár mind az öt ajándék. Nálad a mai listaárból számolunk: 12 hónap 9 × 39.990 Ft-ért, vagyis 359.910 Ft + ÁFA-ért. A korábbi kedvezményes havidíjad nem él vissza.',
+  },
+  {
     q: 'Már havi előfizető vagyok. Nekem is jár?',
-    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát, a személyes konzultációt (nálad a hatékonyságnövelőt) és a fiók auditot. Ugyanazzal a „Kérem az ajánlatot" gombbal lépsz be, és ott válthatsz évesre.',
+    a: 'Igen. Ha az akció ideje alatt éves csomagra váltasz, ugyanazt kapod, mint egy új ügyfél: az akciós árat, az 500 ajándék kreditet, az ár-garanciát, a személyes konzultációt (nálad a hatékonyságnövelőt) és a fiók auditot. Ugyanazzal a „Kérem az ajánlatot" gombbal lépsz be, és ott válthatsz évesre. Az ajánlatot az appban is megtalálod: belépés után a felső csíkon vagy az Előfizetés oldalon.',
   },
   {
     q: 'Mit jelent az ár-garancia?',
@@ -221,14 +220,17 @@ const faqLd = {
               ))}
             </ul>
 
-            <!-- EGY gomb mindenkinek: az app a belépés állapota szerint irányít. -->
+            <!-- Lejárat után ez látszik a gomb helyén (a számláló-script kapcsolja be). -->
+            <p class="hidden font-bold text-dark text-lg" data-bf-expired>A Black Friday-akció november 27-én éjfélkor véget ért.</p>
+
+            <!-- EGY gomb mindenkinek: az app /black-friday oldala dönti el, ki érkezik. -->
             <div class="flex flex-col items-center lg:items-start gap-3 mt-2" data-bf-cta>
               <!-- Kis számláló a gomb fölött (4. ötlet). JS nélkül rejtve marad. -->
               <span class="hidden items-center gap-2 bg-primary/10 text-primary font-bold text-sm rounded-full px-3 py-1.5 tabular-nums" data-bf-pill>
                 <span class="bf-dot w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>
                 <span data-bf-pill-text></span>
               </span>
-              <a href={REGISTER_URL} data-bf-offer class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
+              <a href={OFFER_URL} class="cta-primary px-8 h-14 text-base w-full sm:w-auto justify-center">
                 Kérem az ajánlatot
                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
               </a>
@@ -413,7 +415,7 @@ const faqLd = {
         </p>
 
         <div class="flex flex-col items-center gap-3" data-bf-cta>
-          <a href={REGISTER_URL} data-bf-offer class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
+          <a href={OFFER_URL} class="cta-on-primary px-8 h-14 text-base inline-flex w-full sm:w-auto justify-center">
             Kérem az ajánlatot
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </a>
@@ -428,44 +430,6 @@ const faqLd = {
   </main>
 
   <Footer locale={locale} page={page} />
-
-  <!-- Választó ablak az egyetlen „Kérem az ajánlatot" gomb mögött. -->
-  <dialog
-    id="bf-choose"
-    class="w-[calc(100%-2rem)] max-w-[480px] rounded-[16px] border border-border bg-card p-0 shadow-card-hover backdrop:bg-dark/60"
-    aria-labelledby="bf-choose-title"
-  >
-    <div class="p-5 sm:p-8">
-      <div class="flex items-start justify-between gap-4 mb-5">
-        <h2 id="bf-choose-title" class="text-xl font-bold text-dark">Hogyan folytatod?</h2>
-        <button type="button" class="text-muted hover:text-dark" data-bf-close aria-label="Bezárás">
-          <span class="material-symbols-outlined text-[22px]">close</span>
-        </button>
-      </div>
-      <div class="flex flex-col gap-3">
-        <a href={REGISTER_URL} class="group flex items-center gap-4 rounded-[12px] border border-border bg-light p-4 hover:border-primary transition-colors">
-          <span class="w-11 h-11 rounded-[10px] bg-primary/10 flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary text-[22px]">add_circle</span>
-          </span>
-          <span class="flex-1">
-            <span class="block font-bold text-dark">Még nem vagyok előfizető</span>
-            <span class="block text-sm text-body">Regisztrálsz, az éves csomag már ki lesz választva.</span>
-          </span>
-          <span class="material-symbols-outlined text-primary text-[20px]">arrow_forward</span>
-        </a>
-        <a href={SWITCH_URL} class="group flex items-center gap-4 rounded-[12px] border border-border bg-light p-4 hover:border-primary transition-colors">
-          <span class="w-11 h-11 rounded-[10px] bg-primary/10 flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary text-[22px]">login</span>
-          </span>
-          <span class="flex-1">
-            <span class="block font-bold text-dark">Már előfizető vagyok</span>
-            <span class="block text-sm text-body">Belépsz, és évesre váltasz. A kedvezményed megmarad: te is 3 hónapot kapsz ajándékba, a saját havidíjadból számolva.</span>
-          </span>
-          <span class="material-symbols-outlined text-primary text-[20px]">arrow_forward</span>
-        </a>
-      </div>
-    </div>
-  </dialog>
 
   <!-- Helytartó: a fix alsó sáv ne takarja el a lábléc alját. -->
   <div class="h-[76px] md:h-[96px]" data-bf-cta aria-hidden="true"></div>
@@ -497,7 +461,7 @@ const faqLd = {
           ))}
         </div>
       </div>
-      <a href={REGISTER_URL} data-bf-offer data-bf-bar-btn class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
+      <a href={OFFER_URL} data-bf-bar-btn class="cta-primary px-4 md:px-6 h-12 md:h-14 text-sm md:text-base justify-center shrink-0">
         <span class="md:hidden">Kérem</span>
         <span class="hidden md:inline">Kérem az ajánlatot</span>
         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -554,20 +518,6 @@ const faqLd = {
         })();
       }
       wait(2600, cycle);
-    })();
-
-    // Az egyetlen ajánlat-gomb: választó ablakot nyit (új ügyfél / előfizető).
-    (function () {
-      var dlg = document.getElementById('bf-choose');
-      if (!dlg || typeof dlg.showModal !== 'function') return; // régi böngésző: marad a sima link
-      document.querySelectorAll('[data-bf-offer]').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          dlg.showModal();
-        });
-      });
-      dlg.querySelector('[data-bf-close]').addEventListener('click', function () { dlg.close(); });
-      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); }); // háttérre kattintás
     })();
 
     // Kalkulátor: 12 hónap = 9 × a választott havidíj.
@@ -642,6 +592,7 @@ const faqLd = {
         var now = Date.now();
         if (now > END) {
           document.querySelectorAll('[data-bf-cta]').forEach(function (el) { el.classList.add('hidden'); });
+          document.querySelectorAll('[data-bf-expired]').forEach(function (el) { el.classList.remove('hidden'); });
           clearInterval(timer);
           return;
         }
