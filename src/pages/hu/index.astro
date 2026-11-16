@@ -15,7 +15,7 @@ import HeroScene from '../../components/HeroScene.astro';
 const locale = 'hu';
 const page = 'home';
 
-const title = 'Content Ninja – All-in-one AI marketing webshopoknak | Posztolás, blog, hírlevél';
+const title = 'Content Ninja – Webshop AI | All-in-one AI marketing webshopoknak';
 const description =
   'A Content Ninja all-in-one webshop AI a teljes marketingedre: posztol Facebookra, Instagramra, TikTokra és YouTube Shortsra, SEO-blogcikket ír a webshopod blogjába, hírlevelet tervez és küld, a termékleírásaidat és kategóriaoldalaidat pedig eladósabbra írja – mindezt a saját termékadataidból. Kérj díjmentes bemutatót!';
 const keywords =
@@ -31,6 +31,14 @@ const faqLd = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'A Content Ninja egy all-in-one AI marketing rendszer webshopoknak, röviden: webshop AI. Egy fiókból, ugyanabból a termékkatalógusból dolgozik: social media posztokat ír és publikál Facebookra, Instagramra, TikTokra és YouTube Shortsra, SEO- és GEO-barát blogcikket ír a webshopod blogjába, hírlevelet tervez és küld a MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat és kategóriaoldalaid szövegét pedig eladósabb szövegre írja át – a képeket és videókat is az AI készíti hozzá.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Mi az a webshop AI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A webshop AI olyan mesterséges intelligencia, amely egy webshop marketingmunkáját végzi el. Nem általános chatbot: a bolt saját termékadataiból dolgozik. A Content Ninja ilyen webshop AI. Bekötöd az Unas, Shoprenter vagy WooCommerce boltodat, és a termékeidből posztot, blogcikket, hírlevelet, termékleírást és hirdetést készít. A kész anyagot ki is teszi: publikál a közösségi oldalakra, a szövegeket pedig visszaírja a webshopba.',
       },
     },
     {
@@ -745,6 +753,22 @@ const faqLd = {
                         MailerLite vagy Salesautopilot fiókodból, a meglévő termékleírásaidat és kategóriaoldalaid
                         szövegét pedig eladósabb szövegre írja át – a képeket és videókat is az AI készíti hozzá. Nincs szükség kreatív csapatra,
                         marketing ügynökségre vagy manuális munkára.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-light rounded-[12px] border border-border overflow-hidden">
+                    <button
+                        class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-dark text-base gap-4"
+                        onclick="toggleFaq(this)">
+                        Mi az a webshop AI?
+                        <span class="material-symbols-outlined faq-icon text-primary shrink-0 text-[20px]">add</span>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-body text-sm leading-relaxed">
+                        A <strong>webshop AI</strong> olyan mesterséges intelligencia, amely egy webshop marketingmunkáját végzi el.
+                        Nem általános chatbot: a bolt saját termékadataiból dolgozik. A Content Ninja ilyen webshop AI.
+                        Bekötöd az Unas, Shoprenter vagy WooCommerce boltodat, és a termékeidből posztot, blogcikket,
+                        hírlevelet, termékleírást és hirdetést készít. A kész anyagot ki is teszi: publikál a közösségi
+                        oldalakra, a szövegeket pedig visszaírja a webshopba.
                     </div>
                 </div>
 
