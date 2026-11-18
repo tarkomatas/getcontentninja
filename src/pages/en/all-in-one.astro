@@ -32,17 +32,6 @@ const title = 'All-in-one AI marketing system for webshops | Content Ninja';
 const description =
   'Posts, blog articles, newsletters and product descriptions in one system: connect your webshop and the AI writes, designs and publishes the content from your own store data. Book a free online demo.';
 
-/** The VALUES are Hungarian on purpose: they land in the same admin column as the
- *  /hu/ page's answers, so both languages can be filtered as one. Only the label
- *  is translated – renaming a value would split old and new leads apart. */
-const moduleOptions = [
-  { value: 'Automata posztolás', label: 'Automated posting' },
-  { value: 'Blogcikk író', label: 'Blog writer' },
-  { value: 'Termékleírás írás (Shopgrade)', label: 'Product & category pages' },
-  { value: 'AI hírlevél', label: 'AI newsletter' },
-  { value: 'Kép- és videógenerálás', label: 'Image and video generation' },
-  { value: 'Nemzetközi terjeszkedés', label: 'International expansion' },
-];
 ---
 
 <BaseLayout
@@ -270,10 +259,6 @@ const moduleOptions = [
                              so the lead quality of the two angles stays comparable. The module
                              question is on top of that: it carries no `data-reject`, so it does not
                              affect qualification – it only tells sales what to focus the demo on. -->
-                        <!-- The other campaign pages cap the form with `max-h-[500px] overflow-hidden`,
-                             because four questions fit in step 1 there. Here there are five plus the
-                             module checkboxes, and the cap cut off the "Continue" button – hence NO
-                             height limit: the card follows its content. -->
                         <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
@@ -330,12 +315,7 @@ const moduleOptions = [
                                             <option value="Just exploring for now" data-reject="soft">Just exploring for now</option>
                                         </select>
                                     </div>
-                                    <ModuleInterestField
-                                        label="Which module interests you most?"
-                                        hint="(up to 3)"
-                                        max={3}
-                                        options={moduleOptions}
-                                    />
+                                    <ModuleInterestField locale="en" />
 
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">

@@ -66,6 +66,7 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import { AUDIT_HANDOFF_ENDPOINT, AUDIT_START_URL } from '../../data/forms';
+import ModuleInterestField from '../../components/ModuleInterestField.astro';
 
 const locale = 'hu';
 const page = 'shopgradeAudit';
@@ -254,6 +255,7 @@ const description =
                       </select>
                     </div>
 
+                    <ModuleInterestField locale="hu" />
                     <button
                       type="button"
                       onclick="qualifyAndNext()"

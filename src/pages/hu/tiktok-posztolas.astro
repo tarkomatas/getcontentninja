@@ -35,6 +35,7 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import ModuleInterestField from '../../components/ModuleInterestField.astro';
 
 const locale = 'hu';
 const page = 'tiktok';
@@ -289,7 +290,7 @@ const steps = [
                             </div>
                         </div>
 
-                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                        <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
                             <!-- Step 1: Qualifying Questions -->
@@ -346,6 +347,7 @@ const steps = [
                                             <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
                                         </select>
                                     </div>
+                                    <ModuleInterestField locale="hu" />
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
                                         Tovább

@@ -32,18 +32,6 @@ const title = 'All-in-one AI marketing rendszer webshopoknak | Content Ninja';
 const description =
   'Posztolás, blogcikk, hírlevél és termékleírás egy rendszerben: bekötöd a webshopod, és az AI a saját termékadataidból írja, tervezi és publikálja a tartalmat. Kérj díjmentes online bemutatót.';
 
-/** A `value`-k szándékosan változatlanok: az app egy oszlopban szűri őket, és egy
- *  átnevezés kettévágná a régi és az új leadeket. Csak a látható címke tér el. */
-const moduleOptions = [
-  { value: 'Automata posztolás', label: 'Automata posztolás' },
-  { value: 'Blogcikk író', label: 'Blogcikk író' },
-  { value: 'Termékleírás írás (Shopgrade)', label: 'Termékleírás- és kategóriaoldal-írás' },
-  { value: 'AI hírlevél', label: 'AI hírlevél' },
-  { value: 'Kép- és videógenerálás', label: 'Kép- és videógenerálás' },
-  { value: 'Nemzetközi terjeszkedés', label: 'Nemzetközi terjeszkedés' },
-  // A posztkiemelés 2026-10-20 óta él (/hu/facebook-hirdetes/); itt azt mérjük, hányan jönnek érte. Csak a HU oldalon – az EN párjának nincs Meta-oldala.
-  { value: 'Meta hirdetések', label: 'Facebook- és Instagram-hirdetés' },
-];
 ---
 
 <BaseLayout
@@ -271,9 +259,6 @@ const moduleOptions = [
                              hogy a két szög lead-minősége összevethető legyen. A modul-kérdés ezen felül
                              van: nincs rajta `data-reject`, tehát a minősítés eredményét nem befolyásolja,
                              csak elmondja az értékesítésnek, mire hegyezze a bemutatót. -->
-                        <!-- A többi kampányoldalon `max-h-[500px] overflow-hidden` van a formon, mert ott
-                             négy kérdés fér a step 1-be. Itt öt van + a modul-pipák, és a plafon levágta a
-                             „Tovább" gombot – ezért NINCS magasságkorlát: a kártya a tartalmához igazodik. -->
                         <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
@@ -329,12 +314,7 @@ const moduleOptions = [
                                             <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
                                         </select>
                                     </div>
-                                    <ModuleInterestField
-                                        label="Melyik modul érdekel a leginkább?"
-                                        hint="(legfeljebb 3)"
-                                        max={3}
-                                        options={moduleOptions}
-                                    />
+                                    <ModuleInterestField locale="hu" />
 
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">

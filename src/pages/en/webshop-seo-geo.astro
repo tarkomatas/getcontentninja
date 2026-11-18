@@ -15,6 +15,7 @@ import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
+import ModuleInterestField from '../../components/ModuleInterestField.astro';
 
 const locale = 'en';
 const page = 'webshopSeoGeo';
@@ -242,7 +243,7 @@ const description =
                             </div>
                         </div>
 
-                        <form id="leadForm" class="space-y-4 max-h-[500px] overflow-hidden pr-2 custom-scrollbar relative">
+                        <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
                             <!-- Step 1: Qualifying Questions -->
@@ -294,6 +295,7 @@ const description =
                                             <option value="Még csak érdeklődöm" data-reject="soft">Just browsing for now</option>
                                         </select>
                                     </div>
+                                    <ModuleInterestField locale="en" />
                                     <button type="button" onclick="qualifyAndNext()"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">
                                         Next

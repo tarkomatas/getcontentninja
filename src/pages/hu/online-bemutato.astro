@@ -10,20 +10,6 @@ import VideoShowcase from '../../components/VideoShowcase.astro';
 const locale = 'hu';
 const page = 'bookDemo';
 
-/**
- * Modul-érdeklődés: NEM kiszűrő kérdés (nincs `data-reject`), csak az
- * értékesítésnek mondja meg, mire hegyezze a bemutatót. A `value`-k magyarul és
- * a `/hu/teljes-rendszer/` oldal szóhasználatával mennek – az app egy oszlopban
- * szűri őket, ezért nem lehet oldalanként más nevet adni ugyanannak a modulnak.
- * Legfeljebb 2 pipa: itt a prioritás a kérdés, nem a teljes kívánságlista.
- */
-const moduleOptions = [
-  { value: 'Automata posztolás', label: 'Posztolás' },
-  { value: 'AI hírlevél', label: 'Hírlevelezés' },
-  { value: 'Blogcikk író', label: 'Blogcikk írás' },
-  { value: 'Termékleírás írás (Shopgrade)', label: 'Termék és kategóriaoldal átírás' },
-  { value: 'Egyéb', label: 'Egyéb' },
-];
 const title = 'Online bemutatót kérek – AI marketing webshopoknak | Content Ninja';
 const description =
   'Kérj egy díjmentes, kb. 20 perces online bemutatót a Content Ninjáról, és nézd meg élesben, hogyan posztol az AI helyetted, hogyan ír SEO-blogcikket a webshopod blogjába, hogyan küldi ki a hírleveleidet, és hogyan írja át a termékleírásaidat és kategóriaoldalaidat – a te termékeidből.';
@@ -255,9 +241,6 @@ const description =
                             </div>
                         </div>
 
-                        <!-- A többi kampányoldalon `max-h-[500px] overflow-hidden` van a formon, mert ott
-                             mind a négy kérdés egy képernyőn van. Itt a kérdések három lépésre oszlanak,
-                             ezért NINCS magasságkorlát: a kártya a látható lépéshez igazodik. -->
                         <form id="leadForm" class="space-y-4 pr-2 custom-scrollbar relative">
                             <HoneypotField />
 
@@ -329,12 +312,7 @@ const description =
                                             <option value="Még csak érdeklődöm" data-reject="soft">Még csak érdeklődöm</option>
                                         </select>
                                     </div>
-                                    <ModuleInterestField
-                                        label="Melyik funkció érdekel a leginkább?"
-                                        hint="(legfeljebb 2)"
-                                        max={2}
-                                        options={moduleOptions}
-                                    />
+                                    <ModuleInterestField locale="hu" />
                                     <div class="flex gap-3 mt-4">
                                         <button type="button" onclick="nextStep(1)"
                                             class="flex-shrink-0 hidden md:flex items-center justify-center rounded-[10px] h-12 px-4 border-2 border-border text-body text-base font-bold hover:bg-light transition-all">
