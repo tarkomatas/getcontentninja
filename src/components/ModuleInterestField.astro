@@ -20,15 +20,25 @@
  * „Egyéb" mellett kap `name`-et (`module_interest_egyeb`) – így a gyűjtő
  * ilyenkor kötelezőnek látja, egyébként pedig nem kéri számon és nem küldi.
  *
+ * **`preselect`:** az oldal saját témája (pl. a posztolás oldalon a
+ * `Automata posztolás`) már bepipálva érkezik – amiért jött, azt ne kelljen
+ * külön bejelölnie. A rejtett mező is ezzel az értékkel indul, tehát a kérdés
+ * ilyenkor magától teljesül; a pipa levehető.
+ *
  * Oldalanként EGY példány (fix id-kre épül).
  */
 import { MODULE_INTEREST_OPTIONS, MODULE_INTEREST_OTHER } from '../data/moduleInterest';
 
 interface Props {
   locale: 'hu' | 'en';
+  /** Előre bepipált `value`-k (az oldal témája). */
+  preselect?: string[];
 }
 
-const { locale } = Astro.props;
+const { locale, preselect = [] } = Astro.props;
+const initialValue = MODULE_INTEREST_OPTIONS.filter((o) => preselect.includes(o.value))
+  .map((o) => o.value)
+  .join(', ');
 const t =
   locale === 'hu'
     ? {
@@ -54,7 +64,7 @@ const t =
     {
       MODULE_INTEREST_OPTIONS.map((opt) => (
         <label class="flex items-start gap-2 text-sm text-body cursor-pointer">
-          <input type="checkbox" value={opt.value} class="mt-0.5 rounded text-primary focus:ring-primary" />
+          <input type="checkbox" value={opt.value} checked={preselect.includes(opt.value)} class="mt-0.5 rounded text-primary focus:ring-primary" />
           <span>{opt[locale]}</span>
         </label>
       ))
@@ -67,7 +77,7 @@ const t =
     maxlength="200"
     class="hidden mt-2 w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
   />
-  <input type="hidden" name="module_interest" id="moduleInterestValue" />
+  <input type="hidden" name="module_interest" id="moduleInterestValue" value={initialValue} />
 </div>
 
 <script is:inline define:vars={{ otherValue: MODULE_INTEREST_OTHER }}>

@@ -172,8 +172,9 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
   kitöltöttnek látná, és csak az utolsó érték maradna meg.
 - ez a trükk a **`src/components/ModuleInterestField.astro`** komponensben él (egyetlen prop: `locale`).
   **2026-11-18 óta MINDEN lead-űrlapon ott van** (mind a 25 `LeadFormScript`-oldalon, HU + EN), a minősítő
-  lépés utolsó kérdéseként. **Nincs felső korlát, legalább 1 pipa kötelező.** Az opciók EGY helyen élnek:
-  `src/data/moduleInterest.ts` (Posztolás · Hírlevelezés · Blogcikk írás · Termék átírás · Kategóriaoldal
+  lépés utolsó kérdéseként. **Nincs felső korlát, legalább 1 pipa kötelező.** A `preselect` prop az oldal saját
+  témáját előre bepipálja (posztolás-, hírlevél-, blog-, Shopgrade-, SEO/GEO-, diagnózis- és Meta-oldalakon). Az opciók EGY helyen élnek:
+  `src/data/moduleInterest.ts` (Posztolás · Hírlevelezés · Blogcikk írás · Termékszöveg átírás · Kategóriaszöveg
   átírás · Meta hirdetéskezelés · Egyéb, leírom). Az „Egyéb, leírom" pipa szövegmezőt nyit, ami csak
   bepipálva kap `name`-et (`module_interest_egyeb`) — ilyenkor kötelező, és külön mezőben megy, hogy a
   `module_interest` szűrhető maradjon. **Nincs rajta `data-reject`**, a minősítést nem befolyásolja.
