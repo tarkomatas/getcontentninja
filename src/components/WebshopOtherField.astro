@@ -1,0 +1,47 @@
+---
+/**
+ * „Milyen webshopod van?" → „Egyéb": szövegmező, amibe beírhatja a boltmotort.
+ *
+ * TISZTÁN PIACKUTATÁS (2026-11-18-i döntés): a beírt szöveg a kiszűrést NEM
+ * befolyásolja. Ahol az „Egyéb" `data-reject="hard"`, ott a látogató ugyanúgy
+ * kiesik, akármit ír be – a szöveg a `hard_reject` beküldéssel együtt megy az
+ * appnak (`has_webshop_egyeb`). Ahol az „Egyéb" nem kiszűrő, ott a sikeres
+ * leaddel megy.
+ *
+ * **Nem kötelező** (`data-optional` → a `LeadFormScript` nem kéri számon, és
+ * üresen nem küldi). Csak „Egyéb" mellett látszik; más választásnál kiürül.
+ *
+ * A `has_webshop` select UTÁN, ugyanabba a lépésbe kerüljön. Oldalanként EGY
+ * példány (fix id).
+ */
+interface Props {
+  locale: 'hu' | 'en';
+}
+const { locale } = Astro.props;
+const placeholder = locale === 'hu' ? 'Milyen webshopmotort használsz?' : 'Which webshop platform do you use?';
+---
+
+<input
+  type="text"
+  id="webshopOther"
+  name="has_webshop_egyeb"
+  data-optional
+  maxlength="200"
+  placeholder={placeholder}
+  class="hidden mt-2 w-full rounded-[10px] border-border focus:border-primary focus:ring-primary shadow-card hover:shadow-card-hover transition-all"
+/>
+
+<script is:inline>
+  (function () {
+    var other = document.getElementById('webshopOther');
+    var select = document.querySelector('#leadForm select[name="has_webshop"]');
+    if (!other || !select) return;
+    function sync() {
+      var on = select.value === 'Egyéb';
+      other.classList.toggle('hidden', !on);
+      if (!on) other.value = '';
+    }
+    select.addEventListener('change', sync);
+    sync();
+  })();
+</script>

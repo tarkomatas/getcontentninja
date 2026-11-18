@@ -13,6 +13,7 @@ import { pathFor, type Locale } from '../i18n/routes';
  *    mondja meg. Így ha valaki átfogalmaz egy választ, a szabály vele együtt
  *    mozog – korábban ez JS-ben, kézzel másolt szövegkonstansokban élt, és
  *    némán elromlott.
+ *  - a `data-optional` mező nem kötelező: üresen kimarad a payloadból.
  *
  * **Több minősítő képernyő** (2026-09-10): egy oldal szétoszthatja a kérdéseit
  * több lépésre. A további lépések `data-qualify` attribútumot kapnak – a gyűjtő
@@ -136,7 +137,7 @@ const cfg = {
   function cnStepMissing(step) {
     var missing = false;
     step.querySelectorAll('select[name], input[name], textarea[name]').forEach(function (el) {
-      if (!(el.value || '').trim()) missing = true;
+      if (!(el.value || '').trim() && !el.hasAttribute('data-optional')) missing = true;
     });
     return missing;
   }
@@ -220,6 +221,11 @@ const cfg = {
     steps.forEach(function (step) {
       step.querySelectorAll('select[name], input[name], textarea[name]').forEach(function (el) {
         var value = (el.value || '').trim();
+        if (el.hasAttribute('data-optional')) {
+          // Nem kötelező mező (pl. `WebshopOtherField`): üresen nem kérjük számon és nem küldjük.
+          if (value) result.values[el.name] = value;
+          return;
+        }
         if (!value) result.missing = true;
         result.values[el.name] = value;
 

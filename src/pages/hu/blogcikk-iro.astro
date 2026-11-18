@@ -30,6 +30,7 @@ import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import PlatformLogos from '../../components/PlatformLogos.astro';
 import ModuleInterestField from '../../components/ModuleInterestField.astro';
+import WebshopOtherField from '../../components/WebshopOtherField.astro';
 
 const locale = 'hu';
 const page = 'blogWriter';
@@ -311,11 +312,13 @@ const faqLd = {
                                             <option value="WooCommerce">WooCommerce</option>
                                             <option value="WordPress (webshop nélkül)">WordPress (webshop nélkül)</option>
                                             <option value="Egyéb" data-reject="hard">Egyéb</option>
+                                            <option value="Saját fejlesztésű webshop" data-reject="hard">Saját fejlesztésű webshop</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">Csak tervezek webshopot
                                                 indítani</option>
                                             <option value="Más típusú vállalkozásom van" data-reject="hard">Más típusú vállalkozásom
                                                 van</option>
                                         </select>
+                                        <WebshopOtherField locale="hu" />
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">Jelenik meg blogcikk az

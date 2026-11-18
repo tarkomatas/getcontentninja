@@ -5,6 +5,7 @@ import HoneypotField from '../../components/HoneypotField.astro';
 import LeadFormScript from '../../components/LeadFormScript.astro';
 import ModuleInterestField from '../../components/ModuleInterestField.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
+import WebshopOtherField from '../../components/WebshopOtherField.astro';
 
 const locale = 'en';
 const page = 'bookDemo';
@@ -259,9 +260,11 @@ const description =
                                             <option value="Shoprenter">Shoprenter</option>
                                             <option value="WooCommerce">WooCommerce</option>
                                             <option value="Egyéb">Other</option>
+                                            <option value="Saját fejlesztésű webshop">Custom-built webshop</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">I'm only planning to launch a store</option>
                                             <option value="Más típusú vállalkozásom van" data-reject="hard">I run a different type of business</option>
                                         </select>
+                                        <WebshopOtherField locale="en" />
                                     </div>
                                     <button type="button" onclick="qualifyStep('1b')"
                                         class="w-full mt-4 flex items-center justify-center rounded-[10px] h-12 cta-primary transition-all hover:brightness-95">

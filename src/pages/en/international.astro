@@ -8,6 +8,7 @@ import LeadFormScript from '../../components/LeadFormScript.astro';
 import PricingCards from '../../components/PricingCards.astro';
 import TrustBadges from '../../components/TrustBadges.astro';
 import ModuleInterestField from '../../components/ModuleInterestField.astro';
+import WebshopOtherField from '../../components/WebshopOtherField.astro';
 
 const locale = 'en';
 const page = 'international';
@@ -333,9 +334,11 @@ const description =
                                             <option value="Shoprenter">Shoprenter</option>
                                             <option value="WooCommerce">WooCommerce</option>
                                             <option value="Egyéb">Other</option>
+                                            <option value="Saját fejlesztésű webshop">Custom-built webshop</option>
                                             <option value="Csak tervezek webshopot indítani" data-reject="soft">I'm only planning to launch a store</option>
                                             <option value="Más típusú vállalkozásom van" data-reject="hard">I run a different type of business</option>
                                         </select>
+                                        <WebshopOtherField locale="en" />
                                     </div>
                                     <div>
                                         <label class="block text-sm font-bold text-body mb-1">In how many countries /
