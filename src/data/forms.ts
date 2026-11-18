@@ -154,6 +154,8 @@ export const QUEUE_MAX_ATTEMPTS = 5;
  * (v1 → v2: a „Külsős ügynökség" már nem hard reject.)
  * (v2 → v3: új `WooCommerce` és „WordPress (webshop nélkül)" opció – aki eddig
  *  ezekkel az „Egyéb"-et választotta, hard rejectet kapott.)
+ * (v3 → v4, 2026-11-18: a „Milyen szinten van a céged a marketingben?" kérdés
+ *  megszűnt – az „Egyáltalán nem értünk semmit a témához" válasz hard reject volt.)
  */
-export const QUALIFY_KEY = 'cn_qualify_v3';
+export const QUALIFY_KEY = 'cn_qualify_v4';
 export const QUALIFY_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;

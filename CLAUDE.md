@@ -139,7 +139,7 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
     kapnak. A `nextStep()` frissíti, és elrejti azokon a képernyőkön, amiknek nincs sorszáma (kiszűrő
     és köszönő ágak). Enélkül a blokk nélküli oldalak változatlanok.
   - **Ma a `bookDemo` oldalpár (`online-bemutato`/`book-demo`) használja mindkettőt**: 3 képernyő —
-    (1) webshop + marketing-szint, (2) ki csinálja + mikor kezdene + `module_interest`,
+    (1) webshop, (2) ki csinálja + mikor kezdene + `module_interest`,
     (3) kapcsolati adatok. A többi 14 űrlap egyképernyős maradt.
 - **`src/components/HoneypotField.astro`** – a rejtett `website` mező (`.hp-field` a `global.css`-ben).
 - **Opt-in oldalak: `successUrl` + `cnResolveSuccessUrl`.** A `LeadFormScript` opcionális `successUrl`
@@ -162,7 +162,7 @@ oldal szerződését az app repó `docs/honlap-urlap-kuldes-feladat.md`-je írja
 **Ami oldalanként eltér, azt a MARKUP hordozza, nem a script:**
 
 - a minősítő kérdéseket a `.form-step[data-step="1"]` alatti `name`-es mezőkből olvassuk ki
-  (`has_webshop`, `marketing_level`, `product_count`, `blog_frequency`, `markets`, `marketing_role`, `timing`),
+  (`has_webshop`, `product_count`, `blog_frequency`, `markets`, `marketing_role`, `timing`), — a `marketing_level` („Milyen szinten van a céged a marketingben?") 2026-11-18-án megszűnt, ne tedd vissza (a „semmit nem értünk" válasza hard reject volt)
 - a kiszűrés szabályát az **`<option data-reject="hard|soft">`** attribútum mondja meg. Ha valaki
   átfogalmaz egy választ, a szabály vele együtt mozog — korábban ez kézzel másolt JS-szövegkonstansokban
   élt, és némán elromlott.
@@ -260,7 +260,7 @@ ezért megy minden az appon keresztül. A feliratkozás **nem lead**: nem jeleni
 - **Még hiányzik a briefből** (§7): lábléc-űrlap minden oldalon, és doboz a blogcikkek alján. A
   `NewsletterForm` `compact` változata pont erre való (`source: 'footer'` / `'blog_alja'`).
 
-**A minősítés-emlékezet** (`cn_qualify_v2`, 30 nap, témánként) a régi „Már elküldve" zár helyett áll: nem
+**A minősítés-emlékezet** (`cn_qualify_v4`, 30 nap, témánként) a régi „Már elküldve" zár helyett áll: nem
 a beküldést, hanem a **minősítés kimenetelét** jegyzi meg, hogy a kiszűrt látogató ne tudja újratöltéssel,
 más válaszokkal végigpróbálni az űrlapot. Sikeres beküldés után **nincs** zár (az app dedupál, és aki
 elgépelte az adatait, javíthasson). Kliens-oldali emlékezet: inkognitóval megkerülhető — a cél a súrlódás.
